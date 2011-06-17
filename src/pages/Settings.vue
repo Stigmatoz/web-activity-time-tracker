@@ -17,6 +17,7 @@
                 class="filled-in"
                 id="viewTimeInBadge"
                 v-model="viewTimeInBadge"
+                @change="onChange(StorageParams.VIEW_TIME_IN_BADGE, $event.target.checked)"
               />
               <span>Display time tracker in icon</span>
               <p class="description">
@@ -31,6 +32,7 @@
                 class="filled-in"
                 id="blockDeferral"
                 v-model="allowDeferringBlock"
+                @change="onChange(StorageParams.BLOCK_DEFERRAL, $event.target.checked)"
               />
               <span>Allow deferring block for 5 minutes</span>
               <p class="description">
@@ -40,7 +42,13 @@
           </div>
           <div class="settings-item">
             <label class="setting-header">
-              <input type="checkbox" class="filled-in" id="darkMode" v-model="darkMode" />
+              <input
+                type="checkbox"
+                class="filled-in"
+                id="darkMode"
+                v-model="darkMode"
+                @change="onChange(StorageParams.DARK_MODE, $event.target.checked)"
+              />
               <span>Dark mode</span>
               <p class="description">Dark theme</p>
             </label>
@@ -50,7 +58,11 @@
               >Stop tracking if there is no activity during:
             </label>
             <div class="d-inline-block ml-10">
-              <select class="option" v-model="intervalInactivity">
+              <select
+                class="option"
+                v-model="intervalInactivity"
+                @change="onChange(StorageParams.INTERVAL_INACTIVITY, $event.target.value)"
+              >
                 <option :value="InactivityInterval.Seconds_30">30 seconds</option>
                 <option :value="InactivityInterval.Seconds_45">45 seconds</option>
                 <option :value="InactivityInterval.Min_1">1 min</option>
@@ -195,14 +207,8 @@ onMounted(async () => {
   whiteList.value = await settingsStorage.getValue(StorageParams.BLACK_LIST, []);
 });
 
-watchEffect(async () => await save(StorageParams.VIEW_TIME_IN_BADGE, viewTimeInBadge.value));
-watchEffect(async () => await save(StorageParams.INTERVAL_INACTIVITY, intervalInactivity.value));
-watchEffect(async () => await save(StorageParams.DARK_MODE, darkMode.value));
-watchEffect(async () => await save(StorageParams.BLOCK_DEFERRAL, allowDeferringBlock.value));
-watchEffect(async () => await save(StorageParams.BLACK_LIST, whiteList.value));
-
 async function save(storageParam: StorageParams, value: any) {
-  await settingsStorage.saveValue(storageParam, value);
+  if (value != undefined) await settingsStorage.saveValue(storageParam, value);
 }
 
 async function addWebsite() {
@@ -216,7 +222,13 @@ async function addWebsite() {
     });
   } else {
     whiteList.value?.push(newWebsiteForWhiteList.value!);
+    onChange(StorageParams.BLACK_LIST, whiteList.value);
+    newWebsiteForWhiteList.value = '';
   }
+}
+
+function onChange(storageParam: StorageParams, value: any) {
+  save(storageParam, value);
 }
 </script>
 
