@@ -4,7 +4,7 @@
     "short_name": "Web Tracker",
     "version": "2.0.0",
     "description": "Track and limit time your activity in the browser every day. Control how much time you spend on websites.",
-    "options_page": "src/settings.html",
+    "options_page": "src/dashboard.html",
     "icons": {
         "16": "16x16.png",
         "32": "32x32.png",

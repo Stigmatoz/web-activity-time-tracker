@@ -1,4 +1,4 @@
-import Settings from './pages/Settings.vue';
+import Settings from './pages/Dashboard.vue';
 import Notifications from '@kyvg/vue3-notification';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';

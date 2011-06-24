@@ -1,9 +1,12 @@
 <template>
   <div class="headerBlock">
-    <p class="header">Web Activity Time Tracker</p>
-    <div class="float-right mr-10">
+    <div class="d-inline-block">
+      <img class="logo" height="30" src="../assets/icons/48x48.png" />
+      <p class="header">Web Activity Time Tracker</p>
+    </div>
+    <div class="icons-block">
       <img height="17" src="../assets/icons/dark-mode.svg" />
-      <img height="17" src="../assets/icons/settings.svg" @click="openSettings()" />
+      <img height="17" src="../assets/icons/settings.svg" @click="openDashboard()" />
     </div>
   </div>
   <div class="tabs">
@@ -64,9 +67,9 @@ import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
 import { TypeOfList } from '../utils/enums';
 
-async function openSettings() {
+async function openDashboard() {
   await Browser.tabs.create({
-    url: Browser.runtime.getURL('src/settings.html'),
+    url: Browser.runtime.getURL('src/dashboard.html'),
     active: true,
   });
 }
@@ -84,21 +87,29 @@ function selectTab(type: TypeOfList) {
 
 <style scoped>
 .headerBlock {
-  height: 40px;
-  background-color: var(--popup-header);
+  height: 52px;
+  /* background-color: var(--popup-header); */
+  border-bottom: 1px solid #e7e7e7;
 }
 
 .headerBlock .header {
   font-size: 16px;
-  padding: 0 20px;
-  margin-top: 8px;
+  padding: 0 10px;
   display: inline-block;
   font-weight: 600;
   color: #4a4a4a;
+  vertical-align: text-bottom;
 }
 
 .headerBlock img {
   cursor: pointer;
   padding: 10px;
+}
+.headerBlock .logo {
+  margin-left: 7px;
+}
+.headerBlock .icons-block {
+  float: right;
+  margin: 7px 10px 0 0;
 }
 </style>
