@@ -2,21 +2,31 @@
         "manifest_version": 2,
     
         "name": "WebActivity Time Tracker",
+        "short_name": "WebActivity",
         "version": "0.0.1",
+
+        "minimum_chrome_version": "26",
+
+        "description": "A plain text description",
     
         "icons": {
-            "16": "16x16.png",
-            "32": "32x32.png",
-            "48": "48x48.png",
-            "128": "128x128.png"
+            "16": "icons/16x16.png",
+            "32": "icons/32x32.png",
+            "48": "icons/48x48.png",
+            "128": "icons/128x128.png"
         },
-            "permissions": [
-                 
-            ],
+        "permissions": [
+            "tabs",
+            "activeTab"
+        ],
+        "background": {
+            "scripts": ["scripts/background.js"],
+            "persistent": false
+        },
     
         "browser_action": {
-            "default_title": "Open WebActivity",
-            "default_icon": "48x48.png",
-            "default_popup": "popup.html"
+            "default_popup": "index.html",
+            "default_title": "WebActivity Time Tracker",
+            "default_icon": "icons/48x48.png"
         }
 }
