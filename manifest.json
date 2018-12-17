@@ -17,10 +17,11 @@
         },
         "permissions": [
             "tabs",
-            "activeTab"
+            "activeTab",
+            "storage"
         ],
         "background": {
-            "scripts": ["scripts/background.js"],
+            "scripts": ["scripts/background.js", "scripts/webTimer.js", "scripts/tab.js"],
             "persistent": false
         },
         "browser_action": {
