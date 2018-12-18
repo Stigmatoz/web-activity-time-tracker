@@ -1,6 +1,6 @@
 var Tab = function (domain, favicon) {
     this.url = domain;
-    this.startTime = Date.now;
+    this.startTime = new Date();
     this.favicon = favicon;
  };
 
@@ -9,5 +9,14 @@ Tab.prototype = {
     startTime: {},
     summaryTime: {},
     favicon: {},
-    percentage: {}
+    percentage: {},
+
+    start: function(){
+        this.startTime = new Date();
+    },
+
+    stop: function(){
+        this.summaryTime = new Date() - this.startTime;
+        this.startTime = null;
+    }
 };

@@ -13,8 +13,9 @@ WebTimer.prototype = {
                     var newTab = new Tab(domain, tab.favIconUrl);
                     this.tabs.push(newTab);
                 }
-                this.startTimeTracker(tab);
+                this.startTimeTracker(this.getTab(domain));
                 this.currentTab = domain;
+                this.stopTimeTracker(this.getTab(this.currentTab));
             }
         }
     },
@@ -23,6 +24,10 @@ WebTimer.prototype = {
         if (this.tabs.length > 0)
             return this.tabs.find(o => o.url === domain) === undefined;
         else return true;
+    },
+
+    getTab: function (domain) {
+        return this.tabs.find(o => o.url === domain);
     },
 
     extractHostname: function (url) {
@@ -50,6 +55,12 @@ WebTimer.prototype = {
     },
 
     startTimeTracker: function (tab) {
-        var tab = new Tab(tab.url, tab.favIconUrl);
+        tab.start();
+        chrome.storage.sync.set({'tabs': JSON.stringify(this.tabs)});
+    },
+
+    stopTimeTracker: function (tab) {
+        tab.stop();
+        chrome.storage.sync.set({'tabs': JSON.stringify(this.tabs)});
     }
 };
