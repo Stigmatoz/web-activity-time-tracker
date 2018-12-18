@@ -21,7 +21,7 @@
             "storage"
         ],
         "background": {
-            "scripts": ["scripts/background.js", "scripts/webTimer.js", "scripts/tab.js"],
+            "scripts": ["scripts/webTimer.js", "scripts/tab.js", "scripts/background.js"],
             "persistent": false
         },
         "browser_action": {
