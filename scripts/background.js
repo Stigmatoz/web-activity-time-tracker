@@ -1,12 +1,15 @@
-var timer = new WebTimer();
+'use strict';
 
-window.onload = function () {
-    chrome.tabs.onActivated.addListener(function (info) {
-        chrome.tabs.get(info.tabId, function (tab) {
-            timer.addTab(tab);
-        });
+var tabs = [];
+var activity = new Activity();
+var storage = new LocalStorage();
+
+chrome.tabs.onActivated.addListener(function (info) {
+    chrome.tabs.get(info.tabId, function (tab) {
+        activity.addTab(tab);
     });
-    chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-        timer.addTab(tab);
-    });
-};
+});
+
+chrome.windows.getLastFocused({populate: true}, function (window){
+    var s = window;
+});

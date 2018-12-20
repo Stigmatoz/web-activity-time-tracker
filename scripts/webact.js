@@ -1,15 +1,20 @@
 window.onload = function () {
     var resultTabs = {};
     //var tabs = chrome.extension.getBackgroundPage().timer.tabs;
-    chrome.storage.sync.get('tabs', function(val){
+    setInterval(getDataFromStorage, 3000);
+};
+
+function getDataFromStorage(){
+    chrome.storage.local.get('tabs', function(val){
         resultTabs = JSON.parse(val.tabs);
         getTabsFromStorage(resultTabs);
     });
-};
+}
 
 function getTabsFromStorage(tabs){
+    var table = document.getElementById('resultTable');
+    table.innerHTML = null;
     for (var i = 0; i < tabs.length; i++) {
-        var table = document.getElementById('resultTable');
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
@@ -18,7 +23,7 @@ function getTabsFromStorage(tabs){
         img.setAttribute('src', tabs[i].favicon);
 
         var span = document.createElement('span');
-        span.innerText = tabs[i].url + ' ' + tabs[i].summaryTime;
+        span.innerText = tabs[i].url + ' ' + convertSummaryTimeToString(tabs[i].summaryTime);
         span.classList.add('margin-left-5');
 
         div.appendChild(img);

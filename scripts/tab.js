@@ -1,22 +1,9 @@
-var Tab = function (domain, favicon) {
-    this.url = domain;
-    this.startTime = new Date();
-    this.favicon = favicon;
- };
+'use strict';
 
-Tab.prototype = {
-    url: {},
-    startTime: {},
-    summaryTime: {},
-    favicon: {},
-    percentage: {},
-
-    start: function(){
-        this.startTime = new Date();
-    },
-
-    stop: function(){
-        this.summaryTime = new Date() - this.startTime;
-        this.startTime = null;
+class Tab {
+    constructor(url, favicon){
+        this.url = url;
+        this.favicon = favicon;
+        this.summaryTime = '';
     }
 };
