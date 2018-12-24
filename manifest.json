@@ -18,7 +18,8 @@
         "permissions": [
             "tabs",
             "activeTab",
-            "storage"
+            "storage",
+            "idle"
         ],
         "background": {
             "scripts": ["scripts/common.js", 

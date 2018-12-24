@@ -4,6 +4,6 @@ class Tab {
     constructor(url, favicon){
         this.url = url;
         this.favicon = favicon;
-        this.summaryTime = '';
+        this.summaryTime = 0;
     }
 };
