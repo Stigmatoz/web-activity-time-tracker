@@ -1,7 +1,29 @@
+body {
+    font-family: "Segoe UI", Verdana, sans-serif !important;
+    color: #262626;
+}
+
 .inline-flex{
     display: inline-flex;
 }
 
-.margin-left-5{
-    margin-left: 5px;
+.span-url{
+    width: 200px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.span-url:hover{
+    color: rgb(107, 107, 107);
+}
+
+.span-time{
+    margin-left: 10px;
+    width: 70px;
+}
+
+.favicon{
+    margin-right:5px;
 }

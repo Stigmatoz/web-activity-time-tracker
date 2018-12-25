@@ -28,7 +28,7 @@ function backgroundCheck() {
                         tab.summaryTime += 1;
                         chrome.browserAction.setBadgeText({
                             tabId: activeTab.id,
-                            text: String(convertSummaryTimeToString(tab.summaryTime))
+                            text: String(convertSummaryTimeToBadgeString(tab.summaryTime))
                         });
                     }
                 });

@@ -1,9 +1,8 @@
+'use strict';
+
 var storage = new LocalStorage();
 
-setTimeout(function run() {
-    getDataFromStorage();
-    setTimeout(run, SETTINGS_INTERVAL_CHECK_STORAGE);
-}, 0);
+getDataFromStorage();
 
 function getDataFromStorage() {
     storage.load(STORAGE_TABS, getTabsFromStorage);
@@ -17,15 +16,21 @@ function getTabsFromStorage(tabs) {
         div.classList.add('inline-flex');
 
         var img = document.createElement('img');
+        img.classList.add('favicon');
         img.setAttribute('height', 15);
         img.setAttribute('src', tabs[i].favicon);
 
-        var span = document.createElement('span');
-        span.innerText = tabs[i].url + ' ' + convertSummaryTimeToString(tabs[i].summaryTime);
-        span.classList.add('margin-left-5');
+        var spanUrl = document.createElement('span');
+        spanUrl.classList.add('span-url');
+        spanUrl.innerText = tabs[i].url;
+
+        var spanTime = document.createElement('span');
+        spanTime.classList.add('span-time');
+        spanTime.innerText = convertSummaryTimeToString(tabs[i].summaryTime);
 
         div.appendChild(img);
-        div.appendChild(span);
+        div.appendChild(spanUrl);
+        div.appendChild(spanTime);
         table.appendChild(div);
     }
 }
