@@ -1,11 +1,12 @@
 var storage = new LocalStorage();
 
-setInterval(getDataFromStorage, SETTINGS_INTERVAL_CHECK_STORAGE);
+setTimeout(function run() {
+    getDataFromStorage();
+    setTimeout(run, SETTINGS_INTERVAL_CHECK_STORAGE);
+}, 0);
 
 function getDataFromStorage() {
-    var currentTabs = storage.load(STORAGE_TABS);
-    if (currentTabs !== undefined && currentTabs.length > 0)
-        getTabsFromStorage(currentTabs);
+    storage.load(STORAGE_TABS, getTabsFromStorage);
 }
 
 function getTabsFromStorage(tabs) {

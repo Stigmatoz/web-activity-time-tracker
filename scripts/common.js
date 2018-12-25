@@ -14,18 +14,18 @@ function isEmpty(obj) {
 }
 
 function convertSummaryTimeToString(summaryTime) {
-    var sec = (summaryTime / 1000).toFixed(1);
-    var min = (summaryTime / (1000 * 60)).toFixed(1);
-    var hours = (summaryTime / (1000 * 60 * 60)).toFixed(1);
-    var days = (summaryTime / (1000 * 60 * 60 * 24)).toFixed(1);
+    var sec = (summaryTime);
+    var min = (summaryTime / 60);
+    var hours = (summaryTime / (60 * 60));
+    var days = (summaryTime / (60 * 60 * 24));
 
     if (sec < 60) {
-        return sec + " sec";
+        return sec + " s";
     } else if (min < 60) {
-        return min + " min";
+        return min + " m";
     } else if (hours < 24) {
-        return hours + " hours";
+        return hours + " h";
     } else {
-        return days + " days"
+        return days + " d"
     }
 }
