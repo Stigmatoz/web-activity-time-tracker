@@ -1,6 +1,8 @@
 var STORAGE_TABS = 'tabs';
 var SETTINGS_INTERVAL_INACTIVITY = 30;
 var SETTINGS_INTERVAL_CHECK = 1000;
+var SETTINGS_INTERVAL_SAVE_STORAGE = 3000;
+var SETTINGS_INTERVAL_CHECK_STORAGE = 3000;
 
 function isEmpty(obj) {
     for (var prop in obj) {

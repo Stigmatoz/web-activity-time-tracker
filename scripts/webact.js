@@ -1,17 +1,14 @@
-window.onload = function () {
-    var resultTabs = {};
-    //var tabs = chrome.extension.getBackgroundPage().timer.tabs;
-    setInterval(getDataFromStorage, 3000);
-};
+var storage = new LocalStorage();
 
-function getDataFromStorage(){
-    chrome.storage.local.get('tabs', function(val){
-        resultTabs = JSON.parse(val.tabs);
-        getTabsFromStorage(resultTabs);
-    });
+setInterval(getDataFromStorage, SETTINGS_INTERVAL_CHECK_STORAGE);
+
+function getDataFromStorage() {
+    var currentTabs = storage.load(STORAGE_TABS);
+    if (currentTabs !== undefined && currentTabs.length > 0)
+        getTabsFromStorage(currentTabs);
 }
 
-function getTabsFromStorage(tabs){
+function getTabsFromStorage(tabs) {
     var table = document.getElementById('resultTable');
     table.innerHTML = null;
     for (var i = 0; i < tabs.length; i++) {

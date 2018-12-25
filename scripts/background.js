@@ -4,13 +4,13 @@ var tabs = [];
 var activity = new Activity();
 var storage = new LocalStorage();
 
-chrome.tabs.onActivated.addListener(function (info) {
-    chrome.tabs.get(info.tabId, function (tab) {
-        activity.addTab(tab);
-    });
-});
+function updateSummaryTime() {
+    setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK);
+}
 
-setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK);
+function updateStorage() {
+    setInterval(backgroundUpdateStorage, SETTINGS_INTERVAL_SAVE_STORAGE);
+}
 
 function backgroundCheck() {
     chrome.windows.getLastFocused({ populate: true }, function (currentWindow) {
@@ -30,3 +30,20 @@ function backgroundCheck() {
         }
     });
 }
+
+function backgroundUpdateStorage() {
+    if (tabs.length > 0)
+        storage.save(STORAGE_TABS, tabs);
+}
+
+function addListener() {
+    chrome.tabs.onActivated.addListener(function (info) {
+        chrome.tabs.get(info.tabId, function (tab) {
+            activity.addTab(tab);
+        });
+    });
+}
+
+addListener();
+updateSummaryTime();
+updateStorage();
