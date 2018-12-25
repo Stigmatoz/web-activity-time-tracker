@@ -23,15 +23,17 @@ function backgroundCheck() {
                     activity.addTab(activeTab);
                 }
 
-                chrome.idle.queryState(SETTINGS_INTERVAL_INACTIVITY, function (state) {
-                    if (state === 'active') {
-                        tab.summaryTime += 1;
-                        chrome.browserAction.setBadgeText({
-                            tabId: activeTab.id,
-                            text: String(convertSummaryTimeToBadgeString(tab.summaryTime))
-                        });
-                    }
-                });
+                if (tab !== undefined) {
+                    chrome.idle.queryState(SETTINGS_INTERVAL_INACTIVITY, function (state) {
+                        if (state === 'active') {
+                            tab.summaryTime += 1;
+                            chrome.browserAction.setBadgeText({
+                                tabId: activeTab.id,
+                                text: String(convertSummaryTimeToBadgeString(tab.summaryTime))
+                            });
+                        }
+                    });
+                }
             }
         }
     });
