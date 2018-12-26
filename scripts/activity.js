@@ -9,7 +9,7 @@ class Activity {
                 if (this.isNewUrl(domain)) {
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined){
-                        favicon = 'chrome://favicon/' + tab.url;
+                        favicon = 'chrome://favicon/' + domain;
                     }
                     var newTab = new Tab(domain, favicon);
                     tabs.push(newTab);

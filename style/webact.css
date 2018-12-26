@@ -20,12 +20,17 @@ body {
 }
 
 .span-total{
-    width: 220px;
+    width: 260px;
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
+}
+
+.span-percentage{
+    color: rgb(78, 78, 78);
+    font-size: 11px;
 }
 
 .span-time{
@@ -40,6 +45,6 @@ body {
 
 hr {
     border: none;
-    background-color: rgb(187, 187, 187);
+    background-color: rgb(223, 222, 222);
     height: 2px;
    }
