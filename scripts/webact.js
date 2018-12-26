@@ -11,6 +11,9 @@ function getDataFromStorage() {
 function getTabsFromStorage(tabs) {
     var table = document.getElementById('resultTable');
     table.innerHTML = null;
+    tabs = tabs.sort(function(a, b){
+        return b.summaryTime - a.summaryTime;
+    });
     for (var i = 0; i < tabs.length; i++) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
