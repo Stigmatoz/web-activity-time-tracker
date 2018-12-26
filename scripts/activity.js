@@ -7,7 +7,11 @@ class Activity {
                 tabs = tabs || [];
                 var domain = this.extractHostname(tab.url);
                 if (this.isNewUrl(domain)) {
-                    var newTab = new Tab(domain, tab.favIconUrl);
+                    var favicon = tab.favIconUrl;
+                    if (favicon === undefined){
+                        favicon = 'chrome://favicon/' + url;
+                    }
+                    var newTab = new Tab(domain, favicon);
                     tabs.push(newTab);
                 }
             }
