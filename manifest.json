@@ -19,7 +19,8 @@
             "tabs",
             "activeTab",
             "storage",
-            "idle"
+            "idle",
+            "chrome://favicon/*"
         ],
         "background": {
             "scripts": ["scripts/common.js", 
