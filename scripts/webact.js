@@ -11,7 +11,7 @@ function getDataFromStorage() {
 function getTabsFromStorage(tabs) {
     var table = document.getElementById('resultTable');
     table.innerHTML = null;
-    tabs = tabs.sort(function(a, b){
+    tabs = tabs.sort(function (a, b) {
         return b.summaryTime - a.summaryTime;
     });
     for (var i = 0; i < tabs.length; i++) {
@@ -36,4 +36,12 @@ function getTabsFromStorage(tabs) {
         div.appendChild(spanTime);
         table.appendChild(div);
     }
+
+    setTotalTime(tabs);
+}
+
+function setTotalTime(tabs) {
+    var summaryTimeList = tabs.map(function (a) { return a.summaryTime; });
+    var total = summaryTimeList.reduce(function (a, b) { return a + b; })
+    document.getElementById('totalTime').innerText = convertSummaryTimeToString(total);
 }

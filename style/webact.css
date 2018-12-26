@@ -19,11 +19,27 @@ body {
     color: rgb(107, 107, 107);
 }
 
+.span-total{
+    width: 220px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .span-time{
     margin-left: 10px;
     width: 70px;
+    font-weight: 500;
 }
 
 .favicon{
     margin-right:5px;
 }
+
+hr {
+    border: none;
+    background-color: rgb(187, 187, 187);
+    height: 2px;
+   }
