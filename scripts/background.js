@@ -50,6 +50,12 @@ function addListener() {
             activity.addTab(tab);
         });
     });
+
+    chrome.webNavigation.onCompleted.addListener(function(details){
+        chrome.tabs.get(details.tabId, function (tab) {
+            activity.updateFavicon(tab);
+        });
+    });
 }
 
 addListener();

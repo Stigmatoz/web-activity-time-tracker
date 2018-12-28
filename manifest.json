@@ -20,7 +20,8 @@
             "activeTab",
             "storage",
             "idle",
-            "chrome://favicon/*"
+            "chrome://favicon/*",
+            "webNavigation"
         ],
         "background": {
             "scripts": ["scripts/common.js", 
