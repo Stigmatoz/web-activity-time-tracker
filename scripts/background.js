@@ -1,6 +1,7 @@
 'use strict';
 
 var tabs = [];
+var currentTab;
 var activity = new Activity();
 var storage = new LocalStorage();
 

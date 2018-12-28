@@ -20,6 +20,10 @@ body {
     cursor: pointer;
 }
 
+.span-active-url{
+    font-weight: 700;
+}
+
 .span-url:hover{
     color: rgb(107, 107, 107);
 }

@@ -18,6 +18,8 @@ function getTabsFromStorage(tabs) {
 
     totalTime = setTotalTime(tabs);
 
+    var currentTab = getCurrentTab();
+
     for (var i = 0; i < tabs.length; i++) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
@@ -30,6 +32,9 @@ function getTabsFromStorage(tabs) {
         var spanUrl = document.createElement('span');
         spanUrl.classList.add('span-url');
         spanUrl.innerText = tabs[i].url;
+        if (tabs[i].url == currentTab){
+            spanUrl.classList.add('span-active-url');
+        }
 
         var spanPercentage = document.createElement('span');
         spanPercentage.classList.add('span-percentage');
@@ -57,4 +62,8 @@ function setTotalTime(tabs) {
 
 function setPercentage(time){
     return ((time / totalTime) * 100).toFixed(2) + '%';
+}
+
+function getCurrentTab(){
+    return chrome.extension.getBackgroundPage().currentTab;
 }

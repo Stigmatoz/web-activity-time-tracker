@@ -6,6 +6,7 @@ class Activity {
             if (tab.id && (tab.id != 0)) {
                 tabs = tabs || [];
                 var domain = this.extractHostname(tab.url);
+                this.setCurrentActiveTab(domain);
                 if (this.isNewUrl(domain)) {
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined){
@@ -16,6 +17,7 @@ class Activity {
                 }
             }
         }
+        else this.clearCurrentActiveTab();
     }
 
     isValidPage(tab) {
@@ -64,5 +66,13 @@ class Activity {
                 currentTab.favicon = tab.favIconUrl;
             }
         }
+    }
+
+    setCurrentActiveTab(domain){
+        currentTab = domain;
+    }
+
+    clearCurrentActiveTab(){
+        currentTab = '';
     }
 };
