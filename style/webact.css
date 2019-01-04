@@ -1,10 +1,9 @@
 body {
-    font-family: "Segoe UI", Verdana, sans-serif !important;
+    font-family: "Segoe UI", Tahoma, sans-serif !important;
     color: #262626;
 }
 
 .list-of-site{
-    height: 400px;
     overflow-y: auto;
 }
 
@@ -13,10 +12,10 @@ body {
 }
 
 .span-url{
-    width: 200px;
+    width: 320px;
     text-decoration: none;
     color: rgb(0, 0, 0);
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -29,16 +28,17 @@ body {
 }
 
 .span-total{
-    width: 260px;
+    width: 395px;
     text-decoration: none;
     color: rgb(0, 0, 0);
+    margin-left: 15px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
 }
 
 .span-percentage{
-    width: 40px;
+    width: 70px;
     color: rgb(78, 78, 78);
     font-size: 11px;
 }
