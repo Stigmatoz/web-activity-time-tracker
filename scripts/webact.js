@@ -57,6 +57,7 @@ function getTabsFromStorage(tabs) {
     }
 
     drawChart(tabsForChart);
+    setActiveTooltipe(currentTab);
 }
 
 function setTotalTime(tabs) {
@@ -118,4 +119,9 @@ function drawChart(tabs) {
     d3.select('#chart')
         .datum(tabs) // bind data to the div
         .call(donut); // draw chart in div
+}
+
+function setActiveTooltipe(currentTab){
+    var event = new Event("mouseenter");
+    document.getElementById(currentTab).dispatchEvent(event);
 }

@@ -37,3 +37,7 @@ tspan{
     font-size: 1.8em !important;
     font-weight: 600 !important;
 }
+
+.backColorChart{
+    background-color: rgb(227, 245, 243);
+}

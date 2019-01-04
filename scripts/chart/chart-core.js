@@ -1,7 +1,7 @@
 function donutChart() {
     var width,
         height,
-        margin = {top: 10, right: 10, bottom: 10, left: 10},
+        margin = { top: 10, right: 10, bottom: 10, left: 10 },
         colour = d3.scaleOrdinal(d3.schemeCategory20), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
@@ -10,8 +10,8 @@ function donutChart() {
         cornerRadius, // sets how rounded the corners are on each slice
         percentFormat = d3.format(',.2%');
 
-    function chart(selection){
-        selection.each(function(data) {
+    function chart(selection) {
+        selection.each(function (data) {
             // generate chart
 
             // ===========================================================================================
@@ -20,7 +20,7 @@ function donutChart() {
 
             // creates a new pie generator
             var pie = d3.pie()
-                .value(function(d) { return floatFormat(d[variable]); })
+                .value(function (d) { return floatFormat(d[variable]); })
                 .sort(null);
 
             // contructs and arc generator. This will be used for the donut. The difference between outer and inner
@@ -42,7 +42,8 @@ function donutChart() {
             var svg = selection.append('svg')
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
-              .append('g')
+                .attr('class', 'backColorChart')
+                .append('g')
                 .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
             // ===========================================================================================
 
@@ -58,22 +59,23 @@ function donutChart() {
             var path = svg.select('.slices')
                 .datum(data).selectAll('path')
                 .data(pie)
-              .enter().append('path')
-                .attr('fill', function(d) { return colour(d.data[category]); })
-                .attr('d', arc);
+                .enter().append('path')
+                .attr('fill', function (d) { return colour(d.data[category]); })
+                .attr('d', arc)
+                .attr('id', function (d) { return d.data[category]; });
             // ===========================================================================================
 
             // ===========================================================================================
             // add text labels
             var label = svg.select('.labelName').selectAll('text')
                 .data(pie)
-              .enter().append('text')
+                .enter().append('text')
                 .attr('dy', '.35em')
-                .html(function(d) {
+                .html(function (d) {
                     // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
                     return '       <tspan class="siteName">' + d.data[category] + '       </tspan>';
                 })
-                .attr('transform', function(d) {
+                .attr('transform', function (d) {
 
                     // effectively computes the centre of the slice.
                     // see https://github.com/d3/d3-shape/blob/master/README.md#arc_centroid
@@ -83,7 +85,7 @@ function donutChart() {
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
                     return 'translate(' + pos + ')';
                 })
-                .style('text-anchor', function(d) {
+                .style('text-anchor', function (d) {
                     // if slice centre is on the left, anchor text to start, otherwise anchor to end
                     return (midAngle(d)) < Math.PI ? 'start' : 'end';
                 });
@@ -94,8 +96,8 @@ function donutChart() {
             var polyline = svg.select('.lines')
                 .selectAll('polyline')
                 .data(pie)
-              .enter().append('polyline')
-                .attr('points', function(d) {
+                .enter().append('polyline')
+                .attr('points', function (d) {
 
                     // see label transform function for explanations of these three lines.
                     var pos = outerArc.centroid(d);
@@ -147,7 +149,7 @@ function donutChart() {
             function toolTipHTML(data) {
 
                 var tip = '',
-                    i   = 0;
+                    i = 0;
 
                 for (var key in data.data) {
 
@@ -174,55 +176,55 @@ function donutChart() {
     }
 
     // getter and setter functions. See Mike Bostocks post "Towards Reusable Charts" for a tutorial on how this works.
-    chart.width = function(value) {
+    chart.width = function (value) {
         if (!arguments.length) return width;
         width = value;
         return chart;
     };
 
-    chart.height = function(value) {
+    chart.height = function (value) {
         if (!arguments.length) return height;
         height = value;
         return chart;
     };
 
-    chart.margin = function(value) {
+    chart.margin = function (value) {
         if (!arguments.length) return margin;
         margin = value;
         return chart;
     };
 
-    chart.radius = function(value) {
+    chart.radius = function (value) {
         if (!arguments.length) return radius;
         radius = value;
         return chart;
     };
 
-    chart.padAngle = function(value) {
+    chart.padAngle = function (value) {
         if (!arguments.length) return padAngle;
         padAngle = value;
         return chart;
     };
 
-    chart.cornerRadius = function(value) {
+    chart.cornerRadius = function (value) {
         if (!arguments.length) return cornerRadius;
         cornerRadius = value;
         return chart;
     };
 
-    chart.colour = function(value) {
+    chart.colour = function (value) {
         if (!arguments.length) return colour;
         colour = value;
         return chart;
     };
 
-    chart.variable = function(value) {
+    chart.variable = function (value) {
         if (!arguments.length) return variable;
         variable = value;
         return chart;
     };
 
-    chart.category = function(value) {
+    chart.category = function (value) {
         if (!arguments.length) return category;
         category = value;
         return chart;

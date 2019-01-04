@@ -25,6 +25,7 @@ function backgroundCheck() {
                 }
 
                 if (tab !== undefined) {
+                    activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(SETTINGS_INTERVAL_INACTIVITY, function (state) {
                         if (state === 'active') {
                             tab.summaryTime += 1;
