@@ -28,7 +28,7 @@ function backgroundCheck() {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(SETTINGS_INTERVAL_INACTIVITY, function (state) {
                         if (state === 'active') {
-                            tab.summaryTime += 1;
+                            tab.incSummaryTime();
                             chrome.browserAction.setBadgeText({
                                 tabId: activeTab.id,
                                 text: String(convertSummaryTimeToBadgeString(tab.summaryTime))

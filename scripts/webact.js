@@ -2,52 +2,103 @@
 
 var storage = new LocalStorage();
 var totalTime;
+var tabsFromStorage;
 
-getDataFromStorage();
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('btnToday').addEventListener('click', function () {
+        document.getElementById('btnToday').classList.add('active');
+        document.getElementById('btnAll').classList.remove('active');
+        document.getElementById('btnByDays').classList.remove('active');
+        getDataFromStorageToday();
+    });
+    document.getElementById('btnAll').addEventListener('click', function () {
+        document.getElementById('btnAll').classList.add('active');
+        document.getElementById('btnToday').classList.remove('active');
+        document.getElementById('btnByDays').classList.remove('active');
+        getDataFromStorageAll();
+    });
+    document.getElementById('btnByDays').addEventListener('click', function () {
+        document.getElementById('btnByDays').classList.add('active');
+        document.getElementById('btnAll').classList.remove('active');
+        document.getElementById('btnToday').classList.remove('active');
 
-function getDataFromStorage() {
+        document.getElementById('resultTable').innerHTML = null;
+        document.getElementById('chart').innerHTML = null;
+    });
+});
+
+getDataFromStorageToday();
+
+function getDataFromStorageToday() {
     storage.load(STORAGE_TABS, getTabsFromStorage);
 }
 
-function getTabsFromStorage(tabs) {
+function getDataFromStorageAll() {
+    storage.load(STORAGE_TABS, getTabsFromStorage, true);
+}
+
+function getTabsFromStorage(tabs, options) {
+    tabsFromStorage = tabs;
+    var targetTabs = [];
+
     var table = document.getElementById('resultTable');
     table.innerHTML = null;
-    tabs = tabs.sort(function (a, b) {
-        return b.summaryTime - a.summaryTime;
-    });
+    document.getElementById('chart').innerHTML = null;
 
-    totalTime = setTotalTime(tabs);
+    if (options !== undefined && options === true) {
+        targetTabs = tabs.sort(function (a, b) {
+            return b.summaryTime - a.summaryTime;
+        });
+
+        totalTime = setTotalTime(targetTabs);
+    } else {
+        var today = new Date().toLocaleDateString();
+
+        targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
+        targetTabs = targetTabs.sort(function (a, b) {
+            return b.days.find(s => s.date === today) - a.days.find(s => s.date === today);
+        });
+
+        totalTime = setTotalTime(targetTabs, today);
+    }
 
     var currentTab = getCurrentTab();
 
     var tabsForChart = [];
-    for (var i = 0; i < tabs.length; i++) {
+    for (var i = 0; i < targetTabs.length; i++) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
         var img = document.createElement('img');
         img.classList.add('favicon');
         img.setAttribute('height', 15);
-        img.setAttribute('src', tabs[i].favicon);
+        img.setAttribute('src', targetTabs[i].favicon);
 
         var spanUrl = document.createElement('span');
         spanUrl.classList.add('span-url');
-        spanUrl.innerText = tabs[i].url;
-        if (tabs[i].url == currentTab) {
+        spanUrl.innerText = targetTabs[i].url;
+        if (targetTabs[i].url == currentTab) {
             spanUrl.classList.add('span-active-url');
+        }
+
+        var summaryTime;
+        if (today !== undefined) {
+            summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
+        } else {
+            summaryTime = targetTabs[i].summaryTime;
         }
 
         var spanPercentage = document.createElement('span');
         spanPercentage.classList.add('span-percentage');
-        spanPercentage.innerText = getPercentage(tabs[i].summaryTime);
+        spanPercentage.innerText = getPercentage(summaryTime);
 
         if (i <= 5)
-            addTabForChart(tabsForChart, tabs[i].url, tabs[i].summaryTime);
-        else addTabOthersForChart(tabsForChart, tabs[i].summaryTime);
+            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime);
+        else addTabOthersForChart(tabsForChart, summaryTime);
 
         var spanTime = document.createElement('span');
         spanTime.classList.add('span-time');
-        spanTime.innerText = convertSummaryTimeToString(tabs[i].summaryTime);
+        spanTime.innerText = convertSummaryTimeToString(summaryTime);
 
         div.appendChild(img);
         div.appendChild(spanUrl);
@@ -60,9 +111,15 @@ function getTabsFromStorage(tabs) {
     setActiveTooltipe(currentTab);
 }
 
-function setTotalTime(tabs) {
-    var summaryTimeList = tabs.map(function (a) { return a.summaryTime; });
-    var total = summaryTimeList.reduce(function (a, b) { return a + b; })
+function setTotalTime(tabs, today) {
+    var total;
+    if (today !== undefined) {
+        var summaryTimeList = tabs.map(function (a) { return a.days.find(s => s.date === today).summary; });
+        total = summaryTimeList.reduce(function (a, b) { return a + b; })
+    } else {
+        var summaryTimeList = tabs.map(function (a) { return a.summaryTime; });
+        total = summaryTimeList.reduce(function (a, b) { return a + b; })
+    }
     document.getElementById('totalTime').innerText = convertSummaryTimeToString(total);
 
     return total;
@@ -102,7 +159,7 @@ function addTabOthersForChart(tabsForChart, summaryTime) {
         );
     }
     else {
-        tab['summary'] = tab['summary'] + summaryTime;
+        tab['summary'] += summaryTime;
         tab['percentage'] = getPercentageForChart(tab['summary']);
     }
 }
@@ -121,7 +178,9 @@ function drawChart(tabs) {
         .call(donut); // draw chart in div
 }
 
-function setActiveTooltipe(currentTab){
-    var event = new Event("mouseenter");
-    document.getElementById(currentTab).dispatchEvent(event);
+function setActiveTooltipe(currentTab) {
+    if (currentTab !== '') {
+        var event = new Event("mouseenter");
+        document.getElementById(currentTab).dispatchEvent(event);
+    }
 }
