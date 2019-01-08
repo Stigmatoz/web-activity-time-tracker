@@ -3,12 +3,21 @@ body {
     color: #262626;
 }
 
+.margin-top-7{
+    margin-top: 7px;
+}
+
 .list-of-site{
     overflow-y: auto;
 }
 
 .inline-flex{
     display: inline-flex;
+}
+
+.inline-flex:hover{
+    font-size: 13px;
+    font-weight: 650;
 }
 
 .span-url{
@@ -23,15 +32,11 @@ body {
     font-weight: 700;
 }
 
-.span-url:hover{
-    color: rgb(107, 107, 107);
-}
-
 .span-total{
-    width: 395px;
+    width: 405px;
     text-decoration: none;
     color: rgb(0, 0, 0);
-    margin-left: 15px;
+    margin-left: 5px;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
@@ -84,4 +89,33 @@ hr {
     font-weight: 650;
     margin: 5px;
     text-align: center;
+}
+
+input[type="button"]{
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    border-radius: 6px; 
+    border: 1px solid #0099CC;
+    background: transparent; 
+    color: #0099CC; 
+}
+
+input[type="button"]:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+input[type="button"].active {
+    background-color: #008CBA;
+    color: white;
 }
