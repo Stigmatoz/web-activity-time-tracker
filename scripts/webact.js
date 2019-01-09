@@ -56,7 +56,7 @@ function getTabsFromStorage(tabs, options) {
 
         targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
         targetTabs = targetTabs.sort(function (a, b) {
-            return b.days.find(s => s.date === today) - a.days.find(s => s.date === today);
+            return b.days.find(s => s.date === today).summary - a.days.find(s => s.date === today).summary;
         });
 
         totalTime = setTotalTime(targetTabs, today);
