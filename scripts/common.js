@@ -4,6 +4,12 @@ var SETTINGS_INTERVAL_CHECK = 1000;
 var SETTINGS_INTERVAL_SAVE_STORAGE = 3000;
 var SETTINGS_INTERVAL_CHECK_STORAGE = 3000;
 
+var TypeListEnum = {
+    ToDay: 1,
+    All: 2,
+    ByDays: 3,
+};
+
 function isEmpty(obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop))
@@ -47,7 +53,7 @@ function convertSummaryTimeToString(summaryTime) {
     else return hours + 'h ' + mins + 'm ' + seconds + 's';
 }
 
-function zeroAppend(time){
+function zeroAppend(time) {
     if (time < 10)
         return '0' + time;
     else return time;

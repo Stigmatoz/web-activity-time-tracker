@@ -13,6 +13,7 @@ body {
 
 .inline-flex{
     display: inline-flex;
+    height: 25px;
 }
 
 .inline-flex:hover{
@@ -118,4 +119,11 @@ input[type="button"]:hover {
 input[type="button"].active {
     background-color: #008CBA;
     color: white;
+}
+
+.no-data{
+    width: 500px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
 }
