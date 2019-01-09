@@ -237,16 +237,10 @@ function setActiveTooltipe(currentTab) {
         if (element !== null) {
             var event = new Event("mouseenter");
             document.getElementById(currentTab).dispatchEvent(event);
-        } else {
-            var currentInfoForTab;
-            if (currentTypeOfList === TypeListEnum.ToDay) {
-                currentInfoForTab = targetTabs.find(x => x.url === currentTab).days.find(x => x.date === today)
-                donut.viewToolTipe({
-                    'url': currentTab,
-                    'summary': currentInfoForTab.summary,
-                    'percentage': getPercentageForChart(currentInfoForTab.summary)
-                });
-            }
         }
+        //     var currentInfoForTab;
+        //     if (currentTypeOfList === TypeListEnum.ToDay) {
+        //         currentInfoForTab = targetTabs.find(x => x.url === currentTab).days.find(x => x.date === today)
+        //     }
     }
 }
