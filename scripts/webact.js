@@ -44,7 +44,6 @@ function getTabsFromStorage(tabs) {
     tabsFromStorage = tabs;
     targetTabs = [];
 
-    var table = ui.getTableOfSite();
     ui.clearUI();
 
     if (currentTypeOfList === TypeListEnum.All) {

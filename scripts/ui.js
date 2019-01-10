@@ -22,14 +22,15 @@ class UI {
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnToday').classList.remove('active');
 
-        document.getElementById('resultTable').innerHTML = null;
-        document.getElementById('chart').innerHTML = null;
+        this.clearUI();
+        this.addBlockForCalendar();
     }
 
     clearUI() {
         document.getElementById('resultTable').innerHTML = null;
         document.getElementById('chart').innerHTML = null;
         document.getElementById('total').innerHTML = null;
+        document.getElementById('byDays').innerHTML = null;
     }
 
     createTotalBlock(totalTime) {
@@ -130,5 +131,29 @@ class UI {
         div.appendChild(spanPercentage);
         div.appendChild(spanTime);
         this.getTableOfSite().appendChild(div);
+    }
+
+    addBlockForCalendar() {
+        var div = document.getElementById('byDays');
+
+        var from = document.createElement('span');
+        from.innerHTML = 'From';
+        var to = document.createElement('span');
+        to.innerHTML = 'To';
+
+        var calendarFirst = document.createElement('input');
+        calendarFirst.type = 'date';
+        var previousDate = new Date();
+        previousDate.setDate(previousDate.getDate() - 7);
+        calendarFirst.valueAsDate = previousDate;
+
+        var calendarTwo = document.createElement('input');
+        calendarTwo.type = 'date';
+        calendarTwo.valueAsDate = new Date();
+
+        div.appendChild(from);
+        div.appendChild(calendarFirst);
+        div.appendChild(to);
+        div.appendChild(calendarTwo);
     }
 }

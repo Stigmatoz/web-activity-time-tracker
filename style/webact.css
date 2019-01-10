@@ -3,17 +3,12 @@ body {
     color: #262626;
 }
 
-.margin-top-7{
-    margin-top: 7px;
-}
-
 .list-of-site{
     overflow-y: auto;
 }
 
 .inline-flex{
     display: inline-flex;
-    height: 25px;
 }
 
 .inline-flex:hover{
@@ -107,6 +102,7 @@ input[type="button"]{
     border: 1px solid #0099CC;
     background: transparent; 
     color: #0099CC; 
+    width: 32%;
 }
 
 input[type="button"]:hover {
@@ -119,11 +115,27 @@ input[type="button"].active {
     color: white;
 }
 
+input[type="date"]{
+    margin: 4px 6px;
+    height: 22px;
+}
+
+.btn-block{
+    width: 500px;
+    margin-bottom: 7px;
+}
+
 .no-data{
     width: 500px;
     text-align: center;
     font-weight: 600;
     font-size: 14px;
+}
+
+.calendar-block{
+    margin-top: -20px;
+}
+
 .table-header{
     margin:3px 0;
     border-radius: 5px;
