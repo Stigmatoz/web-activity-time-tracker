@@ -170,4 +170,17 @@ class UI {
             'to': new Date(document.getElementById('dateTo').value).toLocaleDateString()
         };
     }
+
+    fillListOfDays(days) {
+        var parent = document.getElementById('byDays');
+        for (var i = 0; i < days.length; i++) {
+            var div = document.createElement('div');
+            div.classList.add('day');
+            var span = document.createElement('span');
+            span.innerHTML = days[i];
+            div.appendChild(span);
+
+            parent.appendChild(div);
+        }
+    }
 }

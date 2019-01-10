@@ -185,4 +185,6 @@ function getTabsByDays(tabs){
     listOfDays = listOfDays.sort(function (a, b) {
         return new Date(a) - new Date(b);
     });
+
+    ui.fillListOfDays(listOfDays);
 }

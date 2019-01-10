@@ -145,3 +145,9 @@ input[type="date"]{
     background-color: rgb(223, 221, 221);
     text-align: center;
 }
+
+.day{
+    width: 500px;
+    height: 25px;
+    cursor: pointer;
+}
