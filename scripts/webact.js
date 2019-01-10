@@ -45,6 +45,10 @@ function getTabsFromStorage(tabs) {
     targetTabs = [];
 
     ui.clearUI();
+    if (tabs === null){
+        ui.fillEmptyBlock();
+        return;
+    }
 
     if (currentTypeOfList === TypeListEnum.All) {
         targetTabs = tabs.sort(function (a, b) {
