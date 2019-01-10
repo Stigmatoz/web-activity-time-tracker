@@ -9,12 +9,16 @@ class UI {
         document.getElementById('btnToday').classList.add('active');
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
+
+        this.clearUI();
     }
 
     setUIForAll() {
         document.getElementById('btnAll').classList.add('active');
         document.getElementById('btnToday').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
+
+        this.clearUI();
     }
 
     setUIForByDays() {
@@ -141,19 +145,29 @@ class UI {
         var to = document.createElement('span');
         to.innerHTML = 'To';
 
+        var dateNow = new Date();
         var calendarFirst = document.createElement('input');
+        calendarFirst.id = 'dateFrom';
         calendarFirst.type = 'date';
-        var previousDate = new Date();
+        var previousDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
         previousDate.setDate(previousDate.getDate() - 7);
         calendarFirst.valueAsDate = previousDate;
 
         var calendarTwo = document.createElement('input');
+        calendarTwo.id = 'dateTo';
         calendarTwo.type = 'date';
-        calendarTwo.valueAsDate = new Date();
+        calendarTwo.valueAsDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
 
         div.appendChild(from);
         div.appendChild(calendarFirst);
         div.appendChild(to);
         div.appendChild(calendarTwo);
+    }
+
+    getDateRange() {
+        return {
+            'from': new Date(document.getElementById('dateFrom').value).toLocaleDateString(),
+            'to': new Date(document.getElementById('dateTo').value).toLocaleDateString()
+        };
     }
 }

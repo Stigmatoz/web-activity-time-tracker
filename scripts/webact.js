@@ -12,16 +12,17 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnToday').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ToDay;
         ui.setUIForToday();
-        getDataFromStorageToday();
+        getDataFromStorage();
     });
     document.getElementById('btnAll').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.All;
         ui.setUIForAll();
-        getDataFromStorageAll();
+        getDataFromStorage();
     });
     document.getElementById('btnByDays').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ByDays;
         ui.setUIForByDays();
+        getDataFromStorageByDays();
     });
 });
 
@@ -29,15 +30,15 @@ firstInitPage();
 
 function firstInitPage() {
     currentTypeOfList = TypeListEnum.ToDay;
-    getDataFromStorageToday();
+    getDataFromStorage();
 }
 
-function getDataFromStorageToday() {
+function getDataFromStorage() {
     storage.load(STORAGE_TABS, getTabsFromStorage);
 }
 
-function getDataFromStorageAll() {
-    storage.load(STORAGE_TABS, getTabsFromStorage);
+function getDataFromStorageByDays(){
+    storage.load(STORAGE_TABS, getTabsByDays);
 }
 
 function getTabsFromStorage(tabs) {
@@ -170,4 +171,18 @@ function getFirstDay() {
         'countOfDays': array.length,
         'minDate': array[0]
     };
+}
+
+function getTabsByDays(tabs){
+    var range = ui.getDateRange();
+    var listOfDays = [];
+    tabs.map(function (a) {
+        return a.days.map(function (a) {
+            if (listOfDays.indexOf(a.date) === -1 && isDateInRange(a.date, range))
+                return listOfDays.push(a.date);
+        });
+    });
+    listOfDays = listOfDays.sort(function (a, b) {
+        return new Date(a) - new Date(b);
+    });
 }

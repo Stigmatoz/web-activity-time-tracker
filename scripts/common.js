@@ -58,3 +58,7 @@ function zeroAppend(time) {
         return '0' + time;
     else return time;
 }
+
+function isDateInRange(date, range){
+    return date >= range.from && date <= range.to;
+}
