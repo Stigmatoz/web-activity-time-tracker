@@ -124,4 +124,12 @@ input[type="button"].active {
     text-align: center;
     font-weight: 600;
     font-size: 14px;
+.table-header{
+    margin:3px 0;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 4px;
+    background-color: rgb(223, 221, 221);
+    text-align: center;
 }

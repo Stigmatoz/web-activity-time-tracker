@@ -69,6 +69,11 @@ function getTabsFromStorage(tabs) {
         }
     }
 
+    if (currentTypeOfList === TypeListEnum.All)
+        ui.addTableHeader(currentTypeOfList, getFirstDay());
+    if (currentTypeOfList === TypeListEnum.ToDay)
+        ui.addTableHeader(currentTypeOfList);
+
     var currentTab = getCurrentTab();
 
     var tabsForChart = [];
@@ -144,4 +149,22 @@ function addTabOthersForChart(tabsForChart, summaryTime) {
         tab['summary'] += summaryTime;
         tab['percentage'] = getPercentageForChart(tab['summary']);
     }
+}
+
+function getFirstDay() {
+    var array = [];
+    tabsFromStorage.map(function (a) {
+        return a.days.map(function (a) {
+            if (array.indexOf(a.date) === -1)
+                return array.push(a.date);
+        });
+    });
+    array = array.sort(function (a, b) {
+        return new Date(a) - new Date(b);
+    });
+
+    return {
+        'countOfDays': array.length,
+        'minDate': array[0]
+    };
 }

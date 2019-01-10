@@ -71,21 +71,37 @@ class UI {
 
     drawChart(tabs) {
         var donut = donutChart()
-                .width(480)
-                .height(280)
-                .cornerRadius(5) // sets how rounded the corners are on each slice
-                .padAngle(0.020) // effectively dictates the gap between slices
-                .variable('percentage')
-                .category('url');
+            .width(480)
+            .height(280)
+            .cornerRadius(5) // sets how rounded the corners are on each slice
+            .padAngle(0.020) // effectively dictates the gap between slices
+            .variable('percentage')
+            .category('url');
 
         d3.select('#chart')
-                .datum(tabs) // bind data to the div
-                .call(donut); // draw chart in div
+            .datum(tabs) // bind data to the div
+            .call(donut); // draw chart in div
 
         ui.addHrAfterChart();
     }
 
-    addLineToTableOfSite(tab, currentTab, summaryTime){
+    addTableHeader(currentTypeOfList, totalDays) {
+        var p = document.createElement('p');
+        p.classList.add('table-header');
+        if (currentTypeOfList === TypeListEnum.ToDay)
+            p.innerHTML = 'Today';
+        if (currentTypeOfList === TypeListEnum.All && totalDays !== undefined) {
+            if (totalDays.countOfDays > 0) {
+                p.innerHTML = 'Aggregate data since ' + totalDays.minDate + ' (' + totalDays.countOfDays + ' days)';
+            } else {
+                p.innerHTML = 'Aggregate data since ' + today;
+            }
+        }
+
+        this.getTableOfSite().appendChild(p);
+    }
+
+    addLineToTableOfSite(tab, currentTab, summaryTime) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
