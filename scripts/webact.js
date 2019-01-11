@@ -37,7 +37,7 @@ function getDataFromStorage() {
     storage.load(STORAGE_TABS, getTabsFromStorage);
 }
 
-function getDataFromStorageByDays(){
+function getDataFromStorageByDays() {
     storage.load(STORAGE_TABS, getTabsByDays);
 }
 
@@ -46,7 +46,7 @@ function getTabsFromStorage(tabs) {
     targetTabs = [];
 
     ui.clearUI();
-    if (tabs === null){
+    if (tabs === null) {
         ui.fillEmptyBlock();
         return;
     }
@@ -173,17 +173,26 @@ function getFirstDay() {
     };
 }
 
-function getTabsByDays(tabs){
+function getTabsByDays(tabs) {
     var range = ui.getDateRange();
     var listOfDays = [];
     tabs.map(function (a) {
         return a.days.map(function (a) {
-            if (listOfDays.indexOf(a.date) === -1 && isDateInRange(a.date, range))
-                return listOfDays.push(a.date);
+            var item = listOfDays.find(x => x.date == a.date);
+            if (item !== undefined){
+                return item.total += a.summary;
+            }
+            if (item === undefined && isDateInRange(a.date, range))
+                return listOfDays.push(
+                    {
+                        'date': a.date,
+                        'total': a.summary
+                    }
+                );
         });
     });
     listOfDays = listOfDays.sort(function (a, b) {
-        return new Date(a) - new Date(b);
+        return new Date(a.date) - new Date(b.date);
     });
 
     ui.fillListOfDays(listOfDays);

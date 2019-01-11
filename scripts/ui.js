@@ -158,10 +158,25 @@ class UI {
         calendarTwo.type = 'date';
         calendarTwo.valueAsDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
 
+        var header = document.createElement('div');
+        header.classList.add('table-header');
+
+        var headerTitleDate = document.createElement('span');
+        headerTitleDate.innerHTML = 'Day';
+        headerTitleDate.classList.add('header-title-day');
+        var headerTitleTime = document.createElement('span');
+        headerTitleTime.innerHTML = 'Summary time';
+        headerTitleTime.classList.add('header-title-time');
+
+        header.appendChild(headerTitleDate);
+        header.appendChild(headerTitleTime);
+
         div.appendChild(from);
         div.appendChild(calendarFirst);
         div.appendChild(to);
         div.appendChild(calendarTwo);
+
+        div.append(header);
     }
 
     getDateRange() {
@@ -175,10 +190,16 @@ class UI {
         var parent = document.getElementById('byDays');
         for (var i = 0; i < days.length; i++) {
             var div = document.createElement('div');
-            div.classList.add('day');
+            div.classList.add('day-block');
             var span = document.createElement('span');
-            span.innerHTML = days[i];
+            span.classList.add('day');
+            span.innerHTML = days[i].date;
+            var spanTime = document.createElement('span');
+            spanTime.classList.add('day-time');
+            spanTime.innerHTML = convertSummaryTimeToString(days[i].total);
+
             div.appendChild(span);
+            div.appendChild(spanTime);
 
             parent.appendChild(div);
         }
