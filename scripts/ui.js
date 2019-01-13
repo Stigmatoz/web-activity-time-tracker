@@ -110,7 +110,7 @@ class UI {
         this.getTableOfSite().appendChild(p);
     }
 
-    addLineToTableOfSite(tab, currentTab, summaryTime) {
+    addLineToTableOfSite(tab, currentTab, summaryTime, blockName) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
@@ -138,7 +138,10 @@ class UI {
         div.appendChild(spanUrl);
         div.appendChild(spanPercentage);
         div.appendChild(spanTime);
-        this.getTableOfSite().appendChild(div);
+        if (blockName !== undefined)
+            document.getElementById(blockName).appendChild(div);
+        else
+            this.getTableOfSite().appendChild(div);
     }
 
     addBlockForCalendar() {
@@ -164,20 +167,6 @@ class UI {
 
         var tableForDaysBlock = document.createElement('div');
         tableForDaysBlock.id = 'tableForDaysBlock';
-        var header = document.createElement('div');
-        header.classList.add('table-header');
-
-        var headerTitleDate = document.createElement('span');
-        headerTitleDate.innerHTML = 'Day';
-        headerTitleDate.classList.add('header-title-day');
-        var headerTitleTime = document.createElement('span');
-        headerTitleTime.innerHTML = 'Summary time';
-        headerTitleTime.classList.add('header-title-time');
-
-        header.appendChild(headerTitleDate);
-        header.appendChild(headerTitleTime);
-
-        tableForDaysBlock.appendChild(header);
 
         div.appendChild(from);
         div.appendChild(calendarFirst);
@@ -206,9 +195,31 @@ class UI {
         var parent = document.getElementById('tableForDaysBlock');
         parent.innerHTML = null;
         if (days.length > 0) {
+            var header = document.createElement('div');
+            header.classList.add('table-header');
+
+            var headerTitleDate = document.createElement('span');
+            headerTitleDate.innerHTML = 'Day';
+            headerTitleDate.classList.add('header-title-day');
+            var headerTitleTime = document.createElement('span');
+            headerTitleTime.innerHTML = 'Summary time';
+            headerTitleTime.classList.add('header-title-time');
+
+            header.appendChild(headerTitleDate);
+            header.appendChild(headerTitleTime);
+
+            parent.appendChild(header);
+
             for (var i = 0; i < days.length; i++) {
-                var div = document.createElement('div');
-                div.classList.add('day-block');
+                var check = document.createElement('input');
+                check.type = 'checkbox';
+                check.id = days[i].date;
+                check.classList.add('toggle');
+
+                var label = document.createElement('label');
+                label.setAttribute('for', days[i].date);
+                label.classList.add('day-block');
+                label.classList.add('lbl-toggle');
                 var span = document.createElement('span');
                 span.classList.add('day');
                 span.innerHTML = days[i].date;
@@ -216,12 +227,24 @@ class UI {
                 spanTime.classList.add('day-time');
                 spanTime.innerHTML = convertSummaryTimeToString(days[i].total);
 
-                div.appendChild(span);
-                div.appendChild(spanTime);
+                label.appendChild(span);
+                label.appendChild(spanTime);
 
+                parent.appendChild(check);
+                parent.appendChild(label);
+
+                var div = document.createElement('div');
+                div.id = days[i].date + '_block';
+                div.classList.add('collapsible-content');
                 parent.appendChild(div);
+
+                document.getElementById(days[i].date).addEventListener('click', function () {
+                    var element = document.getElementById(this.id + '_block');
+                    element.innerHTML = null;
+                    getTabsFromStorageByDay(this.id, this.id + '_block')
+                });
             }
-        
+
         } else {
             this.fillEmptyBlock('tableForDaysBlock');
         }

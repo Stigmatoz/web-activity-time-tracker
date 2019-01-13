@@ -116,6 +116,13 @@ function getTotalTime(tabs) {
     return total;
 }
 
+function getTotalTimeForDay(day, tabs) {
+    var total;
+    var summaryTimeList = tabs.map(function (a) { return a.days.find(s => s.date === day).summary; });
+    total = summaryTimeList.reduce(function (a, b) { return a + b; })
+    return total;
+}
+
 function getPercentage(time) {
     return ((time / totalTime) * 100).toFixed(2) + '%';
 }
@@ -198,7 +205,43 @@ function getTabsByDays(tabs) {
 
         ui.fillListOfDays(listOfDays);
     }
-    else{
+    else {
         ui.fillEmptyBlockForDays();
+    }
+}
+
+function getTabsFromStorageByDay(day, blockName) {
+    targetTabs = [];
+
+    if (tabsFromStorage === null) {
+        ui.fillEmptyBlock(blockName);
+        return;
+    }
+
+    targetTabs = tabsFromStorage.filter(x => x.days.find(s => s.date === day));
+    if (targetTabs.length > 0) {
+        targetTabs = targetTabs.sort(function (a, b) {
+            return b.days.find(s => s.date === day).summary - a.days.find(s => s.date === day).summary;
+        });
+
+        totalTime = getTotalTimeForDay(day, targetTabs);
+    }
+    else {
+        ui.fillEmptyBlock(blockName);
+        return;
+    }
+
+    var currentTab = getCurrentTab();
+
+    var tabsForChart = [];
+    var content = document.createElement('div');
+    content.classList.add('content-inner');
+    content.id = blockName + '_content';
+    document.getElementById(blockName).appendChild(content);
+    for (var i = 0; i < targetTabs.length; i++) {
+        var summaryTime;
+        summaryTime = targetTabs[i].days.find(x => x.date == day).summary;
+
+        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, blockName + '_content');
     }
 }
