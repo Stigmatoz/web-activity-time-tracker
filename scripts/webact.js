@@ -47,7 +47,7 @@ function getTabsFromStorage(tabs) {
 
     ui.clearUI();
     if (tabs === null) {
-        ui.fillEmptyBlock();
+        ui.fillEmptyBlock('chart');
         return;
     }
 
@@ -68,7 +68,7 @@ function getTabsFromStorage(tabs) {
             totalTime = getTotalTime(targetTabs);
         }
         else {
-            ui.fillEmptyBlock();
+            ui.fillEmptyBlock('chart');
             return;
         }
     }
@@ -175,25 +175,30 @@ function getFirstDay() {
 
 function getTabsByDays(tabs) {
     var range = ui.getDateRange();
-    var listOfDays = [];
-    tabs.map(function (a) {
-        return a.days.map(function (a) {
-            var item = listOfDays.find(x => x.date == a.date);
-            if (item !== undefined){
-                return item.total += a.summary;
-            }
-            if (item === undefined && isDateInRange(a.date, range))
-                return listOfDays.push(
-                    {
-                        'date': a.date,
-                        'total': a.summary
-                    }
-                );
+    if (range.from !== 'Invalid Date' && range.to !== 'Invalid Date') {
+        var listOfDays = [];
+        tabs.map(function (a) {
+            return a.days.map(function (a) {
+                var item = listOfDays.find(x => x.date == a.date);
+                if (item !== undefined) {
+                    return item.total += a.summary;
+                }
+                if (item === undefined && isDateInRange(a.date, range))
+                    return listOfDays.push(
+                        {
+                            'date': a.date,
+                            'total': a.summary
+                        }
+                    );
+            });
         });
-    });
-    listOfDays = listOfDays.sort(function (a, b) {
-        return new Date(a.date) - new Date(b.date);
-    });
+        listOfDays = listOfDays.sort(function (a, b) {
+            return new Date(a.date) - new Date(b.date);
+        });
 
-    ui.fillListOfDays(listOfDays);
+        ui.fillListOfDays(listOfDays);
+    }
+    else{
+        ui.fillEmptyBlockForDays();
+    }
 }

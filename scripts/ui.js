@@ -52,8 +52,12 @@ class UI {
         totalElement.appendChild(spanTime);
     }
 
-    fillEmptyBlock() {
-        document.getElementById('chart').innerHTML = '<p class="no-data">No data</p>';
+    fillEmptyBlock(elementName) {
+        document.getElementById(elementName).innerHTML = '<p class="no-data">No data</p>';
+    }
+
+    fillEmptyBlockForDays() {
+        document.getElementById('tableForDaysBlock').innerHTML = '<p class="no-data">Invalid date</p>';
     }
 
     addHrAfterChart() {
@@ -158,6 +162,8 @@ class UI {
         calendarTwo.type = 'date';
         calendarTwo.valueAsDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
 
+        var tableForDaysBlock = document.createElement('div');
+        tableForDaysBlock.id = 'tableForDaysBlock';
         var header = document.createElement('div');
         header.classList.add('table-header');
 
@@ -171,12 +177,22 @@ class UI {
         header.appendChild(headerTitleDate);
         header.appendChild(headerTitleTime);
 
+        tableForDaysBlock.appendChild(header);
+
         div.appendChild(from);
         div.appendChild(calendarFirst);
         div.appendChild(to);
         div.appendChild(calendarTwo);
 
-        div.append(header);
+        div.append(tableForDaysBlock);
+
+        document.getElementById('dateFrom').addEventListener('change', function () {
+            getTabsByDays(tabsFromStorage);
+        });
+
+        document.getElementById('dateTo').addEventListener('change', function () {
+            getTabsByDays(tabsFromStorage);
+        });
     }
 
     getDateRange() {
@@ -187,21 +203,27 @@ class UI {
     }
 
     fillListOfDays(days) {
-        var parent = document.getElementById('byDays');
-        for (var i = 0; i < days.length; i++) {
-            var div = document.createElement('div');
-            div.classList.add('day-block');
-            var span = document.createElement('span');
-            span.classList.add('day');
-            span.innerHTML = days[i].date;
-            var spanTime = document.createElement('span');
-            spanTime.classList.add('day-time');
-            spanTime.innerHTML = convertSummaryTimeToString(days[i].total);
+        var parent = document.getElementById('tableForDaysBlock');
+        parent.innerHTML = null;
+        if (days.length > 0) {
+            for (var i = 0; i < days.length; i++) {
+                var div = document.createElement('div');
+                div.classList.add('day-block');
+                var span = document.createElement('span');
+                span.classList.add('day');
+                span.innerHTML = days[i].date;
+                var spanTime = document.createElement('span');
+                spanTime.classList.add('day-time');
+                spanTime.innerHTML = convertSummaryTimeToString(days[i].total);
 
-            div.appendChild(span);
-            div.appendChild(spanTime);
+                div.appendChild(span);
+                div.appendChild(spanTime);
 
-            parent.appendChild(div);
+                parent.appendChild(div);
+            }
+        
+        } else {
+            this.fillEmptyBlock('tableForDaysBlock');
         }
     }
 }
