@@ -86,34 +86,32 @@ hr {
     text-align: center;
 }
 
-input[type="button"]{
-    border: none;
-    color: white;
-    padding: 6px 10px;
+a{
+    color: rgb(184, 179, 179);
+    padding: 4px 5px;
     text-align: center;
     display: inline-block;
     font-size: 12px;
+    font-weight: 600;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
     text-decoration: none;
     text-transform: uppercase;
 
-    border-radius: 6px; 
-    border: 1px solid #0099CC;
+    border-bottom: 2px solid rgb(184, 179, 179);
     background: transparent; 
-    color: #0099CC; 
-    width: 32%;
+    width: 30%;
 }
 
-input[type="button"]:hover {
-    background-color: #008CBA;
-    color: white;
+a:hover {
+    color:rgb(55, 158, 86);
+    border-bottom: 2px solid rgb(55, 158, 86);
 }
 
-input[type="button"].active {
-    background-color: #008CBA;
-    color: white;
+a.active {
+    color:rgb(55, 158, 86);
+    border-bottom: 2px solid rgb(55, 158, 86);
 }
 
 input[type="date"]{
@@ -143,7 +141,7 @@ input[type="date"]{
     font-weight: 600;
     font-size: 13px;
     padding: 4px;
-    background-color: rgb(223, 221, 221);
+    background-color: rgb(176, 233, 188);
 }
 
 p.table-header{
