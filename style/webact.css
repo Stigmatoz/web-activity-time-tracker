@@ -216,7 +216,7 @@ p.table-header{
   
   .collapsible-content {
     max-height: 0px;
-    overflow: hidden;
+    overflow-y: auto;
     transition: max-height .25s ease-in-out;
   }
   
@@ -235,6 +235,7 @@ p.table-header{
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     padding: 7px;
+    overflow-y: auto;
 
 
     /* border-left: 3px solid rgb(151, 218, 52); */
