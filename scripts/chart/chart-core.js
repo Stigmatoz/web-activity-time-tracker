@@ -44,7 +44,7 @@ function donutChart() {
                 .attr('height', height + margin.top + margin.bottom)
                 .attr('class', 'backColorChart')
                 .append('g')
-                .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+                .attr('transform', 'translate(' + (width / 2 + 30) + ',' + (height / 2 + 30) + ')');
             // ===========================================================================================
 
             // ===========================================================================================
@@ -83,6 +83,12 @@ function donutChart() {
 
                     // changes the point to be on left or right depending on where label is.
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+
+                    if (d.data.percentage < 0.10 || d.data.url == 'Others' ){
+                        pos[0] = pos[0] * 1.1;
+                        pos[1] = pos[1] * 1.15;
+                    }
+
                     return 'translate(' + pos + ')';
                 })
                 .style('text-anchor', function (d) {
@@ -98,10 +104,14 @@ function donutChart() {
                 .data(pie)
                 .enter().append('polyline')
                 .attr('points', function (d) {
-
                     // see label transform function for explanations of these three lines.
                     var pos = outerArc.centroid(d);
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+
+                    if (d.data.percentage < 0.10 || d.data.url == 'Others'){
+                        pos[0] = pos[0] * 1.1;
+                        pos[1] = pos[1] * 1.15;
+                    }
                     return [arc.centroid(d), outerArc.centroid(d), pos]
                 });
             // ===========================================================================================
