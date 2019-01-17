@@ -16,7 +16,7 @@ function donutChart() {
 
             // ===========================================================================================
             // Set up constructors for making donut. See https://github.com/d3/d3-shape/blob/master/README.md
-            var radius = 140;
+            var radius = 120;
 
             // creates a new pie generator
             var pie = d3.pie()
@@ -37,6 +37,11 @@ function donutChart() {
                 .innerRadius(radius * 0.9);
             // ===========================================================================================
 
+            var tempAngle;
+            var tempOffset = {
+                x: 1,
+                y: 0.95
+            };
             // ===========================================================================================
             // append the svg object to the selection
             var svg = selection.append('svg')
@@ -44,7 +49,7 @@ function donutChart() {
                 .attr('height', height + margin.top + margin.bottom)
                 .attr('class', 'backColorChart')
                 .append('g')
-                .attr('transform', 'translate(' + (width / 2 + 30) + ',' + (height / 2 + 30) + ')');
+                .attr('transform', 'translate(' + (width / 2 + 20) + ',' + (height / 2 + 10) + ')');
             // ===========================================================================================
 
             // ===========================================================================================
@@ -80,14 +85,23 @@ function donutChart() {
                     // effectively computes the centre of the slice.
                     // see https://github.com/d3/d3-shape/blob/master/README.md#arc_centroid
                     var pos = outerArc.centroid(d);
-
+                    
                     // changes the point to be on left or right depending on where label is.
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
 
-                    if (d.data.percentage < 0.10 || d.data.url == 'Others' ){
-                        pos[0] = pos[0] * 1.1;
-                        pos[1] = pos[1] * 1.15;
+                    var currentAngle = midAngle(d);
+                    if (angleIsInRangeDifference(tempAngle, currentAngle, 2)){
+                        tempOffset.x -= 0.1;
+                        tempOffset.y += 0.1;
+                        tempAngle = 0;
                     }
+
+                    if (d.data.percentage < 0.10 || d.data.url == 'Others' ){
+                        pos[0] = pos[0] * tempOffset.x;
+                        pos[1] = pos[1] * tempOffset.y;
+                    }
+
+                    tempAngle = midAngle(d);
 
                     return 'translate(' + pos + ')';
                 })
@@ -97,6 +111,10 @@ function donutChart() {
                 });
             // ===========================================================================================
 
+            tempOffset = {
+                x: 1,
+                y: 0.95
+            };
             // ===========================================================================================
             // add lines connecting labels to slice. A polyline creates straight lines connecting several points
             var polyline = svg.select('.lines')
@@ -108,10 +126,19 @@ function donutChart() {
                     var pos = outerArc.centroid(d);
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
 
-                    if (d.data.percentage < 0.10 || d.data.url == 'Others'){
-                        pos[0] = pos[0] * 1.1;
-                        pos[1] = pos[1] * 1.15;
+                    var currentAngle = midAngle(d);
+                    if (angleIsInRangeDifference(tempAngle, currentAngle, 2)){
+                        tempOffset.x -= 0.1;
+                        tempOffset.y += 0.1;
+                        tempAngle = 0;
                     }
+
+                    if (d.data.percentage < 0.10 || d.data.url == 'Others'){
+                        pos[0] = pos[0] * tempOffset.x;
+                        pos[1] = pos[1] * tempOffset.y;
+                    }
+
+                    tempAngle = midAngle(d);
                     return [arc.centroid(d), outerArc.centroid(d), pos]
                 });
             // ===========================================================================================
@@ -179,6 +206,10 @@ function donutChart() {
                 }
 
                 return tip;
+            }
+
+            function angleIsInRangeDifference(tempAngle, currentAngle, difference){
+                return currentAngle < (tempAngle + difference) && currentAngle > (tempAngle - difference);
             }
             // ===========================================================================================
 
