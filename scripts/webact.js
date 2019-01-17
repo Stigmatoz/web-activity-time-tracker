@@ -41,11 +41,11 @@ function firstInitPage() {
 }
 
 function getDataFromStorage() {
-    storage.load(STORAGE_TABS, getTabsFromStorage);
+    storage.loadTabs(STORAGE_TABS, getTabsFromStorage);
 }
 
 function getDataFromStorageByDays() {
-    storage.load(STORAGE_TABS, getTabsByDays);
+    storage.loadTabs(STORAGE_TABS, getTabsByDays);
 }
 
 function getTabsFromStorage(tabs) {

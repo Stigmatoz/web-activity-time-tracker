@@ -5,6 +5,8 @@
    <meta charset="utf-8">
    <title>WebActivity Time Tracker</title>
    <link href="style/settings.css" rel="stylesheet" />
+   <script src="scripts/storage.js"></script>
+   <script src="scripts/settings.js"></script>
 </head>
 
 <body>
@@ -12,44 +14,61 @@
       <div class="header">
          <p class="title">Web Activity Time Tracker</p>
       </div>
-      <div id="nav" class="nav">
-         <a class="active">Settings</a>
-         <a>About</a>
+      <div id='nav' class="nav">
+         <a id='settingsBtn' class="active">Settings</a>
+         <a id='aboutBtn'>About</a>
       </div>
-      <div>
-         <label>
-            <input type="checkbox" class="filled-in" id="chk-demo3" checked="checked" />
-            <span>Display time tracker in icon</span>
-         </label>
-         <div class="margin-top-10"><label>Stop tracking if no activity detected for:</label></div>
-         <div class="margin-top-10">
-            <select id="timeToStopTracking" class="option">
-               <option value="0.33">30 seconds</option>
-               <option value="0.45">45 seconds</option>
-               <option value="1">1 min</option>
-               <option value="2">2 min</option>
-               <option value="5">5 mins</option>
-               <option value="10">10 mins</option>
-               <option value="15">15 mins</option>
-               <option value="20">20 mins</option>
-               <option value="30">30 mins</option>
-            </select>
+      <div id='block'>
+         <div id="settingsBlock">
+            <label>
+               <input type="checkbox" class="filled-in" id="chk-demo3" checked="checked" />
+               <span>Display time tracker in icon</span>
+            </label>
+            <div class="margin-top-10">
+               <label>Stop tracking if no activity detected for: </label>
+               <div class="tooltip"><img src="/icons/information.png" />
+                  <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
+               </div>
+               <div class="margin-top-10">
+                  <select id='timeToStopTracking' class="option">
+                     <option value="0.33">30 seconds</option>
+                     <option value="0.45">45 seconds</option>
+                     <option value="1">1 min</option>
+                     <option value="2">2 min</option>
+                     <option value="5">5 mins</option>
+                     <option value="10">10 mins</option>
+                     <option value="15">15 mins</option>
+                     <option value="20">20 mins</option>
+                     <option value="30">30 mins</option>
+                  </select>
+               </div>
+               <div class="margin-top-10"><label>Default range for days:</label></div>
+               <div class="margin-top-10">
+                  <select id='rangeToDays' class="option">
+                     <option value="2days">2 days</option>
+                     <option value="3days">3 days</option>
+                     <option value="4days">4 days</option>
+                     <option value="5days">5 days</option>
+                     <option value="6days">6 days</option>
+                     <option value="7days">7 days</option>
+                     <option value="1month">1 month</option>
+                     <option value="2month">2 month</option>
+                     <option value="3month">3 month</option>
+                  </select>
+               </div>
+               <div class="margin-top-10"><input type="button" value="Clear all data"></div>
+            </div>
          </div>
-         <div class="margin-top-10"><label>Default range for days:</label></div>
-         <div class="margin-top-10">
-            <select id="rangeToDays" class="option">
-               <option value="2days">2 days</option>
-               <option value="3days">3 days</option>
-               <option value="4days">4 days</option>
-               <option value="5days">5 days</option>
-               <option value="6days">6 days</option>
-               <option value="7days">7 days</option>
-               <option value="1month">1 month</option>
-               <option value="2month">2 month</option>
-               <option value="3month">3 month</option>
-            </select>
+         <div id='aboutBlock' hidden>
+            <div><label id='version'>v0.0.1</label></div>
+            <div class="margin-top-20">
+               <label>If experiencing problems, having questions or suggestions, please fill out <a href="https://chrome.google.com/webstore/detail/webtime-tracker/fohgfakiidklhicnjedbohplegpnmbch/support" target="_blank">support
+                     form</a>.</label>
+            </div>
+            <div class="margin-top-20">
+               <label>Do you enjoy using Web Activity Time Tracker? <a href="https://chrome.google.com/webstore/detail/webtime-tracker/fohgfakiidklhicnjedbohplegpnmbch/reviews" target="_blank">Let me know!</a></label>
+            </div>
          </div>
-         <div class="margin-top-10"><input type="button" value="Clear all data"></div>
       </div>
    </div>
 </body>

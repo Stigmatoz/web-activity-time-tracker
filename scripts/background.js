@@ -43,7 +43,7 @@ function backgroundCheck() {
 
 function backgroundUpdateStorage() {
     if (tabs.length > 0)
-        storage.save(tabs);
+        storage.saveTabs(tabs);
 }
 
 function addListener() {

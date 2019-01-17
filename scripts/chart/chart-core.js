@@ -91,8 +91,8 @@ function donutChart() {
 
                     var currentAngle = midAngle(d);
                     if (angleIsInRangeDifference(tempAngle, currentAngle, 2)){
-                        tempOffset.x -= 0.1;
-                        tempOffset.y += 0.1;
+                        tempOffset.x -= 0.07;
+                        tempOffset.y += 0.07;
                         tempAngle = 0;
                     }
 
@@ -128,8 +128,8 @@ function donutChart() {
 
                     var currentAngle = midAngle(d);
                     if (angleIsInRangeDifference(tempAngle, currentAngle, 2)){
-                        tempOffset.x -= 0.1;
-                        tempOffset.y += 0.1;
+                        tempOffset.x -= 0.07;
+                        tempOffset.y += 0.07;
                         tempAngle = 0;
                     }
 

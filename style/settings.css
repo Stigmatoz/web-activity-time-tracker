@@ -185,7 +185,11 @@ input[type="button"]:hover {
       margin-top: 10px;
   }
 
-  select {
+  .margin-top-20{
+    margin-top: 20px;
+}
+
+select {
     min-width: 170px;
     color: #444;
     background: #fff;
@@ -197,3 +201,34 @@ input[type="button"]:hover {
     position: relative;
     cursor: pointer;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+  
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    transform: translateX(-50%) translateY(-150%);
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
