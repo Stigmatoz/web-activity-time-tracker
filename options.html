@@ -5,6 +5,7 @@
    <meta charset="utf-8">
    <title>WebActivity Time Tracker</title>
    <link href="style/settings.css" rel="stylesheet" />
+   <script src="scripts/common.js"></script>
    <script src="scripts/storage.js"></script>
    <script src="scripts/settings.js"></script>
 </head>
@@ -21,7 +22,7 @@
       <div id='block'>
          <div id="settingsBlock">
             <label>
-               <input type="checkbox" class="filled-in" id="chk-demo3" checked="checked" />
+               <input type="checkbox" class="filled-in" id="viewTimeInBadge" checked="checked" />
                <span>Display time tracker in icon</span>
             </label>
             <div class="margin-top-10">
@@ -30,8 +31,8 @@
                   <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
                </div>
                <div class="margin-top-10">
-                  <select id='timeToStopTracking' class="option">
-                     <option value="0.33">30 seconds</option>
+                  <select id='intervalInactivity' class="option">
+                     <option value="0.3">30 seconds</option>
                      <option value="0.45">45 seconds</option>
                      <option value="1">1 min</option>
                      <option value="2">2 min</option>
@@ -45,18 +46,18 @@
                <div class="margin-top-10"><label>Default range for days:</label></div>
                <div class="margin-top-10">
                   <select id='rangeToDays' class="option">
-                     <option value="2days">2 days</option>
-                     <option value="3days">3 days</option>
-                     <option value="4days">4 days</option>
-                     <option value="5days">5 days</option>
-                     <option value="6days">6 days</option>
-                     <option value="7days">7 days</option>
-                     <option value="1month">1 month</option>
-                     <option value="2month">2 month</option>
-                     <option value="3month">3 month</option>
+                     <option value="days2">2 days</option>
+                     <option value="days3">3 days</option>
+                     <option value="days4">4 days</option>
+                     <option value="days5">5 days</option>
+                     <option value="days6">6 days</option>
+                     <option value="days7">7 days</option>
+                     <option value="month1">1 month</option>
+                     <option value="month2">2 month</option>
+                     <option value="month3">3 month</option>
                   </select>
                </div>
-               <div class="margin-top-10"><input type="button" value="Clear all data"></div>
+               <div class="margin-top-10"><input type="button" value="Clear all data" id='clearAllData'></div>
             </div>
          </div>
          <div id='aboutBlock' hidden>

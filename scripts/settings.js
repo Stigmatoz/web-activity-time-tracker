@@ -15,10 +15,28 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('settingsBlock').hidden = true;
         document.getElementById('aboutBlock').hidden = false;
     });
+    document.getElementById('clearAllData').addEventListener('click', function () {
+        clearAllData();
+    });
 });
 
 loadSettings();
 
 function loadSettings(){
-    var options = storage.getSettings();
+    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item){
+        document.getElementById('intervalInactivity').value = item[SETTINGS_INTERVAL_INACTIVITY];
+    });
+    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item){
+        document.getElementById('rangeToDays').value = item[SETTINGS_INTERVAL_RANGE];
+    });
+    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item){
+        document.getElementById('viewTimeInBadge').setAttribute('checked', item[SETTINGS_VIEW_TIME_IN_BADGE]);
+    });
+    // storage.getSettings(SETTINGS_INTERVAL_SAVE_STORAGE, function (item){
+    //     document.getElementById('intervalInactivity').value = item;
+    // });
+}
+
+function clearAllData(){
+    storage.saveTabs(null);
 }

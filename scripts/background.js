@@ -6,7 +6,7 @@ var activity = new Activity();
 var storage = new LocalStorage();
 
 function updateSummaryTime() {
-    setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK);
+    setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK_DEFAULT);
 }
 
 function updateStorage() {
@@ -46,6 +46,13 @@ function backgroundUpdateStorage() {
         storage.saveTabs(tabs);
 }
 
+function setDefaultSettings(){
+    storage.saveSettings(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
+    storage.saveSettings(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
+    storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
+    storage.saveSettings(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
+}
+
 function addListener() {
     chrome.tabs.onActivated.addListener(function (info) {
         chrome.tabs.get(info.tabId, function (tab) {
@@ -53,10 +60,15 @@ function addListener() {
         });
     });
 
-    chrome.webNavigation.onCompleted.addListener(function(details){
+    chrome.webNavigation.onCompleted.addListener(function (details) {
         chrome.tabs.get(details.tabId, function (tab) {
             activity.updateFavicon(tab);
         });
+    });
+    chrome.runtime.onInstalled.addListener(function (details) {
+        //if (details.reason == "install") {
+            setDefaultSettings();
+        //}
     });
 }
 

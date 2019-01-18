@@ -16,13 +16,13 @@ class LocalStorage {
     }
 
     saveSettings(name, value) {
-        chrome.storage.local.set({ name: value });
+        chrome.storage.local.set({ [name]: value });
     }
 
     getSettings(name, callback) {
         chrome.storage.local.get(name, function(item){
             if (item !== undefined){
-                callback(item.name);
+                callback(item);
             }
         });
     }
