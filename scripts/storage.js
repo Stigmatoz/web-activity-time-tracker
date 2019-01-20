@@ -20,9 +20,9 @@ class LocalStorage {
     }
 
     getSettings(name, callback) {
-        chrome.storage.local.get(name, function(item){
-            if (item !== undefined){
-                callback(item);
+        chrome.storage.local.get(name, function (item) {
+            if (item !== undefined) {
+                callback(item[name]);
             }
         });
     }

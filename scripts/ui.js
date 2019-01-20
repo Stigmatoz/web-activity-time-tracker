@@ -21,13 +21,13 @@ class UI {
         this.clearUI();
     }
 
-    setUIForByDays() {
+    setUIForByDays(range) {
         document.getElementById('btnByDays').classList.add('active');
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnToday').classList.remove('active');
 
         this.clearUI();
-        this.addBlockForCalendar();
+        this.addBlockForCalendar(range);
     }
 
     clearUI() {
@@ -144,7 +144,7 @@ class UI {
             this.getTableOfSite().appendChild(div);
     }
 
-    addBlockForCalendar() {
+    addBlockForCalendar(range) {
         var div = document.getElementById('byDays');
 
         var from = document.createElement('span');
@@ -157,7 +157,7 @@ class UI {
         calendarFirst.id = 'dateFrom';
         calendarFirst.type = 'date';
         var previousDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
-        previousDate.setDate(previousDate.getDate() - 7);
+        previousDate.setDate(previousDate.getDate() - range);
         calendarFirst.valueAsDate = previousDate;
 
         var calendarTwo = document.createElement('input');

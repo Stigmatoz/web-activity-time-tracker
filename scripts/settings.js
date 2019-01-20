@@ -24,13 +24,13 @@ loadSettings();
 
 function loadSettings(){
     storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item){
-        document.getElementById('intervalInactivity').value = item[SETTINGS_INTERVAL_INACTIVITY];
+        document.getElementById('intervalInactivity').value = item;
     });
     storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item){
-        document.getElementById('rangeToDays').value = item[SETTINGS_INTERVAL_RANGE];
+        document.getElementById('rangeToDays').value = item;
     });
     storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item){
-        document.getElementById('viewTimeInBadge').setAttribute('checked', item[SETTINGS_VIEW_TIME_IN_BADGE]);
+        document.getElementById('viewTimeInBadge').setAttribute('checked', item);
     });
     // storage.getSettings(SETTINGS_INTERVAL_SAVE_STORAGE, function (item){
     //     document.getElementById('intervalInactivity').value = item;

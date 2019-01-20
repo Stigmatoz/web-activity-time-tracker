@@ -7,6 +7,7 @@ var tabsFromStorage;
 var targetTabs;
 var currentTypeOfList;
 var today = new Date().toLocaleDateString();
+var setting_range_days;
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnToday').addEventListener('click', function () {
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('btnByDays').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ByDays;
-        ui.setUIForByDays();
+        storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
+        ui.setUIForByDays(setting_range_days);
         getDataFromStorageByDays();
     });
     document.getElementById('settings').addEventListener('click', function () {

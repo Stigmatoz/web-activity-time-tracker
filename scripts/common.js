@@ -11,15 +11,14 @@ var RangeForDays = {
 };
 
 var InactivityInterval = {
-    second30: 0.3,
-    second45: 0.45,
-    min1: 1,
-    min2: 2,
-    min5: 5,
-    min10: 10,
-    min20: 20,
-    min30: 30,
-    min40: 40
+    second30: 30,
+    second45: 45,
+    min1: 60,
+    min2: 120,
+    min5: 300,
+    min10: 600,
+    min20: 1200,
+    min30: 1800
 };
 
 var TypeListEnum = {
