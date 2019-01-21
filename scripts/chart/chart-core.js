@@ -90,13 +90,11 @@ function donutChart() {
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
 
                     var currentAngle = midAngle(d);
-                    if (angleIsInRangeDifference(tempAngle, currentAngle, 2)){
+                    if (angleIsInRangeDifference(tempAngle, currentAngle, 0.5)){
                         tempOffset.x -= 0.07;
                         tempOffset.y += 0.07;
                         tempAngle = 0;
-                    }
 
-                    if (d.data.percentage < 0.10 || d.data.url == 'Others' ){
                         pos[0] = pos[0] * tempOffset.x;
                         pos[1] = pos[1] * tempOffset.y;
                     }
@@ -127,15 +125,13 @@ function donutChart() {
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
 
                     var currentAngle = midAngle(d);
-                    if (angleIsInRangeDifference(tempAngle, currentAngle, 2)){
+                    if (angleIsInRangeDifference(tempAngle, currentAngle, 0.5)){
                         tempOffset.x -= 0.07;
                         tempOffset.y += 0.07;
-                        tempAngle = 0;
-                    }
 
-                    if (d.data.percentage < 0.10 || d.data.url == 'Others'){
                         pos[0] = pos[0] * tempOffset.x;
                         pos[1] = pos[1] * tempOffset.y;
+                        tempAngle = 0;
                     }
 
                     tempAngle = midAngle(d);
