@@ -207,7 +207,7 @@ function getTabsByDays(tabs) {
             });
         });
         listOfDays = listOfDays.sort(function (a, b) {
-            return new Date(a.date) - new Date(b.date);
+            return convertToDate(a.date) - convertToDate(b.date);
         });
 
         ui.fillListOfDays(listOfDays);

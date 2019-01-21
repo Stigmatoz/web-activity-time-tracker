@@ -90,8 +90,19 @@ function zeroAppend(time) {
     else return time;
 }
 
-function isDateInRange(date, range){
-    return date >= range.from && date <= range.to;
+function isDateInRange(dateStr, range){
+    var arr = dateStr.split('.');
+    var date = new Date(arr[2], arr[1], arr[0]);
+    var arrFrom = range.from.split('.');
+    var from = new Date(arrFrom[2], arrFrom[1], arr[0]);
+    var arrTo = range.to.split('.');
+    var to = new Date(arrTo[2], arrTo[1], arrTo[0]);
+    return date >= from && date <= to;
+}
+
+function convertToDate(date){
+    var arr = date.split('.');
+    return new Date(arr[2], arr[1], arr[0]);
 }
 
 function getDateFromRange(range){
