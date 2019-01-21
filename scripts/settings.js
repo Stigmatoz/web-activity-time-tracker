@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('clearAllData').addEventListener('click', function () {
         clearAllData();
     });
+    document.getElementById('viewTimeInBadge').addEventListener('change', function () {
+        storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
+    });
+    document.getElementById('intervalInactivity').addEventListener('change', function () {
+        storage.saveSettings(SETTINGS_INTERVAL_INACTIVITY, this.value);
+    });
+    document.getElementById('rangeToDays').addEventListener('change', function () {
+        storage.saveSettings(SETTINGS_INTERVAL_RANGE, this.value);
+    });
 });
 
 loadSettings();

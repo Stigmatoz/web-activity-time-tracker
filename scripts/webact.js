@@ -10,6 +10,7 @@ var today = new Date().toLocaleDateString();
 var setting_range_days;
 
 document.addEventListener('DOMContentLoaded', function () {
+    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
     document.getElementById('btnToday').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ToDay;
         ui.setUIForToday();
@@ -22,16 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('btnByDays').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ByDays;
-        storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
         ui.setUIForByDays(setting_range_days);
         getDataFromStorageByDays();
     });
     document.getElementById('settings').addEventListener('click', function () {
         if (chrome.runtime.openOptionsPage) {
             chrome.runtime.openOptionsPage();
-          } else {
+        } else {
             window.open(chrome.runtime.getURL('options.html'));
-          }
+        }
     });
 });
 
@@ -200,12 +200,10 @@ function getTabsByDays(tabs) {
                     return item.total += a.summary;
                 }
                 if (item === undefined && isDateInRange(a.date, range))
-                    return listOfDays.push(
-                        {
-                            'date': a.date,
-                            'total': a.summary
-                        }
-                    );
+                    return listOfDays.push({
+                        'date': a.date,
+                        'total': a.summary
+                    });
             });
         });
         listOfDays = listOfDays.sort(function (a, b) {
@@ -242,7 +240,6 @@ function getTabsFromStorageByDay(day, blockName) {
 
     var currentTab = getCurrentTab();
 
-    var tabsForChart = [];
     var content = document.createElement('div');
     content.classList.add('content-inner');
     content.id = blockName + '_content';

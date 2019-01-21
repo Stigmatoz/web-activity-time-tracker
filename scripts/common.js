@@ -93,3 +93,18 @@ function zeroAppend(time) {
 function isDateInRange(date, range){
     return date >= range.from && date <= range.to;
 }
+
+function getDateFromRange(range){
+    switch (range)
+    {
+        case 'days2': return 2;
+        case 'days3': return 3;
+        case 'days4': return 4;
+        case 'days5': return 5;
+        case 'days6': return 6;
+        case 'days7': return 7;
+        case 'month1': return 30;
+        case 'month2': return 60;
+        case 'month3': return 90;
+    }
+}

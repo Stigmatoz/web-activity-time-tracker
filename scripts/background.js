@@ -33,13 +33,18 @@ function backgroundCheck() {
 
                 if (tab !== undefined) {
                     activity.setCurrentActiveTab(tab.url);
-                    chrome.idle.queryState(setting_interval_inactivity, function (state) {
+                    chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
                             tab.incSummaryTime();
-                            if (setting_view_in_badge) {
+                            if (setting_view_in_badge === true) {
                                 chrome.browserAction.setBadgeText({
                                     tabId: activeTab.id,
                                     text: String(convertSummaryTimeToBadgeString(tab.summaryTime))
+                                });
+                            } else {
+                                chrome.browserAction.setBadgeText({
+                                    tabId: activeTab.id,
+                                    text: ''
                                 });
                             }
                         }

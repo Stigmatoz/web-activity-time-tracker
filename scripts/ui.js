@@ -157,7 +157,7 @@ class UI {
         calendarFirst.id = 'dateFrom';
         calendarFirst.type = 'date';
         var previousDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
-        previousDate.setDate(previousDate.getDate() - range);
+        previousDate.setDate(previousDate.getDate() - getDateFromRange(range));
         calendarFirst.valueAsDate = previousDate;
 
         var calendarTwo = document.createElement('input');
