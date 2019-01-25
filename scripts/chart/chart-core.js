@@ -49,7 +49,7 @@ function donutChart() {
                 .attr('height', height + margin.top + margin.bottom)
                 .attr('class', 'backColorChart')
                 .append('g')
-                .attr('transform', 'translate(' + (width / 2 + 20) + ',' + (height / 2 + 10) + ')');
+                .attr('transform', 'translate(' + (width / 2 - 100) + ',' + (height / 2) + ')');
             // ===========================================================================================
 
             // ===========================================================================================
@@ -70,74 +70,28 @@ function donutChart() {
                 .attr('id', function (d) { return d.data[category]; });
             // ===========================================================================================
 
-            // ===========================================================================================
-            // add text labels
-            var label = svg.select('.labelName').selectAll('text')
-                .data(pie)
-                .enter().append('text')
-                .attr('dy', '.35em')
-                .html(function (d) {
-                    // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
-                    return '       <tspan class="siteName">' + d.data[category] + '       </tspan>';
+            var legendG = svg.selectAll(".legend") // note appending it to mySvg and not svg to make positioning easier
+                .data(pie(data))
+                .enter().append("g")
+                .attr("transform", function (d, i) {
+                    return "translate(" + (120) + "," + (i * 20 - 30) + ")"; // place each legend on the right and bump each one down 15 pixels
                 })
-                .attr('transform', function (d) {
+                .attr("class", "legend");
 
-                    // effectively computes the centre of the slice.
-                    // see https://github.com/d3/d3-shape/blob/master/README.md#arc_centroid
-                    var pos = outerArc.centroid(d);
-                    
-                    // changes the point to be on left or right depending on where label is.
-                    pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+            legendG.append("rect") // make a matching color rect
+                .attr("width", 10)
+                .attr("height", 10)
+                .attr("fill", function (d, i) {
+                    return colour(d.data[category]);
+                });
 
-                    var currentAngle = midAngle(d);
-                    if (angleIsInRangeDifference(tempAngle, currentAngle, 0.5)){
-                        tempOffset.x -= 0.07;
-                        tempOffset.y += 0.07;
-                        tempAngle = 0;
-
-                        pos[0] = pos[0] * tempOffset.x;
-                        pos[1] = pos[1] * tempOffset.y;
-                    }
-
-                    tempAngle = midAngle(d);
-
-                    return 'translate(' + pos + ')';
+            legendG.append("text") // add the text
+                .text(function (d) {
+                    return d.data.url;
                 })
-                .style('text-anchor', function (d) {
-                    // if slice centre is on the left, anchor text to start, otherwise anchor to end
-                    return (midAngle(d)) < Math.PI ? 'start' : 'end';
-                });
-            // ===========================================================================================
-
-            tempOffset = {
-                x: 1,
-                y: 0.95
-            };
-            // ===========================================================================================
-            // add lines connecting labels to slice. A polyline creates straight lines connecting several points
-            var polyline = svg.select('.lines')
-                .selectAll('polyline')
-                .data(pie)
-                .enter().append('polyline')
-                .attr('points', function (d) {
-                    // see label transform function for explanations of these three lines.
-                    var pos = outerArc.centroid(d);
-                    pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-
-                    var currentAngle = midAngle(d);
-                    if (angleIsInRangeDifference(tempAngle, currentAngle, 0.5)){
-                        tempOffset.x -= 0.07;
-                        tempOffset.y += 0.07;
-
-                        pos[0] = pos[0] * tempOffset.x;
-                        pos[1] = pos[1] * tempOffset.y;
-                        tempAngle = 0;
-                    }
-
-                    tempAngle = midAngle(d);
-                    return [arc.centroid(d), outerArc.centroid(d), pos]
-                });
-            // ===========================================================================================
+                .style("font-size", 13)
+                .attr("y", 10)
+                .attr("x", 11);
 
             // ===========================================================================================
             // add tooltip to mouse events on slices and labels
@@ -204,7 +158,7 @@ function donutChart() {
                 return tip;
             }
 
-            function angleIsInRangeDifference(tempAngle, currentAngle, difference){
+            function angleIsInRangeDifference(tempAngle, currentAngle, difference) {
                 return currentAngle < (tempAngle + difference) && currentAngle > (tempAngle - difference);
             }
             // ===========================================================================================
