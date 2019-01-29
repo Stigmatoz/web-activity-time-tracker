@@ -36,9 +36,11 @@ function backgroundCheck() {
                         if (state === 'active') {
                             tab.incSummaryTime();
                             if (setting_view_in_badge === true) {
+                                var today = new Date().toLocaleDateString();
+                                var summary = tab.days.find(s => s.date === today).summary;
                                 chrome.browserAction.setBadgeText({
                                     tabId: activeTab.id,
-                                    text: String(convertSummaryTimeToBadgeString(tab.summaryTime))
+                                    text: String(convertSummaryTimeToBadgeString(summary))
                                 });
                             } else {
                                 chrome.browserAction.setBadgeText({
