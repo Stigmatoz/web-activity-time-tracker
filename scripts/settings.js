@@ -47,5 +47,12 @@ function loadSettings(){
 }
 
 function clearAllData(){
-    storage.saveTabs(null);
+    var tabs = [];
+    chrome.extension.getBackgroundPage().tabs = tabs;
+    storage.saveTabs(tabs, viewNotify);
+}
+
+function viewNotify(){
+    document.getElementById('notify').hidden = false;
+    setTimeout(function(){ document.getElementById('notify').hidden = true; }, 3000);
 }

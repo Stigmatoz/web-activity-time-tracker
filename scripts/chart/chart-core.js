@@ -16,7 +16,7 @@ function donutChart() {
 
             // ===========================================================================================
             // Set up constructors for making donut. See https://github.com/d3/d3-shape/blob/master/README.md
-            var radius = 120;
+            var radius = 135;
 
             // creates a new pie generator
             var pie = d3.pie()
@@ -49,7 +49,7 @@ function donutChart() {
                 .attr('height', height + margin.top + margin.bottom)
                 .attr('class', 'backColorChart')
                 .append('g')
-                .attr('transform', 'translate(' + (width / 2 - 100) + ',' + (height / 2) + ')');
+                .attr('transform', 'translate(' + (width / 2 - 100) + ',' + (height / 2 + 10) + ')');
             // ===========================================================================================
 
             // ===========================================================================================
@@ -74,7 +74,7 @@ function donutChart() {
                 .data(pie(data))
                 .enter().append("g")
                 .attr("transform", function (d, i) {
-                    return "translate(" + (120) + "," + (i * 20 - 30) + ")"; // place each legend on the right and bump each one down 15 pixels
+                    return "translate(" + (130) + "," + (i * 20 - 30) + ")"; // place each legend on the right and bump each one down 15 pixels
                 })
                 .attr("class", "legend");
 

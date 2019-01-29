@@ -4,15 +4,17 @@ class LocalStorage {
     loadTabs(name, callback) {
         chrome.storage.local.get(name, function (item) {
             if (item[name] !== undefined) {
-                var result = JSON.parse(item[name]);
+                var result = item[name];
                 if (result !== undefined)
                     callback(result);
             }
         });
     }
 
-    saveTabs(value) {
-        chrome.storage.local.set({ tabs: JSON.stringify(value) });
+    saveTabs(value, callback) {
+        chrome.storage.local.set({ tabs: value });
+        if (callback !== undefined)
+            callback();
     }
 
     saveSettings(name, value) {

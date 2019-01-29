@@ -14,8 +14,7 @@ function updateSummaryTime() {
 }
 
 function updateStorage() {
-    storage.getSettings(SETTINGS_INTERVAL_SAVE_STORAGE, function (item) { setting_interval_save = item; });
-    setInterval(backgroundUpdateStorage, setting_interval_save);
+    setInterval(backgroundUpdateStorage, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
 }
 
 function backgroundCheck() {

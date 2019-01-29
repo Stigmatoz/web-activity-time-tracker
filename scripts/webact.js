@@ -65,7 +65,13 @@ function getTabsFromStorage(tabs) {
             return b.summaryTime - a.summaryTime;
         });
 
-        totalTime = getTotalTime(targetTabs);
+        if (targetTabs.length > 0){
+            totalTime = getTotalTime(targetTabs);
+        }
+        else{
+            ui.fillEmptyBlock('chart');
+            return;
+        }
     }
     if (currentTypeOfList === TypeListEnum.ToDay) {
         targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
