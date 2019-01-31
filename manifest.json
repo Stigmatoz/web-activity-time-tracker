@@ -3,11 +3,11 @@
     
         "name": "WebActivity Time Tracker",
         "short_name": "WebActivity",
-        "version": "0.0.1",
+        "version": "0.5.0",
 
         "minimum_chrome_version": "26",
 
-        "description": "A plain text description",
+        "description": "Track your activity in the browser.",
 
         "options_page": "options.html",
     
