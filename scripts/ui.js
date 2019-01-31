@@ -81,7 +81,7 @@ class UI {
     drawChart(tabs) {
         var donut = donutChart()
             .width(480)
-            .height(240)
+            .height(230)
             .cornerRadius(5) // sets how rounded the corners are on each slice
             .padAngle(0.020) // effectively dictates the gap between slices
             .variable('percentage')
