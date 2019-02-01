@@ -1,8 +1,8 @@
 {
         "manifest_version": 2,
     
-        "name": "WebActivity Time Tracker",
-        "short_name": "WebActivity",
+        "name": "Web Activity Time Tracker",
+        "short_name": "Web Activity",
         "version": "0.6.0",
 
         "minimum_chrome_version": "26",
@@ -35,7 +35,7 @@
         },
         "browser_action": {
             "default_popup": "index.html",
-            "default_title": "WebActivity Time Tracker",
+            "default_title": "Web Activity Time Tracker",
             "default_icon": "icons/48x48.png"
         }
 }
