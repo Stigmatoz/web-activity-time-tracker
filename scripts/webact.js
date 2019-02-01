@@ -1,6 +1,5 @@
 'use strict';
 
-var storage = new LocalStorage();
 var ui = new UI();
 var totalTime;
 var tabsFromStorage;
@@ -10,7 +9,7 @@ var today = new Date().toLocaleDateString();
 var setting_range_days;
 
 document.addEventListener('DOMContentLoaded', function () {
-    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
+    storageLocal.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
     document.getElementById('btnToday').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ToDay;
         ui.setUIForToday();
@@ -43,11 +42,11 @@ function firstInitPage() {
 }
 
 function getDataFromStorage() {
-    storage.loadTabs(STORAGE_TABS, getTabsFromStorage);
+    storageLocal.loadTabs(STORAGE_TABS, getTabsFromStorage);
 }
 
 function getDataFromStorageByDays() {
-    storage.loadTabs(STORAGE_TABS, getTabsByDays);
+    storageLocal.loadTabs(STORAGE_TABS, getTabsByDays);
 }
 
 function getTabsFromStorage(tabs) {

@@ -1,6 +1,6 @@
 'use strict';
 
-class LocalStorage {
+var storageLocal = {
     loadTabs(name, callback) {
         chrome.storage.sync.get(name, function (item) {
             if (item[name] !== undefined) {
@@ -9,17 +9,17 @@ class LocalStorage {
                     callback(result);
             }
         });
-    }
+    },
 
     saveTabs(value, callback) {
         chrome.storage.sync.set({ tabs: value });
         if (callback !== undefined)
             callback();
-    }
+    },
 
     saveSettings(name, value) {
         chrome.storage.sync.set({ [name]: value });
-    }
+    },
 
     getSettings(name, callback) {
         chrome.storage.sync.get(name, function (item) {
@@ -28,4 +28,4 @@ class LocalStorage {
             }
         });
     }
-};
+}

@@ -3,7 +3,6 @@
 var tabs = [];
 var currentTab;
 var activity = new Activity();
-var storage = new LocalStorage();
 
 var setting_interval_save;
 var setting_interval_inactivity;
@@ -18,8 +17,8 @@ function updateStorage() {
 }
 
 function backgroundCheck() {
-    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
-    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
+    storageLocal.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
+    storageLocal.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
     chrome.windows.getLastFocused({ populate: true }, function (currentWindow) {
         if (currentWindow.focused) {
             var activeTab = currentWindow.tabs.find(t => t.active === true);
@@ -58,14 +57,14 @@ function backgroundCheck() {
 
 function backgroundUpdateStorage() {
     if (tabs.length > 0)
-        storage.saveTabs(tabs);
+        storageLocal.saveTabs(tabs);
 }
 
 function setDefaultSettings() {
-    storage.saveSettings(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
-    storage.saveSettings(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
-    storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
-    storage.saveSettings(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
+    storageLocal.saveSettings(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
+    storageLocal.saveSettings(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
+    storageLocal.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
+    storageLocal.saveSettings(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
 }
 
 function addListener() {
