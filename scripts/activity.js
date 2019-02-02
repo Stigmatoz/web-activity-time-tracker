@@ -54,6 +54,10 @@ class Activity {
         return hostname;
     }
 
+    loadDataFromStorage(){
+        var tabs = storage.load(STORAGE_TABS);
+    }
+
     updateFavicon(tab){
         var domain = this.extractHostname(tab.url);
         var currentTab = this.getTab(domain);
