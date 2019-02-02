@@ -1,6 +1,6 @@
 'use strict';
 
-var tabs = [];
+var tabs;
 var currentTab;
 var activity = new Activity();
 var storage = new LocalStorage();
@@ -57,7 +57,7 @@ function backgroundCheck() {
 }
 
 function backgroundUpdateStorage() {
-    if (tabs.length > 0)
+    if (tabs != undefined && tabs.length > 0)
         storage.saveTabs(tabs);
 }
 
@@ -81,12 +81,23 @@ function addListener() {
         });
     });
     chrome.runtime.onInstalled.addListener(function (details) {
-        //if (details.reason == "install") {
-        setDefaultSettings();
-        //}
+        if (details.reason == "install") {
+            setDefaultSettings();
+        }
     });
 }
 
+function loadTabs() {
+    storage.loadTabs(STORAGE_TABS, function (items) 
+    { 
+        tabs = [];
+        for (var i=0; i<items.length; i++){
+            tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime));
+        }
+    });
+}
+
+loadTabs();
 addListener();
 updateSummaryTime();
 updateStorage();

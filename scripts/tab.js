@@ -1,11 +1,17 @@
 'use strict';
 
 class Tab {
-    constructor(url, favicon) {
+    constructor(url, favicon, days, summary) {
         this.url = url;
         this.favicon = favicon;
-        this.summaryTime = 0;
-        this.days = [];
+        if (summary !== undefined)
+            this.summaryTime = summary;
+        else
+            this.summaryTime = 0;
+        if (days !== undefined)
+            this.days = days;
+        else
+            this.days = [];
     }
 
     incSummaryTime() {
@@ -21,7 +27,7 @@ class Tab {
         }
     }
 
-    addNewDay(today){
+    addNewDay(today) {
         this.days.push(
             {
                 'date': today,
