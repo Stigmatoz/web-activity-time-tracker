@@ -68,6 +68,14 @@ function setDefaultSettings() {
     storage.saveSettings(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
 }
 
+function checkSettingsImEmpty() {
+    chrome.storage.local.getBytesInUse(['inactivity_interval'], function (item) { 
+        if (item == 0){
+            setDefaultSettings();
+        }
+    });
+}
+
 function addListener() {
     chrome.tabs.onActivated.addListener(function (info) {
         chrome.tabs.get(info.tabId, function (tab) {
@@ -81,17 +89,19 @@ function addListener() {
         });
     });
     chrome.runtime.onInstalled.addListener(function (details) {
-        if (details.reason == "install") {
+        if (details.reason == 'install') {
             setDefaultSettings();
+        }
+        if (details.reason == 'update') {
+            checkSettingsImEmpty();
         }
     });
 }
 
 function loadTabs() {
-    storage.loadTabs(STORAGE_TABS, function (items) 
-    { 
+    storage.loadTabs(STORAGE_TABS, function (items) {
         tabs = [];
-        for (var i=0; i<items.length; i++){
+        for (var i = 0; i < items.length; i++) {
             tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime));
         }
     });
