@@ -1,31 +1,6 @@
-'use strict';
-
-class LocalStorage {
-    loadTabs(name, callback) {
-        chrome.storage.local.get(name, function (item) {
-            if (item[name] !== undefined) {
-                var result = item[name];
-                if (result !== undefined)
-                    callback(result);
-            }
-        });
-    }
-
-    saveTabs(value, callback) {
-        chrome.storage.local.set({ tabs: value });
-        if (callback !== undefined)
-            callback();
-    }
-
-    saveSettings(name, value) {
-        chrome.storage.local.set({ [name]: value });
-    }
-
-    getSettings(name, callback) {
-        chrome.storage.local.get(name, function (item) {
-            if (item !== undefined) {
-                callback(item[name]);
-            }
-        });
-    }
-};
+'use strict';class LocalStorage{loadTabs(name,callback){chrome.storage.local.get(name,function(item){if(item[name]!==undefined){var result=item[name];if(result!==undefined)
+    callback(result)}})}
+    saveTabs(value,callback){chrome.storage.local.set({tabs:value});if(callback!==undefined)
+    callback()}
+    saveSettings(name,value){chrome.storage.local.set({[name]:value})}
+    getSettings(name,callback){chrome.storage.local.get(name,function(item){if(item!==undefined){callback(item[name])}})}}
