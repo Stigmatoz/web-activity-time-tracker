@@ -3,7 +3,7 @@
     
         "name": "Web Activity Time Tracker",
         "short_name": "Web Activity",
-        "version": "0.6.5",
+        "version": "0.6.6",
 
         "minimum_chrome_version": "26",
 
@@ -26,6 +26,7 @@
             "webNavigation",
             "unlimitedStorage"
         ],
+        "offline_enabled": true,
         "background": {
             "scripts": ["scripts/common.js", 
                         "scripts/storage.js", 
