@@ -1,1 +1,252 @@
-body{font-family:"Segoe UI",Tahoma,sans-serif!important;color:#262626}.content{width:750px;margin:50px auto;display:grid;grid-template-columns:200px auto;grid-column-gap:40px;grid-template-areas:'h h' 'n m'}.title{font-size:23px;font-weight:650}.header{grid-area:h;margin:0 0 50px;font-size:20px}a{color:#3477db;text-decoration:none;cursor:pointer}.nav{grid-area:n;border-right:1px solid #ddd;padding-right:15px;align-self:start}.nav a{font-size:16px;margin-bottom:20px;color:#888;display:block}.nav a:hover{font-size:16px;margin-bottom:20px;color:#3477db;display:block;font-weight:650}.nav .active{color:#3477db;font-weight:700}label{font-size:14px}[type="checkbox"]:not(:checked),[type="checkbox"]:checked{position:absolute;opacity:0;pointer-events:none}[type="checkbox"]+span{position:relative;padding-left:35px;cursor:pointer;display:inline-block;height:25px;line-height:25px;font-size:14px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}[type="checkbox"]+span:before,[type="checkbox"]:not(.filled-in)+span:after{content:'';position:absolute;top:0;left:0;width:18px;height:18px;z-index:0;border:2px solid #5a5a5a;border-radius:1px;margin-top:3px}[type="checkbox"]:not(:checked):disabled+span:before{border:none;background-color:rgba(0,0,0,.42)}[type="checkbox"]:checked:disabled+span:before{border-right:2px solid rgba(0,0,0,.42);border-bottom:2px solid rgba(0,0,0,.42)}[type="checkbox"].filled-in+span:after{border-radius:2px}[type="checkbox"].filled-in+span:before,[type="checkbox"].filled-in+span:after{content:'';left:0;position:absolute;z-index:1}[type="checkbox"].filled-in:not(:checked)+span:before{width:0;height:0;border:3px solid transparent;left:6px;top:10px;-webkit-transform:rotateZ(37deg);transform:rotateZ(37deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}[type="checkbox"].filled-in:not(:checked)+span:after{height:17px;width:17px;background-color:transparent;border:2px solid #5a5a5a;top:0;z-index:0}[type="checkbox"].filled-in:checked+span:before{top:-3px;left:-2px;width:7px;height:12px;border-top:3px solid transparent;border-left:3px solid transparent;border-right:3px solid #fff;border-bottom:3px solid #fff;-webkit-transform:rotateZ(35deg);transform:rotateZ(35deg);-webkit-transform-origin:100% 100%;transform-origin:100% 100%}[type="checkbox"].filled-in:checked+span:after{top:0;width:17px;height:17px;border:2px solid #3477db;background-color:#3477db;z-index:0}input[type="button"]{background:#3477db;color:#fff;border-radius:3px;height:40px;line-height:40px;padding:0 20px;display:inline-block;border:0;font-size:14px;font-weight:500;cursor:pointer;min-width:80px;text-align:center;width:170px}input[type="button"]:hover{background:#5c9dfe;text-decoration:none}.margin-top-10{margin-top:10px}.margin-top-20{margin-top:20px}select{min-width:170px;color:#444;background:#fff;border-radius:3px;margin:0;padding:10px 30px 10px 15px;font-size:14px;border-color:#ccc;position:relative;cursor:pointer}.tooltip{position:relative;display:inline-block}.tooltip .tooltiptext{visibility:hidden;width:250px;background-color:#555;color:#fff;text-align:center;padding:5px 0;border-radius:6px;position:absolute;z-index:1;transform:translateX(-50%) translateY(-150%);opacity:0;transition:opacity 0.3s}.tooltip:hover .tooltiptext{visibility:visible;opacity:1}.notify{width:200px;height:30px;margin:auto;background-color:rgb(118,219,93);color:rgb(0,0,0);text-align:center;font-weight:600;border-radius:5px;position:fixed;z-index:1;top:10px;right:20px;font-size:17px;white-space:nowrap;padding:10px}
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif !important;
+    color: #262626;
+}
+
+.content {
+    width: 750px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-column-gap: 40px;
+    grid-template-areas: 'h h' 'n m';
+}
+
+.title{
+    font-size: 23px;
+    font-weight: 650;
+}
+
+.header{
+    grid-area: h;
+    margin: 0 0 50px;
+    font-size: 20px;
+}
+
+a {
+    color: #3477db;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav{
+    grid-area: n;
+    border-right: 1px solid #ddd;
+    padding-right: 15px;
+    align-self: start;
+}
+
+.nav a {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #888;
+    display: block;
+}
+
+.nav a:hover {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #3477db;
+    display: block;
+    font-weight: 650;
+}
+
+.nav .active {
+    color: #3477db;
+    font-weight: bold;
+}
+
+label{
+    font-size: 14px;
+}
+
+[type="checkbox"]:not(:checked),[type="checkbox"]:checked {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none
+}
+
+[type="checkbox"]+span {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+[type="checkbox"]+span:before,[type="checkbox"]:not(.filled-in)+span:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    z-index: 0;
+    border: 2px solid #5a5a5a;
+    border-radius: 1px;
+    margin-top: 3px;
+}
+
+[type="checkbox"]:not(:checked):disabled+span:before {
+    border: none;
+    background-color: rgba(0,0,0,0.42)
+}
+
+[type="checkbox"]:checked:disabled+span:before {
+    border-right: 2px solid rgba(0,0,0,0.42);
+    border-bottom: 2px solid rgba(0,0,0,0.42)
+}
+
+[type="checkbox"].filled-in+span:after {
+    border-radius: 2px
+}
+
+[type="checkbox"].filled-in+span:before,[type="checkbox"].filled-in+span:after {
+    content: '';
+    left: 0;
+    position: absolute;
+    z-index: 1
+}
+
+[type="checkbox"].filled-in:not(:checked)+span:before {
+    width: 0;
+    height: 0;
+    border: 3px solid transparent;
+    left: 6px;
+    top: 10px;
+    -webkit-transform: rotateZ(37deg);
+    transform: rotateZ(37deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%
+}
+
+[type="checkbox"].filled-in:not(:checked)+span:after {
+    height: 17px;
+    width: 17px;
+    background-color: transparent;
+    border: 2px solid #5a5a5a;
+    top: 0px;
+    z-index: 0
+}
+
+[type="checkbox"].filled-in:checked+span:before {
+    top: -3px;
+    left: -2px;
+    width: 7px;
+    height: 12px;
+    border-top: 3px solid transparent;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    -webkit-transform: rotateZ(35deg);
+    transform: rotateZ(35deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%
+}
+
+[type="checkbox"].filled-in:checked+span:after {
+    top: 0;
+    width: 17px;
+    height: 17px;
+    border: 2px solid #3477db;
+    background-color: #3477db;
+    z-index: 0
+}
+
+input[type="button"]{
+    background: #3477db;
+    color: #fff;
+    border-radius: 3px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    display: inline-block;
+    border: 0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 80px;
+    text-align: center;
+    width: 170px;
+}
+
+input[type="button"]:hover {
+    background: #5c9dfe;
+    text-decoration: none;
+  }
+
+  .margin-top-10{
+      margin-top: 10px;
+  }
+
+  .margin-top-20{
+    margin-top: 20px;
+}
+
+select {
+    min-width: 170px;
+    color: #444;
+    background: #fff;
+    border-radius: 3px;
+    margin: 0;
+    padding: 10px 30px 10px 15px;
+    font-size: 14px;
+    border-color: #ccc;
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+  
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    transform: translateX(-50%) translateY(-150%);
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .notify{
+    width: 200px;
+    height: 30px;
+    margin: auto;
+    background-color: rgb(118, 219, 93);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-weight: 600;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 1;
+    top: 10px;
+    right: 20px;
+    font-size: 17px;
+    white-space: nowrap;
+    padding: 10px;
+  }
