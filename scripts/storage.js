@@ -28,4 +28,8 @@ class LocalStorage {
             }
         });
     }
+
+    getMemoryUse(name, callback){
+        chrome.storage.local.getBytesInUse(name, callback);
+    }
 };

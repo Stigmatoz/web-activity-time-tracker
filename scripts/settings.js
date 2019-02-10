@@ -31,28 +31,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 loadSettings();
 
-function loadSettings(){
-    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item){
+function loadSettings() {
+    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) {
         document.getElementById('intervalInactivity').value = item;
     });
-    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item){
+    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) {
         document.getElementById('rangeToDays').value = item;
     });
-    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item){
+    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) {
         document.getElementById('viewTimeInBadge').setAttribute('checked', item);
     });
-    // storage.getSettings(SETTINGS_INTERVAL_SAVE_STORAGE, function (item){
-    //     document.getElementById('intervalInactivity').value = item;
-    // });
+    storage.getMemoryUse(STORAGE_TABS, function (integer) {
+        document.getElementById('memoryUse').innerHTML = (integer/1024).toFixed(2) + 'Kb';
+    })
 }
 
-function clearAllData(){
+function clearAllData() {
     var tabs = [];
     chrome.extension.getBackgroundPage().tabs = tabs;
     storage.saveTabs(tabs, viewNotify);
 }
 
-function viewNotify(){
+function viewNotify() {
     document.getElementById('notify').hidden = false;
-    setTimeout(function(){ document.getElementById('notify').hidden = true; }, 3000);
+    setTimeout(function () { document.getElementById('notify').hidden = true; }, 3000);
 }
