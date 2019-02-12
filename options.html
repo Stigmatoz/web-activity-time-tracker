@@ -27,7 +27,7 @@
             </label>
             <div class="margin-top-10">
                <label>Stop tracking if no activity detected for: </label>
-               <div class="tooltip"><img src="/icons/information.png" />
+               <div class="tooltip"><img src="/icons/information.svg" height="18"/>
                   <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
                </div>
                <div class="margin-top-10">
@@ -57,7 +57,20 @@
                   </select>
                </div>
                <div class="margin-top-10">
-                  <label>Data in memory use </label><label id='memoryUse'>test</label>
+                  <label>Ignored list of domain: </label>
+                  <div class="tooltip"><img src="/icons/information.svg" height="18"/>
+                     <span class="tooltiptext">Activity for these domains not will tracked</span>
+                  </div>
+                  <div class="margin-top-10">
+                     <ul id='blackList' class="listbox" size="7"></ul>
+                  </div>
+                  <div class="margin-top-10">
+                     <input type="text" id='addBlackSiteLbl'/>
+                     <input type="button" value="+" id='addBlackSiteBtn'/>
+                  </div>
+               </div>
+               <div class="margin-top-10">
+                  <label>Data in memory use </label><label id='memoryUse'></label>
                </div>
                <div class="margin-top-10"><input type="button" value="Clear all data" id='clearAllData'></div>
                <div class="notify" id='notify' hidden>

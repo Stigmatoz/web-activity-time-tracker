@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('clearAllData').addEventListener('click', function () {
         clearAllData();
     });
+    document.getElementById('addBlackSiteBtn').addEventListener('click', function () {
+        addNewBlackSite();
+    });
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
         storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
     });
@@ -42,7 +45,7 @@ function loadSettings() {
         document.getElementById('viewTimeInBadge').setAttribute('checked', item);
     });
     storage.getMemoryUse(STORAGE_TABS, function (integer) {
-        document.getElementById('memoryUse').innerHTML = (integer/1024).toFixed(2) + 'Kb';
+        document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';
     })
 }
 
@@ -55,4 +58,20 @@ function clearAllData() {
 function viewNotify() {
     document.getElementById('notify').hidden = false;
     setTimeout(function () { document.getElementById('notify').hidden = true; }, 3000);
+}
+
+function addNewBlackSite() {
+    var newBlackSite = document.getElementById('addBlackSiteLbl').value;
+    if (newBlackSite !== '') {
+        var count = document.getElementById('blackList').getElementsByTagName('li').length;
+        var li = document.createElement('li');
+        li.innerHTML = newBlackSite;
+        li.value = count++;
+        var del = document.createElement('img');
+        del.height = 12;
+        del.src = '/icons/delete.png';
+        del.value = count++;
+        document.getElementById('blackList').appendChild(li).appendChild(del);
+        document.getElementById('addBlackSiteLbl').value = '';
+    }
 }
