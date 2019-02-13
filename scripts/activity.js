@@ -7,7 +7,7 @@ class Activity {
                 tabs = tabs || [];
                 var domain = this.extractHostname(tab.url);
                 this.setCurrentActiveTab(domain);
-                if (this.isNewUrl(domain)) {
+                if (this.isNewUrl(domain) && !this.isInBlackList(domain)) {
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined){
                         favicon = 'chrome://favicon/' + domain;
@@ -26,6 +26,12 @@ class Activity {
             || tab.url.indexOf('chrome-extension://') !== -1)
             return false;
         return true;
+    }
+
+    isInBlackList(domain){
+        if (setting_black_list !== undefined && setting_black_list.length > 0)
+            return setting_black_list.find(o => o === domain) !== undefined;
+        else return false;
     }
 
     isNewUrl(domain) {

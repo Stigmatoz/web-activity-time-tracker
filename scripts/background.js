@@ -5,6 +5,7 @@ var currentTab;
 var activity = new Activity();
 var storage = new LocalStorage();
 
+var setting_black_list;
 var setting_interval_save;
 var setting_interval_inactivity;
 var setting_view_in_badge;
@@ -34,7 +35,10 @@ function backgroundCheck() {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
-                            tab.incSummaryTime();
+                            if (!activity.isInBlackList(activeUrl))
+                                tab.incSummaryTime();
+                                //todo: сделать, чтобы, если страница в черном списке, 
+                                //то показываем крестик на badge text
                             if (setting_view_in_badge === true) {
                                 var today = new Date().toLocaleDateString();
                                 var summary = tab.days.find(s => s.date === today).summary;
@@ -107,7 +111,14 @@ function loadTabs() {
     });
 }
 
+function loadBlackList(){
+    storage.getSettings(STORAGE_BLACK_LIST, function (items){
+        setting_black_list = items;
+    })
+}
+
 loadTabs();
+loadBlackList();
 addListener();
 updateSummaryTime();
 updateStorage();
