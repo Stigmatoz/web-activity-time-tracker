@@ -28,6 +28,7 @@ var TypeListEnum = {
 };
 
 var STORAGE_TABS = 'tabs';
+var STORAGE_BLACK_LIST = 'black_list';
 
 var SETTINGS_INTERVAL_INACTIVITY_DEFAULT = InactivityInterval.second30;
 var SETTINGS_INTERVAL_CHECK_DEFAULT = 1000;

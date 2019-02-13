@@ -63,15 +63,34 @@ function viewNotify() {
 function addNewBlackSite() {
     var newBlackSite = document.getElementById('addBlackSiteLbl').value;
     if (newBlackSite !== '') {
-        var count = document.getElementById('blackList').getElementsByTagName('li').length;
         var li = document.createElement('li');
-        li.innerHTML = newBlackSite;
-        li.value = count++;
+        li.innerText = newBlackSite;
         var del = document.createElement('img');
         del.height = 12;
         del.src = '/icons/delete.png';
-        del.value = count++;
+        del.addEventListener('click', function (e) {
+            deleteBlackSite(e);
+        });
         document.getElementById('blackList').appendChild(li).appendChild(del);
         document.getElementById('addBlackSiteLbl').value = '';
     }
+    updateBlackList();
+}
+
+function deleteBlackSite(e){
+    var targetElement = e.path[1];
+    var domain = targetElement.innerText;
+    var list = document.getElementById('blackList').getElementsByTagName('li');
+    var blackList = [];
+    for (var i = 0; i < list.length; i++){
+        if (list[i].innerText == domain){
+            document.getElementById('blackList').removeChild(list[i]);
+        }
+        blackList.push(list[i].innerText);
+    }
+    updateBlackList(blackList);
+}
+
+function updateBlackList(blackList){
+    storage.saveSettings(STORAGE_BLACK_LIST, blackList);
 }
