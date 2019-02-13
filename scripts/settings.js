@@ -1,4 +1,5 @@
 var storage = new LocalStorage();
+var blackList = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearAllData();
     });
     document.getElementById('addBlackSiteBtn').addEventListener('click', function () {
-        addNewBlackSite();
+        addNewBlackSiteClickHandler();
     });
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
         storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
@@ -46,7 +47,19 @@ function loadSettings() {
     });
     storage.getMemoryUse(STORAGE_TABS, function (integer) {
         document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';
-    })
+    });
+    storage.getSettings(STORAGE_BLACK_LIST, function (items) {
+        blackList = items;
+        viewBlackList(items);
+    });
+}
+
+function viewBlackList(items) {
+    if (items !== undefined) {
+        for (var i = 0; i < items.length; i++) {
+            addDomainToListBox(items[i]);
+        }
+    }
 }
 
 function clearAllData() {
@@ -60,37 +73,35 @@ function viewNotify() {
     setTimeout(function () { document.getElementById('notify').hidden = true; }, 3000);
 }
 
-function addNewBlackSite() {
+function addNewBlackSiteClickHandler() {
     var newBlackSite = document.getElementById('addBlackSiteLbl').value;
     if (newBlackSite !== '') {
-        var li = document.createElement('li');
-        li.innerText = newBlackSite;
-        var del = document.createElement('img');
-        del.height = 12;
-        del.src = '/icons/delete.png';
-        del.addEventListener('click', function (e) {
-            deleteBlackSite(e);
-        });
-        document.getElementById('blackList').appendChild(li).appendChild(del);
+        addDomainToListBox(newBlackSite);
+        blackList.push(newBlackSite);
         document.getElementById('addBlackSiteLbl').value = '';
     }
     updateBlackList();
 }
 
-function deleteBlackSite(e){
-    var targetElement = e.path[1];
-    var domain = targetElement.innerText;
-    var list = document.getElementById('blackList').getElementsByTagName('li');
-    var blackList = [];
-    for (var i = 0; i < list.length; i++){
-        if (list[i].innerText == domain){
-            document.getElementById('blackList').removeChild(list[i]);
-        }
-        blackList.push(list[i].innerText);
-    }
-    updateBlackList(blackList);
+function addDomainToListBox(domain) {
+    var li = document.createElement('li');
+    li.innerText = domain;
+    var del = document.createElement('img');
+    del.height = 12;
+    del.src = '/icons/delete.png';
+    del.addEventListener('click', function (e) {
+        deleteBlackSite(e);
+    });
+    document.getElementById('blackList').appendChild(li).appendChild(del);
 }
 
-function updateBlackList(blackList){
+function deleteBlackSite(e) {
+    var targetElement = e.path[1];
+    blackList.splice(blackList.indexOf(targetElement.innerText), 1);
+    document.getElementById('blackList').removeChild(targetElement);
+    updateBlackList();
+}
+
+function updateBlackList() {
     storage.saveSettings(STORAGE_BLACK_LIST, blackList);
 }
