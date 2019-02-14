@@ -19,6 +19,7 @@ function updateStorage() {
 }
 
 function backgroundCheck() {
+    loadBlackList();
     storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
     storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
     chrome.windows.getLastFocused({ populate: true }, function (currentWindow) {
@@ -37,16 +38,24 @@ function backgroundCheck() {
                         if (state === 'active') {
                             if (!activity.isInBlackList(activeUrl))
                                 tab.incSummaryTime();
-                                //todo: сделать, чтобы, если страница в черном списке, 
-                                //то показываем крестик на badge text
                             if (setting_view_in_badge === true) {
-                                var today = new Date().toLocaleDateString();
-                                var summary = tab.days.find(s => s.date === today).summary;
-                                chrome.browserAction.setBadgeText({
-                                    tabId: activeTab.id,
-                                    text: String(convertSummaryTimeToBadgeString(summary))
-                                });
+                                if (activity.isInBlackList(activeUrl)) {
+                                    chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
+                                    chrome.browserAction.setBadgeText({
+                                        tabId: activeTab.id,
+                                        text: 'n/a'
+                                    });
+                                } else {
+                                    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
+                                    var today = new Date().toLocaleDateString();
+                                    var summary = tab.days.find(s => s.date === today).summary;
+                                    chrome.browserAction.setBadgeText({
+                                        tabId: activeTab.id,
+                                        text: String(convertSummaryTimeToBadgeString(summary))
+                                    });
+                                }
                             } else {
+                                chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
                                 chrome.browserAction.setBadgeText({
                                     tabId: activeTab.id,
                                     text: ''
@@ -54,6 +63,14 @@ function backgroundCheck() {
                             }
                         }
                     });
+                } else {
+                    if (activity.isInBlackList(activeUrl)) {
+                        chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
+                        chrome.browserAction.setBadgeText({
+                            tabId: activeTab.id,
+                            text: 'n/a'
+                        });
+                    }
                 }
             }
         }
@@ -73,8 +90,8 @@ function setDefaultSettings() {
 }
 
 function checkSettingsImEmpty() {
-    chrome.storage.local.getBytesInUse(['inactivity_interval'], function (item) { 
-        if (item == 0){
+    chrome.storage.local.getBytesInUse(['inactivity_interval'], function (item) {
+        if (item == 0) {
             setDefaultSettings();
         }
     });
@@ -111,8 +128,8 @@ function loadTabs() {
     });
 }
 
-function loadBlackList(){
-    storage.getSettings(STORAGE_BLACK_LIST, function (items){
+function loadBlackList() {
+    storage.getSettings(STORAGE_BLACK_LIST, function (items) {
         setting_black_list = items;
     })
 }
