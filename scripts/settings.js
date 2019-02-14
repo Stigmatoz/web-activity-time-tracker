@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById('settingsBlock').hidden = true;
         document.getElementById('aboutBlock').hidden = false;
+
+        loadVersion();
     });
     document.getElementById('clearAllData').addEventListener('click', function () {
         clearAllData();
@@ -52,6 +54,11 @@ function loadSettings() {
         blackList = items;
         viewBlackList(items);
     });
+}
+
+function loadVersion(){
+    var version = chrome.runtime.getManifest().version;
+    document.getElementById('version').innerText = 'v' + version;
 }
 
 function viewBlackList(items) {
