@@ -107,7 +107,7 @@ function getTabsFromStorage(tabs) {
 
         ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime);
 
-        if (i <= 5)
+        if (i <= 8)
             addTabForChart(tabsForChart, targetTabs[i].url, summaryTime);
         else addTabOthersForChart(tabsForChart, summaryTime);
     }
