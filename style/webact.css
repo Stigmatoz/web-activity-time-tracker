@@ -80,9 +80,9 @@ hr {
 }
 
 .title{
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 650;
-    margin: 5px;
+    margin: 2px;
     text-align: center;
 }
 
@@ -121,7 +121,7 @@ input[type="date"]{
 
 .btn-block{
     width: 500px;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 .no-data{

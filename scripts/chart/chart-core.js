@@ -74,7 +74,7 @@ function donutChart() {
                 .data(pie(data))
                 .enter().append("g")
                 .attr("transform", function (d, i) {
-                    return "translate(" + (130) + "," + (i * 20 - 40) + ")"; // place each legend on the right and bump each one down 15 pixels
+                    return "translate(" + (130) + "," + (i * 20 - 80) + ")"; // place each legend on the right and bump each one down 15 pixels
                 })
                 .attr("class", "legend");
 
