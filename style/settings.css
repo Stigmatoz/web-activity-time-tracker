@@ -278,3 +278,22 @@ input[type="button"]:hover {
     min-width: 20px !important;
     width: 28px !important;
   }
+
+  #addRestrictionSiteLbl{
+    width: 233px;
+    height: 15px;
+    padding: 3px;
+}
+
+#addRestrictionSiteBtn{
+  height: 24px !important;
+  line-height: 20px !important;
+  padding: 0 5px !important;
+  min-width: 20px !important;
+  width: 28px !important;
+}
+
+#restrictionsList{
+    width: 430px;
+    height: 170px;
+}
