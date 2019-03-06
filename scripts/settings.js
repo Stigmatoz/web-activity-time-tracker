@@ -84,6 +84,8 @@ function addNewBlackSiteClickHandler() {
     var newBlackSite = document.getElementById('addBlackSiteLbl').value;
     if (newBlackSite !== '') {
         addDomainToListBox(newBlackSite);
+        if (blackList === undefined)
+            blackList = [];
         blackList.push(newBlackSite);
         document.getElementById('addBlackSiteLbl').value = '';
     }
