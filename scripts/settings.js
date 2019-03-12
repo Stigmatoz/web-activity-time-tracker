@@ -135,7 +135,10 @@ function addDomainToListBox(domain) {
 
 function addDomainToRestrictionListBox(domain, time) {
     var li = document.createElement('li');
-    li.innerText = domain;
+    var domainLbl = document.createElement('div');
+    domainLbl.classList.add('inline-block');
+    domainLbl.innerText = domain;
+    domainLbl.setAttribute('name', 'domain');
     var edit = document.createElement('img');
     edit.height = 14;
     edit.src = '/icons/edit.png';
@@ -153,10 +156,14 @@ function addDomainToRestrictionListBox(domain, time) {
     var timeArray = time.split(':');
     var resultTime = timeArray[0] + 'h ' + timeArray[1] + 'm';
     timeElement.innerText = resultTime;
+    timeElement.setAttribute('name', 'time');
+    var hr = document.createElement('hr');
     var li = document.getElementById('restrictionsList').appendChild(li);
+    li.appendChild(domainLbl);
     li.appendChild(del);
     li.appendChild(edit);
     li.appendChild(timeElement);
+    li.appendChild(hr);
 }
 
 function deleteBlackSite(e) {
@@ -174,7 +181,12 @@ function deleteRestrictionSite(e) {
 }
 
 function editRestrictionSite(e){
-
+    var targetElement = e.path[1];
+    document.getElementById('addRestrictionSiteLbl').value = targetElement.querySelector('[name="domain"]').innerText;
+    var timeText = targetElement.querySelector('[name="time"]').innerText;
+    var hour = timeText.split(' ')[0].slice(0, 2);
+    var min = timeText.split(' ')[1].slice(0, 2);
+    document.getElementById('addRestrictionTimeLbl').value = hour + ':' + min;
 }
 
 function updateBlackList() {
