@@ -181,6 +181,10 @@ input[type="button"]:hover {
     text-decoration: none;
   }
 
+.margin-top-5{
+    margin-top: 5px;
+}
+
 .margin-top-10{
       margin-top: 10px;
   }
@@ -303,5 +307,19 @@ input[type="button"]:hover {
 }
 
 .inline-block{
-    display: inline-block;
+    display: inline-block !important;
+}
+
+.block{
+    display: block;
+}
+
+.readonly-input{
+    cursor: default;
+    border: 0;
+    display: block;
+}
+
+.restriction-item{
+    width: 380px;
 }
