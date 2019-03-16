@@ -39,14 +39,14 @@ loadSettings();
 
 function setBlockEvent(btnName, blockName) {
     blockBtnList.forEach(element => {
-        if (element === btnName){
+        if (element === btnName) {
             document.getElementById(btnName).classList.add('active');
         }
         else document.getElementById(element).classList.remove('active');
     });
 
     blockList.forEach(element => {
-        if (element === blockName){
+        if (element === blockName) {
             document.getElementById(blockName).hidden = false;
         } else document.getElementById(element).hidden = true;
     });
@@ -107,7 +107,7 @@ function addNewBlackSiteClickHandler() {
     updateBlackList();
 }
 
-function addNewRestrictionSiteClickHandler(){
+function addNewRestrictionSiteClickHandler() {
     var newRestrictionSite = document.getElementById('addRestrictionSiteLbl').value;
     var newRestrictionTime = document.getElementById('addRestrictionTimeLbl').value;
     if (newRestrictionSite !== '' && newRestrictionTime !== '') {
@@ -144,6 +144,7 @@ function addDomainToRestrictionListBox(domain, time) {
     domainLbl.setAttribute('name', 'domain');
 
     var edit = document.createElement('img');
+    edit.setAttribute('name', 'editCmd');
     edit.height = 14;
     edit.src = '/icons/edit.png';
     edit.addEventListener('click', function (e) {
@@ -190,19 +191,41 @@ function deleteRestrictionSite(e) {
     updateRestrictionList();
 }
 
-function editRestrictionSite(e){
+function editRestrictionSite(e) {
     var targetElement = e.path[1];
     var domainElement = targetElement.querySelector('[name="domain"]');
     var timeElement = targetElement.querySelector('[name="time"]');
-    domainElement.readOnly = false;
-    domainElement.classList.remove('readonly-input');
-    timeElement.classList.remove('readonly-input');
-    timeElement.readOnly = false;
-    var timeText = targetElement.querySelector('[name="time"]').value;
-    var hour = timeText.split(' ')[0].slice(0, 2);
-    var min = timeText.split(' ')[1].slice(0, 2);
-    timeElement.type = 'time';
-    timeElement.value = hour + ':' + min;
+    var sourceDomain = domainElement.value;
+    if (domainElement.readOnly == true && timeElement.readOnly == true) {
+        domainElement.readOnly = false;
+        domainElement.classList.remove('readonly-input');
+        timeElement.classList.remove('readonly-input');
+        timeElement.readOnly = false;
+        var timeText = targetElement.querySelector('[name="time"]').value;
+        var hour = timeText.split(' ')[0].slice(0, 2);
+        var min = timeText.split(' ')[1].slice(0, 2);
+        timeElement.type = 'time';
+        timeElement.value = hour + ':' + min;
+        var editCmd = targetElement.querySelector('[name="editCmd"]');
+        editCmd.src = '/icons/success.png';
+    }
+    else {
+        var domain = domainElement.value;
+        var time = timeElement.value;
+        if (domain !== '' && time !== '') {
+            var editCmd = targetElement.querySelector('[name="editCmd"]');
+            editCmd.src = '/icons/edit.png';
+            domainElement.classList.add('readonly-input');
+            domainElement.readOnly = true;
+            timeElement.classList.add('readonly-input');
+            timeElement.readOnly = true;
+
+            updateRestrictionList();
+        }
+        else{
+
+        }
+    }
 }
 
 function updateBlackList() {
