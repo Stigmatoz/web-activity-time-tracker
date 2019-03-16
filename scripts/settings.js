@@ -69,6 +69,10 @@ function loadSettings() {
         blackList = items;
         viewBlackList(items);
     });
+    storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
+        restrictionList = items;
+        viewRestrictionList(items);
+    });
 }
 
 function loadVersion() {
@@ -80,6 +84,14 @@ function viewBlackList(items) {
     if (items !== undefined) {
         for (var i = 0; i < items.length; i++) {
             addDomainToListBox(items[i]);
+        }
+    }
+}
+
+function viewRestrictionList(items){
+    if (items !== undefined) {
+        for (var i = 0; i < items.length; i++) {
+            addDomainToRestrictionListBox(items[i]);
         }
     }
 }
@@ -111,10 +123,10 @@ function addNewRestrictionSiteClickHandler() {
     var newRestrictionSite = document.getElementById('addRestrictionSiteLbl').value;
     var newRestrictionTime = document.getElementById('addRestrictionTimeLbl').value;
     if (newRestrictionSite !== '' && newRestrictionTime !== '') {
-        addDomainToRestrictionListBox(newRestrictionSite, newRestrictionTime);
+        addDomainToRestrictionListBox(new Restriction(newRestrictionSite, newRestrictionTime));
         if (restrictionList === undefined)
             restrictionList = [];
-        restrictionList.push(newRestrictionSite);
+        restrictionList.push(new Restriction(newRestrictionSite, newRestrictionTime));
         document.getElementById('addRestrictionSiteLbl').value = '';
         document.getElementById('addRestrictionTimeLbl').value = '';
     }
@@ -133,13 +145,13 @@ function addDomainToListBox(domain) {
     document.getElementById('blackList').appendChild(li).appendChild(del);
 }
 
-function addDomainToRestrictionListBox(domain, time) {
+function addDomainToRestrictionListBox(resctiction) {
     var li = document.createElement('li');
 
     var domainLbl = document.createElement('input');
     domainLbl.type = 'text';
     domainLbl.classList.add('readonly-input', 'inline-block', 'restriction-item');
-    domainLbl.value = domain;
+    domainLbl.value = resctiction.domain;
     domainLbl.readOnly = true;
     domainLbl.setAttribute('name', 'domain');
 
@@ -160,7 +172,7 @@ function addDomainToRestrictionListBox(domain, time) {
     });
 
     var timeElement = document.createElement('input');
-    var timeArray = time.split(':');
+    var timeArray = resctiction.time.split(':');
     var resultTime = timeArray[0] + 'h ' + timeArray[1] + 'm';
     timeElement.type = 'text';
     timeElement.value = resultTime;
@@ -195,10 +207,7 @@ function editRestrictionSite(e) {
     var targetElement = e.path[1];
     var domainElement = targetElement.querySelector('[name="domain"]');
     var timeElement = targetElement.querySelector('[name="time"]');
-    var sourceDomain = domainElement.value;
-    if (domainElement.readOnly == true && timeElement.readOnly == true) {
-        domainElement.readOnly = false;
-        domainElement.classList.remove('readonly-input');
+    if (timeElement.readOnly == true) {
         timeElement.classList.remove('readonly-input');
         timeElement.readOnly = false;
         var timeText = targetElement.querySelector('[name="time"]').value;
@@ -215,17 +224,17 @@ function editRestrictionSite(e) {
         if (domain !== '' && time !== '') {
             var editCmd = targetElement.querySelector('[name="editCmd"]');
             editCmd.src = '/icons/edit.png';
-            domainElement.classList.add('readonly-input');
-            domainElement.readOnly = true;
             timeElement.classList.add('readonly-input');
             timeElement.readOnly = true;
+            updateItemFromResctrictoinList(domain, time);
 
             updateRestrictionList();
         }
-        else{
-
-        }
     }
+}
+
+function updateItemFromResctrictoinList(domain, time){
+    restrictionList.find(x => x.domain === domain).time = time;
 }
 
 function updateBlackList() {
@@ -233,4 +242,5 @@ function updateBlackList() {
 }
 
 function updateRestrictionList() {
+    storage.saveSettings(STORAGE_RESTRICTION_LIST, restrictionList);
 }
