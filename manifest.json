@@ -31,7 +31,8 @@
                         "scripts/storage.js", 
                         "scripts/activity.js", 
                         "scripts/tab.js", 
-                        "scripts/background.js"],
+                        "scripts/background.js",
+                        "scripts/restriction.js"],
             "persistent": false
         },
         "browser_action": {
