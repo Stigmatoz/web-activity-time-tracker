@@ -242,8 +242,8 @@ input[type="button"]:hover {
   }
 
   .notify{
-    width: 200px;
-    height: 30px;
+    width: 250px;
+    height: 22px;
     margin: auto;
     background-color: rgb(118, 219, 93);
     color: rgb(0, 0, 0);
@@ -254,9 +254,13 @@ input[type="button"]:hover {
     z-index: 1;
     top: 10px;
     right: 20px;
-    font-size: 17px;
+    font-size: 15px;
     white-space: nowrap;
     padding: 10px;
+  }
+
+  .notify.warning{
+    background-color: rgb(219, 93, 104);
   }
 
   .listbox{
