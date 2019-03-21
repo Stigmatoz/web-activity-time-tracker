@@ -94,7 +94,7 @@ a{
     display: inline-block;
     font-size: 12px;
     font-weight: 600;
-    margin: 4px 2px;
+    margin: 4px 7px;
     transition-duration: 0.4s;
     cursor: pointer;
     text-decoration: none;
@@ -102,7 +102,7 @@ a{
 
     border-bottom: 2px solid rgb(184, 179, 179);
     background: transparent; 
-    width: 21%;
+    width: 19%;
 }
 
 a:hover {
