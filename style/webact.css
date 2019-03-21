@@ -47,8 +47,9 @@ body {
 
 .span-time{
     margin-left: 10px;
-    width: 80px;
+    width: 100px;
     font-weight: 500;
+    text-align: right;
 }
 
 .favicon{
