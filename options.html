@@ -70,6 +70,9 @@
                      <input type="text" placeholder="Enter site name..." id='addBlackSiteLbl' />
                      <input type="button" value="+" id='addBlackSiteBtn' />
                   </div>
+                  <div class="notify warning" id='notifyForBlackList' hidden>
+                     The site is already in the list
+                  </div>
                </div>
                <div class="margin-top-10">
                   <label>Data in memory use </label><label id='memoryUse'></label>
@@ -92,6 +95,9 @@
                <input type="text" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
                <input type="time" id='addRestrictionTimeLbl' />
                <input type="button" value="+" id='addRestrictionSiteBtn' />
+            </div>
+            <div class="notify warning" id='notifyForRestrictionList' hidden>
+               The site is already in the list
             </div>
          </div>
          <div id='aboutBlock' hidden>

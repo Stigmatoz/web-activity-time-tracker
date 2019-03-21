@@ -99,12 +99,16 @@ function viewRestrictionList(items) {
 function clearAllData() {
     var tabs = [];
     chrome.extension.getBackgroundPage().tabs = tabs;
-    storage.saveTabs(tabs, viewNotify);
+    storage.saveTabs(tabs, allDataDeletedSuccess);
 }
 
-function viewNotify() {
-    document.getElementById('notify').hidden = false;
-    setTimeout(function () { document.getElementById('notify').hidden = true; }, 3000);
+function allDataDeletedSuccess(){
+    viewNotify('notify');
+}
+
+function viewNotify(elementName) {
+    document.getElementById(elementName).hidden = false;
+    setTimeout(function () { document.getElementById(elementName).hidden = true; }, 3000);
 }
 
 function addNewBlackSiteClickHandler() {
@@ -118,7 +122,7 @@ function addNewBlackSiteClickHandler() {
             document.getElementById('addBlackSiteLbl').value = '';
 
             updateBlackList();
-        }
+        } else viewNotify('notifyForBlackList');
     }
 }
 
@@ -136,6 +140,7 @@ function addNewRestrictionSiteClickHandler() {
 
             updateRestrictionList();
         }
+        else viewNotify('notifyForRestrictionList');
     }
 }
 
