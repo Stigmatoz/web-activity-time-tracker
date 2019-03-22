@@ -173,17 +173,13 @@ input[type="button"]{
     cursor: pointer;
     min-width: 80px;
     text-align: center;
-    width: 170px;
+    width: 200px;
 }
 
 input[type="button"]:hover {
     background: #5c9dfe;
     text-decoration: none;
   }
-
-.margin-top-5{
-    margin-top: 5px;
-}
 
 .margin-top-10{
       margin-top: 10px;
@@ -242,8 +238,8 @@ input[type="button"]:hover {
   }
 
   .notify{
-    width: 250px;
-    height: 22px;
+    width: 200px;
+    height: 30px;
     margin: auto;
     background-color: rgb(118, 219, 93);
     color: rgb(0, 0, 0);
@@ -254,19 +250,15 @@ input[type="button"]:hover {
     z-index: 1;
     top: 10px;
     right: 20px;
-    font-size: 15px;
+    font-size: 17px;
     white-space: nowrap;
     padding: 10px;
   }
 
-  .notify.warning{
-    background-color: rgb(219, 93, 104);
-  }
-
   .listbox{
       overflow-y: auto;
-      width: 263px;
-      height: 100px;
+      width: 350px;
+      height: 120px;
       padding: 3px;
       padding: 3px 5px 3px 5px;
       border: 1px solid rgb(172, 169, 169);
@@ -278,7 +270,7 @@ input[type="button"]:hover {
   }
 
   #addBlackSiteLbl{
-      width: 233px;
+      width: 321px;
       height: 15px;
       padding: 3px;
   }
@@ -292,7 +284,7 @@ input[type="button"]:hover {
   }
 
   #addRestrictionSiteLbl{
-    width: 233px;
+    width: 323px;
     height: 15px;
     padding: 3px;
 }
@@ -307,23 +299,5 @@ input[type="button"]:hover {
 
 #restrictionsList{
     width: 430px;
-    height: 250px;
-}
-
-.inline-block{
-    display: inline-block !important;
-}
-
-.block{
-    display: block;
-}
-
-.readonly-input{
-    cursor: default;
-    border: 0;
-    display: block;
-}
-
-.restriction-item{
-    width: 380px;
+    height: 170px;
 }
