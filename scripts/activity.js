@@ -34,6 +34,16 @@ class Activity {
         else return false;
     }
 
+    checkRestrictionIfAny(domain){
+        if (setting_restriction_list !== undefined && setting_restriction_list.length > 0){
+             var item = setting_restriction_list.find(o => o.domain === domain);
+             if (item !== undefined){
+                 
+             }
+        }
+        else return false;
+    }
+
     isNewUrl(domain) {
         if (tabs.length > 0)
             return tabs.find(o => o.url === domain) === undefined;
