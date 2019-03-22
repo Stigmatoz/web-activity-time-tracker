@@ -71,6 +71,8 @@ function loadSettings() {
     });
     storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
         restrictionList = items;
+        if (restrictionList === undefined)
+            restrictionList = [];
         viewRestrictionList(items);
     });
 }
