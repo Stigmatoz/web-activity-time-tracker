@@ -6,6 +6,7 @@ var activity = new Activity();
 var storage = new LocalStorage();
 
 var setting_black_list;
+var setting_restriction_list;
 var setting_interval_save;
 var setting_interval_inactivity;
 var setting_view_in_badge;
@@ -20,6 +21,7 @@ function updateStorage() {
 
 function backgroundCheck() {
     loadBlackList();
+    loadRestrictionList();
     storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
     storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
     chrome.windows.getLastFocused({ populate: true }, function (currentWindow) {
@@ -36,6 +38,9 @@ function backgroundCheck() {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
+                            if (activity.checkRestrictionIfAny(activeUrl) && ){
+                                
+                            }
                             if (!activity.isInBlackList(activeUrl))
                                 tab.incSummaryTime();
                             if (setting_view_in_badge === true) {
@@ -131,6 +136,12 @@ function loadTabs() {
 function loadBlackList() {
     storage.getSettings(STORAGE_BLACK_LIST, function (items) {
         setting_black_list = items;
+    })
+}
+
+function loadRestrictionList() {
+    storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
+        setting_restriction_list = items;
     })
 }
 

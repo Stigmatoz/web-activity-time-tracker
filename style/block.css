@@ -1,0 +1,19 @@
+body{
+    padding: 150px;
+    text-align: center;
+    background-color: rgb(243, 243, 243)
+}
+
+.title{
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.description{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.current-site{
+    font-weight: 500;
+}
