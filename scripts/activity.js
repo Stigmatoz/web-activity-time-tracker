@@ -34,11 +34,15 @@ class Activity {
         else return false;
     }
 
-    checkRestrictionIfAny(domain){
+    checkRestrictionIfAny(domain, tab){
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0){
              var item = setting_restriction_list.find(o => o.domain === domain);
              if (item !== undefined){
-                 
+                 var today = new Date().toLocaleDateString();
+                 var todayTimeUse = tab.days.find(x => x.date == today).summary;
+                 if (todayTimeUse > item.time){
+                     
+                 }
              }
         }
         else return false;

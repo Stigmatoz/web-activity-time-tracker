@@ -239,7 +239,7 @@ input[type="button"]:hover {
 
   .notify{
     width: 200px;
-    height: 30px;
+    height: 27px;
     margin: auto;
     background-color: rgb(118, 219, 93);
     color: rgb(0, 0, 0);
@@ -250,7 +250,7 @@ input[type="button"]:hover {
     z-index: 1;
     top: 10px;
     right: 20px;
-    font-size: 17px;
+    font-size: 15px;
     white-space: nowrap;
     padding: 10px;
   }
@@ -299,5 +299,23 @@ input[type="button"]:hover {
 
 #restrictionsList{
     width: 430px;
-    height: 170px;
+    height: 250px;
+}
+
+.inline-block{
+    display: inline-block !important;
+}
+
+.block{
+    display: block;
+}
+
+.readonly-input{
+    cursor: default;
+    border: 0;
+    display: block;
+}
+
+.restriction-item{
+    width: 380px;
 }
