@@ -133,10 +133,11 @@ function addNewRestrictionSiteClickHandler() {
     var newRestrictionTime = document.getElementById('addRestrictionTimeLbl').value;
     if (newRestrictionSite !== '' && newRestrictionTime !== '') {
         if (!isContainsRestrictionSite(newRestrictionSite)) {
-            addDomainToRestrictionListBox(new Restriction(newRestrictionSite, newRestrictionTime));
+            var restriction = new Restriction(newRestrictionSite, newRestrictionTime);
+            addDomainToRestrictionListBox(restriction);
             if (restrictionList === undefined)
                 restrictionList = [];
-            restrictionList.push(new Restriction(newRestrictionSite, newRestrictionTime));
+            restrictionList.push(restriction);
             document.getElementById('addRestrictionSiteLbl').value = '';
             document.getElementById('addRestrictionTimeLbl').value = '';
 
@@ -185,8 +186,7 @@ function addDomainToRestrictionListBox(resctiction) {
     });
 
     var timeElement = document.createElement('input');
-    var timeArray = resctiction.time.split(':');
-    var resultTime = timeArray[0] + 'h ' + timeArray[1] + 'm';
+    var resultTime = convertShortSummaryTimeToString(resctiction.time);
     timeElement.type = 'text';
     timeElement.value = resultTime;
     timeElement.readOnly = true;

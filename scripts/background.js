@@ -38,7 +38,7 @@ function backgroundCheck() {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
-                            if (activity.checkRestrictionIfAny(activeUrl) && ){
+                            if (activity.checkRestrictionIfAny(activeUrl, tab)){
                                 
                             }
                             if (!activity.isInBlackList(activeUrl))
