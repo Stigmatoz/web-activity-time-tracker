@@ -52,6 +52,18 @@ function isEmpty(obj) {
     return JSON.stringify(obj) === JSON.stringify({});
 }
 
+function convertTimeToSummaryTime(time) {
+    var timeValue = time.split(':');
+    var hour = timeValue[0];
+    var min = timeValue[1];
+    var resultTimeValue;
+    if (hour > 0)
+        resultTimeValue = hour * 60 * 3600;
+    resultTimeValue += min * 60;
+
+    return resultTimeValue;
+}
+
 function convertSummaryTimeToBadgeString(summaryTime) {
     var sec = (summaryTime);
     var min = (summaryTime / 60).toFixed(0);
@@ -69,7 +81,7 @@ function convertSummaryTimeToBadgeString(summaryTime) {
     }
 }
 
-function convertShortSummaryTimeToString(summaryTime){
+function convertShortSummaryTimeToString(summaryTime) {
     var hours = Math.floor(summaryTime / (3600 * 60));
     var totalSeconds = summaryTime % 3600;
     var mins = Math.floor(totalSeconds / 60);
@@ -111,15 +123,15 @@ function isDateInRange(dateStr, range) {
     return date >= from && date <= to;
 }
 
-function getValueFromArrayRange(value){
+function getValueFromArrayRange(value) {
     var arr;
-    if (value.indexOf('.') !== -1){
+    if (value.indexOf('.') !== -1) {
         arr = value.split('.');
         return new Date(arr[2], arr[1] - 1, arr[0]);
     }
     if (value.indexOf('/') !== -1)
         arr = value.split('/');
-        return new Date(arr[2], arr[0] - 1, arr[1]);
+    return new Date(arr[2], arr[0] - 1, arr[1]);
 }
 
 function convertToDate(date) {
