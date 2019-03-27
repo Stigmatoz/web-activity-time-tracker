@@ -27,13 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
         getDataFromStorageByDays();
     });
     document.getElementById('settings').addEventListener('click', function () {
-        chrome.tabs.create({ url: chrome.runtime.getURL("block.html") })
-
-        // if (chrome.runtime.openOptionsPage) {
-        //     chrome.runtime.openOptionsPage();
-        // } else {
-        //     window.open(chrome.runtime.getURL('block.html'));
-        // }
+        if (chrome.runtime.openOptionsPage) {
+            chrome.runtime.openOptionsPage();
+        } else {
+            window.open(chrome.runtime.getURL('options.html'));
+        }
     });
 });
 
