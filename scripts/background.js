@@ -38,8 +38,8 @@ function backgroundCheck() {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
-                            if (activity.checkRestrictionIfAny(activeUrl, tab)){
-                                
+                            if (activity.isLimitExceeded(activeUrl, tab)){
+                                chrome.tabs.create({ url: chrome.runtime.getURL("block.html") })
                             }
                             if (!activity.isInBlackList(activeUrl))
                                 tab.incSummaryTime();

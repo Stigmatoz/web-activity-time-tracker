@@ -211,7 +211,9 @@ function deleteBlackSite(e) {
 
 function deleteRestrictionSite(e) {
     var targetElement = e.path[1];
-    restrictionList.splice(restrictionList.indexOf(targetElement.innerText), 1);
+    var itemValue = targetElement.querySelector("[name='domain']").value;
+    var item = restrictionList.find(x => x.domain == itemValue);
+    restrictionList.splice(restrictionList.indexOf(item), 1);
     document.getElementById('restrictionsList').removeChild(targetElement);
     updateRestrictionList();
 }
