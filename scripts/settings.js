@@ -255,7 +255,7 @@ function isContainsBlackSite(domain) {
 }
 
 function updateItemFromResctrictoinList(domain, time) {
-    restrictionList.find(x => x.domain === domain).time = time;
+    restrictionList.find(x => x.domain === domain).time = convertTimeToSummaryTime(time);
 }
 
 function updateBlackList() {
