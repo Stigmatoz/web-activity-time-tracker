@@ -38,8 +38,8 @@ function backgroundCheck() {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
-                            if (activity.isLimitExceeded(activeUrl, tab)){
-                                chrome.tabs.create({ url: chrome.runtime.getURL("block.html") })
+                            if (activity.isLimitExceeded(activeUrl, tab)) {
+                                setBlockPageToCurrent(activeUrl);
                             }
                             if (!activity.isInBlackList(activeUrl))
                                 tab.incSummaryTime();
@@ -79,6 +79,13 @@ function backgroundCheck() {
                 }
             }
         }
+    });
+}
+
+function setBlockPageToCurrent(activeUrl) {
+    var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + activeUrl;
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+        chrome.tabs.update(tab.id, { url: blockUrl });
     });
 }
 

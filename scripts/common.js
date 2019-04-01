@@ -58,7 +58,7 @@ function convertTimeToSummaryTime(time) {
     var min = timeValue[1];
     var resultTimeValue = 0;
     if (hour > 0)
-        resultTimeValue = hour * 60 * 3600;
+        resultTimeValue = hour * 3600;
     resultTimeValue += min * 60;
 
     return resultTimeValue;
