@@ -9,7 +9,7 @@ class Activity {
                 this.setCurrentActiveTab(domain);
                 if (this.isNewUrl(domain) && !this.isInBlackList(domain)) {
                     var favicon = tab.favIconUrl;
-                    if (favicon === undefined){
+                    if (favicon === undefined) {
                         favicon = 'chrome://favicon/' + domain;
                     }
                     var newTab = new Tab(domain, favicon);
@@ -28,24 +28,43 @@ class Activity {
         return true;
     }
 
-    isInBlackList(domain){
+    isInBlackList(domain) {
         if (setting_black_list !== undefined && setting_black_list.length > 0)
             return setting_black_list.find(o => o === domain) !== undefined;
         else return false;
     }
 
-    isLimitExceeded(domain, tab){
-        if (setting_restriction_list !== undefined && setting_restriction_list.length > 0){
-             var item = setting_restriction_list.find(o => o.domain === domain);
-             if (item !== undefined){
-                 var today = new Date().toLocaleDateString();
-                 var todayTimeUse = tab.days.find(x => x.date == today).summary;
-                 if (todayTimeUse >= item.time){
-                     return true;
-                 }
-             }
+    isLimitExceeded(domain, tab) {
+        if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
+            var item = setting_restriction_list.find(o => this.isDomainEquals(o.domain, domain));
+            if (item !== undefined) {
+                var today = new Date().toLocaleDateString();
+                var data = tab.days.find(x => x.date == today);
+                if (data !== undefined) {
+                    var todayTimeUse = data.summary;
+                    if (todayTimeUse >= item.time) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
+    }
+
+    isDomainEquals(first, second) {
+        if (first === second)
+            return true;
+        else {
+            var resultUrl = function (url) {
+                if (url.indexOf('www.') > -1)
+                    return url.split('www.')[1];
+                return url;
+            };
+
+            if (resultUrl(first) === resultUrl(second))
+                return true;
+            else return false;
+        }
     }
 
     isNewUrl(domain) {
@@ -74,25 +93,25 @@ class Activity {
         return hostname;
     }
 
-    loadDataFromStorage(){
+    loadDataFromStorage() {
         var tabs = storage.load(STORAGE_TABS);
     }
 
-    updateFavicon(tab){
+    updateFavicon(tab) {
         var domain = this.extractHostname(tab.url);
         var currentTab = this.getTab(domain);
-        if (currentTab !== null && currentTab !== undefined){
-            if (tab.favIconUrl !== undefined && tab.favIconUrl !== currentTab.favicon){
+        if (currentTab !== null && currentTab !== undefined) {
+            if (tab.favIconUrl !== undefined && tab.favIconUrl !== currentTab.favicon) {
                 currentTab.favicon = tab.favIconUrl;
             }
         }
     }
 
-    setCurrentActiveTab(domain){
+    setCurrentActiveTab(domain) {
         currentTab = domain;
     }
 
-    clearCurrentActiveTab(){
+    clearCurrentActiveTab() {
         currentTab = '';
     }
 };
