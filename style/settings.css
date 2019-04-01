@@ -318,6 +318,7 @@ input[type="button"]:hover {
 
 .restriction-item{
     width: 380px;
+    font-weight: 600;
 }
 
 .notify.warning{
