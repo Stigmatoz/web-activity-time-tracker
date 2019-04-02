@@ -152,3 +152,19 @@ function getDateFromRange(range) {
         case 'month3': return 90;
     }
 }
+
+function isDomainEquals(first, second) {
+    if (first === second)
+        return true;
+    else {
+        var resultUrl = function (url) {
+            if (url.indexOf('www.') > -1)
+                return url.split('www.')[1];
+            return url;
+        };
+
+        if (resultUrl(first) === resultUrl(second))
+            return true;
+        else return false;
+    }
+}

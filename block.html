@@ -5,15 +5,19 @@
    <meta charset="utf-8">
    <title>Access to the site is limited</title>
    <link href="style/block.css" rel="stylesheet" />
+   <script src="scripts/storage.js"></script>
+   <script src="scripts/common.js"></script>
    <script src="scripts/block.js"></script>
 </head>
 
 <body>
-   <div class="content">
+   <div>
       <img src="icons/time.svg" height="50">
       <p class="title">Time limit</p>
       <div class="description">You've reached today your limit on <span id='site' class="current-site"></span></div>
+      <div class="description margin-top-10">Your current daily limit is <span id='limit' class="current-limit"></span></div>
    </div>
+   <p class="product-title">Web Activity Time Tracker</p>
 </body>
 
 </html>

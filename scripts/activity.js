@@ -36,7 +36,7 @@ class Activity {
 
     isLimitExceeded(domain, tab) {
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
-            var item = setting_restriction_list.find(o => this.isDomainEquals(o.domain, domain));
+            var item = setting_restriction_list.find(o => isDomainEquals(o.domain, domain));
             if (item !== undefined) {
                 var today = new Date().toLocaleDateString();
                 var data = tab.days.find(x => x.date == today);
@@ -49,22 +49,6 @@ class Activity {
             }
         }
         return false;
-    }
-
-    isDomainEquals(first, second) {
-        if (first === second)
-            return true;
-        else {
-            var resultUrl = function (url) {
-                if (url.indexOf('www.') > -1)
-                    return url.split('www.')[1];
-                return url;
-            };
-
-            if (resultUrl(first) === resultUrl(second))
-                return true;
-            else return false;
-        }
     }
 
     isNewUrl(domain) {
