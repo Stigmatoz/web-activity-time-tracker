@@ -82,7 +82,7 @@ function convertSummaryTimeToBadgeString(summaryTime) {
 }
 
 function convertShortSummaryTimeToString(summaryTime) {
-    var hours = Math.floor(summaryTime / (3600 * 60));
+    var hours = Math.floor(summaryTime / 3600);
     var totalSeconds = summaryTime % 3600;
     var mins = Math.floor(totalSeconds / 60);
 
