@@ -241,8 +241,11 @@ function editRestrictionSite(e) {
             editCmd.src = '/icons/edit.png';
             timeElement.classList.add('readonly-input');
             timeElement.readOnly = true;
-            updateItemFromResctrictoinList(domain, time);
+            timeElement.type = 'text';
+            var resultTime = convertShortSummaryTimeToString(convertTimeToSummaryTime(time));
+            timeElement.value = resultTime;
 
+            updateItemFromResctrictoinList(domain, time);
             updateRestrictionList();
         }
     }
