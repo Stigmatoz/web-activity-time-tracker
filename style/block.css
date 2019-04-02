@@ -15,6 +15,24 @@ body{
 }
 
 .current-site{
+    font-size: 18px;
     font-weight: 500;
     color: rgb(202, 48, 48);
+}
+
+.current-limit{
+    font-weight: 500;
+    color: rgb(128, 128, 128);
+}
+
+.margin-top-10{
+    margin-top: 10px;
+}
+
+.product-title{
+    font-size: 16px;
+    color: rgb(128, 128, 128);
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
 }
