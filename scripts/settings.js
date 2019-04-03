@@ -33,9 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('rangeToDays').addEventListener('change', function () {
         storage.saveSettings(SETTINGS_INTERVAL_RANGE, this.value);
     });
-});
+    $('.clockpicker').clockpicker();
 
-loadSettings();
+    loadSettings();
+});
 
 function setBlockEvent(btnName, blockName) {
     blockBtnList.forEach(element => {
