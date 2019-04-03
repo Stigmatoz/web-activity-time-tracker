@@ -4,11 +4,15 @@
 <head>
    <meta charset="utf-8">
    <title>Web Activity Time Tracker</title>
+   <link href="style/picker/standalone.min.css" rel="stylesheet" />
+   <link href="style/picker/clockpicker.min.css" rel="stylesheet" />
    <link href="style/settings.css" rel="stylesheet" />
    <script src="scripts/common.js"></script>
    <script src="scripts/storage.js"></script>
    <script src="scripts/settings.js"></script>
    <script src="scripts/restriction.js"></script>
+   <script src="scripts/picker/jquery-3.3.1.min.js"></script>
+   <script src="scripts/picker/clockpicker.min.js"></script>
 </head>
 
 <body>
@@ -93,7 +97,9 @@
             </div>
             <div class="margin-top-10">
                <input type="text" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
-               <input type="time" id='addRestrictionTimeLbl' />
+               <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                  <input type="text" class="clock" placeholder="Time..." readonly id="addRestrictionTimeLbl">
+               </div>
                <input type="button" value="+" id='addRestrictionSiteBtn' />
             </div>
             <div class="notify warning" id='notifyForRestrictionList' hidden>
