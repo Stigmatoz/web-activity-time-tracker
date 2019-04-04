@@ -58,7 +58,8 @@ class Activity {
     }
 
     getTab(domain) {
-        return tabs.find(o => o.url === domain);
+        if (tabs !== undefined)
+            return tabs.find(o => o.url === domain);
     }
 
     extractHostname(url) {
@@ -75,10 +76,6 @@ class Activity {
         hostname = hostname.split('?')[0];
 
         return hostname;
-    }
-
-    loadDataFromStorage() {
-        var tabs = storage.load(STORAGE_TABS);
     }
 
     updateFavicon(tab) {
