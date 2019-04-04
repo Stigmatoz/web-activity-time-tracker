@@ -67,7 +67,9 @@ function loadSettings() {
         document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';
     });
     storage.getSettings(STORAGE_BLACK_LIST, function (items) {
-        blackList = items;
+        if (items !== undefined)
+            blackList = items;
+        else blackList = [];
         viewBlackList(items);
     });
     storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
