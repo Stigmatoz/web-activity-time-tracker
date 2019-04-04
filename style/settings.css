@@ -303,9 +303,14 @@ input[type="button"]:hover {
 }
 
 .clock{
-    width: 55px;
+    width: 65px;
     height: 15px;
     padding: 3px;
+}
+
+.clock-li-readonly{
+    border: none;
+    margin-left: -3px;
 }
 
 .inline-block{

@@ -105,7 +105,7 @@ function clearAllData() {
     storage.saveTabs(tabs, allDataDeletedSuccess);
 }
 
-function allDataDeletedSuccess(){
+function allDataDeletedSuccess() {
     viewNotify('notify');
 }
 
@@ -186,20 +186,25 @@ function addDomainToRestrictionListBox(resctiction) {
         deleteRestrictionSite(e);
     });
 
-    var timeElement = document.createElement('input');
-    var resultTime = convertShortSummaryTimeToString(resctiction.time);
-    timeElement.type = 'text';
-    timeElement.value = resultTime;
-    timeElement.readOnly = true;
-    timeElement.classList.add('readonly-input', 'block', 'margin-top-5');
-    timeElement.setAttribute('name', 'time');
+    var bloc = document.createElement('div');
+    bloc.classList.add('clockpicker');
+    bloc.setAttribute('data-placement', 'left');
+    bloc.setAttribute('data-align', 'top');
+    bloc.setAttribute('data-autoclose', 'true');
+    var timeInput = document.createElement('input');
+    timeInput.type = 'text';
+    timeInput.classList.add('clock', 'clock-li-readonly');
+    timeInput.setAttribute('readonly', true);
+    timeInput.setAttribute('name', 'time');
+    timeInput.value = convertShortSummaryTimeToString(resctiction.time);
+    bloc.appendChild(timeInput);
 
     var hr = document.createElement('hr');
     var li = document.getElementById('restrictionsList').appendChild(li);
     li.appendChild(domainLbl);
     li.appendChild(del);
     li.appendChild(edit);
-    li.appendChild(timeElement);
+    li.appendChild(bloc);
     li.appendChild(hr);
 }
 
@@ -223,16 +228,14 @@ function editRestrictionSite(e) {
     var targetElement = e.path[1];
     var domainElement = targetElement.querySelector('[name="domain"]');
     var timeElement = targetElement.querySelector('[name="time"]');
-    if (timeElement.readOnly == true) {
-        timeElement.classList.remove('readonly-input');
-        timeElement.readOnly = false;
-        var timeText = targetElement.querySelector('[name="time"]').value;
-        var hour = timeText.split(' ')[0].slice(0, 2);
-        var min = timeText.split(' ')[1].slice(0, 2);
-        timeElement.type = 'time';
+    if (timeElement.classList.contains('clock-li-readonly')) {
+        timeElement.classList.remove('clock-li-readonly');
+        var hour = timeElement.value.split(':')[0].slice(0, 2);
+        var min = timeElement.value.split(':')[1].slice(1, 3);
         timeElement.value = hour + ':' + min;
         var editCmd = targetElement.querySelector('[name="editCmd"]');
         editCmd.src = '/icons/success.png';
+        $('.clockpicker').clockpicker();
     }
     else {
         var domain = domainElement.value;
@@ -240,9 +243,7 @@ function editRestrictionSite(e) {
         if (domain !== '' && time !== '') {
             var editCmd = targetElement.querySelector('[name="editCmd"]');
             editCmd.src = '/icons/edit.png';
-            timeElement.classList.add('readonly-input');
-            timeElement.readOnly = true;
-            timeElement.type = 'text';
+            timeElement.classList.add('clock-li-readonly');
             var resultTime = convertShortSummaryTimeToString(convertTimeToSummaryTime(time));
             timeElement.value = resultTime;
 

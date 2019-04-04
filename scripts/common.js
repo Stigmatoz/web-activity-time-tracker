@@ -89,7 +89,7 @@ function convertShortSummaryTimeToString(summaryTime) {
     hours = zeroAppend(hours);
     mins = zeroAppend(mins);
 
-    return hours + 'h ' + mins + 'm';
+    return hours + 'h : ' + mins + 'm';
 }
 
 function convertSummaryTimeToString(summaryTime) {
