@@ -116,8 +116,10 @@ class UI {
 
         var img = document.createElement('img');
         img.classList.add('favicon');
-        img.setAttribute('height', 15);
-        img.setAttribute('src', tab.favicon);
+        img.setAttribute('height', 17);
+        if (tab.favicon !== undefined || tab.favicon == null)
+            img.setAttribute('src', tab.favicon);
+        else img.setAttribute('src', '/icons/empty.png');
 
         var spanUrl = document.createElement('span');
         spanUrl.classList.add('span-url');
