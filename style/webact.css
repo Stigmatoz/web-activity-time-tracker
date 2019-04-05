@@ -9,7 +9,7 @@ body {
 
 .inline-flex{
     display: inline-flex;
-    height: 23px;
+    height: 27px;
 }
 
 .inline-flex:hover{
@@ -46,14 +46,12 @@ body {
 }
 
 .span-time{
-    margin-left: 10px;
-    width: 100px;
     font-weight: 500;
     text-align: right;
 }
 
 .favicon{
-    margin-right:5px;
+    margin:2px 7px 5px 3px;
 }
 
 hr {
