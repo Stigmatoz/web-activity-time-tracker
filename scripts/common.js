@@ -92,6 +92,17 @@ function convertShortSummaryTimeToString(summaryTime) {
     return hours + 'h : ' + mins + 'm';
 }
 
+function convertShortSummaryTimeToLongString(summaryTime) {
+    var hours = Math.floor(summaryTime / 3600);
+    var totalSeconds = summaryTime % 3600;
+    var mins = Math.floor(totalSeconds / 60);
+
+    hours = zeroAppend(hours);
+    mins = zeroAppend(mins);
+
+    return hours + ' hour ' + mins + ' minutes';
+}
+
 function convertSummaryTimeToString(summaryTime) {
     var days = Math.floor(summaryTime / 3600 / 24);
     var totalHours = summaryTime % (3600 * 24);
