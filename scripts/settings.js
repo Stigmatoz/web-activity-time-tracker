@@ -61,7 +61,7 @@ function loadSettings() {
         document.getElementById('rangeToDays').value = item;
     });
     storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) {
-        document.getElementById('viewTimeInBadge').setAttribute('checked', item);
+        document.getElementById('viewTimeInBadge').checked = item;
     });
     storage.getMemoryUse(STORAGE_TABS, function (integer) {
         document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';
