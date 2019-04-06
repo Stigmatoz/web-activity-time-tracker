@@ -8,6 +8,7 @@ var targetTabs;
 var currentTypeOfList;
 var today = new Date().toLocaleDateString();
 var setting_range_days;
+var restrictionList;
 
 document.addEventListener('DOMContentLoaded', function () {
     storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
@@ -39,7 +40,12 @@ firstInitPage();
 
 function firstInitPage() {
     currentTypeOfList = TypeListEnum.ToDay;
+    getLimitsListFromStorage();
     getDataFromStorage();
+}
+
+function getLimitsListFromStorage() {
+    storage.loadTabs(STORAGE_RESTRICTION_LIST, getLimitsListFromStorageCallback);
 }
 
 function getDataFromStorage() {
@@ -48,6 +54,12 @@ function getDataFromStorage() {
 
 function getDataFromStorageByDays() {
     storage.loadTabs(STORAGE_TABS, getTabsByDays);
+}
+
+function getLimitsListFromStorageCallback(items){
+    if (items !== undefined)
+        restrictionList = items;
+    else restrictionList = [];
 }
 
 function getTabsFromStorage(tabs) {
@@ -105,7 +117,7 @@ function getTabsFromStorage(tabs) {
             summaryTime = targetTabs[i].summaryTime;
         }
 
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime);
+        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList);
 
         if (i <= 8)
             addTabForChart(tabsForChart, targetTabs[i].url, summaryTime);
@@ -254,6 +266,6 @@ function getTabsFromStorageByDay(day, blockName) {
         var summaryTime;
         summaryTime = targetTabs[i].days.find(x => x.date == day).summary;
 
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, blockName + '_content');
+        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, TypeListEnum.ByDays, blockName + '_content');
     }
 }

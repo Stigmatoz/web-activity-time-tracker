@@ -110,7 +110,7 @@ class UI {
         this.getTableOfSite().appendChild(p);
     }
 
-    addLineToTableOfSite(tab, currentTab, summaryTime, blockName) {
+    addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, blockName) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
@@ -126,6 +126,26 @@ class UI {
         spanUrl.innerText = tab.url;
         if (tab.url == currentTab) {
             spanUrl.classList.add('span-active-url');
+        }
+
+        if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {
+            if (restrictionList !== undefined && restrictionList.length > 0) {
+                var item = restrictionList.find(x => isDomainEquals(x.domain, tab.url));
+                if (item !== undefined) {
+                    var divLimit = document.createElement('div');
+                    divLimit.classList.add('tooltip', 'inline-block');
+                    var limitIcon = document.createElement('img');
+                    limitIcon.height = 15;
+                    limitIcon.classList.add('margin-left-5', 'tooltip');
+                    limitIcon.src = '/icons/limit.png';
+                    var tooltip = document.createElement('span');
+                    tooltip.classList.add('tooltiptext');
+                    tooltip.innerText = "Dayly limit is " + convertShortSummaryTimeToLongString(item.time);
+                    divLimit.appendChild(limitIcon);
+                    divLimit.appendChild(tooltip);
+                    spanUrl.appendChild(divLimit);
+                }
+            }
         }
 
         var spanPercentage = document.createElement('span');
