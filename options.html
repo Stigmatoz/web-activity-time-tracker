@@ -17,17 +17,18 @@
       </div>
       <div id='nav' class="nav">
          <a id='settingsBtn' class="active">Settings</a>
+         <a id='restrictionsBtn'>Restrictions</a>
          <a id='aboutBtn'>About</a>
       </div>
       <div id='block'>
-         <div id="settingsBlock">
+         <div id='settingsBlock'>
             <label>
                <input type="checkbox" class="filled-in" id="viewTimeInBadge" checked="checked" />
                <span>Display time tracker in icon</span>
             </label>
             <div class="margin-top-10">
                <label>Stop tracking if no activity detected for: </label>
-               <div class="tooltip"><img src="/icons/information.svg" height="18"/>
+               <div class="tooltip"><img src="/icons/information.svg" height="18" />
                   <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
                </div>
                <div class="margin-top-10">
@@ -58,15 +59,15 @@
                </div>
                <div class="margin-top-10">
                   <label>Ignored list of domain: </label>
-                  <div class="tooltip"><img src="/icons/information.svg" height="18"/>
+                  <div class="tooltip"><img src="/icons/information.svg" height="18" />
                      <span class="tooltiptext">Activity for these domains not will tracked</span>
                   </div>
                   <div class="margin-top-10">
                      <ul id='blackList' class="listbox" size="7"></ul>
                   </div>
                   <div class="margin-top-10">
-                     <input type="text" id='addBlackSiteLbl'/>
-                     <input type="button" value="+" id='addBlackSiteBtn'/>
+                     <input type="text" placeholder="Enter site name..." id='addBlackSiteLbl' />
+                     <input type="button" value="+" id='addBlackSiteBtn' />
                   </div>
                </div>
                <div class="margin-top-10">
@@ -78,15 +79,31 @@
                </div>
             </div>
          </div>
+         <div id='restrictionsBlock' hidden>
+            <label>Access restrictions for websites: </label>
+            <div class="tooltip"><img src="/icons/information.svg" height="18" />
+               <span class="tooltiptext">Set the time you can spend on the site during the day. After this time, access to the site will be blocked.</span>
+            </div>
+            <div class="margin-top-10">
+               <ul id='restrictionsList' class="listbox" size="10"></ul>
+            </div>
+            <div class="margin-top-10">
+               <input type="text" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
+               <input type="time" id='addRestrictionTimeLbl' />
+               <input type="button" value="+" id='addRestrictionSiteBtn' />
+            </div>
+         </div>
          <div id='aboutBlock' hidden>
             <div><label id='version'></label></div>
             <div class="margin-top-20">
-               <label>If experiencing problems, having questions or suggestions, please fill out <a href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
+               <label>If experiencing problems, having questions or suggestions, please fill out <a
+                     href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
                      target="_blank">support
                      form</a>.</label>
             </div>
             <div class="margin-top-20">
-               <label>Do you enjoy using Web Activity Time Tracker? <a href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
+               <label>Do you enjoy using Web Activity Time Tracker? <a
+                     href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
                      target="_blank">Let me know!</a></label>
             </div>
          </div>

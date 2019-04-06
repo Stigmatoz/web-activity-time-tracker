@@ -3,7 +3,7 @@
     
         "name": "Web Activity Time Tracker",
         "short_name": "Web Activity",
-        "version": "0.7.4",
+        "version": "0.7.5",
         "minimum_chrome_version": "26",
 
         "description": "Track your activity in the browser.",

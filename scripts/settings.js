@@ -1,21 +1,18 @@
 var storage = new LocalStorage();
 var blackList = [];
+var restrictionList = [];
+var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'aboutBtn'];
+var blockList = ['settingsBlock', 'restrictionsBlock', 'aboutBlock'];
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
-        document.getElementById('settingsBtn').classList.add('active');
-        document.getElementById('aboutBtn').classList.remove('active');
-
-        document.getElementById('settingsBlock').hidden = false;
-        document.getElementById('aboutBlock').hidden = true;
+        setBlockEvent('settingsBtn', 'settingsBlock');
+    });
+    document.getElementById('restrictionsBtn').addEventListener('click', function () {
+        setBlockEvent('restrictionsBtn', 'restrictionsBlock');
     });
     document.getElementById('aboutBtn').addEventListener('click', function () {
-        document.getElementById('settingsBtn').classList.remove('active');
-        document.getElementById('aboutBtn').classList.add('active');
-
-        document.getElementById('settingsBlock').hidden = true;
-        document.getElementById('aboutBlock').hidden = false;
-
+        setBlockEvent('aboutBtn', 'aboutBlock');
         loadVersion();
     });
     document.getElementById('clearAllData').addEventListener('click', function () {
@@ -23,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('addBlackSiteBtn').addEventListener('click', function () {
         addNewBlackSiteClickHandler();
+    });
+    document.getElementById('addRestrictionSiteBtn').addEventListener('click', function () {
+        addNewRestrictionSiteClickHandler();
     });
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
         storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
@@ -36,6 +36,21 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 loadSettings();
+
+function setBlockEvent(btnName, blockName) {
+    blockBtnList.forEach(element => {
+        if (element === btnName){
+            document.getElementById(btnName).classList.add('active');
+        }
+        else document.getElementById(element).classList.remove('active');
+    });
+
+    blockList.forEach(element => {
+        if (element === blockName){
+            document.getElementById(blockName).hidden = false;
+        } else document.getElementById(element).hidden = true;
+    });
+}
 
 function loadSettings() {
     storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) {
@@ -56,7 +71,7 @@ function loadSettings() {
     });
 }
 
-function loadVersion(){
+function loadVersion() {
     var version = chrome.runtime.getManifest().version;
     document.getElementById('version').innerText = 'v' + version;
 }
@@ -92,6 +107,18 @@ function addNewBlackSiteClickHandler() {
     updateBlackList();
 }
 
+function addNewRestrictionSiteClickHandler(){
+    var newRestrictionSite = document.getElementById('addRestrictionSiteLbl').value;
+    if (newRestrictionSite !== '') {
+        addDomainToRestrictionListBox(newRestrictionSite);
+        if (restrictionList === undefined)
+            restrictionList = [];
+        restrictionList.push(newRestrictionSite);
+        document.getElementById('addRestrictionSiteLbl').value = '';
+    }
+    updateRestrictionList();
+}
+
 function addDomainToListBox(domain) {
     var li = document.createElement('li');
     li.innerText = domain;
@@ -104,6 +131,26 @@ function addDomainToListBox(domain) {
     document.getElementById('blackList').appendChild(li).appendChild(del);
 }
 
+function addDomainToRestrictionListBox(domain) {
+    var li = document.createElement('li');
+    li.innerText = domain;
+    var edit = document.createElement('img');
+    edit.height = 12;
+    edit.src = '/icons/delete.png';
+    edit.addEventListener('click', function (e) {
+        editRestrictionSite(e);
+    });
+    var del = document.createElement('img');
+    del.height = 12;
+    del.src = '/icons/delete.png';
+    del.addEventListener('click', function (e) {
+        deleteRestrictionSite(e);
+    });
+    var li = document.getElementById('restrictionsList').appendChild(li);
+    li.appendChild(del);
+    li.appendChild(edit);
+}
+
 function deleteBlackSite(e) {
     var targetElement = e.path[1];
     blackList.splice(blackList.indexOf(targetElement.innerText), 1);
@@ -111,6 +158,20 @@ function deleteBlackSite(e) {
     updateBlackList();
 }
 
+function deleteRestrictionSite(e) {
+    var targetElement = e.path[1];
+    restrictionList.splice(restrictionList.indexOf(targetElement.innerText), 1);
+    document.getElementById('restrictionsList').removeChild(targetElement);
+    updateRestrictionList();
+}
+
+function editRestrictionSite(e){
+
+}
+
 function updateBlackList() {
     storage.saveSettings(STORAGE_BLACK_LIST, blackList);
+}
+
+function updateRestrictionList() {
 }
