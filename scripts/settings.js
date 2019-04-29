@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('clearAllData').addEventListener('click', function () {
         clearAllData();
     });
+    document.getElementById('exportToCsv').addEventListener('click', function () {
+        exportToCSV();
+    });
     document.getElementById('addBlackSiteBtn').addEventListener('click', function () {
         addNewBlackSiteClickHandler();
     });
@@ -99,6 +102,29 @@ function viewRestrictionList(items) {
             addDomainToRestrictionListBox(items[i]);
         }
     }
+}
+
+function exportToCSV(){
+    storage.getSettings(STORAGE_TABS, function (item) {
+        toCsv(item);
+    });
+}
+
+function toCsv(tabsData){
+    var str = '';
+    for (var i = 0; i < tabsData.length; i++) {
+        var line = tabsData[i].url + ',' + convertSummaryTimeToString(tabsData[i].summaryTime);
+        str += line + '\r\n';
+    }
+    
+    var csvFile = new Blob([str], {type:"text/csv"});
+    var downloadLink;
+	downloadLink = document.createElement("a");
+	downloadLink.download = 'domains.csv';
+	downloadLink.href = window.URL.createObjectURL(csvFile);
+	downloadLink.style.display = "none";
+	document.body.appendChild(downloadLink);
+	downloadLink.click();
 }
 
 function clearAllData() {
