@@ -111,9 +111,9 @@ function exportToCSV(){
 }
 
 function toCsv(tabsData){
-    var str = '';
+    var str = 'domain,time(sec)\r\n';
     for (var i = 0; i < tabsData.length; i++) {
-        var line = tabsData[i].url + ',' + convertSummaryTimeToString(tabsData[i].summaryTime);
+        var line = tabsData[i].url + ',' + tabsData[i].summaryTime;
         str += line + '\r\n';
     }
     
