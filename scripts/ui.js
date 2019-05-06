@@ -56,8 +56,12 @@ class UI {
         document.getElementById(elementName).innerHTML = '<p class="no-data">No data</p>';
     }
 
-    fillEmptyBlockForDays() {
+    fillEmptyBlockForDaysIfInvalid() {
         document.getElementById('tableForDaysBlock').innerHTML = '<p class="no-data">Invalid date</p>';
+    }
+
+    fillEmptyBlockForDays() {
+        document.getElementById('tableForDaysBlock').innerHTML = '<p class="no-data">No data</p>';
     }
 
     addHrAfterChart() {

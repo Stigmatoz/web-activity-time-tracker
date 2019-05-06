@@ -1,12 +1,16 @@
 'use strict';
 
 class LocalStorage {
-    loadTabs(name, callback) {
+    loadTabs(name, callback, callbackIsUndefined) {
         chrome.storage.local.get(name, function (item) {
             if (item[name] !== undefined) {
                 var result = item[name];
                 if (result !== undefined)
                     callback(result);
+            }
+            else {
+                if (callbackIsUndefined !== undefined)
+                    callbackIsUndefined();
             }
         });
     }
@@ -29,7 +33,7 @@ class LocalStorage {
         });
     }
 
-    getMemoryUse(name, callback){
+    getMemoryUse(name, callback) {
         chrome.storage.local.getBytesInUse(name, callback);
     }
 };

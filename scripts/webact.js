@@ -49,7 +49,7 @@ function getLimitsListFromStorage() {
 }
 
 function getDataFromStorage() {
-    storage.loadTabs(STORAGE_TABS, getTabsFromStorage);
+    storage.loadTabs(STORAGE_TABS, getTabsFromStorage, fillEmptyBlock);
 }
 
 function getDataFromStorageByDays() {
@@ -60,6 +60,10 @@ function getLimitsListFromStorageCallback(items){
     if (items !== undefined)
         restrictionList = items;
     else restrictionList = [];
+}
+
+function fillEmptyBlock(){
+    ui.fillEmptyBlock('chart');
 }
 
 function getTabsFromStorage(tabs) {
@@ -209,6 +213,10 @@ function getFirstDay() {
 
 function getTabsByDays(tabs) {
     var range = ui.getDateRange();
+    if (tabs === undefined){
+        ui.fillEmptyBlockForDays();
+        return;
+    }
     if (range.from !== 'Invalid Date' && range.to !== 'Invalid Date') {
         var listOfDays = [];
         tabs.map(function (a) {
@@ -231,7 +239,7 @@ function getTabsByDays(tabs) {
         ui.fillListOfDays(listOfDays);
     }
     else {
-        ui.fillEmptyBlockForDays();
+        ui.fillEmptyBlockForDaysIfInvalid();
     }
 }
 
