@@ -37,7 +37,7 @@ function backgroundCheck() {
                 if (tab !== undefined) {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
-                        if (state === 'active') {
+                        if (state === 'active' || (state === 'idle' && checkDOM())) {
                             if (activity.isLimitExceeded(activeUrl, tab)) {
                                 setBlockPageToCurrent(activeUrl);
                             }
@@ -86,6 +86,21 @@ function setBlockPageToCurrent(activeUrl) {
     var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + activeUrl;
     chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
         chrome.tabs.update(tab.id, { url: blockUrl });
+    });
+}
+
+function isVideoPlayedOnPage() {
+    var videoElement = document.getElementsByTagName('video')[0];
+    if (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2)
+        return true;
+}
+
+function checkDOM(){
+    chrome.tabs.executeScript({
+        code: '(' + isVideoPlayedOnPage + ')();'
+    }, (results) => {
+        if (results !== undefined && results !== null && results[0] !== undefined)
+            return results[0];
     });
 }
 
