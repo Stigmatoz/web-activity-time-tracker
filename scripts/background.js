@@ -37,36 +37,10 @@ function backgroundCheck() {
                 if (tab !== undefined) {
                     activity.setCurrentActiveTab(tab.url);
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
-                        if (state === 'active' || (state === 'idle' && checkDOM())) {
-                            if (activity.isLimitExceeded(activeUrl, tab)) {
-                                setBlockPageToCurrent(activeUrl);
-                            }
-                            if (!activity.isInBlackList(activeUrl))
-                                tab.incSummaryTime();
-                            if (setting_view_in_badge === true) {
-                                if (activity.isInBlackList(activeUrl)) {
-                                    chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
-                                    chrome.browserAction.setBadgeText({
-                                        tabId: activeTab.id,
-                                        text: 'n/a'
-                                    });
-                                } else {
-                                    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
-                                    var today = new Date().toLocaleDateString();
-                                    var summary = tab.days.find(s => s.date === today).summary;
-                                    chrome.browserAction.setBadgeText({
-                                        tabId: activeTab.id,
-                                        text: String(convertSummaryTimeToBadgeString(summary))
-                                    });
-                                }
-                            } else {
-                                chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
-                                chrome.browserAction.setBadgeText({
-                                    tabId: activeTab.id,
-                                    text: ''
-                                });
-                            }
+                        if (state === 'active') {
+                            mainTRacker(activeUrl, tab, activeTab);
                         }
+                        else checkDOM(state, activeUrl, tab, activeTab);
                     });
                 } else {
                     if (activity.isInBlackList(activeUrl)) {
@@ -82,6 +56,37 @@ function backgroundCheck() {
     });
 }
 
+function mainTRacker(activeUrl, tab, activeTab) {
+    if (activity.isLimitExceeded(activeUrl, tab)) {
+        setBlockPageToCurrent(activeUrl);
+    }
+    if (!activity.isInBlackList(activeUrl))
+        tab.incSummaryTime();
+    if (setting_view_in_badge === true) {
+        if (activity.isInBlackList(activeUrl)) {
+            chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
+            chrome.browserAction.setBadgeText({
+                tabId: activeTab.id,
+                text: 'n/a'
+            });
+        } else {
+            chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
+            var today = new Date().toLocaleDateString();
+            var summary = tab.days.find(s => s.date === today).summary;
+            chrome.browserAction.setBadgeText({
+                tabId: activeTab.id,
+                text: String(convertSummaryTimeToBadgeString(summary))
+            });
+        }
+    } else {
+        chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
+        chrome.browserAction.setBadgeText({
+            tabId: activeTab.id,
+            text: ''
+        });
+    }
+}
+
 function setBlockPageToCurrent(activeUrl) {
     var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + activeUrl;
     chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
@@ -91,17 +96,19 @@ function setBlockPageToCurrent(activeUrl) {
 
 function isVideoPlayedOnPage() {
     var videoElement = document.getElementsByTagName('video')[0];
-    if (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2)
+    if (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2) {
         return true;
+    }
+    else return false;
 }
 
-function checkDOM(){
-    chrome.tabs.executeScript({
-        code: '(' + isVideoPlayedOnPage + ')();'
-    }, (results) => {
-        if (results !== undefined && results !== null && results[0] !== undefined)
-            return results[0];
-    });
+function checkDOM(state, activeUrl, tab, activeTab) {
+    if (state === 'idle') {
+        chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
+            if (results !== undefined && results[0] !== undefined && results[0] === true)
+                mainTRacker(activeUrl, tab, activeTab);
+        });
+    }
 }
 
 function backgroundUpdateStorage() {
