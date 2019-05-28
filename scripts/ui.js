@@ -118,12 +118,14 @@ class UI {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
+        var divForImg = document.createElement('div');
         var img = document.createElement('img');
-        img.classList.add('favicon');
         img.setAttribute('height', 17);
         if (tab.favicon !== undefined || tab.favicon == null)
             img.setAttribute('src', tab.favicon);
         else img.setAttribute('src', '/icons/empty.png');
+        divForImg.classList.add('block-img');
+        divForImg.appendChild(img);
 
         var spanUrl = document.createElement('span');
         spanUrl.classList.add('span-url');
@@ -160,7 +162,7 @@ class UI {
         spanTime.classList.add('span-time');
         spanTime.innerText = convertSummaryTimeToString(summaryTime);
 
-        div.appendChild(img);
+        div.appendChild(divForImg);
         div.appendChild(spanUrl);
         div.appendChild(spanPercentage);
         div.appendChild(spanTime);
