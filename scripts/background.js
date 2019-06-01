@@ -36,6 +36,7 @@ function backgroundCheck() {
 
                 if (tab !== undefined) {
                     activity.setCurrentActiveTab(tab.url);
+
                     chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
                         if (state === 'active') {
                             mainTRacker(activeUrl, tab, activeTab);
@@ -104,9 +105,12 @@ function isVideoPlayedOnPage() {
 
 function checkDOM(state, activeUrl, tab, activeTab) {
     if (state === 'idle') {
-        chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
-            if (results !== undefined && results[0] !== undefined && results[0] === true)
-                mainTRacker(activeUrl, tab, activeTab);
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, { action: 'CHECK_VIDEO' }, function (response) {
+                if (response !== undefined && response.value !== undefined && response.value === true) {
+                    mainTRacker(activeUrl, tab, activeTab);
+                }
+            });
         });
     }
 }

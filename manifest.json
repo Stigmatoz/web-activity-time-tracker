@@ -3,7 +3,7 @@
     
         "name": "Web Activity Time Tracker",
         "short_name": "Web Activity",
-        "version": "0.8.0",
+        "version": "0.8.1",
         "minimum_chrome_version": "26",
 
         "description": "Track your activity in the browser.",
@@ -23,10 +23,16 @@
             "idle",
             "chrome://favicon/*",
             "webNavigation",
-            "unlimitedStorage",
-            "<all_urls>"
+            "unlimitedStorage"
         ],
         "offline_enabled": true,
+        "content_scripts": [
+            {
+               "matches": ["http://*/*", "https://*/*"],
+               "js": ["scripts/contentScript.js"],
+               "run_at": "document_end"
+            }
+         ],
         "background": {
             "scripts": ["scripts/common.js", 
                         "scripts/storage.js", 
