@@ -104,11 +104,22 @@ function isVideoPlayedOnPage() {
 
 function checkDOM(state, activeUrl, tab, activeTab) {
     if (state === 'idle') {
-        chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
-            if (results !== undefined && results[0] !== undefined && results[0] === true)
-                mainTRacker(activeUrl, tab, activeTab);
-        });
+        checkPermissions(mainTRacker, activeUrl, tab, activeTab);
     }
+}
+
+function checkPermissions(callback, activeUrl, tab, activeTab){
+    chrome.permissions.contains({
+        permissions: ['tabs'],
+        origins: ["http://*/*", "https://*/*"]
+      }, function(result) {
+        if (result) {
+            chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
+                if (results !== undefined && results[0] !== undefined && results[0] === true)
+                callback(activeUrl, tab, activeTab);
+            });
+        }
+      });
 }
 
 function backgroundUpdateStorage() {
