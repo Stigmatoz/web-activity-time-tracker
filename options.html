@@ -82,6 +82,20 @@
                   <input type="button" value="Export to CSV" id='exportToCsv'>
                </div>
                <div class="margin-top-10">
+                  <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser (mouse
+                     or keyboard).
+                     In order for the extension to also track when you watch a video, you must grant permissions to
+                     access the sites.
+                     It is necessary that extension will get access to DOM (Document Object Model).</label>
+                  <input class="margin-top-10" type="button" value="Grant permission" id='grantPermission'>
+                  <div class="inline-block">
+                     <div id='permissionSuccessedBlock' hidden>
+                        <img src="/icons/success.png" height="18" />
+                        <label>Permissions have been granted</label>
+                     </div>
+                  </div>
+               </div>
+               <div class="margin-top-10">
                   <label>Data in memory use </label><label id='memoryUse'></label>
                </div>
                <div class="margin-top-10"><input type="button" value="Clear all data" id='clearAllData'></div>
@@ -132,9 +146,11 @@
                      <input type="hidden" name="business" value="JBQEMTYGHGJVS" />
                      <input type="hidden" name="item_name" value="Web Activity Time Tracker" />
                      <input type="hidden" name="currency_code" value="USD" />
-                     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0"
+                        name="submit" title="PayPal - The safer, easier way to pay online!"
+                        alt="Donate with PayPal button" />
                      <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-                     </form>
+                  </form>
                </div>
             </div>
          </div>

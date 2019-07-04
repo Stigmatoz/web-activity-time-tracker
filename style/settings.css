@@ -181,6 +181,13 @@ input[type="button"]:hover {
     text-decoration: none;
   }
 
+  
+  input[type="button"][disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
 .margin-top-10{
       margin-top: 10px;
   }
@@ -235,6 +242,10 @@ input[type="button"]:hover {
   .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+  }
+
+  .hidden{
+      display: none;
   }
 
   .notify{

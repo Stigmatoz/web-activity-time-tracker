@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('rangeToDays').addEventListener('change', function () {
         storage.saveSettings(SETTINGS_INTERVAL_RANGE, this.value);
     });
+    document.getElementById('grantPermission').addEventListener('click', function () {
+        grantPermission();
+    });
     $('.clockpicker').clockpicker();
 
     loadSettings();
@@ -81,6 +84,18 @@ function loadSettings() {
             restrictionList = [];
         viewRestrictionList(items);
     });
+    checkPermissions();
+}
+
+function checkPermissions() {
+    chrome.permissions.contains({
+        permissions: ['tabs'],
+        origins: ["http://*/*", "https://*/*"]
+    }, function (result) {
+        if (result) {
+            setUIForAnyPermission();
+        }
+    });
 }
 
 function loadVersion() {
@@ -96,6 +111,23 @@ function viewBlackList(items) {
     }
 }
 
+function grantPermission() {
+    chrome.permissions.request({
+        permissions: ['tabs'],
+        origins: ["http://*/*", "https://*/*"]
+    }, function (granted) {
+        // The callback argument will be true if the user granted the permissions.
+        if (granted) {
+            setUIForAnyPermission();
+        }
+    });
+}
+
+function setUIForAnyPermission() {
+    document.getElementById('permissionSuccessedBlock').hidden = false;
+    document.getElementById('grantPermission').setAttribute('disabled', 'true');
+}
+
 function viewRestrictionList(items) {
     if (items !== undefined) {
         for (var i = 0; i < items.length; i++) {
@@ -104,27 +136,27 @@ function viewRestrictionList(items) {
     }
 }
 
-function exportToCSV(){
+function exportToCSV() {
     storage.getSettings(STORAGE_TABS, function (item) {
         toCsv(item);
     });
 }
 
-function toCsv(tabsData){
+function toCsv(tabsData) {
     var str = 'domain,time(sec)\r\n';
     for (var i = 0; i < tabsData.length; i++) {
         var line = tabsData[i].url + ',' + tabsData[i].summaryTime;
         str += line + '\r\n';
     }
-    
-    var csvFile = new Blob([str], {type:"text/csv"});
+
+    var csvFile = new Blob([str], { type: "text/csv" });
     var downloadLink;
-	downloadLink = document.createElement("a");
-	downloadLink.download = 'domains.csv';
-	downloadLink.href = window.URL.createObjectURL(csvFile);
-	downloadLink.style.display = "none";
-	document.body.appendChild(downloadLink);
-	downloadLink.click();
+    downloadLink = document.createElement("a");
+    downloadLink.download = 'domains.csv';
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
 }
 
 function clearAllData() {
