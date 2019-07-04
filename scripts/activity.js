@@ -6,6 +6,10 @@ class Activity {
             if (tab.id && (tab.id != 0)) {
                 tabs = tabs || [];
                 var domain = this.extractHostname(tab.url);
+                var isDifferentUrl = false;
+                if (currentTab !== tab.url) {
+                    isDifferentUrl = true;
+                }
                 this.setCurrentActiveTab(domain);
                 if (this.isNewUrl(domain) && !this.isInBlackList(domain)) {
                     var favicon = tab.favIconUrl;
@@ -14,6 +18,12 @@ class Activity {
                     }
                     var newTab = new Tab(domain, favicon);
                     tabs.push(newTab);
+                }
+
+                if (isDifferentUrl) {
+                    var tabUrl = this.getTab(domain);
+                    if (tabUrl !== undefined)
+                        tabUrl.incCounter();
                 }
             }
         }

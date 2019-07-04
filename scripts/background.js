@@ -60,8 +60,9 @@ function mainTRacker(activeUrl, tab, activeTab) {
     if (activity.isLimitExceeded(activeUrl, tab)) {
         setBlockPageToCurrent(activeUrl);
     }
-    if (!activity.isInBlackList(activeUrl))
+    if (!activity.isInBlackList(activeUrl)) {
         tab.incSummaryTime();
+    }
     if (setting_view_in_badge === true) {
         if (activity.isInBlackList(activeUrl)) {
             chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
@@ -108,18 +109,18 @@ function checkDOM(state, activeUrl, tab, activeTab) {
     }
 }
 
-function checkPermissions(callback, activeUrl, tab, activeTab){
+function checkPermissions(callback, activeUrl, tab, activeTab) {
     chrome.permissions.contains({
         permissions: ['tabs'],
         origins: ["http://*/*", "https://*/*"]
-      }, function(result) {
+    }, function (result) {
         if (result) {
             chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
                 if (results !== undefined && results[0] !== undefined && results[0] === true)
-                callback(activeUrl, tab, activeTab);
+                    callback(activeUrl, tab, activeTab);
             });
         }
-      });
+    });
 }
 
 function backgroundUpdateStorage() {
@@ -168,7 +169,7 @@ function loadTabs() {
     storage.loadTabs(STORAGE_TABS, function (items) {
         tabs = [];
         for (var i = 0; i < items.length; i++) {
-            tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime));
+            tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime, items[i].counter));
         }
     });
 }
