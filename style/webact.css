@@ -18,7 +18,7 @@ body {
 }
 
 .span-url{
-    width: 312px;
+    width: 282px;
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 13px;
@@ -26,7 +26,8 @@ body {
 }
 
 .span-active-url{
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 650;
 }
 
 .span-total{
@@ -37,6 +38,19 @@ body {
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
+}
+
+.span-visits{
+    width: 30px;
+    /* padding: 0 10px 0 10px; */
+    color: rgb(137, 154, 190);
+    font-size: 11px;
+}
+
+.visits{
+    text-decoration: underline;
+    text-decoration-style: solid;
+    /* border-bottom: 1px dotted #ccc; */
 }
 
 .span-percentage{
@@ -267,6 +281,11 @@ p.table-header{
     /* Fade in tooltip */
     opacity: 0;
     transition: opacity 0.3s;
+  }
+
+  .visits.tooltip .tooltiptext{
+    width: 120px;
+    transform: translateX(-50%) translateY(-120%);
   }
   
   /* Show the tooltip text when you mouse over the tooltip container */

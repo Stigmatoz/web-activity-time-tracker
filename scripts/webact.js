@@ -124,7 +124,7 @@ function getTabsFromStorage(tabs) {
         ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList);
 
         if (i <= 8)
-            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime);
+            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, targetTabs[i].counter);
         else addTabOthersForChart(tabsForChart, summaryTime);
     }
 
@@ -166,12 +166,13 @@ function getCurrentTab() {
     return chrome.extension.getBackgroundPage().currentTab;
 }
 
-function addTabForChart(tabsForChart, url, time) {
+function addTabForChart(tabsForChart, url, time, counter) {
     tabsForChart.push(
         {
             'url': url,
             'percentage': getPercentageForChart(time),
-            'summary': time
+            'summary': time,
+            'visits': counter
         }
     );
 }

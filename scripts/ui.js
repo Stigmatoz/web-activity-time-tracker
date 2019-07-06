@@ -118,6 +118,10 @@ class UI {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
+        if (tab.url == currentTab) {
+            div.classList.add('span-active-url');
+        }
+
         var divForImg = document.createElement('div');
         var img = document.createElement('img');
         img.setAttribute('height', 17);
@@ -130,9 +134,6 @@ class UI {
         var spanUrl = document.createElement('span');
         spanUrl.classList.add('span-url');
         spanUrl.innerText = tab.url;
-        if (tab.url == currentTab) {
-            spanUrl.classList.add('span-active-url');
-        }
 
         if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {
             if (restrictionList !== undefined && restrictionList.length > 0) {
@@ -154,6 +155,16 @@ class UI {
             }
         }
 
+        var spanVisits = document.createElement('span');
+        spanVisits.classList.add('span-visits', 'tooltip', 'visits');
+        spanVisits.innerText = tab.counter !== undefined ? tab.counter : 0;
+
+        var visitsTooltip = document.createElement('span');
+        visitsTooltip.classList.add('tooltiptext');
+        visitsTooltip.innerText = 'Count of visits';
+
+        spanVisits.appendChild(visitsTooltip);
+
         var spanPercentage = document.createElement('span');
         spanPercentage.classList.add('span-percentage');
         spanPercentage.innerText = getPercentage(summaryTime);
@@ -164,6 +175,7 @@ class UI {
 
         div.appendChild(divForImg);
         div.appendChild(spanUrl);
+        div.appendChild(spanVisits);
         div.appendChild(spanPercentage);
         div.appendChild(spanTime);
         if (blockName !== undefined)

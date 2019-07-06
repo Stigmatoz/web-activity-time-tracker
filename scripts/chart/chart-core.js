@@ -144,6 +144,8 @@ function donutChart() {
                     var value = (!isNaN(parseFloat(data.data[key]))) ? percentFormat(data.data[key]) : data.data[key];
                     if (key === 'summary')
                         value = convertSummaryTimeToString(data.data[key]);
+                    if (key === 'visits' && data.data[key] !== undefined)
+                        value = data.data[key] + ' visits';
                     var className = '';
                     if (key === 'percentage')
                         className = 'class="percentageValue"';
