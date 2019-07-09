@@ -76,21 +76,25 @@ function getTabsFromStorage(tabs) {
         return;
     }
 
+    var counterOfSite;
     if (currentTypeOfList === TypeListEnum.All) {
         targetTabs = tabs.sort(function (a, b) {
             return b.summaryTime - a.summaryTime;
         });
 
-        if (targetTabs.length > 0){
+        if (targetTabs.length > 0) {
             totalTime = getTotalTime(targetTabs);
         }
-        else{
+        else {
             ui.fillEmptyBlock('chart');
             return;
         }
+
+        counterOfSite = tabs.length;
     }
     if (currentTypeOfList === TypeListEnum.ToDay) {
         targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
+        counterOfSite = targetTabs.length;
         if (targetTabs.length > 0) {
             targetTabs = targetTabs.sort(function (a, b) {
                 return b.days.find(s => s.date === today).summary - a.days.find(s => s.date === today).summary;
@@ -105,9 +109,9 @@ function getTabsFromStorage(tabs) {
     }
 
     if (currentTypeOfList === TypeListEnum.All)
-        ui.addTableHeader(currentTypeOfList, getFirstDay());
+        ui.addTableHeader(currentTypeOfList, counterOfSite, getFirstDay());
     if (currentTypeOfList === TypeListEnum.ToDay)
-        ui.addTableHeader(currentTypeOfList);
+        ui.addTableHeader(currentTypeOfList, counterOfSite);
 
     var currentTab = getCurrentTab();
 
@@ -277,7 +281,7 @@ function getTabsFromStorageByDay(day, blockName) {
     for (var i = 0; i < targetTabs.length; i++) {
         var summaryTime, counter;
         summaryTime = targetTabs[i].days.find(x => x.date == day).summary;
-        counter = targetTabs[i].days.find(x => x.date == today).counter;
+        counter = targetTabs[i].days.find(x => x.date == day).counter;
 
         ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, TypeListEnum.ByDays, counter, blockName + '_content');
     }

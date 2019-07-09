@@ -98,16 +98,16 @@ class UI {
         ui.addHrAfterChart();
     }
 
-    addTableHeader(currentTypeOfList, totalDays) {
+    addTableHeader(currentTypeOfList, counterOfSite, totalDays) {
         var p = document.createElement('p');
         p.classList.add('table-header');
         if (currentTypeOfList === TypeListEnum.ToDay)
-            p.innerHTML = 'Today';
+            p.innerHTML = 'Today (' + counterOfSite + ' sites)';
         if (currentTypeOfList === TypeListEnum.All && totalDays !== undefined) {
             if (totalDays.countOfDays > 0) {
-                p.innerHTML = 'Aggregate data since ' + totalDays.minDate + ' (' + totalDays.countOfDays + ' days)';
+                p.innerHTML = 'Aggregate data since ' + totalDays.minDate + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites)';
             } else {
-                p.innerHTML = 'Aggregate data since ' + today;
+                p.innerHTML = 'Aggregate data since ' + today + ' ('  + counterOfSite + ' sites)';
             }
         }
 
