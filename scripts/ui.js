@@ -184,6 +184,24 @@ class UI {
             this.getTableOfSite().appendChild(div);
     }
 
+    addExpander() {
+        if (document.getElementById('expander') === null) {
+            var div = document.createElement('div');
+            div.id = 'expander';
+            div.innerText = 'Show all';
+            div.classList.add('expander');
+            div.addEventListener('click', function () {
+                ui.expand();
+            });
+            this.getTableOfSite().appendChild(div);
+        }
+    }
+
+    expand(){
+        getTabsForExpander();
+        this.getTableOfSite().removeChild(document.getElementById('expander'));
+    }
+
     addBlockForCalendar(range) {
         var div = document.getElementById('byDays');
 

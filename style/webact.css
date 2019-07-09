@@ -299,3 +299,12 @@ p.table-header{
       height: 17px;
       margin: 2px 7px 5px 3px;
   }
+
+  .expander{
+    background-color: rgb(231, 227, 227);
+    height: 20px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }

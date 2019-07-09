@@ -56,13 +56,13 @@ function getDataFromStorageByDays() {
     storage.loadTabs(STORAGE_TABS, getTabsByDays);
 }
 
-function getLimitsListFromStorageCallback(items){
+function getLimitsListFromStorageCallback(items) {
     if (items !== undefined)
         restrictionList = items;
     else restrictionList = [];
 }
 
-function fillEmptyBlock(){
+function fillEmptyBlock() {
     ui.fillEmptyBlock('chart');
 }
 
@@ -121,14 +121,18 @@ function getTabsFromStorage(tabs) {
         var counter;
         if (currentTypeOfList === TypeListEnum.ToDay) {
             summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
-            counter = targetTabs[i].days.find(x => x.date == today).counter;
+            if (targetTabs[i].days.find(x => x.date == today))
+                counter = targetTabs[i].days.find(x => x.date == today).counter;
         }
         if (currentTypeOfList === TypeListEnum.All) {
             summaryTime = targetTabs[i].summaryTime;
             counter = targetTabs[i].counter;
         }
 
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
+        if (currentTypeOfList === TypeListEnum.ToDay || (currentTypeOfList === TypeListEnum.All && i <= 30))
+            ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
+        else
+            ui.addExpander();
 
         if (i <= 8)
             addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, counter);
@@ -139,6 +143,41 @@ function getTabsFromStorage(tabs) {
     ui.createTotalBlock(totalTime);
     ui.drawChart(tabsForChart);
     ui.setActiveTooltipe(currentTab);
+}
+
+function getTabsForExpander() {
+    storage.loadTabs(STORAGE_TABS, getTabsFromStorageForExpander);
+}
+
+function getTabsFromStorageForExpander(tabs) {
+    tabsFromStorage = tabs;
+    targetTabs = [];
+
+    targetTabs = tabs.sort(function (a, b) {
+        return b.summaryTime - a.summaryTime;
+    });
+
+    var currentTab = getCurrentTab();
+
+    for (var i = 31; i < targetTabs.length; i++) {
+        var summaryTime;
+        var counter;
+        if (currentTypeOfList === TypeListEnum.ToDay) {
+            summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
+            if (targetTabs[i].days.find(x => x.date == today))
+                counter = targetTabs[i].days.find(x => x.date == today).counter;
+        }
+        if (currentTypeOfList === TypeListEnum.All) {
+            summaryTime = targetTabs[i].summaryTime;
+            counter = targetTabs[i].counter;
+        }
+
+        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
+    }
+
+    var table = ui.getTableOfSite();
+    table.removeChild(table.getElementsByTagName('hr')[0]);
+    ui.addHrAfterTableOfSite();
 }
 
 function getTotalTime(tabs) {
@@ -221,7 +260,7 @@ function getFirstDay() {
 
 function getTabsByDays(tabs) {
     var range = ui.getDateRange();
-    if (tabs === undefined){
+    if (tabs === undefined) {
         ui.fillEmptyBlockForDays();
         return;
     }
