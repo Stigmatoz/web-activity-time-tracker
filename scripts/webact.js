@@ -114,17 +114,20 @@ function getTabsFromStorage(tabs) {
     var tabsForChart = [];
     for (var i = 0; i < targetTabs.length; i++) {
         var summaryTime;
+        var counter;
         if (currentTypeOfList === TypeListEnum.ToDay) {
             summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
+            counter = targetTabs[i].days.find(x => x.date == today).counter;
         }
         if (currentTypeOfList === TypeListEnum.All) {
             summaryTime = targetTabs[i].summaryTime;
+            counter = targetTabs[i].counter;
         }
 
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList);
+        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
 
         if (i <= 8)
-            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, targetTabs[i].counter);
+            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, counter);
         else addTabOthersForChart(tabsForChart, summaryTime);
     }
 
@@ -272,9 +275,10 @@ function getTabsFromStorageByDay(day, blockName) {
     content.id = blockName + '_content';
     document.getElementById(blockName).appendChild(content);
     for (var i = 0; i < targetTabs.length; i++) {
-        var summaryTime;
+        var summaryTime, counter;
         summaryTime = targetTabs[i].days.find(x => x.date == day).summary;
+        counter = targetTabs[i].days.find(x => x.date == today).counter;
 
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, TypeListEnum.ByDays, blockName + '_content');
+        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, TypeListEnum.ByDays, counter, blockName + '_content');
     }
 }

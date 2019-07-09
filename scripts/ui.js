@@ -114,7 +114,7 @@ class UI {
         this.getTableOfSite().appendChild(p);
     }
 
-    addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, blockName) {
+    addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, counter, blockName) {
         var div = document.createElement('div');
         div.classList.add('inline-flex');
 
@@ -157,7 +157,7 @@ class UI {
 
         var spanVisits = document.createElement('span');
         spanVisits.classList.add('span-visits', 'tooltip', 'visits');
-        spanVisits.innerText = tab.counter !== undefined ? tab.counter : 0;
+        spanVisits.innerText = counter !== undefined ? counter : 0;
 
         var visitsTooltip = document.createElement('span');
         visitsTooltip.classList.add('tooltiptext');
