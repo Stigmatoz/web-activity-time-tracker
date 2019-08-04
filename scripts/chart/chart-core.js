@@ -126,9 +126,9 @@ function donutChart() {
                 });
 
                 // remove the tooltip when mouse leaves the slice/label
-                selection.on('mouseout', function () {
-                    d3.selectAll('.toolCircle').remove();
-                });
+                // selection.on('mouseout', function () {
+                //     d3.selectAll('.toolCircle').remove();
+                // });
             }
 
             // function to create the HTML string for the tool tip. Loops through each key in data object

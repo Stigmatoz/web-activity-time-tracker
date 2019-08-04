@@ -2,11 +2,11 @@
         "manifest_version": 2,
     
         "name": "Web Activity Time Tracker",
-        "short_name": "Web Activity",
-        "version": "0.8.4",
+        "short_name": "Web Time Tracker",
+        "version": "0.8.5",
         "minimum_chrome_version": "26",
 
-        "description": "Track your activity in the browser.",
+        "description": "Track and limit time your activity in the browser.",
 
         "options_page": "options.html",
     
