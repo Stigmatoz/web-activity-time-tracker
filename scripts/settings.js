@@ -114,7 +114,7 @@ function viewBlackList(items) {
 function grantPermission() {
     chrome.permissions.request({
         permissions: ['tabs'],
-        origins: ["http://*/*", "https://*/*"]
+        origins: ["https://www.youtube.com/*"]
     }, function (granted) {
         // The callback argument will be true if the user granted the permissions.
         if (granted) {
