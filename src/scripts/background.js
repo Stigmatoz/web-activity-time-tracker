@@ -163,6 +163,8 @@ function addListener() {
             checkSettingsImEmpty();
         }
     });
+
+    chrome.runtime.setUninstallURL("https://docs.google.com/forms/d/e/1FAIpQLSdImHtvey6sg5mzsQwWfAQscgZOOV52blSf9HkywSXJhuQQHg/viewform");
 }
 
 function loadTabs() {
