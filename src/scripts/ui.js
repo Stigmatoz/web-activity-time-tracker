@@ -107,7 +107,7 @@ class UI {
             if (totalDays.countOfDays > 0) {
                 p.innerHTML = 'Aggregate data since ' + totalDays.minDate + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites)';
             } else {
-                p.innerHTML = 'Aggregate data since ' + today + ' ('  + counterOfSite + ' sites)';
+                p.innerHTML = 'Aggregate data since ' + today + ' (' + counterOfSite + ' sites)';
             }
         }
 
@@ -116,6 +116,14 @@ class UI {
 
     addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, counter, blockName) {
         var div = document.createElement('div');
+        div.addEventListener('mouseenter', function () {
+            if (document.getElementById('chart').innerHTML !== '') {
+                var item = document.getElementById(tab.url);
+                if (item !== null)
+                    item.dispatchEvent(new Event('mouseenter'));
+                else document.getElementById('Others').dispatchEvent(new Event('mouseenter'));
+            }
+        });
         div.classList.add('inline-flex');
 
         if (tab.url == currentTab) {
@@ -197,7 +205,7 @@ class UI {
         }
     }
 
-    expand(){
+    expand() {
         getTabsForExpander();
         this.getTableOfSite().removeChild(document.getElementById('expander'));
     }
