@@ -266,16 +266,16 @@ function getTabsByDays(tabs) {
     }
     if (range.from !== 'Invalid Date' && range.to !== 'Invalid Date') {
         var listOfDays = [];
-        tabs.map(function (a) {
-            return a.days.map(function (a) {
-                var item = listOfDays.find(x => x.date == a.date);
+        tabs.forEach(tab => {
+            return tab.days.forEach(day => {
+                var item = listOfDays.find(x => x.date == day.date);
                 if (item !== undefined) {
-                    return item.total += a.summary;
+                    return item.total += day.summary;
                 }
-                if (item === undefined && isDateInRange(a.date, range))
+                if (item === undefined && isDateInRange(day.date, range))
                     return listOfDays.push({
-                        'date': a.date,
-                        'total': a.summary
+                        'date': day.date,
+                        'total': day.summary
                     });
             });
         });
@@ -283,7 +283,13 @@ function getTabsByDays(tabs) {
             return convertToDate(a.date) - convertToDate(b.date);
         });
 
-        ui.fillListOfDays(listOfDays);
+        var getDaysArray = function(start, end) {
+            for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+                arr.push(dt.toLocaleDateString());
+            }
+            return arr;
+        };
+        ui.fillListOfDays(listOfDays, getDaysArray(getValueFromArrayRange(range.from), getValueFromArrayRange(range.to)));
     }
     else {
         ui.fillEmptyBlockForDaysIfInvalid();

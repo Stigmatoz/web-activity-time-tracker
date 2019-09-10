@@ -98,6 +98,11 @@ class UI {
         ui.addHrAfterChart();
     }
 
+    drawBarChart(days) {
+        d3.select('#barChart').datum(days);
+        barChart(days);
+    }
+
     addTableHeader(currentTypeOfList, counterOfSite, totalDays) {
         var p = document.createElement('p');
         p.classList.add('table-header');
@@ -212,6 +217,8 @@ class UI {
 
     addBlockForCalendar(range) {
         var div = document.getElementById('byDays');
+        var barChart = document.createElement('div');
+        barChart.id = 'barChart';
 
         var from = document.createElement('span');
         from.innerHTML = 'From';
@@ -234,6 +241,7 @@ class UI {
         var tableForDaysBlock = document.createElement('div');
         tableForDaysBlock.id = 'tableForDaysBlock';
 
+        div.appendChild(barChart);
         div.appendChild(from);
         div.appendChild(calendarFirst);
         div.appendChild(to);
@@ -257,10 +265,14 @@ class UI {
         };
     }
 
-    fillListOfDays(days) {
+    fillListOfDays(days, allDays) {
         var parent = document.getElementById('tableForDaysBlock');
         parent.innerHTML = null;
+        document.getElementById('barChart').innerHTML = null;
         if (days.length > 0) {
+            var daysForBarChart = this.fillDaysForBarChart(days, allDays);
+            this.drawBarChart(daysForBarChart);
+
             var header = document.createElement('div');
             header.classList.add('table-header');
 
@@ -314,5 +326,24 @@ class UI {
         } else {
             this.fillEmptyBlock('tableForDaysBlock');
         }
+    }
+
+    fillDaysForBarChart(days, allDays) {
+        var resultList = [];
+        allDays.forEach(element => {
+            var day = days.find(x => x.date == element);
+            if (day !== undefined){
+                resultList.push({
+                    'date': day.date,
+                    'total': day.total
+                });
+            }
+            else resultList.push({
+                'date': element,
+                'total': 0
+            });
+        });
+        
+        return resultList;
     }
 }
