@@ -87,3 +87,7 @@ tspan{
   top: 100%;
   left: 0;
 }
+
+.red-label{
+  color:red;
+}

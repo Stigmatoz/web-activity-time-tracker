@@ -251,7 +251,10 @@ function barChart(data) {
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function (d) {
-            return "<strong>" + convertShortSummaryTimeToLongString(d.total) + "</strong>";
+            if (data.length > 9)
+                return "<strong><span class='red-label'>" + d.date + "</span></strong></br><strong>" + convertShortSummaryTimeToString(d.total) + "</strong>";
+            else
+                return "<strong>" + convertShortSummaryTimeToString(d.total) + "</strong>";
         });
 
     svg.call(tip);
@@ -276,4 +279,7 @@ function barChart(data) {
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
+
+    if (data.length > 9)
+        document.querySelectorAll('#barChart g.tick ').forEach(element => { element.remove() });
 }
