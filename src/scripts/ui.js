@@ -124,9 +124,23 @@ class UI {
         div.addEventListener('mouseenter', function () {
             if (document.getElementById('chart').innerHTML !== '') {
                 var item = document.getElementById(tab.url);
-                if (item !== null)
+                if (item !== null) {
                     item.dispatchEvent(new Event('mouseenter'));
-                else document.getElementById('Others').dispatchEvent(new Event('mouseenter'));
+                    item.classList.add('mouse-over');
+                }
+                else {
+                    document.getElementById('Others').dispatchEvent(new Event('mouseenter'));
+                    document.getElementById('Others').classList.add('mouse-over');
+                }
+            }
+        });
+        div.addEventListener('mouseout', function () {
+            if (document.getElementById('chart').innerHTML !== '') {
+                var item = document.getElementById(tab.url);
+                if (item !== null) {
+                    item.classList.remove('mouse-over');
+                }
+                else document.getElementById('Others').classList.remove('mouse-over');
             }
         });
         div.classList.add('inline-flex');
@@ -332,7 +346,7 @@ class UI {
         var resultList = [];
         allDays.forEach(element => {
             var day = days.find(x => x.date == element);
-            if (day !== undefined){
+            if (day !== undefined) {
                 resultList.push({
                     'date': day.date,
                     'total': day.total
@@ -343,7 +357,7 @@ class UI {
                 'total': 0
             });
         });
-        
+
         return resultList;
     }
 }
