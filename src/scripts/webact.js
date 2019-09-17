@@ -280,16 +280,19 @@ function getTabsByDays(tabs) {
             });
         });
         listOfDays = listOfDays.sort(function (a, b) {
-            return convertToDate(a.date) - convertToDate(b.date);
+            return new Date(a.date) - new Date(b.date);
         });
 
         var getDaysArray = function(start, end) {
-            for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
-                arr.push(dt.toLocaleDateString());
+            let first = new Date(start);
+            let second = new Date(end);
+            var arr = [];
+            for (let i = first; i <= second; i = new Date(i.setDate(i.getDate() + 1))){
+                arr.push(new Date(i).toLocaleDateString());
             }
             return arr;
         };
-        ui.fillListOfDays(listOfDays, getDaysArray(getValueFromArrayRange(range.from), getValueFromArrayRange(range.to)));
+        ui.fillListOfDays(listOfDays, getDaysArray(getDateValueFromString(range.from), getDateValueFromString(range.to)));
     }
     else {
         ui.fillEmptyBlockForDaysIfInvalid();

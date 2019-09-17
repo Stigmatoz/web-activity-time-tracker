@@ -127,27 +127,18 @@ function zeroAppend(time) {
 }
 
 function isDateInRange(dateStr, range) {
-    var arr = dateStr.split('.');
-    var date = new Date(arr[2], arr[1] - 1, arr[0]);
-    var from = getValueFromArrayRange(range.from);
-    var to = getValueFromArrayRange(range.to);
-    return date >= from && date <= to;
+    return dateStr >= range.from && dateStr <= range.to;
 }
 
-function getValueFromArrayRange(value) {
+function getDateValueFromString(value) {
     var arr;
     if (value.indexOf('.') !== -1) {
         arr = value.split('.');
         return new Date(arr[2], arr[1] - 1, arr[0]);
     }
     if (value.indexOf('/') !== -1)
-        arr = value.split('/');
+        arr = value.split('/');ч
     return new Date(arr[2], arr[0] - 1, arr[1]);
-}
-
-function convertToDate(date) {
-    var arr = date.split('.');
-    return new Date(arr[2], arr[1] - 1, arr[0]);
 }
 
 function getDateFromRange(range) {
