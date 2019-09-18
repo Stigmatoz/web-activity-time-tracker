@@ -137,7 +137,7 @@ function getDateValueFromString(value) {
         return new Date(arr[2], arr[1] - 1, arr[0]);
     }
     if (value.indexOf('/') !== -1)
-        arr = value.split('/');ч
+        arr = value.split('/');
     return new Date(arr[2], arr[0] - 1, arr[1]);
 }
 
