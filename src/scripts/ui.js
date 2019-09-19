@@ -40,16 +40,10 @@ class UI {
     createTotalBlock(totalTime) {
         var totalElement = document.getElementById('total');
 
-        var spanTitle = document.createElement('span');
-        spanTitle.classList.add('span-total');
-        spanTitle.innerHTML = 'Total';
+        var spanTitle = this.createElement('span', ['span-total'], 'Total');
+        var spanTime = this.createElement('span', ['span-time'], convertSummaryTimeToString(totalTime));
 
-        var spanTime = document.createElement('span');
-        spanTime.classList.add('span-time');
-        spanTime.innerHTML = convertSummaryTimeToString(totalTime);
-
-        totalElement.appendChild(spanTitle);
-        totalElement.appendChild(spanTime);
+        totalElement = this.appendChild(totalElement, [spanTitle, spanTime]);
     }
 
     fillEmptyBlock(elementName) {
@@ -158,53 +152,32 @@ class UI {
         divForImg.classList.add('block-img');
         divForImg.appendChild(img);
 
-        var spanUrl = document.createElement('span');
-        spanUrl.classList.add('span-url');
-        spanUrl.innerText = tab.url;
+        var spanUrl = this.createElement('span', ['span-url'], tab.url);
 
         if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {
             if (restrictionList !== undefined && restrictionList.length > 0) {
                 var item = restrictionList.find(x => isDomainEquals(x.domain, tab.url));
                 if (item !== undefined) {
-                    var divLimit = document.createElement('div');
-                    divLimit.classList.add('tooltip', 'inline-block');
-                    var limitIcon = document.createElement('img');
+                    var divLimit = this.createElement('div', ['tooltip', 'inline-block']);
+                    var limitIcon = this.createElement('img', ['margin-left-5', 'tooltip']);
                     limitIcon.height = 15;
-                    limitIcon.classList.add('margin-left-5', 'tooltip');
                     limitIcon.src = '/icons/limit.png';
-                    var tooltip = document.createElement('span');
-                    tooltip.classList.add('tooltiptext');
-                    tooltip.innerText = "Dayly limit is " + convertShortSummaryTimeToLongString(item.time);
-                    divLimit.appendChild(limitIcon);
-                    divLimit.appendChild(tooltip);
+                    var tooltip = this.createElement('span', ['tooltiptext'], "Dayly limit is " + convertShortSummaryTimeToLongString(item.time));
+                    divLimit = this.appendChild(divLimit, [limitIcon, tooltip]);
                     spanUrl.appendChild(divLimit);
                 }
             }
         }
 
-        var spanVisits = document.createElement('span');
-        spanVisits.classList.add('span-visits', 'tooltip', 'visits');
-        spanVisits.innerText = counter !== undefined ? counter : 0;
-
-        var visitsTooltip = document.createElement('span');
-        visitsTooltip.classList.add('tooltiptext');
-        visitsTooltip.innerText = 'Count of visits';
+        var spanVisits = this.createElement('span', ['span-visits', 'tooltip', 'visits'], counter !== undefined ? counter : 0);
+        var visitsTooltip = this.createElement('span', ['tooltiptext'], 'Count of visits');
 
         spanVisits.appendChild(visitsTooltip);
 
-        var spanPercentage = document.createElement('span');
-        spanPercentage.classList.add('span-percentage');
-        spanPercentage.innerText = getPercentage(summaryTime);
+        var spanPercentage = this.createElement('span', ['span-percentage'], getPercentage(summaryTime));
+        var spanTime = this.createElement('span', ['span-time'], convertSummaryTimeToString(summaryTime));
 
-        var spanTime = document.createElement('span');
-        spanTime.classList.add('span-time');
-        spanTime.innerText = convertSummaryTimeToString(summaryTime);
-
-        div.appendChild(divForImg);
-        div.appendChild(spanUrl);
-        div.appendChild(spanVisits);
-        div.appendChild(spanPercentage);
-        div.appendChild(spanTime);
+        div = this.appendChild(div, [divForImg, spanUrl, spanVisits, spanPercentage, spanTime]);
         if (blockName !== undefined)
             document.getElementById(blockName).appendChild(div);
         else
@@ -213,10 +186,8 @@ class UI {
 
     addExpander() {
         if (document.getElementById('expander') === null) {
-            var div = document.createElement('div');
+            var div = this.createElement('div', ['expander'], 'Show all');
             div.id = 'expander';
-            div.innerText = 'Show all';
-            div.classList.add('expander');
             div.addEventListener('click', function () {
                 ui.expand();
             });
@@ -234,10 +205,8 @@ class UI {
         var barChart = document.createElement('div');
         barChart.id = 'barChart';
 
-        var from = document.createElement('span');
-        from.innerHTML = 'From';
-        var to = document.createElement('span');
-        to.innerHTML = 'To';
+        var from = this.createElement('span', null, 'From');
+        var to = this.createElement('span', null,'To');
 
         var dateNow = new Date();
         var calendarFirst = document.createElement('input');
@@ -255,11 +224,7 @@ class UI {
         var tableForDaysBlock = document.createElement('div');
         tableForDaysBlock.id = 'tableForDaysBlock';
 
-        div.appendChild(barChart);
-        div.appendChild(from);
-        div.appendChild(calendarFirst);
-        div.appendChild(to);
-        div.appendChild(calendarTwo);
+        div = this.appendChild(div, [barChart, from, calendarFirst, to, calendarTwo]);
 
         div.append(tableForDaysBlock);
 
@@ -287,47 +252,29 @@ class UI {
             var daysForBarChart = this.fillDaysForBarChart(days, allDays);
             this.drawBarChart(daysForBarChart);
 
-            var header = document.createElement('div');
-            header.classList.add('table-header');
+            var header = this.createElement('div', ['table-header']);
 
-            var headerTitleDate = document.createElement('span');
-            headerTitleDate.innerHTML = 'Day';
-            headerTitleDate.classList.add('header-title-day');
-            var headerTitleTime = document.createElement('span');
-            headerTitleTime.innerHTML = 'Summary time';
-            headerTitleTime.classList.add('header-title-time');
+            var headerTitleDate = this.createElement('span', ['header-title-day'], 'Day');
+            var headerTitleTime = this.createElement('span', ['header-title-time'], 'Summary time');
 
-            header.appendChild(headerTitleDate);
-            header.appendChild(headerTitleTime);
-
+            header = this.appendChild(header, [headerTitleDate, headerTitleTime]);
             parent.appendChild(header);
 
             for (var i = 0; i < days.length; i++) {
-                var check = document.createElement('input');
+                var check = this.createElement('input', ['toggle']);
                 check.type = 'checkbox';
                 check.id = days[i].date;
-                check.classList.add('toggle');
 
-                var label = document.createElement('label');
+                var label = this.createElement('label', ['day-block', 'lbl-toggle']);
                 label.setAttribute('for', days[i].date);
-                label.classList.add('day-block');
-                label.classList.add('lbl-toggle');
-                var span = document.createElement('span');
-                span.classList.add('day');
-                span.innerHTML = days[i].date;
-                var spanTime = document.createElement('span');
-                spanTime.classList.add('day-time');
-                spanTime.innerHTML = convertSummaryTimeToString(days[i].total);
+                var span = this.createElement('span', ['day'], days[i].date);
+                var spanTime = this.createElement('span', ['day-time'], convertSummaryTimeToString(days[i].total));
 
-                label.appendChild(span);
-                label.appendChild(spanTime);
+                label = this.appendChild(label, [span, spanTime]);
+                parent = this.appendChild(parent, [check, label]);
 
-                parent.appendChild(check);
-                parent.appendChild(label);
-
-                var div = document.createElement('div');
+                var div = this.createElement('div', ['collapsible-content'], convertSummaryTimeToString(days[i].total));
                 div.id = days[i].date + '_block';
-                div.classList.add('collapsible-content');
                 parent.appendChild(div);
 
                 document.getElementById(days[i].date).addEventListener('click', function () {
@@ -359,5 +306,24 @@ class UI {
         });
 
         return resultList;
+    }
+
+    createElement(type, css, innerText){
+        var element = document.createElement(type);
+        if (css !== undefined && css !== null){
+            for (let i=0; i<=css.length; i++)
+                element.classList.add(css[i]);
+        }
+        if (innerText !== undefined)
+            element.innerHTML = innerText;
+
+        return element;
+    }
+
+    appendChild(element, children){
+        for (let i=0; i<children.length; i++)
+            element.appendChild(children[i]);
+
+        return element;
     }
 }

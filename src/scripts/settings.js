@@ -90,7 +90,7 @@ function loadSettings() {
 function checkPermissions() {
     chrome.permissions.contains({
         permissions: ['tabs'],
-        origins: ["http://*/*", "https://*/*"]
+        origins: ["https://www.youtube.com/*"]
     }, function (result) {
         if (result) {
             setUIForAnyPermission();
