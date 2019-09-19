@@ -48,7 +48,7 @@ class Activity {
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
             var item = setting_restriction_list.find(o => isDomainEquals(o.domain, domain));
             if (item !== undefined) {
-                var today = new Date().toLocaleDateString();
+                var today = new Date().toLocaleDateString("en-US");
                 var data = tab.days.find(x => x.date == today);
                 if (data !== undefined) {
                     var todayTimeUse = data.summary;

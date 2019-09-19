@@ -21,7 +21,7 @@ class Tab {
     incSummaryTime() {
         this.summaryTime += 1;
 
-        var today = new Date().toLocaleDateString();
+        var today = new Date().toLocaleDateString("en-US");
         var day = this.days.find(x => x.date == today);
         if (day === undefined) {
             this.addNewDay(today);
@@ -34,7 +34,7 @@ class Tab {
     incCounter(){
         this.counter +=1;
 
-        var today = new Date().toLocaleDateString();
+        var today = new Date().toLocaleDateString("en-US");
         var day = this.days.find(x => x.date == today);
         if (day === undefined) {
             this.addNewDay(today);

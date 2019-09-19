@@ -72,7 +72,7 @@ function mainTRacker(activeUrl, tab, activeTab) {
             });
         } else {
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
-            var today = new Date().toLocaleDateString();
+            var today = new Date().toLocaleDateString("en-US");
             var summary = tab.days.find(s => s.date === today).summary;
             chrome.browserAction.setBadgeText({
                 tabId: activeTab.id,

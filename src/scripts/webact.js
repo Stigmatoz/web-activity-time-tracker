@@ -6,7 +6,7 @@ var totalTime;
 var tabsFromStorage;
 var targetTabs;
 var currentTypeOfList;
-var today = new Date().toLocaleDateString();
+var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var restrictionList;
 
@@ -264,7 +264,7 @@ function getTabsByDays(tabs) {
         ui.fillEmptyBlockForDays();
         return;
     }
-    if (range.from !== 'Invalid Date' && range.to !== 'Invalid Date') {
+    if (range.from !== 'Invalid Date' && range.to !== 'Invalid Date' && isCorrectDate(range)) {
         var listOfDays = [];
         tabs.forEach(tab => {
             return tab.days.forEach(day => {
@@ -284,15 +284,15 @@ function getTabsByDays(tabs) {
         });
 
         var getDaysArray = function(start, end) {
-            let first = new Date(start);
-            let second = new Date(end);
+            let first = start;
+            let second = end;
             var arr = [];
             for (let i = first; i <= second; i = new Date(i.setDate(i.getDate() + 1))){
-                arr.push(new Date(i).toLocaleDateString());
+                arr.push(new Date(i).toLocaleDateString("en-US"));
             }
             return arr;
         };
-        ui.fillListOfDays(listOfDays, getDaysArray(getDateValueFromString(range.from), getDateValueFromString(range.to)));
+        ui.fillListOfDays(listOfDays, getDaysArray(range.from, range.to));
     }
     else {
         ui.fillEmptyBlockForDaysIfInvalid();

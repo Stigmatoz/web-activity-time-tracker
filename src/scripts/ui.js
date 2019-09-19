@@ -104,9 +104,9 @@ class UI {
             p.innerHTML = 'Today (' + counterOfSite + ' sites)';
         if (currentTypeOfList === TypeListEnum.All && totalDays !== undefined) {
             if (totalDays.countOfDays > 0) {
-                p.innerHTML = 'Aggregate data since ' + totalDays.minDate + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites)';
+                p.innerHTML = 'Aggregate data since ' + new Date(totalDays.minDate).toLocaleDateString() + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites)';
             } else {
-                p.innerHTML = 'Aggregate data since ' + today + ' (' + counterOfSite + ' sites)';
+                p.innerHTML = 'Aggregate data since ' + new Date().toLocaleDateString() + ' (' + counterOfSite + ' sites)';
             }
         }
 
@@ -208,18 +208,17 @@ class UI {
         var from = this.createElement('span', null, 'From');
         var to = this.createElement('span', null,'To');
 
-        var dateNow = new Date();
         var calendarFirst = document.createElement('input');
         calendarFirst.id = 'dateFrom';
         calendarFirst.type = 'date';
-        var previousDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
+        var previousDate = new Date();
         previousDate.setDate(previousDate.getDate() - getDateFromRange(range));
-        calendarFirst.valueAsDate = previousDate;
+        calendarFirst.valueAsDate = new Date(Date.UTC(previousDate.getFullYear(), previousDate.getMonth(), previousDate.getDate()));
 
         var calendarTwo = document.createElement('input');
         calendarTwo.id = 'dateTo';
         calendarTwo.type = 'date';
-        calendarTwo.valueAsDate = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()));
+        calendarTwo.valueAsDate = new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()));
 
         var tableForDaysBlock = document.createElement('div');
         tableForDaysBlock.id = 'tableForDaysBlock';
@@ -239,8 +238,8 @@ class UI {
 
     getDateRange() {
         return {
-            'from': new Date(document.getElementById('dateFrom').value).toLocaleDateString(),
-            'to': new Date(document.getElementById('dateTo').value).toLocaleDateString()
+            'from': new Date(document.getElementById('dateFrom').value),
+            'to': new Date(document.getElementById('dateTo').value)
         };
     }
 
@@ -267,7 +266,7 @@ class UI {
 
                 var label = this.createElement('label', ['day-block', 'lbl-toggle']);
                 label.setAttribute('for', days[i].date);
-                var span = this.createElement('span', ['day'], days[i].date);
+                var span = this.createElement('span', ['day'], new Date(days[i].date).toLocaleDateString());
                 var spanTime = this.createElement('span', ['day-time'], convertSummaryTimeToString(days[i].total));
 
                 label = this.appendChild(label, [span, spanTime]);
@@ -311,7 +310,7 @@ class UI {
     createElement(type, css, innerText){
         var element = document.createElement(type);
         if (css !== undefined && css !== null){
-            for (let i=0; i<=css.length; i++)
+            for (let i=0; i<css.length; i++)
                 element.classList.add(css[i]);
         }
         if (innerText !== undefined)

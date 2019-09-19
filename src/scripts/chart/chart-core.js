@@ -252,7 +252,7 @@ function barChart(data) {
         .offset([-10, 0])
         .html(function (d) {
             if (data.length > 9)
-                return "<strong><span class='red-label'>" + d.date + "</span></strong></br><strong>" + convertShortSummaryTimeToString(d.total) + "</strong>";
+                return "<strong><span class='red-label'>" + new Date(d.date).toLocaleDateString() + "</span></strong></br><strong>" + convertShortSummaryTimeToString(d.total) + "</strong>";
             else
                 return "<strong>" + convertShortSummaryTimeToString(d.total) + "</strong>";
         });
@@ -260,7 +260,7 @@ function barChart(data) {
     svg.call(tip);
 
     // Scale the range of the data in the domains
-    x.domain(data.map(function (d) { return d.date; }));
+    x.domain(data.map(function (d) { return new Date(d.date).toLocaleDateString(); }));
     y.domain([0, d3.max(data, function (d) { return d.total; })]);
 
     // append the rectangles for the bar chart
@@ -268,7 +268,7 @@ function barChart(data) {
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function (d) { return x(d.date); })
+        .attr("x", function (d) { return x(new Date(d.date).toLocaleDateString()); })
         .attr("width", x.bandwidth())
         .attr("y", function (d) { return y(d.total); })
         .attr("height", function (d) { return height - y(d.total); })
