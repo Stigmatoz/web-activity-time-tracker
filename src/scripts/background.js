@@ -112,7 +112,7 @@ function checkDOM(state, activeUrl, tab, activeTab) {
 function checkPermissions(callback, activeUrl, tab, activeTab) {
     chrome.permissions.contains({
         permissions: ['tabs'],
-        origins: ["http://*/*", "https://*/*"]
+        origins: ["https://www.youtube.com/*"]
     }, function (result) {
         if (result) {
             chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
