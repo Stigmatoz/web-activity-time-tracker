@@ -20,10 +20,6 @@ function updateStorage() {
 }
 
 function backgroundCheck() {
-    loadBlackList();
-    loadRestrictionList();
-    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
-    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
     chrome.windows.getLastFocused({ populate: true }, function (currentWindow) {
         if (currentWindow.focused) {
             var activeTab = currentWindow.tabs.find(t => t.active === true);
@@ -163,6 +159,22 @@ function addListener() {
             checkSettingsImEmpty();
         }
     });
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+        for (var key in changes) {
+            if (key === STORAGE_BLACK_LIST){
+                loadBlackList();
+            }
+            if (key === STORAGE_RESTRICTION_LIST){
+                loadRestrictionList();
+            }
+            if (key === SETTINGS_INTERVAL_INACTIVITY){
+                storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
+            }
+            if (key === SETTINGS_VIEW_TIME_IN_BADGE){
+                storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
+            }
+        }
+      });
 
     chrome.runtime.setUninstallURL("https://docs.google.com/forms/d/e/1FAIpQLSdImHtvey6sg5mzsQwWfAQscgZOOV52blSf9HkywSXJhuQQHg/viewform");
 }
@@ -188,8 +200,15 @@ function loadRestrictionList() {
     })
 }
 
+function loadSettings(){
+    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
+    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
+}
+
 loadTabs();
 loadBlackList();
+loadRestrictionList();
+loadSettings();
 addListener();
 updateSummaryTime();
 updateStorage();

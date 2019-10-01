@@ -40,13 +40,13 @@ class Activity {
 
     isInBlackList(domain) {
         if (setting_black_list !== undefined && setting_black_list.length > 0)
-            return setting_black_list.find(o => o === domain) !== undefined;
+            return setting_black_list.find(o => isDomainEquals(this.extractHostname(o), this.extractHostname(domain))) !== undefined;
         else return false;
     }
 
     isLimitExceeded(domain, tab) {
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
-            var item = setting_restriction_list.find(o => isDomainEquals(o.domain, domain));
+            var item = setting_restriction_list.find(o => isDomainEquals(this.extractHostname(o.domain), this.extractHostname(domain)));
             if (item !== undefined) {
                 var today = new Date().toLocaleDateString("en-US");
                 var data = tab.days.find(x => x.date == today);
