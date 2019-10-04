@@ -9,16 +9,17 @@ body {
 
 .inline-flex{
     display: inline-flex;
-    height: 27px;
+    height: 23px;
 }
 
 .inline-flex:hover{
     font-size: 13px;
     font-weight: 650;
+    cursor: pointer;
 }
 
 .span-url{
-    width: 282px;
+    width: 320px;
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 13px;
@@ -31,7 +32,7 @@ body {
 }
 
 .span-total{
-    width: 405px;
+    width: 450px;
     text-decoration: none;
     color: rgb(0, 0, 0);
     margin-left: 5px;
@@ -40,8 +41,26 @@ body {
     cursor: pointer;
 }
 
+#total{
+    text-align: right;
+} 
+
+#total .title{
+    font-weight: 550;
+    font-size: 12px;
+    text-align: right;
+}
+
+#total .span-time{
+    font-weight: 750;
+    font-size: 14px;
+    text-align: right;
+    padding: 5px 40px 5px 5px;
+    color: green;
+}
+
 .span-visits{
-    width: 30px;
+    width: 40px;
     /* padding: 0 10px 0 10px; */
     color: rgb(137, 154, 190);
     font-size: 11px;
@@ -54,13 +73,13 @@ body {
 }
 
 .span-percentage{
-    width: 70px;
+    width: 80px;
     color: rgb(78, 78, 78);
     font-size: 11px;
 }
 
 .span-time{
-    font-weight: 500;
+    font-weight: 700;
     text-align: right;
 }
 
@@ -133,7 +152,7 @@ input[type="date"]{
 }
 
 .btn-block{
-    width: 500px;
+    width: 580px;
     margin-bottom: 5px;
 }
 
@@ -174,11 +193,13 @@ p.table-header{
     font-size: 13px;
     padding-left:5px;
     margin:auto;
+    font-weight: 600;
 }
 
 .day-time{
     width: 80px;
     margin:auto;
+    font-weight: 650;
 }
 
 .header-title-day{

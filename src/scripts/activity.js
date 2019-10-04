@@ -99,10 +99,18 @@ class Activity {
     }
 
     setCurrentActiveTab(domain) {
+        this.closeIntervalForCurrentTab();
         currentTab = domain;
     }
 
     clearCurrentActiveTab() {
+        this.closeIntervalForCurrentTab();
         currentTab = '';
+    }
+
+    closeIntervalForCurrentTab(){
+        var tabUrl = this.getTab(currentTab);
+        if (tabUrl !== undefined)
+            tabUrl.closeInterval();
     }
 };

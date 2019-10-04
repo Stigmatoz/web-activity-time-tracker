@@ -48,6 +48,8 @@ function backgroundCheck() {
                     }
                 }
             }
+        } else {
+            activity.closeIntervalForCurrentTab();
         }
     });
 }

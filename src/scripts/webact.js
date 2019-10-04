@@ -142,7 +142,23 @@ function getTabsFromStorage(tabs) {
     ui.addHrAfterTableOfSite();
     ui.createTotalBlock(totalTime);
     ui.drawChart(tabsForChart);
+    if (currentTypeOfList === TypeListEnum.ToDay)
+        ui.drawTimeChart(getTabsForTimeChart(targetTabs));
     ui.setActiveTooltipe(currentTab);
+}
+
+function getTabsForTimeChart(targetTabs){
+    var resultArr = [];
+    targetTabs.forEach(function (name){
+      var current = name.days.forEach(function (item){
+        if (item.date == new Date().toLocaleDateString("en-US")){
+          item.time.forEach(function (time){
+            resultArr.push({'domain':name.url, 'interval':time});
+                })
+            } 
+        });
+    });
+    return resultArr;
 }
 
 function getTabsForExpander() {

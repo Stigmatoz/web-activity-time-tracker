@@ -226,8 +226,8 @@ function donutChart() {
 }
 
 function barChart(data) {
-    var margin = { top: 5, right: 5, bottom: 25, left: 5 },
-        width = 485,
+    var margin = { top: 25, right: 5, bottom: 25, left: 5 },
+        width = 555,
         height = 160;
 
     // set the ranges
@@ -282,4 +282,153 @@ function barChart(data) {
 
     if (data.length > 9)
         document.querySelectorAll('#barChart g.tick ').forEach(element => { element.remove() });
+}
+
+function drawIntervalChart(data) {
+    data.forEach(function (item){
+        var hFrom = getHourFrom(item.interval);
+        var hTo = getHourTo(item.interval);
+        if (hFrom != hTo){
+            var sourceTimeFrom = item.interval.split('-')[0].split(':');
+            var sourceTimeTo = item.interval.split('-')[1].split(':');
+            var timeTo = sourceTimeFrom[0] + ":" + 59 + ":" + 59;
+            var timeFrom = sourceTimeTo[0] + ":" + 00 + ":" + 00;
+            data.push({"domain":item.domain, "interval":item.interval.split('-')[0] + "-" + timeTo});
+            data.push({"domain":item.domain, "interval":timeFrom + "-" + item.interval.split('-')[1]});
+        }
+    });
+
+    var margin = { top: 5, right: 10, bottom: 20, left: 20 },
+        width = 580 - margin.left - margin.right,
+        height = 410 - margin.top - margin.bottom;
+
+    //linear 24 hour scale
+    var y = d3.scaleLinear()
+        .domain([0, 60])
+        .range([height, 0]);
+
+    //vertical axis
+    var yAxis = d3.axisLeft()
+        .ticks(10)
+        .scale(y);
+
+    var x = d3.scaleLinear()
+        .domain([0, 24])
+        .range([0, width]);
+
+    //vertical axis
+    var xAxis = d3.axisBottom()
+        .ticks(24)
+        .scale(x)
+
+    var tickDistance = 4.38;
+
+    var tooltip = d3.select("#timeChart")
+        .append("div")
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function (d) {
+        tooltip
+            .style("opacity", 1)
+        d3.select(this)
+            .style("stroke", "black")
+            .style("stroke-width", "0.5px")
+            .style("opacity", 1)
+    }
+    var mousemove = function (d) {
+        tooltip
+            .html(d.domain + "<br>" + d.interval)
+            .style("left", (d3.mouse(this)[0]) + 10 + "px")
+            .style("top", (d3.mouse(this)[1]) + 275 + "px")
+    }
+    var mouseleave = function (d) {
+        tooltip
+            .style("opacity", 0)
+        d3.select(this)
+            .style("stroke", "none")
+            .style("opacity", 0.8)
+    }
+
+    //create the svg
+    var svg = d3.select("#timeChart").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    //draw the axis.
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "label")
+        .call(xAxis)
+        .append("text")
+        .text("Value");
+
+    // Add a y-axis with label.
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("class", "label")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .text("Value");
+
+    //draw the bars, offset y and bar height based on data
+    svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .style("fill", "lightgreen")
+        .style("stroke", "#f1f1f1")
+        .style("stroke-width", "1")
+        .attr("class", "bar")
+        .attr("x", function (d) {
+            return x(getHourFrom(d.interval));
+        })
+        .attr("width", 19)
+        .attr("y", function (d) {
+            return y(getMinutesTo(d.interval));
+        })
+        .attr("height", function (d) {
+            var offset = getMinutesTo(d.interval) - getMinutesFrom(d.interval);
+            // if (offset == 0)
+            //     return 2;
+            // else 
+            return offset * tickDistance;
+        })
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave);
+}
+
+function getHourFrom(interval) {
+    var time = interval.split('-')[0];
+    return time.split(':')[0];
+}
+
+function getHourTo(interval) {
+    var time = interval.split('-')[1];
+    return time.split(':')[0];
+}
+
+function getMinutesFrom(interval) {
+    var time = interval.split('-')[0];
+    return time.split(':')[1];
+}
+
+function getMinutesTo(interval) {
+    var time = interval.split('-')[1];
+    return time.split(':')[1];
 }

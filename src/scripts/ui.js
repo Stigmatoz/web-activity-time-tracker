@@ -33,6 +33,7 @@ class UI {
     clearUI() {
         document.getElementById('resultTable').innerHTML = null;
         document.getElementById('chart').innerHTML = null;
+        document.getElementById('timeChart').innerHTML = null;
         document.getElementById('total').innerHTML = null;
         document.getElementById('byDays').innerHTML = null;
     }
@@ -40,7 +41,7 @@ class UI {
     createTotalBlock(totalTime) {
         var totalElement = document.getElementById('total');
 
-        var spanTitle = this.createElement('span', ['span-total'], 'Total');
+        var spanTitle = this.createElement('span', ['title'], 'Total: ');
         var spanTime = this.createElement('span', ['span-time'], convertSummaryTimeToString(totalTime));
 
         totalElement = this.appendChild(totalElement, [spanTitle, spanTime]);
@@ -78,7 +79,7 @@ class UI {
 
     drawChart(tabs) {
         var donut = donutChart()
-            .width(480)
+            .width(550)
             .height(230)
             .cornerRadius(5) // sets how rounded the corners are on each slice
             .padAngle(0.020) // effectively dictates the gap between slices
@@ -90,6 +91,10 @@ class UI {
             .call(donut); // draw chart in div
 
         ui.addHrAfterChart();
+    }
+
+    drawTimeChart(tabs) {
+        //drawIntervalChart(tabs);
     }
 
     drawBarChart(days) {
