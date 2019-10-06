@@ -155,15 +155,15 @@ function getTabsFromStorage(tabs) {
     ui.setActiveTooltipe(currentTab);
 }
 
-function getTabsForTimeChart(targetTabs){
+function getTabsForTimeChart(targetTabs) {
     var resultArr = [];
-    targetTabs.forEach(function (name){
-      var current = name.days.forEach(function (item){
-        if (item.date == new Date().toLocaleDateString("en-US")){
-          item.time.forEach(function (time){
-            resultArr.push({'domain':name.url, 'interval':time});
+    targetTabs.forEach(function (name) {
+        name.days.forEach(function (item) {
+            if (item.date == new Date().toLocaleDateString("en-US") && item.time !== undefined) {
+                item.time.forEach(function (time) {
+                    resultArr.push({ 'domain': name.url, 'interval': time });
                 })
-            } 
+            }
         });
     });
     return resultArr;
@@ -173,7 +173,7 @@ function getTabsForExpander() {
     storage.loadTabs(STORAGE_TABS, getTabsFromStorageForExpander);
 }
 
-function drawTimeChart(){
+function drawTimeChart() {
     ui.drawTimeChart(getTabsForTimeChart(currentTabListForToday));
 }
 
@@ -311,11 +311,11 @@ function getTabsByDays(tabs) {
             return new Date(a.date) - new Date(b.date);
         });
 
-        var getDaysArray = function(start, end) {
+        var getDaysArray = function (start, end) {
             let first = start;
             let second = end;
             var arr = [];
-            for (let i = first; i <= second; i = new Date(i.setDate(i.getDate() + 1))){
+            for (let i = first; i <= second; i = new Date(i.setDate(i.getDate() + 1))) {
                 arr.push(new Date(i).toLocaleDateString("en-US"));
             }
             return arr;
