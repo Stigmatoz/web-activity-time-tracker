@@ -9,6 +9,8 @@ class UI {
         document.getElementById('btnToday').classList.add('active');
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
+        document.getElementById('blockForChartBtn').classList.remove('hide');
+        this.setUIForDonutChart();
 
         this.clearUI();
     }
@@ -17,6 +19,7 @@ class UI {
         document.getElementById('btnAll').classList.add('active');
         document.getElementById('btnToday').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
+        document.getElementById('blockForChartBtn').classList.add('hide');
 
         this.clearUI();
     }
@@ -25,6 +28,7 @@ class UI {
         document.getElementById('btnByDays').classList.add('active');
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnToday').classList.remove('active');
+        document.getElementById('blockForChartBtn').classList.add('hide');
 
         this.clearUI();
         this.addBlockForCalendar(range);
@@ -33,14 +37,27 @@ class UI {
     clearUI() {
         document.getElementById('resultTable').innerHTML = null;
         document.getElementById('chart').innerHTML = null;
+        document.getElementById('timeChart').innerHTML = null;
         document.getElementById('total').innerHTML = null;
         document.getElementById('byDays').innerHTML = null;
+    }
+
+    setUIForDonutChart(){
+        document.getElementById('donutChartBtn').classList.add('active');
+        document.getElementById('heatMapChartBtn').classList.remove('active');
+        document.getElementById('timeChart').innerHTML = null;
+    }
+
+    setUIForTimeChart(){
+        document.getElementById('donutChartBtn').classList.remove('active');
+        document.getElementById('heatMapChartBtn').classList.add('active');
+        document.getElementById('chart').innerHTML = null;
     }
 
     createTotalBlock(totalTime) {
         var totalElement = document.getElementById('total');
 
-        var spanTitle = this.createElement('span', ['span-total'], 'Total');
+        var spanTitle = this.createElement('span', ['title'], 'Total: ');
         var spanTime = this.createElement('span', ['span-time'], convertSummaryTimeToString(totalTime));
 
         totalElement = this.appendChild(totalElement, [spanTitle, spanTime]);
@@ -78,7 +95,7 @@ class UI {
 
     drawChart(tabs) {
         var donut = donutChart()
-            .width(480)
+            .width(550)
             .height(230)
             .cornerRadius(5) // sets how rounded the corners are on each slice
             .padAngle(0.020) // effectively dictates the gap between slices
@@ -90,6 +107,10 @@ class UI {
             .call(donut); // draw chart in div
 
         ui.addHrAfterChart();
+    }
+
+    drawTimeChart(tabs) {
+        drawIntervalChart(tabs);
     }
 
     drawBarChart(days) {

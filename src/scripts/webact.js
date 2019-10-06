@@ -9,6 +9,7 @@ var currentTypeOfList;
 var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var restrictionList;
+var currentTabListForToday;
 
 document.addEventListener('DOMContentLoaded', function () {
     storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
@@ -16,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
         currentTypeOfList = TypeListEnum.ToDay;
         ui.setUIForToday();
         getDataFromStorage();
+    });
+    document.getElementById('donutChartBtn').addEventListener('click', function () {
+        ui.setUIForDonutChart();
+        getDataFromStorage();
+    });
+    document.getElementById('heatMapChartBtn').addEventListener('click', function () {
+        ui.setUIForTimeChart();
+        drawTimeChart();
     });
     document.getElementById('btnAll').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.All;
@@ -139,14 +148,33 @@ function getTabsFromStorage(tabs) {
         else addTabOthersForChart(tabsForChart, summaryTime);
     }
 
+    currentTabListForToday = targetTabs;
     ui.addHrAfterTableOfSite();
     ui.createTotalBlock(totalTime);
     ui.drawChart(tabsForChart);
     ui.setActiveTooltipe(currentTab);
 }
 
+function getTabsForTimeChart(targetTabs){
+    var resultArr = [];
+    targetTabs.forEach(function (name){
+      var current = name.days.forEach(function (item){
+        if (item.date == new Date().toLocaleDateString("en-US")){
+          item.time.forEach(function (time){
+            resultArr.push({'domain':name.url, 'interval':time});
+                })
+            } 
+        });
+    });
+    return resultArr;
+}
+
 function getTabsForExpander() {
     storage.loadTabs(STORAGE_TABS, getTabsFromStorageForExpander);
+}
+
+function drawTimeChart(){
+    ui.drawTimeChart(getTabsForTimeChart(currentTabListForToday));
 }
 
 function getTabsFromStorageForExpander(tabs) {

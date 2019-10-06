@@ -30,24 +30,29 @@ function backgroundCheck() {
                     activity.addTab(activeTab);
                 }
 
-                if (tab !== undefined) {
-                    activity.setCurrentActiveTab(tab.url);
-                    chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
-                        if (state === 'active') {
-                            mainTRacker(activeUrl, tab, activeTab);
-                        }
-                        else checkDOM(state, activeUrl, tab, activeTab);
+                if (activity.isInBlackList(activeUrl)) {
+                    chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
+                    chrome.browserAction.setBadgeText({
+                        tabId: activeTab.id,
+                        text: 'n/a'
                     });
                 } else {
-                    if (activity.isInBlackList(activeUrl)) {
-                        chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
-                        chrome.browserAction.setBadgeText({
-                            tabId: activeTab.id,
-                            text: 'n/a'
+                    if (tab !== undefined) {
+                        if (currentTab !== tab.url) {
+                            tab.incCounter();
+                            activity.setCurrentActiveTab(tab.url);
+                        }
+                        chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
+                            if (state === 'active') {
+                                mainTRacker(activeUrl, tab, activeTab);
+                            }
+                            else checkDOM(state, activeUrl, tab, activeTab);
                         });
                     }
                 }
             }
+        } else {
+            activity.closeIntervalForCurrentTab();
         }
     });
 }
@@ -60,21 +65,13 @@ function mainTRacker(activeUrl, tab, activeTab) {
         tab.incSummaryTime();
     }
     if (setting_view_in_badge === true) {
-        if (activity.isInBlackList(activeUrl)) {
-            chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
-            chrome.browserAction.setBadgeText({
-                tabId: activeTab.id,
-                text: 'n/a'
-            });
-        } else {
-            chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
-            var today = new Date().toLocaleDateString("en-US");
-            var summary = tab.days.find(s => s.date === today).summary;
-            chrome.browserAction.setBadgeText({
-                tabId: activeTab.id,
-                text: String(convertSummaryTimeToBadgeString(summary))
-            });
-        }
+        chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
+        var today = new Date().toLocaleDateString("en-US");
+        var summary = tab.days.find(s => s.date === today).summary;
+        chrome.browserAction.setBadgeText({
+            tabId: activeTab.id,
+            text: String(convertSummaryTimeToBadgeString(summary))
+        });
     } else {
         chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
         chrome.browserAction.setBadgeText({
@@ -100,9 +97,10 @@ function isVideoPlayedOnPage() {
 }
 
 function checkDOM(state, activeUrl, tab, activeTab) {
-    if (state === 'idle') {
+    if (state === 'idle' && isDomainEquals(activeUrl, "youtube.com")) {
         checkPermissions(mainTRacker, activeUrl, tab, activeTab);
     }
+    else activity.closeIntervalForCurrentTab();
 }
 
 function checkPermissions(callback, activeUrl, tab, activeTab) {
@@ -114,6 +112,7 @@ function checkPermissions(callback, activeUrl, tab, activeTab) {
             chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
                 if (results !== undefined && results[0] !== undefined && results[0] === true)
                     callback(activeUrl, tab, activeTab);
+                else activity.closeIntervalForCurrentTab();
             });
         }
     });
@@ -159,22 +158,22 @@ function addListener() {
             checkSettingsImEmpty();
         }
     });
-    chrome.storage.onChanged.addListener(function(changes, namespace) {
+    chrome.storage.onChanged.addListener(function (changes, namespace) {
         for (var key in changes) {
-            if (key === STORAGE_BLACK_LIST){
+            if (key === STORAGE_BLACK_LIST) {
                 loadBlackList();
             }
-            if (key === STORAGE_RESTRICTION_LIST){
+            if (key === STORAGE_RESTRICTION_LIST) {
                 loadRestrictionList();
             }
-            if (key === SETTINGS_INTERVAL_INACTIVITY){
+            if (key === SETTINGS_INTERVAL_INACTIVITY) {
                 storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
             }
-            if (key === SETTINGS_VIEW_TIME_IN_BADGE){
+            if (key === SETTINGS_VIEW_TIME_IN_BADGE) {
                 storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
             }
         }
-      });
+    });
 
     chrome.runtime.setUninstallURL("https://docs.google.com/forms/d/e/1FAIpQLSdImHtvey6sg5mzsQwWfAQscgZOOV52blSf9HkywSXJhuQQHg/viewform");
 }
@@ -200,7 +199,7 @@ function loadRestrictionList() {
     })
 }
 
-function loadSettings(){
+function loadSettings() {
     storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
     storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
 }

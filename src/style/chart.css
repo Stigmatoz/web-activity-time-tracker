@@ -101,3 +101,11 @@ g.slices > path.mouse-over{
 .height-0{
   height: 0 !important;
 }
+
+.grid .tick {
+  stroke: lightgrey;
+  opacity: 0.1;
+}
+.grid path {
+    stroke-width: 0;
+}
