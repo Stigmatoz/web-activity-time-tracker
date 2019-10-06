@@ -285,16 +285,16 @@ function barChart(data) {
 }
 
 function drawIntervalChart(data) {
-    data.forEach(function (item){
+    data.forEach(function (item) {
         var hFrom = getHourFrom(item.interval);
         var hTo = getHourTo(item.interval);
-        if (hFrom != hTo){
+        if (hFrom != hTo) {
             var sourceTimeFrom = item.interval.split('-')[0].split(':');
             var sourceTimeTo = item.interval.split('-')[1].split(':');
             var timeTo = sourceTimeFrom[0] + ":" + 59 + ":" + 59;
             var timeFrom = sourceTimeTo[0] + ":" + 00 + ":" + 00;
-            data.push({"domain":item.domain, "interval":item.interval.split('-')[0] + "-" + timeTo});
-            data.push({"domain":item.domain, "interval":timeFrom + "-" + item.interval.split('-')[1]});
+            data.push({ "domain": item.domain, "interval": item.interval.split('-')[0] + "-" + timeTo });
+            data.push({ "domain": item.domain, "interval": timeFrom + "-" + item.interval.split('-')[1] });
         }
     });
 
@@ -326,6 +326,7 @@ function drawIntervalChart(data) {
     var tooltip = d3.select("#timeChart")
         .append("div")
         .style("opacity", 0)
+        .style("display", "none")
         .style("position", "absolute")
         .attr("class", "tooltip")
         .style("background-color", "white")
@@ -338,6 +339,7 @@ function drawIntervalChart(data) {
     var mouseover = function (d) {
         tooltip
             .style("opacity", 1)
+            .style("display", "block")
         d3.select(this)
             .style("stroke", "black")
             .style("stroke-width", "0.5px")
@@ -347,11 +349,12 @@ function drawIntervalChart(data) {
         tooltip
             .html(d.domain + "<br>" + d.interval)
             .style("left", (d3.mouse(this)[0]) + 10 + "px")
-            .style("top", (d3.mouse(this)[1]) + 275 + "px")
+            .style("top", (d3.mouse(this)[1]) + 30 + "px")
     }
     var mouseleave = function (d) {
         tooltip
             .style("opacity", 0)
+            .style("display", "none")
         d3.select(this)
             .style("stroke", "none")
             .style("opacity", 0.8)
@@ -385,50 +388,74 @@ function drawIntervalChart(data) {
         .attr("transform", "rotate(-90)")
         .text("Value");
 
+    svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(0," + height + ")")
+        .call(make_x_axis()
+            .tickSize(-height, 0, 0)
+        )
+
+    svg.append("g")
+        .attr("class", "grid")
+        .call(make_y_axis()
+            .tickSize(-width, 0, 0)
+        )
+
     //draw the bars, offset y and bar height based on data
     svg.selectAll(".bar")
         .data(data)
         .enter()
         .append("rect")
-        .style("fill", "lightgreen")
+        .style("fill", "orangered")
         .style("stroke", "#f1f1f1")
         .style("stroke-width", "1")
         .attr("class", "bar")
         .attr("x", function (d) {
-            return x(getHourFrom(d.interval));
+            return x(getHourFrom(d.interval)) + 2;
         })
-        .attr("width", 19)
+        .attr("width", 20)
         .attr("y", function (d) {
-            return y(getMinutesTo(d.interval));
+            return y(getMinutesTo(d.interval)) - 1;
         })
         .attr("height", function (d) {
             var offset = getMinutesTo(d.interval) - getMinutesFrom(d.interval);
-            // if (offset == 0)
-            //     return 2;
-            // else 
-            return offset * tickDistance;
+            if (offset == 0)
+                return 1;
+            else return offset * tickDistance;
         })
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave);
-}
 
-function getHourFrom(interval) {
-    var time = interval.split('-')[0];
-    return time.split(':')[0];
-}
+    function make_x_axis() {
+        return d3.axisBottom()
+            .scale(x)
+            .ticks(24)
+    }
 
-function getHourTo(interval) {
-    var time = interval.split('-')[1];
-    return time.split(':')[0];
-}
+    function make_y_axis() {
+        return d3.axisLeft()
+            .scale(y)
+            .ticks(10)
+    }
 
-function getMinutesFrom(interval) {
-    var time = interval.split('-')[0];
-    return time.split(':')[1];
-}
+    function getHourFrom(interval) {
+        var time = interval.split('-')[0];
+        return time.split(':')[0];
+    }
 
-function getMinutesTo(interval) {
-    var time = interval.split('-')[1];
-    return time.split(':')[1];
+    function getHourTo(interval) {
+        var time = interval.split('-')[1];
+        return time.split(':')[0];
+    }
+
+    function getMinutesFrom(interval) {
+        var time = interval.split('-')[0];
+        return time.split(':')[1];
+    }
+
+    function getMinutesTo(interval) {
+        var time = interval.split('-')[1];
+        return time.split(':')[1];
+    }
 }

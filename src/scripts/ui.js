@@ -9,6 +9,8 @@ class UI {
         document.getElementById('btnToday').classList.add('active');
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
+        document.getElementById('blockForChartBtn').classList.remove('hide');
+        this.setUIForDonutChart();
 
         this.clearUI();
     }
@@ -17,6 +19,7 @@ class UI {
         document.getElementById('btnAll').classList.add('active');
         document.getElementById('btnToday').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
+        document.getElementById('blockForChartBtn').classList.add('hide');
 
         this.clearUI();
     }
@@ -25,6 +28,7 @@ class UI {
         document.getElementById('btnByDays').classList.add('active');
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnToday').classList.remove('active');
+        document.getElementById('blockForChartBtn').classList.add('hide');
 
         this.clearUI();
         this.addBlockForCalendar(range);
@@ -36,6 +40,18 @@ class UI {
         document.getElementById('timeChart').innerHTML = null;
         document.getElementById('total').innerHTML = null;
         document.getElementById('byDays').innerHTML = null;
+    }
+
+    setUIForDonutChart(){
+        document.getElementById('donutChartBtn').classList.add('active');
+        document.getElementById('heatMapChartBtn').classList.remove('active');
+        document.getElementById('timeChart').innerHTML = null;
+    }
+
+    setUIForTimeChart(){
+        document.getElementById('donutChartBtn').classList.remove('active');
+        document.getElementById('heatMapChartBtn').classList.add('active');
+        document.getElementById('chart').innerHTML = null;
     }
 
     createTotalBlock(totalTime) {
@@ -94,7 +110,7 @@ class UI {
     }
 
     drawTimeChart(tabs) {
-        //drawIntervalChart(tabs);
+        drawIntervalChart(tabs);
     }
 
     drawBarChart(days) {

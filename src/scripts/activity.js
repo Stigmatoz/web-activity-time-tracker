@@ -10,7 +10,7 @@ class Activity {
                 if (currentTab !== tab.url) {
                     isDifferentUrl = true;
                 }
-                this.setCurrentActiveTab(domain);
+                
                 if (this.isNewUrl(domain) && !this.isInBlackList(domain)) {
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined) {
@@ -20,7 +20,8 @@ class Activity {
                     tabs.push(newTab);
                 }
 
-                if (isDifferentUrl) {
+                if (isDifferentUrl && !this.isInBlackList(domain)) {
+                    this.setCurrentActiveTab(domain);
                     var tabUrl = this.getTab(domain);
                     if (tabUrl !== undefined)
                         tabUrl.incCounter();
@@ -108,9 +109,12 @@ class Activity {
         currentTab = '';
     }
 
-    closeIntervalForCurrentTab(){
-        var tabUrl = this.getTab(currentTab);
-        if (tabUrl !== undefined)
-            tabUrl.closeInterval();
+    closeIntervalForCurrentTab() {
+        if (currentTab !== '') {
+            var tabUrl = this.getTab(currentTab);
+            if (tabUrl !== undefined)
+                tabUrl.closeInterval();
+            currentTab = '';
+        }
     }
 };

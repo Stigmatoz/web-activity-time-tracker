@@ -164,7 +164,7 @@ input[type="date"]{
 }
 
 .calendar-block{
-    margin-top: -20px;
+    margin-top: 0px;
 }
 
 .table-header{
@@ -328,4 +328,47 @@ p.table-header{
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+  }
+
+  .button{
+    width: 40%;
+    background-color: white;
+    color: rgb(184, 179, 179);
+    border: 2px solid rgb(184, 179, 179);
+  }
+
+  .button:hover{
+    background-color: white;
+    color: black;
+    color:rgb(55, 158, 86);
+    border: 2px solid rgb(55, 158, 86);
+  }
+
+  .button.active{
+    background-color: white;
+    color: black;
+    color:rgb(55, 158, 86);
+    border: 2px solid rgb(55, 158, 86);
+  }
+
+  .hide{
+      display: none;
+  }
+
+  .chart-btn{
+    background-color: transparent;
+    background-repeat: no-repeat; 
+    background-position: 5px; 
+    cursor: pointer;      
+    height: 16px;         
+    padding-left: 16px;   
+    vertical-align: middle
+  }
+
+  .chart-btn-donut{
+    background-image: url(/icons/pie-chart.png);
+  }
+
+  .chart-btn-heatmap{
+    background-image: url(/icons/heat-map-16.png);
   }
