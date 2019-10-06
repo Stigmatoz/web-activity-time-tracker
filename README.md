@@ -1,5 +1,5 @@
 # Web Activity Time Tracker <a href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm" rel="nofollow"><img src="https://user-images.githubusercontent.com/768070/51865757-87d45300-2347-11e9-84fd-bafff5b036b2.png" alt="Add to Chrome" style="max-width:100%;"></a>
-![image](https://user-images.githubusercontent.com/23387046/66277830-7f57f300-e8ac-11e9-9b50-6fd09b32f682.png)
+![image](https://user-images.githubusercontent.com/23387046/66277868-d1991400-e8ac-11e9-8cce-4abc8878f639.png)
 
 Web Activity Time Tracker keeps track of how much time you spend on the web and presents the stats in a useful and intuitive way. 
 You can set a daily visit limit for sites and block it after the expiration of the limit. 
