@@ -15,7 +15,17 @@
 </head>
 
 <body>
-   <div id="title">
+   <svg class="height-0">
+      <filter id="dropShadow">
+         <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+         <feOffset dx="0" dy="1" />
+         <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+         </feMerge>
+      </filter>
+   </svg>
+   <div id="extensionTitle">
       <p class="title">Web Activity Time Tracker</p>
    </div>
    <div id="buttons" class="btn-block">
@@ -31,19 +41,9 @@
    <div id="chart"></div>
    <div id="timeChart"></div>
    <div id="resultTable" class="list-of-site"></div>
-   <div id="total"></div>
+   <div id="total" class="inline-flex"></div>
    <div id="byDays" class="calendar-block"></div>
 
-   <svg class="height-0">
-      <filter id="dropShadow">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
-          <feOffset dx="0" dy="1" />
-          <feMerge>
-              <feMergeNode />
-              <feMergeNode in="SourceGraphic" />
-          </feMerge>
-      </filter>
-    </svg>
 </body>
 
 </html>

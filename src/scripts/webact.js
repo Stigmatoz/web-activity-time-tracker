@@ -125,6 +125,7 @@ function getTabsFromStorage(tabs) {
     var currentTab = getCurrentTab();
 
     var tabsForChart = [];
+    var summaryCounter = 0;
     for (var i = 0; i < targetTabs.length; i++) {
         var summaryTime;
         var counter;
@@ -138,6 +139,8 @@ function getTabsFromStorage(tabs) {
             counter = targetTabs[i].counter;
         }
 
+        summaryCounter += counter;
+
         if (currentTypeOfList === TypeListEnum.ToDay || (currentTypeOfList === TypeListEnum.All && i <= 30))
             ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
         else
@@ -150,7 +153,7 @@ function getTabsFromStorage(tabs) {
 
     currentTabListForToday = targetTabs;
     ui.addHrAfterTableOfSite();
-    ui.createTotalBlock(totalTime);
+    ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
     ui.drawChart(tabsForChart);
     ui.setActiveTooltipe(currentTab);
 }
@@ -229,7 +232,7 @@ function getTotalTimeForDay(day, tabs) {
 }
 
 function getPercentage(time) {
-    return ((time / totalTime) * 100).toFixed(2) + '%';
+    return ((time / totalTime) * 100).toFixed(2) + ' %';
 }
 
 function getPercentageForChart(time) {

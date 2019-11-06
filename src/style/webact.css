@@ -7,15 +7,26 @@ body {
     overflow-y: auto;
 }
 
+#extensionTitle{
+  margin-top:-20px;
+}
+
 .inline-flex{
-    display: inline-flex;
+    display: flex;
     height: 23px;
 }
 
 .inline-flex:hover{
+  cursor: pointer;
+}
+
+.inline-flex:hover .span-url{
     font-size: 13px;
     font-weight: 650;
-    cursor: pointer;
+}
+
+.inline-flex:hover .span-time{
+  color: rgb(0, 0, 0);
 }
 
 .span-url{
@@ -26,9 +37,13 @@ body {
     cursor: pointer;
 }
 
-.span-active-url{
+.span-active-url .span-url{
     font-size: 13px;
     font-weight: 650;
+}
+.span-active-url .span-time{
+  color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 .span-total{
@@ -41,9 +56,11 @@ body {
     cursor: pointer;
 }
 
-#total{
-    text-align: right;
-} 
+#total .total-block{
+  width: 344px;
+  font-size: 13px;
+  font-weight: 600;
+}
 
 #total .title{
     font-weight: 550;
@@ -53,10 +70,7 @@ body {
 
 #total .span-time{
     font-weight: 750;
-    font-size: 14px;
     text-align: right;
-    padding: 5px 40px 5px 5px;
-    color: green;
 }
 
 .span-visits{
@@ -73,14 +87,24 @@ body {
 }
 
 .span-percentage{
-    width: 80px;
     color: rgb(78, 78, 78);
     font-size: 11px;
 }
 
 .span-time{
+    color:#c5c3c3;
     font-weight: 700;
     text-align: right;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.span-time .span-active-time{
+  color: rgb(0, 0, 0);
+}
+
+.margin-left-auto{
+  margin-left: auto;
 }
 
 .favicon{
@@ -119,7 +143,7 @@ hr {
 }
 
 a{
-    color: rgb(184, 179, 179);
+    color: rgb(195, 194, 194);
     padding: 4px 5px;
     text-align: center;
     display: inline-block;
@@ -131,19 +155,19 @@ a{
     text-decoration: none;
     text-transform: uppercase;
 
-    border-bottom: 2px solid rgb(184, 179, 179);
+    border-bottom: 2px solid rgb(195, 194, 194);
     background: transparent; 
     width: 19%;
 }
 
 a:hover {
-    color:rgb(55, 158, 86);
-    border-bottom: 2px solid rgb(55, 158, 86);
+    color:rgb(76, 160, 175);
+    border-bottom: 2px solid rgb(76, 160, 175);
 }
 
 a.active {
-    color:rgb(55, 158, 86);
-    border-bottom: 2px solid rgb(55, 158, 86);
+    color:rgb(76, 160, 175);
+    border-bottom: 2px solid rgb(76, 160, 175);
 }
 
 input[type="date"]{
@@ -173,7 +197,7 @@ input[type="date"]{
     font-weight: 600;
     font-size: 13px;
     padding: 4px;
-    background-color: rgb(176, 233, 188);
+    background-color: rgb(235, 243, 251);
 }
 
 p.table-header{
@@ -278,6 +302,7 @@ p.table-header{
   }
 
   .tooltip {
+    width: 70px;
     position: relative;
     display: inline-block;
   }
@@ -333,22 +358,22 @@ p.table-header{
   .button{
     width: 40%;
     background-color: white;
-    color: rgb(184, 179, 179);
-    border: 2px solid rgb(184, 179, 179);
+    color: rgb(195, 194, 194);
+    border: 2px solid rgb(209, 207, 207);
   }
 
   .button:hover{
     background-color: white;
     color: black;
-    color:rgb(55, 158, 86);
-    border: 2px solid rgb(55, 158, 86);
+    color:rgb(76, 160, 175);
+    border: 2px solid rgb(76, 160, 175);
   }
 
   .button.active{
     background-color: white;
     color: black;
-    color:rgb(55, 158, 86);
-    border: 2px solid rgb(55, 158, 86);
+    color:rgb(76, 160, 175);
+    border: 2px solid rgb(76, 160, 175);
   }
 
   .hide{
@@ -356,6 +381,7 @@ p.table-header{
   }
 
   .chart-btn{
+    border-radius: 5px;
     background-color: transparent;
     background-repeat: no-repeat; 
     background-position: 5px; 

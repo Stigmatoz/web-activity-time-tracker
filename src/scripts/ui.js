@@ -42,25 +42,32 @@ class UI {
         document.getElementById('byDays').innerHTML = null;
     }
 
-    setUIForDonutChart(){
+    setUIForDonutChart() {
         document.getElementById('donutChartBtn').classList.add('active');
         document.getElementById('heatMapChartBtn').classList.remove('active');
         document.getElementById('timeChart').innerHTML = null;
     }
 
-    setUIForTimeChart(){
+    setUIForTimeChart() {
         document.getElementById('donutChartBtn').classList.remove('active');
         document.getElementById('heatMapChartBtn').classList.add('active');
         document.getElementById('chart').innerHTML = null;
     }
 
-    createTotalBlock(totalTime) {
+    createTotalBlock(totalTime, currentTypeOfList, counter) {
         var totalElement = document.getElementById('total');
 
-        var spanTitle = this.createElement('span', ['title'], 'Total: ');
-        var spanTime = this.createElement('span', ['span-time'], convertSummaryTimeToString(totalTime));
+        var spanVisits = this.createElement('span', ['span-visits', 'tooltip', 'visits'], counter !== undefined ? counter : 0);
+        var visitsTooltip = this.createElement('span', ['tooltiptext'], 'Count of visits');
+        spanVisits.appendChild(visitsTooltip);
 
-        totalElement = this.appendChild(totalElement, [spanTitle, spanTime]);
+        var spanPercentage = this.createElement('span', ['span-percentage'], '100 %');
+
+        var div = this.createElement('div', ['margin-left-5', 'total-block'], 'Total');
+        var span = this.createElement('span', ['span-time']);
+        this.createElementsForTotalTime(totalTime, currentTypeOfList, span);
+
+       this.appendChild(totalElement, [div, spanVisits, spanPercentage, span]);
     }
 
     fillEmptyBlock(elementName) {
@@ -196,13 +203,38 @@ class UI {
         spanVisits.appendChild(visitsTooltip);
 
         var spanPercentage = this.createElement('span', ['span-percentage'], getPercentage(summaryTime));
-        var spanTime = this.createElement('span', ['span-time'], convertSummaryTimeToString(summaryTime));
+        var spanTime = this.createElement('span', ['span-time']);
+        this.createElementsForTotalTime(summaryTime, typeOfList, spanTime);
 
         div = this.appendChild(div, [divForImg, spanUrl, spanVisits, spanPercentage, spanTime]);
         if (blockName !== undefined)
             document.getElementById(blockName).appendChild(div);
         else
             this.getTableOfSite().appendChild(div);
+    }
+
+    createElementsForTotalTime(summaryTime, typeOfList, parentElement) {
+        var arr = getArrayTime(summaryTime);
+        var isNextPartActiv = false;
+        var getCssClass = function (item) {
+            if (item > 0) {
+                isNextPartActiv = true;
+                return ['span-active-time'];
+            }
+            else {
+                if (isNextPartActiv)
+                    return ['span-active-time'];
+                return null;
+            }
+        };
+        if (typeOfList === TypeListEnum.All) {
+            var spanForDays = this.createElement('span', getCssClass(arr.days), arr.days + 'd ');
+            this.appendChild(parentElement, [spanForDays]);
+        }
+        var spanForHour = this.createElement('span', getCssClass(arr.hours), arr.hours + 'h ');
+        var spanForMin = this.createElement('span', getCssClass(arr.mins), arr.mins + 'm ');
+        var spanForSec = this.createElement('span', getCssClass(arr.seconds), arr.seconds + 's ');
+        this.appendChild(parentElement, [spanForHour, spanForMin, spanForSec]);
     }
 
     addExpander() {
@@ -227,7 +259,7 @@ class UI {
         barChart.id = 'barChart';
 
         var from = this.createElement('span', null, 'From');
-        var to = this.createElement('span', null,'To');
+        var to = this.createElement('span', null, 'To');
 
         var calendarFirst = document.createElement('input');
         calendarFirst.id = 'dateFrom';
@@ -328,10 +360,10 @@ class UI {
         return resultList;
     }
 
-    createElement(type, css, innerText){
+    createElement(type, css, innerText) {
         var element = document.createElement(type);
-        if (css !== undefined && css !== null){
-            for (let i=0; i<css.length; i++)
+        if (css !== undefined && css !== null) {
+            for (let i = 0; i < css.length; i++)
                 element.classList.add(css[i]);
         }
         if (innerText !== undefined)
@@ -340,8 +372,8 @@ class UI {
         return element;
     }
 
-    appendChild(element, children){
-        for (let i=0; i<children.length; i++)
+    appendChild(element, children) {
+        for (let i = 0; i < children.length; i++)
             element.appendChild(children[i]);
 
         return element;

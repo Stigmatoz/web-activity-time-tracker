@@ -103,6 +103,24 @@ function convertShortSummaryTimeToLongString(summaryTime) {
     return hours + ' hour ' + mins + ' minutes';
 }
 
+function getArrayTime(summaryTime) {
+    var days = Math.floor(summaryTime / 3600 / 24);
+    var totalHours = summaryTime % (3600 * 24);
+    var hours = Math.floor(totalHours / 3600);
+    var totalSeconds = summaryTime % 3600;
+    var mins = Math.floor(totalSeconds / 60);
+    var seconds = totalSeconds % 60;
+
+    hours = zeroAppend(hours);
+    mins = zeroAppend(mins);
+    seconds = zeroAppend(seconds);
+
+    return {'days': days,
+            'hours': hours, 
+            'mins': mins, 
+            'seconds': seconds};
+}
+
 function convertSummaryTimeToString(summaryTime) {
     var days = Math.floor(summaryTime / 3600 / 24);
     var totalHours = summaryTime % (3600 * 24);
