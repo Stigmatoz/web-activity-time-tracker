@@ -111,6 +111,7 @@ function getArrayTime(summaryTime) {
     var mins = Math.floor(totalSeconds / 60);
     var seconds = totalSeconds % 60;
 
+    days = zeroAppend(days);
     hours = zeroAppend(hours);
     mins = zeroAppend(mins);
     seconds = zeroAppend(seconds);

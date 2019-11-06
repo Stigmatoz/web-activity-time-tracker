@@ -320,7 +320,8 @@ class UI {
                 var label = this.createElement('label', ['day-block', 'lbl-toggle']);
                 label.setAttribute('for', days[i].date);
                 var span = this.createElement('span', ['day'], new Date(days[i].date).toLocaleDateString());
-                var spanTime = this.createElement('span', ['day-time'], convertSummaryTimeToString(days[i].total));
+                var spanTime = this.createElement('span', ['day-time']);
+                this.createElementsForTotalTime(days[i].total, TypeListEnum.ByDays, spanTime);
 
                 label = this.appendChild(label, [span, spanTime]);
                 parent = this.appendChild(parent, [check, label]);

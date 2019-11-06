@@ -103,6 +103,10 @@ body {
   color: rgb(0, 0, 0);
 }
 
+.day-time .span-active-time{
+  color: rgb(0, 0, 0);
+}
+
 .margin-left-auto{
   margin-left: auto;
 }
@@ -216,14 +220,17 @@ p.table-header{
     width: 415px;
     font-size: 13px;
     padding-left:5px;
-    margin:auto;
+    margin: 0 0 0 5px;
     font-weight: 600;
 }
 
 .day-time{
     width: 80px;
-    margin:auto;
+    margin-left:auto;
+    margin-right: 10px;
     font-weight: 650;
+    font-size: 13px;
+    color:#c5c3c3;
 }
 
 .header-title-day{
@@ -246,12 +253,6 @@ p.table-header{
     cursor: pointer;
   }
   
-  .lbl-toggle:hover {
-    font-size: 13px;
-    font-weight: 650;
-    color: rgb(27, 27, 27);
-  }
-  
   .lbl-toggle::before {
     content: '    ';
     display: table;
@@ -260,8 +261,7 @@ p.table-header{
     border-bottom: 5px solid transparent;
     border-left: 5px solid currentColor;
     vertical-align: middle;
-    margin-right: 3px;
-    transform: translateY(6px);
+    transform: translateY(3px);
   
     transition: transform .2s ease-out;
   }
