@@ -41,41 +41,16 @@ class Tab {
         }
         else {
             day['counter'] += 1;
-            this.addInterval(day);
         }
     }
 
     addNewDay(today) {
-        var date = new Date();
-        var stringDate = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         this.days.push(
             {
                 'date': today,
                 'summary': 1,
-                'counter': 1,
-                'time': ["" + stringDate + '-'+ stringDate + ""]
+                'counter': 1
             }
         );
-    }
-
-    addInterval(day){
-        var date = new Date();
-        var stringDate = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-        if (day.time == undefined)
-            day.time = [stringDate + '-'+ stringDate]; 
-        else {
-            day.time.push(stringDate + '-' + stringDate);
-        }
-    }
-
-    closeInterval(){
-        var date = new Date();
-        var stringDate = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-        var today = new Date().toLocaleDateString("en-US");
-        var day = this.days.find(x => x.date == today);
-        if (day != undefined && day.time !== undefined){
-            var interval = day.time.pop();
-            day.time.push(interval.split('-')[0] + '-' + stringDate);
-        }
     }
 };

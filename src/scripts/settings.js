@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
         addNewRestrictionSiteClickHandler();
     });
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
-        storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
+        storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
     });
     document.getElementById('intervalInactivity').addEventListener('change', function () {
-        storage.saveSettings(SETTINGS_INTERVAL_INACTIVITY, this.value);
+        storage.saveValue(SETTINGS_INTERVAL_INACTIVITY, this.value);
     });
     document.getElementById('rangeToDays').addEventListener('change', function () {
-        storage.saveSettings(SETTINGS_INTERVAL_RANGE, this.value);
+        storage.saveValue(SETTINGS_INTERVAL_RANGE, this.value);
     });
     document.getElementById('grantPermission').addEventListener('click', function () {
         grantPermission();
@@ -60,25 +60,25 @@ function setBlockEvent(btnName, blockName) {
 }
 
 function loadSettings() {
-    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) {
+    storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function (item) {
         document.getElementById('intervalInactivity').value = item;
     });
-    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) {
+    storage.getValue(SETTINGS_INTERVAL_RANGE, function (item) {
         document.getElementById('rangeToDays').value = item;
     });
-    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) {
+    storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) {
         document.getElementById('viewTimeInBadge').checked = item;
     });
     storage.getMemoryUse(STORAGE_TABS, function (integer) {
         document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';
     });
-    storage.getSettings(STORAGE_BLACK_LIST, function (items) {
+    storage.getValue(STORAGE_BLACK_LIST, function (items) {
         if (items !== undefined)
             blackList = items;
         else blackList = [];
         viewBlackList(items);
     });
-    storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
+    storage.getValue(STORAGE_RESTRICTION_LIST, function (items) {
         restrictionList = items;
         if (restrictionList === undefined)
             restrictionList = [];
@@ -137,7 +137,7 @@ function viewRestrictionList(items) {
 }
 
 function exportToCSV() {
-    storage.getSettings(STORAGE_TABS, function (item) {
+    storage.getValue(STORAGE_TABS, function (item) {
         toCsv(item);
     });
 }
@@ -326,9 +326,9 @@ function updateItemFromResctrictoinList(domain, time) {
 }
 
 function updateBlackList() {
-    storage.saveSettings(STORAGE_BLACK_LIST, blackList);
+    storage.saveValue(STORAGE_BLACK_LIST, blackList);
 }
 
 function updateRestrictionList() {
-    storage.saveSettings(STORAGE_RESTRICTION_LIST, restrictionList);
+    storage.saveValue(STORAGE_RESTRICTION_LIST, restrictionList);
 }

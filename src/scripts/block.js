@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var blockSiteUrl = url.searchParams.get("url");
     document.getElementById('site').innerText = blockSiteUrl;
 
-    storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
+    storage.getValue(STORAGE_RESTRICTION_LIST, function (items) {
         restrictionList = items;
         if (restrictionList === undefined)
             restrictionList = [];

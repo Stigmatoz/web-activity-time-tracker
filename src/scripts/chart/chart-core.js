@@ -419,8 +419,13 @@ function drawIntervalChart(data) {
         })
         .attr("height", function (d) {
             var offset = getMinutesTo(d.interval) - getMinutesFrom(d.interval);
-            if (offset == 0)
-                return 1;
+            if (offset == 0){
+                var offsetSeconds = getSecondsTo(d.interval) - getSecondsFrom(d.interval);
+                if (offsetSeconds <= 3)
+                    return 0;
+                else
+                    return 1;
+            }
             else return offset * tickDistance;
         })
         .on("mouseover", mouseover)
@@ -457,5 +462,15 @@ function drawIntervalChart(data) {
     function getMinutesTo(interval) {
         var time = interval.split('-')[1];
         return time.split(':')[1];
+    }
+
+    function getSecondsFrom(interval) {
+        var time = interval.split('-')[0];
+        return time.split(':')[2];
+    }
+
+    function getSecondsTo(interval) {
+        var time = interval.split('-')[1];
+        return time.split(':')[2];
     }
 }

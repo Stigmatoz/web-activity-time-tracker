@@ -10,7 +10,7 @@ class Activity {
                 if (currentTab !== tab.url) {
                     isDifferentUrl = true;
                 }
-                
+
                 if (this.isNewUrl(domain) && !this.isInBlackList(domain)) {
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined) {
@@ -25,10 +25,10 @@ class Activity {
                     var tabUrl = this.getTab(domain);
                     if (tabUrl !== undefined)
                         tabUrl.incCounter();
+                    this.addTimeInterval(domain);
                 }
             }
         }
-        else this.clearCurrentActiveTab();
     }
 
     isValidPage(tab) {
@@ -109,12 +109,24 @@ class Activity {
         currentTab = '';
     }
 
+    addTimeInterval(domain) {
+        var item = timeIntervalList.find(o => o.domain === domain);
+        if (item != undefined) {
+            item.addInterval();
+        } else {
+            var newInterval = new TimeInterval(new Date().toLocaleDateString("en-US"), domain);
+            timeIntervalList.push(newInterval);
+            newInterval.addInterval();
+        }
+    }
+
+
     closeIntervalForCurrentTab() {
         if (currentTab !== '') {
-            var tabUrl = this.getTab(currentTab);
-            if (tabUrl !== undefined)
-                tabUrl.closeInterval();
-            currentTab = '';
+            var item = timeIntervalList.find(o => o.domain === currentTab);
+            if (item != undefined)
+                item.closeInterval();
         }
+        currentTab = '';
     }
 };

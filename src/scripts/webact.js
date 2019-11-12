@@ -9,10 +9,9 @@ var currentTypeOfList;
 var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var restrictionList;
-var currentTabListForToday;
 
 document.addEventListener('DOMContentLoaded', function () {
-    storage.getSettings(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
+    storage.getValue(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
     document.getElementById('btnToday').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ToDay;
         ui.setUIForToday();
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('heatMapChartBtn').addEventListener('click', function () {
         ui.setUIForTimeChart();
-        drawTimeChart();
+        getTimeIntervalList();
     });
     document.getElementById('btnAll').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.All;
@@ -151,24 +150,23 @@ function getTabsFromStorage(tabs) {
         else addTabOthersForChart(tabsForChart, summaryTime);
     }
 
-    currentTabListForToday = targetTabs;
     ui.addHrAfterTableOfSite();
     ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
     ui.drawChart(tabsForChart);
     ui.setActiveTooltipe(currentTab);
 }
 
-function getTabsForTimeChart(targetTabs) {
+function getTabsForTimeChart(timeIntervals) {
     var resultArr = [];
-    targetTabs.forEach(function (name) {
-        name.days.forEach(function (item) {
-            if (item.date == new Date().toLocaleDateString("en-US") && item.time !== undefined) {
-                item.time.forEach(function (time) {
-                    resultArr.push({ 'domain': name.url, 'interval': time });
-                })
+    if (timeIntervals != undefined) {
+        timeIntervals.forEach(function (data) {
+            if (data.day == today) {
+                data.intervals.forEach(function (interval) {
+                    resultArr.push({ 'domain': data.domain, 'interval': interval });
+                });
             }
         });
-    });
+    }
     return resultArr;
 }
 
@@ -176,8 +174,12 @@ function getTabsForExpander() {
     storage.loadTabs(STORAGE_TABS, getTabsFromStorageForExpander);
 }
 
-function drawTimeChart() {
-    ui.drawTimeChart(getTabsForTimeChart(currentTabListForToday));
+function getTimeIntervalList() {
+    storage.getValue(STORAGE_TIMEINTERVAL_LIST, drawTimeChart);
+}
+
+function drawTimeChart(items) {
+    ui.drawTimeChart(getTabsForTimeChart(items));
 }
 
 function getTabsFromStorageForExpander(tabs) {

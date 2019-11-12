@@ -1,7 +1,9 @@
 'use strict';
 
 var tabs;
+var timeIntervalList;
 var currentTab;
+var isNeedDeleteTimeIntervalFromTabs = false;
 var activity = new Activity();
 var storage = new LocalStorage();
 
@@ -120,13 +122,15 @@ function checkPermissions(callback, activeUrl, tab, activeTab) {
 function backgroundUpdateStorage() {
     if (tabs != undefined && tabs.length > 0)
         storage.saveTabs(tabs);
+    if (timeIntervalList != undefined && timeIntervalList.length > 0)
+        storage.saveValue(STORAGE_TIMEINTERVAL_LIST, timeIntervalList);
 }
 
 function setDefaultSettings() {
-    storage.saveSettings(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
-    storage.saveSettings(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
-    storage.saveSettings(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
-    storage.saveSettings(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
+    storage.saveValue(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
+    storage.saveValue(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
+    storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
+    storage.saveValue(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
 }
 
 function checkSettingsImEmpty() {
@@ -155,6 +159,7 @@ function addListener() {
         }
         if (details.reason == 'update') {
             checkSettingsImEmpty();
+            isNeedDeleteTimeIntervalFromTabs = true;
         }
     });
     chrome.storage.onChanged.addListener(function (changes, namespace) {
@@ -166,10 +171,10 @@ function addListener() {
                 loadRestrictionList();
             }
             if (key === SETTINGS_INTERVAL_INACTIVITY) {
-                storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
+                storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
             }
             if (key === SETTINGS_VIEW_TIME_IN_BADGE) {
-                storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
+                storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
             }
         }
     });
@@ -180,33 +185,58 @@ function addListener() {
 function loadTabs() {
     storage.loadTabs(STORAGE_TABS, function (items) {
         tabs = [];
-        for (var i = 0; i < items.length; i++) {
-            tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime, items[i].counter));
+        if (items != undefined) {
+            for (var i = 0; i < items.length; i++) {
+                tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime, items[i].counter));
+            }
+            if (isNeedDeleteTimeIntervalFromTabs)
+                deleteTimeIntervalFromTabs();
         }
     });
 }
 
+function deleteTimeIntervalFromTabs() {
+    tabs.forEach(function (item) {
+        item.days.forEach(function (day) {
+            if (day.time != undefined)
+                day.time = [];
+        })
+    })
+}
+
 function loadBlackList() {
-    storage.getSettings(STORAGE_BLACK_LIST, function (items) {
+    storage.getValue(STORAGE_BLACK_LIST, function (items) {
         setting_black_list = items;
     })
 }
 
+function loadTimeIntervals() {
+    storage.getValue(STORAGE_TIMEINTERVAL_LIST, function (items) {
+        timeIntervalList = [];
+        if (items != undefined) {
+            for (var i = 0; i < items.length; i++) {
+                timeIntervalList.push(new TimeInterval(items[i].day, items[i].domain, items[i].intervals));
+            }
+        }
+    });
+}
+
 function loadRestrictionList() {
-    storage.getSettings(STORAGE_RESTRICTION_LIST, function (items) {
+    storage.getValue(STORAGE_RESTRICTION_LIST, function (items) {
         setting_restriction_list = items;
     })
 }
 
 function loadSettings() {
-    storage.getSettings(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
-    storage.getSettings(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
+    storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
+    storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
 }
 
+addListener();
 loadTabs();
+loadTimeIntervals();
 loadBlackList();
 loadRestrictionList();
 loadSettings();
-addListener();
 updateSummaryTime();
 updateStorage();
