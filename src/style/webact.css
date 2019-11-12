@@ -302,7 +302,6 @@ p.table-header{
   }
 
   .tooltip {
-    width: 70px;
     position: relative;
     display: inline-block;
   }
@@ -397,4 +396,38 @@ p.table-header{
 
   .chart-btn-heatmap{
     background-image: url(/icons/heat-map-16.png);
+  }
+
+  #statsBlock{
+    /* border: 1px solid rgb(195, 194, 194);
+    border-radius: 5px; */
+    /* padding: 7px; */
+    color: #9b9b9b;
+    font-size: 13px;
+  }
+
+  #statsBlock .title-block{
+    display: inline-block; 
+    width: 40%; 
+    margin-left:10%;
+  }
+
+  #statsBlock .value-block{
+    color:black; 
+    font-weight: 600;
+  }
+
+  #statsBlock .inline-block{
+    display: inline-block;
+  }
+
+  #statsBlock .most-inactive-days-title{
+    width: 50%; 
+    display: inline-block;
+  }
+
+  #statsBlock .most-inactive-days-value{
+    display: inline-block;
+    margin-left:20%;
+    vertical-align: top;
   }

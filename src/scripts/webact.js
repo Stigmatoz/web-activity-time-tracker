@@ -9,6 +9,18 @@ var currentTypeOfList;
 var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var restrictionList;
+var stat = {
+    'firstDay': null,
+    'lastDay': null,
+    'activeDays': null,
+    'totalDays': null,
+    'inActiveDay': null,
+    'inActiveDayTime': null,
+    'activeDay': null,
+    'activeDayTime': null,
+    'todayTime': null,
+    'allDaysTime': null
+};
 
 document.addEventListener('DOMContentLoaded', function () {
     storage.getValue(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
@@ -92,6 +104,7 @@ function getTabsFromStorage(tabs) {
 
         if (targetTabs.length > 0) {
             totalTime = getTotalTime(targetTabs);
+            stat.allDaysTime = totalTime;
         }
         else {
             ui.fillEmptyBlock('chart');
@@ -109,6 +122,7 @@ function getTabsFromStorage(tabs) {
             });
 
             totalTime = getTotalTime(targetTabs);
+            stat.todayTime = totalTime;
         }
         else {
             ui.fillEmptyBlock('chart');

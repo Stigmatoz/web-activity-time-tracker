@@ -10,6 +10,7 @@ class UI {
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
         document.getElementById('blockForChartBtn').classList.remove('hide');
+        document.getElementById('stats').classList.add('hide');
         this.setUIForDonutChart();
 
         this.clearUI();
@@ -20,6 +21,7 @@ class UI {
         document.getElementById('btnToday').classList.remove('active');
         document.getElementById('btnByDays').classList.remove('active');
         document.getElementById('blockForChartBtn').classList.add('hide');
+        document.getElementById('stats').classList.remove('hide');
 
         this.clearUI();
     }
@@ -29,6 +31,7 @@ class UI {
         document.getElementById('btnAll').classList.remove('active');
         document.getElementById('btnToday').classList.remove('active');
         document.getElementById('blockForChartBtn').classList.add('hide');
+        document.getElementById('stats').classList.add('hide');
 
         this.clearUI();
         this.addBlockForCalendar(range);
