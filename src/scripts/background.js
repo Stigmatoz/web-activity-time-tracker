@@ -39,7 +39,6 @@ function backgroundCheck() {
                 } else {
                     if (tab !== undefined) {
                         if (currentTab !== tab.url) {
-                            tab.incCounter();
                             activity.setCurrentActiveTab(tab.url);
                         }
                         chrome.idle.queryState(parseInt(setting_interval_inactivity), function (state) {
