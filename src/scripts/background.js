@@ -52,9 +52,7 @@ function backgroundCheck() {
                     }
                 }
             }
-        } else {
-            activity.closeIntervalForCurrentTab();
-        }
+        } else activity.closeIntervalForCurrentTab();
     });
 }
 
@@ -115,7 +113,7 @@ function checkPermissions(callback, activeUrl, tab, activeTab) {
                     callback(activeUrl, tab, activeTab);
                 else activity.closeIntervalForCurrentTab();
             });
-        }
+        } else activity.closeIntervalForCurrentTab();
     });
 }
 

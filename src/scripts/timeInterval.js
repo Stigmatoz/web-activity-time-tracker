@@ -10,7 +10,6 @@ class TimeInterval {
     }
 
     addInterval() {
-        console.log('add interval');
         var date = new Date();
         var stringDate = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         this.intervals.push(stringDate + '-' + stringDate);
@@ -18,8 +17,13 @@ class TimeInterval {
 
     closeInterval() {
         var today = new Date();
-        var stringDate = zeroAppend(today.getHours()) + ':' + zeroAppend(today.getMinutes()) + ':' + zeroAppend(today.getSeconds());
-        var currentInterval = this.intervals.pop();
-        this.intervals.push(currentInterval.split('-')[0] + '-' + stringDate);
+        var stringDate = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+        var currentInterval = this.intervals[this.intervals.length - 1];
+        if (currentInterval != undefined) {
+            if (currentInterval.split('-')[0] == currentInterval.split('-')[1]) {
+                this.intervals.pop();
+                this.intervals.push(currentInterval.split('-')[0] + '-' + stringDate);
+            }
+        }
     }
 };

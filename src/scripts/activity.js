@@ -28,7 +28,7 @@ class Activity {
                     this.addTimeInterval(domain);
                 }
             }
-        }
+        } else this.closeIntervalForCurrentTab();
     }
 
     isValidPage(tab) {
@@ -110,20 +110,26 @@ class Activity {
     }
 
     addTimeInterval(domain) {
-        var item = timeIntervalList.find(o => o.domain === domain);
+        var item = timeIntervalList.find(o => o.domain === domain && o.day == new Date().toLocaleDateString("en-US"));
         if (item != undefined) {
-            item.addInterval();
+            if (item.day == new Date().toLocaleDateString("en-US"))
+                item.addInterval();
+            else {
+                var newInterval = new TimeInterval(new Date().toLocaleDateString("en-US"), domain);
+                newInterval.addInterval();
+                timeIntervalList.push(newInterval);
+            }
         } else {
             var newInterval = new TimeInterval(new Date().toLocaleDateString("en-US"), domain);
-            timeIntervalList.push(newInterval);
             newInterval.addInterval();
+            timeIntervalList.push(newInterval);
         }
     }
 
 
     closeIntervalForCurrentTab() {
         if (currentTab !== '') {
-            var item = timeIntervalList.find(o => o.domain === currentTab);
+            var item = timeIntervalList.find(o => o.domain === currentTab && o.day == new Date().toLocaleDateString("en-US"));
             if (item != undefined)
                 item.closeInterval();
         }

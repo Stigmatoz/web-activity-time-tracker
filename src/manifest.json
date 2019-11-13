@@ -34,8 +34,8 @@
                         "scripts/storage.js", 
                         "scripts/activity.js", 
                         "scripts/tab.js", 
-                        "scripts/background.js",
                         "scripts/timeInterval.js",
+                        "scripts/background.js",
                         "scripts/restriction.js"],
             "persistent": false
         },
