@@ -406,6 +406,14 @@ p.table-header{
     font-size: 13px;
   }
 
+  #statsBlock .span-time{
+    font-weight: 600;
+  }
+
+  #statsBlock .span-time-active{
+    font-weight: 600;
+  }
+
   #statsBlock .title-block{
     display: inline-block; 
     width: 40%; 
@@ -436,4 +444,9 @@ p.table-header{
     color: #9b9b9b;
     font-size: 13px;
     text-align: center;
+  }
+
+  .stat-description{
+    float: left;
+    width: 110px;
   }

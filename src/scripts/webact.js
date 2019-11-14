@@ -350,12 +350,12 @@ function setStatData(array){
     arrayAscByTime = arrayAscByTime.sort(function (a, b) {
         return a.total - b.total;
     });
-    stat.inActiveDay = arrayAscByTime[0].date;
-    stat.activeDay = arrayAscByTime[arrayAscByTime.length-1].date;
+    stat.inActiveDay = new Date(arrayAscByTime[0].date).toLocaleDateString('ru-RU');
+    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length-1].date).toLocaleDateString('ru-RU');;
     stat.inActiveDayTime = arrayAscByTime[0].total;
     stat.activeDayTime = arrayAscByTime[arrayAscByTime.length-1].total;
-    stat.firstDay = array[0];
-    stat.lastDay = array[array.length-1];
+    stat.firstDay = new Date(array[0]).toLocaleDateString('ru-RU');;
+    stat.lastDay = new Date(array[array.length-1]).toLocaleDateString('ru-RU');;
     stat.activeDays = array.length;
     stat.totalDays = daysBetween(array[0], array[array.length-1]);
 }
