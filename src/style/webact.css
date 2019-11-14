@@ -37,15 +37,6 @@ body {
     cursor: pointer;
 }
 
-.span-active-url .span-url{
-    font-size: 13px;
-    font-weight: 650;
-}
-.span-active-url .span-time{
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-}
-
 .span-total{
     width: 450px;
     text-decoration: none;
@@ -311,7 +302,7 @@ p.table-header{
     font-size: 11px;
     font-weight: 500;
     visibility: hidden;
-    width: 220px;
+    width: 180px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -321,7 +312,7 @@ p.table-header{
     /* Position the tooltip text */
     position: absolute;
     z-index: 1;
-    transform: translateX(-20%) translateY(-120%);
+    transform: translateX(-40%) translateY(-120%);
   
     /* Fade in tooltip */
     opacity: 0;
@@ -329,6 +320,11 @@ p.table-header{
   }
 
   .visits.tooltip .tooltiptext{
+    width: 120px;
+    transform: translateX(-50%) translateY(-120%);
+  }
+
+  .current-url.tooltip .tooltiptext{
     width: 120px;
     transform: translateX(-50%) translateY(-120%);
   }

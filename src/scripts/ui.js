@@ -75,7 +75,7 @@ class UI {
         var span = this.createElement('span', ['span-time']);
         this.createElementsForTotalTime(totalTime, currentTypeOfList, span);
 
-       this.appendChild(totalElement, [div, spanVisits, spanPercentage, span]);
+        this.appendChild(totalElement, [div, spanVisits, spanPercentage, span]);
     }
 
     fillEmptyBlock(elementName) {
@@ -120,8 +120,6 @@ class UI {
         d3.select('#chart')
             .datum(tabs) // bind data to the div
             .call(donut); // draw chart in div
-
-        ui.addHrAfterChart();
     }
 
     drawTimeChart(tabs) {
@@ -175,10 +173,6 @@ class UI {
         });
         div.classList.add('inline-flex');
 
-        if (tab.url == currentTab) {
-            div.classList.add('span-active-url');
-        }
-
         var divForImg = document.createElement('div');
         var img = document.createElement('img');
         img.setAttribute('height', 17);
@@ -189,6 +183,18 @@ class UI {
         divForImg.appendChild(img);
 
         var spanUrl = this.createElement('span', ['span-url'], tab.url);
+
+        if (tab.url == currentTab) {
+            div.classList.add('span-active-url');
+            var imgCurrentDomain = document.createElement('img');
+            imgCurrentDomain.setAttribute('src', '/icons/eye.png');
+            imgCurrentDomain.setAttribute('height', 17);
+            imgCurrentDomain.classList.add('margin-left-5');
+            spanUrl.appendChild(imgCurrentDomain);
+            var currentDomainTooltip = this.createElement('span', ['tooltiptext'], 'Current domain');
+            spanUrl.classList.add('tooltip', 'current-url');
+            spanUrl.appendChild(currentDomainTooltip);
+        }
 
         if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {
             if (restrictionList !== undefined && restrictionList.length > 0) {
