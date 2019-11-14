@@ -399,15 +399,18 @@ p.table-header{
   }
 
   #statsBlock{
-    /* border: 1px solid rgb(195, 194, 194);
-    border-radius: 5px; */
-    /* padding: 7px; */
     color: #9b9b9b;
     font-size: 13px;
+  }
+  #statsBlock .block{
+    width: 40%;
+    display: inline-block;
+    text-align: center;
   }
 
   #statsBlock .span-time{
     font-weight: 600;
+    text-align: center !important;
   }
 
   #statsBlock .span-time-active{
@@ -415,9 +418,8 @@ p.table-header{
   }
 
   #statsBlock .title-block{
-    display: inline-block; 
-    width: 40%; 
     margin-left:10%;
+    margin-top: 5px;
   }
 
   #statsBlock .value-block{
@@ -444,9 +446,4 @@ p.table-header{
     color: #9b9b9b;
     font-size: 13px;
     text-align: center;
-  }
-
-  .stat-description{
-    float: left;
-    width: 110px;
   }
