@@ -202,6 +202,10 @@ function deleteTimeIntervalFromTabs() {
     })
 }
 
+function deleteYesterdayTimeInterval(){
+    timeIntervalList = timeIntervalList.filter(x => x.day == new Date().toLocaleDateString("en-US"));
+}
+
 function loadBlackList() {
     storage.getValue(STORAGE_BLACK_LIST, function (items) {
         setting_black_list = items;
@@ -215,6 +219,7 @@ function loadTimeIntervals() {
             for (var i = 0; i < items.length; i++) {
                 timeIntervalList.push(new TimeInterval(items[i].day, items[i].domain, items[i].intervals));
             }
+            deleteYesterdayTimeInterval();
         }
     });
 }

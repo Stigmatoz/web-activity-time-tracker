@@ -58,33 +58,33 @@
             </div>
          </div>
          <div>
-            <div class="most-inactive-days-title">
-               <div class="most-inactive-days-value">
-                  <span>Most inactive day</span>
+            <div class="title-block">
+               <span>Today</span>
+               <span class="span-time" id="statTodayTime"></span>
+            </div>
+            <div class="inline-block">
+               <span>All-time</span>
+               <span class="span-time" id="statAllDaysTime"></span>
+            </div>
+         </div>
+         <div>
+            <div class="most-active-days-title">
+               <div class="most-active-days-value">
+                  <span>Most active day</span>
                </div>
                <div class="inline-block">
-                  <div class="value-block" id="statInActiveDay"></div>
-                  <div class="value-block" id="statInActiveDayTime"></div>
+                  <div class="value-block" id="statActiveDay"></div>
+                  <div class="span-time" id="statActiveDayTime"></div>
                </div>
             </div>
             <div class="inline-block">
                <div style="display: inline-block;vertical-align: top;">
-                  <span>Most active day</span>
+                  <span>Most inactive day</span>
                </div>
                <div class="inline-block">
-                     <div class="value-block" id="statActiveDay"></div>
-                     <div class="value-block" id="statActiveDayTime"></div>
+                  <div class="value-block" id="statInActiveDay"></div>
+                  <div class="span-time" id="statInActiveDayTime"></div>
                </div>
-            </div>
-         </div>
-         <div>
-            <div class="title-block">
-               <span>Today</span>
-               <span class="value-block" id="statTodayTime"></span>
-            </div>
-            <div class="inline-block">
-               <span>All-time</span>
-               <span class="value-block" id="statAllDaysTime"></span>
             </div>
          </div>
       </div>
@@ -94,6 +94,9 @@
       <a class="button chart-btn chart-btn-heatmap" id="heatMapChartBtn">Time chart</a>
    </div>
    <div id="chart"></div>
+   <div id="labelForTimeInterval" class="warning hide">
+      <label>Only time intervals greater than 3 seconds are shown</label>
+   </div>
    <div id="timeChart"></div>
    <div id="resultTable" class="list-of-site"></div>
    <div id="total" class="inline-flex"></div>

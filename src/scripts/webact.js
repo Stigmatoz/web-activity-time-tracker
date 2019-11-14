@@ -10,16 +10,40 @@ var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var restrictionList;
 var stat = {
-    'firstDay': null,
-    'lastDay': null,
-    'activeDays': null,
-    'totalDays': null,
-    'inActiveDay': null,
-    'inActiveDayTime': null,
-    'activeDay': null,
-    'activeDayTime': null,
-    'todayTime': null,
-    'allDaysTime': null
+    set firstDay(value){
+        document.getElementById('statFirstDay').innerHTML = value;
+    },
+    set lastDay(value){
+        document.getElementById('statLastDay').innerHTML = value;
+    },
+    set activeDays(value){
+        document.getElementById('statActiveDays').innerHTML = value;
+    },
+    set totalDays(value){
+        document.getElementById('statTotalDays').innerHTML = value;
+    },
+    set inActiveDay(value){
+        document.getElementById('statInActiveDay').innerHTML = value;
+    },
+    set inActiveDayTime(value){
+        document.getElementById('statInActiveDayTime').innerHTML = '';
+        ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statInActiveDayTime'));
+    },
+    set activeDay(value){
+        document.getElementById('statActiveDay').innerHTML = value;
+    },
+    set activeDayTime(value){
+        document.getElementById('statActiveDayTime').innerHTML = '';
+        ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statActiveDayTime'));
+    },
+    set todayTime(value){
+        document.getElementById('statTodayTime').innerHTML = '';
+        ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statTodayTime'));
+    },
+    set allDaysTime(value){
+        document.getElementById('statAllDaysTime').innerHTML = '';
+        ui.createElementsForTotalTime(value, TypeListEnum.All, document.getElementById('statAllDaysTime'));
+    },
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -295,14 +319,45 @@ function getFirstDay() {
                 return array.push(a.date);
         });
     });
+    
     array = array.sort(function (a, b) {
         return new Date(a) - new Date(b);
     });
 
+    setStatData(array);
     return {
         'countOfDays': array.length,
         'minDate': array[0]
     };
+}
+
+function setStatData(array){
+    var arrayAscByTime = [];
+    tabsFromStorage.forEach(tab => {
+        return tab.days.forEach(day => {
+            var item = arrayAscByTime.find(x => x.date == day.date);
+            if (item !== undefined) {
+                return item.total += day.summary;
+            }
+            if (item === undefined)
+                return arrayAscByTime.push({
+                    'date': day.date,
+                    'total': day.summary
+                });
+        });
+    });
+
+    arrayAscByTime = arrayAscByTime.sort(function (a, b) {
+        return a.total - b.total;
+    });
+    stat.inActiveDay = arrayAscByTime[0].date;
+    stat.activeDay = arrayAscByTime[arrayAscByTime.length-1].date;
+    stat.inActiveDayTime = arrayAscByTime[0].total;
+    stat.activeDayTime = arrayAscByTime[arrayAscByTime.length-1].total;
+    stat.firstDay = array[0];
+    stat.lastDay = array[array.length-1];
+    stat.activeDays = array.length;
+    stat.totalDays = daysBetween(array[0], array[array.length-1]);
 }
 
 function getTabsByDays(tabs) {

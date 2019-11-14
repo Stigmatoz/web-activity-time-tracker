@@ -102,6 +102,7 @@ class Activity {
     setCurrentActiveTab(domain) {
         this.closeIntervalForCurrentTab();
         currentTab = domain;
+        this.addTimeInterval(domain);
     }
 
     clearCurrentActiveTab() {

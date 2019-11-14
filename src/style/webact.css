@@ -421,13 +421,19 @@ p.table-header{
     display: inline-block;
   }
 
-  #statsBlock .most-inactive-days-title{
+  #statsBlock .most-active-days-title{
     width: 50%; 
     display: inline-block;
   }
 
-  #statsBlock .most-inactive-days-value{
+  #statsBlock .most-active-days-value{
     display: inline-block;
     margin-left:20%;
     vertical-align: top;
+  }
+
+  .warning{
+    color: #9b9b9b;
+    font-size: 13px;
+    text-align: center;
   }

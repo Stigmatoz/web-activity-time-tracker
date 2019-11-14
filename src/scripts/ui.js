@@ -11,6 +11,7 @@ class UI {
         document.getElementById('btnByDays').classList.remove('active');
         document.getElementById('blockForChartBtn').classList.remove('hide');
         document.getElementById('stats').classList.add('hide');
+        document.getElementById('labelForTimeInterval').classList.add('hide');
         this.setUIForDonutChart();
 
         this.clearUI();
@@ -22,6 +23,7 @@ class UI {
         document.getElementById('btnByDays').classList.remove('active');
         document.getElementById('blockForChartBtn').classList.add('hide');
         document.getElementById('stats').classList.remove('hide');
+        document.getElementById('labelForTimeInterval').classList.add('hide');
 
         this.clearUI();
     }
@@ -32,6 +34,7 @@ class UI {
         document.getElementById('btnToday').classList.remove('active');
         document.getElementById('blockForChartBtn').classList.add('hide');
         document.getElementById('stats').classList.add('hide');
+        document.getElementById('labelForTimeInterval').classList.add('hide');
 
         this.clearUI();
         this.addBlockForCalendar(range);
@@ -49,12 +52,14 @@ class UI {
         document.getElementById('donutChartBtn').classList.add('active');
         document.getElementById('heatMapChartBtn').classList.remove('active');
         document.getElementById('timeChart').innerHTML = null;
+        document.getElementById('labelForTimeInterval').classList.add('hide');
     }
 
     setUIForTimeChart() {
         document.getElementById('donutChartBtn').classList.remove('active');
         document.getElementById('heatMapChartBtn').classList.add('active');
         document.getElementById('chart').innerHTML = null;
+        document.getElementById('labelForTimeInterval').classList.remove('hide');
     }
 
     createTotalBlock(totalTime, currentTypeOfList, counter) {
