@@ -5,7 +5,7 @@ You can set a daily visit limit for sites and block it after the expiration of t
 
 Extension uses only local [chrome.storage API](https://developer.chrome.com/apps/storage) chrome.storage API to store data and it does't send data anywhere.
 
-![image](https://user-images.githubusercontent.com/23387046/66277868-d1991400-e8ac-11e9-8cce-4abc8878f639.png)
+![image](https://user-images.githubusercontent.com/23387046/68947288-242bf100-07c6-11ea-8b08-184be2dd306a.png)
 
 If you have suggestions or problems using the extension, please [submit a bug or a feature request](https://github.com/Stigmatoz/web-activity-time-tracker/issues).
 
