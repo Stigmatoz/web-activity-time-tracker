@@ -23,6 +23,7 @@
       <div id='nav' class="nav">
          <a id='settingsBtn' class="active">Settings</a>
          <a id='restrictionsBtn'>Limits</a>
+         <a id='notifyBtn'>Notifications</a>
          <a id='aboutBtn'>About</a>
       </div>
       <div id='block'>
@@ -112,17 +113,36 @@
                   to the site will be blocked.</span>
             </div>
             <div class="margin-top-10">
-               <input type="text" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
+               <input type="text" class="label-with-list" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
                <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
                   <input type="text" class="clock" placeholder="Time..." readonly id="addRestrictionTimeLbl">
                </div>
-               <input type="button" value="+" id='addRestrictionSiteBtn' />
+               <input type="button" value="+" class="btn-with-list" id='addRestrictionSiteBtn' />
             </div>
             <div class="margin-top-10">
-               <ul id='restrictionsList' class="listbox" size="10"></ul>
+               <ul id='restrictionsList' class="listbox list" size="10"></ul>
             </div>
             <div class="notify warning" id='notifyForRestrictionList' hidden>
                The site is already in the list
+            </div>
+         </div>
+         <div id='notifyBlock' hidden>
+            <label>List of sites with notifications: </label>
+            <div class="tooltip"><img src="/icons/information.svg" height="18" />
+               <span class="tooltiptext">Show notifications every time you spend a specified time interval on the site</span>
+            </div>
+            <div class="margin-top-10">
+               <input type="text" class="label-with-list" placeholder="Enter site name..." id='addNotifySiteLbl' />
+               <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                  <input type="text" class="clock" placeholder="Time..." readonly id="addNotifyTimeLbl">
+               </div>
+               <input type="button" class="btn-with-list" value="+" id='addNotifySiteBtn' />
+            </div>
+            <div class="margin-top-10">
+               <ul id='notifyList' class="listbox list" size="10"></ul>
+            </div>
+            <div class="notify warning" id='notifyForNotifyList' hidden>
+               The site is already in the notify list
             </div>
          </div>
          <div id='aboutBlock' hidden>

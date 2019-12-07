@@ -1,8 +1,10 @@
 var storage = new LocalStorage();
 var blackList = [];
 var restrictionList = [];
-var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'aboutBtn'];
-var blockList = ['settingsBlock', 'restrictionsBlock', 'aboutBlock'];
+var notifyList = [];
+var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn'];
+var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock'];
+
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
@@ -10,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('restrictionsBtn').addEventListener('click', function () {
         setBlockEvent('restrictionsBtn', 'restrictionsBlock');
+    });
+    document.getElementById('notifyBtn').addEventListener('click', function () {
+        setBlockEvent('notifyBtn', 'notifyBlock');
     });
     document.getElementById('aboutBtn').addEventListener('click', function () {
         setBlockEvent('aboutBtn', 'aboutBlock');
@@ -22,10 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
         exportToCSV();
     });
     document.getElementById('addBlackSiteBtn').addEventListener('click', function () {
-        addNewBlackSiteClickHandler();
+        addNewSiteClickHandler('addBlackSiteLbl', null, actionAddBlackSiteToList, 'notifyForBlackList');
     });
     document.getElementById('addRestrictionSiteBtn').addEventListener('click', function () {
-        addNewRestrictionSiteClickHandler();
+        addNewSiteClickHandler('addRestrictionSiteLbl', 'addRestrictionTimeLbl', actionAddRectrictionToList, 'notifyForRestrictionList');
+    });
+    document.getElementById('addNotifySiteBtn').addEventListener('click', function () {
+        addNewSiteClickHandler('addNotifySiteLbl', 'addNotifyTimeLbl', actionAddNotifyToList, 'notifyForNotifyList');
     });
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
         storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
@@ -84,6 +92,12 @@ function loadSettings() {
             restrictionList = [];
         viewRestrictionList(items);
     });
+    storage.getValue(STORAGE_NOTIFICATION_LIST, function (items) {
+        notifyList = items;
+        if (notifyList === undefined)
+        notifyList = [];
+        viewNotificationList(items);
+    });
     checkPermissions();
 }
 
@@ -128,10 +142,18 @@ function setUIForAnyPermission() {
     document.getElementById('grantPermission').setAttribute('disabled', 'true');
 }
 
+function viewNotificationList(items){
+    if (items !== undefined) {
+        for (var i = 0; i < items.length; i++) {
+            addDomainToEditableListBox(items[i], 'notifyList', actionEditSite, deleteNotificationSite, updateItemFromNotifyList, updateNotificationList);
+        }
+    }
+}
+
 function viewRestrictionList(items) {
     if (items !== undefined) {
         for (var i = 0; i < items.length; i++) {
-            addDomainToRestrictionListBox(items[i]);
+            addDomainToEditableListBox(items[i], 'restrictionsList', actionEditSite, deleteRestrictionSite, updateItemFromResctrictoinList, updateRestrictionList);
         }
     }
 }
@@ -174,37 +196,60 @@ function viewNotify(elementName) {
     setTimeout(function () { document.getElementById(elementName).hidden = true; }, 3000);
 }
 
-function addNewBlackSiteClickHandler() {
-    var newBlackSite = document.getElementById('addBlackSiteLbl').value;
-    if (newBlackSite !== '') {
-        if (!isContainsBlackSite(newBlackSite)) {
-            addDomainToListBox(newBlackSite);
-            if (blackList === undefined)
-                blackList = [];
-            blackList.push(newBlackSite);
-            document.getElementById('addBlackSiteLbl').value = '';
+function actionAddRectrictionToList(newSite, newTime) {
+    if (!isContainsRestrictionSite(newSite)) {
+        var restriction = new Restriction(newSite, newTime);
+        addDomainToEditableListBox(restriction, 'restrictionsList', actionEditSite, deleteRestrictionSite, updateItemFromResctrictoinList, updateRestrictionList);
+        if (restrictionList === undefined)
+            restrictionList = [];
+        restrictionList.push(restriction);
+        document.getElementById('addRestrictionSiteLbl').value = '';
+        document.getElementById('addRestrictionTimeLbl').value = '';
 
-            updateBlackList();
-        } else viewNotify('notifyForBlackList');
-    }
+        updateRestrictionList();
+
+        return true;
+    } else return false;
 }
 
-function addNewRestrictionSiteClickHandler() {
-    var newRestrictionSite = document.getElementById('addRestrictionSiteLbl').value;
-    var newRestrictionTime = document.getElementById('addRestrictionTimeLbl').value;
-    if (newRestrictionSite !== '' && newRestrictionTime !== '') {
-        if (!isContainsRestrictionSite(newRestrictionSite)) {
-            var restriction = new Restriction(newRestrictionSite, newRestrictionTime);
-            addDomainToRestrictionListBox(restriction);
-            if (restrictionList === undefined)
-                restrictionList = [];
-            restrictionList.push(restriction);
-            document.getElementById('addRestrictionSiteLbl').value = '';
-            document.getElementById('addRestrictionTimeLbl').value = '';
+function actionAddBlackSiteToList(newSite) {
+    if (!isContainsBlackSite(newSite)) {
+        addDomainToListBox(newSite);
+        if (blackList === undefined)
+            blackList = [];
+        blackList.push(newSite);
+        document.getElementById('addBlackSiteLbl').value = '';
 
-            updateRestrictionList();
-        }
-        else viewNotify('notifyForRestrictionList');
+        updateBlackList();
+
+        return true;
+    } else return false;
+}
+
+function actionAddNotifyToList(newSite, newTime) {
+    if (!isContainsNotificationSite(newSite)) {
+        var notify = new Notification(newSite, newTime);
+        addDomainToEditableListBox(notify, 'notifyList', actionEditSite, deleteNotificationSite, updateItemFromNotifyList, updateNotificationList);
+        if (notifyList === undefined)
+            notifyList = [];
+        notifyList.push(notify);
+        document.getElementById('addNotifySiteLbl').value = '';
+        document.getElementById('addNotifyTimeLbl').value = '';
+
+        updateNotificationList();
+
+        return true;
+    } else return false;
+}
+
+function addNewSiteClickHandler(lblName, timeName, actionCheck, notifyBlock) {
+    var newSite = document.getElementById(lblName).value;
+    var newTime;
+    if (timeName != null)
+        newTime = document.getElementById(timeName).value;
+    if (newSite !== '' && (newTime === undefined || (newTime !== undefined && newTime !== ''))) {
+        if (!actionCheck(newSite, newTime))
+            viewNotify(notifyBlock);
     }
 }
 
@@ -220,13 +265,13 @@ function addDomainToListBox(domain) {
     document.getElementById('blackList').appendChild(li).appendChild(del);
 }
 
-function addDomainToRestrictionListBox(resctiction) {
+function addDomainToEditableListBox(entity, elementId, actionEdit, actionDelete, actionUpdateTimeFromList, actionUpdateList){
     var li = document.createElement('li');
 
     var domainLbl = document.createElement('input');
     domainLbl.type = 'text';
-    domainLbl.classList.add('readonly-input', 'inline-block', 'restriction-item');
-    domainLbl.value = resctiction.domain;
+    domainLbl.classList.add('readonly-input', 'inline-block', 'element-item');
+    domainLbl.value = entity.domain;
     domainLbl.readOnly = true;
     domainLbl.setAttribute('name', 'domain');
 
@@ -235,7 +280,7 @@ function addDomainToRestrictionListBox(resctiction) {
     edit.height = 14;
     edit.src = '/icons/edit.png';
     edit.addEventListener('click', function (e) {
-        editRestrictionSite(e);
+        actionEdit(e, actionUpdateTimeFromList, actionUpdateList);
     });
 
     var del = document.createElement('img');
@@ -243,7 +288,7 @@ function addDomainToRestrictionListBox(resctiction) {
     del.src = '/icons/delete.png';
     del.classList.add('margin-left-5');
     del.addEventListener('click', function (e) {
-        deleteRestrictionSite(e);
+        actionDelete(e, actionUpdateTimeFromList, actionUpdateList);
     });
 
     var bloc = document.createElement('div');
@@ -256,11 +301,11 @@ function addDomainToRestrictionListBox(resctiction) {
     timeInput.classList.add('clock', 'clock-li-readonly');
     timeInput.setAttribute('readonly', true);
     timeInput.setAttribute('name', 'time');
-    timeInput.value = convertShortSummaryTimeToString(resctiction.time);
+    timeInput.value = convertShortSummaryTimeToString(entity.time);
     bloc.appendChild(timeInput);
 
     var hr = document.createElement('hr');
-    var li = document.getElementById('restrictionsList').appendChild(li);
+    var li = document.getElementById(elementId).appendChild(li);
     li.appendChild(domainLbl);
     li.appendChild(del);
     li.appendChild(edit);
@@ -284,7 +329,16 @@ function deleteRestrictionSite(e) {
     updateRestrictionList();
 }
 
-function editRestrictionSite(e) {
+function deleteNotificationSite(e) {
+    var targetElement = e.path[1];
+    var itemValue = targetElement.querySelector("[name='domain']").value;
+    var item = notifyList.find(x => x.domain == itemValue);
+    notifyList.splice(notifyList.indexOf(item), 1);
+    document.getElementById('notifyList').removeChild(targetElement);
+    updateNotificationList();
+}
+
+function actionEditSite(e, actionUpdateTimeFromList, actionUpdateList) {
     var targetElement = e.path[1];
     var domainElement = targetElement.querySelector('[name="domain"]');
     var timeElement = targetElement.querySelector('[name="time"]');
@@ -307,14 +361,18 @@ function editRestrictionSite(e) {
             var resultTime = convertShortSummaryTimeToString(convertTimeToSummaryTime(time));
             timeElement.value = resultTime;
 
-            updateItemFromResctrictoinList(domain, time);
-            updateRestrictionList();
+            actionUpdateTimeFromList(domain, time);
+            actionUpdateList();
         }
     }
 }
 
 function isContainsRestrictionSite(domain) {
     return restrictionList.find(x => x.domain == domain) != undefined;
+}
+
+function isContainsNotificationSite(domain) {
+    return notifyList.find(x => x.domain == domain) != undefined;
 }
 
 function isContainsBlackSite(domain) {
@@ -325,10 +383,18 @@ function updateItemFromResctrictoinList(domain, time) {
     restrictionList.find(x => x.domain === domain).time = convertTimeToSummaryTime(time);
 }
 
+function updateItemFromNotifyList(domain, time) {
+    notifyList.find(x => x.domain === domain).time = convertTimeToSummaryTime(time);
+}
+
 function updateBlackList() {
     storage.saveValue(STORAGE_BLACK_LIST, blackList);
 }
 
 function updateRestrictionList() {
     storage.saveValue(STORAGE_RESTRICTION_LIST, restrictionList);
+}
+
+function updateNotificationList() {
+    storage.saveValue(STORAGE_NOTIFICATION_LIST, notifyList);
 }

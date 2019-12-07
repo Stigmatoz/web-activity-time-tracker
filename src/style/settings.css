@@ -295,13 +295,13 @@ input[type="button"]:hover {
     width: 28px !important;
   }
 
-  #addRestrictionSiteLbl{
+  .label-with-list{
     width: 333px;
     height: 15px;
     padding: 3px;
 }
 
-#addRestrictionSiteBtn{
+.btn-with-list{
   height: 24px !important;
   line-height: 20px !important;
   padding: 0 5px !important;
@@ -309,7 +309,7 @@ input[type="button"]:hover {
   width: 28px !important;
 }
 
-#restrictionsList{
+.list{
     width: 440px;
     height: 250px;
 }
@@ -339,7 +339,7 @@ input[type="button"]:hover {
     display: block;
 }
 
-.restriction-item{
+.element-item{
     width: 380px;
     font-weight: 600;
 }
