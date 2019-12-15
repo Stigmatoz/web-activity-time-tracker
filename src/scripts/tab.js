@@ -31,6 +31,11 @@ class Tab {
         }
     }
 
+    getTodayTime(){
+        var today = new Date().toLocaleDateString("en-US");
+        return this.days.find(x => x.date == today).summary;
+    }
+
     incCounter(){
         this.counter +=1;
 

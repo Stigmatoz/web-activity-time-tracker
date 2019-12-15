@@ -5,7 +5,6 @@ var notifyList = [];
 var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn'];
 var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock'];
 
-
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
         setBlockEvent('settingsBtn', 'settingsBlock');
@@ -46,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('grantPermission').addEventListener('click', function () {
         grantPermission();
+    });
+    document.getElementById('notifyMessage').addEventListener('change', function () {
+        updateNotificationMessage();
     });
     $('.clockpicker').clockpicker();
 
@@ -97,6 +99,9 @@ function loadSettings() {
         if (notifyList === undefined)
         notifyList = [];
         viewNotificationList(items);
+    });
+    storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (mess) {
+        document.getElementById('notifyMessage').value = mess;
     });
     checkPermissions();
 }
@@ -397,4 +402,8 @@ function updateRestrictionList() {
 
 function updateNotificationList() {
     storage.saveValue(STORAGE_NOTIFICATION_LIST, notifyList);
+}
+
+function updateNotificationMessage() {
+    storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, document.getElementById('notifyMessage').value);
 }

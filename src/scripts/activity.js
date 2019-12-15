@@ -127,7 +127,6 @@ class Activity {
         }
     }
 
-
     closeIntervalForCurrentTab() {
         if (currentTab !== '') {
             var item = timeIntervalList.find(o => o.domain === currentTab && o.day == new Date().toLocaleDateString("en-US"));
@@ -135,5 +134,22 @@ class Activity {
                 item.closeInterval();
         }
         currentTab = '';
+    }
+
+    isNeedNotifyView(domain, tab){
+        if (setting_notification_list !== undefined && setting_notification_list.length > 0) {
+            var item = setting_notification_list.find(o => isDomainEquals(this.extractHostname(o.domain), this.extractHostname(domain)));
+            if (item !== undefined) {
+                var today = new Date().toLocaleDateString("en-US");
+                var data = tab.days.find(x => x.date == today);
+                if (data !== undefined) {
+                    var todayTimeUse = data.summary;
+                    if (todayTimeUse == item.time || todayTimeUse % item.time == 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 };

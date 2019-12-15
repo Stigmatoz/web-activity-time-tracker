@@ -31,6 +31,7 @@ var STORAGE_TABS = 'tabs';
 var STORAGE_BLACK_LIST = 'black_list';
 var STORAGE_RESTRICTION_LIST = 'restriction_list';
 var STORAGE_NOTIFICATION_LIST = 'notification_list';
+var STORAGE_NOTIFICATION_MESSAGE = 'notification_message';
 var STORAGE_TIMEINTERVAL_LIST = 'time_interval';
 
 var SETTINGS_INTERVAL_INACTIVITY_DEFAULT = InactivityInterval.second30;
@@ -39,6 +40,7 @@ var SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT = 2000;
 var SETTINGS_INTERVAL_CHECK_STORAGE_DEFAULT = 3000;
 var SETTINGS_INTERVAL_RANGE_DEFAULT = RangeForDays.days7;
 var SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT = true;
+var STORAGE_NOTIFICATION_MESSAGE_DEFAULT = 'You have spent a lot of time on this site';
 
 var SETTINGS_INTERVAL_INACTIVITY = 'inactivity_interval';
 var SETTINGS_INTERVAL_SAVE_STORAGE = 'interval_save_in_storage';

@@ -185,15 +185,17 @@ class UI {
         var spanUrl = this.createElement('span', ['span-url'], tab.url);
 
         if (tab.url == currentTab) {
+            var divForImage = document.createElement('div');
             div.classList.add('span-active-url');
             var imgCurrentDomain = document.createElement('img');
             imgCurrentDomain.setAttribute('src', '/icons/eye.png');
             imgCurrentDomain.setAttribute('height', 17);
             imgCurrentDomain.classList.add('margin-left-5');
-            spanUrl.appendChild(imgCurrentDomain);
+            divForImage.appendChild(imgCurrentDomain);
             var currentDomainTooltip = this.createElement('span', ['tooltiptext'], 'Current domain');
-            spanUrl.classList.add('tooltip', 'current-url');
-            spanUrl.appendChild(currentDomainTooltip);
+            divForImage.classList.add('tooltip', 'current-url');
+            divForImage.appendChild(currentDomainTooltip);
+            spanUrl.appendChild(divForImage);
         }
 
         if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {

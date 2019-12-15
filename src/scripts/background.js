@@ -12,6 +12,8 @@ var setting_restriction_list;
 var setting_interval_save;
 var setting_interval_inactivity;
 var setting_view_in_badge;
+var setting_notification_list;
+var setting_notification_message;
 
 function updateSummaryTime() {
     setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK_DEFAULT);
@@ -61,6 +63,17 @@ function mainTRacker(activeUrl, tab, activeTab) {
         setBlockPageToCurrent(activeUrl);
     }
     if (!activity.isInBlackList(activeUrl)) {
+        if (activity.isNeedNotifyView(activeUrl, tab)) {
+            chrome.notifications.clear('watt-site-notification');
+            chrome.notifications.create(
+                'watt-site-notification', {
+                type: 'basic',
+                iconUrl: 'icons/128x128.png',
+                title: "Web Activity Time Tracker",
+                contextMessage: activeUrl + ' ' + convertShortSummaryTimeToString(tab.getTodayTime()),
+                message: setting_notification_message
+            });
+        }
         tab.incSummaryTime();
     }
     if (setting_view_in_badge === true) {
@@ -137,6 +150,13 @@ function checkSettingsImEmpty() {
             setDefaultSettings();
         }
     });
+
+    storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (item) {
+        var current = item;
+        if (current == undefined) {
+            storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, STORAGE_NOTIFICATION_MESSAGE_DEFAULT);
+        }
+    });
 }
 
 function addListener() {
@@ -167,6 +187,9 @@ function addListener() {
             }
             if (key === STORAGE_RESTRICTION_LIST) {
                 loadRestrictionList();
+            }
+            if (key === STORAGE_NOTIFICATION_LIST) {
+                loadNotificationList();
             }
             if (key === SETTINGS_INTERVAL_INACTIVITY) {
                 storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
@@ -202,7 +225,7 @@ function deleteTimeIntervalFromTabs() {
     })
 }
 
-function deleteYesterdayTimeInterval(){
+function deleteYesterdayTimeInterval() {
     timeIntervalList = timeIntervalList.filter(x => x.day == new Date().toLocaleDateString("en-US"));
 }
 
@@ -230,16 +253,30 @@ function loadRestrictionList() {
     })
 }
 
+function loadNotificationList() {
+    storage.getValue(STORAGE_NOTIFICATION_LIST, function (items) {
+        setting_notification_list = items;
+    });
+    storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (item) {
+        setting_notification_message = item;
+    });
+}
+
 function loadSettings() {
     storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
     storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
 }
 
+function loadAddDataFromStorage(){
+    loadTabs();
+    loadTimeIntervals();
+    loadBlackList();
+    loadRestrictionList();
+    loadNotificationList();
+    loadSettings();
+}
+
 addListener();
-loadTabs();
-loadTimeIntervals();
-loadBlackList();
-loadRestrictionList();
-loadSettings();
+loadAddDataFromStorage();
 updateSummaryTime();
 updateStorage();

@@ -347,3 +347,100 @@ input[type="button"]:hover {
 .notify.warning{
     background-color: rgb(219, 93, 104);
 }
+
+.notify-width-300{
+    width: 300px !important;
+}
+
+.button{
+    background: #FF813F;
+    color: #fff;
+    border-radius: 3px;
+    line-height: 47px;
+    display: inline-block;
+    border: 0;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    height: 51px;
+    min-width: 200px;
+}
+
+.bmc-button img {
+    width: 27px !important;
+    margin-bottom: 4px !important;
+    box-shadow: none !important;
+    border: none !important;
+    vertical-align: middle !important;
+ }
+
+ .bmc-button span{
+    margin-left:15px;
+    font-size:15px !important;
+ }
+
+ .bmc-button {
+    padding: 15px 25px 18px 18px !important;
+    line-height: 35px !important;
+    height: 51px !important;
+    width: 217px !important;
+    text-decoration: none !important;
+    color: #FFFFFF !important;
+    background-color: #FF813F !important;
+    border-radius: 3px !important;
+    border: 1px solid transparent !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+ }
+
+.button:hover,
+.button:active,
+.button:focus,
+.bmc-button:hover,
+.bmc-button:active,
+.bmc-button:focus{
+    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+    text-decoration: none !important;
+    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+    opacity: 0.85 !important;
+    color: #FFFFFF !important;
+}
+
+.setting-notify-block{
+    width: 450px;
+    height: 100px;
+    margin-top: 15px;
+    background-color: rgb(71, 69, 69);
+}
+
+.setting-notify-block .setting-notify-title{
+    padding: 15px 20px 5px 0;
+    font-weight: 700;
+    color:#FFFFFF;
+    font-size: 15px;
+    text-align: left;
+    display: block;
+}
+
+.setting-notify-block .setting-notify-message{
+    padding: 3px 20px 5px 0;
+    font-size: 14px;
+    display: block;
+    width: 320px;
+}
+.setting-notify-block .setting-notify-message-g{
+    padding: 0 30px 5px 0;
+    color:rgb(199, 199, 199);
+    font-size: 11px;
+    display: block;
+}
+
+.setting-notify-block .setting-notify-img{
+    height: 50px;
+    padding: 25px 15px 25px 25px;
+}
+
+.setting-notify-block .setting-notify-message-block{
+    display: inline-block;
+    position: absolute;
+}

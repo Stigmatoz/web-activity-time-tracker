@@ -122,14 +122,15 @@
             <div class="margin-top-10">
                <ul id='restrictionsList' class="listbox list" size="10"></ul>
             </div>
-            <div class="notify warning" id='notifyForRestrictionList' hidden>
+            <div class="notify warning notify-width-300" id='notifyForRestrictionList' hidden>
                The site is already in the list
             </div>
          </div>
          <div id='notifyBlock' hidden>
             <label>List of sites with notifications: </label>
             <div class="tooltip"><img src="/icons/information.svg" height="18" />
-               <span class="tooltiptext">Show notifications every time you spend a specified time interval on the site</span>
+               <span class="tooltiptext">Show notifications every time you spend a specified time interval on the
+                  site</span>
             </div>
             <div class="margin-top-10">
                <input type="text" class="label-with-list" placeholder="Enter site name..." id='addNotifySiteLbl' />
@@ -141,7 +142,17 @@
             <div class="margin-top-10">
                <ul id='notifyList' class="listbox list" size="10"></ul>
             </div>
-            <div class="notify warning" id='notifyForNotifyList' hidden>
+            <div class="margin-top-10">
+               <label>You can set message for notification: </label>
+               <div class="setting-notify-block">
+                  <img src="icons/128x128.png" class="setting-notify-img">
+                  <div class="setting-notify-message-block">
+                     <span class="setting-notify-title">Web Activity Time Tracker</span>
+                     <input type="text" class="setting-notify-message" id="notifyMessage" />
+                  </div>
+               </div>
+            </div>
+            <div class="notify warning notify-width-300" id='notifyForNotifyList' hidden>
                The site is already in the notify list
             </div>
          </div>
@@ -164,6 +175,20 @@
                <label>Do you enjoy using Web Activity Time Tracker? <a
                      href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
                      target="_blank">Let me know!</a></label>
+            </div>
+            <hr class="margin-top-20">
+            <div class="margin-top-20">
+               <label>You can support Web Activity Time Tracker by donating:</label>
+               <div class="margin-top-20">
+                  <div class="inline-block">
+                     <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/webtracker"><img
+                           src="/icons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span>Buy me a coffee</span></a>
+                  </div>
+                  <div class="inline-block">
+                     <a class="button" target="_blank" href="https://www.patreon.com/bePatron?u=19558753"
+                        data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
