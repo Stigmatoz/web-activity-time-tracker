@@ -43,8 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('rangeToDays').addEventListener('change', function () {
         storage.saveValue(SETTINGS_INTERVAL_RANGE, this.value);
     });
-    document.getElementById('grantPermission').addEventListener('click', function () {
-        grantPermission();
+    document.getElementById('grantPermissionForYT').addEventListener('click', function () {
+        grantPermissionForYT();
+    });
+    document.getElementById('grantPermissionForNotifications').addEventListener('click', function () {
+        grantPermissionForNotifications();
     });
     document.getElementById('notifyMessage').addEventListener('change', function () {
         updateNotificationMessage();
@@ -97,22 +100,33 @@ function loadSettings() {
     storage.getValue(STORAGE_NOTIFICATION_LIST, function (items) {
         notifyList = items;
         if (notifyList === undefined)
-        notifyList = [];
+            notifyList = [];
         viewNotificationList(items);
     });
     storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (mess) {
         document.getElementById('notifyMessage').value = mess;
     });
-    checkPermissions();
+    checkPermissionsForYT();
+    checkPermissionsForNotifications();
 }
 
-function checkPermissions() {
+function checkPermissionsForYT() {
     chrome.permissions.contains({
         permissions: ['tabs'],
         origins: ["https://www.youtube.com/*"]
     }, function (result) {
         if (result) {
-            setUIForAnyPermission();
+            setUIForAnyPermissionForYT();
+        }
+    });
+}
+
+function checkPermissionsForNotifications() {
+    chrome.permissions.contains({
+        permissions: ["notifications"]
+    }, function (result) {
+        if (result) {
+            setUIForAnyPermissionForNotifications();
         }
     });
 }
@@ -130,24 +144,40 @@ function viewBlackList(items) {
     }
 }
 
-function grantPermission() {
+function grantPermissionForYT() {
     chrome.permissions.request({
         permissions: ['tabs'],
         origins: ["https://www.youtube.com/*"]
     }, function (granted) {
         // The callback argument will be true if the user granted the permissions.
         if (granted) {
-            setUIForAnyPermission();
+            setUIForAnyPermissionForYT();
         }
     });
 }
 
-function setUIForAnyPermission() {
-    document.getElementById('permissionSuccessedBlock').hidden = false;
-    document.getElementById('grantPermission').setAttribute('disabled', 'true');
+function grantPermissionForNotifications() {
+    chrome.permissions.request({
+        permissions: ["notifications"]
+    }, function (granted) {
+        // The callback argument will be true if the user granted the permissions.
+        if (granted) {
+            setUIForAnyPermissionForNotifications();
+        }
+    });
 }
 
-function viewNotificationList(items){
+function setUIForAnyPermissionForYT() {
+    document.getElementById('permissionSuccessedBlockForYT').hidden = false;
+    document.getElementById('grantPermissionForYT').setAttribute('disabled', 'true');
+}
+
+function setUIForAnyPermissionForNotifications() {
+    document.getElementById('permissionSuccessedBlockForNotifications').hidden = false;
+    document.getElementById('grantPermissionForNotifications').setAttribute('disabled', 'true');
+}
+
+function viewNotificationList(items) {
     if (items !== undefined) {
         for (var i = 0; i < items.length; i++) {
             addDomainToEditableListBox(items[i], 'notifyList', actionEditSite, deleteNotificationSite, updateItemFromNotifyList, updateNotificationList);
@@ -270,7 +300,7 @@ function addDomainToListBox(domain) {
     document.getElementById('blackList').appendChild(li).appendChild(del);
 }
 
-function addDomainToEditableListBox(entity, elementId, actionEdit, actionDelete, actionUpdateTimeFromList, actionUpdateList){
+function addDomainToEditableListBox(entity, elementId, actionEdit, actionDelete, actionUpdateTimeFromList, actionUpdateList) {
     var li = document.createElement('li');
 
     var domainLbl = document.createElement('input');

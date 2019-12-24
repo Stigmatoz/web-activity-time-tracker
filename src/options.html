@@ -85,13 +85,13 @@
                <div class="margin-top-10">
                   <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser (mouse
                      or keyboard).
-                     In order for the extension to also track when you watch a video on YouTube.com, you must grant
-                     permissions to
+                     In order for the extension to also track when you watch a video on YouTube.com, you need grant
+                     permission to
                      access the sites.
                      It is necessary that extension will get access to DOM (Document Object Model).</label>
-                  <input class="margin-top-10" type="button" value="Grant permission" id='grantPermission'>
+                  <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForYT'>
                   <div class="inline-block">
-                     <div id='permissionSuccessedBlock' hidden>
+                     <div id='permissionSuccessedBlockForYT' hidden>
                         <img src="/icons/success.png" height="18" />
                         <label>Permissions have been granted</label>
                      </div>
@@ -149,6 +149,17 @@
                   <div class="setting-notify-message-block">
                      <span class="setting-notify-title">Web Activity Time Tracker</span>
                      <input type="text" class="setting-notify-message" id="notifyMessage" />
+                  </div>
+               </div>
+            </div>
+            <div class="margin-top-10">
+               <label class="block">In order to Web Activity Time Tracker showed notifications every time you spend a specified time interval on the site, you need grant permission to access for notifications.
+               </label>
+               <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForNotifications'>
+               <div class="inline-block">
+                  <div id='permissionSuccessedBlockForNotifications' hidden>
+                     <img src="/icons/success.png" height="18" />
+                     <label>Permissions have been granted</label>
                   </div>
                </div>
             </div>

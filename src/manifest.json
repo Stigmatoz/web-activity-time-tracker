@@ -3,10 +3,10 @@
     
         "name": "Web Activity Time Tracker",
         "short_name": "Web Time Tracker",
-        "version": "1.3.1",
+        "version": "1.3.2",
         "minimum_chrome_version": "26",
 
-        "description": "Track and limit time your activity in the browser.",
+        "description": "Track and limit time your activity in the browser every day.",
 
         "options_page": "options.html",
     
@@ -23,11 +23,11 @@
             "idle",
             "chrome://favicon/*",
             "webNavigation",
-            "unlimitedStorage",
-            "notifications"
+            "unlimitedStorage"
         ],
         "optional_permissions": [
-            "https://www.youtube.com/*"
+            "https://www.youtube.com/*",
+            "notifications"
           ],
         "offline_enabled": true,
         "background": {

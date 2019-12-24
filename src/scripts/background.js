@@ -15,6 +15,9 @@ var setting_view_in_badge;
 var setting_notification_list;
 var setting_notification_message;
 
+var isHasPermissioForYouTube;
+var isHasPermissioForNotification;
+
 function updateSummaryTime() {
     setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK_DEFAULT);
 }
@@ -64,15 +67,11 @@ function mainTRacker(activeUrl, tab, activeTab) {
     }
     if (!activity.isInBlackList(activeUrl)) {
         if (activity.isNeedNotifyView(activeUrl, tab)) {
-            chrome.notifications.clear('watt-site-notification');
-            chrome.notifications.create(
-                'watt-site-notification', {
-                type: 'basic',
-                iconUrl: 'icons/128x128.png',
-                title: "Web Activity Time Tracker",
-                contextMessage: activeUrl + ' ' + convertShortSummaryTimeToString(tab.getTodayTime()),
-                message: setting_notification_message
-            });
+            if (isHasPermissioForNotification) {
+                showNotification(activeUrl, tab);
+            } else {
+                checkPermissionsForNotifications(showNotification, activeUrl, tab);
+            }
         }
         tab.incSummaryTime();
     }
@@ -93,6 +92,18 @@ function mainTRacker(activeUrl, tab, activeTab) {
     }
 }
 
+function showNotification(activeUrl, tab) {
+    chrome.notifications.clear('watt-site-notification');
+    chrome.notifications.create(
+        'watt-site-notification', {
+        type: 'basic',
+        iconUrl: 'icons/128x128.png',
+        title: "Web Activity Time Tracker",
+        contextMessage: activeUrl + ' ' + convertShortSummaryTimeToString(tab.getTodayTime()),
+        message: setting_notification_message
+    });
+}
+
 function setBlockPageToCurrent(activeUrl) {
     var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + activeUrl;
     chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
@@ -110,23 +121,24 @@ function isVideoPlayedOnPage() {
 
 function checkDOM(state, activeUrl, tab, activeTab) {
     if (state === 'idle' && isDomainEquals(activeUrl, "youtube.com")) {
-        checkPermissions(mainTRacker, activeUrl, tab, activeTab);
+        trackForYT(mainTRacker, activeUrl, tab, activeTab);
     }
     else activity.closeIntervalForCurrentTab();
 }
 
-function checkPermissions(callback, activeUrl, tab, activeTab) {
-    chrome.permissions.contains({
-        permissions: ['tabs'],
-        origins: ["https://www.youtube.com/*"]
-    }, function (result) {
-        if (result) {
-            chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
-                if (results !== undefined && results[0] !== undefined && results[0] === true)
-                    callback(activeUrl, tab, activeTab);
-                else activity.closeIntervalForCurrentTab();
-            });
-        } else activity.closeIntervalForCurrentTab();
+function trackForYT(callback, activeUrl, tab, activeTab) {
+    if (isHasPermissioForYouTube) {
+        executeScript(callback, activeUrl, tab, activeTab);
+    } else {
+        checkPermissionsForYT(executeScript, activity.closeIntervalForCurrentTab, callback, activeUrl, tab, activeTab);
+    }
+}
+
+function executeScript(callback, activeUrl, tab, activeTab) {
+    chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
+        if (results !== undefined && results[0] !== undefined && results[0] === true)
+            callback(activeUrl, tab, activeTab);
+        else activity.closeIntervalForCurrentTab();
     });
 }
 
@@ -142,19 +154,13 @@ function setDefaultSettings() {
     storage.saveValue(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
     storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
     storage.saveValue(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
+    storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, STORAGE_NOTIFICATION_MESSAGE_DEFAULT);
 }
 
 function checkSettingsImEmpty() {
     chrome.storage.local.getBytesInUse(['inactivity_interval'], function (item) {
         if (item == 0) {
             setDefaultSettings();
-        }
-    });
-
-    storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (item) {
-        var current = item;
-        if (current == undefined) {
-            storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, STORAGE_NOTIFICATION_MESSAGE_DEFAULT);
         }
     });
 }
@@ -190,6 +196,9 @@ function addListener() {
             }
             if (key === STORAGE_NOTIFICATION_LIST) {
                 loadNotificationList();
+            }
+            if (key === STORAGE_NOTIFICATION_MESSAGE) {
+                loadNotificationMessage();
             }
             if (key === SETTINGS_INTERVAL_INACTIVITY) {
                 storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function (item) { setting_interval_inactivity = item; });
@@ -257,6 +266,9 @@ function loadNotificationList() {
     storage.getValue(STORAGE_NOTIFICATION_LIST, function (items) {
         setting_notification_list = items;
     });
+}
+
+function loadNotificationMessage() {
     storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (item) {
         setting_notification_message = item;
     });
@@ -267,7 +279,7 @@ function loadSettings() {
     storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) { setting_view_in_badge = item; });
 }
 
-function loadAddDataFromStorage(){
+function loadAddDataFromStorage() {
     loadTabs();
     loadTimeIntervals();
     loadBlackList();
@@ -276,6 +288,35 @@ function loadAddDataFromStorage(){
     loadSettings();
 }
 
+function loadPermissions() {
+    checkPermissionsForYT();
+    checkPermissionsForNotifications();
+}
+
+function checkPermissionsForYT(callbackIfTrue, callbackIfFalse, ...props) {
+    chrome.permissions.contains({
+        permissions: ['tabs'],
+        origins: ["https://www.youtube.com/*"]
+    }, function (result) {
+        if (callbackIfTrue != undefined && result)
+            callbackIfTrue(...props);
+        if (callbackIfFalse != undefined && !result)
+            callbackIfFalse();
+        isHasPermissioForYouTube = result;
+    });
+}
+
+function checkPermissionsForNotifications(callback, ...props) {
+    chrome.permissions.contains({
+        permissions: ["notifications"]
+    }, function (result) {
+        if (callback != undefined && result)
+            callback(...props);
+        isHasPermissioForNotification = result;
+    });
+}
+
+loadPermissions();
 addListener();
 loadAddDataFromStorage();
 updateSummaryTime();
