@@ -93,7 +93,31 @@ function mainTRacker(activeUrl, tab, activeTab) {
 }
 
 function showNotification(activeUrl, tab) {
-    chrome.notifications.clear('watt-site-notification');
+    chrome.notifications.clear('watt-site-notification', function (wasCleared) {
+        if (!wasCleared) {
+            console.log('!wasCleared');
+
+            chrome.notifications.create(
+                'watt-site-notification', {
+                type: 'basic',
+                iconUrl: 'icons/128x128.png',
+                title: "Web Activity Time Tracker",
+                contextMessage: activeUrl + ' ' + convertShortSummaryTimeToString(tab.getTodayTime()),
+                message: setting_notification_message
+            }, function (notificationId) {
+                console.log(notificationId);
+                chrome.notifications.clear('watt-site-notification', function (wasCleared) {
+                    if (wasCleared)
+                        notificationAction(activeUrl, tab);
+                    });
+            });
+        } else {
+            notificationAction(activeUrl, tab);
+        }
+    });
+}
+
+function notificationAction(activeUrl, tab){
     chrome.notifications.create(
         'watt-site-notification', {
         type: 'basic',
@@ -165,6 +189,10 @@ function checkSettingsImEmpty() {
     });
 }
 
+function setDefaultValueForNewSettings() {
+    loadNotificationMessage();
+}
+
 function addListener() {
     chrome.tabs.onActivated.addListener(function (info) {
         chrome.tabs.get(info.tabId, function (tab) {
@@ -183,6 +211,7 @@ function addListener() {
         }
         if (details.reason == 'update') {
             checkSettingsImEmpty();
+            setDefaultValueForNewSettings();
             isNeedDeleteTimeIntervalFromTabs = true;
         }
     });
@@ -271,6 +300,10 @@ function loadNotificationList() {
 function loadNotificationMessage() {
     storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (item) {
         setting_notification_message = item;
+        if (isEmpty(setting_notification_message)) {
+            storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, STORAGE_NOTIFICATION_MESSAGE_DEFAULT);
+            setting_notification_message = STORAGE_NOTIFICATION_MESSAGE_DEFAULT;
+        }
     });
 }
 
@@ -285,6 +318,7 @@ function loadAddDataFromStorage() {
     loadBlackList();
     loadRestrictionList();
     loadNotificationList();
+    loadNotificationMessage();
     loadSettings();
 }
 
