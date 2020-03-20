@@ -206,7 +206,7 @@ class UI {
                     var limitIcon = this.createElement('img', ['margin-left-5', 'tooltip']);
                     limitIcon.height = 15;
                     limitIcon.src = '/icons/limit.png';
-                    var tooltip = this.createElement('span', ['tooltiptext'], "Dayly limit is " + convertShortSummaryTimeToLongString(item.time));
+                    var tooltip = this.createElement('span', ['tooltiptext'], "Daily limit is " + convertShortSummaryTimeToLongString(item.time));
                     divLimit = this.appendChild(divLimit, [limitIcon, tooltip]);
                     spanUrl.appendChild(divLimit);
                 }
