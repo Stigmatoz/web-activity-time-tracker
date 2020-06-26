@@ -10,43 +10,44 @@ var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var restrictionList;
 var stat = {
-    set firstDay(value){
+    set firstDay(value) {
         document.getElementById('statFirstDay').innerHTML = value;
     },
-    set lastDay(value){
+    set lastDay(value) {
         document.getElementById('statLastDay').innerHTML = value;
     },
-    set activeDays(value){
+    set activeDays(value) {
         document.getElementById('statActiveDays').innerHTML = value;
     },
-    set totalDays(value){
+    set totalDays(value) {
         document.getElementById('statTotalDays').innerHTML = value;
     },
-    set inActiveDay(value){
+    set inActiveDay(value) {
         document.getElementById('statInActiveDay').innerHTML = value;
     },
-    set inActiveDayTime(value){
+    set inActiveDayTime(value) {
         document.getElementById('statInActiveDayTime').innerHTML = '';
         ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statInActiveDayTime'));
     },
-    set activeDay(value){
+    set activeDay(value) {
         document.getElementById('statActiveDay').innerHTML = value;
     },
-    set activeDayTime(value){
+    set activeDayTime(value) {
         document.getElementById('statActiveDayTime').innerHTML = '';
         ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statActiveDayTime'));
     },
-    set todayTime(value){
+    set todayTime(value) {
         document.getElementById('statTodayTime').innerHTML = '';
         ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statTodayTime'));
     },
-    set allDaysTime(value){
+    set allDaysTime(value) {
         document.getElementById('statAllDaysTime').innerHTML = '';
         ui.createElementsForTotalTime(value, TypeListEnum.All, document.getElementById('statAllDaysTime'));
     },
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+    ui.setPreloader();
     storage.getValue(SETTINGS_INTERVAL_RANGE, function (item) { setting_range_days = item; });
     document.getElementById('btnToday').addEventListener('click', function () {
         currentTypeOfList = TypeListEnum.ToDay;
@@ -111,87 +112,91 @@ function fillEmptyBlock() {
 }
 
 function getTabsFromStorage(tabs) {
-    tabsFromStorage = tabs;
-    targetTabs = [];
+    setTimeout(function () {
+        tabsFromStorage = tabs;
+        targetTabs = [];
 
-    ui.clearUI();
-    if (tabs === null) {
-        ui.fillEmptyBlock('chart');
-        return;
-    }
-
-    var counterOfSite;
-    if (currentTypeOfList === TypeListEnum.All) {
-        targetTabs = tabs.sort(function (a, b) {
-            return b.summaryTime - a.summaryTime;
-        });
-
-        if (targetTabs.length > 0) {
-            totalTime = getTotalTime(targetTabs);
-            stat.allDaysTime = totalTime;
-        }
-        else {
+        ui.clearUI();
+        if (tabs === null) {
             ui.fillEmptyBlock('chart');
             return;
         }
 
-        counterOfSite = tabs.length;
-    }
-    if (currentTypeOfList === TypeListEnum.ToDay) {
-        targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
-        counterOfSite = targetTabs.length;
-        if (targetTabs.length > 0) {
-            targetTabs = targetTabs.sort(function (a, b) {
-                return b.days.find(s => s.date === today).summary - a.days.find(s => s.date === today).summary;
+        var counterOfSite;
+        if (currentTypeOfList === TypeListEnum.All) {
+            targetTabs = tabs.sort(function (a, b) {
+                return b.summaryTime - a.summaryTime;
             });
 
-            totalTime = getTotalTime(targetTabs);
-            stat.todayTime = totalTime;
+            if (targetTabs.length > 0) {
+                totalTime = getTotalTime(targetTabs);
+                stat.allDaysTime = totalTime;
+            }
+            else {
+                ui.fillEmptyBlock('chart');
+                return;
+            }
+
+            counterOfSite = tabs.length;
         }
-        else {
-            ui.fillEmptyBlock('chart');
-            return;
-        }
-    }
-
-    if (currentTypeOfList === TypeListEnum.All)
-        ui.addTableHeader(currentTypeOfList, counterOfSite, getFirstDay());
-    if (currentTypeOfList === TypeListEnum.ToDay)
-        ui.addTableHeader(currentTypeOfList, counterOfSite);
-
-    var currentTab = getCurrentTab();
-
-    var tabsForChart = [];
-    var summaryCounter = 0;
-    for (var i = 0; i < targetTabs.length; i++) {
-        var summaryTime;
-        var counter;
         if (currentTypeOfList === TypeListEnum.ToDay) {
-            summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
-            if (targetTabs[i].days.find(x => x.date == today))
-                counter = targetTabs[i].days.find(x => x.date == today).counter;
+            targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
+            counterOfSite = targetTabs.length;
+            if (targetTabs.length > 0) {
+                targetTabs = targetTabs.sort(function (a, b) {
+                    return b.days.find(s => s.date === today).summary - a.days.find(s => s.date === today).summary;
+                });
+
+                totalTime = getTotalTime(targetTabs);
+                stat.todayTime = totalTime;
+            }
+            else {
+                ui.fillEmptyBlock('chart');
+                return;
+            }
         }
-        if (currentTypeOfList === TypeListEnum.All) {
-            summaryTime = targetTabs[i].summaryTime;
-            counter = targetTabs[i].counter;
+
+        if (currentTypeOfList === TypeListEnum.All)
+            ui.addTableHeader(currentTypeOfList, counterOfSite, getFirstDay());
+        if (currentTypeOfList === TypeListEnum.ToDay)
+            ui.addTableHeader(currentTypeOfList, counterOfSite);
+
+        var currentTab = getCurrentTab();
+
+        var tabsForChart = [];
+        var summaryCounter = 0;
+        for (var i = 0; i < targetTabs.length; i++) {
+            var summaryTime;
+            var counter;
+            if (currentTypeOfList === TypeListEnum.ToDay) {
+                summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
+                if (targetTabs[i].days.find(x => x.date == today))
+                    counter = targetTabs[i].days.find(x => x.date == today).counter;
+            }
+            if (currentTypeOfList === TypeListEnum.All) {
+                summaryTime = targetTabs[i].summaryTime;
+                counter = targetTabs[i].counter;
+            }
+
+            summaryCounter += counter;
+
+            if (currentTypeOfList === TypeListEnum.ToDay || (currentTypeOfList === TypeListEnum.All && i <= 30))
+                ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
+            else
+                ui.addExpander();
+
+            if (i <= 8)
+                addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, counter);
+            else addTabOthersForChart(tabsForChart, summaryTime);
         }
 
-        summaryCounter += counter;
+        ui.addHrAfterTableOfSite();
+        ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
+        ui.drawChart(tabsForChart);
+        ui.setActiveTooltipe(currentTab);
 
-        if (currentTypeOfList === TypeListEnum.ToDay || (currentTypeOfList === TypeListEnum.All && i <= 30))
-            ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
-        else
-            ui.addExpander();
-
-        if (i <= 8)
-            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, counter);
-        else addTabOthersForChart(tabsForChart, summaryTime);
-    }
-
-    ui.addHrAfterTableOfSite();
-    ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
-    ui.drawChart(tabsForChart);
-    ui.setActiveTooltipe(currentTab);
+        ui.removePreloader();
+    }, 4000);
 }
 
 function getTabsForTimeChart(timeIntervals) {
@@ -319,7 +324,7 @@ function getFirstDay() {
                 return array.push(a.date);
         });
     });
-    
+
     array = array.sort(function (a, b) {
         return new Date(a) - new Date(b);
     });
@@ -331,7 +336,7 @@ function getFirstDay() {
     };
 }
 
-function setStatData(array){
+function setStatData(array) {
     var arrayAscByTime = [];
     tabsFromStorage.forEach(tab => {
         return tab.days.forEach(day => {
@@ -351,13 +356,13 @@ function setStatData(array){
         return a.total - b.total;
     });
     stat.inActiveDay = new Date(arrayAscByTime[0].date).toLocaleDateString('ru-RU');
-    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length-1].date).toLocaleDateString('ru-RU');;
+    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length - 1].date).toLocaleDateString('ru-RU');;
     stat.inActiveDayTime = arrayAscByTime[0].total;
-    stat.activeDayTime = arrayAscByTime[arrayAscByTime.length-1].total;
+    stat.activeDayTime = arrayAscByTime[arrayAscByTime.length - 1].total;
     stat.firstDay = new Date(array[0]).toLocaleDateString('ru-RU');;
-    stat.lastDay = new Date(array[array.length-1]).toLocaleDateString('ru-RU');;
+    stat.lastDay = new Date(array[array.length - 1]).toLocaleDateString('ru-RU');;
     stat.activeDays = array.length;
-    stat.totalDays = daysBetween(array[0], array[array.length-1]);
+    stat.totalDays = daysBetween(array[0], array[array.length - 1]);
 }
 
 function getTabsByDays(tabs) {

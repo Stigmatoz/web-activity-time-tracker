@@ -15,6 +15,9 @@
 </head>
 
 <body>
+   <div id="preloader" class="preloader">
+      <div class="preloader__image"><div class="title">Loading...</div></div>
+   </div>
    <svg class="height-0">
       <filter id="dropShadow">
          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -28,6 +31,7 @@
    <div id="extensionTitle">
       <p class="title">Web Activity Time Tracker</p>
    </div>
+   <div id="preloader" class="preloader hide"></div>
    <div id="buttons" class="btn-block">
       <a class="active" id="btnToday">Today</a>
       <a id="btnAll">All-time</a>

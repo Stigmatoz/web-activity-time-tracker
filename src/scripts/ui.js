@@ -395,4 +395,13 @@ class UI {
 
         return element;
     }
+
+    setPreloader(){
+        document.getElementById('preloader').classList.add('preloader');
+    }
+
+    removePreloader(){
+        document.getElementById('preloader').classList.remove('preloader');
+        document.getElementById('preloader').classList.add('hide');
+    }
 }
