@@ -2,43 +2,43 @@
 <html>
 
 <head>
-   <meta charset="utf-8">
-   <title>Web Activity Time Tracker</title>
-   <link href="style/picker/standalone.min.css" rel="stylesheet" />
-   <link href="style/picker/clockpicker.min.css" rel="stylesheet" />
-   <link href="style/settings.css" rel="stylesheet" />
-   <script src="scripts/common.js"></script>
-   <script src="scripts/storage.js"></script>
-   <script src="scripts/settings.js"></script>
-   <script src="scripts/restriction.js"></script>
-   <script src="scripts/picker/jquery-3.3.1.min.js"></script>
-   <script src="scripts/picker/clockpicker.min.js"></script>
+    <meta charset="utf-8">
+    <title>Web Activity Time Tracker</title>
+    <link href="style/picker/standalone.min.css" rel="stylesheet" />
+    <link href="style/picker/clockpicker.min.css" rel="stylesheet" />
+    <link href="style/settings.css" rel="stylesheet" />
+    <script src="scripts/common.js"></script>
+    <script src="scripts/storage.js"></script>
+    <script src="scripts/settings.js"></script>
+    <script src="scripts/restriction.js"></script>
+    <script src="scripts/picker/jquery-3.3.1.min.js"></script>
+    <script src="scripts/picker/clockpicker.min.js"></script>
 </head>
 
 <body>
-   <div class="content">
-      <div class="header">
-         <p class="title">Web Activity Time Tracker</p>
-      </div>
-      <div id='nav' class="nav">
-         <a id='settingsBtn' class="active">Settings</a>
-         <a id='restrictionsBtn'>Limits</a>
-         <a id='notifyBtn'>Notifications</a>
-         <a id='aboutBtn'>About</a>
-      </div>
-      <div id='block'>
-         <div id='settingsBlock'>
-            <label>
+    <div class="content">
+        <div class="header">
+            <p class="title">Web Activity Time Tracker</p>
+        </div>
+        <div id='nav' class="nav">
+            <a id='settingsBtn' class="active">Settings</a>
+            <a id='restrictionsBtn'>Limits</a>
+            <a id='notifyBtn'>Notifications</a>
+            <a id='aboutBtn'>About</a>
+        </div>
+        <div id='block'>
+            <div id='settingsBlock'>
+                <label>
                <input type="checkbox" class="filled-in" id="viewTimeInBadge" checked="checked" />
                <span>Display time tracker in icon</span>
             </label>
-            <div class="margin-top-10">
-               <label>Stop tracking if no activity detected for: </label>
-               <div class="tooltip"><img src="/icons/information.svg" height="18" />
-                  <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
-               </div>
-               <div class="margin-top-10">
-                  <select id='intervalInactivity' class="option">
+                <div class="margin-top-10">
+                    <label>Stop tracking if no activity detected for: </label>
+                    <div class="tooltip"><img src="/icons/information.svg" height="18" />
+                        <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
+                    </div>
+                    <div class="margin-top-10">
+                        <select id='intervalInactivity' class="option">
                      <option value="30">30 seconds</option>
                      <option value="45">45 seconds</option>
                      <option value="60">1 min</option>
@@ -48,10 +48,10 @@
                      <option value="1200">20 mins</option>
                      <option value="1800">30 mins</option>
                   </select>
-               </div>
-               <div class="margin-top-10"><label>Default range for days:</label></div>
-               <div class="margin-top-10">
-                  <select id='rangeToDays' class="option">
+                    </div>
+                    <div class="margin-top-10"><label>Default range for days:</label></div>
+                    <div class="margin-top-10">
+                        <select id='rangeToDays' class="option">
                      <option value="days2">2 days</option>
                      <option value="days3">3 days</option>
                      <option value="days4">4 days</option>
@@ -62,148 +62,146 @@
                      <option value="month2">2 month</option>
                      <option value="month3">3 month</option>
                   </select>
-               </div>
-               <div class="margin-top-10">
-                  <label>Ignored list of domain: </label>
-                  <div class="tooltip"><img src="/icons/information.svg" height="18" />
-                     <span class="tooltiptext">Activity for these domains not will tracked</span>
-                  </div>
-                  <div class="margin-top-10">
-                     <ul id='blackList' class="listbox" size="7"></ul>
-                  </div>
-                  <div class="margin-top-10">
-                     <input type="text" placeholder="Enter site name..." id='addBlackSiteLbl' />
-                     <input type="button" value="+" id='addBlackSiteBtn' />
-                  </div>
-                  <div class="notify warning" id='notifyForBlackList' hidden>
-                     The site is already in the list
-                  </div>
-               </div>
-               <div class="margin-top-10">
-                  <input type="button" value="Export to CSV" id='exportToCsv'>
-               </div>
-               <div class="margin-top-10">
-                  <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser (mouse
+                    </div>
+                    <div class="margin-top-10">
+                        <label>Ignored list of domain: </label>
+                        <div class="tooltip"><img src="/icons/information.svg" height="18" />
+                            <span class="tooltiptext">Activity for these domains not will tracked</span>
+                        </div>
+                        <div class="margin-top-10">
+                            <ul id='blackList' class="listbox" size="7"></ul>
+                        </div>
+                        <div class="margin-top-10">
+                            <input type="text" placeholder="Enter site name..." id='addBlackSiteLbl' />
+                            <input type="button" value="+" id='addBlackSiteBtn' />
+                        </div>
+                        <div class="notify warning" id='notifyForBlackList' hidden>
+                            The site is already in the list
+                        </div>
+                    </div>
+                    <div class="margin-top-10">
+                        <input type="button" value="Export to CSV" id='exportToCsv'>
+                    </div>
+                    <div class="margin-top-10">
+                        <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser (mouse
                      or keyboard).
                      In order for the extension to also track when you watch a video on YouTube.com, you need grant
                      permission to
                      access the sites.
                      It is necessary that extension will get access to DOM (Document Object Model).</label>
-                  <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForYT'>
-                  <div class="inline-block">
-                     <div id='permissionSuccessedBlockForYT' hidden>
-                        <img src="/icons/success.png" height="18" />
-                        <label>Permissions have been granted</label>
-                     </div>
-                  </div>
-               </div>
-               <div class="margin-top-10">
-                  <label>Data in memory use </label><label id='memoryUse'></label>
-               </div>
-               <div class="margin-top-10"><input type="button" value="Clear all data" id='clearAllData'></div>
-               <div class="notify" id='notify' hidden>
-                  Data succeed deleted
-               </div>
+                        <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForYT'>
+                        <div class="inline-block">
+                            <div id='permissionSuccessedBlockForYT' hidden>
+                                <img src="/icons/success.png" height="18" />
+                                <label>Permissions have been granted</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="margin-top-10">
+                        <label>Data in memory use </label><label id='memoryUse'></label>
+                    </div>
+                    <div class="margin-top-10"><input type="button" value="Clear all data" id='clearAllData'></div>
+                    <div class="notify" id='notify' hidden>
+                        Data succeed deleted
+                    </div>
+                </div>
             </div>
-         </div>
-         <div id='restrictionsBlock' hidden>
-            <label>Access daily restrictions for websites: </label>
-            <div class="tooltip"><img src="/icons/information.svg" height="18" />
-               <span class="tooltiptext">Set the time you can spend on the site during the day. After this time, access
+            <div id='restrictionsBlock' hidden>
+                <label>Access daily restrictions for websites: </label>
+                <div class="tooltip"><img src="/icons/information.svg" height="18" />
+                    <span class="tooltiptext">Set the time you can spend on the site during the day. After this time, access
                   to the site will be blocked.</span>
+                </div>
+                <div class="margin-top-10">
+                    <input type="text" class="label-with-list" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
+                    <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                        <input type="text" class="clock" placeholder="Time..." readonly id="addRestrictionTimeLbl">
+                    </div>
+                    <input type="button" value="+" class="btn-with-list" id='addRestrictionSiteBtn' />
+                </div>
+                <div class="margin-top-10">
+                    <ul id='restrictionsList' class="listbox list" size="10"></ul>
+                </div>
+                <div class="notify warning notify-width-300" id='notifyForRestrictionList' hidden>
+                    The site is already in the list
+                </div>
             </div>
-            <div class="margin-top-10">
-               <input type="text" class="label-with-list" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
-               <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-                  <input type="text" class="clock" placeholder="Time..." readonly id="addRestrictionTimeLbl">
-               </div>
-               <input type="button" value="+" class="btn-with-list" id='addRestrictionSiteBtn' />
-            </div>
-            <div class="margin-top-10">
-               <ul id='restrictionsList' class="listbox list" size="10"></ul>
-            </div>
-            <div class="notify warning notify-width-300" id='notifyForRestrictionList' hidden>
-               The site is already in the list
-            </div>
-         </div>
-         <div id='notifyBlock' hidden>
-            <label>List of sites with notifications: </label>
-            <div class="tooltip"><img src="/icons/information.svg" height="18" />
-               <span class="tooltiptext">Show notifications every time you spend a specified time interval on the
+            <div id='notifyBlock' hidden>
+                <label>List of sites with notifications: </label>
+                <div class="tooltip"><img src="/icons/information.svg" height="18" />
+                    <span class="tooltiptext">Show notifications every time you spend a specified time interval on the
                   site</span>
-            </div>
-            <div class="margin-top-10">
-               <input type="text" class="label-with-list" placeholder="Enter site name..." id='addNotifySiteLbl' />
-               <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-                  <input type="text" class="clock" placeholder="Time..." readonly id="addNotifyTimeLbl">
-               </div>
-               <input type="button" class="btn-with-list" value="+" id='addNotifySiteBtn' />
-            </div>
-            <div class="margin-top-10">
-               <ul id='notifyList' class="listbox list" size="10"></ul>
-            </div>
-            <div class="margin-top-10">
-               <label>You can set message for notification: </label>
-               <div class="setting-notify-block">
-                  <img src="icons/128x128.png" class="setting-notify-img">
-                  <div class="setting-notify-message-block">
-                     <span class="setting-notify-title">Web Activity Time Tracker</span>
-                     <input type="text" class="setting-notify-message" id="notifyMessage" />
-                  </div>
-               </div>
-            </div>
-            <div class="margin-top-10">
-               <label class="block">In order to Web Activity Time Tracker showed notifications every time you spend a specified time interval on the site, you need grant permission to access for notifications.
+                </div>
+                <div class="margin-top-10">
+                    <input type="text" class="label-with-list" placeholder="Enter site name..." id='addNotifySiteLbl' />
+                    <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+                        <input type="text" class="clock" placeholder="Time..." readonly id="addNotifyTimeLbl">
+                    </div>
+                    <input type="button" class="btn-with-list" value="+" id='addNotifySiteBtn' />
+                </div>
+                <div class="margin-top-10">
+                    <ul id='notifyList' class="listbox list" size="10"></ul>
+                </div>
+                <div class="margin-top-10">
+                    <label>You can set message for notification: </label>
+                    <div class="setting-notify-block">
+                        <img src="icons/128x128.png" class="setting-notify-img">
+                        <div class="setting-notify-message-block">
+                            <span class="setting-notify-title">Web Activity Time Tracker</span>
+                            <input type="text" class="setting-notify-message" id="notifyMessage" />
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-top-10">
+                    <label class="block">In order to Web Activity Time Tracker showed notifications every time you spend a specified time interval on the site, you need grant permission to access for notifications.
                </label>
-               <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForNotifications'>
-               <div class="inline-block">
-                  <div id='permissionSuccessedBlockForNotifications' hidden>
-                     <img src="/icons/success.png" height="18" />
-                     <label>Permissions have been granted</label>
-                  </div>
-               </div>
+                    <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForNotifications'>
+                    <div class="inline-block">
+                        <div id='permissionSuccessedBlockForNotifications' hidden>
+                            <img src="/icons/success.png" height="18" />
+                            <label>Permissions have been granted</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="notify warning notify-width-300" id='notifyForNotifyList' hidden>
+                    The site is already in the notify list
+                </div>
             </div>
-            <div class="notify warning notify-width-300" id='notifyForNotifyList' hidden>
-               The site is already in the notify list
-            </div>
-         </div>
-         <div id='aboutBlock' hidden>
-            <div><label id='version'></label></div>
-            <div class="margin-top-20"><label>GitHub: <a href="https://github.com/Stigmatoz/web-activity-time-tracker"
+            <div id='aboutBlock' hidden>
+                <div><label id='version'></label></div>
+                <div class="margin-top-20"><label>GitHub: <a href="https://github.com/Stigmatoz/web-activity-time-tracker"
                      target="_blank">github.com/Stigmatoz/web-activity-time-tracker</a></label>
-            </div>
-            <div class="margin-top-20"><label>If you have feedback or would like to report an issue, you can do so on
+                </div>
+                <div class="margin-top-20"><label>If you have feedback or would like to report an issue, you can do so on
                   the <a href="https://github.com/Stigmatoz/web-activity-time-tracker/issues" target="_blank">GitHub
                      issues page</a></label>
-            </div>
-            <div class="margin-top-20">
-               <label>If experiencing problems, having questions or suggestions, please fill out <a
+                </div>
+                <div class="margin-top-20">
+                    <label>If experiencing problems, having questions or suggestions, please fill out <a
                      href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
                      target="_blank">support
                      form</a>.</label>
-            </div>
-            <div class="margin-top-20">
-               <label>Do you enjoy using Web Activity Time Tracker? <a
+                </div>
+                <div class="margin-top-20">
+                    <label>Do you enjoy using Web Activity Time Tracker? <a
                      href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
                      target="_blank">Let me know!</a></label>
+                </div>
+                <hr class="margin-top-20">
+                <div class="margin-top-20">
+                    <label>You can support Web Activity Time Tracker by donating:</label>
+                    <div class="margin-top-20">
+                        <div class="inline-block">
+                            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/webtracker"><img src="/icons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span>Buy me a coffee</span></a>
+                        </div>
+                        <div class="inline-block">
+                            <a class="button" target="_blank" href="https://www.patreon.com/bePatron?u=19558753" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr class="margin-top-20">
-            <div class="margin-top-20">
-               <label>You can support Web Activity Time Tracker by donating:</label>
-               <div class="margin-top-20">
-                  <div class="inline-block">
-                     <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/webtracker"><img
-                           src="/icons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span>Buy me a coffee</span></a>
-                  </div>
-                  <div class="inline-block">
-                     <a class="button" target="_blank" href="https://www.patreon.com/bePatron?u=19558753"
-                        data-patreon-widget-type="become-patron-button">Become a Patron!</a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </body>
 
 </html>
