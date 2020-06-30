@@ -2,23 +2,19 @@
 <html>
 
 <head>
-   <meta charset="utf-8">
-   <title>Web Activity Time Tracker</title>
-   <link href="style/webact.css" rel="stylesheet" />
-   <link href="style/chart.css" rel="stylesheet" />
-   <script src="scripts/chart/d3.v4.min.js"></script>
-   <script src="scripts/chart/chart-core.js"></script>
-   <script src="scripts/storage.js"></script>
-   <script src="scripts/common.js"></script>
-   <script src="scripts/ui.js"></script>
-   <script src="scripts/webact.js"></script>
+    <meta charset="utf-8">
+    <title>Web Activity Time Tracker</title>
+    <link href="style/webact.css" rel="stylesheet" />
+    <link href="style/chart.css" rel="stylesheet" />
 </head>
 
 <body>
-   <div id="preloader" class="preloader">
-      <div class="preloader__image"><div class="title">Loading...</div></div>
-   </div>
-   <svg class="height-0">
+    <div id="preloader" class="preloader">
+        <div class="preloader__image">
+            <div class="title">Loading...</div>
+        </div>
+    </div>
+    <svg class="height-0">
       <filter id="dropShadow">
          <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
          <feOffset dx="0" dy="1" />
@@ -28,80 +24,94 @@
          </feMerge>
       </filter>
    </svg>
-   <div id="extensionTitle">
-      <p class="title">Web Activity Time Tracker</p>
-   </div>
-   <div id="preloader" class="preloader hide"></div>
-   <div id="buttons" class="btn-block">
-      <a class="active" id="btnToday">Today</a>
-      <a id="btnAll">All-time</a>
-      <a id="btnByDays">By days</a>
-      <a id="settings">Settings</a>
-   </div>
-   <div id="stats" class="hide">
-      <p class="table-header">Overall stats</p>
-      <div id="statsBlock">
-         <div class="title-block">
-            <div class="block">
-               <div>First day</div>
-               <div class="value-block" id="statFirstDay"></div>
+    <div id="extensionTitle">
+        <p class="title">Web Activity Time Tracker</p>
+    </div>
+    <div id="buttons" class="btn-block">
+        <a class="active" id="btnToday">Today</a>
+        <a id="btnAll">All-time</a>
+        <a id="btnByDays">By days</a>
+        <a id="settings">Settings</a>
+        <div id='hintForUsers' class="hint-for-settings hide">
+            <div id='closeHintBtn' class="close-hint">✖</div>
+            <p class="title-block">You can:</p>
+            <p><span class="arrow">➤</span> set daily limits for sites</p>
+            <p><span class="arrow">➤</span> set notifications after a certain time has elapsed</p>
+            <p><span class="arrow">➤</span> set a list of sites with no tracking</p>
+            <p><span class="arrow">➤</span> enable time tracking on youtube.com</p>
+        </div>
+    </div>
+    <div id="stats" class="hide">
+        <p class="table-header">Overall stats</p>
+        <div id="statsBlock">
+            <div class="title-block">
+                <div class="block">
+                    <div>First day</div>
+                    <div class="value-block" id="statFirstDay"></div>
+                </div>
+                <div class="block">
+                    <div>Last day</div>
+                    <div class="value-block" id="statLastDay"></div>
+                </div>
             </div>
-            <div class="block">
-               <div>Last day</div>
-               <div class="value-block" id="statLastDay"></div>
+            <div class="title-block">
+                <div class="block">
+                    <div>Active days</div>
+                    <div class="value-block" id="statActiveDays"></div>
+                </div>
+                <div class="block">
+                    <div>Days in total</div>
+                    <div class="value-block" id="statTotalDays"></div>
+                </div>
             </div>
-         </div>
-         <div class="title-block">
-            <div class="block">
-               <div>Active days</div>
-               <div class="value-block" id="statActiveDays"></div>
+            <div class="title-block">
+                <div class="block">
+                    <div>Today</div>
+                    <div class="span-time" id="statTodayTime"></div>
+                </div>
+                <div class="block">
+                    <div>All-time</div>
+                    <div class="span-time" id="statAllDaysTime"></div>
+                </div>
             </div>
-            <div class="block">
-               <div>Days in total</div>
-               <div class="value-block" id="statTotalDays"></div>
+            <div class="title-block">
+                <div class="block">
+                    <div>Most active day</div>
+                    <div class="inline-block">
+                        <div class="value-block" id="statActiveDay"></div>
+                        <div class="span-time" id="statActiveDayTime"></div>
+                    </div>
+                </div>
+                <div class="block">
+                    <div>Most inactive day</div>
+                    <div class="inline-block">
+                        <div class="value-block" id="statInActiveDay"></div>
+                        <div class="span-time" id="statInActiveDayTime"></div>
+                    </div>
+                </div>
             </div>
-         </div>
-         <div class="title-block">
-            <div class="block">
-               <div>Today</div>
-               <div class="span-time" id="statTodayTime"></div>
-            </div>
-            <div class="block">
-               <div>All-time</div>
-               <div class="span-time" id="statAllDaysTime"></div>
-            </div>
-         </div>
-         <div class="title-block">
-            <div class="block">
-               <div>Most active day</div>
-               <div class="inline-block">
-                  <div class="value-block" id="statActiveDay"></div>
-                  <div class="span-time" id="statActiveDayTime"></div>
-               </div>
-            </div>
-            <div class="block">
-               <div>Most inactive day</div>
-               <div class="inline-block">
-                  <div class="value-block" id="statInActiveDay"></div>
-                  <div class="span-time" id="statInActiveDayTime"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div id="blockForChartBtn">
-      <a class="button active chart-btn chart-btn-donut" id="donutChartBtn">Common chart</a>
-      <a class="button chart-btn chart-btn-heatmap" id="heatMapChartBtn">Time chart</a>
-   </div>
-   <div id="chart"></div>
-   <div id="labelForTimeInterval" class="warning hide">
-      <label>Only time intervals greater than 3 seconds are shown</label>
-   </div>
-   <div id="timeChart"></div>
-   <div id="resultTable" class="list-of-site"></div>
-   <div id="total" class="inline-flex"></div>
-   <div id="byDays" class="calendar-block"></div>
+        </div>
+    </div>
+    <div id="blockForChartBtn">
+        <a class="button active chart-btn chart-btn-donut" id="donutChartBtn">Common chart</a>
+        <a class="button chart-btn chart-btn-heatmap" id="heatMapChartBtn">Time chart</a>
+    </div>
+    <div id="chart"></div>
+    <div id="labelForTimeInterval" class="warning hide">
+        <label>Only time intervals greater than 3 seconds are shown</label>
+    </div>
+    <div id="timeChart"></div>
+    <div id="resultTable" class="list-of-site"></div>
+    <div id="total" class="inline-flex"></div>
+    <div id="byDays" class="calendar-block"></div>
 
 </body>
 
 </html>
+
+<script src="scripts/chart/d3.v4.min.js"></script>
+<script src="scripts/chart/chart-core.js"></script>
+<script src="scripts/storage.js"></script>
+<script src="scripts/common.js"></script>
+<script src="scripts/ui.js"></script>
+<script src="scripts/webact.js"></script>

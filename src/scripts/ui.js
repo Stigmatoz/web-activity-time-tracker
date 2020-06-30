@@ -149,26 +149,24 @@ class UI {
 
     addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, counter, blockName) {
         var div = document.createElement('div');
-        div.addEventListener('mouseenter', function () {
+        div.addEventListener('mouseenter', function() {
             if (document.getElementById('chart').innerHTML !== '') {
                 var item = document.getElementById(tab.url);
                 if (item !== null) {
                     item.dispatchEvent(new Event('mouseenter'));
                     item.classList.add('mouse-over');
-                }
-                else {
+                } else {
                     document.getElementById('Others').dispatchEvent(new Event('mouseenter'));
                     document.getElementById('Others').classList.add('mouse-over');
                 }
             }
         });
-        div.addEventListener('mouseout', function () {
+        div.addEventListener('mouseout', function() {
             if (document.getElementById('chart').innerHTML !== '') {
                 var item = document.getElementById(tab.url);
                 if (item !== null) {
                     item.classList.remove('mouse-over');
-                }
-                else document.getElementById('Others').classList.remove('mouse-over');
+                } else document.getElementById('Others').classList.remove('mouse-over');
             }
         });
         div.classList.add('inline-flex');
@@ -232,12 +230,11 @@ class UI {
     createElementsForTotalTime(summaryTime, typeOfList, parentElement) {
         var arr = getArrayTime(summaryTime);
         var isNextPartActiv = false;
-        var getCssClass = function (item) {
+        var getCssClass = function(item) {
             if (item > 0) {
                 isNextPartActiv = true;
                 return ['span-active-time'];
-            }
-            else {
+            } else {
                 if (isNextPartActiv)
                     return ['span-active-time'];
                 return null;
@@ -257,7 +254,7 @@ class UI {
         if (document.getElementById('expander') === null) {
             var div = this.createElement('div', ['expander'], 'Show all');
             div.id = 'expander';
-            div.addEventListener('click', function () {
+            div.addEventListener('click', function() {
                 ui.expand();
             });
             this.getTableOfSite().appendChild(div);
@@ -296,11 +293,11 @@ class UI {
 
         div.append(tableForDaysBlock);
 
-        document.getElementById('dateFrom').addEventListener('change', function () {
+        document.getElementById('dateFrom').addEventListener('change', function() {
             getTabsByDays(tabsFromStorage);
         });
 
-        document.getElementById('dateTo').addEventListener('change', function () {
+        document.getElementById('dateTo').addEventListener('change', function() {
             getTabsByDays(tabsFromStorage);
         });
     }
@@ -346,7 +343,7 @@ class UI {
                 div.id = days[i].date + '_block';
                 parent.appendChild(div);
 
-                document.getElementById(days[i].date).addEventListener('click', function () {
+                document.getElementById(days[i].date).addEventListener('click', function() {
                     var element = document.getElementById(this.id + '_block');
                     element.innerHTML = null;
                     getTabsFromStorageByDay(this.id, this.id + '_block')
@@ -367,8 +364,7 @@ class UI {
                     'date': day.date,
                     'total': day.total
                 });
-            }
-            else resultList.push({
+            } else resultList.push({
                 'date': element,
                 'total': 0
             });
@@ -396,11 +392,11 @@ class UI {
         return element;
     }
 
-    setPreloader(){
+    setPreloader() {
         document.getElementById('preloader').classList.add('preloader');
     }
 
-    removePreloader(){
+    removePreloader() {
         document.getElementById('preloader').classList.remove('preloader');
         document.getElementById('preloader').classList.add('hide');
     }

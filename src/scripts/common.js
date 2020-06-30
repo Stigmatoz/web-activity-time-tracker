@@ -40,12 +40,14 @@ var SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT = 2000;
 var SETTINGS_INTERVAL_CHECK_STORAGE_DEFAULT = 3000;
 var SETTINGS_INTERVAL_RANGE_DEFAULT = RangeForDays.days7;
 var SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT = true;
+var SETTINGS_SHOW_HINT_DEFAULT = true;
 var STORAGE_NOTIFICATION_MESSAGE_DEFAULT = 'You have spent a lot of time on this site';
 
 var SETTINGS_INTERVAL_INACTIVITY = 'inactivity_interval';
 var SETTINGS_INTERVAL_SAVE_STORAGE = 'interval_save_in_storage';
 var SETTINGS_INTERVAL_RANGE = 'range_days';
 var SETTINGS_VIEW_TIME_IN_BADGE = 'view_time_in_badge';
+var SETTINGS_SHOW_HINT = 'show_hint';
 
 function isEmpty(obj) {
     for (var prop in obj) {
@@ -120,10 +122,12 @@ function getArrayTime(summaryTime) {
     mins = zeroAppend(mins);
     seconds = zeroAppend(seconds);
 
-    return {'days': days,
-            'hours': hours, 
-            'mins': mins, 
-            'seconds': seconds};
+    return {
+        'days': days,
+        'hours': hours,
+        'mins': mins,
+        'seconds': seconds
+    };
 }
 
 function convertSummaryTimeToString(summaryTime) {
@@ -153,21 +157,30 @@ function isDateInRange(dateStr, range) {
     return new Date(dateStr) >= range.from && new Date(dateStr) <= range.to;
 }
 
-function isCorrectDate(range){
+function isCorrectDate(range) {
     return range.from.getFullYear() >= 2019 && range.to.getFullYear() >= 2019;
 }
 
 function getDateFromRange(range) {
     switch (range) {
-        case 'days2': return 2;
-        case 'days3': return 3;
-        case 'days4': return 4;
-        case 'days5': return 5;
-        case 'days6': return 6;
-        case 'days7': return 7;
-        case 'month1': return 30;
-        case 'month2': return 60;
-        case 'month3': return 90;
+        case 'days2':
+            return 2;
+        case 'days3':
+            return 3;
+        case 'days4':
+            return 4;
+        case 'days5':
+            return 5;
+        case 'days6':
+            return 6;
+        case 'days7':
+            return 7;
+        case 'month1':
+            return 30;
+        case 'month2':
+            return 60;
+        case 'month3':
+            return 90;
     }
 }
 
@@ -175,7 +188,7 @@ function isDomainEquals(first, second) {
     if (first === second)
         return true;
     else {
-        var resultUrl = function (url) {
+        var resultUrl = function(url) {
             if (url.indexOf('www.') > -1)
                 return url.split('www.')[1];
             return url;
