@@ -27,6 +27,7 @@
         ],
         "optional_permissions": [
             "https://www.youtube.com/*",
+            "https://www.netflix.com/*",
             "notifications"
           ],
         "offline_enabled": true,
