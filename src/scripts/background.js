@@ -178,10 +178,8 @@ function executeScriptYoutube(callback, activeUrl, tab, activeTab) {
 function executeScriptNetflix(callback, activeUrl, tab, activeTab) {
     chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
         if (results !== undefined && results[0] !== undefined && results[0] === true) {
-            console.log("netglix is playing")
             callback(activeUrl, tab, activeTab);
         } else {
-            console.log("netflix paused")
             activity.closeIntervalForCurrentTab();
         }
     });
