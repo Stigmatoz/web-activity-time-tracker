@@ -3,7 +3,7 @@
     
         "name": "Web Activity Time Tracker",
         "short_name": "Web Time Tracker",
-        "version": "1.5.0",
+        "version": "1.5.1",
         "minimum_chrome_version": "26",
 
         "description": "Track and limit time your activity in the browser every day.",
