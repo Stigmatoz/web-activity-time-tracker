@@ -232,10 +232,12 @@ function exportToCSV() {
 }
 
 function toCsv(tabsData) {
-    var str = 'domain,time(sec)\r\n';
+    var str = 'domain,date,time(sec)\r\n';
     for (var i = 0; i < tabsData.length; i++) {
-        var line = tabsData[i].url + ',' + tabsData[i].summaryTime;
-        str += line + '\r\n';
+        for (var y = 0; y < tabsData[i].days.length; y++) {
+            var line = tabsData[i].url + ',' + tabsData[i].days[y].date + ','  + tabsData[i].days[y].summary;
+            str += line + '\r\n';
+        }
     }
 
     var csvFile = new Blob([str], { type: "text/csv" });
