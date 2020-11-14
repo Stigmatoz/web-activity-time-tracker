@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('grantPermissionForYT').addEventListener('click', function () {
         grantPermissionForYT();
     });
+    document.getElementById('grantPermissionForNetflix').addEventListener('click', function () {
+        grantPermissionForNetflix();
+    });
     document.getElementById('grantPermissionForNotifications').addEventListener('click', function () {
         grantPermissionForNotifications();
     });
@@ -107,6 +110,7 @@ function loadSettings() {
         document.getElementById('notifyMessage').value = mess;
     });
     checkPermissionsForYT();
+    checkPermissionsForNetflix();
     checkPermissionsForNotifications();
 }
 
@@ -117,6 +121,17 @@ function checkPermissionsForYT() {
     }, function (result) {
         if (result) {
             setUIForAnyPermissionForYT();
+        }
+    });
+}
+
+function checkPermissionsForNetflix() {
+    chrome.permissions.contains({
+        permissions: ['tabs'],
+        origins: ["https://www.netflix.com/*"]
+    }, function (result) {
+        if (result) {
+            setUIForAnyPermissionForNetflix();
         }
     });
 }
@@ -156,6 +171,18 @@ function grantPermissionForYT() {
     });
 }
 
+function grantPermissionForNetflix() {
+    chrome.permissions.request({
+        permissions: ['tabs'],
+        origins: ["https://www.netflix.com/*"]
+    }, function (granted) {
+        // The callback argument will be true if the user granted the permissions.
+        if (granted) {
+            setUIForAnyPermissionForNetflix();
+        }
+    });
+}
+
 function grantPermissionForNotifications() {
     chrome.permissions.request({
         permissions: ["notifications"]
@@ -170,6 +197,11 @@ function grantPermissionForNotifications() {
 function setUIForAnyPermissionForYT() {
     document.getElementById('permissionSuccessedBlockForYT').hidden = false;
     document.getElementById('grantPermissionForYT').setAttribute('disabled', 'true');
+}
+
+function setUIForAnyPermissionForNetflix() {
+    document.getElementById('permissionSuccessedBlockForNetflix').hidden = false;
+    document.getElementById('grantPermissionForNetflix').setAttribute('disabled', 'true');
 }
 
 function setUIForAnyPermissionForNotifications() {
