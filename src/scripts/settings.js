@@ -25,6 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('exportToCsv').addEventListener('click', function () {
         exportToCSV();
     });
+    document.getElementById('backup').addEventListener('click', function () {
+        backup();
+    });
+    document.getElementById('restore').addEventListener('click', function () {
+        restoreDataClick();
+    });
+    document.getElementById('file-input-backup').addEventListener('change', function (e) {
+        restore(e);
+    });
     document.getElementById('addBlackSiteBtn').addEventListener('click', function () {
         addNewSiteClickHandler('addBlackSiteLbl', null, actionAddBlackSiteToList, 'notifyForBlackList');
     });
@@ -87,6 +96,9 @@ function loadSettings() {
     });
     storage.getMemoryUse(STORAGE_TABS, function (integer) {
         document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';
+    });
+    storage.getValue(STORAGE_TABS, function (item) {
+        let s = item;
     });
     storage.getValue(STORAGE_BLACK_LIST, function (items) {
         if (items !== undefined)
@@ -234,20 +246,54 @@ function exportToCSV() {
     });
 }
 
+function backup() {
+    storage.getValue(STORAGE_TABS, function (item) {
+        let tabs = JSON.stringify(item);
+        createFile(tabs, "application/json", 'backup.json');
+        viewNotify('notify-backup');
+    });
+}
+
+function restoreDataClick() {
+    document.getElementById('file-input-backup').click();
+}
+
+function restore(e) {
+    let file = e.target.files[0];
+    if (file.type === "application/json") {
+        var reader = new FileReader();
+        reader.readAsText(file, 'UTF-8');
+
+        reader.onload = readerEvent => {
+            let content = readerEvent.target.result;
+            let tabs = JSON.parse(content);
+            chrome.extension.getBackgroundPage().tabs = tabs;
+            storage.saveTabs(tabs, allDataDeletedSuccess);
+            viewNotify('notify-restore');
+        }
+    } else {
+        viewNotify('notify-restore-failed');
+    }
+}
+
 function toCsv(tabsData) {
     var str = 'domain,date,time(sec)\r\n';
     for (var i = 0; i < tabsData.length; i++) {
         for (var y = 0; y < tabsData[i].days.length; y++) {
-            var line = tabsData[i].url + ',' + tabsData[i].days[y].date + ','  + tabsData[i].days[y].summary;
+            var line = tabsData[i].url + ',' + tabsData[i].days[y].date + ',' + tabsData[i].days[y].summary;
             str += line + '\r\n';
         }
     }
 
-    var csvFile = new Blob([str], { type: "text/csv" });
+    createFile(str, "text/csv", 'domains.csv');
+}
+
+function createFile(data, type, fileName) {
+    var file = new Blob([data], { type: type });
     var downloadLink;
     downloadLink = document.createElement("a");
-    downloadLink.download = 'domains.csv';
-    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.download = fileName;
+    downloadLink.href = window.URL.createObjectURL(file);
     downloadLink.style.display = "none";
     document.body.appendChild(downloadLink);
     downloadLink.click();

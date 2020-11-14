@@ -82,6 +82,20 @@
                     <div class="margin-top-10">
                         <input type="button" value="Export to CSV" id='exportToCsv'>
                     </div>
+                    <div class="margin-top-10">
+                        <input type="button" value="Backup" id='backup'>
+                        <input type="button" value="Restore" id='restore'>
+                        <input id="file-input-backup" class="hidden" type="file" name="backupFile" />
+                    </div>
+                    <div class="notify" id='notify-backup' hidden>
+                        Backup completed successfully
+                    </div>
+                    <div class="notify" id='notify-restore' hidden>
+                        Restore completed successfully
+                    </div>
+                    <div class="notify warning" id='notify-restore-failed' hidden>
+                        Backup file is not valid
+                    </div>
                     <!-- YouTube -->
                     <div class="margin-top-10">
                         <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser

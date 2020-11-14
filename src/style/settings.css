@@ -249,11 +249,11 @@ input[type="button"]:hover {
   }
 
   .notify{
-    width: 200px;
+    width: 220px;
     height: 27px;
     margin: auto;
-    background-color: rgb(118, 219, 93);
-    color: rgb(0, 0, 0);
+    background-color: rgb(21, 104, 0);
+    color: rgb(255, 255, 255);
     text-align: center;
     font-weight: 600;
     border-radius: 5px;
