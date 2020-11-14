@@ -196,17 +196,20 @@ function grantPermissionForNotifications() {
 
 function setUIForAnyPermissionForYT() {
     document.getElementById('permissionSuccessedBlockForYT').hidden = false;
-    document.getElementById('grantPermissionForYT').setAttribute('disabled', 'true');
+    document.getElementById('permissionSuccessedBlockForYT').classList.add('inline-block');
+    document.getElementById('grantPermissionForYT').hidden = true;
 }
 
 function setUIForAnyPermissionForNetflix() {
     document.getElementById('permissionSuccessedBlockForNetflix').hidden = false;
-    document.getElementById('grantPermissionForNetflix').setAttribute('disabled', 'true');
+    document.getElementById('permissionSuccessedBlockForNetflix').classList.add('inline-block');
+    document.getElementById('grantPermissionForNetflix').hidden = true;
 }
 
 function setUIForAnyPermissionForNotifications() {
     document.getElementById('permissionSuccessedBlockForNotifications').hidden = false;
-    document.getElementById('grantPermissionForNotifications').setAttribute('disabled', 'true');
+    document.getElementById('permissionSuccessedBlockForNotifications').classList.add('inline-block');
+    document.getElementById('grantPermissionForNotifications').hidden = true;
 }
 
 function viewNotificationList(items) {

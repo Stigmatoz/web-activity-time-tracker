@@ -479,7 +479,7 @@ input[type='checkbox'] {
     position: absolute;
     z-index: 98;
     width: 300px;
-    height: 140px;
+    height: 160px;
 }
 
 .hint-for-settings::before {

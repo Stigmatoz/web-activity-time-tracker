@@ -164,10 +164,9 @@ input[type="button"]{
     background: #3477db;
     color: #fff;
     border-radius: 3px;
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     padding: 0 20px;
-    display: inline-block;
     border: 0;
     font-size: 14px;
     font-weight: 500;
@@ -246,7 +245,7 @@ input[type="button"]:hover {
   }
 
   .hidden{
-      display: none;
+      display: none !important;
   }
 
   .notify{
@@ -443,4 +442,19 @@ input[type="button"]:hover {
 .setting-notify-block .setting-notify-message-block{
     display: inline-block;
     position: absolute;
+}
+
+.bold{
+    font-weight: 650;
+}
+
+.site-name{
+    display: inline-block;
+    width: 100px;
+}
+
+.permission-btn{
+    height: 25px !important;
+    line-height: 25px !important;
+    background-color:green !important;
 }

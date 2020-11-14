@@ -29,9 +29,9 @@
         <div id='block'>
             <div id='settingsBlock'>
                 <label>
-               <input type="checkbox" class="filled-in" id="viewTimeInBadge" checked="checked" />
-               <span>Display time tracker in icon</span>
-            </label>
+                    <input type="checkbox" class="filled-in" id="viewTimeInBadge" checked="checked" />
+                    <span>Display time tracker in icon</span>
+                </label>
                 <div class="margin-top-10">
                     <label>Stop tracking if no activity detected for: </label>
                     <div class="tooltip"><img src="/icons/information.svg" height="18" />
@@ -39,29 +39,29 @@
                     </div>
                     <div class="margin-top-10">
                         <select id='intervalInactivity' class="option">
-                     <option value="30">30 seconds</option>
-                     <option value="45">45 seconds</option>
-                     <option value="60">1 min</option>
-                     <option value="120">2 min</option>
-                     <option value="300">5 mins</option>
-                     <option value="600">10 mins</option>
-                     <option value="1200">20 mins</option>
-                     <option value="1800">30 mins</option>
-                  </select>
+                            <option value="30">30 seconds</option>
+                            <option value="45">45 seconds</option>
+                            <option value="60">1 min</option>
+                            <option value="120">2 min</option>
+                            <option value="300">5 mins</option>
+                            <option value="600">10 mins</option>
+                            <option value="1200">20 mins</option>
+                            <option value="1800">30 mins</option>
+                        </select>
                     </div>
                     <div class="margin-top-10"><label>Default range for days:</label></div>
                     <div class="margin-top-10">
                         <select id='rangeToDays' class="option">
-                     <option value="days2">2 days</option>
-                     <option value="days3">3 days</option>
-                     <option value="days4">4 days</option>
-                     <option value="days5">5 days</option>
-                     <option value="days6">6 days</option>
-                     <option value="days7">7 days</option>
-                     <option value="month1">1 month</option>
-                     <option value="month2">2 month</option>
-                     <option value="month3">3 month</option>
-                  </select>
+                            <option value="days2">2 days</option>
+                            <option value="days3">3 days</option>
+                            <option value="days4">4 days</option>
+                            <option value="days5">5 days</option>
+                            <option value="days6">6 days</option>
+                            <option value="days7">7 days</option>
+                            <option value="month1">1 month</option>
+                            <option value="month2">2 month</option>
+                            <option value="month3">3 month</option>
+                        </select>
                     </div>
                     <div class="margin-top-10">
                         <label>Ignored list of domain: </label>
@@ -84,32 +84,32 @@
                     </div>
                     <!-- YouTube -->
                     <div class="margin-top-10">
-                        <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser (mouse
-                     or keyboard).
-                     In order for the extension to also track when you watch a video on YouTube / Netflix, you need grant
-                     permission to
-                     access the sites.
-                     It is necessary that extension will get access to DOM (Document Object Model).</label>
+                        <label class="block">Web Activity Time Tracker tracks your activity, if you active in browser
+                            (mouse
+                            or keyboard).
+                            In order for the extension to also track when you watch <span class="bold">a video on
+                                YouTube / Netflix</span>, you need grant
+                            permission to
+                            access the sites.
+                            It is necessary that extension will get access to DOM (Document Object Model).</label>
                     </div>
                     <div class="margin-top-10">
-                        <label class="block">YouTube</label>
-                        <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForYT'>
-                        <div class="inline-block">
-                            <div id='permissionSuccessedBlockForYT' hidden>
-                                <img src="/icons/success.png" height="18" />
-                                <label>Permissions have been granted</label>
-                            </div>
+                        <label class="bold site-name">YouTube</label>
+                        <input class="margin-top-10 permission-btn" type="button" value="Grant permission"
+                            id='grantPermissionForYT'>
+                        <div id='permissionSuccessedBlockForYT' hidden>
+                            <img src="/icons/success.png" height="18" />
+                            <label>Permissions have been granted</label>
                         </div>
                     </div>
                     <!-- Netflix -->
                     <div class="margin-top-10">
-                        <label class="block">Netflix</label>
-                        <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForNetflix'>
-                        <div class="inline-block">
-                            <div id='permissionSuccessedBlockForNetflix' hidden>
-                                <img src="/icons/success.png" height="18" />
-                                <label>Permissions have been granted</label>
-                            </div>
+                        <label class="bold site-name">Netflix</label>
+                        <input class="margin-top-10 permission-btn" type="button" value="Grant permission"
+                            id='grantPermissionForNetflix'>
+                        <div id='permissionSuccessedBlockForNetflix' hidden>
+                            <img src="/icons/success.png" height="18" />
+                            <label>Permissions have been granted</label>
                         </div>
                     </div>
                     <div class="margin-top-10">
@@ -124,11 +124,13 @@
             <div id='restrictionsBlock' hidden>
                 <label>Access daily restrictions for websites: </label>
                 <div class="tooltip"><img src="/icons/information.svg" height="18" />
-                    <span class="tooltiptext">Set the time you can spend on the site during the day. After this time, access
-                  to the site will be blocked.</span>
+                    <span class="tooltiptext">Set the time you can spend on the site during the day. After this time,
+                        access
+                        to the site will be blocked.</span>
                 </div>
                 <div class="margin-top-10">
-                    <input type="text" class="label-with-list" placeholder="Enter site name..." id='addRestrictionSiteLbl' />
+                    <input type="text" class="label-with-list" placeholder="Enter site name..."
+                        id='addRestrictionSiteLbl' />
                     <div class="inline-block clockpicker" data-placement="left" data-align="top" data-autoclose="true">
                         <input type="text" class="clock" placeholder="Time..." readonly id="addRestrictionTimeLbl">
                     </div>
@@ -145,7 +147,7 @@
                 <label>List of sites with notifications: </label>
                 <div class="tooltip"><img src="/icons/information.svg" height="18" />
                     <span class="tooltiptext">Show notifications every time you spend a specified time interval on the
-                  site</span>
+                        site</span>
                 </div>
                 <div class="margin-top-10">
                     <input type="text" class="label-with-list" placeholder="Enter site name..." id='addNotifySiteLbl' />
@@ -168,14 +170,14 @@
                     </div>
                 </div>
                 <div class="margin-top-10">
-                    <label class="block">In order to Web Activity Time Tracker showed notifications every time you spend a specified time interval on the site, you need grant permission to access for notifications.
-               </label>
-                    <input class="margin-top-10" type="button" value="Grant permission" id='grantPermissionForNotifications'>
-                    <div class="inline-block">
-                        <div id='permissionSuccessedBlockForNotifications' hidden>
-                            <img src="/icons/success.png" height="18" />
-                            <label>Permissions have been granted</label>
-                        </div>
+                    <label class="block">In order to Web Activity Time Tracker showed notifications every time you spend
+                        a specified time interval on the site, you need grant permission to access for notifications.
+                    </label>
+                    <input class="margin-top-10 permission-btn" type="button" value="Grant permission"
+                        id='grantPermissionForNotifications'>
+                    <div id='permissionSuccessedBlockForNotifications' hidden>
+                        <img src="/icons/success.png" height="18" />
+                        <label>Permissions have been granted</label>
                     </div>
                 </div>
                 <div class="notify warning notify-width-300" id='notifyForNotifyList' hidden>
@@ -184,33 +186,35 @@
             </div>
             <div id='aboutBlock' hidden>
                 <div><label id='version'></label></div>
-                <div class="margin-top-20"><label>GitHub: <a href="https://github.com/Stigmatoz/web-activity-time-tracker"
-                     target="_blank">github.com/Stigmatoz/web-activity-time-tracker</a></label>
+                <div class="margin-top-20"><label>GitHub: <a
+                            href="https://github.com/Stigmatoz/web-activity-time-tracker"
+                            target="_blank">github.com/Stigmatoz/web-activity-time-tracker</a></label>
                 </div>
-                <div class="margin-top-20"><label>If you have feedback or would like to report an issue, you can do so on
-                  the <a href="https://github.com/Stigmatoz/web-activity-time-tracker/issues" target="_blank">GitHub
-                     issues page</a></label>
+                <div class="margin-top-20"><label>If you have feedback or would like to report an issue, you can do so
+                        on
+                        the <a href="https://github.com/Stigmatoz/web-activity-time-tracker/issues"
+                            target="_blank">GitHub
+                            issues page</a></label>
                 </div>
                 <div class="margin-top-20">
                     <label>If experiencing problems, having questions or suggestions, please fill out <a
-                     href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
-                     target="_blank">support
-                     form</a>.</label>
+                            href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
+                            target="_blank">support
+                            form</a>.</label>
                 </div>
                 <div class="margin-top-20">
                     <label>Do you enjoy using Web Activity Time Tracker? <a
-                     href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
-                     target="_blank">Let me know!</a></label>
+                            href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
+                            target="_blank">Let me know!</a></label>
                 </div>
                 <hr class="margin-top-20">
                 <div class="margin-top-20">
                     <label>You can support Web Activity Time Tracker by donating:</label>
                     <div class="margin-top-20">
                         <div class="inline-block">
-                            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/webtracker"><img src="/icons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span>Buy me a coffee</span></a>
-                        </div>
-                        <div class="inline-block">
-                            <a class="button" target="_blank" href="https://www.patreon.com/bePatron?u=19558753" data-patreon-widget-type="become-patron-button">Become a Patron!</a>
+                            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/webtracker"><img
+                                    src="/icons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span>Buy me a
+                                    coffee</span></a>
                         </div>
                     </div>
                 </div>
