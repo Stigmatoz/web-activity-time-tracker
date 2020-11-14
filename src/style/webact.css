@@ -393,7 +393,21 @@ input[type='checkbox'] {
 }
 
 #statsBlock .block {
-    width: 40%;
+    width: 45%;
+    display: inline-block;
+    text-align: center;
+}
+
+#statsBlock .summary-title{
+    background: #dbdbdb;
+    border: #dbdbdb 1px solid;
+    border-radius: 10px;
+    color: #919191;
+    padding: 2px;
+}
+
+#statsBlock .block-additional {
+    width: 30%;
     display: inline-block;
     text-align: center;
 }

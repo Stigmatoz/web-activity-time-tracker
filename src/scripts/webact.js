@@ -3,7 +3,7 @@
 var tabsFromBackground;
 var storage = new LocalStorage();
 var ui = new UI();
-var totalTime;
+var totalTime, averageTime;
 var tabsFromStorage;
 var targetTabs;
 var currentTypeOfList;
@@ -32,6 +32,10 @@ var stat = {
     },
     set activeDay(value) {
         document.getElementById('statActiveDay').innerHTML = value;
+    },
+    set averageTime(value) {
+        document.getElementById('statAverageTime').innerHTML = '';
+        ui.createElementsForTotalTime(value, TypeListEnum.ToDay, document.getElementById('statAverageTime'));
     },
     set activeDayTime(value) {
         document.getElementById('statActiveDayTime').innerHTML = '';
@@ -147,6 +151,7 @@ function getTabsFromStorage(tabs) {
         if (targetTabs.length > 0) {
             totalTime = getTotalTime(targetTabs);
             stat.allDaysTime = totalTime;
+
         } else {
             ui.fillEmptyBlock('chart');
             return;
@@ -371,6 +376,7 @@ function setStatData(array) {
     stat.firstDay = new Date(array[0]).toLocaleDateString('ru-RU');;
     stat.lastDay = new Date(array[array.length - 1]).toLocaleDateString('ru-RU');;
     stat.activeDays = array.length;
+    stat.averageTime = totalTime / array.length;
     stat.totalDays = daysBetween(array[0], array[array.length - 1]);
 }
 
