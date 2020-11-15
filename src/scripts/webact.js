@@ -376,7 +376,7 @@ function setStatData(array) {
     stat.firstDay = new Date(array[0]).toLocaleDateString('ru-RU');;
     stat.lastDay = new Date(array[array.length - 1]).toLocaleDateString('ru-RU');;
     stat.activeDays = array.length;
-    stat.averageTime = totalTime / array.length;
+    stat.averageTime = Math.round(totalTime / array.length);
     stat.totalDays = daysBetween(array[0], array[array.length - 1]);
 }
 
