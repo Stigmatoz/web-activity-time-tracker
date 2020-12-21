@@ -73,7 +73,7 @@ function convertTimeToSummaryTime(time) {
 function convertSummaryTimeToBadgeString(summaryTime) {
     var sec = (summaryTime);
     var min = (summaryTime / 60).toFixed(0);
-    var hours = (summaryTime / (60 * 60)).toFixed(0);
+    var hours = (summaryTime / (60 * 60)).toFixed(1);
     var days = (summaryTime / (60 * 60 * 24)).toFixed(0);
 
     if (sec < 60) {

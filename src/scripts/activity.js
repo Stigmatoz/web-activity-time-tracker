@@ -128,7 +128,7 @@ class Activity {
     }
 
     closeIntervalForCurrentTab() {
-        if (currentTab !== '') {
+        if (currentTab !== '' && timeIntervalList != undefined) {
             var item = timeIntervalList.find(o => o.domain === currentTab && o.day == new Date().toLocaleDateString("en-US"));
             if (item != undefined)
                 item.closeInterval();
