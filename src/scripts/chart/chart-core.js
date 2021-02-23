@@ -1,6 +1,7 @@
 function donutChart() {
     var width,
         height,
+        darkMode,
         margin = { top: 10, right: 10, bottom: 10, left: 10 },
         colour = d3.scaleOrdinal(d3.schemeCategory20), // colour scheme
         variable, // value in data that will dictate proportions on chart
@@ -78,6 +79,10 @@ function donutChart() {
                 })
                 .attr("class", "legend");
 
+            if (darkMode)
+                legendG.style("fill", "#ffffff");
+            else legendG.style("fill", "black");
+
             legendG.append("rect") // make a matching color rect
                 .attr("width", 10)
                 .attr("height", 10)
@@ -85,13 +90,24 @@ function donutChart() {
                     return colour(d.data[category]);
                 });
 
-            legendG.append("text") // add the text
-                .text(function (d) {
-                    return d.data.url;
-                })
-                .style("font-size", 13)
-                .attr("y", 10)
-                .attr("x", 13);
+            if (darkMode)
+                legendG.append("text") // add the text
+                    .text(function (d) {
+                        return d.data.url;
+                    })
+                    .style("font-size", 13)
+                    .style('fill', '#ffffff')
+                    .attr("y", 10)
+                    .attr("x", 13);
+            else
+                legendG.append("text") // add the text
+                    .text(function (d) {
+                        return d.data.url;
+                    })
+                    .style("fill", "black")
+                    .style("font-size", 13)
+                    .attr("y", 10)
+                    .attr("x", 13);
 
             // ===========================================================================================
             // add tooltip to mouse events on slices and labels
@@ -110,12 +126,21 @@ function donutChart() {
                 // add tooltip (svg circle element) when mouse enters label or slice
                 selection.on('mouseenter', function (data) {
                     d3.selectAll('.toolCircle').remove();
-                    svg.append('text')
-                        .attr('class', 'toolCircle')
-                        .attr('dy', -15) // hard-coded. can adjust this to adjust text vertical alignment in tooltip
-                        .html(toolTipHTML(data)) // add text to the circle.
-                        .style('font-size', '.9em')
-                        .style('text-anchor', 'middle'); // centres text in tooltip
+                    if (darkMode)
+                        svg.append('text')
+                            .attr('class', 'toolCircle')
+                            .attr('dy', -15) // hard-coded. can adjust this to adjust text vertical alignment in tooltip
+                            .html(toolTipHTML(data)) // add text to the circle.
+                            .style('font-size', '.9em')
+                            .style('fill', '#ffffff')
+                            .style('text-anchor', 'middle'); // centres text in tooltip
+                    else
+                        svg.append('text')
+                            .attr('class', 'toolCircle')
+                            .attr('dy', -15)
+                            .html(toolTipHTML(data))
+                            .style('font-size', '.9em')
+                            .style('text-anchor', 'middle');
 
                     svg.append('circle')
                         .attr('class', 'toolCircle')
@@ -177,6 +202,12 @@ function donutChart() {
     chart.height = function (value) {
         if (!arguments.length) return height;
         height = value;
+        return chart;
+    };
+
+    chart.darkMode = function (value) {
+        if (!arguments.length) return darkMode;
+        darkMode = value;
         return chart;
     };
 
@@ -323,17 +354,33 @@ function drawIntervalChart(data) {
 
     var tickDistance = 4.38;
 
-    var tooltip = d3.select("#timeChart")
-        .append("div")
-        .style("opacity", 0)
-        .style("display", "none")
-        .style("position", "absolute")
-        .attr("class", "tooltip")
-        .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "1px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
+    var tooltip;
+    if (document.body.classList.contains('night-mode'))
+        tooltip = d3.select("#timeChart")
+            .append("div")
+            .style("opacity", 0)
+            .style("display", "none")
+            .style("position", "absolute")
+            .attr("class", "tooltip")
+            .style("background-color", "#cbcbcb")
+            .style("color", "black")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+    else
+        tooltip = d3.select("#timeChart")
+            .append("div")
+            .style("opacity", 0)
+            .style("display", "none")
+            .style("position", "absolute")
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("color", "black")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
 
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function (d) {
@@ -361,11 +408,20 @@ function drawIntervalChart(data) {
     }
 
     //create the svg
-    var svg = d3.select("#timeChart").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg;
+    if (document.body.classList.contains('night-mode'))
+        svg = d3.select("#timeChart").append("svg")
+            .style('background-color', '#383838')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    else
+        svg = d3.select("#timeChart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     //draw the axis.
     svg.append("g")
@@ -419,7 +475,7 @@ function drawIntervalChart(data) {
         })
         .attr("height", function (d) {
             var offset = getMinutesTo(d.interval) - getMinutesFrom(d.interval);
-            if (offset == 0){
+            if (offset == 0) {
                 var offsetSeconds = getSecondsTo(d.interval) - getSecondsFrom(d.interval);
                 if (offsetSeconds <= 3)
                     return 0;

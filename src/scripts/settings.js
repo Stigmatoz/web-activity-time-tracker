@@ -2,8 +2,8 @@ var storage = new LocalStorage();
 var blackList = [];
 var restrictionList = [];
 var notifyList = [];
-var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn'];
-var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock'];
+var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn', 'donateBtn'];
+var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock', 'donateBlock'];
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('aboutBtn').addEventListener('click', function () {
         setBlockEvent('aboutBtn', 'aboutBlock');
         loadVersion();
+    });
+    document.getElementById('donateBtn').addEventListener('click', function () {
+        setBlockEvent('donateBtn', 'donateBlock');
     });
     document.getElementById('clearAllData').addEventListener('click', function () {
         clearAllData();
@@ -45,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
         storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
+    });
+    document.getElementById('darkMode').addEventListener('change', function () {
+        storage.saveValue(SETTINGS_DARK_MODE, this.checked);
     });
     document.getElementById('intervalInactivity').addEventListener('change', function () {
         storage.saveValue(SETTINGS_INTERVAL_INACTIVITY, this.value);
@@ -93,6 +99,9 @@ function loadSettings() {
     });
     storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) {
         document.getElementById('viewTimeInBadge').checked = item;
+    });
+    storage.getValue(SETTINGS_DARK_MODE, function (item) {
+        document.getElementById('darkMode').checked = item;
     });
     storage.getMemoryUse(STORAGE_TABS, function (integer) {
         document.getElementById('memoryUse').innerHTML = (integer / 1024).toFixed(2) + 'Kb';

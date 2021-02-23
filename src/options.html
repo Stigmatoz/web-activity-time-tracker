@@ -25,6 +25,7 @@
             <a id='restrictionsBtn'>Limits</a>
             <a id='notifyBtn'>Notifications</a>
             <a id='aboutBtn'>About</a>
+            <a id='donateBtn'>Donate</a>
         </div>
         <div id='block'>
             <div id='settingsBlock'>
@@ -32,6 +33,12 @@
                     <input type="checkbox" class="filled-in" id="viewTimeInBadge" checked="checked" />
                     <span>Display time tracker in icon</span>
                 </label>
+                <div class="margin-top-10">
+                    <label>
+                        <input type="checkbox" class="filled-in" id="darkMode" />   
+                        <span>Dark mode</span>
+                    </label>
+                </div>
                 <div class="margin-top-10">
                     <label>Stop tracking if no activity detected for: </label>
                     <div class="tooltip"><img src="/icons/information.svg" height="18" />
@@ -219,8 +226,9 @@
                             href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
                             target="_blank">Let me know!</a></label>
                 </div>
-                <hr class="margin-top-20">
-                <div class="margin-top-20">
+            </div>
+            <div id='donateBlock' hidden>
+                <div>
                     <label>You can support Web Activity Time Tracker by donating:</label>
                     <div class="margin-top-20">
                         <div class="inline-block">

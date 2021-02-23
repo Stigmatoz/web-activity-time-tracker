@@ -12,6 +12,7 @@ var setting_restriction_list;
 var setting_interval_save;
 var setting_interval_inactivity;
 var setting_view_in_badge;
+var setting_dark_mode;
 var setting_notification_list;
 var setting_notification_message;
 
@@ -196,6 +197,7 @@ function setDefaultSettings() {
     storage.saveValue(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
     storage.saveValue(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
     storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT);
+    storage.saveValue(SETTINGS_DARK_MODE, SETTINGS_DARK_MODE_DEFAULT);
     storage.saveValue(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
     storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, STORAGE_NOTIFICATION_MESSAGE_DEFAULT);
 }
@@ -255,6 +257,9 @@ function addListener() {
             }
             if (key === SETTINGS_VIEW_TIME_IN_BADGE) {
                 storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function(item) { setting_view_in_badge = item; });
+            }
+            if (key === SETTINGS_DARK_MODE) {
+                storage.getValue(SETTINGS_DARK_MODE, function(item) { setting_dark_mode = item; });
             }
         }
     });
@@ -331,6 +336,7 @@ function loadNotificationMessage() {
 function loadSettings() {
     storage.getValue(SETTINGS_INTERVAL_INACTIVITY, function(item) { setting_interval_inactivity = item; });
     storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function(item) { setting_view_in_badge = item; });
+    storage.getValue(SETTINGS_DARK_MODE, function(item) { setting_dark_mode = item; });
 }
 
 function loadAddDataFromStorage() {

@@ -40,12 +40,14 @@ var SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT = 2000;
 var SETTINGS_INTERVAL_CHECK_STORAGE_DEFAULT = 3000;
 var SETTINGS_INTERVAL_RANGE_DEFAULT = RangeForDays.days7;
 var SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT = true;
+var SETTINGS_DARK_MODE_DEFAULT = false;
 var SETTINGS_SHOW_HINT_DEFAULT = true;
 var STORAGE_NOTIFICATION_MESSAGE_DEFAULT = 'You have spent a lot of time on this site';
 
 var SETTINGS_INTERVAL_INACTIVITY = 'inactivity_interval';
 var SETTINGS_INTERVAL_SAVE_STORAGE = 'interval_save_in_storage';
 var SETTINGS_INTERVAL_RANGE = 'range_days';
+var SETTINGS_DARK_MODE = 'night_mode';
 var SETTINGS_VIEW_TIME_IN_BADGE = 'view_time_in_badge';
 var SETTINGS_SHOW_HINT = 'show_hint';
 

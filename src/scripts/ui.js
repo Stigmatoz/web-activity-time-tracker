@@ -117,6 +117,10 @@ class UI {
             .variable('percentage')
             .category('url');
 
+        if (setting_dark_mode)
+            donut.darkMode(true);
+        else donut.darkMode(false);
+
         d3.select('#chart')
             .datum(tabs) // bind data to the div
             .call(donut); // draw chart in div
@@ -394,6 +398,11 @@ class UI {
 
     setPreloader() {
         document.getElementById('preloader').classList.add('preloader');
+    }
+
+    setMode(){
+        if (setting_dark_mode)
+            document.body.classList.add('night-mode');
     }
 
     removePreloader() {

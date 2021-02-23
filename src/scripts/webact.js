@@ -9,6 +9,7 @@ var targetTabs;
 var currentTypeOfList;
 var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
+var setting_dark_mode;
 var restrictionList;
 var stat = {
     set firstDay(value) {
@@ -95,6 +96,8 @@ firstInitPage();
 
 function firstInitPage() {
     chrome.runtime.getBackgroundPage(function(bg) {
+        setting_dark_mode = bg.setting_dark_mode;
+        ui.setMode();
         tabsFromBackground = bg.tabs;
         currentTypeOfList = TypeListEnum.ToDay;
         getLimitsListFromStorage();

@@ -288,7 +288,6 @@ input[type='checkbox'] {
     display: inline-block;
 }
 
-
 /* Tooltip text */
 
 .tooltip .tooltiptext {
@@ -319,7 +318,6 @@ input[type='checkbox'] {
     width: 120px;
     transform: translateX(-50%) translateY(-120%);
 }
-
 
 /* Show the tooltip text when you mouse over the tooltip container */
 
@@ -398,7 +396,7 @@ input[type='checkbox'] {
     text-align: center;
 }
 
-#statsBlock .summary-title{
+#statsBlock .summary-title {
     background: #dbdbdb;
     border: #dbdbdb 1px solid;
     border-radius: 10px;
@@ -493,7 +491,7 @@ input[type='checkbox'] {
     position: absolute;
     z-index: 98;
     width: 300px;
-    height: 160px;
+    height: 190px;
 }
 
 .hint-for-settings::before {
@@ -522,4 +520,42 @@ input[type='checkbox'] {
 
 .arrow {
     color: yellow;
+}
+
+.night-mode {
+    color: #ffffff !important;
+    background-color: #11151c !important;
+}
+
+.night-mode .span-active-time {
+    color: #ffffff;
+}
+
+.night-mode .span-url {
+    color: #ffffff;
+}
+
+.night-mode .table-header {
+    color: #ffffff;
+    background-color: #838383;
+}
+
+.night-mode .span-percentage {
+    color: #a5a5a5;
+}
+
+.night-mode .block .value-block {
+    color: #ffffff !important;
+}
+
+.night-mode .inline-flex:hover .span-time {
+    color: #ffffff;
+}
+
+.night-mode .span-time {
+    color: #a5a5a5;
+}
+
+.night-mode .summary-title {
+    color: #000000 !important;
 }
