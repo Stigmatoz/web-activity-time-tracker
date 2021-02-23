@@ -76,7 +76,7 @@ function mainTRacker(activeUrl, tab, activeTab) {
         tab.incSummaryTime();
     }
     if (setting_view_in_badge === true) {
-        chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 0] })
+        chrome.browserAction.setBadgeBackgroundColor({ color: '#1aa1434d' })
         var today = new Date().toLocaleDateString("en-US");
         var summary = tab.days.find(s => s.date === today).summary;
         chrome.browserAction.setBadgeText({
