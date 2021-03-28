@@ -44,24 +44,18 @@
         </div>
     </div>
     <div id="stats" class="hide">
-        <p class="table-header">Overall stats</p>
+        <p class="table-header">Overall statistics</p>
         <div id="statsBlock">
             <div class="title-block">
-                <div class="block">
+                <div class="block-additional">
                     <div class="summary-title">First day</div>
                     <div class="value-block" id="statFirstDay"></div>
                 </div>
-                <div class="block">
-                    <div class="summary-title">Last day</div>
-                    <div class="value-block" id="statLastDay"></div>
-                </div>
-            </div>
-            <div class="title-block">
-                <div class="block">
+                <div class="block-additional">
                     <div class="summary-title">Active days</div>
                     <div class="value-block" id="statActiveDays"></div>
                 </div>
-                <div class="block">
+                <div class="block-additional">
                     <div class="summary-title">Days in total</div>
                     <div class="value-block" id="statTotalDays"></div>
                 </div>
@@ -82,17 +76,23 @@
             </div>
             <div class="title-block">
                 <div class="block">
-                    <div class="summary-title">Most active day</div>
+                    <div class="summary-title">Most active day<div class="tooltip today-icon"><img id="statActiveDayIcon" data-today="true" src="/icons/today.svg" height="17" class="margin-left-5"><span class="tooltiptext" id="statActiveDayTitle">Don't include the current day in the calculation of statistics</span></div></div>
                     <div class="inline-block">
                         <div class="value-block" id="statActiveDay"></div>
                         <div class="span-time" id="statActiveDayTime"></div>
+
+                        <div class="value-block hide" id="statActiveDayWithoutCurrentDay"></div>
+                        <div class="span-time hide" id="statActiveDayTimeWithoutCurrentDay"></div>
                     </div>
                 </div>
                 <div class="block">
-                    <div class="summary-title">Most inactive day</div>
+                    <div class="summary-title">Most inactive day<div class="tooltip today-icon"><img id="statInActiveDayIcon" data-today="true" src="/icons/today.svg" height="17" class="margin-left-5"><span class="tooltiptext" id="statInActiveDayTitle">Don't include the current day in the calculation of statistics</span></div></div>
                     <div class="inline-block">
                         <div class="value-block" id="statInActiveDay"></div>
                         <div class="span-time" id="statInActiveDayTime"></div>
+
+                        <div class="value-block hide" id="statInActiveDayWithoutCurrentDay"></div>
+                        <div class="span-time hide" id="statInActiveDayTimeWithoutCurrentDay"></div>
                     </div>
                 </div>
             </div>

@@ -182,6 +182,10 @@ input[type="date"] {
     margin-top: 0px;
 }
 
+.today-icon{
+    cursor:pointer;
+}
+
 .table-header {
     margin: 3px 0;
     border-radius: 5px;
@@ -189,6 +193,7 @@ input[type="date"] {
     font-size: 13px;
     padding: 4px;
     background-color: rgb(235, 243, 251);
+    text-align: center;
 }
 
 p.table-header {
