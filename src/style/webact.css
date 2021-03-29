@@ -564,3 +564,7 @@ input[type='checkbox'] {
 .night-mode .summary-title {
     color: #000000 !important;
 }
+
+.night-mode .value-block{
+    color: #ffffff !important;
+}
