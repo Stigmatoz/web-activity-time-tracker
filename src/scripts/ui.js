@@ -136,13 +136,22 @@ class UI {
     }
 
     addTableHeader(currentTypeOfList, counterOfSite, totalTime, totalDays) {
+        function fillSummaryTime(totalTime){
+            let arrayTime = getArrayTime(totalTime);
+            let stringTime = '';
+            if (arrayTime.days > 0) stringTime += arrayTime.days + ' days ';
+            stringTime += arrayTime.hours + ' hours ';
+            stringTime += arrayTime.mins + ' minutes ';
+            return stringTime;
+        }
+
         var p = document.createElement('p');
         p.classList.add('table-header');
         if (currentTypeOfList === TypeListEnum.ToDay)
             p.innerHTML = 'Today (' + counterOfSite + ' sites) <br> <strong>' + convertShortSummaryTimeToLongString(totalTime) + '</strong>';
         if (currentTypeOfList === TypeListEnum.All && totalDays !== undefined) {
             if (totalDays.countOfDays > 0) {
-                p.innerHTML = 'Aggregate data since ' + new Date(totalDays.minDate).toLocaleDateString() + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites) <br> <strong>' + convertShortSummaryTimeToLongString(totalTime)  + '</strong>';
+                p.innerHTML = 'Aggregate data since ' + new Date(totalDays.minDate).toLocaleDateString() + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites) <br> <strong>' + fillSummaryTime(totalTime)  + '</strong>';
             } else {
                 p.innerHTML = 'Aggregate data since ' + new Date().toLocaleDateString() + ' (' + counterOfSite + ' sites) <br>  <strong>' + convertShortSummaryTimeToLongString(totalTime)  + '</strong>';
             }
