@@ -135,16 +135,16 @@ class UI {
         barChart(days);
     }
 
-    addTableHeader(currentTypeOfList, counterOfSite, totalDays) {
+    addTableHeader(currentTypeOfList, counterOfSite, totalTime, totalDays) {
         var p = document.createElement('p');
         p.classList.add('table-header');
         if (currentTypeOfList === TypeListEnum.ToDay)
-            p.innerHTML = 'Today (' + counterOfSite + ' sites)';
+            p.innerHTML = 'Today (' + counterOfSite + ' sites) <br> <strong>' + convertShortSummaryTimeToLongString(totalTime) + '</strong>';
         if (currentTypeOfList === TypeListEnum.All && totalDays !== undefined) {
             if (totalDays.countOfDays > 0) {
-                p.innerHTML = 'Aggregate data since ' + new Date(totalDays.minDate).toLocaleDateString() + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites)';
+                p.innerHTML = 'Aggregate data since ' + new Date(totalDays.minDate).toLocaleDateString() + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites) <br> <strong>' + convertShortSummaryTimeToLongString(totalTime)  + '</strong>';
             } else {
-                p.innerHTML = 'Aggregate data since ' + new Date().toLocaleDateString() + ' (' + counterOfSite + ' sites)';
+                p.innerHTML = 'Aggregate data since ' + new Date().toLocaleDateString() + ' (' + counterOfSite + ' sites) <br>  <strong>' + convertShortSummaryTimeToLongString(totalTime)  + '</strong>';
             }
         }
 
@@ -185,6 +185,7 @@ class UI {
         divForImg.appendChild(img);
 
         var spanUrl = this.createElement('span', ['span-url'], tab.url);
+        spanUrl.setAttribute('href', 'https://' + tab.url);
 
         if (tab.url == currentTab) {
             var divForImage = document.createElement('div');

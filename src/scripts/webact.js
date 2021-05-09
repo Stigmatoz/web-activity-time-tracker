@@ -142,6 +142,12 @@ function firstInitPage() {
     });
 }
 
+window.addEventListener('click', function (e) {
+    if (e.target.nodeName == 'SPAN' && e.target.className == 'span-url' && e.target.attributes.href.value != undefined){
+        chrome.tabs.create({ url: e.target.attributes.href.value })
+    }
+});
+
 function getLimitsListFromStorage() {
     storage.loadTabs(STORAGE_RESTRICTION_LIST, getLimitsListFromStorageCallback);
 }
@@ -212,9 +218,9 @@ function getTabsFromStorage(tabs) {
     }
 
     if (currentTypeOfList === TypeListEnum.All)
-        ui.addTableHeader(currentTypeOfList, counterOfSite, getFirstDay());
+        ui.addTableHeader(currentTypeOfList, counterOfSite, totalTime, getFirstDay());
     if (currentTypeOfList === TypeListEnum.ToDay)
-        ui.addTableHeader(currentTypeOfList, counterOfSite);
+        ui.addTableHeader(currentTypeOfList, counterOfSite, totalTime);
 
     var currentTab = getCurrentTab();
 
