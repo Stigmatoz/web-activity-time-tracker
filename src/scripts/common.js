@@ -34,10 +34,11 @@ var STORAGE_NOTIFICATION_LIST = 'notification_list';
 var STORAGE_NOTIFICATION_MESSAGE = 'notification_message';
 var STORAGE_TIMEINTERVAL_LIST = 'time_interval';
 
+var DEFERRED_TIMEOUT = 300000;
+
 var SETTINGS_INTERVAL_INACTIVITY_DEFAULT = InactivityInterval.second30;
 var SETTINGS_INTERVAL_CHECK_DEFAULT = 1000;
-var SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT = 2000;
-var SETTINGS_INTERVAL_CHECK_STORAGE_DEFAULT = 3000;
+var SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT = 5000;
 var SETTINGS_INTERVAL_RANGE_DEFAULT = RangeForDays.days7;
 var SETTINGS_VIEW_TIME_IN_BADGE_DEFAULT = true;
 var SETTINGS_DARK_MODE_DEFAULT = false;
@@ -200,6 +201,22 @@ function isDomainEquals(first, second) {
             return true;
         else return false;
     }
+}
+
+function extractHostname(url) {
+    var hostname;
+
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
+    }
+    else {
+        hostname = url.split('/')[0];
+    }
+
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+
+    return hostname;
 }
 
 function treatAsUTC(date) {

@@ -36,3 +36,9 @@ body{
     bottom: 30px;
     right: 30px;
 }
+
+.defferer-link{
+    color: gray;
+    text-decoration: underline;
+    cursor: pointer;
+}

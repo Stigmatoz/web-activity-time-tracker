@@ -6,6 +6,7 @@ var currentTab;
 var isNeedDeleteTimeIntervalFromTabs = false;
 var activity = new Activity();
 var storage = new LocalStorage();
+var deferredRestrictionsList;
 
 var setting_black_list;
 var setting_restriction_list;
@@ -33,7 +34,7 @@ function backgroundCheck() {
         if (currentWindow.focused) {
             var activeTab = currentWindow.tabs.find(t => t.active === true);
             if (activeTab !== undefined && activity.isValidPage(activeTab)) {
-                var activeUrl = activity.extractHostname(activeTab.url);
+                var activeUrl = extractHostname(activeTab.url);
                 var tab = activity.getTab(activeUrl);
                 if (tab === undefined) {
                     activity.addTab(activeTab);
@@ -63,8 +64,8 @@ function backgroundCheck() {
 }
 
 function mainTRacker(activeUrl, tab, activeTab) {
-    if (activity.isLimitExceeded(activeUrl, tab)) {
-        setBlockPageToCurrent(activeUrl);
+    if (activity.isLimitExceeded(activeUrl, tab) && !activity.wasDeferred(activeUrl)) {
+        setBlockPageToCurrent(activeTab.url);
     }
     if (!activity.isInBlackList(activeUrl)) {
         if (activity.isNeedNotifyView(activeUrl, tab)) {
@@ -130,8 +131,8 @@ function notificationAction(activeUrl, tab) {
         });
 }
 
-function setBlockPageToCurrent(activeUrl) {
-    var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + activeUrl;
+function setBlockPageToCurrent(currentUrl) {
+    var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + currentUrl;
     chrome.tabs.query({ currentWindow: true, active: true }, function(tab) {
         chrome.tabs.update(tab.id, { url: blockUrl });
     });

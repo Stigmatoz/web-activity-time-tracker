@@ -5,7 +5,7 @@ class Activity {
         if (this.isValidPage(tab) === true) {
             if (tab.id && (tab.id != 0)) {
                 tabs = tabs || [];
-                var domain = this.extractHostname(tab.url);
+                var domain = extractHostname(tab.url);
                 var isDifferentUrl = false;
                 if (currentTab !== tab.url) {
                     isDifferentUrl = true;
@@ -41,13 +41,13 @@ class Activity {
 
     isInBlackList(domain) {
         if (setting_black_list !== undefined && setting_black_list.length > 0)
-            return setting_black_list.find(o => isDomainEquals(this.extractHostname(o), this.extractHostname(domain))) !== undefined;
+            return setting_black_list.find(o => isDomainEquals(extractHostname(o), extractHostname(domain))) !== undefined;
         else return false;
     }
 
     isLimitExceeded(domain, tab) {
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
-            var item = setting_restriction_list.find(o => isDomainEquals(this.extractHostname(o.domain), this.extractHostname(domain)));
+            var item = setting_restriction_list.find(o => isDomainEquals(extractHostname(o.domain), extractHostname(domain)));
             if (item !== undefined) {
                 var today = new Date().toLocaleDateString("en-US");
                 var data = tab.days.find(x => x.date == today);
@@ -62,6 +62,27 @@ class Activity {
         return false;
     }
 
+    wasDeferred(domain){
+        if (deferredRestrictionsList != undefined){
+            let defItem = deferredRestrictionsList.find(x => extractHostname(x.site) == extractHostname(domain));
+            if (defItem != null){
+                let time = defItem.dateOfDeferred;
+                if (time + DEFERRED_TIMEOUT > new Date().getTime()){
+                    return true;
+                }
+                else {
+                    let index = deferredRestrictionsList.indexOf(defItem);
+                    if (index > -1)
+                        deferredRestrictionsList.splice(index, 1);
+
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
     isNewUrl(domain) {
         if (tabs.length > 0)
             return tabs.find(o => o.url === domain) === undefined;
@@ -73,24 +94,9 @@ class Activity {
             return tabs.find(o => o.url === domain);
     }
 
-    extractHostname(url) {
-        var hostname;
-
-        if (url.indexOf("//") > -1) {
-            hostname = url.split('/')[2];
-        }
-        else {
-            hostname = url.split('/')[0];
-        }
-
-        hostname = hostname.split(':')[0];
-        hostname = hostname.split('?')[0];
-
-        return hostname;
-    }
-
+   
     updateFavicon(tab) {
-        var domain = this.extractHostname(tab.url);
+        var domain = extractHostname(tab.url);
         var currentTab = this.getTab(domain);
         if (currentTab !== null && currentTab !== undefined) {
             if (tab.favIconUrl !== undefined && tab.favIconUrl !== currentTab.favicon) {
@@ -138,7 +144,7 @@ class Activity {
 
     isNeedNotifyView(domain, tab){
         if (setting_notification_list !== undefined && setting_notification_list.length > 0) {
-            var item = setting_notification_list.find(o => isDomainEquals(this.extractHostname(o.domain), this.extractHostname(domain)));
+            var item = setting_notification_list.find(o => isDomainEquals(extractHostname(o.domain), extractHostname(domain)));
             if (item !== undefined) {
                 var today = new Date().toLocaleDateString("en-US");
                 var data = tab.days.find(x => x.date == today);

@@ -109,3 +109,7 @@ g.slices > path.mouse-over{
 .grid path {
     stroke-width: 0;
 }
+
+#chart{
+  min-height: 250px;
+}
