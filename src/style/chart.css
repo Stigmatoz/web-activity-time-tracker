@@ -110,6 +110,6 @@ g.slices > path.mouse-over{
     stroke-width: 0;
 }
 
-#chart{
+body{
   min-height: 250px;
 }
