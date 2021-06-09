@@ -203,7 +203,7 @@ p.table-header {
 .day-block {
     display: inline-flex;
     width: 100%;
-    height: 25px;
+    height: 20px;
     cursor: pointer;
     border-bottom: 1px solid rgb(223, 221, 221);
 }
@@ -239,7 +239,6 @@ input[type='checkbox'] {
 }
 
 .lbl-toggle {
-    font-family: monospace;
     font-size: 12px;
     cursor: pointer;
 }
@@ -247,11 +246,10 @@ input[type='checkbox'] {
 .lbl-toggle::before {
     content: '    ';
     display: table;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid currentColor;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 8px solid currentColor;
     vertical-align: middle;
-    transform: translateY(3px);
     transition: transform .2s ease-out;
 }
 

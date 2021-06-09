@@ -28,7 +28,7 @@ function donutChart() {
             // radius will dictate the thickness of the donut
             var arc = d3.arc()
                 .outerRadius(radius * 0.9)
-                .innerRadius(radius * 0.6)
+                .innerRadius(radius * 0.8)
                 .cornerRadius(cornerRadius)
                 .padAngle(padAngle);
 
@@ -144,7 +144,7 @@ function donutChart() {
 
                     svg.append('circle')
                         .attr('class', 'toolCircle')
-                        .attr('r', radius * 0.55) // radius of tooltip circle
+                        .attr('r', radius * 0.75) // radius of tooltip circle
                         .style('fill', colour(data.data[category])) // colour based on category mouse is over
                         .style('fill-opacity', 0.35);
 
