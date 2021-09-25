@@ -6,7 +6,7 @@ var restrictionList = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     var url = new URL(document.URL);
-    blockSiteUrl = url.searchParams.get("url");
+    blockSiteUrl = url.searchParams.get('url');
     document.getElementById('site').innerText = extractHostname(blockSiteUrl);
 
     storage.getValue(STORAGE_RESTRICTION_LIST, function (items) {
@@ -19,18 +19,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.getElementById('deffererBtn').addEventListener('click', function () {
-        chrome.runtime.getBackgroundPage(function (bg) {
-            let defList = bg.deferredRestrictionsList;
-            if (defList == undefined)
-                defList = [];
-            defList.push({ site: blockSiteUrl, dateOfDeferred: new Date().getTime()});
+    storage.getValue(SETTINGS_BLOCK_DEFERRAL, function(item) { 
+        var deferBtn = document.getElementById('deffererBtn');
+        if (item){
+            deferBtn.addEventListener('click', function () {
+                chrome.runtime.getBackgroundPage(function (bg) {
+                    let defList = bg.deferredRestrictionsList;
+                    if (defList == undefined)
+                        defList = [];
+                    defList.push({ site: blockSiteUrl, dateOfDeferred: new Date().getTime()});
 
-            bg.deferredRestrictionsList = defList;
+                    bg.deferredRestrictionsList = defList;
 
-            chrome.tabs.query({ currentWindow: true, active: true }, function(tab) {
-                chrome.tabs.update(tab.id, { url: blockSiteUrl });
+                    chrome.tabs.query({ currentWindow: true, active: true }, function(tab) {
+                        chrome.tabs.update(tab.id, { url: blockSiteUrl });
+                    });
+                });
             });
-        });
+        } else {
+            deferBtn.remove();
+        }
     });
 });
