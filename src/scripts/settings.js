@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('viewTimeInBadge').addEventListener('change', function () {
         storage.saveValue(SETTINGS_VIEW_TIME_IN_BADGE, this.checked);
     });
+    document.getElementById('blockDeferral').addEventListener('change', function () {
+        storage.saveValue(SETTINGS_BLOCK_DEFERRAL, this.checked);
+    });
     document.getElementById('darkMode').addEventListener('change', function () {
         storage.saveValue(SETTINGS_DARK_MODE, this.checked);
     });
@@ -99,6 +102,9 @@ function loadSettings() {
     });
     storage.getValue(SETTINGS_VIEW_TIME_IN_BADGE, function (item) {
         document.getElementById('viewTimeInBadge').checked = item;
+    });
+    storage.getValue(SETTINGS_BLOCK_DEFERRAL, function (item) {
+        document.getElementById('blockDeferral').checked = item;
     });
     storage.getValue(SETTINGS_DARK_MODE, function (item) {
         document.getElementById('darkMode').checked = item;
