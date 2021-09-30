@@ -231,3 +231,7 @@ function daysBetween(startDate, endDate) {
     var millisecondsPerDay = 24 * 60 * 60 * 1000;
     return ((treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay) + 1;
 }
+
+function todayLocalDate(){
+    return new Date().toLocaleDateString('en-US');
+}

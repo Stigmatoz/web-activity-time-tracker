@@ -7,7 +7,6 @@ var totalTime, averageTime;
 var tabsFromStorage;
 var targetTabs;
 var currentTypeOfList;
-var today = new Date().toLocaleDateString("en-US");
 var setting_range_days;
 var setting_dark_mode;
 var restrictionList;
@@ -202,11 +201,11 @@ function getTabsFromStorage(tabs) {
         counterOfSite = tabs.length;
     }
     if (currentTypeOfList === TypeListEnum.ToDay) {
-        targetTabs = tabs.filter(x => x.days.find(s => s.date === today));
+        targetTabs = tabs.filter(x => x.days.find(s => s.date === todayLocalDate()));
         counterOfSite = targetTabs.length;
         if (targetTabs.length > 0) {
             targetTabs = targetTabs.sort(function (a, b) {
-                return b.days.find(s => s.date === today).summary - a.days.find(s => s.date === today).summary;
+                return b.days.find(s => s.date === todayLocalDate()).summary - a.days.find(s => s.date === todayLocalDate()).summary;
             });
 
             totalTime = getTotalTime(targetTabs);
@@ -230,9 +229,10 @@ function getTabsFromStorage(tabs) {
         var summaryTime;
         var counter;
         if (currentTypeOfList === TypeListEnum.ToDay) {
-            summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
-            if (targetTabs[i].days.find(x => x.date == today))
-                counter = targetTabs[i].days.find(x => x.date == today).counter;
+            summaryTime = targetTabs[i].days.find(x => x.date == todayLocalDate()).summary;
+            let item = targetTabs[i].days.find(x => x.date == todayLocalDate());
+            if (item != null)
+              counter = item.counter;
         }
         if (currentTypeOfList === TypeListEnum.All) {
             summaryTime = targetTabs[i].summaryTime;
@@ -263,7 +263,7 @@ function getTabsForTimeChart(timeIntervals) {
     var resultArr = [];
     if (timeIntervals != undefined) {
         timeIntervals.forEach(function (data) {
-            if (data.day == today) {
+            if (data.day == todayLocalDate()) {
                 data.intervals.forEach(function (interval) {
                     resultArr.push({ 'domain': data.domain, 'interval': interval });
                 });
@@ -300,9 +300,10 @@ function getTabsFromStorageForExpander(tabs) {
         var summaryTime;
         var counter;
         if (currentTypeOfList === TypeListEnum.ToDay) {
-            summaryTime = targetTabs[i].days.find(x => x.date == today).summary;
-            if (targetTabs[i].days.find(x => x.date == today))
-                counter = targetTabs[i].days.find(x => x.date == today).counter;
+            summaryTime = targetTabs[i].days.find(x => x.date == todayLocalDate()).summary;
+            let item = targetTabs[i].days.find(x => x.date == todayLocalDate());
+            if (item != undefined)
+                counter = item.counter;
         }
         if (currentTypeOfList === TypeListEnum.All) {
             summaryTime = targetTabs[i].summaryTime;
@@ -320,7 +321,7 @@ function getTabsFromStorageForExpander(tabs) {
 function getTotalTime(tabs) {
     var total;
     if (currentTypeOfList === TypeListEnum.ToDay) {
-        var summaryTimeList = tabs.map(function (a) { return a.days.find(s => s.date === today).summary; });
+        var summaryTimeList = tabs.map(function (a) { return a.days.find(s => s.date === todayLocalDate()).summary; });
         total = summaryTimeList.reduce(function (a, b) { return a + b; })
     }
     if (currentTypeOfList === TypeListEnum.All) {
@@ -410,7 +411,7 @@ function setStatData(array) {
     });
 
     arrayAscByTimeWithoutCurrentDay = arrayAscByTime.filter(function (item) {
-        return item.date != today;
+        return item.date != todayLocalDate();
     })
 
     arrayAscByTime = arrayAscByTime.sort(function (a, b) {
@@ -421,15 +422,15 @@ function setStatData(array) {
         return a.total - b.total;
     });
 
-    stat.inActiveDay = new Date(arrayAscByTime[0].date).toLocaleDateString('ru-RU');
-    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length - 1].date).toLocaleDateString('ru-RU');;
+    stat.inActiveDay = new Date(arrayAscByTime[0].date).toLocaleDateString();
+    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length - 1].date).toLocaleDateString();;
     stat.inActiveDayTime = arrayAscByTime[0].total;
     stat.activeDayTime = arrayAscByTime[arrayAscByTime.length - 1].total;
 
     //exclude current day from summary statistics 
     if (arrayAscByTimeWithoutCurrentDay.length > 0) {
-        stat.inActiveDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[0].date).toLocaleDateString('ru-RU');
-        stat.activeDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[arrayAscByTimeWithoutCurrentDay.length - 1].date).toLocaleDateString('ru-RU');
+        stat.inActiveDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[0].date).toLocaleDateString();
+        stat.activeDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[arrayAscByTimeWithoutCurrentDay.length - 1].date).toLocaleDateString();
         stat.inActiveDayTimeWithoutCurrentDay = arrayAscByTimeWithoutCurrentDay[0].total;
         stat.activeDayTimeWithoutCurrentDay = arrayAscByTimeWithoutCurrentDay[arrayAscByTimeWithoutCurrentDay.length - 1].total;
     }
@@ -438,7 +439,7 @@ function setStatData(array) {
         stat.inActiveDayWithoutCurrentDay = 'No data';
     }
 
-    stat.firstDay = new Date(array[0]).toLocaleDateString('ru-RU');;
+    stat.firstDay = new Date(array[0]).toLocaleDateString();;
     stat.activeDays = array.length;
     stat.averageTime = Math.round(totalTime / array.length);
     stat.totalDays = daysBetween(array[0], array[array.length - 1]);

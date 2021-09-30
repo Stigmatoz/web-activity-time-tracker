@@ -80,8 +80,7 @@ function mainTRacker(activeUrl, tab, activeTab) {
     }
     if (setting_view_in_badge === true) {
         chrome.browserAction.setBadgeBackgroundColor({ color: '#1aa1434d' })
-        var today = new Date().toLocaleDateString("en-US");
-        var summary = tab.days.find(s => s.date === today).summary;
+        var summary = tab.days.find(s => s.date === todayLocalDate()).summary;
         chrome.browserAction.setBadgeText({
             tabId: activeTab.id,
             text: String(convertSummaryTimeToBadgeString(summary))
@@ -296,7 +295,7 @@ function deleteTimeIntervalFromTabs() {
 }
 
 function deleteYesterdayTimeInterval() {
-    timeIntervalList = timeIntervalList.filter(x => x.day == new Date().toLocaleDateString("en-US"));
+    timeIntervalList = timeIntervalList.filter(x => x.day == todayLocalDate());
 }
 
 function loadBlackList() {

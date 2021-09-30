@@ -20,11 +20,9 @@ class Tab {
 
     incSummaryTime() {
         this.summaryTime += 1;
-
-        var today = new Date().toLocaleDateString("en-US");
-        var day = this.days.find(x => x.date == today);
+        var day = this.days.find(x => x.date == todayLocalDate());
         if (day === undefined) {
-            this.addNewDay(today);
+            this.addNewDay(todayLocalDate());
         }
         else {
             day['summary'] += 1;
@@ -32,17 +30,14 @@ class Tab {
     }
 
     getTodayTime(){
-        var today = new Date().toLocaleDateString("en-US");
-        return this.days.find(x => x.date == today).summary;
+        return this.days.find(x => x.date == todayLocalDate()).summary;
     }
 
     incCounter(){
         this.counter +=1;
-
-        var today = new Date().toLocaleDateString("en-US");
-        var day = this.days.find(x => x.date == today);
+        var day = this.days.find(x => x.date == todayLocalDate());
         if (day === undefined) {
-            this.addNewDay(today);
+            this.addNewDay(todayLocalDate());
         }
         else {
             day['counter'] += 1;

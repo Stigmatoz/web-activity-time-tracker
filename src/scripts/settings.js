@@ -295,7 +295,7 @@ function toCsv(tabsData) {
     var str = 'domain,date,time(sec)\r\n';
     for (var i = 0; i < tabsData.length; i++) {
         for (var y = 0; y < tabsData[i].days.length; y++) {
-            var line = tabsData[i].url + ',' + tabsData[i].days[y].date + ',' + tabsData[i].days[y].summary;
+            var line = tabsData[i].url + ',' + new Date(tabsData[i].days[y].date).toLocaleDateString() + ',' + tabsData[i].days[y].summary;
             str += line + '\r\n';
         }
     }
