@@ -7,7 +7,7 @@ var totalTime, averageTime;
 var tabsFromStorage;
 var targetTabs;
 var currentTypeOfList;
-var today = new Date().toLocaleDateString("en-US");
+var today = new Date().toLocaleDateString();
 var setting_range_days;
 var setting_dark_mode;
 var restrictionList;
@@ -421,15 +421,15 @@ function setStatData(array) {
         return a.total - b.total;
     });
 
-    stat.inActiveDay = new Date(arrayAscByTime[0].date).toLocaleDateString('ru-RU');
-    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length - 1].date).toLocaleDateString('ru-RU');;
+    stat.inActiveDay = new Date(arrayAscByTime[0].date).toLocaleDateString();
+    stat.activeDay = new Date(arrayAscByTime[arrayAscByTime.length - 1].date).toLocaleDateString();
     stat.inActiveDayTime = arrayAscByTime[0].total;
     stat.activeDayTime = arrayAscByTime[arrayAscByTime.length - 1].total;
 
     //exclude current day from summary statistics 
     if (arrayAscByTimeWithoutCurrentDay.length > 0) {
-        stat.inActiveDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[0].date).toLocaleDateString('ru-RU');
-        stat.activeDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[arrayAscByTimeWithoutCurrentDay.length - 1].date).toLocaleDateString('ru-RU');
+        stat.inActiveDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[0].date).toLocaleDateString();
+        stat.activeDayWithoutCurrentDay = new Date(arrayAscByTimeWithoutCurrentDay[arrayAscByTimeWithoutCurrentDay.length - 1].date).toLocaleDateString();
         stat.inActiveDayTimeWithoutCurrentDay = arrayAscByTimeWithoutCurrentDay[0].total;
         stat.activeDayTimeWithoutCurrentDay = arrayAscByTimeWithoutCurrentDay[arrayAscByTimeWithoutCurrentDay.length - 1].total;
     }
@@ -438,7 +438,7 @@ function setStatData(array) {
         stat.inActiveDayWithoutCurrentDay = 'No data';
     }
 
-    stat.firstDay = new Date(array[0]).toLocaleDateString('ru-RU');;
+    stat.firstDay = new Date(array[0]).toLocaleDateString();
     stat.activeDays = array.length;
     stat.averageTime = Math.round(totalTime / array.length);
     stat.totalDays = daysBetween(array[0], array[array.length - 1]);
@@ -474,7 +474,7 @@ function getTabsByDays(tabs) {
             let second = end;
             var arr = [];
             for (let i = first; i <= second; i = new Date(i.setDate(i.getDate() + 1))) {
-                arr.push(new Date(i).toLocaleDateString("en-US"));
+                arr.push(new Date(i).toLocaleDateString());
             }
             return arr;
         };

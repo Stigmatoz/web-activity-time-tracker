@@ -49,7 +49,7 @@ class Activity {
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
             var item = setting_restriction_list.find(o => isDomainEquals(extractHostname(o.domain), extractHostname(domain)));
             if (item !== undefined) {
-                var today = new Date().toLocaleDateString("en-US");
+                var today = new Date().toLocaleDateString();
                 var data = tab.days.find(x => x.date == today);
                 if (data !== undefined) {
                     var todayTimeUse = data.summary;
@@ -117,17 +117,17 @@ class Activity {
     }
 
     addTimeInterval(domain) {
-        var item = timeIntervalList.find(o => o.domain === domain && o.day == new Date().toLocaleDateString("en-US"));
+        var item = timeIntervalList.find(o => o.domain === domain && o.day == new Date().toLocaleDateString());
         if (item != undefined) {
-            if (item.day == new Date().toLocaleDateString("en-US"))
+            if (item.day == new Date().toLocaleDateString())
                 item.addInterval();
             else {
-                var newInterval = new TimeInterval(new Date().toLocaleDateString("en-US"), domain);
+                var newInterval = new TimeInterval(new Date().toLocaleDateString(), domain);
                 newInterval.addInterval();
                 timeIntervalList.push(newInterval);
             }
         } else {
-            var newInterval = new TimeInterval(new Date().toLocaleDateString("en-US"), domain);
+            var newInterval = new TimeInterval(new Date().toLocaleDateString(), domain);
             newInterval.addInterval();
             timeIntervalList.push(newInterval);
         }
@@ -135,7 +135,7 @@ class Activity {
 
     closeIntervalForCurrentTab() {
         if (currentTab !== '' && timeIntervalList != undefined) {
-            var item = timeIntervalList.find(o => o.domain === currentTab && o.day == new Date().toLocaleDateString("en-US"));
+            var item = timeIntervalList.find(o => o.domain === currentTab && o.day == new Date().toLocaleDateString());
             if (item != undefined)
                 item.closeInterval();
         }
@@ -146,7 +146,7 @@ class Activity {
         if (setting_notification_list !== undefined && setting_notification_list.length > 0) {
             var item = setting_notification_list.find(o => isDomainEquals(extractHostname(o.domain), extractHostname(domain)));
             if (item !== undefined) {
-                var today = new Date().toLocaleDateString("en-US");
+                var today = new Date().toLocaleDateString();
                 var data = tab.days.find(x => x.date == today);
                 if (data !== undefined) {
                     var todayTimeUse = data.summary;
