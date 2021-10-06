@@ -319,8 +319,8 @@ class UI {
 
     getDateRange() {
         return {
-            'from': new Date(document.getElementById('dateFrom').value),
-            'to': new Date(document.getElementById('dateTo').value)
+            'from': new Date(document.getElementById('dateFrom').value  + ' '),
+            'to': new Date(document.getElementById('dateTo').value  + ' ')
         };
     }
 
