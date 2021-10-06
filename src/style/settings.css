@@ -225,13 +225,13 @@ input[type="button"]:hover {
     background-color: #555;
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 5px;
     border-radius: 6px;
   
     /* Position the tooltip text */
     position: absolute;
     z-index: 1;
-    transform: translateX(-50%) translateY(-150%);
+    transform: translateX(-50%) translateY(-120%);
   
     /* Fade in tooltip */
     opacity: 0;
