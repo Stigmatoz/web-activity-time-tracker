@@ -38,7 +38,8 @@
                         "scripts/tab.js", 
                         "scripts/timeInterval.js",
                         "scripts/background.js",
-                        "scripts/restriction.js"],
+                        "scripts/restriction.js",
+                        "scripts/url.js"],
             "persistent": false
         },
         "browser_action": {

@@ -475,7 +475,7 @@ function drawIntervalChart(data) {
         })
         .attr("height", function (d) {
             var offset = getMinutesTo(d.interval) - getMinutesFrom(d.interval);
-            if (offset == 0) {
+            if (offset <= 0) {
                 var offsetSeconds = getSecondsTo(d.interval) - getSecondsFrom(d.interval);
                 if (offsetSeconds <= 3)
                     return 0;

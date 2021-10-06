@@ -2,7 +2,7 @@
 
 class Tab {
     constructor(url, favicon, days, summary, counter) {
-        this.url = url;
+        this.url = new Url(url);
         this.favicon = favicon;
         if (summary !== undefined)
             this.summaryTime = summary;

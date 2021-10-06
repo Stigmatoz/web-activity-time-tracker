@@ -163,9 +163,7 @@ function getDataFromStorageByDays() {
 }
 
 function getLimitsListFromStorageCallback(items) {
-    if (items !== undefined)
-        restrictionList = items;
-    else restrictionList = [];
+    restrictionList = (items || []).map(item => new Restriction(item.url, item.time));
 }
 
 function fillEmptyBlock() {
@@ -265,11 +263,12 @@ function getTabsForTimeChart(timeIntervals) {
         timeIntervals.forEach(function (data) {
             if (data.day == todayLocalDate()) {
                 data.intervals.forEach(function (interval) {
-                    resultArr.push({ 'domain': data.domain, 'interval': interval });
+                    resultArr.push({ 'domain': data.url.host, 'interval': interval });
                 });
             }
         });
     }
+
     return resultArr;
 }
 
@@ -283,7 +282,14 @@ function getTimeIntervalList() {
 }
 
 function drawTimeChart(items) {
-    ui.drawTimeChart(getTabsForTimeChart(items));
+    var timeIntervalList = [];
+    items = items || [];
+
+    for (var i = 0; i < items.length; i++) {
+        timeIntervalList.push(new TimeInterval(items[i].day, items[i].url || items[i].domain, items[i].intervals));
+    }
+
+    ui.drawTimeChart(getTabsForTimeChart(timeIntervalList));
 }
 
 function getTabsFromStorageForExpander(tabs) {
@@ -352,7 +358,7 @@ function getCurrentTab() {
 
 function addTabForChart(tabsForChart, url, time, counter) {
     tabsForChart.push({
-        'url': url,
+        'url': url.host,
         'percentage': getPercentageForChart(time),
         'summary': time,
         'visits': counter

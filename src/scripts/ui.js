@@ -162,9 +162,10 @@ class UI {
 
     addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, counter, blockName) {
         var div = document.createElement('div');
+        var tabUrlString = tab.url.host;
         div.addEventListener('mouseenter', function() {
             if (document.getElementById('chart').innerHTML !== '') {
-                var item = document.getElementById(tab.url);
+                var item = document.getElementById(tabUrlString);
                 if (item !== null) {
                     item.dispatchEvent(new Event('mouseenter'));
                     item.classList.add('mouse-over');
@@ -176,7 +177,7 @@ class UI {
         });
         div.addEventListener('mouseout', function() {
             if (document.getElementById('chart').innerHTML !== '') {
-                var item = document.getElementById(tab.url);
+                var item = document.getElementById(tabUrlString);
                 if (item !== null) {
                     item.classList.remove('mouse-over');
                 } else document.getElementById('Others').classList.remove('mouse-over');
@@ -193,10 +194,10 @@ class UI {
         divForImg.classList.add('block-img');
         divForImg.appendChild(img);
 
-        var spanUrl = this.createElement('span', ['span-url'], tab.url);
-        spanUrl.setAttribute('href', 'https://' + tab.url);
+        var spanUrl = this.createElement('span', ['span-url'], tabUrlString);
+        spanUrl.setAttribute('href', 'https://' + tabUrlString);
 
-        if (tab.url == currentTab) {
+        if (tab.url.isMatch(currentTab)) {
             var divForImage = document.createElement('div');
             div.classList.add('span-active-url');
             var imgCurrentDomain = document.createElement('img');
@@ -212,7 +213,7 @@ class UI {
 
         if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {
             if (restrictionList !== undefined && restrictionList.length > 0) {
-                var item = restrictionList.find(x => isDomainEquals(x.domain, tab.url));
+                var item = restrictionList.find(x => x.url.isMatch(tab.url));
                 if (item !== undefined) {
                     var divLimit = this.createElement('div', ['tooltip', 'inline-block']);
                     var limitIcon = this.createElement('img', ['margin-left-5', 'tooltip']);

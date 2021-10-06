@@ -35,7 +35,7 @@ function backgroundCheck() {
         if (currentWindow.focused) {
             var activeTab = currentWindow.tabs.find(t => t.active === true);
             if (activeTab !== undefined && activity.isValidPage(activeTab)) {
-                var activeUrl = extractHostname(activeTab.url);
+                var activeUrl = new Url(activeTab.url);
                 var tab = activity.getTab(activeUrl);
                 if (tab === undefined) {
                     activity.addTab(activeTab);
@@ -49,7 +49,7 @@ function backgroundCheck() {
                     });
                 } else {
                     if (tab !== undefined) {
-                        if (currentTab !== tab.url) {
+                        if (!tab.url.isMatch(currentTab)) {
                             activity.setCurrentActiveTab(tab.url);
                         }
                         chrome.idle.queryState(parseInt(setting_interval_inactivity), function(state) {
@@ -146,9 +146,9 @@ function isVideoPlayedOnPage() {
 }
 
 function checkDOM(state, activeUrl, tab, activeTab) {
-    if (state === 'idle' && isDomainEquals(activeUrl, "youtube.com")) {
+    if (state === 'idle' && activeUrl.isMatch("youtube.com")) {
         trackForYT(mainTRacker, activeUrl, tab, activeTab);
-    } else if (state === 'idle' && isDomainEquals(activeUrl, "netflix.com")) {
+    } else if (state === 'idle' && activeUrl.isMatch("netflix.com")) {
         trackForNetflix(mainTRacker, activeUrl, tab, activeTab);
     } else activity.closeIntervalForCurrentTab();
 }
@@ -275,13 +275,13 @@ function addListener() {
 function loadTabs() {
     storage.loadTabs(STORAGE_TABS, function(items) {
         tabs = [];
-        if (items != undefined) {
-            for (var i = 0; i < items.length; i++) {
-                tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime, items[i].counter));
-            }
-            if (isNeedDeleteTimeIntervalFromTabs)
-                deleteTimeIntervalFromTabs();
+        items = items || [];
+
+        for (var i = 0; i < items.length; i++) {
+            tabs.push(new Tab(items[i].url, items[i].favicon, items[i].days, items[i].summaryTime, items[i].counter));
         }
+        if (isNeedDeleteTimeIntervalFromTabs)
+            deleteTimeIntervalFromTabs();
     });
 }
 
@@ -300,31 +300,46 @@ function deleteYesterdayTimeInterval() {
 
 function loadBlackList() {
     storage.getValue(STORAGE_BLACK_LIST, function(items) {
-        setting_black_list = items;
+        setting_black_list = [];
+        items = items || [];
+            
+        for (var i = 0; i < items.length; i++) {
+            setting_black_list.push(new Url(url));
+        }
     })
 }
 
 function loadTimeIntervals() {
     storage.getValue(STORAGE_TIMEINTERVAL_LIST, function(items) {
         timeIntervalList = [];
-        if (items != undefined) {
-            for (var i = 0; i < items.length; i++) {
-                timeIntervalList.push(new TimeInterval(items[i].day, items[i].domain, items[i].intervals));
-            }
-            deleteYesterdayTimeInterval();
+        items = items || [];
+
+        for (var i = 0; i < items.length; i++) {
+            timeIntervalList.push(new TimeInterval(items[i].day, items[i].url || items[i].domain, items[i].intervals));
         }
+        deleteYesterdayTimeInterval();
     });
 }
 
 function loadRestrictionList() {
     storage.getValue(STORAGE_RESTRICTION_LIST, function(items) {
-        setting_restriction_list = items;
-    })
+        setting_restriction_list = [];
+        items = items || [];
+      
+        for (var i = 0; i < items.length; i++) {
+            setting_restriction_list.push(new Restriction(items[i].url || items[i].domain, items[i].time));
+        }
+    });
 }
 
 function loadNotificationList() {
     storage.getValue(STORAGE_NOTIFICATION_LIST, function(items) {
-        setting_notification_list = items;
+        setting_notification_list = [];
+        items = items || [];
+
+        for (var i = 0; i < items.length; i++) {
+            setting_notification_list.push(new Notification(items[i].url || items[i].domain, items[i].time));
+        }
     });
 }
 
