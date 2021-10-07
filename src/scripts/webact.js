@@ -174,88 +174,99 @@ function fillEmptyBlock() {
 function getTabsFromStorage(tabs) {
     tabsFromStorage = tabs;
     targetTabs = [];
-
+  
     ui.clearUI();
     if (tabs === null) {
-        ui.fillEmptyBlock('chart');
-        return;
+      ui.fillEmptyBlock("chart");
+      return;
     }
-
+  
     var counterOfSite;
     if (currentTypeOfList === TypeListEnum.All) {
-        targetTabs = tabs.sort(function (a, b) {
-            return b.summaryTime - a.summaryTime;
-        });
-
-        if (targetTabs.length > 0) {
-            totalTime = getTotalTime(targetTabs);
-            stat.allDaysTime = totalTime;
-
-        } else {
-            ui.fillEmptyBlock('chart');
-            return;
-        }
-
-        counterOfSite = tabs.length;
+        targetTabs = tabs;
+      if (targetTabs.length > 0) {
+        totalTime = getTotalTime(targetTabs, currentTypeOfList);
+        stat.allDaysTime = totalTime;
+      } else {
+        ui.fillEmptyBlock("chart");
+        return;
+      }
+  
+      counterOfSite = tabs.length;
     }
     if (currentTypeOfList === TypeListEnum.ToDay) {
-        targetTabs = tabs.filter(x => x.days.find(s => s.date === todayLocalDate()));
-        counterOfSite = targetTabs.length;
-        if (targetTabs.length > 0) {
-            targetTabs = targetTabs.sort(function (a, b) {
-                return b.days.find(s => s.date === todayLocalDate()).summary - a.days.find(s => s.date === todayLocalDate()).summary;
-            });
-
-            totalTime = getTotalTime(targetTabs);
-            stat.todayTime = totalTime;
-        } else {
-            ui.fillEmptyBlock('chart');
-            return;
-        }
+      targetTabs = tabs.filter((x) =>
+        x.days.find((s) => s.date === todayLocalDate())
+      );
+      counterOfSite = targetTabs.length;
+      if (targetTabs.length > 0) {
+        targetTabs = targetTabs.sort(function (a, b) {
+          return (
+            b.days.find((s) => s.date === todayLocalDate()).summary -
+            a.days.find((s) => s.date === todayLocalDate()).summary
+          );
+        });
+  
+        totalTime = getTotalTime(targetTabs, currentTypeOfList);
+        stat.todayTime = totalTime;
+      } else {
+        ui.fillEmptyBlock("chart");
+        return;
+      }
     }
-
+  
     if (currentTypeOfList === TypeListEnum.All)
-        ui.addTableHeader(currentTypeOfList, counterOfSite, totalTime, getFirstDay());
+      ui.addTableHeader(
+        currentTypeOfList,
+        counterOfSite,
+        totalTime,
+        getFirstDay()
+      );
     if (currentTypeOfList === TypeListEnum.ToDay)
-        ui.addTableHeader(currentTypeOfList, counterOfSite, totalTime);
-
+      ui.addTableHeader(currentTypeOfList, counterOfSite, totalTime);
+  
     var currentTab = getCurrentTab();
-
+  
     var tabsForChart = [];
     var summaryCounter = 0;
-    for (var i = 0; i < targetTabs.length; i++) {
-        var summaryTime;
-        var counter;
-        if (currentTypeOfList === TypeListEnum.ToDay) {
-            summaryTime = targetTabs[i].days.find(x => x.date == todayLocalDate()).summary;
-            let item = targetTabs[i].days.find(x => x.date == todayLocalDate());
-            if (item != null)
-              counter = item.counter;
-        }
-        if (currentTypeOfList === TypeListEnum.All) {
-            summaryTime = targetTabs[i].summaryTime;
-            counter = targetTabs[i].counter;
-        }
-
-        summaryCounter += counter;
-
-        if (currentTypeOfList === TypeListEnum.ToDay || (currentTypeOfList === TypeListEnum.All && i <= 30))
-            ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
-        else
-            ui.addExpander();
-
-        if (i <= 8)
-            addTabForChart(tabsForChart, targetTabs[i].url, summaryTime, counter);
-        else addTabOthersForChart(tabsForChart, summaryTime);
+    var tabGroups = getTabGroups(targetTabs, currentTypeOfList);
+  
+    for (var i = 0; i < tabGroups.length; i++) {
+      var summaryTime = 0;
+      var counter = 0;
+      var tabGroup = tabGroups[i];
+  
+      summaryTime = tabGroup.summaryTime;
+      counter = tabGroup.counter;
+  
+      summaryCounter += counter;
+  
+      const targetTab = tabGroup.tabs[0];
+  
+      if (
+        currentTypeOfList === TypeListEnum.ToDay ||
+        (currentTypeOfList === TypeListEnum.All && i <= 30)
+      )
+        ui.addLineToTableOfSite(
+          targetTab,
+          currentTab,
+          summaryTime,
+          currentTypeOfList,
+          counter
+        );
+      else ui.addExpander();
+  
+      var tabForChartUrl = i <= 8 ? tabGroup.host : 'Others';
+      addTabForChart(tabsForChart, tabForChartUrl, summaryTime, counter);
     }
-
+  
     ui.addHrAfterTableOfSite();
     ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
     ui.drawChart(tabsForChart);
     ui.setActiveTooltipe(currentTab);
-
+  
     ui.removePreloader();
-}
+  }  
 
 function getTabsForTimeChart(timeIntervals) {
     var resultArr = [];
@@ -270,6 +281,39 @@ function getTabsForTimeChart(timeIntervals) {
     }
 
     return resultArr;
+}
+
+function getTabGroups(tabs, typeOfList, date) {
+    var result = [];
+
+    var tabGroups = groupTabsByHost(tabs);
+
+    for(const host in tabGroups){
+        var groupedTabs = tabGroups[host];
+
+        result.push({
+            host: host,
+            counter: getTotalCount(groupedTabs, typeOfList, date),
+            summaryTime: getTotalTime(groupedTabs, typeOfList, date),
+            tabs: groupedTabs
+        });
+    }
+    
+    result.sort(function (a, b) {
+        return b.summaryTime - a.summaryTime;
+    });
+
+    return result;
+}
+
+function groupTabsByHost(tabs) {
+    var tabGroups = tabs.reduce((groups, tab) => {
+        var key = tab.url.host;
+        (groups[key] = groups[key] || []).push(tab);
+        return groups;
+      }, {});
+
+      return tabGroups;
 }
 
 function getTabsForExpander() {
@@ -296,27 +340,13 @@ function getTabsFromStorageForExpander(tabs) {
     tabsFromStorage = tabs;
     targetTabs = [];
 
-    targetTabs = tabs.sort(function (a, b) {
-        return b.summaryTime - a.summaryTime;
-    });
-
     var currentTab = getCurrentTab();
+  
+    var tabGroups = getTabGroups(tabs, currentTypeOfList);
 
-    for (var i = 31; i < targetTabs.length; i++) {
-        var summaryTime;
-        var counter;
-        if (currentTypeOfList === TypeListEnum.ToDay) {
-            summaryTime = targetTabs[i].days.find(x => x.date == todayLocalDate()).summary;
-            let item = targetTabs[i].days.find(x => x.date == todayLocalDate());
-            if (item != undefined)
-                counter = item.counter;
-        }
-        if (currentTypeOfList === TypeListEnum.All) {
-            summaryTime = targetTabs[i].summaryTime;
-            counter = targetTabs[i].counter;
-        }
-
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, currentTypeOfList, counter);
+    for (var i = 31; i < tabGroups.length; i++) {
+        var tabGroup = tabGroups[i];
+        ui.addLineToTableOfSite(tabGroup, currentTab, tabGroup.summaryTime, currentTypeOfList, tabGroup.counter);
     }
 
     var table = ui.getTableOfSite();
@@ -324,16 +354,38 @@ function getTabsFromStorageForExpander(tabs) {
     ui.addHrAfterTableOfSite();
 }
 
-function getTotalTime(tabs) {
+function getTotalCount(tabs, typeofList, date) {
     var total;
-    if (currentTypeOfList === TypeListEnum.ToDay) {
-        var summaryTimeList = tabs.map(function (a) { return a.days.find(s => s.date === todayLocalDate()).summary; });
-        total = summaryTimeList.reduce(function (a, b) { return a + b; })
+    if (typeofList === TypeListEnum.ToDay) {
+        date = date || todayLocalDate();
+        total = tabs.reduce((tot, tab) => {
+            let item = tab.days.find((x) => x.date == date);
+            return tot + (item.counter || 0);
+        }, 0);
+    } else if (typeofList === TypeListEnum.All) {
+        total = tabs.reduce((tot, tab) => tot + tab.counter, 0);
     }
-    if (currentTypeOfList === TypeListEnum.All) {
-        var summaryTimeList = tabs.map(function (a) { return a.summaryTime; });
-        total = summaryTimeList.reduce(function (a, b) { return a + b; })
+  
+    return total;
+}
+  
+
+function getTotalTime(tabs, typeOfList, date) {
+    var total;
+    switch(typeOfList){
+        case TypeListEnum.ByDays:
+        case TypeListEnum.ToDay:
+            date = date || todayLocalDate();
+            var summaryTimeList = tabs.map(function (a) { return a.days.find(s => s.date === date).summary; });
+            total = summaryTimeList.reduce(function (a, b) { return a + b; })
+            break;
+        case TypeListEnum.All:
+            var summaryTimeList = tabs.map(function (a) { return a.summaryTime; });
+            total = summaryTimeList.reduce(function (a, b) { return a + b; })
+            break;
+        default:               
     }
+
     return total;
 }
 
@@ -356,26 +408,19 @@ function getCurrentTab() {
     return chrome.extension.getBackgroundPage().currentTab;
 }
 
-function addTabForChart(tabsForChart, url, time, counter) {
-    tabsForChart.push({
-        'url': url.host,
-        'percentage': getPercentageForChart(time),
-        'summary': time,
-        'visits': counter
-    });
-}
-
-function addTabOthersForChart(tabsForChart, summaryTime) {
-    var tab = tabsForChart.find(x => x.url == 'Others');
+function addTabForChart(tabsForChart, url, summaryTime, counter) {
+    var tab = tabsForChart.find(x => x.url == url);
     if (tab === undefined) {
         tabsForChart.push({
-            'url': 'Others',
+            'url': url,
             'percentage': getPercentageForChart(summaryTime),
-            'summary': summaryTime
+            'summary': summaryTime,
+            'visits': counter
         });
     } else {
         tab['summary'] += summaryTime;
         tab['percentage'] = getPercentageForChart(tab['summary']);
+        tab['visits'] += counter;
     }
 }
 
@@ -517,12 +562,15 @@ function getTabsFromStorageByDay(day, blockName) {
     content.classList.add('content-inner');
     content.id = blockName + '_content';
     document.getElementById(blockName).appendChild(content);
-    for (var i = 0; i < targetTabs.length; i++) {
-        var summaryTime, counter;
-        summaryTime = targetTabs[i].days.find(x => x.date == day).summary;
-        counter = targetTabs[i].days.find(x => x.date == day).counter;
 
-        ui.addLineToTableOfSite(targetTabs[i], currentTab, summaryTime, TypeListEnum.ByDays, counter, blockName + '_content');
+    var tabGroups = getTabGroups(targetTabs, TypeListEnum.ByDays, day);
+
+    for (const tabGroup of tabGroups){
+        var summaryTime = tabGroup.summaryTime;
+        var counter = tabGroup.counter;
+        const targetTab = tabGroup.tabs[0];
+
+        ui.addLineToTableOfSite(targetTab, currentTab, summaryTime, TypeListEnum.ByDays, counter, blockName + '_content');
     }
 }
 
