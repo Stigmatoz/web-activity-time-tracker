@@ -116,22 +116,16 @@ function loadSettings() {
         let s = item;
     });
     storage.getValue(STORAGE_BLACK_LIST, function (items) {
-        if (items !== undefined)
-            blackList = items;
-        else blackList = [];
-        viewBlackList(items);
+        blackList = (items || []).map(item => new Url(item))
+        viewBlackList(blackList);
     });
     storage.getValue(STORAGE_RESTRICTION_LIST, function (items) {
-        restrictionList = items;
-        if (restrictionList === undefined)
-            restrictionList = [];
-        viewRestrictionList(items);
+        restrictionList = (items || []).map(item => new Restriction(item.url || item.domain, item.time));
+        viewRestrictionList(restrictionList);
     });
     storage.getValue(STORAGE_NOTIFICATION_LIST, function (items) {
-        notifyList = items;
-        if (notifyList === undefined)
-            notifyList = [];
-        viewNotificationList(items);
+        notifyList = (items || []).map(item => new Notification(item.url || item.domain, item.time));
+        viewNotificationList(notifyList);
     });
     storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (mess) {
         document.getElementById('notifyMessage').value = mess;
@@ -250,7 +244,7 @@ function viewNotificationList(items) {
 function viewRestrictionList(items) {
     if (items !== undefined) {
         for (var i = 0; i < items.length; i++) {
-            addDomainToEditableListBox(items[i], 'restrictionsList', actionEditSite, deleteRestrictionSite, updateItemFromResctrictoinList, updateRestrictionList);
+            addDomainToEditableListBox(items[i], 'restrictionsList', actionEditSite, deleteRestrictionSite, updateItemFromRestrictionList, updateRestrictionList);
         }
     }
 }
@@ -332,7 +326,7 @@ function viewNotify(elementName) {
 function actionAddRectrictionToList(newSite, newTime) {
     if (!isContainsRestrictionSite(newSite)) {
         var restriction = new Restriction(newSite, newTime);
-        addDomainToEditableListBox(restriction, 'restrictionsList', actionEditSite, deleteRestrictionSite, updateItemFromResctrictoinList, updateRestrictionList);
+        addDomainToEditableListBox(restriction, 'restrictionsList', actionEditSite, deleteRestrictionSite, updateItemFromRestrictionList, updateRestrictionList);
         if (restrictionList === undefined)
             restrictionList = [];
         restrictionList.push(restriction);
@@ -404,7 +398,7 @@ function addDomainToEditableListBox(entity, elementId, actionEdit, actionDelete,
     var domainLbl = document.createElement('input');
     domainLbl.type = 'text';
     domainLbl.classList.add('readonly-input', 'inline-block', 'element-item');
-    domainLbl.value = entity.domain;
+    domainLbl.value = entity.url.toString();
     domainLbl.readOnly = true;
     domainLbl.setAttribute('name', 'domain');
 
@@ -456,7 +450,7 @@ function deleteBlackSite(e) {
 function deleteRestrictionSite(e) {
     var targetElement = e.path[1];
     var itemValue = targetElement.querySelector("[name='domain']").value;
-    var item = restrictionList.find(x => x.domain == itemValue);
+    var item = restrictionList.find(x => x.url.isMatch(itemValue));
     restrictionList.splice(restrictionList.indexOf(item), 1);
     document.getElementById('restrictionsList').removeChild(targetElement);
     updateRestrictionList();
@@ -465,7 +459,7 @@ function deleteRestrictionSite(e) {
 function deleteNotificationSite(e) {
     var targetElement = e.path[1];
     var itemValue = targetElement.querySelector("[name='domain']").value;
-    var item = notifyList.find(x => x.domain == itemValue);
+    var item = notifyList.find(x => x.url.isMatch(itemValue));
     notifyList.splice(notifyList.indexOf(item), 1);
     document.getElementById('notifyList').removeChild(targetElement);
     updateNotificationList();
@@ -501,23 +495,23 @@ function actionEditSite(e, actionUpdateTimeFromList, actionUpdateList) {
 }
 
 function isContainsRestrictionSite(domain) {
-    return restrictionList.find(x => x.domain == domain) != undefined;
+    return restrictionList.find(x => x.url.isMatch(domain)) != undefined;
 }
 
 function isContainsNotificationSite(domain) {
-    return notifyList.find(x => x.domain == domain) != undefined;
+    return notifyList.find(x => x.url.isMatch(domain)) != undefined;
 }
 
 function isContainsBlackSite(domain) {
-    return blackList.find(x => x == domain) != undefined;
+    return blackList.find(x => x.isMatch(domain)) != undefined;
 }
 
-function updateItemFromResctrictoinList(domain, time) {
-    restrictionList.find(x => x.domain === domain).time = convertTimeToSummaryTime(time);
+function updateItemFromRestrictionList(domain, time) {
+    restrictionList.find(x => x.url.isMatch(domain)).time = convertTimeToSummaryTime(time);
 }
 
 function updateItemFromNotifyList(domain, time) {
-    notifyList.find(x => x.domain === domain).time = convertTimeToSummaryTime(time);
+    notifyList.find(x => x.url.isMatch(domain)).time = convertTimeToSummaryTime(time);
 }
 
 function updateBlackList() {

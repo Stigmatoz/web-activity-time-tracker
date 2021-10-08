@@ -1,8 +1,8 @@
 'use strict';
 
 class TimeInterval {
-    constructor(day, domain, intervals) {
-        this.domain = domain;
+    constructor(day, url, intervals) {
+        this.url = new Url(url);
         if (intervals != undefined)
             this.intervals = intervals;
         else this.intervals = [];

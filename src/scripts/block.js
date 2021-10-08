@@ -6,16 +6,15 @@ var restrictionList = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   var url = new URL(document.URL);
-  blockSiteUrl = url.searchParams.get("url");
-  document.getElementById("site").innerText = extractHostname(blockSiteUrl);
+  blockSiteUrl = new Url(url.searchParams.get("url"));
+  document.getElementById("site").innerText = blockSiteUrl;
 
   storage.getValue(STORAGE_RESTRICTION_LIST, function (items) {
-    restrictionList = items;
+    restrictionList = (items || []).map(item => new Restriction(item.url || item.domain, item.time));
     if (restrictionList === undefined) restrictionList = [];
-    var currentItem = restrictionList.find((x) =>
-      isDomainEquals(extractHostname(x.domain), extractHostname(blockSiteUrl))
-    );
+    var currentItem = restrictionList.find(x => x.url.isMatch(blockSiteUrl));
     if (currentItem !== undefined) {
+      document.getElementById("site").innerText = currentItem.url.toString();
       document.getElementById("limit").innerText =
         convertShortSummaryTimeToString(currentItem.time);
     }
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
           chrome.tabs.query(
             { currentWindow: true, active: true },
             function (tab) {
-              chrome.tabs.update(tab.id, { url: blockSiteUrl });
+              chrome.tabs.update(tab.id, { url: blockSiteUrl.href });
             }
           );
         });

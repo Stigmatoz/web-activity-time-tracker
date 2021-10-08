@@ -64,10 +64,15 @@ function isEmpty(obj) {
 }
 
 function convertTimeToSummaryTime(time) {
+    var resultTimeValue = Number(time);
+    if (!isNaN(resultTimeValue)){
+        return resultTimeValue;
+    }
+
     var timeValue = time.split(':');
     var hour = timeValue[0];
     var min = timeValue[1];
-    var resultTimeValue = 0;
+    resultTimeValue = 0;
     if (hour > 0)
         resultTimeValue = hour * 3600;
     resultTimeValue += min * 60;
@@ -187,38 +192,6 @@ function getDateFromRange(range) {
         case 'month3':
             return 90;
     }
-}
-
-function isDomainEquals(first, second) {
-    if (first === second)
-        return true;
-    else {
-        var resultUrl = function(url) {
-            if (url.indexOf('www.') > -1)
-                return url.split('www.')[1];
-            return url;
-        };
-
-        if (resultUrl(first) === resultUrl(second))
-            return true;
-        else return false;
-    }
-}
-
-function extractHostname(url) {
-    var hostname;
-
-    if (url.indexOf("//") > -1) {
-        hostname = url.split('/')[2];
-    }
-    else {
-        hostname = url.split('/')[0];
-    }
-
-    hostname = hostname.split(':')[0];
-    hostname = hostname.split('?')[0];
-
-    return hostname;
 }
 
 function treatAsUTC(date) {

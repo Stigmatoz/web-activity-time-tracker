@@ -5,27 +5,27 @@ class Activity {
         if (this.isValidPage(tab) === true) {
             if (tab.id && (tab.id != 0)) {
                 tabs = tabs || [];
-                var domain = extractHostname(tab.url);
+                var url = new Url(tab.url);
                 var isDifferentUrl = false;
-                if (currentTab !== tab.url) {
+                if (!url.isMatch(currentTab)) {
                     isDifferentUrl = true;
                 }
 
-                if (this.isNewUrl(domain) && !this.isInBlackList(domain)) {
+                if (this.isNewUrl(url) && !this.isInBlackList(url)) {
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined) {
-                        favicon = 'chrome://favicon/' + domain;
+                        favicon = 'chrome://favicon/' + url.host;
                     }
-                    var newTab = new Tab(domain, favicon);
+                    var newTab = new Tab(url, favicon);
                     tabs.push(newTab);
                 }
 
-                if (isDifferentUrl && !this.isInBlackList(domain)) {
-                    this.setCurrentActiveTab(domain);
-                    var tabUrl = this.getTab(domain);
+                if (isDifferentUrl && !this.isInBlackList(url)) {
+                    this.setCurrentActiveTab(url);
+                    var tabUrl = this.getTab(url);
                     if (tabUrl !== undefined)
                         tabUrl.incCounter();
-                    this.addTimeInterval(domain);
+                    this.addTimeInterval(url);
                 }
             }
         } else this.closeIntervalForCurrentTab();
@@ -41,13 +41,13 @@ class Activity {
 
     isInBlackList(domain) {
         if (setting_black_list !== undefined && setting_black_list.length > 0)
-            return setting_black_list.find(o => isDomainEquals(extractHostname(o), extractHostname(domain))) !== undefined;
+            return setting_black_list.find(o => o.isMatch(domain)) !== undefined;
         else return false;
     }
 
     isLimitExceeded(domain, tab) {
         if (setting_restriction_list !== undefined && setting_restriction_list.length > 0) {
-            var item = setting_restriction_list.find(o => isDomainEquals(extractHostname(o.domain), extractHostname(domain)));
+            var item = setting_restriction_list.find(o => o.url.isMatch(domain));
             if (item !== undefined) {
                 var data = tab.days.find(x => x.date == todayLocalDate());
                 if (data !== undefined) {
@@ -63,7 +63,7 @@ class Activity {
 
     wasDeferred(domain){
         if (deferredRestrictionsList != undefined){
-            let defItem = deferredRestrictionsList.find(x => extractHostname(x.site) == extractHostname(domain));
+            let defItem = deferredRestrictionsList.find(x => new Url(x.site).isMatch(domain));
             if (defItem != null){
                 let time = defItem.dateOfDeferred;
                 if (time + DEFERRED_TIMEOUT > new Date().getTime()){
@@ -84,19 +84,23 @@ class Activity {
 
     isNewUrl(domain) {
         if (tabs.length > 0)
-            return tabs.find(o => o.url === domain) === undefined;
+            return tabs.find(o => o.url.isMatch(domain)) === undefined;
         else return true;
     }
 
     getTab(domain) {
         if (tabs !== undefined)
-            return tabs.find(o => o.url === domain);
+            return tabs.find(o => o.url.isMatch(domain));
     }
 
    
     updateFavicon(tab) {
-        var domain = extractHostname(tab.url);
-        var currentTab = this.getTab(domain);
+        if (!this.isValidPage(tab)){
+            return;
+        }
+        
+        var url = new Url(tab.url);
+        var currentTab = this.getTab(url);
         if (currentTab !== null && currentTab !== undefined) {
             if (tab.favIconUrl !== undefined && tab.favIconUrl !== currentTab.favicon) {
                 currentTab.favicon = tab.favIconUrl;
@@ -112,11 +116,11 @@ class Activity {
 
     clearCurrentActiveTab() {
         this.closeIntervalForCurrentTab();
-        currentTab = '';
+        currentTab = null;
     }
 
     addTimeInterval(domain) {
-        var item = timeIntervalList.find(o => o.domain === domain && o.day == todayLocalDate());
+        var item = timeIntervalList.find(o => o.url.isMatch(domain) && o.day == todayLocalDate());
         if (item != undefined) {
             if (item.day == todayLocalDate())
                 item.addInterval();
@@ -133,17 +137,17 @@ class Activity {
     }
 
     closeIntervalForCurrentTab() {
-        if (currentTab !== '' && timeIntervalList != undefined) {
-            var item = timeIntervalList.find(o => o.domain === currentTab && o.day == todayLocalDate());
+        if (currentTab && timeIntervalList != undefined) {
+            var item = timeIntervalList.find(o => o.url.isMatch(currentTab) && o.day == todayLocalDate());
             if (item != undefined)
                 item.closeInterval();
         }
-        currentTab = '';
+        currentTab = null;
     }
 
     isNeedNotifyView(domain, tab){
         if (setting_notification_list !== undefined && setting_notification_list.length > 0) {
-            var item = setting_notification_list.find(o => isDomainEquals(extractHostname(o.domain), extractHostname(domain)));
+            var item = setting_notification_list.find(o => o.url.isMatch(domain));
             if (item !== undefined) {
                 var today = todayLocalDate();
                 var data = tab.days.find(x => x.date == today);

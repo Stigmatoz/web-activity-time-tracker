@@ -11,6 +11,7 @@
     <script src="scripts/storage.js"></script>
     <script src="scripts/settings.js"></script>
     <script src="scripts/restriction.js"></script>
+    <script src="scripts/url.js"></script>
     <script src="scripts/picker/jquery-3.3.1.min.js"></script>
     <script src="scripts/picker/clockpicker.min.js"></script>
 </head>
@@ -149,7 +150,8 @@
             <div id='restrictionsBlock' hidden>
                 <label>Access daily restrictions for websites: </label>
                 <div class="tooltip"><img src="/icons/information.svg" height="18" />
-                    <span class="tooltiptext">Set the maximum time allowed on the site per day. After this time, has elapsed the site will be blocked.</span>
+                    <span class="tooltiptext">Set the maximum time allowed on the site per day. After this time, has elapsed the site will be blocked. 
+                        Restrictions can be configured for specific paths on a site as well.</span>
                 </div>
                 <div class="margin-top-10">
                     <input type="text" class="label-with-list" placeholder="Enter site name..."
@@ -170,7 +172,7 @@
                 <label>List of sites with notifications: </label>
                 <div class="tooltip"><img src="/icons/information.svg" height="18" />
                     <span class="tooltiptext">Show notifications every time you spend a specified time interval on the
-                        site</span>
+                        site. Notifications can be configured for specific paths on a site as well.</span>
                 </div>
                 <div class="margin-top-10">
                     <input type="text" class="label-with-list" placeholder="Enter site name..." id='addNotifySiteLbl' />
