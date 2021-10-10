@@ -197,7 +197,7 @@ class UI {
         var spanUrl = this.createElement('span', ['span-url'], tabUrlString);
         spanUrl.setAttribute('href', 'https://' + tabUrlString);
 
-        if (tab.url.isMatch(currentTab)) {
+        if (currentTab != null && tab.url.isHostMatch(currentTab.host)) {
             var divForImage = document.createElement('div');
             div.classList.add('span-active-url');
             var imgCurrentDomain = document.createElement('img');

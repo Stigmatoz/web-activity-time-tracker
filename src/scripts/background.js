@@ -49,7 +49,7 @@ function backgroundCheck() {
                     });
                 } else {
                     if (tab !== undefined) {
-                        if (!tab.url.isMatch(currentTab)) {
+                        if (currentTab == null || !tab.url.isHostMatch(currentTab.host)) {
                             activity.setCurrentActiveTab(tab.url);
                         }
                         chrome.idle.queryState(parseInt(setting_interval_inactivity), function(state) {
