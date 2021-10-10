@@ -51,7 +51,7 @@ class Url {
   }
 
   isPathMatch(path) {
-    var result = path === this.path || path.indexOf(this.path) === 0;
+    var result = this.path === '' || path === this.path  || path.indexOf(this.path) === 0;
 
     return result;
   }

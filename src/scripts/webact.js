@@ -147,8 +147,16 @@ window.addEventListener('click', function (e) {
     }
 });
 
-function getLimitsListFromStorage() {
-    storage.loadTabs(STORAGE_RESTRICTION_LIST, getLimitsListFromStorageCallback);
+function getLimitsListFromStorage(callback) {
+    callback = callback || (() => {});
+    if (!restrictionList) {
+        storage.loadTabs(STORAGE_RESTRICTION_LIST, items => {
+            getLimitsListFromStorageCallback(items);
+            callback();
+        });
+    } else {
+        callback();
+    }
 }
 
 function getDataFromStorage() {
