@@ -249,7 +249,7 @@ function getTabsFromStorage(tabs) {
   
       summaryCounter += counter;
   
-      const targetTab = tabGroup.tabs[0];
+      const targetTab = tabGroup.tabs.find(t => t.url.isMatch(currentTab)) || tabGroup.tabs[0];
   
       if (
         currentTypeOfList === TypeListEnum.ToDay ||
@@ -271,7 +271,7 @@ function getTabsFromStorage(tabs) {
     ui.addHrAfterTableOfSite();
     ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
     ui.drawChart(tabsForChart);
-    ui.setActiveTooltipe(currentTab);
+    ui.setActiveTooltip(currentTab);
   
     ui.removePreloader();
   }  
@@ -576,7 +576,7 @@ function getTabsFromStorageByDay(day, blockName) {
     for (const tabGroup of tabGroups){
         var summaryTime = tabGroup.summaryTime;
         var counter = tabGroup.counter;
-        const targetTab = tabGroup.tabs[0];
+        const targetTab = tabGroup.tabs.find(t => t.url.isMatch(currentTab)) || tabGroup.tabs[0];
 
         ui.addLineToTableOfSite(targetTab, currentTab, summaryTime, TypeListEnum.ByDays, counter, blockName + '_content');
     }
