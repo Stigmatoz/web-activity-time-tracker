@@ -114,11 +114,6 @@ class Activity {
         this.addTimeInterval(domain);
     }
 
-    clearCurrentActiveTab() {
-        this.closeIntervalForCurrentTab();
-        currentTab = null;
-    }
-
     addTimeInterval(domain) {
         var item = timeIntervalList.find(o => o.url.isMatch(domain) && o.day == todayLocalDate());
         if (item != undefined) {
@@ -136,13 +131,16 @@ class Activity {
         }
     }
 
-    closeIntervalForCurrentTab() {
+    closeIntervalForCurrentTab(preserveCurrentTab) {
         if (currentTab && timeIntervalList != undefined) {
             var item = timeIntervalList.find(o => o.url.isMatch(currentTab) && o.day == todayLocalDate());
             if (item != undefined)
                 item.closeInterval();
         }
-        currentTab = null;
+
+        if (!preserveCurrentTab) {
+            currentTab = null;
+        }
     }
 
     isNeedNotifyView(domain, tab){

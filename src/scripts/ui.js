@@ -98,12 +98,13 @@ class UI {
         this.getTableOfSite().appendChild(document.createElement('hr'));
     }
 
-    setActiveTooltipe(currentTab) {
-        if (currentTab !== '') {
-            var element = document.getElementById(currentTab);
+    setActiveTooltip(currentTab) {
+        if (!!currentTab) {
+            const host = currentTab.host;
+            var element = document.getElementById(host);
             if (element !== null) {
                 var event = new Event("mouseenter");
-                document.getElementById(currentTab).dispatchEvent(event);
+                document.getElementById(host).dispatchEvent(event);
             }
         }
     }
@@ -197,7 +198,7 @@ class UI {
         var spanUrl = this.createElement('span', ['span-url'], tabUrlString);
         spanUrl.setAttribute('href', 'https://' + tabUrlString);
 
-        if (currentTab != null && tab.url.isHostMatch(currentTab.host)) {
+        if (tab.url.isMatch(currentTab)) {
             var divForImage = document.createElement('div');
             div.classList.add('span-active-url');
             var imgCurrentDomain = document.createElement('img');

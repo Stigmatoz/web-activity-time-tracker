@@ -49,7 +49,7 @@ function backgroundCheck() {
                     });
                 } else {
                     if (tab !== undefined) {
-                        if (currentTab == null || !tab.url.isHostMatch(currentTab.host)) {
+                        if (!tab.url.isMatch(currentTab)) {
                             activity.setCurrentActiveTab(tab.url);
                         }
                         chrome.idle.queryState(parseInt(setting_interval_inactivity), function(state) {
@@ -60,7 +60,7 @@ function backgroundCheck() {
                     }
                 }
             }
-        } else activity.closeIntervalForCurrentTab();
+        } else activity.closeIntervalForCurrentTab(true);
     });
 }
 
