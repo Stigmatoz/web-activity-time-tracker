@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "commonjs",
+        "target": "es5",
+        "esModuleInterop": true,
+        "sourceMap": false,
+        "outDir": "dist/js",
+        "noEmitOnError": true,
+        "baseUrl": "./",
+        "jsx": "react",
+        "typeRoots": [ "node_modules/@types" ],
+        "paths": {
+			"modules/*":["./modules/*"],
+		},
+    }
+}
