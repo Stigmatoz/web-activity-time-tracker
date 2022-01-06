@@ -18,8 +18,6 @@ var setting_dark_mode;
 var setting_notification_list;
 var setting_notification_message;
 
-var isHasPermissioForYouTube;
-var isHasPermissioForNetflix;
 var isHasPermissioForNotification;
 
 function updateSummaryTime() {
@@ -55,7 +53,7 @@ function backgroundCheck() {
                         chrome.idle.queryState(parseInt(setting_interval_inactivity), function(state) {
                             if (state === 'active') {
                                 mainTRacker(activeUrl, tab, activeTab);
-                            } else checkDOM(state, activeUrl, tab, activeTab);
+                            } else checkVideoPlaying(activeUrl, tab, activeTab);
                         });
                     }
                 }
@@ -65,6 +63,7 @@ function backgroundCheck() {
 }
 
 function mainTRacker(activeUrl, tab, activeTab) {
+    console.log(activeUrl)
     if (activity.isLimitExceeded(activeUrl, tab) && !activity.wasDeferred(activeUrl)) {
         setBlockPageToCurrent(activeTab.url);
     }
@@ -138,52 +137,16 @@ function setBlockPageToCurrent(currentUrl) {
     });
 }
 
-function isVideoPlayedOnPage() {
-    var videoElement = document.getElementsByTagName('video')[0];
-    if (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2) {
-        return true;
-    } else return false;
-}
-
-function checkDOM(state, activeUrl, tab, activeTab) {
-    if (state === 'idle' && activeUrl.isMatch("youtube.com")) {
-        trackForYT(mainTRacker, activeUrl, tab, activeTab);
-    } else if (state === 'idle' && activeUrl.isMatch("netflix.com")) {
-        trackForNetflix(mainTRacker, activeUrl, tab, activeTab);
-    } else activity.closeIntervalForCurrentTab();
-}
-
-function trackForYT(callback, activeUrl, tab, activeTab) {
-    if (isHasPermissioForYouTube) {
-        executeScriptYoutube(callback, activeUrl, tab, activeTab);
-    } else {
-        checkPermissionsForYT(executeScriptYoutube, activity.closeIntervalForCurrentTab, callback, activeUrl, tab, activeTab);
-    }
-}
-
-function trackForNetflix(callback, activeUrl, tab, activeTab) {
-    if (isHasPermissioForNetflix) {
-        executeScriptNetflix(callback, activeUrl, tab, activeTab);
-    } else {
-        checkPermissionsForNetflix(executeScriptNetflix, activity.closeIntervalForCurrentTab, callback, activeUrl, tab, activeTab);
-    }
-}
-
-function executeScriptYoutube(callback, activeUrl, tab, activeTab) {
-    chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
+function checkVideoPlaying(activeUrl, tab, activeTab) {
+    // wasm DOM has some problems with checking inside executeScript(), so make it always true
+    chrome.tabs.executeScript({ code: `var videoEle = document.getElementsByTagName('video');  var wasmVideoEle = document.getElementsByTagName('bwp-video');
+    var videoPlaying = [...videoEle].map(videoElement => (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2));
+    var wasmVideoPlaying = [...wasmVideoEle].map(videoElement => true);        
+        [...videoPlaying, ...wasmVideoPlaying].includes(true)` }, 
+    (results) => {
         if (results !== undefined && results[0] !== undefined && results[0] === true)
-            callback(activeUrl, tab, activeTab);
+            mainTRacker(activeUrl, tab, activeTab);
         else activity.closeIntervalForCurrentTab();
-    });
-}
-
-function executeScriptNetflix(callback, activeUrl, tab, activeTab) {
-    chrome.tabs.executeScript({ code: "var videoElement = document.getElementsByTagName('video')[0]; (videoElement !== undefined && videoElement.currentTime > 0 && !videoElement.paused && !videoElement.ended && videoElement.readyState > 2);" }, (results) => {
-        if (results !== undefined && results[0] !== undefined && results[0] === true) {
-            callback(activeUrl, tab, activeTab);
-        } else {
-            activity.closeIntervalForCurrentTab();
-        }
     });
 }
 
@@ -371,35 +334,7 @@ function loadAddDataFromStorage() {
 }
 
 function loadPermissions() {
-    checkPermissionsForYT();
-    checkPermissionsForNetflix();
     checkPermissionsForNotifications();
-}
-
-function checkPermissionsForYT(callbackIfTrue, callbackIfFalse, ...props) {
-    chrome.permissions.contains({
-        permissions: ['tabs'],
-        origins: ["https://www.youtube.com/*"]
-    }, function(result) {
-        if (callbackIfTrue != undefined && result)
-            callbackIfTrue(...props);
-        if (callbackIfFalse != undefined && !result)
-            callbackIfFalse();
-        isHasPermissioForYouTube = result;
-    });
-}
-
-function checkPermissionsForNetflix(callbackIfTrue, callbackIfFalse, ...props) {
-    chrome.permissions.contains({
-        permissions: ['tabs'],
-        origins: ["https://www.netflix.com/*"]
-    }, function(result) {
-        if (callbackIfTrue != undefined && result)
-            callbackIfTrue(...props);
-        if (callbackIfFalse != undefined && !result)
-            callbackIfFalse();
-        isHasPermissioForNetflix = result;
-    });
 }
 
 function checkPermissionsForNotifications(callback, ...props) {

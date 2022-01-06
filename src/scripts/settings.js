@@ -61,12 +61,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('rangeToDays').addEventListener('change', function () {
         storage.saveValue(SETTINGS_INTERVAL_RANGE, this.value);
     });
-    document.getElementById('grantPermissionForYT').addEventListener('click', function () {
-        grantPermissionForYT();
-    });
-    document.getElementById('grantPermissionForNetflix').addEventListener('click', function () {
-        grantPermissionForNetflix();
-    });
     document.getElementById('grantPermissionForNotifications').addEventListener('click', function () {
         grantPermissionForNotifications();
     });
@@ -130,32 +124,9 @@ function loadSettings() {
     storage.getValue(STORAGE_NOTIFICATION_MESSAGE, function (mess) {
         document.getElementById('notifyMessage').value = mess;
     });
-    checkPermissionsForYT();
-    checkPermissionsForNetflix();
     checkPermissionsForNotifications();
 }
 
-function checkPermissionsForYT() {
-    chrome.permissions.contains({
-        permissions: ['tabs'],
-        origins: ["https://www.youtube.com/*"]
-    }, function (result) {
-        if (result) {
-            setUIForAnyPermissionForYT();
-        }
-    });
-}
-
-function checkPermissionsForNetflix() {
-    chrome.permissions.contains({
-        permissions: ['tabs'],
-        origins: ["https://www.netflix.com/*"]
-    }, function (result) {
-        if (result) {
-            setUIForAnyPermissionForNetflix();
-        }
-    });
-}
 
 function checkPermissionsForNotifications() {
     chrome.permissions.contains({
@@ -180,29 +151,6 @@ function viewBlackList(items) {
     }
 }
 
-function grantPermissionForYT() {
-    chrome.permissions.request({
-        permissions: ['tabs'],
-        origins: ["https://www.youtube.com/*"]
-    }, function (granted) {
-        // The callback argument will be true if the user granted the permissions.
-        if (granted) {
-            setUIForAnyPermissionForYT();
-        }
-    });
-}
-
-function grantPermissionForNetflix() {
-    chrome.permissions.request({
-        permissions: ['tabs'],
-        origins: ["https://www.netflix.com/*"]
-    }, function (granted) {
-        // The callback argument will be true if the user granted the permissions.
-        if (granted) {
-            setUIForAnyPermissionForNetflix();
-        }
-    });
-}
 
 function grantPermissionForNotifications() {
     chrome.permissions.request({
@@ -215,17 +163,6 @@ function grantPermissionForNotifications() {
     });
 }
 
-function setUIForAnyPermissionForYT() {
-    document.getElementById('permissionSuccessedBlockForYT').hidden = false;
-    document.getElementById('permissionSuccessedBlockForYT').classList.add('inline-block');
-    document.getElementById('grantPermissionForYT').hidden = true;
-}
-
-function setUIForAnyPermissionForNetflix() {
-    document.getElementById('permissionSuccessedBlockForNetflix').hidden = false;
-    document.getElementById('permissionSuccessedBlockForNetflix').classList.add('inline-block');
-    document.getElementById('grantPermissionForNetflix').hidden = true;
-}
 
 function setUIForAnyPermissionForNotifications() {
     document.getElementById('permissionSuccessedBlockForNotifications').hidden = false;
