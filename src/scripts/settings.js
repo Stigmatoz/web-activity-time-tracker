@@ -115,7 +115,7 @@ function loadSettings() {
     storage.getValue(STORAGE_TABS, function (item) {
         let s = item;
     });
-    storage.getValue(STORAGE_BLACK_LIST, function (items) {
+    storage.getValue(STORAGE_WHITE_LIST, function (items) {
         blackList = (items || []).map(item => new Url(item))
         viewBlackList(blackList);
     });
@@ -515,7 +515,7 @@ function updateItemFromNotifyList(domain, time) {
 }
 
 function updateBlackList() {
-    storage.saveValue(STORAGE_BLACK_LIST, blackList);
+    storage.saveValue(STORAGE_WHITE_LIST, blackList);
 }
 
 function updateRestrictionList() {

@@ -8,7 +8,7 @@ var activity = new Activity();
 var storage = new LocalStorage();
 var deferredRestrictionsList;
 
-var setting_black_list;
+var setting_white_list;
 var setting_restriction_list;
 var setting_interval_save;
 var setting_interval_inactivity;
@@ -242,7 +242,7 @@ function addListener() {
     });
     chrome.storage.onChanged.addListener(function(changes, namespace) {
         for (var key in changes) {
-            if (key === STORAGE_BLACK_LIST) {
+            if (key === STORAGE_WHITE_LIST) {
                 loadBlackList();
             }
             if (key === STORAGE_RESTRICTION_LIST) {
@@ -299,12 +299,12 @@ function deleteYesterdayTimeInterval() {
 }
 
 function loadBlackList() {
-    storage.getValue(STORAGE_BLACK_LIST, function(items) {
-        setting_black_list = [];
+    storage.getValue(STORAGE_WHITE_LIST, function(items) {
+        setting_white_list = [];
         items = items || [];
 
         for (var i = 0; i < items.length; i++) {
-            setting_black_list.push(new Url(items[i]));
+            setting_white_list.push(new Url(items[i]));
         }
     })
 }

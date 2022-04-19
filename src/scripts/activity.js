@@ -12,7 +12,6 @@ class Activity {
                 }
 
                 if (this.isNewUrl(url) && !this.isInBlackList(url)) {
-                    console.warn("new site!!", url);
                     var favicon = tab.favIconUrl;
                     if (favicon === undefined) {
                         favicon = 'chrome://favicon/' + url.host;
@@ -42,7 +41,7 @@ class Activity {
 
     isInBlackList(domain) {
         console.warn('our domain', domain);
-        if (setting_black_list !== undefined && setting_black_list.length > 0 && setting_black_list.find(o => o.isMatch(domain)) !== undefined) {
+        if (setting_white_list !== undefined && setting_white_list.length > 0 && setting_white_list.find(o => o.isMatch(domain)) !== undefined) {
             false
         } else {
             return true

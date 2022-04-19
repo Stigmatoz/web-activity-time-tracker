@@ -28,7 +28,7 @@ var TypeListEnum = {
 };
 
 var STORAGE_TABS = 'tabs';
-var STORAGE_BLACK_LIST = 'black_list';
+var STORAGE_WHITE_LIST = 'white_list';
 var STORAGE_RESTRICTION_LIST = 'restriction_list';
 var STORAGE_NOTIFICATION_LIST = 'notification_list';
 var STORAGE_NOTIFICATION_MESSAGE = 'notification_message';
