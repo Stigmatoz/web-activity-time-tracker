@@ -243,7 +243,7 @@ function addListener() {
     chrome.storage.onChanged.addListener(function(changes, namespace) {
         for (var key in changes) {
             if (key === STORAGE_WHITE_LIST) {
-                loadBlackList();
+                loadWhiteList();
             }
             if (key === STORAGE_RESTRICTION_LIST) {
                 loadRestrictionList();
@@ -298,7 +298,7 @@ function deleteYesterdayTimeInterval() {
     timeIntervalList = timeIntervalList.filter(x => x.day == todayLocalDate());
 }
 
-function loadBlackList() {
+function loadWhiteList() {
     storage.getValue(STORAGE_WHITE_LIST, function(items) {
         setting_white_list = [];
         items = items || [];
@@ -363,7 +363,7 @@ function loadSettings() {
 function loadAddDataFromStorage() {
     loadTabs();
     loadTimeIntervals();
-    loadBlackList();
+    loadWhiteList();
     loadRestrictionList();
     loadNotificationList();
     loadNotificationMessage();

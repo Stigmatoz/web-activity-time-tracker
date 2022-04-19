@@ -132,6 +132,7 @@ function firstInitPage() {
         ui.setMode();
         tabsFromBackground = bg.tabs;
         currentTypeOfList = TypeListEnum.ToDay;
+        // remove this
         getLimitsListFromStorage();
         getDataFromStorage();
         storage.getValue(SETTINGS_SHOW_HINT, function (item) {
