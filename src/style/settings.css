@@ -280,13 +280,13 @@ input[type="button"]:hover {
       cursor: pointer;
   }
 
-  #addBlackSiteLbl{
+  #addWhiteSiteLbl{
       width: 321px;
       height: 15px;
       padding: 3px;
   }
 
-  #addBlackSiteBtn{
+  #addWhiteSiteBtn{
     height: 24px !important;
     line-height: 20px !important;
     padding: 0 5px !important;
