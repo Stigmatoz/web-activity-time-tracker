@@ -302,9 +302,9 @@ function loadBlackList() {
     storage.getValue(STORAGE_BLACK_LIST, function(items) {
         setting_black_list = [];
         items = items || [];
-            
+
         for (var i = 0; i < items.length; i++) {
-            setting_black_list.push(new Url(url));
+            setting_black_list.push(new Url(items[i]));
         }
     })
 }

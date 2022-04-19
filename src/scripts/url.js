@@ -32,8 +32,7 @@ class Url {
     } catch {
       return false;
     }
-
-    return this.isHostMatch(url.host) && this.isPathMatch(url.path);
+    return this.isHostMatch(url.host);
   }
 
   isHostMatch(host) {
