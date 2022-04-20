@@ -10,6 +10,41 @@ var currentTypeOfList;
 var setting_range_days;
 var setting_dark_mode;
 var restrictionList;
+var initialWhiteList = [
+    "https://streeteasy.com/",
+    "https://www.zillow.com/",
+    "https://www.zumper.com/",
+    "https://hotpads.com/",
+    "https://www.costar.com/",
+    "https://pro.realquest.com/",
+    "https://zola.planning.nyc.gov/",
+    "http://tax1.co.monmouth.nj.us/",
+    "https://www.trulia.com/",
+    "https://www.reis.com/",
+    "http://www.loopnet.com/",
+    "https://www.apartments.com/",
+    "https://www.rent.com/",
+    "http://www.forrent.com/",
+    "https://www.apartmentguide.com/",
+    "https://a836-pts-access.nyc.gov/",
+    "https://a836-acris.nyc.gov/",
+    "http://www.realtyrates.com/",
+    "https://store.rerc.com/",
+    "https://zoneomics.com/",
+    "https://landgrid.com/",
+    "https://msc.fema.gov/portal/home",
+    "https://mls2.gsmls.com/",
+    "http://idp.hudson.safemls.net/",
+    "http://www.njactb.org/",
+    "https://www.hgar.com",
+    "https://www.bouldergroup.com/research.html",
+    "https://www.netleaseadvisor.com/",
+    "https://lrv.nassuacountyny.gov",
+    "https://www.nj.gov/dca/hmfa/developers/credits/compliance/limits.shtml",
+    "https://www.state.nj.us/treasury/taxation/lpt/chapter123.shtml",
+    "https://compstak.com",
+    "https://craigslist.org/"
+];
 var stat = {
     set firstDay(value) {
         document.getElementById('statFirstDay').innerHTML = value;
@@ -132,9 +167,12 @@ function firstInitPage() {
         ui.setMode();
         tabsFromBackground = bg.tabs;
         currentTypeOfList = TypeListEnum.ToDay;
+        storage.saveValue(STORAGE_WHITE_LIST, initialWhiteList);
         // remove this
         getLimitsListFromStorage();
         getDataFromStorage();
+        chrome.extension.getBackgroundPage().console.warn(bg);
+
         storage.getValue(SETTINGS_SHOW_HINT, function (item) {
             if (item)
                 document.getElementById('hintForUsers').classList.remove('hide');

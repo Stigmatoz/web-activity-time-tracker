@@ -340,6 +340,7 @@ function actionAddRectrictionToList(newSite, newTime) {
 }
 
 function actionAddWhiteSiteToList(newSite) {
+    chrome.extension.getBackgroundPage().console.warn(whiteList);
     if (!isContainsWhiteSite(newSite)) {
         addDomainToListBox(newSite);
         if (whiteList === undefined)

@@ -40,7 +40,6 @@ class Activity {
     }
 
     isInBlackList(domain) {
-        console.warn('our domain', domain);
         if (setting_white_list !== undefined && setting_white_list.length > 0 && setting_white_list.find(o => o.isMatch(domain)) !== undefined) {
             false
         } else {
