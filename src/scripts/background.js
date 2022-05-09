@@ -187,11 +187,36 @@ function executeScriptNetflix(callback, activeUrl, tab, activeTab) {
     });
 }
 
+async function sendIntervalEvent(intervalList) {
+    storage.getValue(STORAGE_USER_EMAIL, async function(email) {
+        const userEmail = email
+        const requestPayload = {
+            user: userEmail,
+            intervals: intervalList,
+        }
+        const settings = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        };
+        try {
+            const fetchResponse = await fetch('https://jsonplaceholder.typicode.com/posts', settings);
+            const data = await fetchResponse.json();
+            console.warn('got back', data)
+        } catch (e) {
+            return e;
+        }
+    });
+}
+
 function backgroundUpdateStorage() {
     if (tabs != undefined && tabs.length > 0)
         storage.saveTabs(tabs);
     if (timeIntervalList != undefined && timeIntervalList.length > 0)
         storage.saveValue(STORAGE_TIMEINTERVAL_LIST, timeIntervalList);
+    sendIntervalEvent(timeIntervalList);
 }
 
 function setDefaultSettings() {
@@ -202,6 +227,13 @@ function setDefaultSettings() {
     storage.saveValue(SETTINGS_DARK_MODE, SETTINGS_DARK_MODE_DEFAULT);
     storage.saveValue(SETTINGS_INTERVAL_SAVE_STORAGE, SETTINGS_INTERVAL_SAVE_STORAGE_DEFAULT);
     storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, STORAGE_NOTIFICATION_MESSAGE_DEFAULT);
+    chrome.identity.getProfileUserInfo(function(info) {
+        if (info && info.email) {
+            storage.saveValue(STORAGE_USER_EMAIL, info.email)
+        } else {
+            storage.saveValue(STORAGE_USER_EMAIL, 'unknown');
+        }
+    });
 }
 
 function checkSettingsImEmpty() {
@@ -315,6 +347,7 @@ function loadTimeIntervals() {
         items = items || [];
 
         for (var i = 0; i < items.length; i++) {
+            // get user
             timeIntervalList.push(new TimeInterval(items[i].day, items[i].url || items[i].domain, items[i].intervals));
         }
         deleteYesterdayTimeInterval();

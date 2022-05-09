@@ -171,7 +171,6 @@ function firstInitPage() {
         // remove this
         getLimitsListFromStorage();
         getDataFromStorage();
-        chrome.extension.getBackgroundPage().console.warn(bg);
 
         storage.getValue(SETTINGS_SHOW_HINT, function (item) {
             if (item)

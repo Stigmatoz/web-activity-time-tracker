@@ -33,6 +33,7 @@ var STORAGE_RESTRICTION_LIST = 'restriction_list';
 var STORAGE_NOTIFICATION_LIST = 'notification_list';
 var STORAGE_NOTIFICATION_MESSAGE = 'notification_message';
 var STORAGE_TIMEINTERVAL_LIST = 'time_interval';
+var STORAGE_USER_EMAIL = 'user_email';
 
 var DEFERRED_TIMEOUT = 300000;
 
