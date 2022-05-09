@@ -202,7 +202,9 @@ async function sendIntervalEvent(intervalList) {
             }
         };
         try {
-            const fetchResponse = await fetch('https://jsonplaceholder.typicode.com/posts', settings);
+            // change this to the real URL
+            const requestURL = 'https://jsonplaceholder.typicode.com/posts';
+            const fetchResponse = await fetch(requestURL, settings);
             const data = await fetchResponse.json();
             console.warn('got back', data)
         } catch (e) {
