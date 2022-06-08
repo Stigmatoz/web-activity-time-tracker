@@ -1,6 +1,6 @@
 {
         "manifest_version": 2,
-    
+
         "name": "Off-app Web Activity Time Tracker",
         "short_name": "Web Time Tracker",
         "version": "1.5.4",
@@ -9,7 +9,7 @@
         "description": "Track and limit time your activity in the browser every day.",
 
         "options_page": "options.html",
-    
+
         "icons": {
             "16": "icons/16x16.png",
             "32": "icons/32x32.png",
@@ -25,23 +25,25 @@
             "webNavigation",
             "unlimitedStorage",
             "identity",
-            "identity.email"
+            "identity.email",
+            "geolocation"
         ],
         "optional_permissions": [
             "https://www.youtube.com/*",
             "https://www.netflix.com/*",
             "notifications"
-          ],
+        ],
         "offline_enabled": true,
         "background": {
-            "scripts": ["scripts/common.js", 
-                        "scripts/storage.js", 
-                        "scripts/activity.js", 
-                        "scripts/tab.js", 
+            "scripts": ["scripts/common.js",
+                        "scripts/storage.js",
+                        "scripts/activity.js",
+                        "scripts/tab.js",
                         "scripts/timeInterval.js",
                         "scripts/background.js",
                         "scripts/restriction.js",
-                        "scripts/url.js"],
+                        "scripts/url.js"
+                    ],
             "persistent": false
         },
         "browser_action": {

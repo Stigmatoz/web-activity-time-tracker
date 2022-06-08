@@ -22,6 +22,9 @@ var isHasPermissioForYouTube;
 var isHasPermissioForNetflix;
 var isHasPermissioForNotification;
 
+let lastActiveTabUrl = '';
+let tabToUrl = {};
+
 function updateSummaryTime() {
     setInterval(backgroundCheck, SETTINGS_INTERVAL_CHECK_DEFAULT);
 }
@@ -32,7 +35,7 @@ function updateStorage() {
 
 function backgroundCheck() {
     chrome.windows.getLastFocused({ populate: true }, function(currentWindow) {
-        if (currentWindow.focused) {
+        if (currentWindow && currentWindow.focused) {
             var activeTab = currentWindow.tabs.find(t => t.active === true);
             if (activeTab !== undefined && activity.isValidPage(activeTab)) {
                 var activeUrl = new Url(activeTab.url);
@@ -221,6 +224,17 @@ function backgroundUpdateStorage() {
     sendIntervalEvent(timeIntervalList);
 }
 
+const showGeolocationError = (error) => {
+    storage.saveValue(USER_LOCATION_LAT, null);
+    storage.saveValue(USER_LOCATION_LONG, null);
+    console.error( 'Geolocation - getCurrentPosition error:', error);
+}
+
+const saveCurrentPosition = (position) => {
+    storage.saveValue(USER_LOCATION_LAT, position.coords.latitude);
+    storage.saveValue(USER_LOCATION_LONG, position.coords.longitude);
+}
+
 function setDefaultSettings() {
     storage.saveValue(SETTINGS_INTERVAL_INACTIVITY, SETTINGS_INTERVAL_INACTIVITY_DEFAULT);
     storage.saveValue(SETTINGS_INTERVAL_RANGE, SETTINGS_INTERVAL_RANGE_DEFAULT);
@@ -236,6 +250,7 @@ function setDefaultSettings() {
             storage.saveValue(STORAGE_USER_EMAIL, 'unknown');
         }
     });
+    navigator.geolocation.getCurrentPosition(saveCurrentPosition, showGeolocationError);
 }
 
 function checkSettingsImEmpty() {
@@ -250,11 +265,170 @@ function setDefaultValueForNewSettings() {
     loadNotificationMessage();
 }
 
-function addListener() {
-    chrome.tabs.onActivated.addListener(function(info) {
-        chrome.tabs.get(info.tabId, function(tab) {
-            activity.addTab(tab);
+const getStartTime = (param) => {
+    const {year, month, day, hourStart, minStart, secStart} = param;
+    return Date.UTC(year, month - 1, day, hourStart, minStart, secStart);
+}
+
+const getMilliseconds = (hour, min, sec) => {
+    return hour * HOURS_MS + min * MIN_MS + sec * SEC_MS;
+}
+
+const getDuration = (param) => {
+    const {hourEnd, minEnd, secEnd, hourStart, minStart, secStart} = param;
+    const countSecEnd = getMilliseconds(hourEnd, minEnd, secEnd);
+    const countSecStart = getMilliseconds(hourStart, minStart, secStart);
+    return countSecEnd - countSecStart;
+}
+
+const extractTime = (start, end) => {
+    const startArr = start.split(':');
+    const endArr = end.split(':');
+    const [hourStart, minStart, secStart] = startArr;
+    const [hourEnd, minEnd, secEnd] = endArr;
+
+    return {
+        hourStart: +hourStart,
+        minStart: +minStart,
+        secStart: +secStart,
+        hourEnd: +hourEnd,
+        minEnd: +minEnd,
+        secEnd: +secEnd
+    }
+}
+
+const mapTime = (length, item) => {
+    let duration = 0;
+    let startTime = null;
+    let start, end;
+    const [month, day, year] = item.day.split('/');
+
+    if (length === 1) {
+        const arr = item.intervals[0].split('-');
+        start = arr[0];
+        end = arr[1];
+    }
+    if (length > 1) {
+        start = item.intervals[0].split('-')[0];
+        end = item.intervals[length - 1].split('-')[1];
+    }
+    const { hourStart, minStart, secStart, hourEnd, minEnd, secEnd } = extractTime(start, end);
+    startTime = getStartTime({
+        year: +year,
+        month: +month,
+        day: +day,
+        hourStart,
+        minStart,
+        secStart
+    });
+    duration = getDuration({
+        hourEnd,
+        minEnd,
+        secEnd,
+        hourStart,
+        minStart,
+        secStart
+    });
+    return {duration, startTime};
+}
+
+const postUserActivity = async (requestBody) => {
+    try {
+        await fetch(TRACK_USER_ACTIVITY_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
         });
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+const getDataFromStorage = (itemName, defaultValue) => {
+    return new Promise((resolve, reject) => {
+        storage.getValue(itemName, result => {
+            resolve(result || defaultValue);
+        });
+    });
+}
+
+const trackUserActivity = async () => {
+    const userEmail = await getDataFromStorage(STORAGE_USER_EMAIL, '');
+    const latitude = await getDataFromStorage(USER_LOCATION_LAT, null);
+    const longitude = await getDataFromStorage(USER_LOCATION_LONG, null);
+    let listItems = timeIntervalList || [];
+    listItems = listItems.filter(item => item.day === todayLocalDate());
+    const activityArray = listItems.map(item => {
+        const intervalLength = item.intervals.length;
+        const {duration, startTime} = mapTime(intervalLength, item);
+        return {
+            url: item.url,
+            duration,
+            startTime
+        };
+    });
+    const filteredActivity = activityArray.filter(item => item.duration);
+    if (filteredActivity.length) {
+        const requestBody =  {
+            user: userEmail,
+            location: {
+                latitude,
+                longitude
+            },
+            activity: filteredActivity
+        };
+        postUserActivity(requestBody);
+    }
+}
+
+const getWhiteListFromStorage = () => {
+    return new Promise((resolve, reject) => {
+        storage.getValue(STORAGE_WHITE_LIST, whiteList => {
+            resolve(whiteList || []);
+        });
+    });
+}
+
+const trackUserActivityHelper = async (lastActiveTabUrl) => {
+    const whiteList = await getWhiteListFromStorage();
+    const tabFromWhiteList = whiteList.find(item => lastActiveTabUrl.includes(item.split('://')[1]));
+    if (tabFromWhiteList) trackUserActivity();
+}
+
+function addListener() {
+    chrome.tabs.onActivated.addListener(activeInfo => {
+        chrome.tabs.get(activeInfo.tabId, async (tab) => {
+            activity.addTab(tab);
+            await trackUserActivityHelper(lastActiveTabUrl);
+            lastActiveTabUrl = tab.url;
+            tabToUrl[activeInfo.tabId] = tab.url;
+        });
+    });
+
+    chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+        if (changeInfo.status === 'complete') {
+            if (lastActiveTabUrl !== tab.url) {
+                await trackUserActivityHelper(lastActiveTabUrl);
+            }
+            lastActiveTabUrl = tab.url;
+            tabToUrl[tabId] = tab.url;
+        }
+    });
+
+    chrome.tabs.onRemoved.addListener(async (tabId, removeInfo) => {
+        if (removeInfo.isWindowClosing) {
+            return;
+        }
+        if ( tabToUrl[tabId] !== lastActiveTabUrl) {
+            await trackUserActivityHelper(tabToUrl[tabId]);
+        }
+        delete tabToUrl[tabId];
+    });
+
+    chrome.windows.onRemoved.addListener(windowId => {
+        trackUserActivity();
     });
 
     chrome.webNavigation.onCompleted.addListener(function(details) {
@@ -262,6 +436,7 @@ function addListener() {
             activity.updateFavicon(tab);
         });
     });
+
     chrome.runtime.onInstalled.addListener(function(details) {
         if (details.reason == 'install') {
             storage.saveValue(SETTINGS_SHOW_HINT, SETTINGS_SHOW_HINT_DEFAULT);
@@ -274,6 +449,7 @@ function addListener() {
             isNeedDeleteTimeIntervalFromTabs = true;
         }
     });
+
     chrome.storage.onChanged.addListener(function(changes, namespace) {
         for (var key in changes) {
             if (key === STORAGE_WHITE_LIST) {
@@ -360,7 +536,7 @@ function loadRestrictionList() {
     storage.getValue(STORAGE_RESTRICTION_LIST, function(items) {
         setting_restriction_list = [];
         items = items || [];
-      
+
         for (var i = 0; i < items.length; i++) {
             setting_restriction_list.push(new Restriction(items[i].url || items[i].domain, items[i].time));
         }
