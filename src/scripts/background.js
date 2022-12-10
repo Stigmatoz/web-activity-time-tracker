@@ -42,7 +42,7 @@ function backgroundCheck() {
                 }
 
                 if (activity.isInBlackList(activeUrl)) {
-                    chrome.browserAction.setBadgeBackgroundColor({ color: '#FF0000' })
+                    chrome.browserAction.setBadgeBackgroundColor({ color: '#fdb8b8' })
                     chrome.browserAction.setBadgeText({
                         tabId: activeTab.id,
                         text: 'n/a'
@@ -79,7 +79,7 @@ function mainTRacker(activeUrl, tab, activeTab) {
         tab.incSummaryTime();
     }
     if (setting_view_in_badge === true) {
-        chrome.browserAction.setBadgeBackgroundColor({ color: '#1aa1434d' })
+        chrome.browserAction.setBadgeBackgroundColor({ color: '#e7e7e7' })
         var summary = tab.days.find(s => s.date === todayLocalDate()).summary;
         chrome.browserAction.setBadgeText({
             tabId: activeTab.id,

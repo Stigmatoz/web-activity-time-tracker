@@ -44,7 +44,6 @@ class UI {
         document.getElementById('resultTable').innerHTML = null;
         document.getElementById('chart').innerHTML = null;
         document.getElementById('timeChart').innerHTML = null;
-        document.getElementById('total').innerHTML = null;
         document.getElementById('byDays').innerHTML = null;
     }
 
@@ -60,22 +59,6 @@ class UI {
         document.getElementById('heatMapChartBtn').classList.add('active');
         document.getElementById('chart').innerHTML = null;
         document.getElementById('labelForTimeInterval').classList.remove('hide');
-    }
-
-    createTotalBlock(totalTime, currentTypeOfList, counter) {
-        var totalElement = document.getElementById('total');
-
-        var spanVisits = this.createElement('span', ['span-visits', 'tooltip', 'visits'], counter !== undefined ? counter : 0);
-        var visitsTooltip = this.createElement('span', ['tooltiptext'], 'Count of visits');
-        spanVisits.appendChild(visitsTooltip);
-
-        var spanPercentage = this.createElement('span', ['span-percentage'], '100 %');
-
-        var div = this.createElement('div', ['margin-left-5', 'total-block'], 'Total');
-        var span = this.createElement('span', ['span-time']);
-        this.createElementsForTotalTime(totalTime, currentTypeOfList, span);
-
-        this.appendChild(totalElement, [div, spanVisits, spanPercentage, span]);
     }
 
     fillEmptyBlock(elementName) {
@@ -94,9 +77,6 @@ class UI {
         document.getElementById('chart').appendChild(document.createElement('hr'));
     }
 
-    addHrAfterTableOfSite() {
-        this.getTableOfSite().appendChild(document.createElement('hr'));
-    }
 
     setActiveTooltipe(currentTab) {
         if (currentTab !== '') {
@@ -148,7 +128,7 @@ class UI {
         var p = document.createElement('p');
         p.classList.add('table-header');
         if (currentTypeOfList === TypeListEnum.ToDay)
-            p.innerHTML = 'Today (' + counterOfSite + ' sites) <br> <strong>' + convertShortSummaryTimeToLongString(totalTime) + '</strong>';
+            p.innerHTML = `Today (${counterOfSite} sites) <br> <strong>${convertShortSummaryTimeToLongString(totalTime)}</strong>`;
         if (currentTypeOfList === TypeListEnum.All && totalDays !== undefined) {
             if (totalDays.countOfDays > 0) {
                 p.innerHTML = 'Aggregate data since ' + new Date(totalDays.minDate).toLocaleDateString() + ' (' + totalDays.countOfDays + ' days) (' + counterOfSite + ' sites) <br> <strong>' + fillSummaryTime(totalTime)  + '</strong>';
@@ -162,6 +142,7 @@ class UI {
 
     addLineToTableOfSite(tab, currentTab, summaryTime, typeOfList, counter, blockName) {
         var div = document.createElement('div');
+        var tabUrlString = tab.url;
         div.addEventListener('mouseenter', function() {
             if (document.getElementById('chart').innerHTML !== '') {
                 var item = document.getElementById(tab.url);
@@ -186,28 +167,43 @@ class UI {
 
         var divForImg = document.createElement('div');
         var img = document.createElement('img');
-        img.setAttribute('height', 17);
+        img.setAttribute('height', 27);
         if (tab.favicon !== undefined || tab.favicon == null)
             img.setAttribute('src', tab.favicon);
         else img.setAttribute('src', '/icons/empty.png');
         divForImg.classList.add('block-img');
         divForImg.appendChild(img);
 
-        var spanUrl = this.createElement('span', ['span-url'], tab.url);
-        spanUrl.setAttribute('href', 'https://' + tab.url);
+        var divForPath = document.createElement('div');
+
+        var url = this.createElement('p', ['p-url'], tabUrlString);
+        url.setAttribute('href', 'https://' + tabUrlString);
+        url.addEventListener('click', function(e){
+            if (e.target.attributes.href.value != undefined)
+                chrome.tabs.create({ url: e.target.attributes.href.value })
+        })
+
+        var visits = this.createElement('p', ['p-visits'], function() {
+            if (counter == 0) return '0 visits';
+            if (counter > 1) return `${counter} visits`;
+            if (counter == 1) return `${counter} visit`;
+        }());
+
+        divForPath.appendChild(url);
+        divForPath.appendChild(visits);
 
         if (tab.url == currentTab) {
             var divForImage = document.createElement('div');
             div.classList.add('span-active-url');
             var imgCurrentDomain = document.createElement('img');
             imgCurrentDomain.setAttribute('src', '/icons/eye.png');
-            imgCurrentDomain.setAttribute('height', 17);
+            imgCurrentDomain.setAttribute('height', 20);
             imgCurrentDomain.classList.add('margin-left-5');
             divForImage.appendChild(imgCurrentDomain);
             var currentDomainTooltip = this.createElement('span', ['tooltiptext'], 'Current domain');
             divForImage.classList.add('tooltip', 'current-url');
             divForImage.appendChild(currentDomainTooltip);
-            spanUrl.appendChild(divForImage);
+            url.appendChild(divForImage);
         }
 
         if (typeOfList !== undefined && typeOfList === TypeListEnum.ToDay) {
@@ -216,25 +212,20 @@ class UI {
                 if (item !== undefined) {
                     var divLimit = this.createElement('div', ['tooltip', 'inline-block']);
                     var limitIcon = this.createElement('img', ['margin-left-5', 'tooltip']);
-                    limitIcon.height = 15;
+                    limitIcon.height = 20;
                     limitIcon.src = '/icons/limit.png';
                     var tooltip = this.createElement('span', ['tooltiptext'], "Daily limit is " + convertShortSummaryTimeToLongString(item.time));
                     divLimit = this.appendChild(divLimit, [limitIcon, tooltip]);
-                    spanUrl.appendChild(divLimit);
+                    url.appendChild(divLimit);
                 }
             }
         }
-
-        var spanVisits = this.createElement('span', ['span-visits', 'tooltip', 'visits'], counter !== undefined ? counter : 0);
-        var visitsTooltip = this.createElement('span', ['tooltiptext'], 'Count of visits');
-
-        spanVisits.appendChild(visitsTooltip);
 
         var spanPercentage = this.createElement('span', ['span-percentage'], getPercentage(summaryTime));
         var spanTime = this.createElement('span', ['span-time']);
         this.createElementsForTotalTime(summaryTime, typeOfList, spanTime);
 
-        div = this.appendChild(div, [divForImg, spanUrl, spanVisits, spanPercentage, spanTime]);
+        div = this.appendChild(div, [divForImg, divForPath, spanPercentage, spanTime]);
         if (blockName !== undefined)
             document.getElementById(blockName).appendChild(div);
         else
@@ -346,8 +337,8 @@ class UI {
 
                 var label = this.createElement('label', ['day-block', 'lbl-toggle']);
                 label.setAttribute('for', days[i].date);
-                var span = this.createElement('span', ['day'], new Date(days[i].date).toLocaleDateString());
-                var spanTime = this.createElement('span', ['span-time']);
+                var span = this.createElement('p', ['day'], new Date(days[i].date).toLocaleDateString());
+                var spanTime = this.createElement('p', ['span-time']);
                 this.createElementsForTotalTime(days[i].total, TypeListEnum.ByDays, spanTime);
 
                 label = this.appendChild(label, [span, spanTime]);
@@ -412,7 +403,7 @@ class UI {
 
     setMode(){
         if (setting_dark_mode)
-            document.body.classList.add('night-mode');
+            document.body.classList.add('dark-mode');
     }
 
     removePreloader() {

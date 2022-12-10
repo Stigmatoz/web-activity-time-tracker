@@ -132,7 +132,7 @@ function firstInitPage() {
         ui.setMode();
         tabsFromBackground = bg.tabs;
         currentTypeOfList = TypeListEnum.ToDay;
-        getLimitsListFromStorage();
+        getLimitsListFromStorage(bg.setting_restriction_list)
         getDataFromStorage();
         storage.getValue(SETTINGS_SHOW_HINT, function (item) {
             if (item)
@@ -140,16 +140,11 @@ function firstInitPage() {
         });
     });
 }
-
 window.addEventListener('click', function (e) {
     if (e.target.nodeName == 'SPAN' && e.target.className == 'span-url' && e.target.attributes.href.value != undefined){
         chrome.tabs.create({ url: e.target.attributes.href.value })
     }
 });
-
-function getLimitsListFromStorage() {
-    storage.loadTabs(STORAGE_RESTRICTION_LIST, getLimitsListFromStorageCallback);
-}
 
 function getDataFromStorage() {
     if (tabsFromBackground != undefined && tabsFromBackground != null && tabsFromBackground.length > 0)
@@ -162,7 +157,7 @@ function getDataFromStorageByDays() {
         getTabsByDays(tabsFromBackground);
 }
 
-function getLimitsListFromStorageCallback(items) {
+function getLimitsListFromStorage(items) {
     if (items !== undefined)
         restrictionList = items;
     else restrictionList = [];
@@ -251,9 +246,8 @@ function getTabsFromStorage(tabs) {
         else addTabOthersForChart(tabsForChart, summaryTime);
     }
 
-    ui.addHrAfterTableOfSite();
-    ui.createTotalBlock(totalTime, currentTypeOfList, summaryCounter);
-    ui.drawChart(tabsForChart);
+    if (currentTypeOfList === TypeListEnum.ToDay)
+        ui.drawChart(tabsForChart);
     ui.setActiveTooltipe(currentTab);
 
     ui.removePreloader();
@@ -315,7 +309,6 @@ function getTabsFromStorageForExpander(tabs) {
 
     var table = ui.getTableOfSite();
     table.removeChild(table.getElementsByTagName('hr')[0]);
-    ui.addHrAfterTableOfSite();
 }
 
 function getTotalTime(tabs) {

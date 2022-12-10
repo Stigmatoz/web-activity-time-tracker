@@ -111,7 +111,7 @@ function convertShortSummaryTimeToLongString(summaryTime) {
     hours = zeroAppend(hours);
     mins = zeroAppend(mins);
 
-    return hours + ' hour ' + mins + ' minutes';
+    return `${hours} hour ${mins} minutes`;
 }
 
 function getArrayTime(summaryTime) {

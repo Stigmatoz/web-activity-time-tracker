@@ -2,7 +2,7 @@ function donutChart() {
     var width,
         height,
         darkMode,
-        margin = { top: 10, right: 10, bottom: 10, left: 10 },
+        margin = { top: 10, right: 10, bottom: 0, left: 10 },
         colour = d3.scaleOrdinal(d3.schemeCategory20), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
@@ -17,7 +17,7 @@ function donutChart() {
 
             // ===========================================================================================
             // Set up constructors for making donut. See https://github.com/d3/d3-shape/blob/master/README.md
-            var radius = 135;
+            var radius = 110;
 
             // creates a new pie generator
             var pie = d3.pie()
@@ -27,22 +27,11 @@ function donutChart() {
             // contructs and arc generator. This will be used for the donut. The difference between outer and inner
             // radius will dictate the thickness of the donut
             var arc = d3.arc()
-                .outerRadius(radius * 0.9)
-                .innerRadius(radius * 0.8)
+                .outerRadius(radius)
+                .innerRadius(radius * 0.75)
                 .cornerRadius(cornerRadius)
                 .padAngle(padAngle);
 
-            // this arc is used for aligning the text labels
-            var outerArc = d3.arc()
-                .outerRadius(radius * 0.9)
-                .innerRadius(radius * 0.9);
-            // ===========================================================================================
-
-            var tempAngle;
-            var tempOffset = {
-                x: 1,
-                y: 0.95
-            };
             // ===========================================================================================
             // append the svg object to the selection
             var svg = selection.append('svg')
@@ -50,7 +39,7 @@ function donutChart() {
                 .attr('height', height + margin.top + margin.bottom)
                 .attr('class', 'backColorChart')
                 .append('g')
-                .attr('transform', 'translate(' + (width / 2 - 105) + ',' + (height / 2 + 12) + ')');
+                .attr('transform', 'translate(' + (width / 2 - 105) + ',' + (height / 2) + ')');
             // ===========================================================================================
 
             // ===========================================================================================
@@ -75,7 +64,7 @@ function donutChart() {
                 .data(pie(data))
                 .enter().append("g")
                 .attr("transform", function (d, i) {
-                    return "translate(" + (130) + "," + (i * 20 - 80) + ")"; // place each legend on the right and bump each one down 15 pixels
+                    return "translate(" + (130) + "," + (i * 20 - 100) + ")"; // place each legend on the right and bump each one down 15 pixels
                 })
                 .attr("class", "legend");
 
@@ -105,9 +94,9 @@ function donutChart() {
                         return d.data.url;
                     })
                     .style("fill", "black")
-                    .style("font-size", 13)
+                    .style("font-size", 14)
                     .attr("y", 10)
-                    .attr("x", 13);
+                    .attr("x", 15);
 
             // ===========================================================================================
             // add tooltip to mouse events on slices and labels
@@ -145,7 +134,7 @@ function donutChart() {
                     svg.append('circle')
                         .attr('class', 'toolCircle')
                         .attr('r', radius * 0.75) // radius of tooltip circle
-                        .style('fill', colour(data.data[category])) // colour based on category mouse is over
+                        .style('fill', 'white') // colour based on category mouse is over
                         .style('fill-opacity', 0.35);
 
                 });
@@ -355,7 +344,7 @@ function drawIntervalChart(data) {
     var tickDistance = 4.38;
 
     var tooltip;
-    if (document.body.classList.contains('night-mode'))
+    if (document.body.classList.contains('dark-mode'))
         tooltip = d3.select("#timeChart")
             .append("div")
             .style("opacity", 0)
@@ -409,7 +398,7 @@ function drawIntervalChart(data) {
 
     //create the svg
     var svg;
-    if (document.body.classList.contains('night-mode'))
+    if (document.body.classList.contains('dark-mode'))
         svg = d3.select("#timeChart").append("svg")
             .style('background-color', '#383838')
             .attr("width", width + margin.left + margin.right)
