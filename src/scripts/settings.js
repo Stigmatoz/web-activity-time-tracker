@@ -2,8 +2,8 @@ var storage = new LocalStorage();
 var blackList = [];
 var restrictionList = [];
 var notifyList = [];
-var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn', 'donateBtn'];
-var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock', 'donateBlock'];
+var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn'];
+var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock'];
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
@@ -18,9 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('aboutBtn').addEventListener('click', function () {
         setBlockEvent('aboutBtn', 'aboutBlock');
         loadVersion();
-    });
-    document.getElementById('donateBtn').addEventListener('click', function () {
-        setBlockEvent('donateBtn', 'donateBlock');
     });
     document.getElementById('clearAllData').addEventListener('click', function () {
         clearAllData();

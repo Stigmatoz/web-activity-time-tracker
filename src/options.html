@@ -25,28 +25,28 @@
             <a id='restrictionsBtn'>Limits</a>
             <a id='notifyBtn'>Notifications</a>
             <a id='aboutBtn'>About</a>
-            <a id='donateBtn'>Donate</a>
         </div>
         <div id='block'>
             <div id='settingsBlock'>
-                <label>
+                <label class="setting-header">
                     <input type="checkbox" class="filled-in" id="viewTimeInBadge" />
                     <span>Display time tracker in icon</span>
                 </label>
                 <div class="margin-top-10">
-                    <label>
+                    <label class="setting-header">
                         <input type="checkbox" class="filled-in" id="blockDeferral" />   
                         <span>Allow deferring block for 5 minutes</span>
                     </label>
                 </div>
                 <div class="margin-top-10">
-                    <label>
+                    <label class="setting-header">
                         <input type="checkbox" class="filled-in" id="darkMode" />   
                         <span>Dark mode</span>
                     </label>
                 </div>
+                <div class="separator"></div>
                 <div class="margin-top-10">
-                    <label>Stop tracking if no activity detected for: </label>
+                    <label class="setting-header">Stop tracking if no activity detected for: </label>
                     <div class="tooltip"><img src="/icons/information.svg" height="18" />
                         <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
                     </div>
@@ -62,7 +62,8 @@
                             <option value="1800">30 mins</option>
                         </select>
                     </div>
-                    <div class="margin-top-10"><label>Default range for days:</label></div>
+                    <div class="separator"></div>
+                    <div class="margin-top-10"><label class="setting-header">Default range for days:</label></div>
                     <div class="margin-top-10">
                         <select id='rangeToDays' class="option">
                             <option value="days2">2 days</option>
@@ -76,8 +77,9 @@
                             <option value="month3">3 month</option>
                         </select>
                     </div>
+                    <div class="separator"></div>
                     <div class="margin-top-10">
-                        <label>Ignored list of domain: </label>
+                        <label class="setting-header">Ignored list of domain: </label>
                         <div class="tooltip"><img src="/icons/information.svg" height="18" />
                             <span class="tooltiptext">Activity for these domains not will tracked</span>
                         </div>
@@ -92,9 +94,11 @@
                             The site is already in the list
                         </div>
                     </div>
+                    <div class="separator"></div>
                     <div class="margin-top-10">
                         <input type="button" value="Export to CSV" id='exportToCsv'>
                     </div>
+                    <div class="separator"></div>
                     <div class="margin-top-10">
                         <input type="button" value="Backup" id='backup'>
                         <input type="button" value="Restore" id='restore'>
@@ -109,6 +113,7 @@
                     <div class="notify warning" id='notify-restore-failed' hidden>
                         Backup file is not valid
                     </div>
+                    <div class="separator"></div>
                     <!-- YouTube -->
                     <div class="margin-top-10">
                         <label class="block">Web Activity Time Tracker tracks your activity when you're active in
@@ -124,7 +129,7 @@
                             id='grantPermissionForYT'>
                         <div id='permissionSuccessedBlockForYT' hidden>
                             <img src="/icons/success.png" height="18" />
-                            <label>Permissions have been granted</label>
+                            <label class="setting-header">Permissions have been granted</label>
                         </div>
                     </div>
                     <!-- Netflix -->
@@ -134,11 +139,12 @@
                             id='grantPermissionForNetflix'>
                         <div id='permissionSuccessedBlockForNetflix' hidden>
                             <img src="/icons/success.png" height="18" />
-                            <label>Permissions have been granted</label>
+                            <label class="setting-header">Permissions have been granted</label>
                         </div>
                     </div>
+                    <div class="separator"></div>
                     <div class="margin-top-10">
-                        <label>Data in memory use </label><label id='memoryUse'></label>
+                        <label class="setting-header">Data in memory use </label><label id='memoryUse'></label>
                     </div>
                     <div class="margin-top-10"><input type="button" value="Clear all data" id='clearAllData'></div>
                     <div class="notify" id='notify' hidden>
@@ -147,7 +153,7 @@
                 </div>
             </div>
             <div id='restrictionsBlock' hidden>
-                <label>Access daily restrictions for websites: </label>
+                <label class="setting-header">Access daily restrictions for websites: </label>
                 <div class="tooltip"><img src="/icons/information.svg" height="18" />
                     <span class="tooltiptext">Set the maximum time allowed on the site per day. After this time, has elapsed the site will be blocked.</span>
                 </div>
@@ -167,7 +173,7 @@
                 </div>
             </div>
             <div id='notifyBlock' hidden>
-                <label>List of sites with notifications: </label>
+                <label class="setting-header">List of sites with notifications: </label>
                 <div class="tooltip"><img src="/icons/information.svg" height="18" />
                     <span class="tooltiptext">Show notifications every time you spend a specified time interval on the
                         site</span>
@@ -183,7 +189,7 @@
                     <ul id='notifyList' class="listbox list" size="10"></ul>
                 </div>
                 <div class="margin-top-10">
-                    <label>You can set message for notification: </label>
+                    <label class="setting-header">You can set message for notification: </label>
                     <div class="setting-notify-block">
                         <img src="icons/128x128.png" class="setting-notify-img">
                         <div class="setting-notify-message-block">
@@ -200,7 +206,7 @@
                         id='grantPermissionForNotifications'>
                     <div id='permissionSuccessedBlockForNotifications' hidden>
                         <img src="/icons/success.png" height="18" />
-                        <label>Permissions have been granted</label>
+                        <label class="setting-header">Permissions have been granted</label>
                     </div>
                 </div>
                 <div class="notify warning notify-width-300" id='notifyForNotifyList' hidden>
@@ -229,18 +235,6 @@
                     <label>Do you enjoy using Web Activity Time Tracker? <a
                             href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
                             target="_blank">Let me know!</a></label>
-                </div>
-            </div>
-            <div id='donateBlock' hidden>
-                <div>
-                    <label>You can support Web Activity Time Tracker by donating:</label>
-                    <div class="margin-top-20">
-                        <div class="inline-block">
-                            <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/webtracker"><img
-                                    src="/icons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span>Buy me a
-                                    coffee</span></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

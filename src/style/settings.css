@@ -458,3 +458,12 @@ input[type="button"]:hover {
     line-height: 25px !important;
     background-color:green !important;
 }
+
+.setting-header{
+    font-weight: 550;
+    font-size: 15px;
+}
+
+.separator{
+    margin: 30px 0;
+}
