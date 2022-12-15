@@ -112,7 +112,7 @@ class UI {
 
     drawBarChart(days) {
         d3.select('#barChart').datum(days);
-        barChart(days);
+        barChart(days, setting_dark_mode);
     }
 
     addTableHeader(currentTypeOfList, counterOfSite, totalTime, totalDays) {

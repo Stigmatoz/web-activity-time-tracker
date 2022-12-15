@@ -245,7 +245,7 @@ function donutChart() {
     return chart;
 }
 
-function barChart(data) {
+function barChart(data, darkMode) {
     var margin = { top: 25, right: 5, bottom: 25, left: 5 },
         width = 555,
         height = 160;
@@ -298,10 +298,17 @@ function barChart(data) {
     // add the x Axis
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
+        .style("stroke", darkMode ? "white" : "")
+        .style("stroke-width", darkMode ? "0.5px" : "")
         .call(d3.axisBottom(x));
 
     if (data.length > 9)
         document.querySelectorAll('#barChart g.tick ').forEach(element => { element.remove() });
+
+    if (darkMode){
+        document.querySelector("#barChart path").setAttribute("stroke", "white");
+        document.querySelectorAll('#barChart g.tick line').forEach(element => { element.setAttribute("stroke", "white") });
+    }
 }
 
 function drawIntervalChart(data) {

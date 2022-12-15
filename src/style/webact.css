@@ -531,7 +531,7 @@ input[type='checkbox'] {
 
 .dark-mode {
     color: #ffffff !important;
-    background-color: #474747 !important;
+    background-color: #121212 !important;
 }
 
 .dark-mode .span-active-time {
@@ -560,6 +560,14 @@ input[type='checkbox'] {
 }
 
 .dark-mode .inline-flex:hover .span-time {
+    color: #ffffff;
+}
+
+.dark-mode .inline-flex .p-visits {
+    color: #ffffff;
+}
+
+.dark-mode .inline-flex:hover .p-visits {
     color: #ffffff;
 }
 
