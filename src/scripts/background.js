@@ -66,7 +66,7 @@ function backgroundCheck() {
 
 function mainTRacker(activeUrl, tab, activeTab) {
     if (activity.isLimitExceeded(activeUrl, tab) && !activity.wasDeferred(activeUrl)) {
-        setBlockPageToCurrent(activeTab.url, tab.summaryTime, tab.counter);
+        setBlockPageToCurrent(activeTab.url, tab.days.at(-1).summaryTime, tab.days.at(-1).counter);
     }
     if (!activity.isInBlackList(activeUrl)) {
         if (activity.isNeedNotifyView(activeUrl, tab)) {
