@@ -42,3 +42,9 @@ body{
     text-decoration: underline;
     cursor: pointer;
 }
+
+.deferred-metrics{
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: rgb(202, 48, 48);
+}

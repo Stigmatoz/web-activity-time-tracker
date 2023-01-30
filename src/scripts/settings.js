@@ -444,14 +444,14 @@ function addDomainToEditableListBox(entity, elementId, actionEdit, actionDelete,
 }
 
 function deleteBlackSite(e) {
-    var targetElement = e.path[1];
+    var targetElement = e.composedPath()[1];
     blackList.splice(blackList.indexOf(targetElement.innerText), 1);
     document.getElementById('blackList').removeChild(targetElement);
     updateBlackList();
 }
 
 function deleteRestrictionSite(e) {
-    var targetElement = e.path[1];
+    var targetElement = e.composedPath()[1];
     var itemValue = targetElement.querySelector("[name='domain']").value;
     var item = restrictionList.find(x => x.domain == itemValue);
     restrictionList.splice(restrictionList.indexOf(item), 1);
@@ -460,7 +460,7 @@ function deleteRestrictionSite(e) {
 }
 
 function deleteNotificationSite(e) {
-    var targetElement = e.path[1];
+    var targetElement = e.composedPath()[1];
     var itemValue = targetElement.querySelector("[name='domain']").value;
     var item = notifyList.find(x => x.domain == itemValue);
     notifyList.splice(notifyList.indexOf(item), 1);
@@ -469,7 +469,7 @@ function deleteNotificationSite(e) {
 }
 
 function actionEditSite(e, actionUpdateTimeFromList, actionUpdateList) {
-    var targetElement = e.path[1];
+    var targetElement = e.composedPath()[1];
     var domainElement = targetElement.querySelector('[name="domain"]');
     var timeElement = targetElement.querySelector('[name="time"]');
     if (timeElement.classList.contains('clock-li-readonly')) {

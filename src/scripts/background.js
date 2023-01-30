@@ -66,7 +66,7 @@ function backgroundCheck() {
 
 function mainTRacker(activeUrl, tab, activeTab) {
     if (activity.isLimitExceeded(activeUrl, tab) && !activity.wasDeferred(activeUrl)) {
-        setBlockPageToCurrent(activeTab.url);
+        setBlockPageToCurrent(activeTab.url, tab.days.at(-1).summary, tab.days.at(-1).counter);
     }
     if (!activity.isInBlackList(activeUrl)) {
         if (activity.isNeedNotifyView(activeUrl, tab)) {
@@ -131,8 +131,10 @@ function notificationAction(activeUrl, tab) {
         });
 }
 
-function setBlockPageToCurrent(currentUrl) {
-    var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + currentUrl;
+function setBlockPageToCurrent(currentUrl, summaryTime, counter) {
+    var blockUrl = chrome.runtime.getURL("block.html") + '?url=' + currentUrl
+    + '&summaryTime=' + summaryTime
+    + '&counter=' + counter;
     chrome.tabs.query({ currentWindow: true, active: true }, function(tab) {
         chrome.tabs.update(tab.id, { url: blockUrl });
     });
