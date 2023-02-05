@@ -399,6 +399,76 @@ function checkPermissionsForNotifications(callback, ...props) {
     });
 }
 
+function createFile(data, type, fileName) {
+    var file = new Blob([data], { type: type });
+    var downloadLink;
+    downloadLink = document.createElement("a");
+    downloadLink.download = fileName;
+    downloadLink.href = window.URL.createObjectURL(file);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+  }
+  
+  function toCsv(tabsData) {
+    var str = "domain,date,time(sec)\r\n";
+    for (var i = 0; i < tabsData.length; i++) {
+      for (var y = 0; y < tabsData[i].days.length; y++) {
+        var line =
+          tabsData[i].url +
+          "," +
+          new Date(tabsData[i].days[y].date).toLocaleDateString() +
+          "," +
+          tabsData[i].days[y].summary;
+        str += line + "\r\n";
+      }
+    }
+  
+    createFile(str, "text/csv", "domains.csv");
+  }
+  
+  function exportToCSV() {
+    storage.getValue(STORAGE_TABS, function (item) {
+      toCsv(item);
+    });
+  }
+  
+  storage.getValue("SETTINGS_PERIODIC_HOUR_DOWNLOAD", function (hour) {
+    storage.getValue("SETTINGS_PERIODIC_MINUTE_DOWNLOAD", function (minute) {
+      if (typeof hour !== "number" || typeof minute !== "number") {
+        return;
+      } else {
+          autoDownloadCsv(hour, minute);
+      }
+    });
+  });
+  
+  function autoDownloadCsv(hour, minute) {
+    var now = new Date();
+    var triggerTime = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      hour,
+      minute,
+      0,
+      0
+    );
+  
+    if (triggerTime < now) {
+      triggerTime.setDate(triggerTime.getDate() + 1);
+    }
+    chrome.alarms.create("periodic_Download", {
+      when: triggerTime.getTime(),
+      periodInMinutes: 1440, // 24 hours
+    });
+    chrome.alarms.onAlarm.addListener(function (alarm) {
+      if (alarm.name === "periodic_Download") {
+        exportToCSV();
+      }
+    });
+  }
+  
 loadPermissions();
 addListener();
 loadAddDataFromStorage();

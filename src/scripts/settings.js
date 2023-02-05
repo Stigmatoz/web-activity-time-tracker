@@ -4,6 +4,8 @@ var restrictionList = [];
 var notifyList = [];
 var blockBtnList = ['settingsBtn', 'restrictionsBtn', 'notifyBtn', 'aboutBtn'];
 var blockList = ['settingsBlock', 'restrictionsBlock', 'notifyBlock', 'aboutBlock'];
+var changed_Periodic_Download_Hour 
+var changed_Periodic_Download_Minutes 
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('settingsBtn').addEventListener('click', function () {
@@ -72,6 +74,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     $('.clockpicker').clockpicker();
 
+    document.getElementById("hour").addEventListener("change", function () {
+        changed_Periodic_Download_Hour = this.value;
+      });
+      document.getElementById("minute").addEventListener("change", function () {
+        changed_Periodic_Download_Minutes = this.value;
+      });
+    
+      document
+        .getElementById("time-save-btn")
+        .addEventListener("click", function () {
+          saveAutoDownloadTime();
+        });
+
     loadSettings();
 });
 
@@ -136,6 +151,8 @@ function loadSettings() {
     checkPermissionsForYT();
     checkPermissionsForNetflix();
     checkPermissionsForNotifications();
+    createHourOptions()
+    createMinutesOptions()
 }
 
 function checkPermissionsForYT() {
@@ -532,3 +549,62 @@ function updateNotificationList() {
 function updateNotificationMessage() {
     storage.saveValue(STORAGE_NOTIFICATION_MESSAGE, document.getElementById('notifyMessage').value);
 }
+
+function createHourOptions() {
+    var select = document.querySelector("#hour");
+    for (let i = 0; i <= 23; i++) {
+      var option = document.createElement("option");
+      option.value = i;
+      option.text = i;
+      select.appendChild(option);
+    }
+    storage.getValue("SETTINGS_PERIODIC_HOUR_DOWNLOAD", function (item) {
+      if (item >= 0) {
+        document.getElementById("hour").value = item;
+      }
+    });
+  }
+  
+  function createMinutesOptions() {
+    var select = document.querySelector("#minute");
+    for (var i = 0; i <= 59; i++) {
+      var option = document.createElement("option");
+      option.value = i;
+      option.text = i;
+      select.appendChild(option);
+    }
+    storage.getValue("SETTINGS_PERIODIC_MINUTE_DOWNLOAD", function (item) {
+      if (item >= 0) {
+        document.getElementById("minute").value = item;
+      }
+    });
+  }
+  
+  function saveAutoDownloadTime() {
+    var hour = changed_Periodic_Download_Hour;
+    var minute = changed_Periodic_Download_Minutes;
+  
+    var _eminut = document.getElementById("minute").value;
+    var _ehour = document.getElementById("hour").value;
+    console.log(minute, hour, _ehour, _eminut);
+    if (
+      (Number(hour) >= 0 || Number(_ehour) >= 0) &&
+      (Number(minute) >= 0 || Number(_eminut) >= 0)
+    ) {
+      storage.saveValue(
+        "SETTINGS_PERIODIC_MINUTE_DOWNLOAD",
+        Number(_eminut) || Number(minute)
+      );
+      storage.saveValue(
+        "SETTINGS_PERIODIC_HOUR_DOWNLOAD",
+        Number(_ehour) || Number(hour)
+      );
+      viewNotify("notify-periodic-saved");
+    } else if (hour === "select" || minute === "select") {
+      viewNotify("notify-periodic-save-failed");
+      storage.saveValue("SETTINGS_PERIODIC_MINUTE_DOWNLOAD", "select");
+      storage.saveValue("SETTINGS_PERIODIC_HOUR_DOWNLOAD", "select");
+    }
+  
+   
+  }
