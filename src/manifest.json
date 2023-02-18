@@ -23,7 +23,8 @@
             "idle",
             "chrome://favicon/*",
             "webNavigation",
-            "unlimitedStorage"
+            "unlimitedStorage",
+            "alarms"
         ],
         "optional_permissions": [
             "https://www.youtube.com/*",

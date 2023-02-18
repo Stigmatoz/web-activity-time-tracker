@@ -98,6 +98,26 @@
                     <div class="margin-top-10">
                         <input type="button" value="Export to CSV" id='exportToCsv'>
                     </div>
+                    <div class="margin-top-10">
+                        <label class="setting-header">Periodic CSV download:</label>
+                      </div>
+                      <div class="margin-top-10">
+                        <label for="hour">Hour:</label>
+                        <select select id="hour" name="hour" class="option time-selector">
+                          <option>select</option>
+                        </select>
+          
+                        <label for="minute">Minute:</label>
+                        <select id="minute" name="minute" class="option time-selector">
+                          <option>select</option>
+                        </select>
+                        <input
+                          type="button"
+                          value="Save"
+                          class="time-save-btn"
+                          id="time-save-btn"
+                        />
+
                     <div class="separator"></div>
                     <div class="margin-top-10">
                         <input type="button" value="Backup" id='backup'>
@@ -113,6 +133,12 @@
                     <div class="notify warning" id='notify-restore-failed' hidden>
                         Backup file is not valid
                     </div>
+                            <div class="notify warning" id="notify-periodic-save-failed" hidden>
+                                Please select hour and minute
+                            </div>
+                            <div class="notify " id="notify-periodic-saved" hidden>
+                                Saved!
+                            </div>
                     <div class="separator"></div>
                     <!-- YouTube -->
                     <div class="margin-top-10">
