@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "web-ext run -s src --target=chromium",
     "compile": "tsc --noEmit",
-    "zip": "powershell scripts/build.ps1",
+    "build": "powershell scripts/build.ps1",
+    "zip": "powershell scripts/zip.ps1",
     "lint": "echo 'TODO'"
   },
   "devDependencies": {
