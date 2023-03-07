@@ -1,50 +1,39 @@
 {
-        "manifest_version": 2,
-    
-        "name": "Web Activity Time Tracker",
-        "short_name": "Web Time Tracker",
-        "version": "1.7.2",
-        "minimum_chrome_version": "26",
-
-        "description": "Track and limit time your activity in the browser every day.",
-
-        "options_page": "options.html",
-    
-        "icons": {
-            "16": "icons/16x16.png",
-            "32": "icons/32x32.png",
-            "48": "icons/48x48.png",
-            "128": "icons/128x128.png"
-        },
-        "permissions": [
-            "tabs",
-            "activeTab",
-            "storage",
-            "idle",
-            "chrome://favicon/*",
-            "webNavigation",
-            "unlimitedStorage",
-            "alarms"
-        ],
-        "optional_permissions": [
-            "https://www.youtube.com/*",
-            "https://www.netflix.com/*",
-            "notifications"
-          ],
-        "offline_enabled": true,
-        "background": {
-            "scripts": ["scripts/common.js", 
-                        "scripts/storage.js", 
-                        "scripts/activity.js", 
-                        "scripts/tab.js", 
-                        "scripts/timeInterval.js",
-                        "scripts/background.js",
-                        "scripts/restriction.js"],
-            "persistent": false
-        },
-        "browser_action": {
-            "default_popup": "index.html",
-            "default_title": "Web Activity Time Tracker",
-            "default_icon": "icons/48x48.png"
-        }
+    "manifest_version": 3,
+    "name": "Web Activity Time Tracker",
+    "short_name": "Web Time Tracker",
+    "version": "1.7.2",
+    "minimum_chrome_version": "26",
+    "description": "Track and limit time your activity in the browser every day.",
+    "options_page": "options.html",
+    "icons": {
+        "16": "icons/16x16.png",
+        "32": "icons/32x32.png",
+        "48": "icons/48x48.png",
+        "128": "icons/128x128.png"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage",
+        "idle",
+        "webNavigation",
+        "unlimitedStorage",
+        "alarms",
+        "notifications"
+    ],
+    "optional_host_permissions": [
+        "https://www.youtube.com/*",
+        "https://www.netflix.com/*"
+    ],
+    "offline_enabled": true,
+    "background": {
+        "service_worker": "background.ts",
+        "type": "module"
+    },
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Web Activity Time Tracker",
+        "default_icon": "icons/48x48.png"
+    }
 }
