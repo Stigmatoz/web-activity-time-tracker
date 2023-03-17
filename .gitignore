@@ -7,17 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Output
 node_modules
 dist
 dist-ssr
 *.local
-artifacts
-coverage
-
-# CI
-.jenkins
-junit.xml
 
 # Editor directories and files
 .vscode/*
@@ -29,4 +22,7 @@ junit.xml
 *.njsproj
 *.sln
 *.sw?
-node_modules
+
+# Config files
+.webextrc
+.webextrc.*
