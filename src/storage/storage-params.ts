@@ -1,0 +1,15 @@
+export enum StorageParams {
+    TABS = 'tabs',
+    BLACK_LIST = 'black_list',
+    RESTRICTION_LIST = 'restriction_list',
+    NOTIFICATION_LIST = 'notification_list',
+    NOTIFICATION_MESSAGE = 'notification_message',
+    TIMEINTERVAL_LIST = 'time_interval',
+    INTERVAL_INACTIVITY = 'inactivity_interval',
+    INTERVAL_SAVE_STORAGE = 'interval_save_in_storage',
+    INTERVAL_RANGE = 'range_days',
+    DARK_MODE = 'night_mode',
+    VIEW_TIME_IN_BADGE = 'view_time_in_badge',
+    BLOCK_DEFERRAL = 'view_block_deferral',
+    SHOW_HINT = 'show_hint',
+}
