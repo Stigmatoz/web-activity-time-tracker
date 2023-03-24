@@ -1,4 +1,4 @@
-import { IStorage } from "./storage";
+import { IStorage } from "./storage-interface";
 import { StorageParams } from "./storage-params";
 import { Tab } from "./tab";
 import Browser from 'webextension-polyfill';
