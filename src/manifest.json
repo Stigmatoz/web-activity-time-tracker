@@ -3,8 +3,8 @@
     "{{firefox}}.manifest_version": 2,
     "name": "Web Activity Time Tracker",
     "short_name": "Web Tracker",
-    "version": "1.7.2",
-    "description": "Track and limit time your activity in the browser every day.",
+    "version": "2.0.0",
+    "description": "Track and limit time your activity in the browser every day. Control how much time you spend on websites.",
     "options_page": "src/options.html",
     "icons": {
         "16": "src/icons/16x16.png",
@@ -27,6 +27,14 @@
         "https://www.netflix.com/*"
     ],
     "offline_enabled": true,
+    "content_scripts": [
+        {
+          "matches": ["*://*/*"],
+          "js": ["src/tracker.ts"],
+          "all_frames": true,
+          "run_at": "document_start"
+        }
+    ],
     "background": {
         "{{chrome}}.service_worker": "src/background.ts",
         "{{firefox}}.scripts": ["src/background.ts"]
