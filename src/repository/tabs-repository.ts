@@ -2,23 +2,53 @@ import { ITabsRepository } from "./tabs-repository-interface";
 import { Tab } from "../storage/tab";
 import Browser from 'webextension-polyfill';
 import { injecStorage } from "../storage/inject-storage";
+import { isValidPage } from '../compositions/valid-page';
+import { isInBlackList } from "../compositions/black-list";
+import { extractHostname } from "../compositions/extract-hostname";
 
 export class TabsRepository implements ITabsRepository {
-    static tabs: Tab[];
+    private tabs: Tab[];
 
-    constructor(){}
+    constructor() {
+        this.tabs = [];
+    }
     
-    static async Create(): Promise<TabsRepository> {
-        const instance = new TabsRepository();
+    async initAsync(){
         this.tabs = await injecStorage().getTabs();
-        return instance;
-      }
-
-    getTab(domain: string): Promise<Tab> {
-        throw new Error("Method not implemented.");
     }
 
-    addTab(value: Browser.Tabs.Tab): Promise<void> {
-        throw new Error("Method not implemented.");
+    getTab(domain: string): Tab | undefined {
+        const tab = this.tabs?.find(x => x.url === domain);
+        return !tab ? tab : undefined;
+    }
+
+    async addTab(tab: Browser.Tabs.Tab): Promise<Tab> {
+        if (isValidPage(tab)) {
+            if (tab.id && (tab.id != 0)) {
+                tabs = tabs || [];
+                var domain = extractHostname(tab.url);
+                var isDifferentUrl = false;
+                if (currentTab !== tab.url) {
+                    isDifferentUrl = true;
+                }
+
+                if (this.isNewUrl(domain) && !await isInBlackList(domain)) {
+                    var favicon = tab.favIconUrl;
+                    if (favicon === undefined) {
+                        favicon = 'chrome://favicon/' + domain;
+                    }
+                    var newTab = new Tab(domain, favicon);
+                    tabs.push(newTab);
+                }
+
+                if (isDifferentUrl && await !isInBlackList(domain)) {
+                    this.setCurrentActiveTab(domain);
+                    var tabUrl = this.getTab(domain);
+                    if (tabUrl !== undefined)
+                        tabUrl.incCounter();
+                    this.addTimeInterval(domain);
+                }
+            }
+        } else this.closeIntervalForCurrentTab();
     }
 }
