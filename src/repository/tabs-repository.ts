@@ -1,16 +1,19 @@
 import { ITabsRepository } from "./tabs-repository-interface";
-import { Tab } from "../storage/tab";
+import { Tab } from "../entity/tab";
 import Browser from 'webextension-polyfill';
 import { injecStorage } from "../storage/inject-storage";
 import { isValidPage } from '../compositions/valid-page';
 import { isInBlackList } from "../compositions/black-list";
 import { extractHostname } from "../compositions/extract-hostname";
+import { addInterval, closeInterval } from "../compositions/daily-intervals";
 
 export class TabsRepository implements ITabsRepository {
     private tabs: Tab[];
+    private currentTabDomain: string | null;
 
     constructor() {
         this.tabs = [];
+        this.currentTabDomain = null;
     }
     
     async initAsync(){
@@ -22,33 +25,34 @@ export class TabsRepository implements ITabsRepository {
         return !tab ? tab : undefined;
     }
 
-    async addTab(tab: Browser.Tabs.Tab): Promise<Tab> {
+    async addTab(tab: Browser.Tabs.Tab): Promise<void> {
         if (isValidPage(tab)) {
             if (tab.id && (tab.id != 0)) {
-                tabs = tabs || [];
-                var domain = extractHostname(tab.url);
-                var isDifferentUrl = false;
-                if (currentTab !== tab.url) {
-                    isDifferentUrl = true;
-                }
+                const domain = extractHostname(tab.url);
+                const tabFromStorage = this.getTab(domain);
+                const isInBlackListFlag = await isInBlackList(domain);
 
-                if (this.isNewUrl(domain) && !await isInBlackList(domain)) {
-                    var favicon = tab.favIconUrl;
-                    if (favicon === undefined) {
-                        favicon = 'chrome://favicon/' + domain;
+                if (!isInBlackListFlag){
+                    if (!tabFromStorage) {
+                        let favicon = tab.favIconUrl;
+                        if (!favicon) {
+                            favicon = 'chrome://favicon/' + domain;
+                        }
+                        this.tabs.push(new Tab(domain, favicon));
                     }
-                    var newTab = new Tab(domain, favicon);
-                    tabs.push(newTab);
+                    else {
+                        tabFromStorage.incCounter();
+                        if (this.currentTabDomain != domain) this.setCurrentActiveTab(domain);
+                        await closeInterval(this.currentTabDomain);
+                        await addInterval(this.currentTabDomain);
+                    }
                 }
-
-                if (isDifferentUrl && await !isInBlackList(domain)) {
-                    this.setCurrentActiveTab(domain);
-                    var tabUrl = this.getTab(domain);
-                    if (tabUrl !== undefined)
-                        tabUrl.incCounter();
-                    this.addTimeInterval(domain);
-                }
+                else await closeInterval(this.currentTabDomain);
             }
-        } else this.closeIntervalForCurrentTab();
+        } else await closeInterval(this.currentTabDomain);
+    }
+
+    private setCurrentActiveTab(domain:string){
+        this.currentTabDomain = domain;
     }
 }
