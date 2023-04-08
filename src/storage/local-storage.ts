@@ -17,13 +17,14 @@ export class LocalStorage implements IStorage {
         return Browser.storage.local.set({ tabs: value });
     }
 
-    saveValue(name: StorageParams, value: object): Promise<void> {
+    saveValue(name: StorageParams, value: any): Promise<void> {
         return Browser.storage.local.set({
             [name]: value
         });
     }
 
-    getValue(name: StorageParams): Promise<object> {
-        return Browser.storage.local.get(name);
+    async getValue(name: StorageParams): Promise<any> {
+        const value = await Browser.storage.local.get(name);
+        return value[name];
     }
 }
