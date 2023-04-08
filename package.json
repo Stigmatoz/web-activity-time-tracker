@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite build --mode development --watch",
-    "build": "vue-tsc && vite build"
+    "start": "vite build --watch --mode production",
+    "build": "pnpm compile && vite build --mode production",
+    "script:build": "powershell scripts/build.ps1",
+    "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
     "tailwind": "^4.0.0",

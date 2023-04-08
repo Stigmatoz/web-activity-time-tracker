@@ -1,6 +1,6 @@
 import { IStorage } from "./storage-interface";
 import { StorageParams } from "./storage-params";
-import { Tab } from "./tab";
+import { Tab } from "../entity/tab";
 import Browser from 'webextension-polyfill';
 
 export class LocalStorage implements IStorage {

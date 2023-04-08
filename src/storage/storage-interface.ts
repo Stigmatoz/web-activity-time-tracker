@@ -1,5 +1,5 @@
 import { StorageParams } from "./storage-params";
-import { Tab } from "./tab";
+import { Tab } from "../entity/tab";
 
 export interface IStorage {
     getTabs(): Promise<Tab[]>;

@@ -14,7 +14,12 @@ function generateManifest() {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  build: {
+    emptyOutDir: true,
+    sourcemap: mode === 'development' ? 'inline' : false,
+    minify: false,
+  },
   plugins: [
     vue(),
     webExtension({
@@ -22,4 +27,7 @@ export default defineConfig({
       watchFilePaths: ["package.json", "manifest.json"],
     }),
   ],
-});
+  optimizeDeps: {
+    include: ['vue', 'webextension-polyfill'],
+  },
+}));
