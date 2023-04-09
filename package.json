@@ -3,6 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=16.15.0",
+    "pnpm": ">=7"
+  },
   "scripts": {
     "dev": "vite build --mode development --watch",
     "start": "vite build --watch --mode production",
@@ -11,6 +15,7 @@
     "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
+    "pinia": "^2.0.34",
     "tailwind": "^4.0.0",
     "vue": "^3.2.47"
   },
