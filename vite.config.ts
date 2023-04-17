@@ -20,6 +20,9 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development' ? 'inline' : false,
     minify: false,
   },
+  define: {
+    'process.env': process.env
+  },
   plugins: [
     vue(),
     webExtension({

@@ -8,7 +8,7 @@
     "pnpm": ">=7"
   },
   "scripts": {
-    "dev": "vite build --mode development --watch",
+    "dev": "vite build --watch --mode development",
     "start": "vite build --watch --mode production",
     "build": "pnpm compile && vite build --mode production",
     "script:build": "powershell scripts/build.ps1",
