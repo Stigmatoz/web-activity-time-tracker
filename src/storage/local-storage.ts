@@ -2,6 +2,7 @@ import { IStorage } from "./storage-interface";
 import { StorageParams } from "./storage-params";
 import { Tab } from "../entity/tab";
 import Browser from 'webextension-polyfill';
+import { isEmpty } from "../common/utility";
 
 export class LocalStorage implements IStorage {
     getTabs(): Promise<Tab[]> {
@@ -23,8 +24,12 @@ export class LocalStorage implements IStorage {
         });
     }
 
-    async getValue(name: StorageParams): Promise<any> {
-        const value = await Browser.storage.local.get(name);
+    async getValue(name: StorageParams, defaultValue?: any): Promise<any> {
+        let value = await Browser.storage.local.get(name);
+        if (isEmpty(value) && defaultValue != undefined){
+            await this.saveValue(name, defaultValue);
+            return defaultValue;
+        }
         return value[name];
     }
 }
