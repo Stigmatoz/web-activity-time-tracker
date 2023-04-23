@@ -27,13 +27,7 @@
         "https://www.netflix.com/*"
     ],
     "offline_enabled": true,
-    "content_scripts": [
-        {
-          "matches": ["*://*/*"],
-          "js": ["src/tracker.ts"],
-          "run_at": "document_start"
-        }
-    ],
+    
     "background": {
         "{{chrome}}.service_worker": "src/background.ts",
         "{{firefox}}.scripts": ["src/background.ts"]
