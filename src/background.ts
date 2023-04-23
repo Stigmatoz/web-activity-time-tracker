@@ -1,7 +1,11 @@
-import browser from "webextension-polyfill";
+import Browser from "webextension-polyfill";
+import { initTracker } from "./tracker";
+import { logger } from "./compositions/logger";
 
-console.log("Start background script");
+logger.log("Start background script");
 
-browser.runtime.onInstalled.addListener((details) => {
-  console.log("Extension installed:", details);
+Browser.runtime.onInstalled.addListener((details) => {
+  logger.log("Extension installed:", details);
 });
+
+initTracker();

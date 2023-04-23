@@ -11,7 +11,6 @@ async function createAndInitInstance() {
 
 export async function injectTabsRepository(): Promise<ITabsRepository> {
   if (instanse == null) {
-    console.log("test");
     instanse = await createAndInitInstance();
   }
   return instanse;
