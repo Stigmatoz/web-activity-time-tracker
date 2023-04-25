@@ -18,3 +18,13 @@ export function convertStringTimeToSummaryTime(time:string) {
 
     return resultTimeValue;
 }
+
+export function convertSummaryTimeToBadgeString(summaryTime:number):string {
+    const sec = summaryTime;
+    const min = Number((summaryTime / 60).toFixed(0));
+    const hours = Number((summaryTime / (60 * 60)).toFixed(1));
+
+    if (sec < 60) return `${sec}s`;
+    else if (min < 60) return `${min}m`;
+    else return `${hours}h`;
+}

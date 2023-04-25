@@ -5,13 +5,14 @@ import { injectTabsRepository } from "./repository/inject-tabs-repository";
 import { isInBlackList } from "./compositions/black-list";
 import { useBadge } from "./compositions/set-badge";
 import { BadgeColor } from "./compositions/types";
-import { INTERVAL_INACTIVITY_DEFAULT, StorageParams,  } from "./storage/storage-params";
+import { INTERVAL_INACTIVITY_DEFAULT, StorageParams, VIEW_TIME_IN_BADGE_DEFAULT,  } from "./storage/storage-params";
 import { injecStorage } from "./storage/inject-storage";
 import { closeInterval } from "./compositions/daily-intervals";
 import { ActiveTab } from "./compositions/activeTab";
 import { isLimitExceeded } from "./compositions/limit-list";
 import { Tab } from "./entity/tab";
 import { useBlockPage } from "./compositions/block-page";
+import { convertSummaryTimeToBadgeString } from "./common/utility";
 
 async function trackTime(){
     const activeTabInstance = ActiveTab.getInstance();
@@ -64,6 +65,25 @@ async function mainTracker(state: Browser.Idle.IdleState, activeTab: Browser.Tab
         }
 
         tab.incSummaryTime();
+
+        const storage = injecStorage();
+        const viewInBadge = (await storage.getValue(
+            StorageParams.VIEW_TIME_IN_BADGE,
+            VIEW_TIME_IN_BADGE_DEFAULT
+        )) as boolean;
+
+        if (viewInBadge)
+            useBadge({
+                tabId: activeTab!.id!,
+                text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
+                color: BadgeColor.green,
+            });
+        else 
+            useBadge({
+                tabId: activeTab!.id!,
+                text: "",
+                color: BadgeColor.red,
+            });
     }
 }
 

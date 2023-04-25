@@ -6,6 +6,6 @@ export interface BadgeState {
 
 export enum BadgeColor {
     red = '#fdb8b8',
-    green = '#e7e7e7',
+    green = '#6ec05e',
     none = '#000'
 }

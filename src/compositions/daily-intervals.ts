@@ -7,7 +7,7 @@ export async function closeInterval(domain:string | null): Promise<void>{
     if (domain == null) return;
     const storage = injecStorage();
     const timeIntervalList = await storage.getValue(StorageParams.TIMEINTERVAL_LIST) as TimeInterval[];
-    const item = timeIntervalList.find(x => x.domain === domain && x.day == todayLocalDate());
+    const item = timeIntervalList?.find(x => x.domain === domain && x.day == todayLocalDate());
     item?.closeInterval();
     await storage.saveValue(StorageParams.TIMEINTERVAL_LIST, timeIntervalList);
 }
@@ -17,7 +17,7 @@ export async function addInterval(domain:string | null): Promise<void>{
 
     const storage = injecStorage();
     const timeIntervalList = await storage.getValue(StorageParams.TIMEINTERVAL_LIST) as TimeInterval[];
-    const item = timeIntervalList.find(x => x.domain === domain && x.day == todayLocalDate());
+    const item = timeIntervalList?.find(x => x.domain === domain && x.day == todayLocalDate());
     if (item != undefined) {
         if (item.day == todayLocalDate())
             item.addInterval();
