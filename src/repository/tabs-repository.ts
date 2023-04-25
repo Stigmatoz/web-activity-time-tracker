@@ -6,14 +6,14 @@ import { isValidPage } from '../compositions/valid-page';
 import { isInBlackList } from "../compositions/black-list";
 import { extractHostname } from "../compositions/extract-hostname";
 import { addInterval, closeInterval } from "../compositions/daily-intervals";
+import { ActiveTab } from "../compositions/activeTab"
 
 export class TabsRepository implements ITabsRepository {
     private tabs: Tab[];
-    private currentTabDomain: string | null;
+    private activeTab = ActiveTab.getInstance();
 
     constructor() {
         this.tabs = [];
-        this.currentTabDomain = null;
     }
     
     async initAsync(){
@@ -21,8 +21,7 @@ export class TabsRepository implements ITabsRepository {
     }
 
     getTab(domain: string): Tab | undefined {
-        const tab = this.tabs?.find(x => x.url === domain);
-        return !tab ? tab : undefined;
+        return this.tabs?.find(x => x.url === domain);
     }
 
     async addTab(tab: Browser.Tabs.Tab): Promise<void> {
@@ -42,17 +41,17 @@ export class TabsRepository implements ITabsRepository {
                     }
                     else {
                         tabFromStorage.incCounter();
-                        if (this.currentTabDomain != domain) this.setCurrentActiveTab(domain);
-                        await closeInterval(this.currentTabDomain);
-                        await addInterval(this.currentTabDomain);
+                        if (this.activeTab.getActiveTab() != domain) this.setCurrentActiveTab(domain);
+                        await closeInterval(this.activeTab.getActiveTab());
+                        await addInterval(this.activeTab.getActiveTab());
                     }
                 }
-                else await closeInterval(this.currentTabDomain);
+                else await closeInterval(this.activeTab.getActiveTab());
             }
-        } else await closeInterval(this.currentTabDomain);
+        } else await closeInterval(this.activeTab.getActiveTab());
     }
 
     private setCurrentActiveTab(domain:string){
-        this.currentTabDomain = domain;
+        this.activeTab.setActiveTab(domain);
     }
 }
