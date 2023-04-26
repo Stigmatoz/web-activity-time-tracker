@@ -20,6 +20,10 @@ export class TabsRepository implements ITabsRepository {
         this.tabs = await injecStorage().getTabs();
     }
 
+    getTabs(): Tab[] {
+        return this.tabs;
+    }
+
     getTab(domain: string): Tab | undefined {
         return this.tabs?.find(x => x.url === domain);
     }

@@ -5,7 +5,7 @@ import { injectTabsRepository } from "./repository/inject-tabs-repository";
 import { isInBlackList } from "./compositions/black-list";
 import { useBadge } from "./compositions/set-badge";
 import { BadgeColor } from "./compositions/types";
-import { INTERVAL_INACTIVITY_DEFAULT, StorageParams, VIEW_TIME_IN_BADGE_DEFAULT,  } from "./storage/storage-params";
+import { INTERVAL_INACTIVITY_DEFAULT, INTERVAL_SAVE_STORAGE_DEFAULT, StorageParams, VIEW_TIME_IN_BADGE_DEFAULT,  } from "./storage/storage-params";
 import { injecStorage } from "./storage/inject-storage";
 import { closeInterval } from "./compositions/daily-intervals";
 import { ActiveTab } from "./compositions/activeTab";
@@ -14,8 +14,16 @@ import { Tab } from "./entity/tab";
 import { useBlockPage } from "./compositions/block-page";
 import { convertSummaryTimeToBadgeString } from "./common/utility";
 
+const activeTabInstance = ActiveTab.getInstance();
+const storage = injecStorage();
+
+export async function initTracker() {
+    setInterval(trackTime, 1000);
+    setInterval(saveTabs, INTERVAL_SAVE_STORAGE_DEFAULT);
+}
+
 async function trackTime(){
-    const activeTabInstance = ActiveTab.getInstance();
+    const repo = await injectTabsRepository();
     const window = await Browser.windows.getLastFocused({ populate: true });
     if (window.focused) {
         const activeTab = window.tabs?.find((t) => t.active === true);
@@ -30,12 +38,10 @@ async function trackTime(){
                     color: BadgeColor.red,
                 });
             } else {
-                const repo = await injectTabsRepository();
                 const tab = repo.getTab(activeUrl);
                 if (tab == undefined) {
                     await repo.addTab(activeTab!);
                 } else {
-                    const storage = injecStorage();
                     const inactivityInterval = (await storage.getValue(
                         StorageParams.INTERVAL_INACTIVITY,
                         INTERVAL_INACTIVITY_DEFAULT
@@ -87,6 +93,9 @@ async function mainTracker(state: Browser.Idle.IdleState, activeTab: Browser.Tab
     }
 }
 
-export async function initTracker() {
-    setInterval(trackTime, 1000);
+async function saveTabs(){
+    const storage = injecStorage();
+    const repo = await injectTabsRepository();
+    const tabs = repo.getTabs();
+    await storage.saveTabs(tabs);
 }
