@@ -41,7 +41,9 @@ export class TabsRepository implements ITabsRepository {
                         if (!favicon) {
                             favicon = 'chrome://favicon/' + domain;
                         }
-                        this.tabs.push(new Tab(domain, favicon));
+                        const newTab = new Tab();
+                        newTab.init(domain, favicon);
+                        this.tabs.push(newTab);
                     }
                     else {
                         tabFromStorage.incCounter();

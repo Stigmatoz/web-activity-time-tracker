@@ -1,13 +1,17 @@
 import { todayLocalDate } from "../utils/common";
 
-export class Tab {
-    url: string;
-    favicon: string;
+interface Serializable<T> {
+    deserialize(input: Object): T;
+}
+
+export class Tab implements Serializable<Tab> {
+    url: string = '';
+    favicon: string = '';
     summaryTime: number = 0;
     counter: number = 0
     days: TabDay[] = [];
 
-    constructor(url: string, favicon: string){
+    init(url: string, favicon: string){
         this.url = url;
         this.favicon = favicon;
     }
@@ -30,17 +34,29 @@ export class Tab {
     }
 
     addNewDay() :void {
-        const newTabDay = new TabDay(todayLocalDate());
+        const newTabDay = new TabDay();
+        newTabDay.init(todayLocalDate());
         this.days.push(newTabDay);
+    }
+
+    deserialize(input: Tab) {
+        this.url = input.url;
+        this.counter = input.counter;
+        this.favicon = input.favicon;
+        this.summaryTime = input.summaryTime;
+        if (input.days?.length > 0)
+            this.days = input.days.map(x =>  new TabDay().deserialize(x));
+
+        return this;
     }
 }
 
-export class TabDay {
-    counter: number;
-    date: string;
-    summary: number;
+export class TabDay implements Serializable<TabDay> {
+    counter: number = 0;
+    date: string = '';
+    summary: number = 0;
 
-    constructor(date: string){
+    init(date: string){
         this.date = date;
         this.counter = 1;
         this.summary = 1;
@@ -52,5 +68,13 @@ export class TabDay {
 
     incCounter() :void {
         this.counter += 1;
+    }
+
+    deserialize(input: TabDay): TabDay {
+        this.counter = input.counter;
+        this.date = input.date;
+        this.summary = input.summary;
+
+        return this;
     }
 }
