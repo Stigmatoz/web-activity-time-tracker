@@ -1,12 +1,16 @@
+import { extractHostname } from "./extract-hostname";
+
 export class ActiveTab {
   private static instance: ActiveTab;
-  private _activeTab: string | null;
+  private _activeTabUrl: string | null;
+  private _activeTabDomain: string | null;
 
   constructor() {
       if (ActiveTab.instance) {
           throw new Error("Error - use ActiveTab.getInstance()");
       }
-      this._activeTab = null;
+      this._activeTabUrl = null;
+      this._activeTabDomain = null;
   }
 
   static getInstance(): ActiveTab {
@@ -16,11 +20,17 @@ export class ActiveTab {
 
   public setActiveTab(value:string | null): void
   {
-    this._activeTab = value;
+    this._activeTabUrl = value;
+    this._activeTabDomain = value != null ? extractHostname(value) : null;
   }
 
-  public getActiveTab(): string | null
+  public getActiveTabUrl(): string | null
   {
-    return this._activeTab;
+    return this._activeTabUrl;
+  }
+
+  public getActiveTabDomain(): string | null
+  {
+    return this._activeTabDomain;
   }
 }
