@@ -1,7 +1,7 @@
 import { TimeInterval } from "../entity/time-interval";
 import { injecStorage } from "../storage/inject-storage";
 import { StorageDeserializeParam, StorageParams } from "../storage/storage-params";
-import { todayLocalDate } from "../utils/common";
+import { todayLocalDate } from "../utils/today";
 
 export async function closeInterval(domain:string | null): Promise<void>{
     if (domain == null) return;

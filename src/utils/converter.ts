@@ -1,13 +1,4 @@
-export function isEmpty(obj:any): boolean {
-    for (const prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-
-    return JSON.stringify(obj) === JSON.stringify({});
-}
-
-export function convertStringTimeToSummaryTime(time:string) {
+export function convertStringTimeToSummaryTime(time: string) {
     const timeValue = time.split(':');
     const hour = Number(timeValue[0]);
     const min = Number(timeValue[1]);
@@ -19,7 +10,7 @@ export function convertStringTimeToSummaryTime(time:string) {
     return resultTimeValue;
 }
 
-export function convertSummaryTimeToBadgeString(summaryTime:number):string {
+export function convertSummaryTimeToBadgeString(summaryTime: number): string {
     const sec = summaryTime;
     const min = Number((summaryTime / 60).toFixed(0));
     const hours = Number((summaryTime / (60 * 60)).toFixed(1));

@@ -12,7 +12,7 @@ import { ActiveTab } from "./compositions/activeTab";
 import { isLimitExceeded } from "./compositions/limit-list";
 import { Tab } from "./entity/tab";
 import { useBlockPage } from "./compositions/block-page";
-import { convertSummaryTimeToBadgeString } from "./common/utility";
+import { convertSummaryTimeToBadgeString } from "./utils/converter";
 
 const activeTabInstance = ActiveTab.getInstance();
 const storage = injecStorage();

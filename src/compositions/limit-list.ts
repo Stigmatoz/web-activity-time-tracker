@@ -2,7 +2,7 @@ import { Restriction } from "../entity/restriction";
 import { Tab } from "../entity/tab";
 import { injecStorage } from "../storage/inject-storage";
 import { StorageParams } from "../storage/storage-params";
-import { todayLocalDate } from "../utils/common";
+import { todayLocalDate } from "../utils/today";
 
 export async function isLimitExceeded(url: string, tab: Tab): Promise<boolean>{
     const storage = injecStorage();
