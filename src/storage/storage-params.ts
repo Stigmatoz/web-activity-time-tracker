@@ -1,3 +1,6 @@
+import { Tab } from "../entity/tab";
+import { TimeInterval } from "../entity/time-interval";
+
 export enum StorageParams {
     TABS = 'tabs',
     BLACK_LIST = 'black_list',
@@ -13,6 +16,20 @@ export enum StorageParams {
     BLOCK_DEFERRAL = 'view_block_deferral',
     SHOW_HINT = 'show_hint',
 }
+
+export enum StorageDeserializeParam{
+    TABS = 'tabs',
+    TIMEINTERVAL_LIST = 'time_interval',
+}
+
+export function createDeserializeParambject(param:StorageDeserializeParam): StorageDeserializeType{
+    switch (param){
+        case StorageDeserializeParam.TABS: return new Tab();
+        case StorageDeserializeParam.TIMEINTERVAL_LIST: return new TimeInterval();
+    }
+}
+
+export type StorageDeserializeType = Tab | TimeInterval;
 
 export enum InactivityInterval {
     Seconds_30 = 30,

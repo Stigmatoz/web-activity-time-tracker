@@ -1,19 +1,21 @@
 import { IStorage } from "./storage-interface";
-import { StorageParams } from "./storage-params";
+import { StorageDeserializeParam, StorageDeserializeType, StorageParams, createDeserializeParambject } from "./storage-params";
 import { Tab } from "../entity/tab";
 import Browser from 'webextension-polyfill';
 import { isEmpty } from "../common/utility";
 
 export class LocalStorage implements IStorage {
-    async getTabs(): Promise<Tab[]> {
+    async getDeserializeList(param: StorageDeserializeParam): Promise<StorageDeserializeType[]> {
         return new Promise(async resolve => {
-            const { tabs } = await Browser.storage.local.get(StorageParams.TABS);
-            if (tabs != undefined){
-                let tempTabs: Tab[] = [];
-                for (let i = 0; i < tabs.length; i++) {
-                    tempTabs.push(new Tab().deserialize(tabs[i]));
+            const obj = await Browser.storage.local.get(param);
+            const list = obj[param];
+            if (list != undefined){
+                let tempList:StorageDeserializeType[] = [];
+                for (let i = 0; i < list.length; i++) {
+                    const obj = createDeserializeParambject(param);
+                    tempList.push(obj.deserialize(list[i]));
                 }
-                return resolve(tempTabs);
+                return resolve(tempList);
             }
             else resolve([]);
         });
