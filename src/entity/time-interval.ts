@@ -1,9 +1,11 @@
-export class TimeInterval {
-    domain: string;
+import { logger } from "../compositions/logger";
+
+export class TimeInterval implements ISerializable<TimeInterval> {
+    domain: string = '';
     intervals: any;
-    day: string;
+    day: string = '';
     
-    constructor(day:string, domain:string) {
+    init(day:string, domain:string) {
         this.domain = domain;
         this.intervals = [];
         this.day = day;
@@ -12,17 +14,27 @@ export class TimeInterval {
     addInterval() {
         const stringDate = this.getCurrentStringDate();
         this.intervals.push(stringDate + '-' + stringDate);
+        logger.log(`Add interval ${this.domain} - ${stringDate} - ${stringDate}`);
     }
 
     closeInterval() {
         const stringDate = this.getCurrentStringDate();
         const currentInterval = this.intervals[this.intervals.length - 1];
-        if (!currentInterval) {
+        if (currentInterval != null) {
             if (currentInterval.split('-')[0] == currentInterval.split('-')[1]) {
                 this.intervals.pop();
                 this.intervals.push(currentInterval.split('-')[0] + '-' + stringDate);
+                logger.log(`Close interval ${this.domain} - ${currentInterval.split('-')[0]} - ${stringDate}`);
             }
         }
+    }
+
+    deserialize(input: TimeInterval): TimeInterval {
+        this.domain = input.domain;
+        this.day = input.day;
+        this.intervals = input.intervals;
+
+        return this;
     }
 
     private getCurrentStringDate():string{

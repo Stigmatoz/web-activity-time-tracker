@@ -5,19 +5,17 @@ import { injecStorage } from "../storage/inject-storage";
 import { isValidPage } from '../compositions/valid-page';
 import { isInBlackList } from "../compositions/black-list";
 import { extractHostname } from "../compositions/extract-hostname";
-import { addInterval, closeInterval } from "../compositions/daily-intervals";
-import { ActiveTab } from "../compositions/activeTab"
+import { StorageDeserializeParam } from "../storage/storage-params";
 
 export class TabsRepository implements ITabsRepository {
     private tabs: Tab[];
-    private activeTab = ActiveTab.getInstance();
 
     constructor() {
         this.tabs = [];
     }
     
     async initAsync(){
-        this.tabs = await injecStorage().getTabs();
+        this.tabs = await injecStorage().getDeserializeList(StorageDeserializeParam.TABS) as Tab[];
     }
 
     getTabs(): Tab[] {
@@ -28,7 +26,7 @@ export class TabsRepository implements ITabsRepository {
         return this.tabs?.find(x => x.url === domain);
     }
 
-    async addTab(tab: Browser.Tabs.Tab): Promise<void> {
+    async addTab(tab: Browser.Tabs.Tab): Promise<Tab | undefined> {
         if (isValidPage(tab)) {
             if (tab.id && (tab.id != 0)) {
                 const domain = extractHostname(tab.url);
@@ -44,20 +42,12 @@ export class TabsRepository implements ITabsRepository {
                         const newTab = new Tab();
                         newTab.init(domain, favicon);
                         this.tabs.push(newTab);
-                    }
-                    else {
-                        tabFromStorage.incCounter();
-                        if (this.activeTab.getActiveTab() != domain) this.setCurrentActiveTab(domain);
-                        await closeInterval(this.activeTab.getActiveTab());
-                        await addInterval(this.activeTab.getActiveTab());
+                        return newTab;
                     }
                 }
-                else await closeInterval(this.activeTab.getActiveTab());
             }
-        } else await closeInterval(this.activeTab.getActiveTab());
-    }
+        }
 
-    private setCurrentActiveTab(domain:string){
-        this.activeTab.setActiveTab(domain);
+        return undefined;
     }
 }

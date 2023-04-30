@@ -1,10 +1,7 @@
 import { todayLocalDate } from "../utils/common";
+import { logger } from "../compositions/logger";
 
-interface Serializable<T> {
-    deserialize(input: Object): T;
-}
-
-export class Tab implements Serializable<Tab> {
+export class Tab implements ISerializable<Tab> {
     url: string = '';
     favicon: string = '';
     summaryTime: number = 0;
@@ -17,7 +14,8 @@ export class Tab implements Serializable<Tab> {
     }
 
     incSummaryTime() :void {
-        this.summaryTime += 1;  
+        this.summaryTime += 1;
+        //logger.log(`Summary time ${this.url} - ${this.summaryTime}`);
 
         const day = this.days.find(x => x.date == todayLocalDate());
         if (day === undefined) 
@@ -27,6 +25,7 @@ export class Tab implements Serializable<Tab> {
 
     incCounter() :void {
         this.counter +=1;
+        logger.log(`Counter ${this.url} - ${this.counter}`);
         const day = this.days.find(x => x.date == todayLocalDate());
         if (day === undefined)
             this.addNewDay();
@@ -51,7 +50,7 @@ export class Tab implements Serializable<Tab> {
     }
 }
 
-export class TabDay implements Serializable<TabDay> {
+export class TabDay implements ISerializable<TabDay> {
     counter: number = 0;
     date: string = '';
     summary: number = 0;
