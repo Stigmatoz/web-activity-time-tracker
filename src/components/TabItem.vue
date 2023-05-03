@@ -51,7 +51,7 @@ const typeOfUrl = computed(() =>
 
 const url = computed(() =>
   typeOfUrl.value == TypeOfUrl.Document
-    ? encodeURI(props.item.url.split('///')[1])
+    ? decodeURI(props.item.url.split('///')[1])
     : props.item.url,
 );
 
