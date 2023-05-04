@@ -2,7 +2,7 @@ import { IStorage } from "./storage-interface";
 import { StorageDeserializeParam, StorageDeserializeType, StorageParams, createDeserializeParambject } from "./storage-params";
 import { Tab } from "../entity/tab";
 import Browser from 'webextension-polyfill';
-import { isEmpty } from "../common/utility";
+import { isEmpty } from "../utils/common";
 
 export class LocalStorage implements IStorage {
     async getDeserializeList(param: StorageDeserializeParam): Promise<StorageDeserializeType[]> {

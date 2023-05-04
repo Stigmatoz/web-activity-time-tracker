@@ -2,7 +2,7 @@ import { logger } from "../compositions/logger";
 
 export class TimeInterval implements ISerializable<TimeInterval> {
     domain: string = '';
-    intervals: any;
+    intervals: string[] = [];
     day: string = '';
     
     init(day:string, domain:string) {
