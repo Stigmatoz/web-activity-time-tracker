@@ -39,7 +39,7 @@ async function trackTime(){
             } else {
                 let tab = repo.getTab(activeDomain);
                 if (tab == undefined) {
-                    tab = await repo.addTab(activeTab!);
+                    tab = await repo.addTab(activeDomain, activeTab?.favIconUrl);
                 }
                 if (tab != undefined){
                     const inactivityInterval = (await storage.getValue(
