@@ -3,6 +3,7 @@ import { Tab } from "../entity/tab";
 import { injecStorage } from "../storage/inject-storage";
 import { isInBlackList } from "../compositions/black-list";
 import { StorageDeserializeParam } from "../storage/storage-params";
+import { todayLocalDate } from "../utils/today";
 
 export class TabsRepository implements ITabsRepository {
   private tabs: Tab[];
@@ -19,6 +20,10 @@ export class TabsRepository implements ITabsRepository {
 
   getTabs(): Tab[] {
     return this.tabs;
+  }
+
+  getTodayTabs(): Tab[]{
+    return this.tabs.filter(x => x.days.find(s => s.date === todayLocalDate()));
   }
 
   getTab(domain: string): Tab | undefined {
