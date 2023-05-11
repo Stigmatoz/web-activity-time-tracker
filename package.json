@@ -15,8 +15,6 @@
     "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
-    "pinia": "^2.0.34",
-    "tailwind": "^4.0.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {

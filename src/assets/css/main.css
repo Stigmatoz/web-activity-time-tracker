@@ -1,0 +1,27 @@
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #7c7c7c;
+}
+
+.float-right{
+    float: right;
+}
+.display-inline-block{
+    display: inline-block;
+}
+.ml-10{
+    margin-left: 10px;
+}
+.text-right{
+    text-align: right;
+}

@@ -3,7 +3,7 @@ import { logger } from "../compositions/logger";
 
 export class Tab implements ISerializable<Tab> {
     url: string = '';
-    favicon: string = '';
+    favicon: string | undefined = '';
     summaryTime: number = 0;
     counter: number = 0
     days: TabDay[] = [];
@@ -14,7 +14,7 @@ export class Tab implements ISerializable<Tab> {
 
     incSummaryTime() :void {
         this.summaryTime += 1;
-        //logger.log(`Summary time ${this.url} - ${this.summaryTime}`);
+        if (__DEV__) logger.log(`Summary time ${this.url} - ${this.summaryTime}`);
 
         const day = this.days.find(x => x.date == todayLocalDate());
         if (day === undefined) 
@@ -24,7 +24,7 @@ export class Tab implements ISerializable<Tab> {
 
     incCounter() :void {
         this.counter +=1;
-        logger.log(`Counter ${this.url} - ${this.counter}`);
+        if (__DEV__) logger.log(`Counter ${this.url} - ${this.counter}`);
         const day = this.days.find(x => x.date == todayLocalDate());
         if (day === undefined)
             this.addNewDay();
@@ -49,10 +49,7 @@ export class Tab implements ISerializable<Tab> {
     }
 
     setFavicon(favicon: string | undefined){
-        if (favicon != undefined)
-            this.favicon = favicon;
-        else
-            this.favicon = "chrome://favicon/" + this.url;
+        this.favicon = favicon;
     }
 }
 

@@ -1,61 +1,42 @@
-<script lang="ts" setup>
-console.log("Hello from the popup!");
-</script>
-
 <template>
-  <div>
-    <img :src="'/icon-with-shadow.svg'" />
-    <h1>vite-plugin-web-extension</h1>
-    <p>
-      Template: <code>vue-ts</code>
-    </p>
+  <div class="headerBlock">
+    <p class="header">Web Activity Time Tracker</p>
+    <div class="float-right">
+      <img height="20" src="../assets/icons/dark-mode.svg" />
+      <img height="20" src="../assets/icons/settings.svg" />
+    </div>
   </div>
+  <TabList />
 </template>
+
+<script lang="ts" setup>
+import TabList from "../components/TabList.vue";
+</script>
 
 <style>
 html,
 body {
-  width: 300px;
-  height: 400px;
+  width: 500px;
+  height: 590px;
   padding: 0;
   margin: 0;
 }
 
-body {
-  background-color: rgb(36, 36, 36);
+.headerBlock {
+  height: 50px;
+  background-color: #6ebf5d;
 }
 
-body > div {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  justify-content: center;
-}
-
-img {
-  width: 200px;
-  height: 200px;
-}
-
-h1 {
-  font-size: 18px;
+.headerBlock .header {
+  font-size: 16px;
+  padding: 0 20px;
+  display: inline-block;
+  font-weight: 600;
   color: white;
-  font-weight: bold;
-  margin: 0;
 }
 
-p {
-  color: white;
-  opacity: 0.7;
-  margin: 0;
-}
-
-code {
-  font-size: 12px;
-  padding: 2px 4px;
-  background-color: #ffffff24;
-  border-radius: 2px;
+.headerBlock img {
+  cursor: pointer;
+  padding: 15px 10px;
 }
 </style>

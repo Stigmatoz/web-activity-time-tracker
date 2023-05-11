@@ -22,3 +22,7 @@ export function isDomainEquals(first:string, second:string) {
         else return false;
     }
 }
+
+export function getPercentage(time:number, totalTime:number) {
+    return ((time / totalTime) * 100).toFixed(2);
+}
