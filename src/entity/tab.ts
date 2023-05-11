@@ -8,9 +8,8 @@ export class Tab implements ISerializable<Tab> {
     counter: number = 0
     days: TabDay[] = [];
 
-    init(url: string, favicon: string){
+    init(url: string){
         this.url = url;
-        this.favicon = favicon;
     }
 
     incSummaryTime() :void {
@@ -47,6 +46,13 @@ export class Tab implements ISerializable<Tab> {
             this.days = input.days.map(x =>  new TabDay().deserialize(x));
 
         return this;
+    }
+
+    setFavicon(favicon: string | undefined){
+        if (favicon != undefined)
+            this.favicon = favicon;
+        else
+            this.favicon = "chrome://favicon/" + this.url;
     }
 }
 

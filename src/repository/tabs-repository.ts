@@ -29,16 +29,11 @@ export class TabsRepository implements ITabsRepository {
     const tabFromStorage = this.getTab(domain);
     const isInBlackListFlag = await isInBlackList(domain);
 
-    if (!isInBlackListFlag) {
-      if (!tabFromStorage) {
-        if (!favicon) {
-          favicon = "chrome://favicon/" + domain;
-        }
+    if (!isInBlackListFlag && !tabFromStorage) {
         const newTab = new Tab();
-        newTab.init(domain, favicon);
+        newTab.init(domain);
         this.tabs.push(newTab);
         return newTab;
-      }
     }
 
     return undefined;
