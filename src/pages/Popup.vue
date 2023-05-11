@@ -2,15 +2,21 @@
   <div class="headerBlock">
     <p class="header">Web Activity Time Tracker</p>
     <div class="float-right">
-      <img height="20" src="../assets/icons/dark-mode.svg" />
-      <img height="20" src="../assets/icons/settings.svg" />
+      <img
+        height="20"
+        src="../assets/icons/dark-mode.svg"
+      />
+      <img
+        height="20"
+        src="../assets/icons/settings.svg"
+      />
     </div>
   </div>
   <TabList />
 </template>
 
 <script lang="ts" setup>
-import TabList from "../components/TabList.vue";
+import TabList from '../components/TabList.vue';
 </script>
 
 <style>
@@ -24,7 +30,7 @@ body {
 
 .headerBlock {
   height: 50px;
-  background-color: #6ebf5d;
+  background-color: var(--main-color);
 }
 
 .headerBlock .header {

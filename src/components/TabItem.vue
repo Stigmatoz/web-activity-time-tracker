@@ -6,8 +6,11 @@
       <p>{{ sessions }}</p>
     </div>
     <div class="display-inline-block float-right">
-      <p class="time">{{ summaryTimeForTab }}</p>
-      <p class="text-right">{{ percent }}</p>
+      <p class="text-right time">{{ summaryTimeForTab }}</p>
+      <p class="text-right">{{ percent }} %</p>
+    </div>
+    <div class="progress-bar">
+      <div :style="styleForProgressBar"></div>
     </div>
   </div>
 </template>
@@ -40,7 +43,9 @@ const sessions = computed(() => {
 });
 
 const summaryTimeForTab = convertSummaryTimeToString(currentDayValue?.summary);
-const percent = `${getPercentage(currentDayValue?.summary, props.summaryTime)} %`;
+const percent = getPercentage(currentDayValue?.summary, props.summaryTime);
+
+const styleForProgressBar = computed(() => `width: ${percent}%`);
 </script>
 
 <style scoped>
@@ -48,7 +53,7 @@ const percent = `${getPercentage(currentDayValue?.summary, props.summaryTime)} %
   padding: 7px;
   border: 1px transparent solid;
   border-radius: 10px;
-  margin: 7px;
+  margin: 10px;
 }
 .tab-item:hover {
   border: 1px rgb(202, 202, 202) solid;
@@ -67,5 +72,14 @@ const percent = `${getPercentage(currentDayValue?.summary, props.summaryTime)} %
 .tab-item .time {
   font-size: 14px;
   font-weight: 600;
+}
+.tab-item .progress-bar {
+  margin: 5px 0 0 45px;
+  border-radius: 10px;
+  border: 1px rgb(225 224 224) solid;
+}
+.tab-item .progress-bar div {
+  height: 6px;
+  background-color: var(--main-color);
 }
 </style>

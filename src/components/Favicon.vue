@@ -1,21 +1,26 @@
 <template>
   <img
-    v-if="favicon == undefined"
+    v-if="favicon == undefined || favicon == ''"
     class="favicon"
     height="22"
     :src="NO_FAVICON_URL"
   />
-  <img v-else class="favicon" height="30" :src="favicon" />
+  <img
+    v-else
+    class="favicon"
+    height="30"
+    :src="favicon"
+  />
 </template>
 
 <script lang="ts">
 export default {
-  name: "Favicon",
+  name: 'Favicon',
 };
 </script>
 
 <script lang="ts" setup>
-import { NO_FAVICON_URL } from "../utils/consts";
+import { NO_FAVICON_URL } from '../utils/consts';
 
 const props = defineProps<{
   favicon: string | undefined;

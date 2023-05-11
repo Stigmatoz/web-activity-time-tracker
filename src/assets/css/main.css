@@ -1,3 +1,6 @@
+:root {
+    --main-color: #6ebf5d;
+}
 ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: #F5F5F5;
