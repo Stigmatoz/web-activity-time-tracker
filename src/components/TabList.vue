@@ -37,7 +37,8 @@ onMounted(async () => {
   let unSortedTabs = repo.getTodayTabs();
   tabs.value = unSortedTabs?.sort(function (a: Tab, b: Tab) {
     return (
-      b.days.find(s => s.date === todayLocalDate())!.summary - a.days.find(s => s.date === todayLocalDate())!.summary
+      b.days.find(s => s.date === todayLocalDate())!.summary -
+      a.days.find(s => s.date === todayLocalDate())!.summary
     );
   });
 });

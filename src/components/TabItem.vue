@@ -1,16 +1,18 @@
 <template>
   <div class="tab-item">
     <Favicon :favicon="tab.favicon" />
-    <div class="ml-10 display-inline-block">
-      <p class="url">{{ tab.url }}</p>
-      <p>{{ sessions }}</p>
-    </div>
-    <div class="display-inline-block float-right">
-      <p class="text-right time">{{ summaryTimeForTab }}</p>
-      <p class="text-right">{{ percent }} %</p>
-    </div>
-    <div class="progress-bar">
-      <div :style="styleForProgressBar"></div>
+    <div class="ml-10 flex-grow-2">
+      <div class="display-inline-block">
+        <p class="url">{{ tab.url }}</p>
+        <p>{{ sessions }}</p>
+      </div>
+      <div class="display-inline-block float-right">
+        <p class="text-right time">{{ summaryTimeForTab }}</p>
+        <p class="text-right">{{ percent }} %</p>
+      </div>
+      <div class="progress-bar">
+        <div :style="styleForProgressBar"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +56,9 @@ const styleForProgressBar = computed(() => `width: ${percent}%`);
   border: 1px transparent solid;
   border-radius: 10px;
   margin: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .tab-item:hover {
   border: 1px rgb(202, 202, 202) solid;
@@ -74,12 +79,15 @@ const styleForProgressBar = computed(() => `width: ${percent}%`);
   font-weight: 600;
 }
 .tab-item .progress-bar {
-  margin: 5px 0 0 45px;
+  margin: 5px 0 0 5px;
   border-radius: 10px;
   border: 1px rgb(225 224 224) solid;
 }
 .tab-item .progress-bar div {
   height: 6px;
   background-color: var(--main-color);
+}
+.flex-grow-2 {
+  flex-grow: 2;
 }
 </style>

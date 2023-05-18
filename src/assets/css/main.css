@@ -1,5 +1,6 @@
 :root {
     --main-color: #6ebf5d;
+    --popup-header: #d7d7d7;
 }
 ::-webkit-scrollbar-track {
     border-radius: 10px;
@@ -24,6 +25,9 @@
 }
 .ml-10{
     margin-left: 10px;
+}
+.mr-10{
+    margin-right: 10px;
 }
 .text-right{
     text-align: right;

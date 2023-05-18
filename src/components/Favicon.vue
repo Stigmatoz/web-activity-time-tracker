@@ -1,7 +1,7 @@
 <template>
   <img
     v-if="favicon == undefined || favicon == ''"
-    class="favicon"
+    class="favicon no-favicon"
     height="22"
     :src="NO_FAVICON_URL"
   />
@@ -30,5 +30,8 @@ const props = defineProps<{
 <style scoped>
 .favicon {
   padding: 5px;
+}
+.no-favicon {
+  margin: 0 5px;
 }
 </style>

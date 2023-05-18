@@ -1,7 +1,7 @@
 <template>
   <div class="headerBlock">
     <p class="header">Web Activity Time Tracker</p>
-    <div class="float-right">
+    <div class="float-right mr-10">
       <img
         height="20"
         src="../assets/icons/dark-mode.svg"
@@ -9,6 +9,7 @@
       <img
         height="20"
         src="../assets/icons/settings.svg"
+        @click="openSettings()"
       />
     </div>
   </div>
@@ -16,7 +17,15 @@
 </template>
 
 <script lang="ts" setup>
+import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
+
+async function openSettings() {
+  await Browser.tabs.create({
+    url: Browser.runtime.getURL('settings.html'),
+    active: true,
+  });
+}
 </script>
 
 <style>
@@ -30,7 +39,7 @@ body {
 
 .headerBlock {
   height: 50px;
-  background-color: var(--main-color);
+  background-color: var(--popup-header);
 }
 
 .headerBlock .header {
@@ -38,7 +47,7 @@ body {
   padding: 0 20px;
   display: inline-block;
   font-weight: 600;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .headerBlock img {
