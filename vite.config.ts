@@ -1,13 +1,13 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import webExtension, { readJsonFile } from "vite-plugin-web-extension";
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import webExtension, { readJsonFile } from 'vite-plugin-web-extension';
 import pkg from './package.json';
 
 const APPID_CHROME = 'hhfnghjdeddcfegfekjeihfmbjenlomm';
 
 function generateManifest() {
-  const manifest = readJsonFile("src/manifest.json");
-  const pkg = readJsonFile("package.json");
+  const manifest = readJsonFile('src/manifest.json');
+  const pkg = readJsonFile('package.json');
   return {
     name: pkg.name,
     description: pkg.description,
@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     emptyOutDir: true,
     sourcemap: mode === 'development' ? 'inline' : false,
-    minify: false,
+    minify: true,
   },
   define: {
     'process.env': process.env,
@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => ({
     vue(),
     webExtension({
       manifest: generateManifest,
-      watchFilePaths: ["package.json", "manifest.json"],
+      watchFilePaths: ['package.json', 'manifest.json'],
     }),
   ],
   optimizeDeps: {

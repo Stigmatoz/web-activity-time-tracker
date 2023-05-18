@@ -11,7 +11,6 @@
     "dev": "vite build --watch --mode development",
     "start": "vite build --watch --mode production",
     "build": "pnpm compile && vite build --mode production",
-    "script:build": "powershell scripts/build.ps1",
     "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
