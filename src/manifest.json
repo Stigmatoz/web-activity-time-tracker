@@ -4,7 +4,7 @@
     "short_name": "Web Tracker",
     "version": "2.0.0",
     "description": "Track and limit time your activity in the browser every day. Control how much time you spend on websites.",
-    "options_page": "src/settings.html",
+    "options_page": "settings.html",
     "icons": {
         "16": "16x16.png",
         "32": "32x32.png",
@@ -26,10 +26,10 @@
     ],
     "offline_enabled": true,
     "background": {
-        "{{chrome}}.service_worker": "src/background.ts"
+        "{{chrome}}.service_worker": "background.ts"
       },
     "{{chrome}}.action": {
-        "default_popup": "src/popup.html",
+        "default_popup": "popup.html",
         "default_title": "Web Activity Time Tracker"
     }
 }
