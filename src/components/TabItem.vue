@@ -87,7 +87,7 @@ const styleForProgressBar = computed(() => `width: ${percent}%`);
 }
 .tab-item .progress-bar div {
   height: 6px;
-  background-color: var(--main-color);
+  background-color: var(--progress-bar);
 }
 .flex-grow-2 {
   flex-grow: 2;
