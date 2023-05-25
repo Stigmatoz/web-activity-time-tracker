@@ -1,40 +1,217 @@
 :root {
-    --main-color: #6ebf5d;
-    --popup-header: #d7d7d7;
+  --main-color: #6ebf5d;
+  --popup-header: #f3f3f3;
+  --progress-bar: #a6afa3;
 }
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #F5F5F5;
+  border-radius: 10px;
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar {
-    width: 7px;
-    background-color: #F5F5F5;
+  width: 7px;
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #7c7c7c;
+  border-radius: 10px;
+  background-color: #7c7c7c;
 }
 html,
 body {
-  width: 500px;
+  width: 600px;
   height: 590px;
   padding: 0;
   margin: 0;
 }
-.float-right{
-    float: right;
+.float-right {
+  float: right;
 }
-.display-inline-block{
-    display: inline-block;
+.display-inline-block {
+  display: inline-block;
 }
-.ml-10{
-    margin-left: 10px;
+.ml-10 {
+  margin-left: 10px;
 }
-.mr-10{
-    margin-right: 10px;
+.mr-10 {
+  margin-right: 10px;
 }
-.text-right{
-    text-align: right;
+.text-right {
+  text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.tabs {
+}
+.tabs input[name='tab-control'] {
+  display: none;
+}
+.tabs .content section h2,
+.tabs ul li label {
+  font-size: 15px;
+  color: #428bff;
+}
+.tabs ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.tabs ul li {
+  box-sizing: border-box;
+  flex: 1;
+  width: 25%;
+  padding: 0 10px;
+  text-align: center;
+}
+.tabs ul li label {
+  transition: all 0.3s ease-in-out;
+  color: #929daf;
+  padding: 5px auto;
+  overflow: hidden;
+  display: block;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.tabs ul li label br {
+  display: none;
+}
+.tabs ul li label img {
+  filter: brightness(0) saturate(100%) invert(67%) sepia(15%) saturate(342%) hue-rotate(178deg)
+    brightness(91%) contrast(89%);
+  vertical-align: bottom;
+  margin-right: 0.2em;
+  transition: all 0.2s ease-in-out;
+}
+.tabs ul li label:hover,
+.tabs ul li label:focus,
+.tabs ul li label:active {
+  outline: 0;
+  color: #bec5cf;
+}
+.tabs ul li label:hover img,
+.tabs ul li label:focus img,
+.tabs ul li label:active img {
+  filter: #bec5cf;
+}
+.tabs .slider {
+  position: relative;
+  width: 25%;
+  transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
+}
+.tabs .slider .indicator {
+  position: relative;
+  width: 50px;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 4px;
+  background: #428bff;
+  border-radius: 1px;
+}
+.tabs .content {
+  margin-top: 30px;
+}
+.tabs .content section {
+  display: none;
+  -webkit-animation-name: content;
+  animation-name: content;
+  -webkit-animation-direction: normal;
+  animation-direction: normal;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  line-height: 1.4;
+}
+.tabs .content section h2 {
+  color: #428bff;
+  display: none;
+}
+.tabs .content section h2::after {
+  content: '';
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: #428bff;
+  margin-top: 5px;
+  left: 1px;
+}
+.tabs input[name='tab-control']:nth-of-type(1):checked ~ ul > li:nth-child(1) > label {
+  cursor: default;
+  color: #428bff;
+}
+.tabs input[name='tab-control']:nth-of-type(1):checked ~ ul > li:nth-child(1) > label img {
+    filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg) brightness(103%) contrast(101%);
+}
+.tabs input[name='tab-control']:nth-of-type(1):checked ~ .slider {
+  transform: translateX(17%);
+}
+.tabs input[name='tab-control']:nth-of-type(1):checked ~ .content > section:nth-child(1) {
+  display: block;
+}
+.tabs input[name='tab-control']:nth-of-type(2):checked ~ ul > li:nth-child(2) > label {
+  cursor: default;
+  color: #428bff;
+}
+.tabs input[name='tab-control']:nth-of-type(2):checked ~ ul > li:nth-child(2) > label img {
+    filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg) brightness(103%) contrast(101%);
+}
+.tabs input[name='tab-control']:nth-of-type(2):checked ~ .slider {
+  transform: translateX(150%);
+}
+.tabs input[name='tab-control']:nth-of-type(2):checked ~ .content > section:nth-child(2) {
+  display: block;
+}
+.tabs input[name='tab-control']:nth-of-type(3):checked ~ ul > li:nth-child(3) > label {
+  cursor: default;
+  color: #428bff;
+}
+.tabs input[name='tab-control']:nth-of-type(3):checked ~ ul > li:nth-child(3) > label img {
+    filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg) brightness(103%) contrast(101%);
+}
+.tabs input[name='tab-control']:nth-of-type(3):checked ~ .slider {
+  transform: translateX(290%);
+}
+.tabs input[name='tab-control']:nth-of-type(3):checked ~ .content > section:nth-child(3) {
+  display: block;
+}
+@-webkit-keyframes content {
+  from {
+    opacity: 0;
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+@keyframes content {
+  from {
+    opacity: 0;
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+.tabs ul li label {
+  white-space: initial;
+}
+.tabs ul li label img {
+  height: 1.2em;
 }
