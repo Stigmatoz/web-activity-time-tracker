@@ -20,10 +20,6 @@
         "alarms",
         "notifications"
     ],
-    "optional_host_permissions": [
-        "https://www.youtube.com/*",
-        "https://www.netflix.com/*"
-    ],
     "offline_enabled": true,
     "background": {
         "{{chrome}}.service_worker": "background.ts"
