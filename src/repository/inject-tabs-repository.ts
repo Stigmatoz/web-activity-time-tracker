@@ -1,5 +1,5 @@
-import { ITabsRepository } from "./tabs-repository-interface";
-import { TabsRepository } from "./tabs-repository";
+import { ITabsRepository } from './tabs-repository-interface';
+import { TabsRepository } from './tabs-repository';
 
 let instanse: ITabsRepository | null = null;
 

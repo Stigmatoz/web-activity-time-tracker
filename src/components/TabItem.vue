@@ -2,18 +2,19 @@
   <div class="tab-item">
     <Favicon :favicon="tab.favicon" />
     <div class="ml-10 flex-grow-2">
-      <div class="display-inline-block">
+      <div class="first-block">
         <p class="url">{{ tab.url }}</p>
-        <p>{{ sessions }}</p>
-      </div>
-      <div class="display-inline-block float-right">
         <p class="text-right time">{{ summaryTimeForTab }}</p>
-        <p class="text-right">{{ percent }} %</p>
       </div>
-      <div class="progress-bar">
-        <div :style="styleForProgressBar"></div>
+      <div class="second-block">
+        <div class="progress-bar">
+          <div :style="styleForProgressBar"></div>
+        </div>
+        <p class="text-right percent">{{ percent }} %</p>
       </div>
+      <p class="sessions">{{ sessions }}</p>
     </div>
+    <div></div>
   </div>
 </template>
 
@@ -79,9 +80,10 @@ const styleForProgressBar = computed(() => `width: ${percent}%`);
   font-weight: 600;
 }
 .tab-item .progress-bar {
+  width: 100%;
   margin: 5px 0 0 5px;
   border-radius: 10px;
-  border: 1px rgb(225 224 224) solid;
+  border: 1.5px rgb(225 224 224) solid;
 }
 .tab-item .progress-bar div {
   height: 6px;
@@ -89,5 +91,21 @@ const styleForProgressBar = computed(() => `width: ${percent}%`);
 }
 .flex-grow-2 {
   flex-grow: 2;
+}
+.tab-item .first-block {
+  display: flex;
+  justify-content: space-between;
+}
+.tab-item .second-block {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.tab-item .percent {
+  white-space: nowrap;
+  margin: 0 5px 0 20px;
+}
+.tab-item .sessions {
+  margin: 0 0 0 5px;
 }
 </style>

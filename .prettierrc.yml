@@ -3,5 +3,4 @@ trailingComma: all
 endOfLine: lf
 printWidth: 100
 tabWidth: 2
-singleAttributePerLine: true
 arrowParens: avoid

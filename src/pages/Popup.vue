@@ -2,15 +2,8 @@
   <div class="headerBlock">
     <p class="header">Web Activity Time Tracker</p>
     <div class="float-right mr-10">
-      <img
-        height="20"
-        src="../assets/icons/dark-mode.svg"
-      />
-      <img
-        height="20"
-        src="../assets/icons/settings.svg"
-        @click="openSettings()"
-      />
+      <img height="17" src="../assets/icons/dark-mode.svg" />
+      <img height="17" src="../assets/icons/settings.svg" @click="openSettings()" />
     </div>
   </div>
   <TabList />
@@ -28,18 +21,10 @@ async function openSettings() {
 }
 </script>
 
-<style>
-html,
-body {
-  width: 500px;
-  height: 590px;
-  padding: 0;
-  margin: 0;
-}
-
+<style scoped>
 .headerBlock {
   height: 50px;
-  background-color: var(--popup-header);
+  background-color: var(--main-color);
 }
 
 .headerBlock .header {
