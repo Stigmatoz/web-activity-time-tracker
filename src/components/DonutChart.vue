@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <Doughnut :data="data" :options="options" :plugins="plugins" />
+    <Doughnut :data="data" :options="options" />
   </div>
 </template>
 
@@ -57,24 +57,14 @@ const options = {
     },
   },
 };
-
-const plugins = [
-  {
-    id: 'legendDistance',
-    beforeInit(chart: any, args: any, opts: any) {
-      const originalFit = chart.legend.fit;
-      chart.legend.fit = function fit() {
-        originalFit.bind(chart.legend)();
-        this.width += opts.padding || 0;
-      };
-    },
-  },
-];
 </script>
 
 <style scoped>
 .chart {
   height: 230px;
-  margin: -10px 0 10px 0;
+  margin: auto;
+  width: 80%;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>
