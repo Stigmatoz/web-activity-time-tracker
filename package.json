@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "vue": "^3.2.47"
+    "date-fns": "^2.30.0",
   },
   "devDependencies": {
     "@types/webextension-polyfill": "^0.10.0",
