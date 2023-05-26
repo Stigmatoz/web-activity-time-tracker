@@ -18,9 +18,7 @@ function generateManifest() {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  root: 'src',
   build: {
-    outDir: '../dist',
     emptyOutDir: true,
     sourcemap: mode === 'development' ? 'inline' : false,
     minify: true,
