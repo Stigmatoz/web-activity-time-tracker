@@ -39,7 +39,7 @@ const summaryTimeString = computed(() => convertSummaryTimeToString(props.summar
 }
 p {
   font-size: 14px;
-  margin: 5px;
+  margin: 0;
 }
 .time {
   font-size: 16px;

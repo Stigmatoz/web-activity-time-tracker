@@ -56,7 +56,7 @@ const styleForProgressBar = computed(() => `width: ${percent}%`);
   padding: 7px;
   border: 1px transparent solid;
   border-radius: 10px;
-  margin: 10px;
+  margin: 5px 15px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

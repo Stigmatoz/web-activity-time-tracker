@@ -105,7 +105,7 @@ async function mainTracker(
       useBadge({
         tabId: activeTab!.id!,
         text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
-        color: BadgeColor.green,
+        color: BadgeColor.blue,
       });
     else
       useBadge({

@@ -68,10 +68,10 @@ async function openSettings() {
 .headerBlock .header {
   font-size: 16px;
   padding: 0 20px;
-  margin-top: 10px;
+  margin-top: 8px;
   display: inline-block;
   font-weight: 600;
-  color: rgb(0, 0, 0);
+  color: #4a4a4a;
 }
 
 .headerBlock img {

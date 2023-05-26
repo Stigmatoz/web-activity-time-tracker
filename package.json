@@ -14,8 +14,10 @@
     "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "chart.js": "^4.3.0",
     "date-fns": "^2.30.0",
+    "vue": "^3.2.47",
+    "vue-chartjs": "^5.2.0"
   },
   "devDependencies": {
     "@types/webextension-polyfill": "^0.10.0",

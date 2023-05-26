@@ -1,7 +1,7 @@
 :root {
   --main-color: #6ebf5d;
   --popup-header: #f3f3f3;
-  --progress-bar: #a6afa3;
+  --progress-bar: #6ebf5d;
 }
 ::-webkit-scrollbar-track {
   border-radius: 10px;
@@ -41,6 +41,11 @@ body {
 }
 .text-center {
     text-align: center;
+}
+.no-data{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
 }
 .tabs {
 }
