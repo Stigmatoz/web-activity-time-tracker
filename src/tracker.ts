@@ -13,7 +13,7 @@ import {
 import { BadgeColor } from './compositions/set-badge';
 import { injecStorage } from './storage/inject-storage';
 import { addInterval, closeInterval } from './compositions/daily-intervals';
-import { ActiveTab } from './compositions/activeTab';
+import { ActiveTab } from './compositions/active-tab';
 import { isLimitExceeded } from './compositions/limit-list';
 import { Tab } from './entity/tab';
 import { useBlockPage } from './compositions/block-page';
