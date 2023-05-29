@@ -1,0 +1,37 @@
+import { Tab } from '../entity/tab';
+import { injectTabsRepository } from '../repository/inject-tabs-repository';
+import { TabListSummary } from '../utils/tabListSummary';
+
+export async function useAllTabListSummary(): Promise<TabListSummary> {
+  const repo = await injectTabsRepository();
+  const unSortedTabs = repo.getTodayTabs();
+  let tabs: Tab[] = [];
+
+  tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
+    return b.summaryTime - a.summaryTime;
+  });
+
+  const summaryTimeList = tabs?.map(function (tab) {
+    return tab.summaryTime;
+  });
+  const siteList = tabs?.map(function (tab) {
+    return tab.url;
+  });
+  const timeForChart = summaryTimeList?.slice(0, 10);
+  const sitesForChart = siteList?.slice(0, 10);
+
+  const summaryTime =
+    summaryTimeList != undefined && summaryTimeList.length > 0
+      ? summaryTimeList.reduce(function (a, b) {
+          return a + b;
+        })
+      : 0;
+  return {
+    tabs,
+    summaryTime,
+    chart: {
+      timeForChart,
+      sitesForChart,
+    },
+  };
+}

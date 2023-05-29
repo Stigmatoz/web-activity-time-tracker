@@ -34,7 +34,7 @@
         <TabList :type="TypeOfList.Today" />
       </section>
       <section>
-        <h2>Delivery Contents</h2>
+        <TabList :type="TypeOfList.All" />
       </section>
       <section>
         <h2>Shipping</h2>

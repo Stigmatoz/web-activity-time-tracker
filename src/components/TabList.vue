@@ -26,7 +26,10 @@ import DonutChart from '../components/DonutChart.vue';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { Tab } from '../entity/tab';
 import { todayLocalDate } from '../utils/today';
-import { TypeOfList } from '../utils/enums';
+import { SortingBy, TypeOfList } from '../utils/enums';
+import { useTodayTabListSummary } from '../compositions/today-tab-list-summary';
+import { TabListSummary } from '../utils/tabListSummary';
+import { useAllTabListSummary } from '../compositions/all-tab-list-summary';
 
 const props = defineProps<{
   type: TypeOfList;
@@ -45,30 +48,32 @@ const firstDay = computed(() => {
   if (props.type == TypeOfList.All) return;
 });
 
-onMounted(async () => {
+async function loadList(sortingBy: SortingBy) {
   const repo = await injectTabsRepository();
-  let unSortedTabs = repo.getTodayTabs();
-  tabs.value = unSortedTabs.sort(function (a: Tab, b: Tab) {
-    return (
-      b.days.find(s => s.date === todayLocalDate())!.summary -
-      a.days.find(s => s.date === todayLocalDate())!.summary
-    );
-  });
+  let tabSummary = null;
+  if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary();
+  if (props.type == TypeOfList.Today) tabSummary = await useAllTabListSummary();
 
-  const summaryTimeList = tabs.value?.map(function (tab) {
-    return tab.days.find(day => day.date === todayLocalDate())!.summary;
-  });
-  const siteList = tabs.value?.map(function (tab) {
-    return tab.url;
-  });
-  timeForChart.value = summaryTimeList?.slice(0, 10);
-  sitesForChart.value = siteList?.slice(0, 10);
+  if (tabSummary != null) {
+    tabs.value = tabSummary.tabs;
+    summaryTime.value = tabSummary.summaryTime;
+    timeForChart.value = tabSummary.chart.timeForChart;
+    sitesForChart.value = tabSummary.chart.sitesForChart;
+  }
+}
 
-  summaryTime.value =
-    summaryTimeList != undefined && summaryTimeList.length > 0
-      ? summaryTimeList.reduce(function (a, b) {
-          return a + b;
-        })
-      : 0;
+onMounted(async () => {
+  loadList(SortingBy.WebUsage);
 });
+
+function sortingBy(sortingBy: SortingBy) {
+  switch (sortingBy) {
+    case SortingBy.WebUsage:
+      loadList(SortingBy.WebUsage);
+      break;
+    case SortingBy.Sessions:
+      loadList(SortingBy.Sessions);
+      break;
+  }
+}
 </script>
