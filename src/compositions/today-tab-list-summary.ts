@@ -1,22 +1,26 @@
 import { Tab } from '../entity/tab';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
+import { SortingBy } from '../utils/enums';
 import { TabListSummary } from '../utils/tabListSummary';
 import { todayLocalDate } from '../utils/today';
 
-export async function useTodayTabListSummary(): Promise<TabListSummary> {
+export async function useTodayTabListSummary(sortingBy: SortingBy): Promise<TabListSummary> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTodayTabs();
   let tabs: Tab[] = [];
 
   tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
-    return (
-      b.days.find(s => s.date === todayLocalDate())!.summary -
-      a.days.find(s => s.date === todayLocalDate())!.summary
-    );
+    return sortingBy == SortingBy.UsageTime
+      ? b.days.find(s => s.date === todayLocalDate())!.summary -
+          a.days.find(s => s.date === todayLocalDate())!.summary
+      : b.days.find(s => s.date === todayLocalDate())!.counter -
+          a.days.find(s => s.date === todayLocalDate())!.counter;
   });
 
   const summaryTimeList = tabs?.map(function (tab) {
-    return tab.days.find(day => day.date === todayLocalDate())!.summary;
+    return sortingBy == SortingBy.UsageTime
+      ? tab.days.find(day => day.date === todayLocalDate())!.summary
+      : tab.days.find(day => day.date === todayLocalDate())!.counter;
   });
   const siteList = tabs?.map(function (tab) {
     return tab.url;

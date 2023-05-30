@@ -3,3 +3,8 @@ export enum TypeOfList {
   All,
   ByDays,
 }
+
+export enum SortingBy {
+  UsageTime,
+  Sessions,
+}

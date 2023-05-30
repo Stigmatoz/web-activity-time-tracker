@@ -1,7 +1,16 @@
 <template>
   <div class="header-block">
-    <p>{{ title }} ({{ countOfSites }} sites)</p>
-    <p class="time">{{ summaryTimeString }}</p>
+    <div class="time-block">
+      <p>{{ title }} ({{ countOfSites }} sites)</p>
+      <p class="time">{{ summaryTimeString }}</p>
+    </div>
+    <div class="sorted-block">
+      <span class="mr-5">Sorting by</span>
+      <select class="p-5" @change="sortingBy()">
+        <option>Usage Time</option>
+        <option>Sessions</option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -14,7 +23,7 @@ export default {
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { convertSummaryTimeToString } from '../utils/converter';
-import { TypeOfList } from '../utils/enums';
+import { SortingBy, TypeOfList } from '../utils/enums';
 
 const props = defineProps<{
   listType: TypeOfList;
@@ -23,12 +32,20 @@ const props = defineProps<{
   firstDay: Date;
 }>();
 
+const emit = defineEmits<{
+  (event: 'sortingBy', sortingBy: SortingBy): void;
+}>();
+
 const title = computed(() => {
   if (props.listType == TypeOfList.Today) return 'Today';
   if (props.listType == TypeOfList.All) return `Aggregate data since ${props.firstDay} `;
 });
 
 const summaryTimeString = computed(() => convertSummaryTimeToString(props.summaryTime));
+
+function sortingBy(value) {
+  emit('sortingBy', value);
+}
 </script>
 
 <style scoped>
@@ -36,6 +53,11 @@ const summaryTimeString = computed(() => convertSummaryTimeToString(props.summar
   background-color: var(--popup-header);
   padding: 1px 0;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+.time-block {
+  flex: auto;
 }
 p {
   font-size: 14px;
@@ -44,5 +66,9 @@ p {
 .time {
   font-size: 16px;
   font-weight: 600;
+}
+.sorted-block {
+  margin: auto;
+  margin-right: 15px;
 }
 </style>

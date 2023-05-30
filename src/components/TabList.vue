@@ -7,6 +7,7 @@
       :summaryTime="summaryTime"
       :countOfSites="countOfSites"
       :firstDay="firstDay"
+      @sortingBy="sorting"
     />
     <TabItem v-for="(tab, i) of tabs" :key="i" :tab="tab" :summaryTime="summaryTime" />
   </div>
@@ -25,10 +26,8 @@ import TabItemHeader from '../components/TabItemHeader.vue';
 import DonutChart from '../components/DonutChart.vue';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { Tab } from '../entity/tab';
-import { todayLocalDate } from '../utils/today';
 import { SortingBy, TypeOfList } from '../utils/enums';
 import { useTodayTabListSummary } from '../compositions/today-tab-list-summary';
-import { TabListSummary } from '../utils/tabListSummary';
 import { useAllTabListSummary } from '../compositions/all-tab-list-summary';
 
 const props = defineProps<{
@@ -51,8 +50,8 @@ const firstDay = computed(() => {
 async function loadList(sortingBy: SortingBy) {
   const repo = await injectTabsRepository();
   let tabSummary = null;
-  if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary();
-  if (props.type == TypeOfList.Today) tabSummary = await useAllTabListSummary();
+  if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
+  if (props.type == TypeOfList.Today) tabSummary = await useAllTabListSummary(sortingBy);
 
   if (tabSummary != null) {
     tabs.value = tabSummary.tabs;
@@ -62,11 +61,7 @@ async function loadList(sortingBy: SortingBy) {
   }
 }
 
-onMounted(async () => {
-  loadList(SortingBy.WebUsage);
-});
-
-function sortingBy(sortingBy: SortingBy) {
+function sorting(sortingBy: SortingBy) {
   switch (sortingBy) {
     case SortingBy.WebUsage:
       loadList(SortingBy.WebUsage);
@@ -76,4 +71,8 @@ function sortingBy(sortingBy: SortingBy) {
       break;
   }
 }
+
+onMounted(async () => {
+  loadList(SortingBy.WebUsage);
+});
 </script>

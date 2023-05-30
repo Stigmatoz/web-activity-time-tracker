@@ -36,6 +36,15 @@ body {
 .mr-10 {
   margin-right: 10px;
 }
+.mr-5 {
+  margin-right: 5px;
+}
+.pr-5{
+  padding-right: 5px;
+}
+.p-5{
+  padding: 5px;
+}
 .text-right {
   text-align: right;
 }
