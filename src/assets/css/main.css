@@ -1,7 +1,7 @@
 :root {
   --main-color: #6ebf5d;
   --popup-header: #f3f3f3;
-  --progress-bar: #6ebf5d;
+  --progress-bar: #428bff;
 }
 ::-webkit-scrollbar-track {
   border-radius: 10px;

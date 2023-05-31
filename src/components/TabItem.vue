@@ -1,9 +1,9 @@
 <template>
   <div class="tab-item">
-    <Favicon :favicon="tab.favicon" />
+    <Favicon :favicon="item.favicon" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
-        <p class="url">{{ tab.url }}</p>
+        <p class="url">{{ item.url }}</p>
         <p class="text-right time">{{ summaryTimeForTab }}</p>
       </div>
       <div class="second-block">
@@ -26,29 +26,29 @@ export default {
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { Tab } from '../entity/tab';
-import { todayLocalDate } from '../utils/today';
 import Favicon from './Favicon.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';
+import { CurrentTabItem } from '../dto/currentTabItem';
 
 const props = defineProps<{
-  tab: Tab;
-  summaryTime: number;
+  item: CurrentTabItem;
 }>();
 
-const currentDayValue = props.tab.days.find(x => x.date == todayLocalDate())!;
-
 const sessions = computed(() => {
-  if (currentDayValue.counter == 0) return '0 visits';
-  if (currentDayValue.counter > 1) return `${currentDayValue.counter} visits`;
-  if (currentDayValue.counter == 1) return `${currentDayValue.counter} visit`;
+  if (props.item.sessions == 0) return '0 session';
+  if (props.item.sessions > 1) return `${props.item.sessions} sessions`;
+  if (props.item.sessions == 1) return `${props.item.sessions} session`;
 });
 
-const summaryTimeForTab = convertSummaryTimeToString(currentDayValue?.summary);
-const percent = getPercentage(currentDayValue?.summary, props.summaryTime);
+const summaryTimeForTab = computed(() =>
+  convertSummaryTimeToString(props.item.summaryTimeForCurrent),
+);
+const percent = computed(() =>
+  getPercentage(props.item.summaryTimeForCurrent, props.item.summaryTime),
+);
 
-const styleForProgressBar = computed(() => `width: ${percent}%`);
+const styleForProgressBar = computed(() => `width: ${percent.value}%`);
 </script>
 
 <style scoped>

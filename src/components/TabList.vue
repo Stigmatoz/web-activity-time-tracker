@@ -9,7 +9,8 @@
       :firstDay="firstDay"
       @sortingBy="sorting"
     />
-    <TabItem v-for="(tab, i) of tabs" :key="i" :tab="tab" :summaryTime="summaryTime" />
+
+    <TabItem v-for="(tab, i) of tabs" :key="i" :item="getItem(tab)" />
   </div>
 </template>
 
@@ -29,6 +30,8 @@ import { Tab } from '../entity/tab';
 import { SortingBy, TypeOfList } from '../utils/enums';
 import { useTodayTabListSummary } from '../compositions/today-tab-list-summary';
 import { useAllTabListSummary } from '../compositions/all-tab-list-summary';
+import { CurrentTabItem } from '../dto/currentTabItem';
+import { todayLocalDate } from '../utils/today';
 
 const props = defineProps<{
   type: TypeOfList;
@@ -51,7 +54,7 @@ async function loadList(sortingBy: SortingBy) {
   const repo = await injectTabsRepository();
   let tabSummary = null;
   if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
-  if (props.type == TypeOfList.Today) tabSummary = await useAllTabListSummary(sortingBy);
+  if (props.type == TypeOfList.All) tabSummary = await useAllTabListSummary(sortingBy);
 
   if (tabSummary != null) {
     tabs.value = tabSummary.tabs;
@@ -61,18 +64,34 @@ async function loadList(sortingBy: SortingBy) {
   }
 }
 
-function sorting(sortingBy: SortingBy) {
+async function sorting(sortingBy: SortingBy) {
   switch (sortingBy) {
-    case SortingBy.WebUsage:
-      loadList(SortingBy.WebUsage);
+    case SortingBy.UsageTime:
+      await loadList(SortingBy.UsageTime);
       break;
     case SortingBy.Sessions:
-      loadList(SortingBy.Sessions);
+      await loadList(SortingBy.Sessions);
       break;
   }
 }
 
+function getItem(tab: Tab): CurrentTabItem {
+  return {
+    summaryTime: summaryTime.value!,
+    favicon: tab.favicon,
+    url: tab.url,
+    sessions:
+      props.type == TypeOfList.Today
+        ? tab.days.find(day => day.date === todayLocalDate())!.counter
+        : tab.counter,
+    summaryTimeForCurrent:
+      props.type == TypeOfList.Today
+        ? tab.days.find(day => day.date === todayLocalDate())!.summary
+        : tab.summaryTime,
+  };
+}
+
 onMounted(async () => {
-  loadList(SortingBy.WebUsage);
+  await loadList(SortingBy.UsageTime);
 });
 </script>

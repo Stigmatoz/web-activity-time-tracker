@@ -1,8 +1,9 @@
+import { TabListSummary } from '../dto/tabListSummary';
 import { Tab } from '../entity/tab';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
-import { TabListSummary } from '../utils/tabListSummary';
+import { SortingBy } from '../utils/enums';
 
-export async function useAllTabListSummary(): Promise<TabListSummary> {
+export async function useAllTabListSummary(sortingBy: SortingBy): Promise<TabListSummary> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTodayTabs();
   let tabs: Tab[] = [];

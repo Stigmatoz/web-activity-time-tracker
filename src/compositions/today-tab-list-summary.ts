@@ -1,7 +1,7 @@
+import { TabListSummary } from '../dto/tabListSummary';
 import { Tab } from '../entity/tab';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { SortingBy } from '../utils/enums';
-import { TabListSummary } from '../utils/tabListSummary';
 import { todayLocalDate } from '../utils/today';
 
 export async function useTodayTabListSummary(sortingBy: SortingBy): Promise<TabListSummary> {
@@ -18,13 +18,13 @@ export async function useTodayTabListSummary(sortingBy: SortingBy): Promise<TabL
   });
 
   const summaryTimeList = tabs?.map(function (tab) {
-    return sortingBy == SortingBy.UsageTime
-      ? tab.days.find(day => day.date === todayLocalDate())!.summary
-      : tab.days.find(day => day.date === todayLocalDate())!.counter;
+    return tab.days.find(day => day.date === todayLocalDate())!.summary;
   });
+
   const siteList = tabs?.map(function (tab) {
     return tab.url;
   });
+
   const timeForChart = summaryTimeList?.slice(0, 10);
   const sitesForChart = siteList?.slice(0, 10);
 

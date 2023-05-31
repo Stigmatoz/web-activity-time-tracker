@@ -6,9 +6,9 @@
     </div>
     <div class="sorted-block">
       <span class="mr-5">Sorting by</span>
-      <select class="p-5" @change="sortingBy()">
-        <option>Usage Time</option>
-        <option>Sessions</option>
+      <select class="p-5" v-model="sortingBySelected" @change="sortingBy()">
+        <option :value="SortingBy.UsageTime">Usage Time</option>
+        <option :value="SortingBy.Sessions">Sessions</option>
       </select>
     </div>
   </div>
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { SortingBy, TypeOfList } from '../utils/enums';
 
@@ -32,6 +32,8 @@ const props = defineProps<{
   firstDay: Date;
 }>();
 
+const sortingBySelected = ref<SortingBy>();
+
 const emit = defineEmits<{
   (event: 'sortingBy', sortingBy: SortingBy): void;
 }>();
@@ -41,10 +43,14 @@ const title = computed(() => {
   if (props.listType == TypeOfList.All) return `Aggregate data since ${props.firstDay} `;
 });
 
+onMounted(async () => {
+  sortingBySelected.value = SortingBy.UsageTime;
+});
+
 const summaryTimeString = computed(() => convertSummaryTimeToString(props.summaryTime));
 
-function sortingBy(value) {
-  emit('sortingBy', value);
+function sortingBy() {
+  emit('sortingBy', sortingBySelected.value!);
 }
 </script>
 

@@ -12,19 +12,13 @@
     <input type="radio" id="byDaysTab" name="tab-control" />
     <ul>
       <li title="Today">
-        <label for="todayTab" role="button"
-          ><img height="15" src="../assets/icons/24-hours.svg" /><span>Today</span></label
-        >
+        <label for="todayTab" role="button"><span>Today</span></label>
       </li>
       <li title="All The Time">
-        <label for="allTimeTab" role="button"
-          ><img height="15" src="../assets/icons/pie-chart.svg" /><span>All The Time</span></label
-        >
+        <label for="allTimeTab" role="button"><span>All The Time</span></label>
       </li>
       <li title="By Days">
-        <label for="byDaysTab" role="button"
-          ><img height="15" src="../assets/icons/stats.svg" /><span>By Days</span></label
-        >
+        <label for="byDaysTab" role="button"><span>By Days</span></label>
       </li>
     </ul>
 
@@ -38,9 +32,6 @@
       </section>
       <section>
         <h2>Shipping</h2>
-      </section>
-      <section>
-        <h2>Returns</h2>
       </section>
     </div>
   </div>
