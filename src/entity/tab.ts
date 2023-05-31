@@ -16,22 +16,27 @@ export class Tab implements ISerializable<Tab> {
     this.summaryTime += 1;
 
     const day = this.days.find(x => x.date == todayLocalDate());
-    if (day === undefined) this.addNewDay();
-    else day.incSummaryTime();
+    if (day === undefined) {
+      const newTab = this.addNewDay();
+      newTab.incSummaryTime();
+    } else day.incSummaryTime();
   }
 
   incCounter(): void {
     this.counter += 1;
     if (__DEV__) logger.log(`Counter ${this.url} - ${this.counter}`);
     const day = this.days.find(x => x.date == todayLocalDate());
-    if (day === undefined) this.addNewDay();
-    else day.incCounter();
+    if (day === undefined) {
+      const newTab = this.addNewDay();
+      newTab.incCounter();
+    } else day.incCounter();
   }
 
-  addNewDay(): void {
+  addNewDay(): TabDay {
     const newTabDay = new TabDay();
     newTabDay.init(todayLocalDate());
     this.days.push(newTabDay);
+    return newTabDay;
   }
 
   deserialize(input: Tab) {
@@ -56,8 +61,6 @@ export class TabDay implements ISerializable<TabDay> {
 
   init(date: string) {
     this.date = date;
-    this.counter = 1;
-    this.summary = 1;
   }
 
   incSummaryTime(): void {
