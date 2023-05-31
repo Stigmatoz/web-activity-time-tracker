@@ -3,14 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "engines": {
-    "node": ">=16.15.0",
-    "pnpm": ">=7"
-  },
   "scripts": {
     "dev": "vite build --watch --mode development",
     "start": "vite build --watch --mode production",
-    "build": "pnpm compile && vite build --mode production",
     "format": "prettier --write .",
     "script:zip": "powershell scripts/zip.ps1"
   },

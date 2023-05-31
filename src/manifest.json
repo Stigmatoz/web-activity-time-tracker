@@ -1,5 +1,5 @@
 {
-    "{{chrome}}.manifest_version": 3,
+    "manifest_version": 3,
     "name": "Web Activity Time Tracker",
     "short_name": "Web Tracker",
     "version": "2.0.0",
@@ -22,9 +22,9 @@
     ],
     "offline_enabled": true,
     "background": {
-        "{{chrome}}.service_worker": "src/background.ts"
+        "service_worker": "src/background.ts"
       },
-    "{{chrome}}.action": {
+    "action": {
         "default_popup": "src/popup.html",
         "default_title": "Web Activity Time Tracker"
     }
