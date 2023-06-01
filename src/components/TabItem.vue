@@ -3,7 +3,7 @@
     <Favicon :favicon="item.favicon" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
-        <p class="url">{{ item.url }}</p>
+        <p class="url" @click="openUrl(item.url)">{{ item.url }}</p>
         <p class="text-right time">{{ summaryTimeForTab }}</p>
       </div>
       <div class="second-block">
@@ -49,6 +49,11 @@ const percent = computed(() =>
 );
 
 const styleForProgressBar = computed(() => `width: ${percent.value}%`);
+
+function openUrl(url: string) {
+  if (!url.startsWith('http')) url = `https://${url}`;
+  window.open(url, '_blank');
+}
 </script>
 
 <style scoped>
