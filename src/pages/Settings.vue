@@ -10,7 +10,12 @@
 
         <div class="content">
           <label class="setting-header">
-            <input type="checkbox" class="filled-in" id="viewTimeInBadge" />
+            <input
+              type="checkbox"
+              class="filled-in"
+              id="viewTimeInBadge"
+              v-model="viewTimeInBadge"
+            />
             <span>Display time tracker in icon</span>
             <p class="description">
               You can see current spent time in short format in the icon of extension
@@ -131,6 +136,24 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { watchEffect, onMounted, ref } from 'vue';
+import { StorageParams } from '../storage/storage-params';
+import { injecStorage } from '../storage/inject-storage';
+
+const settingsStorage = injecStorage();
+
+const viewTimeInBadge = ref<boolean>();
+
+onMounted(async () => {
+  viewTimeInBadge.value = await settingsStorage.getValue(StorageParams.VIEW_TIME_IN_BADGE);
+});
+
+watchEffect(() => save(StorageParams.VIEW_TIME_IN_BADGE, viewTimeInBadge.value));
+
+function save(storageParam: StorageParams, value: any) {
+  settingsStorage.saveValue(storageParam, value);
+}
+</script>
 
 <style></style>

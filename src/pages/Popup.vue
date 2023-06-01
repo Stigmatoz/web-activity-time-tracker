@@ -44,7 +44,7 @@ import { TypeOfList } from '../utils/enums';
 
 async function openSettings() {
   await Browser.tabs.create({
-    url: Browser.runtime.getURL('settings.html'),
+    url: Browser.runtime.getURL('src/settings.html'),
     active: true,
   });
 }
