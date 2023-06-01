@@ -13,6 +13,7 @@ export default {
 <script lang="ts" setup>
 import { Doughnut } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { convertSummaryTimeToString } from '../utils/converter';
 
 const props = defineProps<{
   time: number[];
@@ -54,6 +55,13 @@ const options = {
     },
     legendDistance: {
       padding: 50,
+    },
+    tooltip: {
+      callbacks: {
+        label: function (context: any) {
+          return convertSummaryTimeToString(context.raw);
+        },
+      },
     },
   },
 };

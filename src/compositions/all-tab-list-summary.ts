@@ -5,7 +5,7 @@ import { SortingBy } from '../utils/enums';
 
 export async function useAllTabListSummary(sortingBy: SortingBy): Promise<TabListSummary> {
   const repo = await injectTabsRepository();
-  const unSortedTabs = repo.getTodayTabs();
+  const unSortedTabs = repo.getTabs();
   let tabs: Tab[] = [];
 
   tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
