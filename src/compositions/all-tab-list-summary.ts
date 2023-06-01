@@ -12,6 +12,10 @@ export async function useAllTabListSummary(sortingBy: SortingBy): Promise<TabLis
     return b.summaryTime - a.summaryTime;
   });
 
+  tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
+    return sortingBy == SortingBy.UsageTime ? b.summaryTime - a.summaryTime : b.counter - a.counter;
+  });
+
   const summaryTimeList = tabs?.map(function (tab) {
     return tab.summaryTime;
   });
