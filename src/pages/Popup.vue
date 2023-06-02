@@ -7,9 +7,25 @@
     </div>
   </div>
   <div class="tabs">
-    <input type="radio" id="todayTab" name="tab-control" checked />
-    <input type="radio" id="allTimeTab" name="tab-control" />
-    <input type="radio" id="byDaysTab" name="tab-control" />
+    <input
+      type="radio"
+      id="todayTab"
+      name="tab-control"
+      checked
+      v-on:change="selectTab(TypeOfList.Today)"
+    />
+    <input
+      type="radio"
+      id="allTimeTab"
+      name="tab-control"
+      v-on:change="selectTab(TypeOfList.All)"
+    />
+    <input
+      type="radio"
+      id="byDaysTab"
+      name="tab-control"
+      v-on:change="selectTab(TypeOfList.ByDays)"
+    />
     <ul>
       <li title="Today">
         <label for="todayTab" role="button"><span>Today</span></label>
@@ -25,10 +41,14 @@
     <div class="slider"><div class="indicator"></div></div>
     <div class="content">
       <section>
-        <TabList :type="TypeOfList.Today" :showAllStats="false" />
+        <TabList
+          v-if="activeTab == TypeOfList.Today"
+          :type="TypeOfList.Today"
+          :showAllStats="false"
+        />
       </section>
       <section>
-        <TabList :type="TypeOfList.All" :showAllStats="true" />
+        <TabList v-if="activeTab == TypeOfList.All" :type="TypeOfList.All" :showAllStats="true" />
       </section>
       <section>
         <h2>Shipping</h2>
@@ -38,6 +58,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue';
 import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
 import { TypeOfList } from '../utils/enums';
@@ -47,6 +68,16 @@ async function openSettings() {
     url: Browser.runtime.getURL('src/settings.html'),
     active: true,
   });
+}
+
+const activeTab = ref<TypeOfList>();
+
+onMounted(() => {
+  activeTab.value = TypeOfList.Today;
+});
+
+function selectTab(type: TypeOfList) {
+  activeTab.value = type;
 }
 </script>
 
