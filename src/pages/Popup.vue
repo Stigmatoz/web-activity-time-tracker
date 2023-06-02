@@ -25,10 +25,10 @@
     <div class="slider"><div class="indicator"></div></div>
     <div class="content">
       <section>
-        <TabList :type="TypeOfList.Today" />
+        <TabList :type="TypeOfList.Today" :showAllStats="false" />
       </section>
       <section>
-        <TabList :type="TypeOfList.All" />
+        <TabList :type="TypeOfList.All" :showAllStats="true" />
       </section>
       <section>
         <h2>Shipping</h2>

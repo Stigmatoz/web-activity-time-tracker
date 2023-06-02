@@ -1,20 +1,53 @@
-import { TabListSummary } from '../dto/tabListSummary';
-import { Tab } from '../entity/tab';
+import { ActiveDay, OverallStats } from '../dto/tabListSummary';
+import { Tab, TabDay } from '../entity/tab';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { SortingBy } from '../utils/enums';
+import { daysBetween } from '../utils/time';
+import { todayLocalDate } from '../utils/today';
 
-export async function useAllTabListSummary(sortingBy: SortingBy): Promise<TabListSummary> {
+export async function useAllTabListSummary(sortingBy: SortingBy): Promise<OverallStats> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTabs();
   let tabs: Tab[] = [];
+
+  const summaryTimeListForToday = unSortedTabs.map(function (tab) {
+    return tab.days.find(day => day.date === todayLocalDate())!.summary;
+  });
+
+  const todaySummaryTime =
+    summaryTimeListForToday != undefined && summaryTimeListForToday.length > 0
+      ? summaryTimeListForToday.reduce(function (a, b) {
+          return a + b;
+        })
+      : 0;
 
   tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
     return b.summaryTime - a.summaryTime;
   });
 
-  tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
-    return sortingBy == SortingBy.UsageTime ? b.summaryTime - a.summaryTime : b.counter - a.counter;
+  let days: TabDay[] = [];
+  tabs.map(function (tab) {
+    return tab.days.forEach(function (day) {
+      const existDay = days.find(x => x.date == day.date);
+      if (!existDay) days.push(day);
+      else {
+        existDay.summary += day.summary;
+        existDay.counter += day.counter;
+      }
+    });
   });
+
+  days = days.sort(function (a, b) {
+    return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+  });
+
+  const firstDay = new Date(days[0].date);
+  const activeDaysTotal = days.length;
+
+  if (sortingBy == SortingBy.Sessions)
+    tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
+      return b.counter - a.counter;
+    });
 
   const summaryTimeList = tabs?.map(function (tab) {
     return tab.summaryTime;
@@ -31,12 +64,39 @@ export async function useAllTabListSummary(sortingBy: SortingBy): Promise<TabLis
           return a + b;
         })
       : 0;
+
+  const averageTimeByActiveDays = Math.round(summaryTime / activeDaysTotal);
+  const daysTotal = daysBetween(firstDay, new Date(days[days.length - 1].date));
+
+  const sortedByTimeDays = days.sort(function (a, b) {
+    return a.summary - b.summary;
+  });
+
+  const mostActiveDay = sortedByTimeDays[0];
+  const mostActiveDayObj = fillMostDay(mostActiveDay);
+
+  const mostInactiveDay = sortedByTimeDays[sortedByTimeDays.length - 1];
+  const mostInactiveDayObj = fillMostDay(mostInactiveDay);
   return {
-    tabs,
-    summaryTime,
+    firstDay: firstDay,
+    daysTotal: daysTotal,
+    activeDaysTotal: activeDaysTotal,
+    todaySummaryTime: todaySummaryTime,
+    averageTimeByActiveDays: averageTimeByActiveDays,
+    mostActiveDay: mostActiveDayObj,
+    mostInactiveDay: mostInactiveDayObj,
+    tabs: tabs,
+    summaryTime: summaryTime,
     chart: {
       timeForChart,
       sitesForChart,
     },
+  };
+}
+
+function fillMostDay(mostDat: TabDay): ActiveDay {
+  return {
+    date: new Date(mostDat.date),
+    summaryTime: mostDat.summary,
   };
 }

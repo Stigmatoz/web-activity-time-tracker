@@ -1,6 +1,7 @@
 <template>
   <div class="no-data" v-if="countOfSites == undefined || countOfSites == 0">No data</div>
   <div v-else>
+    <OverallStatistics v-if="isShowOverallStats" :data="dataForOvarallStats" />
     <DonutChart :time="timeForChart" :labels="sitesForChart" />
     <TabItemHeader
       :listType="type"
@@ -25,19 +26,24 @@ import { computed, onMounted, ref } from 'vue';
 import TabItem from '../components/TabItem.vue';
 import TabItemHeader from '../components/TabItemHeader.vue';
 import DonutChart from '../components/DonutChart.vue';
-import { injectTabsRepository } from '../repository/inject-tabs-repository';
+import OverallStatistics from '../components/OverallStatistics.vue';
 import { Tab } from '../entity/tab';
 import { SortingBy, TypeOfList } from '../utils/enums';
 import { useTodayTabListSummary } from '../compositions/today-tab-list-summary';
 import { useAllTabListSummary } from '../compositions/all-tab-list-summary';
 import { CurrentTabItem } from '../dto/currentTabItem';
 import { todayLocalDate } from '../utils/today';
+import { OverallStats } from '../dto/tabListSummary';
 
 const props = defineProps<{
   type: TypeOfList;
+  showAllStats: boolean;
 }>();
 
+const isShowOverallStats = computed(() => props.showAllStats && props.type == TypeOfList.All);
+
 const tabs = ref<Tab[]>();
+const dataForOvarallStats = ref<OverallStats>();
 
 const timeForChart = ref<number[]>();
 const sitesForChart = ref<string[]>();
@@ -46,15 +52,13 @@ const summaryTime = ref<number>();
 
 const countOfSites = computed(() => (tabs.value != undefined ? tabs.value.length : 0));
 
-const firstDay = computed(() => {
-  if (props.type == TypeOfList.All) return;
-});
-
 async function loadList(sortingBy: SortingBy) {
-  const repo = await injectTabsRepository();
   let tabSummary = null;
   if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
-  if (props.type == TypeOfList.All) tabSummary = await useAllTabListSummary(sortingBy);
+  if (props.type == TypeOfList.All) {
+    tabSummary = await useAllTabListSummary(sortingBy);
+    dataForOvarallStats.value = tabSummary;
+  }
 
   if (tabSummary != null) {
     tabs.value = tabSummary.tabs;

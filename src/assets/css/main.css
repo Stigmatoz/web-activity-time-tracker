@@ -1,6 +1,6 @@
 :root {
   --main-color: #6ebf5d;
-  --popup-header: #f3f3f3;
+  --popup-header: #efefef;
   --progress-bar: #428bff;
 }
 ::-webkit-scrollbar-track {
@@ -134,7 +134,7 @@ body {
   border-radius: 1px;
 }
 .tabs .content {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .tabs .content section {
   display: none;
