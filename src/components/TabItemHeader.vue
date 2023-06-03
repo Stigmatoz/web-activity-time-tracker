@@ -1,7 +1,7 @@
 <template>
   <div class="header-block">
     <div class="time-block">
-      <p>{{ title }} ({{ countOfSites }} sites)</p>
+      <p>{{ title }}</p>
       <p class="time">{{ summaryTimeString }}</p>
     </div>
     <div class="sorted-block">
@@ -30,6 +30,7 @@ const props = defineProps<{
   summaryTime: number;
   countOfSites: number;
   firstDay: Date;
+  countOfActiveDays: number;
 }>();
 
 const sortingBySelected = ref<SortingBy>();
@@ -40,7 +41,12 @@ const emit = defineEmits<{
 
 const title = computed(() => {
   if (props.listType == TypeOfList.Today) return 'Today';
-  if (props.listType == TypeOfList.All) return `Aggregate data since ${props.firstDay} `;
+  if (props.listType == TypeOfList.All) {
+    let countOfActiveDays = props.countOfActiveDays > 1 ? `(${props.countOfActiveDays} days)` : '';
+    return `Aggregate data since ${props.firstDay.toLocaleDateString()} ${countOfActiveDays} (${
+      props.countOfSites
+    } sites)`;
+  }
 });
 
 onMounted(async () => {

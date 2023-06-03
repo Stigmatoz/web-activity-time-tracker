@@ -11,7 +11,7 @@ export async function useAllTabListSummary(sortingBy: SortingBy): Promise<Overal
   let tabs: Tab[] = [];
 
   const summaryTimeListForToday = unSortedTabs.map(function (tab) {
-    return tab.days.find(day => day.date === todayLocalDate())!.summary;
+    return tab.days.find(day => day.date === todayLocalDate())?.summary;
   });
 
   const todaySummaryTime =

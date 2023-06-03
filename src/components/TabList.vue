@@ -8,6 +8,7 @@
       :summaryTime="summaryTime"
       :countOfSites="countOfSites"
       :firstDay="firstDay"
+      :countOfActiveDays="countOfActiveDays"
       @sortingBy="sorting"
     />
 
@@ -49,6 +50,8 @@ const timeForChart = ref<number[]>();
 const sitesForChart = ref<string[]>();
 
 const summaryTime = ref<number>();
+const firstDay = ref<Date>();
+const countOfActiveDays = ref<number>();
 
 const countOfSites = computed(() => (tabs.value != undefined ? tabs.value.length : 0));
 
@@ -57,6 +60,8 @@ async function loadList(sortingBy: SortingBy) {
   if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
   if (props.type == TypeOfList.All) {
     tabSummary = await useAllTabListSummary(sortingBy);
+    firstDay.value = tabSummary.firstDay;
+    countOfActiveDays.value = tabSummary.activeDaysTotal;
     dataForOvarallStats.value = tabSummary;
   }
 
