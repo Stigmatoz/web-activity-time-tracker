@@ -22,6 +22,13 @@ import { convertSummaryTimeToBadgeString } from './utils/converter';
 const activeTabInstance = ActiveTab.getInstance();
 const storage = injecStorage();
 
+interface CurrentObj {
+  tab: Tab;
+  activeDomain: string;
+}
+
+let currentObj: CurrentObj | null;
+
 export async function initTracker() {
   setInterval(trackTime, 1000);
   setInterval(saveTabs, INTERVAL_SAVE_STORAGE_DEFAULT);
@@ -35,6 +42,15 @@ async function trackTime() {
     if (isValidPage(activeTab)) {
       const activeDomain = extractHostname(activeTab!.url);
 
+      if (
+        currentObj != null &&
+        currentObj.activeDomain == activeDomain &&
+        !isActiveTabWasChanged(activeDomain)
+      ) {
+        await mainTrackerWrapper(activeTab!, activeDomain, currentObj.tab);
+        return;
+      }
+
       if (await isInBlackList(activeDomain)) {
         useBadge({
           tabId: activeTab!.id!,
@@ -47,18 +63,14 @@ async function trackTime() {
           tab = await repo.addTab(activeDomain, activeTab?.favIconUrl);
         }
         if (tab != undefined) {
-          const inactivityInterval = (await storage.getValue(
-            StorageParams.INTERVAL_INACTIVITY,
-            INTERVAL_INACTIVITY_DEFAULT,
-          )) as number;
-          const state = await Browser.idle.queryState(inactivityInterval);
-          mainTracker(state, activeTab!, activeDomain, tab);
+          await mainTrackerWrapper(activeTab!, activeDomain, tab);
         }
       }
     }
   } else {
     await closeInterval(activeTabInstance.getActiveTabDomain());
     activeTabInstance.setActiveTab(null);
+    currentObj = null;
   }
 }
 
@@ -72,9 +84,10 @@ async function mainTracker(
     return state === 'idle' && activeTab.audible;
   }
 
-  function isActiveTabWasChanged() {
-    return activeDomain != activeTabInstance.getActiveTabDomain();
-  }
+  currentObj = {
+    tab: tab,
+    activeDomain: activeDomain,
+  };
 
   const isAudibleValue = isAudible();
   if (state === 'active' || isAudibleValue) {
@@ -85,7 +98,7 @@ async function mainTracker(
       return;
     }
 
-    if (isActiveTabWasChanged()) {
+    if (isActiveTabWasChanged(activeDomain)) {
       tab.incCounter();
       await closeInterval(activeTabInstance.getActiveTabDomain());
       activeTabInstance.setActiveTab(activeTab.url!);
@@ -114,6 +127,19 @@ async function mainTracker(
         color: BadgeColor.red,
       });
   }
+}
+
+async function mainTrackerWrapper(activeTab: Browser.Tabs.Tab, activeDomain: string, tab: Tab) {
+  const inactivityInterval = (await storage.getValue(
+    StorageParams.INTERVAL_INACTIVITY,
+    INTERVAL_INACTIVITY_DEFAULT,
+  )) as number;
+  const state = await Browser.idle.queryState(inactivityInterval);
+  await mainTracker(state, activeTab!, activeDomain, tab);
+}
+
+function isActiveTabWasChanged(activeDomain: string) {
+  return activeDomain != activeTabInstance.getActiveTabDomain();
 }
 
 async function saveTabs() {
