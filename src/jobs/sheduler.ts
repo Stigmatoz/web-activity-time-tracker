@@ -1,8 +1,8 @@
 import Browser, { Alarms } from 'webextension-polyfill';
 import { logger } from '../compositions/logger';
 import { StorageParams } from '../storage/storage-params';
-import { injecStorage } from '../storage/inject-storage';
 import { DAY_MINUTES, getNextTimeOfDay } from '../utils/time';
+import { Settings } from '../compositions/settings';
 
 export enum JobId {
   DailySummaryNotification = '@alarm/daily-summary-notification',
@@ -24,8 +24,7 @@ export function scheduleJobs(): void {
 }
 
 async function rescheduleJobs(): Promise<void> {
-  const storage = injecStorage();
-  const dailySummaryNotificationTime = (await storage.getValue(
+  const dailySummaryNotificationTime = (await Settings.getInstance().getSetting(
     StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
   )) as number;
   await Browser.alarms.clear(JobId.DailySummaryNotification);

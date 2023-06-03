@@ -1,39 +1,41 @@
-import { TimeInterval } from "../entity/time-interval";
-import { injecStorage } from "../storage/inject-storage";
-import { StorageDeserializeParam, StorageParams } from "../storage/storage-params";
-import { todayLocalDate } from "../utils/today";
+import { TimeInterval } from '../entity/time-interval';
+import { injecStorage } from '../storage/inject-storage';
+import { StorageDeserializeParam, StorageParams } from '../storage/storage-params';
+import { todayLocalDate } from '../utils/today';
 
-export async function closeInterval(domain:string | null): Promise<void>{
-    if (domain == null) return;
-    const storage = injecStorage();
-    const timeIntervalList = await storage.getDeserializeList(StorageDeserializeParam.TIMEINTERVAL_LIST) as TimeInterval[];
-    const item = timeIntervalList?.find(x => x.domain === domain && x.day == todayLocalDate());
-    item?.closeInterval();
-    await storage.saveValue(StorageParams.TIMEINTERVAL_LIST, timeIntervalList);
+export async function closeInterval(domain: string | null): Promise<void> {
+  if (domain == null) return;
+  const storage = injecStorage();
+  const timeIntervalList = (await storage.getDeserializeList(
+    StorageDeserializeParam.TIMEINTERVAL_LIST,
+  )) as TimeInterval[];
+  const item = timeIntervalList?.find(x => x.domain === domain && x.day == todayLocalDate());
+  item?.closeInterval();
+  await storage.saveIntervalList(timeIntervalList);
 }
 
-export async function addInterval(domain:string | null): Promise<void>{
-    if (domain == null) return;
+export async function addInterval(domain: string | null): Promise<void> {
+  if (domain == null) return;
 
-    const storage = injecStorage();
-    let timeIntervalList = await storage.getDeserializeList(StorageDeserializeParam.TIMEINTERVAL_LIST) as TimeInterval[];
-    if (timeIntervalList == undefined)
-        timeIntervalList = [];
-    const item = timeIntervalList?.find(x => x.domain === domain && x.day == todayLocalDate());
-    if (item != undefined) {
-        if (item.day == todayLocalDate())
-            item.addInterval();
-        else {
-            const newInterval = new TimeInterval();
-            newInterval.init(todayLocalDate(), domain);
-            newInterval.addInterval();
-            timeIntervalList.push(newInterval);
-        }
-    } else {
-        const newInterval = new TimeInterval();
-        newInterval.init(todayLocalDate(), domain);
-        newInterval.addInterval();
-        timeIntervalList.push(newInterval);
+  const storage = injecStorage();
+  let timeIntervalList = (await storage.getDeserializeList(
+    StorageDeserializeParam.TIMEINTERVAL_LIST,
+  )) as TimeInterval[];
+  if (timeIntervalList == undefined) timeIntervalList = [];
+  const item = timeIntervalList?.find(x => x.domain === domain && x.day == todayLocalDate());
+  if (item != undefined) {
+    if (item.day == todayLocalDate()) item.addInterval();
+    else {
+      const newInterval = new TimeInterval();
+      newInterval.init(todayLocalDate(), domain);
+      newInterval.addInterval();
+      timeIntervalList.push(newInterval);
     }
-    await storage.saveValue(StorageParams.TIMEINTERVAL_LIST, timeIntervalList);
+  } else {
+    const newInterval = new TimeInterval();
+    newInterval.init(todayLocalDate(), domain);
+    newInterval.addInterval();
+    timeIntervalList.push(newInterval);
+  }
+  await storage.saveIntervalList(timeIntervalList);
 }

@@ -4,12 +4,7 @@ import { extractHostname } from './compositions/extract-hostname';
 import { injectTabsRepositorySingleton } from './repository/inject-tabs-repository';
 import { isInBlackList } from './compositions/black-list';
 import { useBadge } from './compositions/set-badge';
-import {
-  INTERVAL_INACTIVITY_DEFAULT,
-  INTERVAL_SAVE_STORAGE_DEFAULT,
-  StorageParams,
-  VIEW_TIME_IN_BADGE_DEFAULT,
-} from './storage/storage-params';
+import { INTERVAL_SAVE_STORAGE_DEFAULT, StorageParams } from './storage/storage-params';
 import { BadgeColor } from './compositions/set-badge';
 import { injecStorage } from './storage/inject-storage';
 import { addInterval, closeInterval } from './compositions/daily-intervals';
@@ -18,9 +13,9 @@ import { isLimitExceeded } from './compositions/limit-list';
 import { Tab } from './entity/tab';
 import { useBlockPage } from './compositions/block-page';
 import { convertSummaryTimeToBadgeString } from './utils/converter';
+import { Settings } from './compositions/settings';
 
 const activeTabInstance = ActiveTab.getInstance();
-const storage = injecStorage();
 
 interface CurrentObj {
   tab: Tab;
@@ -109,10 +104,7 @@ async function mainTracker(
 
     tab.incSummaryTime();
 
-    const viewInBadge = (await storage.getValue(
-      StorageParams.VIEW_TIME_IN_BADGE,
-      VIEW_TIME_IN_BADGE_DEFAULT,
-    )) as boolean;
+    const viewInBadge = await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE);
 
     if (viewInBadge)
       useBadge({
@@ -130,10 +122,9 @@ async function mainTracker(
 }
 
 async function mainTrackerWrapper(activeTab: Browser.Tabs.Tab, activeDomain: string, tab: Tab) {
-  const inactivityInterval = (await storage.getValue(
+  const inactivityInterval = await Settings.getInstance().getSetting(
     StorageParams.INTERVAL_INACTIVITY,
-    INTERVAL_INACTIVITY_DEFAULT,
-  )) as number;
+  );
   const state = await Browser.idle.queryState(inactivityInterval);
   await mainTracker(state, activeTab!, activeDomain, tab);
 }
