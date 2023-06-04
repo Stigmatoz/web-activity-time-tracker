@@ -23,7 +23,12 @@
           </label>
           <br />
           <label class="setting-header">
-            <input type="checkbox" class="filled-in" id="blockDeferral" />
+            <input
+              type="checkbox"
+              class="filled-in"
+              id="blockDeferral"
+              v-model="allowDeferringBlock"
+            />
             <span>Allow deferring block for 5 minutes</span>
             <p class="description">
               After the site is blocked, you can postpone the blocking for 5 minutes
@@ -31,30 +36,28 @@
           </label>
           <br />
           <label class="setting-header">
-            <input type="checkbox" class="filled-in" id="darkMode" />
+            <input type="checkbox" class="filled-in" id="darkMode" v-model="darkMode" />
             <span>Dark mode</span>
+            <p class="description"></p>
           </label>
+          <label class="setting-header d-inline-block"
+            >Stop tracking if there is no activity during:
+          </label>
+          <div class="d-inline-block ml-10">
+            <select class="option" v-model="intervalInactivity">
+              <option :value="InactivityInterval.Seconds_30">30 seconds</option>
+              <option :value="InactivityInterval.Seconds_45">45 seconds</option>
+              <option :value="InactivityInterval.Min_1">1 min</option>
+              <option :value="InactivityInterval.Min_2">2 min</option>
+              <option :value="InactivityInterval.Min_5">5 mins</option>
+              <option :value="InactivityInterval.Min_10">10 mins</option>
+              <option :value="InactivityInterval.Min_20">20 mins</option>
+              <option :value="InactivityInterval.Min_30">30 mins</option>
+            </select>
+          </div>
+          <p class="description">These are any actions with the mouse or keyboard</p>
           <br />
           <!-- <div class="margin-top-10">
-            <label class="setting-header">Stop tracking if no activity detected for: </label>
-            <div class="tooltip">
-              <img src="../assets/icons/information.svg" height="18" />
-              <span class="tooltiptext">An activity is an action with a mouse or keyboard</span>
-            </div>
-            <div class="margin-top-10">
-              <select id="intervalInactivity" class="option">
-                <option value="30">30 seconds</option> 
-                <option value="45">45 seconds</option> 
-                <option value="60">1 min</option>
-                <option value="120">2 min</option>
-                <option value="300">5 mins</option>
-                <option value="600">10 mins</option>
-                <option value="1200">20 mins</option>
-                <option value="1800">30 mins</option>
-              </select>
-            </div>
-            <br />
-            <div class="margin-top-10">
               <label class="setting-header">Default range for days:</label>
             </div>
             <div class="margin-top-10">
@@ -140,16 +143,26 @@
 import { watchEffect, onMounted, ref } from 'vue';
 import { StorageParams } from '../storage/storage-params';
 import { injecStorage } from '../storage/inject-storage';
+import { InactivityInterval } from '../storage/storage-params';
 
 const settingsStorage = injecStorage();
 
 const viewTimeInBadge = ref<boolean>();
+const intervalInactivity = ref<InactivityInterval>();
+const allowDeferringBlock = ref<boolean>();
+const darkMode = ref<boolean>();
 
 onMounted(async () => {
   viewTimeInBadge.value = await settingsStorage.getValue(StorageParams.VIEW_TIME_IN_BADGE);
+  intervalInactivity.value = await settingsStorage.getValue(StorageParams.INTERVAL_INACTIVITY);
+  darkMode.value = await settingsStorage.getValue(StorageParams.DARK_MODE);
+  allowDeferringBlock.value = await settingsStorage.getValue(StorageParams.BLOCK_DEFERRAL);
 });
 
 watchEffect(() => save(StorageParams.VIEW_TIME_IN_BADGE, viewTimeInBadge.value));
+watchEffect(() => save(StorageParams.INTERVAL_INACTIVITY, intervalInactivity.value));
+watchEffect(() => save(StorageParams.DARK_MODE, darkMode.value));
+watchEffect(() => save(StorageParams.BLOCK_DEFERRAL, allowDeferringBlock.value));
 
 function save(storageParam: StorageParams, value: any) {
   settingsStorage.saveValue(storageParam, value);

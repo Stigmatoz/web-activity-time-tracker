@@ -1,0 +1,35 @@
+.float-right {
+    float: right;
+  }
+  .d-inline-block {
+    display: inline-block;
+  }
+  .ml-10 {
+    margin-left: 10px;
+  }
+  .mr-10 {
+    margin-right: 10px;
+  }
+  .mr-5 {
+    margin-right: 5px;
+  }
+  .pr-5{
+    padding-right: 5px;
+  }
+  .p-5{
+    padding: 5px;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .text-center {
+      text-align: center;
+  }
+  
+.mt-15{
+    margin-top: 15px;
+}
+select{
+    border-color: #ccc;
+    border-radius: 5px;
+}

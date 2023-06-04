@@ -25,10 +25,6 @@ body {
     margin: 7px 0 15px 0;
 }
 
-.mt-15{
-    margin-top: 15px;
-}
-
 .option {
     min-width: 170px;
     color: #444;
@@ -207,10 +203,6 @@ input[type="button"]:hover {
     white-space: nowrap;
     padding: 10px;
   }
-
-.inline-block{
-    display: inline-block !important;
-}
 
 .block{
     display: block;

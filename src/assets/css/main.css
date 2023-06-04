@@ -24,33 +24,6 @@ body {
   padding: 0;
   margin: 0;
 }
-.float-right {
-  float: right;
-}
-.display-inline-block {
-  display: inline-block;
-}
-.ml-10 {
-  margin-left: 10px;
-}
-.mr-10 {
-  margin-right: 10px;
-}
-.mr-5 {
-  margin-right: 5px;
-}
-.pr-5{
-  padding-right: 5px;
-}
-.p-5{
-  padding: 5px;
-}
-.text-right {
-  text-align: right;
-}
-.text-center {
-    text-align: center;
-}
 .no-data{
     text-align: center;
     font-size: 16px;
