@@ -9,54 +9,59 @@
         <label for="tab-general">General</label>
 
         <div class="content">
-          <label class="setting-header">
-            <input
-              type="checkbox"
-              class="filled-in"
-              id="viewTimeInBadge"
-              v-model="viewTimeInBadge"
-            />
-            <span>Display time tracker in icon</span>
-            <p class="description">
-              You can see current spent time in short format in the icon of extension
-            </p>
-          </label>
-          <br />
-          <label class="setting-header">
-            <input
-              type="checkbox"
-              class="filled-in"
-              id="blockDeferral"
-              v-model="allowDeferringBlock"
-            />
-            <span>Allow deferring block for 5 minutes</span>
-            <p class="description">
-              After the site is blocked, you can postpone the blocking for 5 minutes
-            </p>
-          </label>
-          <br />
-          <label class="setting-header">
-            <input type="checkbox" class="filled-in" id="darkMode" v-model="darkMode" />
-            <span>Dark mode</span>
-            <p class="description"></p>
-          </label>
-          <label class="setting-header d-inline-block"
-            >Stop tracking if there is no activity during:
-          </label>
-          <div class="d-inline-block ml-10">
-            <select class="option" v-model="intervalInactivity">
-              <option :value="InactivityInterval.Seconds_30">30 seconds</option>
-              <option :value="InactivityInterval.Seconds_45">45 seconds</option>
-              <option :value="InactivityInterval.Min_1">1 min</option>
-              <option :value="InactivityInterval.Min_2">2 min</option>
-              <option :value="InactivityInterval.Min_5">5 mins</option>
-              <option :value="InactivityInterval.Min_10">10 mins</option>
-              <option :value="InactivityInterval.Min_20">20 mins</option>
-              <option :value="InactivityInterval.Min_30">30 mins</option>
-            </select>
+          <div class="settings-item">
+            <label class="setting-header">
+              <input
+                type="checkbox"
+                class="filled-in"
+                id="viewTimeInBadge"
+                v-model="viewTimeInBadge"
+              />
+              <span>Display time tracker in icon</span>
+              <p class="description">
+                You can see current spent time in short format in the icon of extension
+              </p>
+            </label>
           </div>
-          <p class="description">These are any actions with the mouse or keyboard</p>
-          <br />
+          <div class="settings-item">
+            <label class="setting-header">
+              <input
+                type="checkbox"
+                class="filled-in"
+                id="blockDeferral"
+                v-model="allowDeferringBlock"
+              />
+              <span>Allow deferring block for 5 minutes</span>
+              <p class="description">
+                After the site is blocked, you can postpone the blocking for 5 minutes
+              </p>
+            </label>
+          </div>
+          <div class="settings-item">
+            <label class="setting-header">
+              <input type="checkbox" class="filled-in" id="darkMode" v-model="darkMode" />
+              <span>Dark mode</span>
+              <p class="description"></p>
+            </label>
+          </div>
+          <div class="settings-item">
+            <label class="setting-header d-inline-block"
+              >Stop tracking if there is no activity during:
+            </label>
+            <div class="d-inline-block ml-10">
+              <select class="option" v-model="intervalInactivity">
+                <option :value="InactivityInterval.Seconds_30">30 seconds</option>
+                <option :value="InactivityInterval.Seconds_45">45 seconds</option>
+                <option :value="InactivityInterval.Min_1">1 min</option>
+                <option :value="InactivityInterval.Min_2">2 min</option>
+                <option :value="InactivityInterval.Min_5">5 mins</option>
+                <option :value="InactivityInterval.Min_10">10 mins</option>
+                <option :value="InactivityInterval.Min_20">20 mins</option>
+                <option :value="InactivityInterval.Min_30">30 mins</option>
+              </select>
+            </div>
+            <p class="description">These are any actions with the mouse or keyboard</p>
+          </div>
           <!-- <div class="margin-top-10">
               <label class="setting-header">Default range for days:</label>
             </div>
@@ -127,12 +132,39 @@
         </div>
       </div>
 
-      <div class="tab">
+      <div class="tab about">
         <input type="radio" id="tab-about" name="tab-settings" />
         <label for="tab-about">About</label>
 
         <div class="content">
-          <span>tabik 4</span>
+          <label class="about-label"
+            >GitHub:
+            <a href="https://github.com/Stigmatoz/web-activity-time-tracker" target="_blank"
+              >github.com/Stigmatoz/web-activity-time-tracker</a
+            ></label
+          >
+          <label class="about-label"
+            >If you have feedback or would like to report an issue, you can do so on the
+            <a href="https://github.com/Stigmatoz/web-activity-time-tracker/issues" target="_blank"
+              >GitHub issues page</a
+            ></label
+          >
+          <label class="about-label"
+            >If experiencing problems, having questions or suggestions, please fill out
+            <a
+              href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
+              target="_blank"
+              >support form</a
+            >.</label
+          >
+          <label class="about-label"
+            >Do you enjoy using Web Activity Time Tracker?
+            <a
+              href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
+              target="_blank"
+              >Leave a review!</a
+            ></label
+          >
         </div>
       </div>
     </div>
@@ -169,4 +201,13 @@ function save(storageParam: StorageParams, value: any) {
 }
 </script>
 
-<style></style>
+<style scoped>
+.settings-item {
+  margin-bottom: 30px;
+}
+.about .about-label {
+  font-size: 14px;
+  margin-bottom: 30px;
+  display: block;
+}
+</style>
