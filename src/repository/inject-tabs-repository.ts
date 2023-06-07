@@ -9,9 +9,13 @@ async function createAndInitInstance() {
   return repo;
 }
 
-export async function injectTabsRepository(): Promise<ITabsRepository> {
+export async function injectTabsRepositorySingleton(): Promise<ITabsRepository> {
   if (instanse == null) {
     instanse = await createAndInitInstance();
   }
   return instanse;
+}
+
+export async function injectTabsRepository(): Promise<ITabsRepository> {
+  return createAndInitInstance();
 }

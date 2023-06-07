@@ -1,7 +1,7 @@
 import Browser from 'webextension-polyfill';
 import { isValidPage } from './compositions/valid-page';
 import { extractHostname } from './compositions/extract-hostname';
-import { injectTabsRepository } from './repository/inject-tabs-repository';
+import { injectTabsRepositorySingleton } from './repository/inject-tabs-repository';
 import { isInBlackList } from './compositions/black-list';
 import { useBadge } from './compositions/set-badge';
 import {
@@ -28,7 +28,7 @@ export async function initTracker() {
 }
 
 async function trackTime() {
-  const repo = await injectTabsRepository();
+  const repo = await injectTabsRepositorySingleton();
   const window = await Browser.windows.getLastFocused({ populate: true });
   if (window.focused) {
     const activeTab = window.tabs?.find(t => t.active === true);
@@ -118,7 +118,7 @@ async function mainTracker(
 
 async function saveTabs() {
   const storage = injecStorage();
-  const repo = await injectTabsRepository();
+  const repo = await injectTabsRepositorySingleton();
   const tabs = repo.getTabs();
   await storage.saveTabs(tabs);
 }
