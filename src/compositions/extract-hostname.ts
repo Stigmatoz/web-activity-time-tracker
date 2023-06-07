@@ -1,16 +1,19 @@
-export function extractHostname(url:string | undefined):string {
-    let hostname;
-    if (url == undefined) return '';
+export function extractHostname(url: string | undefined): string {
+  let hostname;
+  if (url == undefined) return '';
 
-    if (url.indexOf("//") > -1) {
-        hostname = url.split('/')[2];
-    }
-    else {
-        hostname = url.split('/')[0];
-    }
+  if (url.startsWith('file:')) {
+    return url;
+  }
 
-    hostname = hostname.split(':')[0];
-    hostname = hostname.split('?')[0];
+  if (url.indexOf('//') > -1) {
+    hostname = url.split('/')[2];
+  } else {
+    hostname = url.split('/')[0];
+  }
 
-    return hostname;
+  hostname = hostname.split(':')[0];
+  hostname = hostname.split('?')[0];
+
+  return hostname;
 }

@@ -33,3 +33,9 @@ select{
     border-color: #ccc;
     border-radius: 5px;
 }
+.w-100{
+    width: 100%;
+}
+.w-85{
+    width: 85%;
+}

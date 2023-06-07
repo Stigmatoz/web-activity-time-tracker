@@ -3,9 +3,15 @@
     <Favicon :favicon="item.favicon" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
-        <p class="url" @click="openUrl(item.url)">{{ item.url }}</p>
+        <div class="w-85">
+          <p class="url" @click="openUrl(item.url)">{{ url }}</p>
+          <div class="d-inline-block" v-html="getBadgeIcon()"></div>
+        </div>
         <p class="text-right time">{{ summaryTimeForTab }}</p>
       </div>
+      <p v-if="showWarningMessage" class="warning-message">
+        You cannot open a local file due to security rules
+      </p>
       <div class="second-block">
         <div class="progress-bar">
           <div :style="styleForProgressBar"></div>
@@ -14,7 +20,6 @@
       </div>
       <p class="sessions">{{ sessions }}</p>
     </div>
-    <div></div>
   </div>
 </template>
 
@@ -25,7 +30,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Favicon from './Favicon.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';
@@ -34,6 +39,21 @@ import { CurrentTabItem } from '../dto/currentTabItem';
 const props = defineProps<{
   item: CurrentTabItem;
 }>();
+
+enum TypeOfUrl {
+  WebSite,
+  Document,
+}
+
+const typeOfUrl = computed(() =>
+  props.item.url.startsWith('file:') ? TypeOfUrl.Document : TypeOfUrl.WebSite,
+);
+
+const url = computed(() =>
+  typeOfUrl.value == TypeOfUrl.Document
+    ? encodeURI(props.item.url.split('///')[1])
+    : props.item.url,
+);
 
 const sessions = computed(() => {
   if (props.item.sessions == 0) return '0 session';
@@ -51,8 +71,16 @@ const percent = computed(() =>
 const styleForProgressBar = computed(() => `width: ${percent.value}%`);
 
 function openUrl(url: string) {
-  if (!url.startsWith('http')) url = `https://${url}`;
-  window.open(url, '_blank');
+  if (typeOfUrl.value != TypeOfUrl.Document && !url.startsWith('http')) {
+    url = `https://${url}`;
+    window.open(url, '_blank');
+  } else showWarningMessage.value = true;
+}
+
+const showWarningMessage = ref<boolean>();
+
+function getBadgeIcon() {
+  if (typeOfUrl.value == TypeOfUrl.Document) return `<span class="badge-document">Document</span>`;
 }
 </script>
 
@@ -73,6 +101,9 @@ function openUrl(url: string) {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  overflow-wrap: anywhere;
+  max-width: 80%;
+  display: inline-block;
 }
 .tab-item .url:hover {
   color: #1a0dab;
@@ -112,5 +143,16 @@ function openUrl(url: string) {
 }
 .tab-item .sessions {
   margin: 0 0 0 5px;
+}
+.tab-item ::v-deep span.badge-document {
+  border-radius: 6px;
+  background-color: #0043ff9e;
+  padding: 3px 7px;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+}
+.tab-item .warning-message {
+  color: grey;
 }
 </style>
