@@ -40,18 +40,18 @@
 
     <div class="slider"><div class="indicator"></div></div>
     <div class="content">
-      <section>
+      <section id="todayTabList">
         <TabList
           v-if="activeTab == TypeOfList.Today"
           :type="TypeOfList.Today"
           :showAllStats="false"
         />
       </section>
-      <section>
+      <section id="summary">
         <TabList v-if="activeTab == TypeOfList.All" :type="TypeOfList.All" :showAllStats="true" />
       </section>
-      <section>
-        <h2>Shipping</h2>
+      <section id="byDaysTabList">
+        <ByDays v-if="activeTab == TypeOfList.ByDays" />
       </section>
     </div>
   </div>
@@ -61,6 +61,7 @@
 import { onMounted, ref } from 'vue';
 import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
+import ByDays from '../components/ByDays.vue';
 import { TypeOfList } from '../utils/enums';
 
 async function openSettings() {
