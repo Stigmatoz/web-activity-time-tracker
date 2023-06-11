@@ -1,9 +1,5 @@
-import { ActiveDay, DayTabs, TabListByDays } from '../dto/tabListSummary';
-import { Tab, TabDay } from '../entity/tab';
+import { DayTabs, TabListByDays } from '../dto/tabListSummary';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
-import { SortingBy } from '../utils/enums';
-import { daysBetween } from '../utils/time';
-import { todayLocalDate } from '../utils/today';
 
 export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<TabListByDays> {
   const repo = await injectTabsRepository();
@@ -50,8 +46,17 @@ export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<Ta
     return new Date(a.day).valueOf() - new Date(b.day).valueOf();
   });
 
+  const summaryTime = daysTabs
+    .map(x => x.time)
+    .reduce(function (a, b) {
+      return a + b;
+    });
+
+  const averageTime = Math.round(summaryTime / daysTabs.length);
+
   return {
     days: daysTabs,
-    summaryTime: 0,
+    summaryTime: summaryTime,
+    averageTime: averageTime,
   };
 }

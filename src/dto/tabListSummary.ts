@@ -31,6 +31,7 @@ export interface DataForChart {
 
 export interface TabListByDays {
   days: DayTabs[];
+  averageTime: number;
   summaryTime: number;
 }
 
