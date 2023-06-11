@@ -9,6 +9,8 @@ export interface OverallStats extends TabListSummary {
   averageTimeByActiveDays: number;
   mostActiveDay: ActiveDay;
   mostInactiveDay: ActiveDay;
+  mostActiveDayExceptToday: ActiveDay;
+  mostInactiveDayExceptToday: ActiveDay;
 }
 
 export interface ActiveDay {

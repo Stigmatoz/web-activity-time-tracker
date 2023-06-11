@@ -43,6 +43,8 @@ export async function useAllTabListSummary(sortingBy: SortingBy): Promise<Overal
     return new Date(a.date).valueOf() - new Date(b.date).valueOf();
   });
 
+  const mostDayExceptToday = fillMostListWithoutToday(days);
+
   const firstDay = new Date(days[0].date);
   const activeDaysTotal = days.length;
 
@@ -70,23 +72,18 @@ export async function useAllTabListSummary(sortingBy: SortingBy): Promise<Overal
   const averageTimeByActiveDays = Math.round(summaryTime / activeDaysTotal);
   const daysTotal = daysBetween(firstDay, new Date(days[days.length - 1].date));
 
-  const sortedByTimeDays = days.sort(function (a, b) {
-    return a.summary - b.summary;
-  });
+  const mostDay = fillMostList(days);
 
-  const mostActiveDay = sortedByTimeDays[0];
-  const mostActiveDayObj = fillMostDay(mostActiveDay);
-
-  const mostInactiveDay = sortedByTimeDays[sortedByTimeDays.length - 1];
-  const mostInactiveDayObj = fillMostDay(mostInactiveDay);
   return {
     firstDay: firstDay,
     daysTotal: daysTotal,
     activeDaysTotal: activeDaysTotal,
     todaySummaryTime: todaySummaryTime,
     averageTimeByActiveDays: averageTimeByActiveDays,
-    mostActiveDay: mostActiveDayObj,
-    mostInactiveDay: mostInactiveDayObj,
+    mostActiveDay: mostDay.mostActiveDayObj,
+    mostInactiveDay: mostDay.mostInactiveDayObj,
+    mostActiveDayExceptToday: mostDayExceptToday.mostActiveDayObjExceptToday,
+    mostInactiveDayExceptToday: mostDayExceptToday.mostInactiveDayObjExceptToday,
     tabs: tabs,
     summaryTime: summaryTime,
     chart: {
@@ -100,5 +97,46 @@ function fillMostDay(mostDat: TabDay): ActiveDay {
   return {
     date: new Date(mostDat.date),
     summaryTime: mostDat.summary,
+  };
+}
+
+function fillMostListWithoutToday(days: TabDay[]) {
+  const daysWithoutToday = days
+    .filter(x => x.date != todayLocalDate())
+    .sort(function (a, b) {
+      return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+    });
+
+  const sortedByTimeDaysWithoutToday = daysWithoutToday.sort(function (a, b) {
+    return a.summary - b.summary;
+  });
+
+  const mostActiveDayExceptToday = sortedByTimeDaysWithoutToday[0];
+  const mostActiveDayObjExceptToday = fillMostDay(mostActiveDayExceptToday);
+
+  const mostInactiveDayExceptToday =
+    sortedByTimeDaysWithoutToday[sortedByTimeDaysWithoutToday.length - 1];
+  const mostInactiveDayObjExceptToday = fillMostDay(mostInactiveDayExceptToday);
+
+  return {
+    mostActiveDayObjExceptToday,
+    mostInactiveDayObjExceptToday,
+  };
+}
+
+function fillMostList(days: TabDay[]) {
+  const sortedByTimeDays = days.sort(function (a, b) {
+    return a.summary - b.summary;
+  });
+
+  const mostActiveDay = sortedByTimeDays[0];
+  const mostActiveDayObj = fillMostDay(mostActiveDay);
+
+  const mostInactiveDay = sortedByTimeDays[sortedByTimeDays.length - 1];
+  const mostInactiveDayObj = fillMostDay(mostInactiveDay);
+
+  return {
+    mostActiveDayObj,
+    mostInactiveDayObj,
   };
 }
