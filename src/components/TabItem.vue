@@ -3,7 +3,7 @@
     <Favicon :favicon="item.favicon" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
-        <div class="w-85">
+        <div class="w-80">
           <p class="url" @click="openUrl(item.url)">{{ url }}</p>
           <div class="d-inline-block" v-html="getBadgeIcon()"></div>
         </div>

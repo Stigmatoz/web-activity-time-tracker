@@ -41,12 +41,12 @@ export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<Ta
     });
   });
 
-  daysTabs = daysTabs.sort(function (a, b) {
+  daysTabs.sort(function (a, b) {
     return new Date(a.day).valueOf() - new Date(b.day).valueOf();
   });
 
   daysTabs.forEach(dayTab => {
-    dayTab.tabs = dayTab.tabs.sort(function (a: CurrentTabItem, b: CurrentTabItem) {
+    dayTab.tabs.sort(function (a: CurrentTabItem, b: CurrentTabItem) {
       return b.summaryTime - a.summaryTime;
     });
   });

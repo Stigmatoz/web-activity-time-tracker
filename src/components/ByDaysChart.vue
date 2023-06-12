@@ -31,8 +31,7 @@ const props = defineProps<{
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 const labelsForChart = props.data.days.map(x => x.day);
 const dataForChart = props.data.days.map(x => x.time);
-const maxTimeValue = dataForChart.sort((a, b) => b - a)[0];
-const tickStep = Math.round(maxTimeValue / 5 / 60) * 60;
+const tickStep = Math.round(dataForChart[0] / 5 / 600) * 600;
 
 const data = {
   labels: labelsForChart,
@@ -65,7 +64,6 @@ const options = {
   scales: {
     y: {
       ticks: {
-        max: maxTimeValue / 60,
         stepSize: tickStep,
         callback: function (value: any, index: number, ticks: number) {
           return convertSummaryTimeToString(value);
