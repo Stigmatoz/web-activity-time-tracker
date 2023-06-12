@@ -38,6 +38,7 @@ import { CurrentTabItem } from '../dto/currentTabItem';
 
 const props = defineProps<{
   item: CurrentTabItem;
+  summaryTimeForWholeDay: number;
 }>();
 
 enum TypeOfUrl {
@@ -61,12 +62,8 @@ const sessions = computed(() => {
   if (props.item.sessions == 1) return `${props.item.sessions} session`;
 });
 
-const summaryTimeForTab = computed(() =>
-  convertSummaryTimeToString(props.item.summaryTimeForCurrent),
-);
-const percent = computed(() =>
-  getPercentage(props.item.summaryTimeForCurrent, props.item.summaryTime),
-);
+const summaryTimeForTab = computed(() => convertSummaryTimeToString(props.item.summaryTime));
+const percent = computed(() => getPercentage(props.item.summaryTime, props.summaryTimeForWholeDay));
 
 const styleForProgressBar = computed(() => `width: ${percent.value}%`);
 

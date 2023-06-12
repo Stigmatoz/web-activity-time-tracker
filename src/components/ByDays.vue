@@ -6,8 +6,21 @@
       <p>{{ convertSummaryTimeToString(tabsByDays.averageTime) }}</p>
     </div>
     <ByDaysChart :data="tabsByDays" />
-    <div></div>
-    <TabItem v-for="(tab, i) of tabs" :key="i" :item="getItem(tab)" />
+    <div>
+      <Expander
+        v-for="(tabDay, i) of tabsByDays?.days"
+        :key="i"
+        :day="tabDay.day"
+        :time="tabDay.time"
+      >
+        <TabItem
+          v-for="(tab, i) of tabDay.tabs"
+          :key="i"
+          :item="tab"
+          :summaryTimeForWholeDay="tabDay.time"
+        />
+      </Expander>
+    </div>
   </div>
 </template>
 
@@ -19,7 +32,9 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import TabItem from '../components/TabItem.vue';
 import ByDaysChart from '../components/ByDaysChart.vue';
+import Expander from '../components/Expander.vue';
 import { TabListByDays } from '../dto/tabListSummary';
 import { useTabListByDays } from '../compositions/tab-list-by-days';
 import { convertSummaryTimeToString } from '../utils/converter';

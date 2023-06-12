@@ -12,7 +12,12 @@
       @sortingBy="sorting"
     />
 
-    <TabItem v-for="(tab, i) of tabs" :key="i" :item="getItem(tab)" />
+    <TabItem
+      v-for="(tab, i) of tabs"
+      :key="i"
+      :item="getItem(tab)"
+      :summaryTimeForWholeDay="summaryTime"
+    />
   </div>
 </template>
 
@@ -86,17 +91,16 @@ async function sorting(sortingBy: SortingBy) {
 
 function getItem(tab: Tab): CurrentTabItem {
   return {
-    summaryTime: summaryTime.value!,
+    summaryTime:
+      props.type == TypeOfList.Today
+        ? tab.days.find(day => day.date === todayLocalDate())!.summary
+        : tab.summaryTime,
     favicon: tab.favicon,
     url: tab.url,
     sessions:
       props.type == TypeOfList.Today
         ? tab.days.find(day => day.date === todayLocalDate())!.counter
         : tab.counter,
-    summaryTimeForCurrent:
-      props.type == TypeOfList.Today
-        ? tab.days.find(day => day.date === todayLocalDate())!.summary
-        : tab.summaryTime,
   };
 }
 

@@ -1,3 +1,4 @@
+import { CurrentTabItem } from '../dto/currentTabItem';
 import { DayTabs, TabListByDays } from '../dto/tabListSummary';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 
@@ -25,7 +26,6 @@ export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<Ta
             url: tab.url,
             sessions: day.counter,
             summaryTime: day.summary,
-            summaryTimeForCurrent: day.summary,
           });
           daysTabs.push(dayTab);
         } else {
@@ -35,7 +35,6 @@ export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<Ta
             url: tab.url,
             sessions: day.counter,
             summaryTime: day.summary,
-            summaryTimeForCurrent: day.summary,
           });
         }
       }
@@ -44,6 +43,12 @@ export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<Ta
 
   daysTabs = daysTabs.sort(function (a, b) {
     return new Date(a.day).valueOf() - new Date(b.day).valueOf();
+  });
+
+  daysTabs.forEach(dayTab => {
+    dayTab.tabs = dayTab.tabs.sort(function (a: CurrentTabItem, b: CurrentTabItem) {
+      return b.summaryTime - a.summaryTime;
+    });
   });
 
   const summaryTime = daysTabs
