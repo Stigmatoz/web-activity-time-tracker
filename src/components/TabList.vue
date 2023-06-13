@@ -18,6 +18,10 @@
       :item="getItem(tab)"
       :summaryTimeForWholeDay="summaryTime"
     />
+
+    <div class="show-all" v-if="showOnlyFirst100Items">
+      <button @click="showAllWebSites()">Show all websites</button>
+    </div>
   </div>
 </template>
 
@@ -48,6 +52,7 @@ const props = defineProps<{
 
 const isShowOverallStats = computed(() => props.showAllStats && props.type == TypeOfList.All);
 
+let loadedTabs: Tab[] = [];
 const tabs = ref<Tab[]>();
 const dataForOvarallStats = ref<OverallStats>();
 
@@ -60,6 +65,13 @@ const countOfActiveDays = ref<number>();
 
 const countOfSites = computed(() => (tabs.value != undefined ? tabs.value.length : 0));
 
+const showOnlyFirst100Items = ref<boolean>();
+
+function showAllWebSites() {
+  showOnlyFirst100Items.value = false;
+  tabs.value = loadedTabs;
+}
+
 async function loadList(sortingBy: SortingBy) {
   let tabSummary = null;
   if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
@@ -71,10 +83,16 @@ async function loadList(sortingBy: SortingBy) {
   }
 
   if (tabSummary != null) {
+    loadedTabs = tabSummary.tabs;
     tabs.value = tabSummary.tabs;
     summaryTime.value = tabSummary.summaryTime;
     timeForChart.value = tabSummary.chart.timeForChart;
     sitesForChart.value = tabSummary.chart.sitesForChart;
+
+    if (props.type == TypeOfList.All && loadedTabs.length > 100) {
+      showOnlyFirst100Items.value = true;
+      tabs.value = tabSummary.tabs.slice(0, 100);
+    } else showOnlyFirst100Items.value = false;
   }
 }
 
@@ -108,3 +126,19 @@ onMounted(async () => {
   await loadList(SortingBy.UsageTime);
 });
 </script>
+
+<style scoped>
+.show-all {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.show-all button {
+  background-color: aliceblue;
+  border-radius: 5px;
+  border: 1px rgb(202, 202, 202) solid;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 5px 25px;
+}
+</style>
