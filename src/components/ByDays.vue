@@ -1,25 +1,30 @@
 <template>
-  <div class="no-data" v-if="countOfDays == undefined || countOfDays == 0">No data</div>
+  <div class="no-data" v-if="isLoading">
+    <img height="55" src="../assets/icons/preloader.gif" />
+  </div>
   <div v-else>
-    <div class="stats-block block">
-      <div class="header">Average time on selected days</div>
-      <p>{{ convertSummaryTimeToString(tabsByDays.averageTime) }}</p>
-    </div>
-    <ByDaysChart :data="tabsByDays" />
-    <div>
-      <Expander
-        v-for="(tabDay, i) of tabsByDays?.days"
-        :key="i"
-        :day="tabDay.day"
-        :time="tabDay.time"
-      >
-        <TabItem
-          v-for="(tab, i) of tabDay.tabs"
+    <div class="no-data" v-if="countOfDays == undefined || countOfDays == 0">No data</div>
+    <div v-else>
+      <div class="stats-block block">
+        <div class="header">Average time on selected days</div>
+        <p>{{ convertSummaryTimeToString(tabsByDays.averageTime) }}</p>
+      </div>
+      <ByDaysChart :data="tabsByDays" />
+      <div>
+        <Expander
+          v-for="(tabDay, i) of tabsByDays?.days"
           :key="i"
-          :item="tab"
-          :summaryTimeForWholeDay="tabDay.time"
-        />
-      </Expander>
+          :day="tabDay.day"
+          :time="tabDay.time"
+        >
+          <TabItem
+            v-for="(tab, i) of tabDay.tabs"
+            :key="i"
+            :item="tab"
+            :summaryTimeForWholeDay="tabDay.time"
+          />
+        </Expander>
+      </div>
     </div>
   </div>
 </template>
@@ -40,16 +45,19 @@ import { useTabListByDays } from '../compositions/tab-list-by-days';
 import { convertSummaryTimeToString } from '../utils/converter';
 
 const tabsByDays = ref<TabListByDays>();
+const isLoading = ref<boolean>();
 
 const countOfDays = computed(() =>
   tabsByDays.value != undefined ? tabsByDays.value.days.length : 0,
 );
 
 async function loadList() {
-  tabsByDays.value = await useTabListByDays(new Date('06/01/2023'), new Date('06/14/2023'));
+  tabsByDays.value = await useTabListByDays(new Date('06/03/2023'), new Date('06/14/2023'));
+  isLoading.value = false;
 }
 
 onMounted(async () => {
+  isLoading.value = true;
   await loadList();
 });
 </script>

@@ -1,26 +1,31 @@
 <template>
-  <div class="no-data" v-if="countOfSites == undefined || countOfSites == 0">No data</div>
+  <div class="no-data" v-if="isLoading">
+    <img height="55" src="../assets/icons/preloader.gif" />
+  </div>
   <div v-else>
-    <OverallStatistics v-if="isShowOverallStats" :data="dataForOvarallStats" />
-    <DonutChart :time="timeForChart" :labels="sitesForChart" />
-    <TabItemHeader
-      :listType="type"
-      :summaryTime="summaryTime"
-      :countOfSites="countOfSites"
-      :firstDay="firstDay"
-      :countOfActiveDays="countOfActiveDays"
-      @sortingBy="sorting"
-    />
+    <div class="no-data" v-if="countOfSites == undefined || countOfSites == 0">No data</div>
+    <div v-else>
+      <OverallStatistics v-if="isShowOverallStats" :data="dataForOvarallStats" />
+      <DonutChart :time="timeForChart" :labels="sitesForChart" />
+      <TabItemHeader
+        :listType="type"
+        :summaryTime="summaryTime"
+        :countOfSites="countOfSites"
+        :firstDay="firstDay"
+        :countOfActiveDays="countOfActiveDays"
+        @sortingBy="sorting"
+      />
 
-    <TabItem
-      v-for="(tab, i) of tabs"
-      :key="i"
-      :item="getItem(tab)"
-      :summaryTimeForWholeDay="summaryTime"
-    />
+      <TabItem
+        v-for="(tab, i) of tabs"
+        :key="i"
+        :item="getItem(tab)"
+        :summaryTimeForWholeDay="summaryTime"
+      />
 
-    <div class="show-all" v-if="showOnlyFirst100Items">
-      <button @click="showAllWebSites()">Show all websites</button>
+      <div class="show-all" v-if="showOnlyFirst100Items">
+        <button @click="showAllWebSites()">Show all websites</button>
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +69,7 @@ const firstDay = ref<Date>();
 const countOfActiveDays = ref<number>();
 
 const countOfSites = computed(() => (tabs.value != undefined ? tabs.value.length : 0));
+const isLoading = ref<boolean>();
 
 const showOnlyFirst100Items = ref<boolean>();
 
@@ -94,6 +100,8 @@ async function loadList(sortingBy: SortingBy) {
       tabs.value = tabSummary.tabs.slice(0, 100);
     } else showOnlyFirst100Items.value = false;
   }
+
+  isLoading.value = false;
 }
 
 async function sorting(sortingBy: SortingBy) {
@@ -123,6 +131,7 @@ function getItem(tab: Tab): CurrentTabItem {
 }
 
 onMounted(async () => {
+  isLoading.value = true;
   await loadList(SortingBy.UsageTime);
 });
 </script>
