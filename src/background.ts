@@ -18,5 +18,6 @@ Browser.storage.onChanged.addListener((changes, namespace) => {
   }
 });
 
+Browser.runtime.setUninstallURL('https://webtracker.online/goodbye.html');
 scheduleJobs();
 initTracker();
