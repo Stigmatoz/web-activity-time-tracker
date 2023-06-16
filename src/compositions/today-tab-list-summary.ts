@@ -4,10 +4,12 @@ import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { SortingBy } from '../utils/enums';
 import { todayLocalDate } from '../utils/today';
 
-export async function useTodayTabListSummary(sortingBy: SortingBy): Promise<TabListSummary> {
+export async function useTodayTabListSummary(sortingBy: SortingBy): Promise<TabListSummary | null> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTodayTabs();
   let tabs: Tab[] = [];
+
+  if (unSortedTabs.length == 0) return null;
 
   tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
     return sortingBy == SortingBy.UsageTime

@@ -3,7 +3,12 @@
     <img height="55" src="../assets/icons/preloader.gif" />
   </div>
   <div v-else>
-    <div class="no-data" v-if="countOfDays == undefined || countOfDays == 0">No data</div>
+    <div class="no-data" v-if="countOfDays == undefined || (countOfDays == 0 && !noData)">
+      No data
+    </div>
+    <div v-else-if="noData">
+      <div class="no-data">No data for selected period</div>
+    </div>
     <div v-else>
       <div class="stats-block block">
         <div class="header">Average time on selected days</div>
@@ -46,13 +51,18 @@ import { convertSummaryTimeToString } from '../utils/converter';
 
 const tabsByDays = ref<TabListByDays>();
 const isLoading = ref<boolean>();
+const noData = ref<boolean>();
 
 const countOfDays = computed(() =>
   tabsByDays.value != undefined ? tabsByDays.value.days.length : 0,
 );
 
 async function loadList() {
-  tabsByDays.value = await useTabListByDays(new Date('06/03/2023'), new Date('06/14/2023'));
+  const tabList = await useTabListByDays(new Date('06/03/2023'), new Date('06/14/2023'));
+  if (tabList != null) {
+    tabsByDays.value = tabList;
+    if (tabList.days.length == 0 && tabList.summaryTime == 0) noData.value = true;
+  }
   isLoading.value = false;
 }
 

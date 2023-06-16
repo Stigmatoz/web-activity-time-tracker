@@ -83,9 +83,12 @@ async function loadList(sortingBy: SortingBy) {
   if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
   if (props.type == TypeOfList.All) {
     tabSummary = await useAllTabListSummary(sortingBy);
-    firstDay.value = tabSummary.firstDay;
-    countOfActiveDays.value = tabSummary.activeDaysTotal;
-    dataForOvarallStats.value = tabSummary;
+
+    if (tabSummary != null) {
+      firstDay.value = tabSummary.firstDay;
+      countOfActiveDays.value = tabSummary.activeDaysTotal;
+      dataForOvarallStats.value = tabSummary;
+    }
   }
 
   if (tabSummary != null) {

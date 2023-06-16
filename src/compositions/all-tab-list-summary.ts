@@ -5,12 +5,13 @@ import { SortingBy } from '../utils/enums';
 import { daysBetween } from '../utils/time';
 import { todayLocalDate } from '../utils/today';
 
-export async function useAllTabListSummary(sortingBy: SortingBy): Promise<OverallStats> {
+export async function useAllTabListSummary(sortingBy: SortingBy): Promise<OverallStats | null> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTabs();
   let tabs: Tab[] = [];
 
-  const todayTabs = unSortedTabs.filter(x => x.days.find(s => s.date === todayLocalDate()));
+  if (unSortedTabs.length == 0) return null;
+  const todayTabs = unSortedTabs?.filter(x => x.days.find(s => s.date === todayLocalDate()));
 
   const summaryTimeListForToday = todayTabs.map(function (tab) {
     return tab.days.find(day => day.date === todayLocalDate())!.summary;
@@ -82,8 +83,10 @@ export async function useAllTabListSummary(sortingBy: SortingBy): Promise<Overal
     averageTimeByActiveDays: averageTimeByActiveDays,
     mostActiveDay: mostDay.mostActiveDayObj,
     mostInactiveDay: mostDay.mostInactiveDayObj,
-    mostActiveDayExceptToday: mostDayExceptToday.mostActiveDayObjExceptToday,
-    mostInactiveDayExceptToday: mostDayExceptToday.mostInactiveDayObjExceptToday,
+    mostActiveDayExceptToday:
+      mostDayExceptToday != null ? mostDayExceptToday.mostActiveDayObjExceptToday : null,
+    mostInactiveDayExceptToday:
+      mostDayExceptToday != null ? mostDayExceptToday.mostInactiveDayObjExceptToday : null,
     tabs: tabs,
     summaryTime: summaryTime,
     chart: {
@@ -111,6 +114,7 @@ function fillMostListWithoutToday(days: TabDay[]) {
     return a.summary - b.summary;
   });
 
+  if (sortedByTimeDaysWithoutToday.length == 0) return null;
   const mostActiveDayExceptToday = sortedByTimeDaysWithoutToday[0];
   const mostActiveDayObjExceptToday = fillMostDay(mostActiveDayExceptToday);
 

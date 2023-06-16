@@ -2,14 +2,26 @@ import { CurrentTabItem } from '../dto/currentTabItem';
 import { DayTabs, TabListByDays } from '../dto/tabListSummary';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 
-export async function useTabListByDays(dateFrom: Date, dateTo: Date): Promise<TabListByDays> {
+export async function useTabListByDays(
+  dateFrom: Date,
+  dateTo: Date,
+): Promise<TabListByDays | null> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTabs();
   let daysTabs: DayTabs[] = [];
 
+  if (unSortedTabs.length == 0) return null;
+
   const unSortedTabsByDays = unSortedTabs.filter(
     x => x.days.find(s => new Date(s.date) >= dateFrom && new Date(s.date) <= dateTo) != undefined,
   );
+
+  if (unSortedTabsByDays.length == 0)
+    return {
+      days: [],
+      averageTime: 0,
+      summaryTime: 0,
+    };
 
   unSortedTabsByDays.forEach(tab => {
     tab.days.forEach(day => {

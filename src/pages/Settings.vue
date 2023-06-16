@@ -173,7 +173,13 @@
 
 <script lang="ts" setup>
 import { watchEffect, onMounted, ref } from 'vue';
-import { StorageParams } from '../storage/storage-params';
+import {
+  BLOCK_DEFERRAL_DEFAULT,
+  DARK_MODE_DEFAULT,
+  INTERVAL_INACTIVITY_DEFAULT,
+  StorageParams,
+  VIEW_TIME_IN_BADGE_DEFAULT,
+} from '../storage/storage-params';
 import { injecStorage } from '../storage/inject-storage';
 import { InactivityInterval } from '../storage/storage-params';
 
@@ -185,10 +191,19 @@ const allowDeferringBlock = ref<boolean>();
 const darkMode = ref<boolean>();
 
 onMounted(async () => {
-  viewTimeInBadge.value = await settingsStorage.getValue(StorageParams.VIEW_TIME_IN_BADGE);
-  intervalInactivity.value = await settingsStorage.getValue(StorageParams.INTERVAL_INACTIVITY);
-  darkMode.value = await settingsStorage.getValue(StorageParams.DARK_MODE);
-  allowDeferringBlock.value = await settingsStorage.getValue(StorageParams.BLOCK_DEFERRAL);
+  viewTimeInBadge.value = await settingsStorage.getValue(
+    StorageParams.VIEW_TIME_IN_BADGE,
+    VIEW_TIME_IN_BADGE_DEFAULT,
+  );
+  intervalInactivity.value = await settingsStorage.getValue(
+    StorageParams.INTERVAL_INACTIVITY,
+    INTERVAL_INACTIVITY_DEFAULT,
+  );
+  darkMode.value = await settingsStorage.getValue(StorageParams.DARK_MODE, DARK_MODE_DEFAULT);
+  allowDeferringBlock.value = await settingsStorage.getValue(
+    StorageParams.BLOCK_DEFERRAL,
+    BLOCK_DEFERRAL_DEFAULT,
+  );
 });
 
 watchEffect(() => save(StorageParams.VIEW_TIME_IN_BADGE, viewTimeInBadge.value));
