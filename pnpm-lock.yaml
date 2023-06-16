@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@kyvg/vue3-notification': ^2.9.1
   '@types/webextension-polyfill': ^0.10.0
   '@vitejs/plugin-vue': ^4.0.0
   chart.js: ^4.3.0
@@ -14,6 +15,7 @@ specifiers:
   webextension-polyfill: ^0.10.0
 
 dependencies:
+  '@kyvg/vue3-notification': 2.9.1_vue@3.2.47
   chart.js: 4.3.0
   date-fns: 2.30.0
   vue: 3.2.47
@@ -363,6 +365,14 @@ packages:
 
   /@kurkle/color/0.3.2:
     resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+    dev: false
+
+  /@kyvg/vue3-notification/2.9.1_vue@3.2.47:
+    resolution: {integrity: sha512-FsY8g25tQetr3etnarxHtCeNFKssH8sheFu13LyL2JJmOOel437QqKV5n4RBDDDTIo55iKgIVYXeojliXYdEhw==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.2.47
     dev: false
 
   /@mdn/browser-compat-data/5.2.42:

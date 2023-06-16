@@ -1,4 +1,5 @@
 <template>
+  <notifications position="bottom right" />
   <div class="container">
     <div class="header">
       <p class="title">Web Activity Time Tracker - Settings</p>
@@ -41,7 +42,7 @@
             <label class="setting-header">
               <input type="checkbox" class="filled-in" id="darkMode" v-model="darkMode" />
               <span>Dark mode</span>
-              <p class="description"></p>
+              <p class="description">Dark theme</p>
             </label>
           </div>
           <div class="settings-item">
@@ -62,46 +63,6 @@
             </div>
             <p class="description">These are any actions with the mouse or keyboard</p>
           </div>
-          <!-- <div class="margin-top-10">
-              <label class="setting-header">Default range for days:</label>
-            </div>
-            <div class="margin-top-10">
-              <select id="rangeToDays" class="option">
-                <option value="days2">2 days</option>
-                <option value="days3">3 days</option>
-                <option value="days4">4 days</option>
-                <option value="days5">5 days</option>
-                <option value="days6">6 days</option>
-                <option value="days7">7 days</option>
-                <option value="month1">1 month</option>
-                <option value="month2">2 month</option>
-                <option value="month3">3 month</option>
-              </select>
-            </div>
-            <br />
-            <div class="margin-top-10">
-              <br />
-              <div class="margin-top-10">
-                <input type="button" value="Backup" id="backup" />
-                <input type="button" value="Restore" id="restore" />
-                <input id="file-input-backup" class="hidden" type="file" name="backupFile" />
-              </div>
-              <div class="notify" id="notify-backup" hidden>Backup completed successfully</div>
-              <div class="notify" id="notify-restore" hidden>Restore completed successfully</div>
-              <div class="notify warning" id="notify-restore-failed" hidden>
-                Backup file is not valid
-              </div>
-              <div class="notify warning" id="notify-periodic-save-failed" hidden>
-                Please select hour and minute
-              </div>
-              <div class="notify" id="notify-periodic-saved" hidden>Saved!</div>
-              <br />
-              <div class="margin-top-10">
-                <input type="button" value="Clear all data" id="clearAllData" />
-              </div>
-              <div class="notify" id="notify" hidden>Data successfully deleted</div>
-            </div>
-          </div> -->
         </div>
       </div>
 
@@ -110,7 +71,29 @@
         <label for="tab-whitelist">White List</label>
 
         <div class="content">
-          <span>tabik 123123</span>
+          <div>
+            <p class="setting-header mt-0">
+              Activity and time for these domains will not be tracked
+            </p>
+            <ul readonly class="url-list">
+              <li v-for="(url, i) of whiteList" :key="i">{{ url }}</li>
+            </ul>
+            <div class="mt-20">
+              <input
+                type="text"
+                class="d-inline-block"
+                placeholder="Enter website name..."
+                v-model="newWebsiteForWhiteList"
+              />
+              <input
+                type="button"
+                class="d-inline-block small-btn ml-10"
+                value="Add Website"
+                :disabled="newWebsiteForWhiteList == null || newWebsiteForWhiteList == ''"
+                @click="addWebsite()"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -118,18 +101,14 @@
         <input type="radio" id="tab-limits" name="tab-settings" />
         <label for="tab-limits">Limits</label>
 
-        <div class="content">
-          <span>tabik 3</span>
-        </div>
+        <div class="content"></div>
       </div>
 
       <div class="tab">
         <input type="radio" id="tab-notifications" name="tab-settings" />
         <label for="tab-notifications">Notifications</label>
 
-        <div class="content">
-          <span>tabik 4</span>
-        </div>
+        <div class="content"></div>
       </div>
 
       <div class="tab about">
@@ -173,6 +152,7 @@
 
 <script lang="ts" setup>
 import { watchEffect, onMounted, ref } from 'vue';
+import { useNotification } from '@kyvg/vue3-notification';
 import {
   BLOCK_DEFERRAL_DEFAULT,
   DARK_MODE_DEFAULT,
@@ -182,13 +162,21 @@ import {
 } from '../storage/storage-params';
 import { injecStorage } from '../storage/inject-storage';
 import { InactivityInterval } from '../storage/storage-params';
+import { isInBlackList } from '../compositions/black-list';
+import { isDomainEquals } from '../utils/common';
+import { extractHostname } from '../compositions/extract-hostname';
+
+const notification = useNotification();
 
 const settingsStorage = injecStorage();
 
 const viewTimeInBadge = ref<boolean>();
 const intervalInactivity = ref<InactivityInterval>();
 const allowDeferringBlock = ref<boolean>();
+const whiteList = ref<string[]>();
 const darkMode = ref<boolean>();
+
+const newWebsiteForWhiteList = ref<string>();
 
 onMounted(async () => {
   viewTimeInBadge.value = await settingsStorage.getValue(
@@ -204,15 +192,31 @@ onMounted(async () => {
     StorageParams.BLOCK_DEFERRAL,
     BLOCK_DEFERRAL_DEFAULT,
   );
+  whiteList.value = await settingsStorage.getValue(StorageParams.BLACK_LIST, []);
 });
 
-watchEffect(() => save(StorageParams.VIEW_TIME_IN_BADGE, viewTimeInBadge.value));
-watchEffect(() => save(StorageParams.INTERVAL_INACTIVITY, intervalInactivity.value));
-watchEffect(() => save(StorageParams.DARK_MODE, darkMode.value));
-watchEffect(() => save(StorageParams.BLOCK_DEFERRAL, allowDeferringBlock.value));
+watchEffect(async () => await save(StorageParams.VIEW_TIME_IN_BADGE, viewTimeInBadge.value));
+watchEffect(async () => await save(StorageParams.INTERVAL_INACTIVITY, intervalInactivity.value));
+watchEffect(async () => await save(StorageParams.DARK_MODE, darkMode.value));
+watchEffect(async () => await save(StorageParams.BLOCK_DEFERRAL, allowDeferringBlock.value));
+watchEffect(async () => await save(StorageParams.BLACK_LIST, whiteList.value));
 
-function save(storageParam: StorageParams, value: any) {
-  settingsStorage.saveValue(storageParam, value);
+async function save(storageParam: StorageParams, value: any) {
+  await settingsStorage.saveValue(storageParam, value);
+}
+
+async function addWebsite() {
+  const existingItem = whiteList.value?.find(x =>
+    isDomainEquals(extractHostname(x), extractHostname(newWebsiteForWhiteList.value!)),
+  );
+  if (existingItem !== undefined) {
+    notification.notify({
+      title: 'You have already added this site',
+      type: 'error',
+    });
+  } else {
+    whiteList.value?.push(newWebsiteForWhiteList.value!);
+  }
 }
 </script>
 

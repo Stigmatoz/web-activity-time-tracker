@@ -23,6 +23,35 @@ body {
     font-size: 13px;
     color: grey;
     margin: 7px 0 15px 0;
+    font-weight: normal;
+}
+
+.url-list{
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    width: 515px;
+    min-height: 150px;
+    cursor: pointer;
+    list-style: none;
+    padding:10px
+}
+
+.url-list li{
+    line-height: 20px;
+    font-size: 13px;
+}
+
+input[type="text"]{
+    height: 32px;
+    padding: 0 0 0 5px;
+    width: 400px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+input[type="button"].small-btn{
+    padding: 0 5px;
+    width: 120px;
 }
 
 .option {
@@ -155,7 +184,7 @@ label{
 }
 
 input[type="button"]{
-    background: #3477db;
+    background: #428bff;
     color: #fff;
     border-radius: 3px;
     height: 35px;
@@ -292,7 +321,7 @@ input[type="button"]:hover {
     background: white;
     right: 0;
     bottom: 0;
-    padding: 20px;
+    padding: 10px 20px;
    }
   .content {
     opacity: 0;

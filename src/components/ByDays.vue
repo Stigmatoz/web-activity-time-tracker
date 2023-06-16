@@ -7,7 +7,7 @@
       No data
     </div>
     <div v-else-if="noData">
-      <div class="no-data">No data for selected period</div>
+      <div class="no-data">No data for the selected period</div>
     </div>
     <div v-else>
       <div class="stats-block block">
