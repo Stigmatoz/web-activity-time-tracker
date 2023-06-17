@@ -33,12 +33,14 @@ body {
     min-height: 150px;
     cursor: pointer;
     list-style: none;
-    padding:10px
+    padding:10px;
+    max-height: 300px;
+    overflow: auto;
 }
 
 .url-list li{
-    line-height: 20px;
-    font-size: 13px;
+    line-height: 25px;
+    font-size: 14px;
 }
 
 input[type="text"]{

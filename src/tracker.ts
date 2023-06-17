@@ -50,7 +50,7 @@ async function trackTime() {
         useBadge({
           tabId: activeTab!.id!,
           text: 'n/a',
-          color: BadgeColor.red,
+          color: BadgeColor.green,
         });
       } else {
         let tab = repo.getTab(activeDomain);
