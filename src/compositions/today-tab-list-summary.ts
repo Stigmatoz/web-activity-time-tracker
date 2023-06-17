@@ -2,7 +2,7 @@ import { TabListSummary } from '../dto/tabListSummary';
 import { Tab } from '../entity/tab';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { SortingBy } from '../utils/enums';
-import { todayLocalDate } from '../utils/today';
+import { todayLocalDate } from '../utils/date';
 
 export async function useTodayTabListSummary(sortingBy: SortingBy): Promise<TabListSummary | null> {
   const repo = await injectTabsRepository();

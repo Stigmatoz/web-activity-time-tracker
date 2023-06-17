@@ -1,4 +1,4 @@
-import { getToday } from './today';
+import { getToday } from './date';
 
 //Every day - 60 minutes * 24 hours
 export const DAY_MINUTES = 1440;

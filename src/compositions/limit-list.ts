@@ -1,7 +1,7 @@
 import { Restriction } from '../entity/restriction';
 import { Tab } from '../entity/tab';
 import { StorageParams } from '../storage/storage-params';
-import { todayLocalDate } from '../utils/today';
+import { todayLocalDate } from '../utils/date';
 import { Settings } from './settings';
 
 export async function isLimitExceeded(url: string, tab: Tab): Promise<boolean> {

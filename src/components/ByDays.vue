@@ -10,6 +10,20 @@
       <div class="no-data">No data for the selected period</div>
     </div>
     <div v-else>
+      <div class="date-block">
+        <VueDatePicker
+          range
+          :enable-time-picker="false"
+          class="date-picker"
+          v-model="selectedDate"
+          :preset-ranges="presetRanges"
+          @update:model-value="handleDate"
+        >
+          <template #yearly="{ label, range, presetDateRange }">
+            <span @click="presetDateRange(range)">{{ label }}</span>
+          </template></VueDatePicker
+        >
+      </div>
       <div class="stats-block block">
         <div class="header">Average time on selected days</div>
         <p>{{ convertSummaryTimeToString(tabsByDays.averageTime) }}</p>
@@ -48,17 +62,21 @@ import Expander from '../components/Expander.vue';
 import { TabListByDays } from '../dto/tabListSummary';
 import { useTabListByDays } from '../compositions/tab-list-by-days';
 import { convertSummaryTimeToString } from '../utils/converter';
+import { ranges, ThisWeekRange } from '../utils/date';
 
 const tabsByDays = ref<TabListByDays>();
 const isLoading = ref<boolean>();
 const noData = ref<boolean>();
+const selectedDate = ref<Date[]>();
+
+const presetRanges = ranges();
 
 const countOfDays = computed(() =>
   tabsByDays.value != undefined ? tabsByDays.value.days.length : 0,
 );
 
-async function loadList() {
-  const tabList = await useTabListByDays(new Date('06/03/2023'), new Date('06/14/2023'));
+async function loadList(dateFrom: Date, dateTo: Date) {
+  const tabList = await useTabListByDays(dateFrom, dateTo);
   if (tabList != null) {
     tabsByDays.value = tabList;
     if (tabList.days.length == 0 && tabList.summaryTime == 0) noData.value = true;
@@ -66,9 +84,19 @@ async function loadList() {
   isLoading.value = false;
 }
 
+async function handleDate(modelData: Date[]) {
+  selectedDate.value = modelData;
+  const dateFrom = selectedDate.value?.[0] as Date;
+  const dateTo = selectedDate.value?.[1] as Date;
+  await loadList(dateFrom, dateTo);
+}
+
 onMounted(async () => {
   isLoading.value = true;
-  await loadList();
+  selectedDate.value = ThisWeekRange;
+  const dateFrom = selectedDate.value?.[0] as Date;
+  const dateTo = selectedDate.value?.[1] as Date;
+  await loadList(dateFrom, dateTo);
 });
 </script>
 
@@ -94,5 +122,11 @@ onMounted(async () => {
   font-weight: 700;
   font-size: 13px;
   color: rgb(59, 59, 59);
+}
+.date-block {
+  margin: 0 20px 0 20px;
+}
+.date-picker {
+  width: 250px;
 }
 </style>

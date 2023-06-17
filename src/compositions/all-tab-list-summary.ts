@@ -3,7 +3,7 @@ import { Tab, TabDay } from '../entity/tab';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { SortingBy } from '../utils/enums';
 import { daysBetween } from '../utils/time';
-import { todayLocalDate } from '../utils/today';
+import { todayLocalDate } from '../utils/date';
 
 export async function useAllTabListSummary(sortingBy: SortingBy): Promise<OverallStats | null> {
   const repo = await injectTabsRepository();

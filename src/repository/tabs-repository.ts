@@ -3,7 +3,7 @@ import { Tab } from '../entity/tab';
 import { injecStorage } from '../storage/inject-storage';
 import { isInBlackList } from '../compositions/black-list';
 import { StorageDeserializeParam } from '../storage/storage-params';
-import { todayLocalDate } from '../utils/today';
+import { todayLocalDate } from '../utils/date';
 
 export class TabsRepository implements ITabsRepository {
   private tabs: Tab[];

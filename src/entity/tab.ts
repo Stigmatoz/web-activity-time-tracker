@@ -1,4 +1,4 @@
-import { todayLocalDate } from '../utils/today';
+import { todayLocalDate } from '../utils/date';
 import { logger } from '../compositions/logger';
 
 export class Tab implements ISerializable<Tab> {

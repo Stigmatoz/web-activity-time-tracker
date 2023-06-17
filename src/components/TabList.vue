@@ -47,7 +47,7 @@ import { SortingBy, TypeOfList } from '../utils/enums';
 import { useTodayTabListSummary } from '../compositions/today-tab-list-summary';
 import { useAllTabListSummary } from '../compositions/all-tab-list-summary';
 import { CurrentTabItem } from '../dto/currentTabItem';
-import { todayLocalDate } from '../utils/today';
+import { todayLocalDate } from '../utils/date';
 import { OverallStats } from '../dto/tabListSummary';
 
 const props = defineProps<{

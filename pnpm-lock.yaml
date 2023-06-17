@@ -4,6 +4,7 @@ specifiers:
   '@kyvg/vue3-notification': ^2.9.1
   '@types/webextension-polyfill': ^0.10.0
   '@vitejs/plugin-vue': ^4.0.0
+  '@vuepic/vue-datepicker': ^5.3.0
   chart.js: ^4.3.0
   date-fns: ^2.30.0
   typescript: ^5.0.4
@@ -16,6 +17,7 @@ specifiers:
 
 dependencies:
   '@kyvg/vue3-notification': 2.9.1_vue@3.2.47
+  '@vuepic/vue-datepicker': 5.3.0_vue@3.2.47
   chart.js: 4.3.0
   date-fns: 2.30.0
   vue: 3.2.47
@@ -583,6 +585,17 @@ packages:
 
   /@vue/shared/3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
+
+  /@vuepic/vue-datepicker/5.3.0_vue@3.2.47:
+    resolution: {integrity: sha512-eW5LRa3mH5klbRaKedG96/KY4EZC7ns+Zs7A+4guRBL+dQQthd8HV0xyS9nkI7hjr1K5zU+FQ3TOdo/oX5r3og==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      vue: '>=3.2.0'
+    dependencies:
+      date-fns: 2.30.0
+      date-fns-tz: 1.3.8_date-fns@2.30.0
+      vue: 3.2.47
+    dev: false
 
   /abort-controller/3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -1157,6 +1170,14 @@ packages:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
     engines: {node: '>= 12'}
     dev: true
+
+  /date-fns-tz/1.3.8_date-fns@2.30.0:
+    resolution: {integrity: sha512-qwNXUFtMHTTU6CFSFjoJ80W8Fzzp24LntbjFFBgL/faqds4e5mo9mftoRLgr3Vi1trISsg4awSpYVsOQCRnapQ==}
+    peerDependencies:
+      date-fns: '>=2.0.0'
+    dependencies:
+      date-fns: 2.30.0
+    dev: false
 
   /date-fns/2.30.0:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
