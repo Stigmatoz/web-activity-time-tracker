@@ -1,7 +1,7 @@
 import { DayTabs } from '../dto/tabListSummary';
 import { useTabListByDays } from './tab-list-by-days';
 
-const CSV_HEADER = 'date,website,time(sec),sessions\r\n';
+const CSV_HEADER = 'Date,WebSite,Time(sec),Sessions\r\n';
 
 export async function useImportToCsvWithData(days: DayTabs[] | undefined): Promise<string> {
   return getCsv(days);

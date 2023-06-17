@@ -75,6 +75,27 @@
             </div>
             <p class="description">These are any actions with the mouse or keyboard</p>
           </div>
+          <div class="settings-item">
+            <label class="setting-header d-inline-block"
+              >Exporting your web activity data to CSV
+            </label>
+            <p class="description">You can export your web activity for any date range</p>
+            <div class="export-block">
+              <VueDatePicker
+                range
+                :enable-time-picker="false"
+                class="date-picker"
+                v-model="selectedDate"
+                :preset-ranges="presetRanges"
+                @update:model-value="handleDate"
+              >
+                <template #yearly="{ label, range, presetDateRange }">
+                  <span @click="presetDateRange(range)">{{ label }}</span>
+                </template></VueDatePicker
+              >
+              <input type="button" value="Export to CSV" @click="exportToCsv()" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -186,6 +207,9 @@ import { InactivityInterval } from '../storage/storage-params';
 import { isInBlackList } from '../compositions/black-list';
 import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../compositions/extract-hostname';
+import { ranges, ThisWeekRange } from '../utils/date';
+import { useImportToCsv } from '../compositions/toCsv';
+import { FileType, useFile } from '../compositions/loadFile';
 
 const notification = useNotification();
 
@@ -196,6 +220,10 @@ const intervalInactivity = ref<InactivityInterval>();
 const allowDeferringBlock = ref<boolean>();
 const whiteList = ref<string[]>();
 const darkMode = ref<boolean>();
+
+const selectedDate = ref<Date[]>();
+
+const presetRanges = ranges();
 
 const newWebsiteForWhiteList = ref<string>();
 
@@ -214,6 +242,7 @@ onMounted(async () => {
     BLOCK_DEFERRAL_DEFAULT,
   );
   whiteList.value = Object.values(await settingsStorage.getValue(StorageParams.BLACK_LIST, []));
+  selectedDate.value = ThisWeekRange;
 });
 
 async function save(storageParam: StorageParams, value: any) {
@@ -245,6 +274,28 @@ function deleteFromWhiteList(url: string) {
 function onChange(storageParam: StorageParams, value: any) {
   save(storageParam, value);
 }
+
+async function handleDate(modelData: Date[]) {
+  selectedDate.value = modelData;
+}
+
+async function exportToCsv() {
+  const dateFrom = selectedDate.value?.[0] as Date;
+  const dateTo = selectedDate.value?.[1] as Date;
+  if (dateFrom == undefined || dateTo == undefined) {
+    notification.notify({
+      title: 'No time period selected',
+      type: 'warn',
+    });
+  } else {
+    const csv = await useImportToCsv(dateFrom, dateTo);
+    useFile(
+      csv,
+      FileType.CSV,
+      `websites_${dateFrom.toLocaleDateString()}-${dateTo.toLocaleDateString()}.csv`,
+    );
+  }
+}
 </script>
 
 <style scoped>
@@ -261,5 +312,14 @@ function onChange(storageParam: StorageParams, value: any) {
   vertical-align: middle;
   margin-right: 10px;
   cursor: pointer;
+}
+.export-block {
+  display: flex;
+  justify-content: start;
+}
+
+.export-block .date-picker {
+  width: 250px;
+  margin-right: 15px;
 }
 </style>
