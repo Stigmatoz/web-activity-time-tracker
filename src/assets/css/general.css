@@ -45,3 +45,30 @@ select{
 .w-80{
     width: 80%;
 }
+input[type="button"]{
+  background: #428bff;
+  color: #fff;
+  border-radius: 3px;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 20px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
+  width: 200px;
+}
+
+input[type="button"]:hover {
+  background: #5c9dfe;
+  text-decoration: none;
+}
+
+
+input[type="button"][disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

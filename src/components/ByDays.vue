@@ -37,6 +37,7 @@
             <span @click="presetDateRange(range)">{{ label }}</span>
           </template></VueDatePicker
         >
+        <input type="button" value="Export to CSV" @click="exportToCsv()" />
       </div>
       <div class="stats-block block">
         <div class="header">Average time on selected days</div>
@@ -77,6 +78,8 @@ import { TabListByDays } from '../dto/tabListSummary';
 import { useTabListByDays } from '../compositions/tab-list-by-days';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { ranges, ThisWeekRange } from '../utils/date';
+import { useImportToCsvWithData } from '../compositions/toCsv';
+import { useFile, FileType } from '../compositions/loadFile';
 
 const tabsByDays = ref<TabListByDays>();
 const isLoading = ref<boolean>();
@@ -113,6 +116,17 @@ onMounted(async () => {
   const dateTo = selectedDate.value?.[1] as Date;
   await loadList(dateFrom, dateTo);
 });
+
+async function exportToCsv() {
+  const dateFrom = selectedDate.value?.[0] as Date;
+  const dateTo = selectedDate.value?.[1] as Date;
+  const csv = await useImportToCsvWithData(tabsByDays.value?.days);
+  useFile(
+    csv,
+    FileType.CSV,
+    `websites_${dateFrom.toLocaleDateString()}-${dateTo.toLocaleDateString()}.csv`,
+  );
+}
 </script>
 
 <style scoped>
@@ -139,7 +153,9 @@ onMounted(async () => {
   color: rgb(59, 59, 59);
 }
 .date-block {
-  margin: 0 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 25px;
 }
 .date-block .date-picker {
   width: 250px;
