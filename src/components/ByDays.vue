@@ -7,7 +7,21 @@
       No data
     </div>
     <div v-else-if="noData">
-      <div class="no-data">No data for the selected period</div>
+      <div class="no-data">
+        No data for the selected period
+        <VueDatePicker
+          range
+          :enable-time-picker="false"
+          class="date-picker"
+          v-model="selectedDate"
+          :preset-ranges="presetRanges"
+          @update:model-value="handleDate"
+        >
+          <template #yearly="{ label, range, presetDateRange }">
+            <span @click="presetDateRange(range)">{{ label }}</span>
+          </template></VueDatePicker
+        >
+      </div>
     </div>
     <div v-else>
       <div class="date-block">
@@ -80,6 +94,7 @@ async function loadList(dateFrom: Date, dateTo: Date) {
   if (tabList != null) {
     tabsByDays.value = tabList;
     if (tabList.days.length == 0 && tabList.summaryTime == 0) noData.value = true;
+    else noData.value = false;
   }
   isLoading.value = false;
 }
@@ -126,7 +141,14 @@ onMounted(async () => {
 .date-block {
   margin: 0 20px 0 20px;
 }
-.date-picker {
+.date-block .date-picker {
   width: 250px;
+}
+.no-data .date-picker {
+  font-weight: normal;
+  text-align: center;
+  width: 250px;
+  margin: auto;
+  margin-top: 15px;
 }
 </style>
