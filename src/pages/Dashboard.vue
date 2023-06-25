@@ -81,6 +81,7 @@
 import { onMounted, ref } from 'vue';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
+import Limits from '../components/Limits.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
 

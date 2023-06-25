@@ -8,7 +8,8 @@ export async function isLimitExceeded(url: string, tab: Tab): Promise<boolean> {
   const limitList = (await Settings.getInstance().getSetting(
     StorageParams.RESTRICTION_LIST,
   )) as Restriction[];
-  const item = limitList?.find(x => x.domain == url);
+  const array = Object.values(limitList);
+  const item = array?.find(x => x.domain == url);
   if (item != undefined) {
     const date = tab.days.find(x => x.date == todayLocalDate());
     if (date != undefined) {

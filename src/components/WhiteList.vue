@@ -64,18 +64,18 @@ function addToWhiteList() {
   } else {
     const newWebsite = extractHostname(newWebsiteForWhiteList.value!);
     whiteList.value?.push(newWebsite);
-    save(StorageParams.BLACK_LIST, whiteList.value);
+    save(whiteList.value);
     newWebsiteForWhiteList.value = '';
   }
 }
 
 function deleteFromWhiteList(url: string) {
   whiteList.value = whiteList.value!.filter(x => x != url);
-  save(StorageParams.BLACK_LIST, whiteList.value);
+  save(whiteList.value);
 }
 
-async function save(storageParam: StorageParams, value: any) {
-  if (value != undefined) await settingsStorage.saveValue(storageParam, value);
+async function save(value: any) {
+  if (value != undefined) await settingsStorage.saveValue(StorageParams.BLACK_LIST, value);
 }
 </script>
 

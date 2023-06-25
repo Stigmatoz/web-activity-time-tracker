@@ -1,5 +1,10 @@
 import { getToday } from './date';
 
+export type Time = {
+  hours: number;
+  minutes: number;
+};
+
 //Every day - 60 minutes * 24 hours
 export const DAY_MINUTES = 1440;
 
