@@ -37,15 +37,6 @@ async function trackTime() {
     if (isValidPage(activeTab)) {
       const activeDomain = extractHostname(activeTab!.url);
 
-      if (
-        currentObj != null &&
-        currentObj.activeDomain == activeDomain &&
-        !isActiveTabWasChanged(activeDomain)
-      ) {
-        await mainTrackerWrapper(activeTab!, activeDomain, currentObj.tab);
-        return;
-      }
-
       if (await isInBlackList(activeDomain)) {
         useBadge({
           tabId: activeTab!.id!,
@@ -53,6 +44,15 @@ async function trackTime() {
           color: BadgeColor.green,
         });
       } else {
+        if (
+          currentObj != null &&
+          currentObj.activeDomain == activeDomain &&
+          !isActiveTabWasChanged(activeDomain)
+        ) {
+          await mainTrackerWrapper(activeTab!, activeDomain, currentObj.tab);
+          return;
+        }
+
         let tab = repo.getTab(activeDomain);
         if (tab == undefined) {
           tab = await repo.addTab(activeDomain, activeTab?.favIconUrl);
@@ -122,9 +122,9 @@ async function mainTracker(
 }
 
 async function mainTrackerWrapper(activeTab: Browser.Tabs.Tab, activeDomain: string, tab: Tab) {
-  const inactivityInterval = await Settings.getInstance().getSetting(
+  const inactivityInterval = (await Settings.getInstance().getSetting(
     StorageParams.INTERVAL_INACTIVITY,
-  );
+  )) as number;
   const state = await Browser.idle.queryState(inactivityInterval);
   await mainTracker(state, activeTab!, activeDomain, tab);
 }

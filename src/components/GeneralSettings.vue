@@ -6,7 +6,7 @@
         class="filled-in"
         id="viewTimeInBadge"
         v-model="viewTimeInBadge"
-        @change="onChange(StorageParams.VIEW_TIME_IN_BADGE, $event.target.checked)"
+        @change="onChange(StorageParams.VIEW_TIME_IN_BADGE, $event.target)"
       />
       <span>Display time tracker in icon</span>
       <p class="description">
@@ -21,7 +21,7 @@
         class="filled-in"
         id="blockDeferral"
         v-model="allowDeferringBlock"
-        @change="onChange(StorageParams.BLOCK_DEFERRAL, $event.target.checked)"
+        @change="onChange(StorageParams.BLOCK_DEFERRAL, $event.target)"
       />
       <span>Allow deferring block for 5 minutes</span>
       <p class="description">
@@ -36,7 +36,7 @@
         class="filled-in"
         id="darkMode"
         v-model="darkMode"
-        @change="onChange(StorageParams.DARK_MODE, $event.target.checked)"
+        @change="onChange(StorageParams.DARK_MODE, $event.target)"
       />
       <span>Dark mode</span>
       <p class="description">Dark theme</p>
@@ -50,7 +50,7 @@
       <select
         class="option"
         v-model="intervalInactivity"
-        @change="onChange(StorageParams.INTERVAL_INACTIVITY, $event.target.value)"
+        @change="onChange(StorageParams.INTERVAL_INACTIVITY, $event.target)"
       >
         <option :value="InactivityInterval.Seconds_30">30 seconds</option>
         <option :value="InactivityInterval.Seconds_45">45 seconds</option>
@@ -135,8 +135,12 @@ onMounted(async () => {
   selectedDate.value = ThisWeekRange;
 });
 
-async function onChange(storageParam: StorageParams, value: any) {
-  await save(storageParam, value);
+async function onChange(storageParam: StorageParams, target: any) {
+  if (target != null)
+    await save(
+      storageParam,
+      storageParam == StorageParams.INTERVAL_INACTIVITY ? Number(target.value) : target.checked,
+    );
 }
 
 async function save(storageParam: StorageParams, value: any) {

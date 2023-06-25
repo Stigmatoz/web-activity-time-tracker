@@ -64,18 +64,14 @@ function addToWhiteList() {
   } else {
     const newWebsite = extractHostname(newWebsiteForWhiteList.value!);
     whiteList.value?.push(newWebsite);
-    onChange(StorageParams.BLACK_LIST, whiteList.value);
+    save(StorageParams.BLACK_LIST, whiteList.value);
     newWebsiteForWhiteList.value = '';
   }
 }
 
 function deleteFromWhiteList(url: string) {
   whiteList.value = whiteList.value!.filter(x => x != url);
-  onChange(StorageParams.BLACK_LIST, whiteList.value);
-}
-
-async function onChange(storageParam: StorageParams, value: any) {
-  await save(storageParam, value);
+  save(StorageParams.BLACK_LIST, whiteList.value);
 }
 
 async function save(storageParam: StorageParams, value: any) {
