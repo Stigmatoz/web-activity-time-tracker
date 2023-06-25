@@ -6,46 +6,72 @@
       <p class="d-inline-block title">Web Activity Time Tracker</p>
     </div>
     <div class="settings-tab">
-      <input type="radio" id="general-tab" name="settings-group" checked />
+      <input
+        type="radio"
+        id="general-tab"
+        name="settings-group"
+        checked
+        v-on:change="selectTab(SettingsTab.GeneralSettings)"
+      />
       <label name="tabName" for="general-tab">General Settings</label>
 
       <div class="settings-content">
-        <GeneralSettings />
+        <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
       </div>
     </div>
 
     <div class="settings-tab">
-      <input type="radio" id="white-list-tab" name="settings-group" />
+      <input
+        type="radio"
+        id="white-list-tab"
+        name="settings-group"
+        v-on:change="selectTab(SettingsTab.WhiteList)"
+      />
       <label name="tabName" for="white-list-tab">White List</label>
 
       <div class="settings-content">
-        <WhiteList />
+        <WhiteList v-if="selectedTab == SettingsTab.WhiteList" />
       </div>
     </div>
 
     <div class="settings-tab">
-      <input type="radio" id="limits-tab" name="settings-group" />
+      <input
+        type="radio"
+        id="limits-tab"
+        name="settings-group"
+        v-on:change="selectTab(SettingsTab.Limits)"
+      />
       <label name="tabName" for="limits-tab">Limits</label>
 
       <div class="settings-content">
-        <Limits />
+        <Limits v-if="selectedTab == SettingsTab.Limits" />
       </div>
     </div>
     <div class="settings-tab">
-      <input type="radio" id="notification-tab" name="settings-group" />
+      <input
+        type="radio"
+        id="notification-tab"
+        name="settings-group"
+        v-on:change="selectTab(SettingsTab.Notifications)"
+      />
       <label name="tabName" for="notification-tab">Notifications</label>
 
       <div class="settings-content">
-        <Notifications />
+        <Notifications v-if="selectedTab == SettingsTab.Notifications" />
       </div>
     </div>
 
     <div class="settings-tab">
-      <input type="radio" id="about-tab" name="settings-group" />
+      <input
+        type="radio"
+        id="about-tab"
+        name="settings-group"
+        v-on:change="selectTab(SettingsTab.About)"
+      />
       <label name="tabName" for="about-tab">About</label>
 
       <div class="settings-content">
-        <About />
+        <About v-if="selectedTab == SettingsTab.About" />
       </div>
     </div>
   </div>
@@ -56,8 +82,15 @@ import { onMounted, ref } from 'vue';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
 import About from '../components/About.vue';
+import { SettingsTab } from '../utils/enums';
 
-onMounted(async () => {});
+const selectedTab = ref<SettingsTab>();
+
+onMounted(() => (selectedTab.value = SettingsTab.GeneralSettings));
+
+function selectTab(value: SettingsTab) {
+  selectedTab.value = value;
+}
 </script>
 
 <style scoped>
