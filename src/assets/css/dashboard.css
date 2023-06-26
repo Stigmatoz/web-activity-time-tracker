@@ -45,7 +45,7 @@ body {
 }
 
 input[type="text"]{
-    height: 32px;
+    height: 36px;
     padding: 0 0 0 5px;
     width: 400px;
     border-radius: 3px;

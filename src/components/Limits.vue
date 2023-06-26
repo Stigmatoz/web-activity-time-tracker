@@ -1,9 +1,12 @@
 <template>
   <div>
     <p class="setting-header mt-0">Daily restrictions on access to websites:</p>
-    <p class="descrition">
+    <p class="description">
       Set the maximum time allowed to visit the site per day. After this time, the site will be
       blocked.
+    </p>
+    <p class="description">
+      If you set the blocking time to 0 hours 0 minutes, the website will be blocked immediately
     </p>
     <ul readonly class="url-list">
       <li v-for="(limit, i) of limitList" :key="i">
@@ -21,14 +24,14 @@
     <div class="limits-time-block mt-20">
       <input
         type="text"
-        class="d-inline-block height"
+        class="d-inline-block"
         placeholder="Enter website name..."
         v-model="newWebsiteForLimitList"
       />
       <VueDatePicker v-model="time" time-picker class="date-picker height" />
       <input
         type="button"
-        class="d-inline-block small-btn height"
+        class="d-inline-block small-btn"
         value="Add Website"
         :disabled="newWebsiteForLimitList == null || newWebsiteForLimitList == '' || time == null"
         @click="addToLimitList()"
@@ -52,7 +55,6 @@ import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../compositions/extract-hostname';
 import { Restriction } from '../entity/restriction';
 import { convertSecondsToHHMM } from '../utils/converter';
-import { Time } from '../utils/time';
 
 const notification = useNotification();
 

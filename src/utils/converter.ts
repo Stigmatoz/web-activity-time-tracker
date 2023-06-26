@@ -48,6 +48,22 @@ export function convertSummaryTimeToString(summaryTime: number) {
   )}`;
 }
 
+export function convertLimitTimeToString(summaryTime: number) {
+  const totalHours = summaryTime % (3600 * 24);
+  let hours = Math.floor(totalHours / 3600);
+  const totalSeconds = summaryTime % 3600;
+  let mins = Math.floor(totalSeconds / 60);
+
+  hours = zeroAppend(hours);
+  mins = zeroAppend(mins);
+
+  function appendTime(value: number, stringPrefix: string) {
+    return `${value} ${stringPrefix}`;
+  }
+
+  return `${appendTime(hours, 'h')} ${appendTime(mins, 'm')}`;
+}
+
 function zeroAppend(time: number) {
   if (time < 10) return Number('0' + time);
   else return time;

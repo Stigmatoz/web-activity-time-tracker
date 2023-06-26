@@ -86,10 +86,10 @@ async function mainTracker(
 
   const isAudibleValue = isAudible();
   if (state === 'active' || isAudibleValue) {
-    if (await isLimitExceeded(activeDomain, tab)) {
-      const summaryTime = tab.days.at(-1)!.summary;
+    const limitExceeded = await isLimitExceeded(activeDomain, tab);
+    if (limitExceeded.IsLimitExceeded) {
       const summaryCounter = tab.days.at(-1)!.counter;
-      await useBlockPage(activeDomain, summaryTime, summaryCounter);
+      await useBlockPage(activeDomain, limitExceeded.LimitTime!, summaryCounter);
       return;
     }
 
