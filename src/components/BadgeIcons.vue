@@ -1,0 +1,52 @@
+<template>
+  <div class="d-inline-block">
+    <span v-if="showDocumentBadge" class="badge-document">Document</span>
+    <span v-if="showLimitBadge" class="badge-block">Limit</span>
+  </div>
+</template>
+
+<script lang="ts">
+export default {
+  name: 'BadgeIcons',
+};
+</script>
+
+<script lang="ts" setup>
+import { computed, onMounted, ref } from 'vue';
+import { TypeOfList, TypeOfUrl } from '../utils/enums';
+import { isDomainInLimits } from '../compositions/limit-list';
+
+const props = defineProps<{
+  url: string;
+  type: TypeOfUrl;
+  listType: TypeOfList;
+}>();
+
+onMounted(async () => {
+  isLimit.value = await isDomainInLimits(props.url);
+});
+
+const isLimit = ref<boolean>();
+
+const showDocumentBadge = computed(() => props.type == TypeOfUrl.Document);
+const showLimitBadge = computed(() => props.listType == TypeOfList.Today && isLimit.value == true);
+</script>
+
+<style scoped>
+span.badge-document {
+  border-radius: 6px;
+  background-color: #0043ff9e;
+  padding: 3px 7px;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+}
+span.badge-block {
+  border-radius: 6px;
+  background-color: #ff0000c0;
+  padding: 3px 7px;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+}
+</style>

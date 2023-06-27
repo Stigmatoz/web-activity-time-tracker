@@ -25,7 +25,7 @@
       />
       <span>Allow deferring block for 5 minutes</span>
       <p class="description">
-        After the site is blocked, you can postpone the blocking for 5 minutes
+        After the site is blocked, you can postpone the blocking for 5 minutes ones
       </p>
     </label>
   </div>

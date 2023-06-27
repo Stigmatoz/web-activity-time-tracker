@@ -16,3 +16,8 @@ export enum SettingsTab {
   Notifications,
   About,
 }
+
+export enum TypeOfUrl {
+  WebSite,
+  Document,
+}

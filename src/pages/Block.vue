@@ -10,11 +10,11 @@
     <table>
       <tr>
         <td class="title">Limit:</td>
-        <td>{{ limitTime }}</td>
+        <td class="value">{{ limitTime }}</td>
       </tr>
       <tr>
         <td class="title">Sessions:</td>
-        <td>{{ summaryCounter }}</td>
+        <td class="value">{{ summaryCounter }}</td>
       </tr>
     </table>
   </div>
@@ -60,13 +60,13 @@ body {
 
 .block-container span {
   font-weight: 600;
-  font-size: 17px;
+  font-size: 21px;
 }
 
 .header {
   font-weight: 600;
   color: #4a4a4a;
-  font-size: 18px !important;
+  font-size: 19px !important;
   vertical-align: super;
   margin-left: 10px;
 }
@@ -86,5 +86,8 @@ table {
 table .title {
   width: 100px;
   text-align: left;
+}
+table .value {
+  font-weight: 600;
 }
 </style>

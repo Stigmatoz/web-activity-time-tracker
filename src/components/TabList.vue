@@ -20,6 +20,7 @@
         v-for="(tab, i) of tabs"
         :key="i"
         :item="getItem(tab)"
+        :listType="type"
         :summaryTimeForWholeDay="summaryTime"
       />
 

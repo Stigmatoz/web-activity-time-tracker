@@ -41,9 +41,9 @@
       </div>
       <div class="stats-block block">
         <div class="header">Average time on selected days</div>
-        <p>{{ convertSummaryTimeToString(tabsByDays.averageTime) }}</p>
+        <p>{{ convertSummaryTimeToString(tabsByDays!.averageTime) }}</p>
       </div>
-      <ByDaysChart :data="tabsByDays" />
+      <ByDaysChart :data="tabsByDays!" />
       <div>
         <Expander
           v-for="(tabDay, i) of tabsByDays?.days"

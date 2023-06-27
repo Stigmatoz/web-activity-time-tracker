@@ -32,3 +32,12 @@ export async function isLimitExceeded(url: string, tab: Tab): Promise<LimitExcee
     LimitTime: null,
   };
 }
+
+export async function isDomainInLimits(url: string): Promise<boolean> {
+  const limitList = (await Settings.getInstance().getSetting(
+    StorageParams.RESTRICTION_LIST,
+  )) as Restriction[];
+  const array = Object.values(limitList);
+  const item = array?.find(x => isDomainEquals(x.domain, url));
+  return item != undefined;
+}

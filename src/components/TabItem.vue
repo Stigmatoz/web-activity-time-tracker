@@ -5,7 +5,7 @@
       <div class="first-block">
         <div class="w-80">
           <p class="url" @click="openUrl(item.url)">{{ url }}</p>
-          <div class="d-inline-block" v-html="getBadgeIcon()"></div>
+          <BadgeIcons :url="url" :type="typeOfUrl" :listType="listType" />
         </div>
         <p class="text-right time">{{ summaryTimeForTab }}</p>
       </div>
@@ -32,19 +32,17 @@ export default {
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import Favicon from './Favicon.vue';
+import BadgeIcons from './BadgeIcons.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';
 import { CurrentTabItem } from '../dto/currentTabItem';
+import { TypeOfList, TypeOfUrl } from '../utils/enums';
 
 const props = defineProps<{
   item: CurrentTabItem;
   summaryTimeForWholeDay: number;
+  listType: TypeOfList;
 }>();
-
-enum TypeOfUrl {
-  WebSite,
-  Document,
-}
 
 const typeOfUrl = computed(() =>
   props.item.url.startsWith('file:') ? TypeOfUrl.Document : TypeOfUrl.WebSite,
@@ -75,10 +73,6 @@ function openUrl(url: string) {
 }
 
 const showWarningMessage = ref<boolean>();
-
-function getBadgeIcon() {
-  if (typeOfUrl.value == TypeOfUrl.Document) return `<span class="badge-document">Document</span>`;
-}
 </script>
 
 <style scoped>
@@ -140,14 +134,6 @@ function getBadgeIcon() {
 }
 .tab-item .sessions {
   margin: 0 0 0 5px;
-}
-.tab-item ::v-deep span.badge-document {
-  border-radius: 6px;
-  background-color: #0043ff9e;
-  padding: 3px 7px;
-  font-size: 11px;
-  color: white;
-  font-weight: 600;
 }
 .tab-item .warning-message {
   color: grey;
