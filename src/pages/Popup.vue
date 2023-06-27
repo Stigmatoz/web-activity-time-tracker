@@ -5,8 +5,8 @@
       <p class="header">Web Activity Time Tracker</p>
     </div>
     <div class="icons-block">
-      <img height="17" src="../assets/icons/dark-mode.svg" />
-      <img height="17" src="../assets/icons/settings.svg" @click="openDashboard()" />
+      <!-- <img height="17" src="../assets/icons/dark-mode.svg" /> -->
+      <a @click="openDashboard()">Settings<img height="22" src="../assets/icons/settings.svg" /></a>
     </div>
   </div>
   <div class="tabs">
@@ -111,5 +111,15 @@ function selectTab(type: TypeOfList) {
 .headerBlock .icons-block {
   float: right;
   margin: 7px 10px 0 0;
+}
+
+.headerBlock .icons-block a {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.headerBlock .icons-block a img {
+  vertical-align: middle;
+  padding-left: 5px !important;
 }
 </style>

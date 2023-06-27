@@ -29,7 +29,7 @@
       </p>
     </label>
   </div>
-  <div class="settings-item">
+  <!-- <div class="settings-item">
     <label class="setting-header">
       <input
         type="checkbox"
@@ -41,7 +41,7 @@
       <span>Dark mode</span>
       <p class="description">Dark theme</p>
     </label>
-  </div>
+  </div> -->
   <div class="settings-item">
     <label class="setting-header d-inline-block"
       >Stop tracking if there is no activity during:
