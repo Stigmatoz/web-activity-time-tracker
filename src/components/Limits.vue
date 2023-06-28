@@ -16,6 +16,11 @@
             height="16"
             @click="deleteFromLimitList(limit.domain)"
           />
+          <img
+            src="../assets/icons/edit.svg"
+            height="16"
+            @click="editItemFromLimitList(limit.domain, limit.time)"
+          />
           {{ limit.domain }}
           <p class="time-value">{{ getTimeForLimit(limit.time) }}</p>
         </div>
@@ -24,6 +29,7 @@
     <div class="limits-time-block mt-20">
       <input
         type="text"
+        :disabled="isEdit"
         class="d-inline-block"
         placeholder="Enter website name..."
         v-model="newWebsiteForLimitList"
@@ -32,9 +38,9 @@
       <input
         type="button"
         class="d-inline-block small-btn"
-        value="Add Website"
+        :value="!isEdit ? 'Add Website' : 'Save'"
         :disabled="newWebsiteForLimitList == null || newWebsiteForLimitList == '' || time == null"
-        @click="addToLimitList()"
+        @click="isEdit ? editItem() : addToLimitList()"
       />
     </div>
   </div>
@@ -54,7 +60,7 @@ import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../compositions/extract-hostname';
 import { Restriction } from '../entity/restriction';
-import { convertSecondsToHHMM } from '../utils/converter';
+import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 
 const notification = useNotification();
 
@@ -66,6 +72,7 @@ const time = ref({
   minutes: 30,
 });
 const newWebsiteForLimitList = ref<string>();
+const isEdit = ref<boolean>();
 
 onMounted(async () => {
   limitList.value = Object.values(
@@ -102,6 +109,26 @@ function getTimeForLimit(time: number) {
 function deleteFromLimitList(url: string) {
   limitList.value = limitList.value!.filter(x => x.domain != url);
   save(limitList.value);
+}
+
+function editItemFromLimitList(url: string, timeForUrl: number) {
+  isEdit.value = true;
+  newWebsiteForLimitList.value = url;
+  const timeObj = convertSecondsToHHMM(timeForUrl);
+  time.value.hours = timeObj.hours;
+  time.value.minutes = timeObj.minutes;
+}
+
+function editItem() {
+  const existingItem = limitList.value?.find(x =>
+    isDomainEquals(extractHostname(x.domain), extractHostname(newWebsiteForLimitList.value!)),
+  );
+  if (existingItem != undefined) {
+    existingItem.time = convertHHMMToSeconds(time.value.hours, time.value.minutes);
+    save(limitList.value);
+    newWebsiteForLimitList.value = '';
+    isEdit.value = false;
+  }
 }
 
 async function save(value: any) {
