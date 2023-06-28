@@ -38,6 +38,7 @@ import { defering, canDefering } from '../compositions/deferList';
 const settingsStorage = injecStorage();
 
 const webSite = ref<string>();
+const sourceUrl = ref<string>();
 const limitTime = ref<number>();
 const limitTimeString = ref<string>();
 const summaryCounter = ref<number>();
@@ -47,6 +48,7 @@ const haveToShowDeffering = ref<boolean>();
 onMounted(async () => {
   const queryObj = getValueFromQuery(location.href);
   webSite.value = queryObj.domain ?? '';
+  sourceUrl.value = queryObj.url ?? '';
   limitTime.value = queryObj.limitTime;
   limitTimeString.value = convertLimitTimeToString(queryObj.limitTime);
   summaryCounter.value = queryObj.summaryCounter ?? 0;
@@ -66,7 +68,7 @@ async function deferring() {
     haveToShowDeffering.value
   ) {
     await defering(webSite.value, 5);
-    //window.open(document.referrer);
+    if (sourceUrl.value != '') window.open(sourceUrl.value);
   }
 }
 </script>

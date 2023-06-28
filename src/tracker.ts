@@ -89,7 +89,7 @@ async function mainTracker(
     const limitExceeded = await isLimitExceeded(activeDomain, tab);
     if (limitExceeded.IsLimitExceeded) {
       const summaryCounter = tab.days.at(-1)!.counter;
-      await useBlockPage(activeDomain, limitExceeded.LimitTime!, summaryCounter);
+      await useBlockPage(activeDomain, activeTab.url!, limitExceeded.LimitTime!, summaryCounter);
       return;
     }
 
