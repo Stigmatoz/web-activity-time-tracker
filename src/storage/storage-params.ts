@@ -1,5 +1,6 @@
 import { Tab } from '../entity/tab';
 import { TimeInterval } from '../entity/time-interval';
+import { HOUR } from '../utils/time';
 
 export enum StorageParams {
   BLACK_LIST = 'black_list',
@@ -10,7 +11,8 @@ export enum StorageParams {
   DARK_MODE = 'night_mode',
   VIEW_TIME_IN_BADGE = 'view_time_in_badge',
   BLOCK_DEFERRAL = 'view_block_deferral',
-  DAILY_SUMMARY_NOTIFICATION_TIME = 'dailySummaryNotificationTime',
+  BLOCK_DEFERRAL_TIME = 'view_block_deferral_time',
+  DAILY_SUMMARY_NOTIFICATION_TIME = 'daily-summary-notification-time',
 }
 
 export enum StorageDeserializeParam {
@@ -50,7 +52,7 @@ export const VIEW_TIME_IN_BADGE_DEFAULT = true;
 export const BLOCK_DEFERRAL_DEFAULT = true;
 export const SHOW_HINT_DEFAULT = true;
 // default time is 20:00, time in miliseconds
-export const DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT = 20 * 60 * 60 * 1000;
+export const DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT = 20 * HOUR;
 
 export function getDefaultValue(param: StorageParams) {
   switch (param) {
@@ -70,6 +72,8 @@ export function getDefaultValue(param: StorageParams) {
       return VIEW_TIME_IN_BADGE_DEFAULT;
     case StorageParams.BLOCK_DEFERRAL:
       return BLOCK_DEFERRAL_DEFAULT;
+    case StorageParams.BLOCK_DEFERRAL_TIME:
+      return [];
     case StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME:
       return DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT;
   }

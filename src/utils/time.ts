@@ -7,6 +7,9 @@ export type Time = {
 
 //Every day - 60 minutes * 24 hours
 export const DAY_MINUTES = 1440;
+export const SECOND = 1000;
+export const MINUTE = 60 * SECOND;
+export const HOUR = 60 * MINUTE;
 
 export function getNextTimeOfDay(timeOfDay: number): number {
   const todaysTime = getToday() + timeOfDay;

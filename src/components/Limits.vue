@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="setting-header mt-0">Daily restrictions on access to websites:</p>
+    <p class="setting-header mt-0">Daily restrictions on access to websites</p>
     <p class="description">
       Set the maximum time allowed to visit the site per day. After this time, the site will be
       blocked.

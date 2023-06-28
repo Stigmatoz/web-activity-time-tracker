@@ -3,6 +3,8 @@ import { Tab } from '../entity/tab';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { todayLocalDate } from '../utils/date';
+import { isInDeferList } from './deferList';
+import { log } from './logger';
 import { Settings } from './settings';
 
 export type LimitExceed = {
@@ -19,11 +21,20 @@ export async function isLimitExceeded(url: string, tab: Tab): Promise<LimitExcee
   if (item != undefined) {
     const date = tab.days.find(x => x.date == todayLocalDate());
     if (date != undefined) {
-      if (date.summary >= item.time)
+      if (date.summary >= item.time) {
+        log(`Limit Exceeded: website ${url} limit ${item.time} summary time ${date.summary}`);
+        if (await isInDeferList(url)) {
+          return {
+            IsLimitExceeded: false,
+            LimitTime: null,
+          };
+        }
+
         return {
           IsLimitExceeded: true,
           LimitTime: item.time,
         };
+      }
     }
   }
 

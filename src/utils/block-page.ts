@@ -1,5 +1,3 @@
-import { convertLimitTimeToString } from './converter';
-
 export enum BlockParams {
   Domain = 'url',
   LimitTime = 'summaryTime',
@@ -18,7 +16,7 @@ export function getValueFromQuery(url: string) {
 
   return {
     domain: domain,
-    limitTime: convertLimitTimeToString(limitTime),
+    limitTime: limitTime,
     summaryCounter: summaryCounter,
   };
 }

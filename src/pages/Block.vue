@@ -10,30 +10,65 @@
     <table>
       <tr>
         <td class="title">Limit:</td>
-        <td class="value">{{ limitTime }}</td>
+        <td class="value">{{ limitTimeString }}</td>
       </tr>
       <tr>
         <td class="title">Sessions:</td>
         <td class="value">{{ summaryCounter }}</td>
       </tr>
     </table>
+    <input
+      v-if="allowDeferringBlock && haveToShowDeffering"
+      type="button"
+      class="mt-20"
+      value="+5 minutes"
+      @click="deferring()"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { getValueFromQuery } from '../utils/block-page';
+import { injecStorage } from '../storage/inject-storage';
+import { BLOCK_DEFERRAL_DEFAULT, StorageParams } from '../storage/storage-params';
+import { convertLimitTimeToString } from '../utils/converter';
+import { defering, canDefering } from '../compositions/deferList';
+
+const settingsStorage = injecStorage();
 
 const webSite = ref<string>();
-const limitTime = ref<string>();
+const limitTime = ref<number>();
+const limitTimeString = ref<string>();
 const summaryCounter = ref<number>();
+const allowDeferringBlock = ref<boolean>();
+const haveToShowDeffering = ref<boolean>();
 
-onMounted(() => {
+onMounted(async () => {
   const queryObj = getValueFromQuery(location.href);
   webSite.value = queryObj.domain ?? '';
   limitTime.value = queryObj.limitTime;
+  limitTimeString.value = convertLimitTimeToString(queryObj.limitTime);
   summaryCounter.value = queryObj.summaryCounter ?? 0;
+
+  allowDeferringBlock.value = await settingsStorage.getValue(
+    StorageParams.BLOCK_DEFERRAL,
+    BLOCK_DEFERRAL_DEFAULT,
+  );
+  haveToShowDeffering.value = await canDefering(webSite.value);
 });
+
+async function deferring() {
+  if (
+    webSite.value != undefined &&
+    limitTime.value != undefined &&
+    allowDeferringBlock.value &&
+    haveToShowDeffering.value
+  ) {
+    await defering(webSite.value, 5);
+    //window.open(document.referrer);
+  }
+}
 </script>
 
 <style scoped>
