@@ -13,6 +13,7 @@ export enum StorageParams {
   BLOCK_DEFERRAL = 'view_block_deferral',
   BLOCK_DEFERRAL_TIME = 'view_block_deferral_time',
   DAILY_SUMMARY_NOTIFICATION_TIME = 'daily-summary-notification-time',
+  DAILY_NOTIFICATION = 'daily_notification',
 }
 
 export enum StorageDeserializeParam {
@@ -51,8 +52,9 @@ export const DARK_MODE_DEFAULT = false;
 export const VIEW_TIME_IN_BADGE_DEFAULT = true;
 export const BLOCK_DEFERRAL_DEFAULT = true;
 export const SHOW_HINT_DEFAULT = true;
-// default time is 20:00, time in miliseconds
-export const DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT = 20 * HOUR;
+// default time is 20:00, time in seconds
+export const DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT = (20 * HOUR) / 1000;
+export const DAILY_NOTIFICATION_DEFAULT = true;
 
 export function getDefaultValue(param: StorageParams) {
   switch (param) {

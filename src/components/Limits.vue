@@ -61,13 +61,14 @@ import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../compositions/extract-hostname';
 import { Restriction } from '../entity/restriction';
 import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
+import { Time } from '../utils/time';
 
 const notification = useNotification();
 
 const settingsStorage = injecStorage();
 
 const limitList = ref<Restriction[]>();
-const time = ref({
+const time = ref<Time>({
   hours: 0,
   minutes: 30,
 });

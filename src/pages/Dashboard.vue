@@ -57,7 +57,7 @@
       <label name="tabName" for="notification-tab">Notifications</label>
 
       <div class="settings-content">
-        <Notifications v-if="selectedTab == SettingsTab.Notifications" />
+        <DailyNotifications v-if="selectedTab == SettingsTab.Notifications" />
       </div>
     </div>
 
@@ -82,6 +82,7 @@ import { onMounted, ref } from 'vue';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
 import Limits from '../components/Limits.vue';
+import DailyNotifications from '../components/Notifications.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
 

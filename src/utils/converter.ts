@@ -1,4 +1,3 @@
-import { min } from 'date-fns';
 import { Time } from './time';
 
 export function convertHHMMToSeconds(hours: number, minutes: number) {
