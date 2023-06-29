@@ -44,7 +44,7 @@ import {
   DAILY_NOTIFICATION_DEFAULT,
   DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT,
 } from '../storage/storage-params';
-import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
+import { convertHHMMToMilliSeconds, convertMilliSecondsToHHMM } from '../utils/converter';
 import { Time } from '../utils/time';
 
 const settingsStorage = injecStorage();
@@ -64,7 +64,7 @@ onMounted(async () => {
     DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT,
   )) as number;
 
-  const timeObj = convertSecondsToHHMM(dailyNotificationTime.value);
+  const timeObj = convertMilliSecondsToHHMM(dailyNotificationTime.value);
   notificationTime.value = timeObj;
 });
 
@@ -73,7 +73,7 @@ function handleDate(modelData: Time) {
     notificationTime.value = modelData;
     save(
       StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
-      convertHHMMToSeconds(notificationTime.value.hours, notificationTime.value.minutes),
+      convertHHMMToMilliSeconds(notificationTime.value.hours, notificationTime.value.minutes),
     );
   }
 }

@@ -1,13 +1,28 @@
-import { Time } from './time';
+import { HOUR, MINUTE, Time } from './time';
 
 export function convertHHMMToSeconds(hours: number, minutes: number) {
   return hours * 3600 + minutes * 60;
+}
+
+export function convertHHMMToMilliSeconds(hours: number, minutes: number) {
+  return hours * HOUR + minutes * MINUTE;
 }
 
 export function convertSecondsToHHMM(seconds: number): Time {
   const hours = Math.floor(seconds / 3600);
   const totalSeconds = seconds % 3600;
   const mins = Math.floor(totalSeconds / 60);
+
+  return {
+    hours: hours,
+    minutes: mins,
+  };
+}
+
+export function convertMilliSecondsToHHMM(seconds: number): Time {
+  const hours = Math.floor(seconds / HOUR);
+  const totalSeconds = seconds % HOUR;
+  const mins = Math.floor(totalSeconds / MINUTE);
 
   return {
     hours: hours,

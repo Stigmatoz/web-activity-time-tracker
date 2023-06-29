@@ -1,4 +1,4 @@
-import { differenceInCalendarDays } from 'date-fns';
+import { differenceInHours } from 'date-fns';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { Settings } from './settings';
@@ -15,16 +15,12 @@ export async function isInDeferList(url: string): Promise<boolean> {
   const item = array?.find(x => isDomainEquals(x.domain, url));
   if (item != undefined)
     log(
-      `Deferring time ${url} ${new Date(item.time)} diff ${differenceInCalendarDays(
+      `Deferring time ${url} ${new Date(item.time)} diff ${differenceInHours(
         new Date(item.time),
         new Date(),
       )}`,
     );
-  return (
-    item != undefined &&
-    item.time > Date.now() &&
-    differenceInCalendarDays(new Date(item.time), new Date()) == 0
-  );
+  return item != undefined && item.time > Date.now();
 }
 
 export async function canDefering(url: string): Promise<boolean> {
@@ -35,16 +31,14 @@ export async function canDefering(url: string): Promise<boolean> {
   const item = array?.find(x => isDomainEquals(x.domain, url));
   if (item != undefined)
     log(
-      `Deferring time ${url} ${new Date(item.time)} diff ${differenceInCalendarDays(
+      `Deferring time ${url} ${new Date(item.time)} diff ${differenceInHours(
         new Date(item.time),
         new Date(),
       )}`,
     );
-  return !(
-    item != undefined &&
-    ((item.time < Date.now() && differenceInCalendarDays(new Date(item.time), new Date()) == 0) ||
-      item.time > Date.now())
-  );
+  if (item == undefined) return true;
+
+  return item != undefined && differenceInHours(new Date(item.time), new Date()) > 24;
 }
 
 export async function defering(url: string, timeInMinutes: number): Promise<void> {

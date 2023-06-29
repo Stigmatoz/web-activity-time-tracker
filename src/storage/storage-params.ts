@@ -78,5 +78,7 @@ export function getDefaultValue(param: StorageParams) {
       return [];
     case StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME:
       return DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT;
+    case StorageParams.DAILY_NOTIFICATION:
+      return DAILY_NOTIFICATION_DEFAULT;
   }
 }

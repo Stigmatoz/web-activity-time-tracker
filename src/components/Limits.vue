@@ -110,6 +110,8 @@ function getTimeForLimit(time: number) {
 function deleteFromLimitList(url: string) {
   limitList.value = limitList.value!.filter(x => x.domain != url);
   save(limitList.value);
+  newWebsiteForLimitList.value = '';
+  isEdit.value = false;
 }
 
 function editItemFromLimitList(url: string, timeForUrl: number) {
