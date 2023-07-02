@@ -10,14 +10,14 @@
     "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
-    "@kyvg/vue3-notification": "^2.9.1",
-    "@vuepic/vue-datepicker": "^5.3.0",
     "chart.js": "^4.3.0",
     "date-fns": "^2.30.0",
     "vue": "^3.2.47",
     "vue-chartjs": "^5.2.0"
   },
   "devDependencies": {
+    "@kyvg/vue3-notification": "^2.9.1",
+    "@vuepic/vue-datepicker": "^5.3.0",
     "@types/webextension-polyfill": "^0.10.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "typescript": "^5.0.4",
