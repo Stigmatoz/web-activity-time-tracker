@@ -1,6 +1,7 @@
 import { MINUTE } from '../utils/time';
+import { BaseTimeList } from './baseTimeList';
 
-export class Deffering {
+export class Deffering implements BaseTimeList {
   domain: string;
   time: number;
 

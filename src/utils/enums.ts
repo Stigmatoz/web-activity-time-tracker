@@ -17,6 +17,11 @@ export enum SettingsTab {
   About,
 }
 
+export enum ListWithTime {
+  Limits,
+  Notifications,
+}
+
 export enum TypeOfUrl {
   WebSite,
   Document,

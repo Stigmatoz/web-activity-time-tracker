@@ -32,7 +32,7 @@ export async function rescheduleJobs(): Promise<void> {
   await Browser.alarms.clear(JobId.DailySummaryNotification);
   Browser.alarms.create(JobId.DailySummaryNotification, {
     when: getNextTimeOfDay(dailySummaryNotificationTime),
-    periodInMinutes: 1,
+    periodInMinutes: DAY_MINUTES,
   });
 }
 

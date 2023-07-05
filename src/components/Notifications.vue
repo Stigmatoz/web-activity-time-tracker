@@ -27,6 +27,13 @@
         class="date-picker d-inline-block"
       />
     </div>
+    <div class="settings-item">
+      <label class="setting-header">Notifications for websites</label>
+      <p class="description">
+        Show notifications every time you spend a certain period of time on the website
+      </p>
+      <ListWithTimeComponent :type="ListWithTime.Notifications" />
+    </div>
   </div>
 </template>
 
@@ -44,8 +51,11 @@ import {
   DAILY_NOTIFICATION_DEFAULT,
   DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT,
 } from '../storage/storage-params';
-import { convertHHMMToMilliSeconds, convertMilliSecondsToHHMM } from '../utils/converter';
+import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { Time } from '../utils/time';
+import { rescheduleJobs } from '../jobs/sheduler';
+import ListWithTimeComponent from '../components/ListWithTime.vue';
+import { ListWithTime } from '../utils/enums';
 
 const settingsStorage = injecStorage();
 
@@ -64,17 +74,18 @@ onMounted(async () => {
     DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT,
   )) as number;
 
-  const timeObj = convertMilliSecondsToHHMM(dailyNotificationTime.value);
+  const timeObj = convertSecondsToHHMM(dailyNotificationTime.value);
   notificationTime.value = timeObj;
 });
 
-function handleDate(modelData: Time) {
+async function handleDate(modelData: Time) {
   if (modelData != null) {
     notificationTime.value = modelData;
     save(
       StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
-      convertHHMMToMilliSeconds(notificationTime.value.hours, notificationTime.value.minutes),
+      convertHHMMToSeconds(notificationTime.value.hours, notificationTime.value.minutes),
     );
+    await rescheduleJobs();
   }
 }
 

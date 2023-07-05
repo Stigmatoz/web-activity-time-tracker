@@ -306,3 +306,11 @@ label{
     margin-right: 10px;
     cursor: pointer;
 }
+.url-list {
+    width: 655px !important;
+  }
+  
+  .url-list .time-value {
+    margin-top: 5px;
+    margin-left: 30px;
+  }

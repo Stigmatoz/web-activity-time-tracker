@@ -12,7 +12,7 @@
     <div class="mt-20">
       <input
         type="text"
-        class="d-inline-block"
+        class="d-inline-block custom-width"
         placeholder="Enter website name..."
         v-model="newWebsiteForWhiteList"
       />
@@ -84,5 +84,9 @@ async function save(value: any) {
   font-size: 14px;
   margin-bottom: 30px;
   display: block;
+}
+
+.custom-width {
+  width: 538px;
 }
 </style>
