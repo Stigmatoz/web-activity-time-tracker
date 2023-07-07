@@ -14,6 +14,8 @@ import { Tab } from './entity/tab';
 import { useBlockPage } from './compositions/block-page';
 import { convertSummaryTimeToBadgeString } from './utils/converter';
 import { Settings } from './compositions/settings';
+import { isNeedToShowNotification } from './compositions/notification-list';
+import { NotificationType, showNotification } from './compositions/show-notification';
 
 const activeTabInstance = ActiveTab.getInstance();
 
@@ -101,6 +103,14 @@ async function mainTracker(
     }
     if (tab.favicon == '' && activeTab.favIconUrl != undefined)
       tab.setFavicon(activeTab.favIconUrl);
+
+    if (await isNeedToShowNotification(activeDomain, tab)) {
+      const message = (await Settings.getInstance().getSetting(
+        StorageParams.NOTIFICATION_MESSAGE,
+      )) as string;
+      const title = `${activeDomain} notification`;
+      await showNotification(NotificationType.WebSiteNotification, title, message);
+    }
 
     tab.incSummaryTime();
 

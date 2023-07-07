@@ -24,6 +24,7 @@ export async function isLimitExceeded(url: string, tab: Tab): Promise<LimitExcee
       if (date.summary >= item.time) {
         log(`Limit Exceeded: website ${url} limit ${item.time} summary time ${date.summary}`);
         if (await isInDeferList(url)) {
+          log(`Page ${url} is in deffering list`);
           return {
             IsLimitExceeded: false,
             LimitTime: null,

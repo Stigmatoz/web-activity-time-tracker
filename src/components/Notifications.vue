@@ -34,6 +34,23 @@
       </p>
       <ListWithTimeComponent :type="ListWithTime.Notifications" />
     </div>
+    <div class="settings-item">
+      <label class="setting-header">Notification message</label>
+      <p class="description">You will see this message in notification for websites every time</p>
+      <input
+        type="text"
+        class=""
+        placeholder="Enter notification message name..."
+        v-model="notificationMessage"
+      />
+      <input
+        type="button"
+        class="d-inline-block small-btn ml-10 width"
+        value="Save"
+        :disabled="notificationMessage == ''"
+        @click="saveNotificationMessage()"
+      />
+    </div>
   </div>
 </template>
 
@@ -46,7 +63,7 @@ export default {
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { injecStorage } from '../storage/inject-storage';
-import { StorageParams } from '../storage/storage-params';
+import { NOTIFICATION_MESSAGE_DEFAULT, StorageParams } from '../storage/storage-params';
 import {
   DAILY_NOTIFICATION_DEFAULT,
   DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT,
@@ -62,11 +79,17 @@ const settingsStorage = injecStorage();
 const showDailyNotifacation = ref<boolean>();
 const dailyNotificationTime = ref<number>();
 const notificationTime = ref<Time>();
+const notificationMessage = ref<string>();
 
 onMounted(async () => {
   showDailyNotifacation.value = await settingsStorage.getValue(
     StorageParams.DAILY_NOTIFICATION,
     DAILY_NOTIFICATION_DEFAULT,
+  );
+
+  notificationMessage.value = await settingsStorage.getValue(
+    StorageParams.NOTIFICATION_MESSAGE,
+    NOTIFICATION_MESSAGE_DEFAULT,
   );
 
   dailyNotificationTime.value = (await settingsStorage.getValue(
@@ -77,6 +100,10 @@ onMounted(async () => {
   const timeObj = convertSecondsToHHMM(dailyNotificationTime.value);
   notificationTime.value = timeObj;
 });
+
+async function saveNotificationMessage() {
+  save(StorageParams.NOTIFICATION_MESSAGE, notificationMessage.value);
+}
 
 async function handleDate(modelData: Time) {
   if (modelData != null) {
@@ -102,5 +129,8 @@ async function save(storageParam: StorageParams, value: any) {
 .date-picker {
   width: 120px;
   margin: 0 15px;
+}
+.width {
+  width: 540px;
 }
 </style>
