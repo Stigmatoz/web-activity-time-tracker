@@ -1,7 +1,7 @@
 import Browser, { Alarms } from 'webextension-polyfill';
 import { log } from '../compositions/logger';
 import { StorageParams } from '../storage/storage-params';
-import { DAY_MINUTES, getNextTimeOfDay } from '../utils/time';
+import { DAY_MINUTES, SECOND, getNextTimeOfDay } from '../utils/time';
 import { Settings } from '../compositions/settings';
 import { dailySummaryNotification } from './daily-summary-notification';
 
@@ -31,7 +31,7 @@ export async function rescheduleJobs(): Promise<void> {
   )) as number;
   await Browser.alarms.clear(JobId.DailySummaryNotification);
   Browser.alarms.create(JobId.DailySummaryNotification, {
-    when: getNextTimeOfDay(dailySummaryNotificationTime),
+    when: getNextTimeOfDay(dailySummaryNotificationTime * SECOND),
     periodInMinutes: DAY_MINUTES,
   });
 }
