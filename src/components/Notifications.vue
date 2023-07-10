@@ -70,9 +70,10 @@ import {
 } from '../storage/storage-params';
 import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { Time } from '../utils/time';
-import { rescheduleJobs } from '../jobs/sheduler';
 import ListWithTimeComponent from '../components/ListWithTime.vue';
 import { ListWithTime } from '../utils/enums';
+import Browser from 'webextension-polyfill';
+import { Messages } from '../utils/messages';
 
 const settingsStorage = injecStorage();
 
@@ -112,7 +113,7 @@ async function handleDate(modelData: Time) {
       StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
       convertHHMMToSeconds(notificationTime.value.hours, notificationTime.value.minutes),
     );
-    await rescheduleJobs();
+    Browser.runtime.sendMessage(Messages.RescheduleJobs);
   }
 }
 

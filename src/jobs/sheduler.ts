@@ -6,6 +6,7 @@ import { Settings } from '../compositions/settings';
 import { dailySummaryNotification } from './daily-summary-notification';
 import { removeOldTimeIntervals } from './remove-time-intervals';
 import { startOfTomorrow } from 'date-fns';
+import { Messages } from '../utils/messages';
 
 export enum JobId {
   DailySummaryNotification = '@alarm/daily-summary-notification',
@@ -28,10 +29,14 @@ export function scheduleJobs(): void {
     log(`[schedule-jobs] ${alarm.name} finished`);
   });
 
+  Browser.runtime.onMessage.addListener(message => {
+    if (message == Messages.RescheduleJobs) rescheduleJobs();
+  });
+
   rescheduleJobs();
 }
 
-export async function rescheduleJobs(): Promise<void> {
+async function rescheduleJobs(): Promise<void> {
   log('Reschedule jobs');
   const dailySummaryNotificationTime = (await Settings.getInstance().getSetting(
     StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
