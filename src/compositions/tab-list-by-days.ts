@@ -1,6 +1,7 @@
 import { CurrentTabItem } from '../dto/currentTabItem';
 import { DayTabs, TabListByDays } from '../dto/tabListSummary';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
+import { isSameDay } from 'date-fns';
 
 export async function useTabListByDays(
   dateFrom: Date,
@@ -12,8 +13,12 @@ export async function useTabListByDays(
 
   if (unSortedTabs.length == 0) return null;
 
-  const unSortedTabsByDays = unSortedTabs.filter(
-    x => x.days.find(s => new Date(s.date) >= dateFrom && new Date(s.date) <= dateTo) != undefined,
+  const isTheSameDay = isSameDay(dateFrom, dateTo);
+
+  const unSortedTabsByDays = unSortedTabs.filter(x =>
+    isTheSameDay
+      ? x.days.find(s => isSameDay(new Date(s.date), dateFrom)) != undefined
+      : x.days.find(s => new Date(s.date) >= dateFrom && new Date(s.date) <= dateTo) != undefined,
   );
 
   if (unSortedTabsByDays.length == 0)
@@ -25,7 +30,10 @@ export async function useTabListByDays(
 
   unSortedTabsByDays.forEach(tab => {
     tab.days.forEach(day => {
-      if (new Date(day.date) >= dateFrom && new Date(day.date) <= dateTo) {
+      if (
+        (new Date(day.date) >= dateFrom && new Date(day.date) <= dateTo) ||
+        (isTheSameDay && isSameDay(new Date(day.date), dateFrom))
+      ) {
         let dayTab = daysTabs.find(x => x.day == day.date);
         if (dayTab == undefined) {
           dayTab = {
