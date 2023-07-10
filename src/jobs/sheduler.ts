@@ -4,9 +4,12 @@ import { StorageParams } from '../storage/storage-params';
 import { DAY_MINUTES, SECOND, getNextTimeOfDay } from '../utils/time';
 import { Settings } from '../compositions/settings';
 import { dailySummaryNotification } from './daily-summary-notification';
+import { removeOldTimeIntervals } from './remove-time-intervals';
+import { startOfTomorrow } from 'date-fns';
 
 export enum JobId {
   DailySummaryNotification = '@alarm/daily-summary-notification',
+  RemoveOldTimeIntervals = '@alarm/remove-old-time-intervals',
 }
 
 export function scheduleJobs(): void {
@@ -15,6 +18,10 @@ export function scheduleJobs(): void {
     switch (alarm.name) {
       case JobId.DailySummaryNotification: {
         await dailySummaryNotification();
+        break;
+      }
+      case JobId.RemoveOldTimeIntervals: {
+        await removeOldTimeIntervals();
         break;
       }
     }
@@ -32,6 +39,11 @@ export async function rescheduleJobs(): Promise<void> {
   await Browser.alarms.clear(JobId.DailySummaryNotification);
   Browser.alarms.create(JobId.DailySummaryNotification, {
     when: getNextTimeOfDay(dailySummaryNotificationTime * SECOND),
+    periodInMinutes: DAY_MINUTES,
+  });
+
+  await createAlarmIfMissing(JobId.RemoveOldTimeIntervals, {
+    when: startOfTomorrow().getTime(),
     periodInMinutes: DAY_MINUTES,
   });
 }
