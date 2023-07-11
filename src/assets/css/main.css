@@ -203,3 +203,28 @@ body {
 .tabs ul li label img {
   height: 1.2em;
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.tooltip .tooltiptext {
+  font-size: 11px;
+  font-weight: 500;
+  visibility: hidden;
+  width: 180px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 10px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  transform: translate(-55%) translateY(-125%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

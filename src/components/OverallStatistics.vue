@@ -30,14 +30,62 @@
     </div>
     <div class="row">
       <div class="block">
-        <div class="header">The most active day</div>
-        <p>{{ data.mostActiveDay.date.toLocaleDateString() }}</p>
-        <p>{{ convertSummaryTimeToString(data.mostActiveDay.summaryTime) }}</p>
+        <div class="header">
+          The most active day
+          <div class="tooltip">
+            <img
+              v-if="isIncludedCurrentForActiveDays"
+              src="../assets/icons/today.svg"
+              height="20"
+              class="most-day"
+              @click="excludeTodayFromMostActive()"
+            />
+            <img
+              v-if="!isIncludedCurrentForActiveDays"
+              src="../assets/icons/no-today.svg"
+              height="20"
+              class="most-day"
+              @click="excludeTodayFromMostActive()"
+            />
+            <span class="tooltiptext">{{
+              isIncludedCurrentForActiveDays
+                ? 'Today is included in the statistics. Click if you want to exclude today.'
+                : 'Today is excluded from the statistics. Click if you want to include today.'
+            }}</span>
+          </div>
+        </div>
+        <p>{{ mostActiveDay }}</p>
+        <p>{{ mostActiveDayTime }}</p>
       </div>
       <div class="block">
-        <div class="header">The most inactive day</div>
-        <p>{{ data.mostInactiveDay.date.toLocaleDateString() }}</p>
-        <p>{{ convertSummaryTimeToString(data.mostInactiveDay.summaryTime) }}</p>
+        <div class="header">
+          The most inactive day
+          <div class="tooltip">
+            <img
+              v-if="isIncludedCurrentForInActiveDays"
+              src="../assets/icons/today.svg"
+              height="20"
+              class="most-day"
+              @click="excludeTodayFromMostInActive()"
+            />
+            <img
+              v-if="!isIncludedCurrentForInActiveDays"
+              src="../assets/icons/no-today.svg"
+              height="20"
+              class="most-day"
+              @click="excludeTodayFromMostInActive()"
+            />
+            <span class="tooltiptext">{{
+              isIncludedCurrentForInActiveDays
+                ? 'Today is included in the statistics. Click if you want to exclude today.'
+                : 'Today is excluded from the statistics. Click if you want to include today.'
+            }}</span>
+          </div>
+        </div>
+        <p>{{ mostInActiveDay }}</p>
+        <p>
+          {{ mostInActiveDayTime }}
+        </p>
       </div>
     </div>
   </div>
@@ -50,12 +98,57 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { computed, onMounted, ref } from 'vue';
 import { OverallStats } from '../dto/tabListSummary';
 import { convertSummaryTimeToString } from '../utils/converter';
 
 const props = defineProps<{
   data: OverallStats;
 }>();
+
+onMounted(() => {
+  isIncludedCurrentForActiveDays.value = true;
+  isIncludedCurrentForInActiveDays.value = true;
+});
+
+const isIncludedCurrentForActiveDays = ref<boolean>();
+const isIncludedCurrentForInActiveDays = ref<boolean>();
+
+const mostActiveDay = computed(() =>
+  isIncludedCurrentForActiveDays.value
+    ? props.data.mostActiveDay.date.toLocaleDateString()
+    : props.data.mostActiveDayExceptToday?.date.toLocaleDateString(),
+);
+
+const mostActiveDayTime = computed(() =>
+  isIncludedCurrentForActiveDays.value
+    ? convertSummaryTimeToString(props.data.mostActiveDay.summaryTime)
+    : props.data.mostActiveDayExceptToday != null
+    ? convertSummaryTimeToString(props.data.mostActiveDayExceptToday.summaryTime)
+    : '-',
+);
+
+const mostInActiveDay = computed(() =>
+  isIncludedCurrentForInActiveDays.value
+    ? props.data.mostInactiveDay.date.toLocaleDateString()
+    : props.data.mostInactiveDayExceptToday?.date.toLocaleDateString(),
+);
+
+const mostInActiveDayTime = computed(() =>
+  isIncludedCurrentForInActiveDays.value
+    ? convertSummaryTimeToString(props.data.mostInactiveDay.summaryTime)
+    : props.data.mostInactiveDayExceptToday != null
+    ? convertSummaryTimeToString(props.data.mostInactiveDayExceptToday.summaryTime)
+    : '-',
+);
+
+function excludeTodayFromMostActive() {
+  isIncludedCurrentForActiveDays.value = !isIncludedCurrentForActiveDays.value;
+}
+
+function excludeTodayFromMostInActive() {
+  isIncludedCurrentForInActiveDays.value = !isIncludedCurrentForInActiveDays.value;
+}
 </script>
 
 <style scoped>
@@ -88,5 +181,9 @@ const props = defineProps<{
   font-weight: 700;
   font-size: 13px;
   color: rgb(59, 59, 59);
+}
+.most-day {
+  cursor: pointer;
+  margin-left: 5px;
 }
 </style>
