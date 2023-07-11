@@ -19,6 +19,18 @@ function generateManifest() {
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: assetInfo => {
+          let extType = assetInfo.name.split('.').at(1);
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'icons';
+          }
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
+      },
+    },
+
     emptyOutDir: true,
     sourcemap: mode === 'development' ? 'inline' : false,
     minify: true,
