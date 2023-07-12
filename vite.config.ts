@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
+import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import webExtension, { readJsonFile } from 'vite-plugin-web-extension';
 import pkg from './package.json';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 
 const APPID_CHROME = 'hhfnghjdeddcfegfekjeihfmbjenlomm';
 
@@ -45,6 +47,9 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     vue(),
+    VueI18nPlugin({
+      include: path.resolve(__dirname, '..', 'src/assets/_locales/*'),
+    }),
     webExtension({
       manifest: generateManifest,
       watchFilePaths: ['package.json', 'manifest.json'],

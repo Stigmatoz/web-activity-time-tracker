@@ -1,0 +1,12 @@
+{
+    "extName": {
+        "message": "Web Activity Time Tracker - Web Analytics"
+    },
+    "extDescription": {
+        "message": "Track, limit and block the time of your web activity. Monitor how much time you spend on websites and review your web analytics."
+    },
+    "settings": "Settings",
+    "today": "Today",
+    "allTime": "All The Time",
+    "byDays": "By Days"
+}
