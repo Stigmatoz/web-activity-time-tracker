@@ -6,7 +6,9 @@
     </div>
     <div class="icons-block">
       <!-- <img height="17" src="../assets/icons/dark-mode.svg" /> -->
-      <a @click="openDashboard()">Settings<img height="22" src="../assets/icons/settings.svg" /></a>
+      <a @click="openDashboard()"
+        >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
+      /></a>
     </div>
   </div>
   <div class="tabs">
@@ -31,13 +33,19 @@
     />
     <ul>
       <li title="Today">
-        <label for="todayTab" role="button"><span>Today</span></label>
+        <label for="todayTab" role="button"
+          ><span>{{ t('today.message') }}</span></label
+        >
       </li>
       <li title="All The Time">
-        <label for="allTimeTab" role="button"><span>All The Time</span></label>
+        <label for="allTimeTab" role="button"
+          ><span>{{ t('allTime.message') }}</span></label
+        >
       </li>
       <li title="By Days">
-        <label for="byDaysTab" role="button"><span>By Days</span></label>
+        <label for="byDaysTab" role="button"
+          ><span>{{ t('byDays.message') }}</span></label
+        >
       </li>
     </ul>
 
@@ -62,10 +70,13 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
 import { TypeOfList } from '../utils/enums';
+
+const { t } = useI18n();
 
 async function openDashboard() {
   await Browser.tabs.create({

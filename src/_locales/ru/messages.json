@@ -1,12 +1,20 @@
 {
     "extName": {
-        "message": "Web Activity Time Tracker - Веб аналитика"
+        "message": "Web Activity Time Tracker - \u0412\u0435\u0431 аналитика"
     },
     "extDescription": {
         "message": "Отслеживайте, ограничивайте и блокируйте время вашей веб-активности. Следите за тем, сколько времени вы проводите на сайтах."
     },
-    "settings": "Настройки",
-    "today": "Сегодня",
-    "allTime": "За все время",
-    "byDays": "По дням"
+    "settings": {
+        "message": "Настройки"
+    },
+    "today": {
+        "message": "Сегодня"
+    },
+    "allTime": {
+        "message": "\u0417\u0430 все время"
+    },
+    "byDays": {
+        "message": "По дням"
+    }
 }

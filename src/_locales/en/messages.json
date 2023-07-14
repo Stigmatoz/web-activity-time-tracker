@@ -5,8 +5,16 @@
     "extDescription": {
         "message": "Track, limit and block the time of your web activity. Monitor how much time you spend on websites and review your web analytics."
     },
-    "settings": "Settings",
-    "today": "Today",
-    "allTime": "All The Time",
-    "byDays": "By Days"
+    "settings": {
+        "message": "Settings"
+    },
+    "today": {
+        "message": "Today"
+    },
+    "allTime": {
+        "message": "All The Time"
+    },
+    "byDays": {
+        "message": "By Days"
+    }
 }
