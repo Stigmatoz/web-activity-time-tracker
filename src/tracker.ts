@@ -135,7 +135,8 @@ async function mainTrackerWrapper(activeTab: Browser.Tabs.Tab, activeDomain: str
   const inactivityInterval = (await Settings.getInstance().getSetting(
     StorageParams.INTERVAL_INACTIVITY,
   )) as number;
-  const state = await Browser.idle.queryState(inactivityInterval);
+  const number = Number(inactivityInterval);
+  const state = await Browser.idle.queryState(number);
   await mainTracker(state, activeTab!, activeDomain, tab);
 }
 
