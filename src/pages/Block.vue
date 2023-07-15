@@ -5,15 +5,15 @@
       <p class="d-inline-block header">Web Activity Time Tracker</p>
     </div>
     <p>
-      You've reached your limit today on <span>{{ webSite }}</span>
+      {{ t('block.message') }}<span>{{ webSite }}</span>
     </p>
     <table>
       <tr>
-        <td class="title">Limit:</td>
+        <td class="title">{{ t('limit.message') }}:</td>
         <td class="value">{{ limitTimeString }}</td>
       </tr>
       <tr>
-        <td class="title">Sessions:</td>
+        <td class="title">{{ t('sessions.message') }}:</td>
         <td class="value">{{ summaryCounter }}</td>
       </tr>
     </table>
@@ -21,7 +21,7 @@
       v-if="allowDeferringBlock && haveToShowDeffering"
       type="button"
       class="mt-20"
-      value="+5 minutes"
+      :value="t('5mins.message')"
       @click="deferring()"
     />
   </div>
@@ -29,11 +29,14 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { getValueFromQuery } from '../utils/block-page';
 import { injecStorage } from '../storage/inject-storage';
 import { BLOCK_DEFERRAL_DEFAULT, StorageParams } from '../storage/storage-params';
 import { convertLimitTimeToString } from '../utils/converter';
 import { defering, canDefering } from '../compositions/deferList';
+
+const { t } = useI18n();
 
 const settingsStorage = injecStorage();
 
