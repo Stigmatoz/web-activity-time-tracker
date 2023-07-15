@@ -1,51 +1,51 @@
 .float-right {
-    float: right;
-  }
-  .d-inline-block {
-    display: inline-block;
-  }
-  .mt-0{
-    margin-top: 0;
-  }
-  .mt-20{
-    margin-top: 20px;
-  }
-  .ml-10 {
-    margin-left: 10px;
-  }
-  .mr-10 {
-    margin-right: 10px;
-  }
-  .mr-5 {
-    margin-right: 5px;
-  }
-  .pr-5{
-    padding-right: 5px;
-  }
-  .p-5{
-    padding: 5px;
-  }
-  .text-right {
-    text-align: right;
-  }
-  .text-center {
-      text-align: center;
-  }
-  
-.mt-15{
-    margin-top: 15px;
+  float: right;
 }
-select{
-    border-color: #ccc;
-    border-radius: 5px;
+.d-inline-block {
+  display: inline-block;
 }
-.w-100{
-    width: 100%;
+.mt-0 {
+  margin-top: 0;
 }
-.w-80{
-    width: 80%;
+.mt-20 {
+  margin-top: 20px;
 }
-input[type="button"]{
+.ml-10 {
+  margin-left: 10px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+.mr-5 {
+  margin-right: 5px;
+}
+.pr-5 {
+  padding-right: 5px;
+}
+.p-5 {
+  padding: 5px;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+select {
+  border-color: #ccc;
+  border-radius: 5px;
+}
+.w-100 {
+  width: 100%;
+}
+.w-80 {
+  width: 80%;
+}
+input[type='button'] {
   background: #428bff;
   color: #fff;
   border-radius: 3px;
@@ -61,13 +61,12 @@ input[type="button"]{
   width: 200px;
 }
 
-input[type="button"]:hover {
+input[type='button']:hover {
   background: #5c9dfe;
   text-decoration: none;
 }
 
-
-input[type="button"][disabled]{
+input[type='button'][disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;

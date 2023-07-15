@@ -24,11 +24,11 @@ body {
   padding: 0;
   margin: 0;
 }
-.no-data{
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 30%;
+.no-data {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 30%;
 }
 .tabs {
 }
@@ -143,7 +143,8 @@ body {
   color: #428bff;
 }
 .tabs input[name='tab-control']:nth-of-type(1):checked ~ ul > li:nth-child(1) > label img {
-    filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg) brightness(103%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg)
+    brightness(103%) contrast(101%);
 }
 .tabs input[name='tab-control']:nth-of-type(1):checked ~ .slider {
   transform: translateX(17%);
@@ -156,7 +157,8 @@ body {
   color: #428bff;
 }
 .tabs input[name='tab-control']:nth-of-type(2):checked ~ ul > li:nth-child(2) > label img {
-    filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg) brightness(103%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg)
+    brightness(103%) contrast(101%);
 }
 .tabs input[name='tab-control']:nth-of-type(2):checked ~ .slider {
   transform: translateX(150%);
@@ -169,7 +171,8 @@ body {
   color: #428bff;
 }
 .tabs input[name='tab-control']:nth-of-type(3):checked ~ ul > li:nth-child(3) > label img {
-    filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg) brightness(103%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(59%) sepia(82%) saturate(4677%) hue-rotate(202deg)
+    brightness(103%) contrast(101%);
 }
 .tabs input[name='tab-control']:nth-of-type(3):checked ~ .slider {
   transform: translateX(290%);

@@ -1,32 +1,32 @@
 {
-    "manifest_version": 3,
-    "name": "__MSG_extName__",
-    "short_name": "Web Tracker",
-    "version": "2.0.0",
-    "description": "__MSG_extDescription__",
-    "options_page": "src/dashboard.html",
-    "default_locale": "en",
-    "icons": {
-        "16": "16x16.png",
-        "32": "32x32.png",
-        "48": "48x48.png",
-        "128": "128x128.png"
-    },
-    "permissions": [
-        "tabs",
-        "activeTab",
-        "storage",
-        "idle",
-        "unlimitedStorage",
-        "alarms",
-        "notifications"
-    ],
-    "offline_enabled": true,
-    "background": {
-        "service_worker": "src/background.ts"
-      },
-    "action": {
-        "default_popup": "src/popup.html",
-        "default_title": "Web Activity Time Tracker"
-    }
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "short_name": "Web Tracker",
+  "version": "2.0.0",
+  "description": "__MSG_extDescription__",
+  "options_page": "src/dashboard.html",
+  "default_locale": "en",
+  "icons": {
+    "16": "16x16.png",
+    "32": "32x32.png",
+    "48": "48x48.png",
+    "128": "128x128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "idle",
+    "unlimitedStorage",
+    "alarms",
+    "notifications"
+  ],
+  "offline_enabled": true,
+  "background": {
+    "service_worker": "src/background.ts"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Web Activity Time Tracker"
+  }
 }

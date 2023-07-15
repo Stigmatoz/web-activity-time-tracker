@@ -1,50 +1,50 @@
-body{
-    padding: 150px;
-    text-align: center;
-    background-color: rgb(243, 243, 243)
+body {
+  padding: 150px;
+  text-align: center;
+  background-color: rgb(243, 243, 243);
 }
 
-.title{
-    font-size: 23px;
-    font-weight: 600;
+.title {
+  font-size: 23px;
+  font-weight: 600;
 }
 
-.description{
-    font-size: 15px;
-    font-weight: 400;
+.description {
+  font-size: 15px;
+  font-weight: 400;
 }
 
-.current-site{
-    font-size: 18px;
-    font-weight: 500;
-    color: rgb(202, 48, 48);
+.current-site {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(202, 48, 48);
 }
 
-.current-limit{
-    font-weight: 500;
-    color: rgb(128, 128, 128);
+.current-limit {
+  font-weight: 500;
+  color: rgb(128, 128, 128);
 }
 
-.margin-top-10{
-    margin-top: 10px;
+.margin-top-10 {
+  margin-top: 10px;
 }
 
-.product-title{
-    font-size: 16px;
-    color: rgb(128, 128, 128);
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
+.product-title {
+  font-size: 16px;
+  color: rgb(128, 128, 128);
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
 }
 
-.defferer-link{
-    color: gray;
-    text-decoration: underline;
-    cursor: pointer;
+.defferer-link {
+  color: gray;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.deferred-metrics{
-    font-weight: 500;
-    font-size: 1.2rem;
-    color: rgb(202, 48, 48);
+.deferred-metrics {
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: rgb(202, 48, 48);
 }

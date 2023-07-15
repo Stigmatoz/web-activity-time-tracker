@@ -1,3 +1,3 @@
 interface ISerializable<T> {
-    deserialize(input: Object): T;
+  deserialize(input: Object): T;
 }

@@ -1,211 +1,211 @@
 {
-    "extName": {
-        "message": "Web Activity Time Tracker - Web Analytics"
-    },
-    "extDescription": {
-        "message": "Track, limit and block the time of your web activity. Monitor how much time you spend on websites and review your web analytics."
-    },
-    "settings": {
-        "message": "Settings"
-    },
-    "today": {
-        "message": "Today"
-    },
-    "allTime": {
-        "message": "All The Time"
-    },
-    "byDays": {
-        "message": "By Days"
-    },
-    "noData": {
-        "message": "No data"
-    },
-    "noDataForPeriod": {
-        "message": "No data for the selected period"
-    },
-    "showAll": {
-        "message": "Show all websites"
-    },
-    "sortBy": {
-        "message": "Sorting by"
-    },
-    "usageTime": {
-        "message": "Usage Time"
-    },
-    "session": {
-        "message": "session"
-    },
-    "someSession": {
-        "message": "sessions"
-    },
-    "sessions": {
-        "message": "Sessions"
-    },
-    "days": {
-        "message": "days"
-    },
-    "aggregate": {
-        "message": "Aggregate data since"
-    },
-    "websites": {
-        "message": "websites"
-    },
-    "cannotOpenFile": {
-        "message": "You cannot open a local file due to security rules"
-    },
-    "document": {
-        "message": "Document"
-    },
-    "limit": {
-        "message": "Limit"
-    },
-    "d": {
-        "message": "d"
-    },
-    "h": {
-        "message": "h"
-    },
-    "m": {
-        "message": "m"
-    },
-    "s": {
-        "message": "s"
-    },
-    "firstActiveDay": {
-        "message": "The first active day"
-    },
-    "numberOfActiveDays": {
-        "message": "Number of active days"
-    },
-    "totalNumberOfDays": {
-        "message": "Total number of days"
-    },
-    "todayTime": {
-        "message": "Time for today"
-    },
-    "averageTime": {
-        "message": "Average time on active days"
-    },
-    "mostActiveDay": {
-        "message": "The most active day"
-    },
-    "mostInactiveDay": {
-        "message": "The most inactive day"
-    },
-    "todayInclude": {
-        "message": "Today is included in the statistics. Click if you want to exclude today."
-    },
-    "todayEcclude": {
-        "message": "Today is excluded from the statistics. Click if you want to include today."
-    },
-    "averageTimeByDays": {
-        "message": "Average time on selected days"
-    },
-    "exportToCsv": {
-        "message": "Export to CSV"
-    },
-    "week": {
-        "message": "This week"
-    },
-    "month": {
-        "message": "This month"
-    },
-    "lastMonth": {
-        "message": "Last month"
-    },
-    "generalSettings": {
-        "message": "General Settings"
-    },
-    "whiteListSettings": {
-        "message": "WhiteList"
-    },
-    "limitsSettings": {
-        "message": "Limits"
-    },
-    "notificationsSettings": {
-        "message": "Notifications"
-    },
-    "aboutSettings": {
-        "message": "About"
-    },
-    "viewTimeInBadge": {
-        "message": "Display time tracker in icon",
-        "description": "You can see current spent time in short format in the icon of extension"
-    },
-    "allowDeferringBlock": {
-        "message": "Allow deferring block for 5 minutes",
-        "description": "After the site is blocked, you can postpone the blocking for 5 minutes once during the day"
-    },
-    "intervalInactivity": {
-        "message": "Stop the tracker if there is no action during:",
-        "description": "These are any actions with the mouse or keyboard"
-    },
-    "exportToCsvSetting": {
-        "message": "Exporting your web activity data to CSV",
-        "description": "You can export your web activity for any date range"
-    },
-    "sec": {
-        "message": "seconds"
-    },
-    "min": {
-        "message": "minute"
-    },
-    "2min": {
-        "message": "minutes"
-    },
-    "mins": {
-        "message": "minutes"
-    },
-    "whiteList": {
-        "message": "Activity and time for these websites will not be tracked"
-    },
-    "addWebsite": {
-        "message": "Add Website"
-    },
-    "enterWebsite": {
-        "message": "Enter website name..."
-    },
-    "enterNotification": {
-        "message": "Enter notification message..."
-    },
-    "limits": {
-        "message": "Daily restrictions on access to websites",
-        "description": "Set the maximum time allowed to visit the site per day. After this time, the site will be blocked."
-    },
-    "limitsTip": {
-        "message": "If you set the blocking time to 0 hours 0 minutes, the website will be blocked immediately"
-    },
-    "save": {
-        "message": "Save"
-    },
-    "showDailyNotifacation": {
-        "message": "Daily Summary Notifications",
-        "description": "At the end of each day, you will receive a notification with a summary of your daily usage"
-    },
-    "notificationTime": {
-        "message": "Notifications for websites",
-        "description": "Show notifications every time you spend a selected period of time on the website"
-    },
-    "notificationMessage": {
-        "message": "Notification message",
-        "description": "You will see this message in notification for websites every time"
-    },
-    "notificationTimeSetting": {
-        "message": "Notification time with summary information about your daily usage"
-    },
-    "github": {
-        "message": "If you have feedback or would like to report an issue, you can do so on the"
-    },
-    "question": {
-        "message": "You can also ask questions or leave your suggestions here"
-    },
-    "supportForm": {
-        "message": "support form"
-    },
-    "doYouEnjoy": {
-        "message": "Do you enjoy using Web Activity Time Tracker?"
-    },
-    "review": {
-        "message": "Leave a review!"
-    }
+  "extName": {
+    "message": "Web Activity Time Tracker - Web Analytics"
+  },
+  "extDescription": {
+    "message": "Track, limit and block the time of your web activity. Monitor how much time you spend on websites and review your web analytics."
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "today": {
+    "message": "Today"
+  },
+  "allTime": {
+    "message": "All The Time"
+  },
+  "byDays": {
+    "message": "By Days"
+  },
+  "noData": {
+    "message": "No data"
+  },
+  "noDataForPeriod": {
+    "message": "No data for the selected period"
+  },
+  "showAll": {
+    "message": "Show all websites"
+  },
+  "sortBy": {
+    "message": "Sorting by"
+  },
+  "usageTime": {
+    "message": "Usage Time"
+  },
+  "session": {
+    "message": "session"
+  },
+  "someSession": {
+    "message": "sessions"
+  },
+  "sessions": {
+    "message": "Sessions"
+  },
+  "days": {
+    "message": "days"
+  },
+  "aggregate": {
+    "message": "Aggregate data since"
+  },
+  "websites": {
+    "message": "websites"
+  },
+  "cannotOpenFile": {
+    "message": "You cannot open a local file due to security rules"
+  },
+  "document": {
+    "message": "Document"
+  },
+  "limit": {
+    "message": "Limit"
+  },
+  "d": {
+    "message": "d"
+  },
+  "h": {
+    "message": "h"
+  },
+  "m": {
+    "message": "m"
+  },
+  "s": {
+    "message": "s"
+  },
+  "firstActiveDay": {
+    "message": "The first active day"
+  },
+  "numberOfActiveDays": {
+    "message": "Number of active days"
+  },
+  "totalNumberOfDays": {
+    "message": "Total number of days"
+  },
+  "todayTime": {
+    "message": "Time for today"
+  },
+  "averageTime": {
+    "message": "Average time on active days"
+  },
+  "mostActiveDay": {
+    "message": "The most active day"
+  },
+  "mostInactiveDay": {
+    "message": "The most inactive day"
+  },
+  "todayInclude": {
+    "message": "Today is included in the statistics. Click if you want to exclude today."
+  },
+  "todayEcclude": {
+    "message": "Today is excluded from the statistics. Click if you want to include today."
+  },
+  "averageTimeByDays": {
+    "message": "Average time on selected days"
+  },
+  "exportToCsv": {
+    "message": "Export to CSV"
+  },
+  "week": {
+    "message": "This week"
+  },
+  "month": {
+    "message": "This month"
+  },
+  "lastMonth": {
+    "message": "Last month"
+  },
+  "generalSettings": {
+    "message": "General Settings"
+  },
+  "whiteListSettings": {
+    "message": "WhiteList"
+  },
+  "limitsSettings": {
+    "message": "Limits"
+  },
+  "notificationsSettings": {
+    "message": "Notifications"
+  },
+  "aboutSettings": {
+    "message": "About"
+  },
+  "viewTimeInBadge": {
+    "message": "Display time tracker in icon",
+    "description": "You can see current spent time in short format in the icon of extension"
+  },
+  "allowDeferringBlock": {
+    "message": "Allow deferring block for 5 minutes",
+    "description": "After the site is blocked, you can postpone the blocking for 5 minutes once during the day"
+  },
+  "intervalInactivity": {
+    "message": "Stop the tracker if there is no action during:",
+    "description": "These are any actions with the mouse or keyboard"
+  },
+  "exportToCsvSetting": {
+    "message": "Exporting your web activity data to CSV",
+    "description": "You can export your web activity for any date range"
+  },
+  "sec": {
+    "message": "seconds"
+  },
+  "min": {
+    "message": "minute"
+  },
+  "2min": {
+    "message": "minutes"
+  },
+  "mins": {
+    "message": "minutes"
+  },
+  "whiteList": {
+    "message": "Activity and time for these websites will not be tracked"
+  },
+  "addWebsite": {
+    "message": "Add Website"
+  },
+  "enterWebsite": {
+    "message": "Enter website name..."
+  },
+  "enterNotification": {
+    "message": "Enter notification message..."
+  },
+  "limits": {
+    "message": "Daily restrictions on access to websites",
+    "description": "Set the maximum time allowed to visit the site per day. After this time, the site will be blocked."
+  },
+  "limitsTip": {
+    "message": "If you set the blocking time to 0 hours 0 minutes, the website will be blocked immediately"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "showDailyNotifacation": {
+    "message": "Daily Summary Notifications",
+    "description": "At the end of each day, you will receive a notification with a summary of your daily usage"
+  },
+  "notificationTime": {
+    "message": "Notifications for websites",
+    "description": "Show notifications every time you spend a selected period of time on the website"
+  },
+  "notificationMessage": {
+    "message": "Notification message",
+    "description": "You will see this message in notification for websites every time"
+  },
+  "notificationTimeSetting": {
+    "message": "Notification time with summary information about your daily usage"
+  },
+  "github": {
+    "message": "If you have feedback or would like to report an issue, you can do so on the"
+  },
+  "question": {
+    "message": "You can also ask questions or leave your suggestions here"
+  },
+  "supportForm": {
+    "message": "support form"
+  },
+  "doYouEnjoy": {
+    "message": "Do you enjoy using Web Activity Time Tracker?"
+  },
+  "review": {
+    "message": "Leave a review!"
+  }
 }

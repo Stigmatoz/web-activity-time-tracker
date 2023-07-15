@@ -18,6 +18,16 @@ Browser.storage.onChanged.addListener((changes, namespace) => {
   }
 });
 
+Browser.runtime.onInstalled.addListener(details => {
+  if (
+    details.reason == 'update' &&
+    details.previousVersion != undefined &&
+    details.previousVersion < '2.0.0'
+  ) {
+  }
+});
+
 Browser.runtime.setUninstallURL('https://webtracker.online/goodbye.html');
+
 scheduleJobs();
 initTracker();
