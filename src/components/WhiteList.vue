@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="setting-header mt-0">Activity and time for these domains will not be tracked</p>
+    <p class="setting-header mt-0">{{ t('whiteList.message') }}</p>
     <ul readonly class="url-list">
       <li v-for="(url, i) of whiteList" :key="i">
         <div>
@@ -13,13 +13,13 @@
       <input
         type="text"
         class="d-inline-block custom-width"
-        placeholder="Enter website name..."
+        :placeholder="t('enterWebsite.message')"
         v-model="newWebsiteForWhiteList"
       />
       <input
         type="button"
         class="d-inline-block small-btn ml-10"
-        value="Add Website"
+        :value="t('addWebsite.message')"
         :disabled="newWebsiteForWhiteList == null || newWebsiteForWhiteList == ''"
         @click="addToWhiteList()"
       />
@@ -35,11 +35,14 @@ export default {
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useNotification } from '@kyvg/vue3-notification';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../compositions/extract-hostname';
+
+const { t } = useI18n();
 
 const notification = useNotification();
 

@@ -2,36 +2,36 @@
   <div class="stats-block">
     <div class="row">
       <div class="block">
-        <div class="header">The first active day</div>
+        <div class="header">{{ t('firstActiveDay.message') }}</div>
         <p>{{ data.firstDay.toLocaleDateString() }}</p>
       </div>
       <div class="block">
-        <div class="header">Number of active days</div>
+        <div class="header">{{ t('numberOfActiveDays.message') }}</div>
         <p>{{ data.activeDaysTotal }}</p>
       </div>
       <div class="block">
-        <div class="header">Total number of days</div>
+        <div class="header">{{ t('totalNumberOfDays.message') }}</div>
         <p>{{ data.daysTotal }}</p>
       </div>
     </div>
     <div class="row">
       <div class="block">
-        <div class="header">Time for today</div>
+        <div class="header">{{ t('todayTime.message') }}</div>
         <p>{{ convertSummaryTimeToString(data.todaySummaryTime) }}</p>
       </div>
       <div class="block">
-        <div class="header">All the time</div>
+        <div class="header">{{ t('allTime.message') }}</div>
         <p>{{ convertSummaryTimeToString(data.summaryTime) }}</p>
       </div>
       <div class="block">
-        <div class="header">Average time on active days</div>
+        <div class="header">{{ t('averageTime.message') }}</div>
         <p>{{ convertSummaryTimeToString(data.averageTimeByActiveDays) }}</p>
       </div>
     </div>
     <div class="row">
       <div class="block">
         <div class="header">
-          The most active day
+          {{ t('mostActiveDay.message') }}
           <div class="tooltip">
             <img
               v-if="isIncludedCurrentForActiveDays"
@@ -48,9 +48,7 @@
               @click="excludeTodayFromMostActive()"
             />
             <span class="tooltiptext">{{
-              isIncludedCurrentForActiveDays
-                ? 'Today is included in the statistics. Click if you want to exclude today.'
-                : 'Today is excluded from the statistics. Click if you want to include today.'
+              isIncludedCurrentForActiveDays ? t('todayInclude.message') : t('todayEcclude.message')
             }}</span>
           </div>
         </div>
@@ -59,7 +57,7 @@
       </div>
       <div class="block">
         <div class="header">
-          The most inactive day
+          {{ t('mostInactiveDay.message') }}
           <div class="tooltip">
             <img
               v-if="isIncludedCurrentForInActiveDays"
@@ -75,11 +73,13 @@
               class="most-day"
               @click="excludeTodayFromMostInActive()"
             />
-            <span class="tooltiptext">{{
-              isIncludedCurrentForInActiveDays
-                ? 'Today is included in the statistics. Click if you want to exclude today.'
-                : 'Today is excluded from the statistics. Click if you want to include today.'
-            }}</span>
+            <span class="tooltiptext">
+              {{
+                isIncludedCurrentForInActiveDays
+                  ? t('todayInclude.message')
+                  : t('todayEcclude.message')
+              }}
+            </span>
           </div>
         </div>
         <p>{{ mostInActiveDay }}</p>
@@ -99,8 +99,11 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { OverallStats } from '../dto/tabListSummary';
 import { convertSummaryTimeToString } from '../utils/converter';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   data: OverallStats;
@@ -164,7 +167,7 @@ function excludeTodayFromMostInActive() {
 }
 
 .stats-block .block {
-  width: 165px;
+  width: 175px;
   text-align: center;
 }
 

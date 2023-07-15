@@ -18,14 +18,14 @@
       type="text"
       :disabled="isEdit"
       class="d-inline-block"
-      placeholder="Enter website name..."
+      :placeholder="t('enterWebsite.message')"
       v-model="newWebsiteForList"
     />
     <VueDatePicker v-model="time" time-picker class="date-picker height" />
     <input
       type="button"
       class="d-inline-block small-btn"
-      :value="!isEdit ? 'Add Website' : 'Save'"
+      :value="!isEdit ? t('addWebsite.message') : t('save.message')"
       :disabled="isDisabledSaving"
       @click="isEdit ? editItem() : addToList()"
     />
@@ -40,6 +40,7 @@ export default {
 
 <script lang="ts" setup>
 import { useNotification } from '@kyvg/vue3-notification';
+import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { Time } from '../utils/time';
 import { computed, onMounted, ref } from 'vue';
@@ -51,6 +52,8 @@ import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { Restriction } from '../entity/restriction';
 import { BaseTimeList } from '../entity/baseTimeList';
 import { Notifications } from '../entity/notification';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   type: ListWithTime;

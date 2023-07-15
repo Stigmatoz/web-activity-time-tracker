@@ -7,25 +7,25 @@
       ></label
     >
     <label class="about-label"
-      >If you have feedback or would like to report an issue, you can do so on the
+      >{{ t('github.message') }}
       <a href="https://github.com/Stigmatoz/web-activity-time-tracker/issues" target="_blank"
         >GitHub issues page</a
       ></label
     >
     <label class="about-label"
-      >If experiencing problems, having questions or suggestions, please fill out
+      >{{ t('question.message') }}
       <a
         href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
         target="_blank"
-        >support form</a
+        >{{ t('supportForm.message') }}</a
       >.</label
     >
     <label class="about-label"
-      >Do you enjoy using Web Activity Time Tracker?
+      >{{ t('doYouEnjoy.message') }}
       <a
         href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
         target="_blank"
-        >Leave a review!</a
+        >{{ t('review.message') }}</a
       ></label
     >
   </div>
@@ -35,6 +35,11 @@
 export default {
   name: 'About',
 };
+</script>
+
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 </script>
 
 <style scoped>

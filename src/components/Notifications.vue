@@ -9,16 +9,15 @@
           v-model="showDailyNotifacation"
           @change="onChange(StorageParams.DAILY_NOTIFICATION, $event.target)"
         />
-        <span>Daily Summary Notifications</span>
+        <span>{{ t('showDailyNotifacation.message') }}</span>
         <p class="description">
-          At the end of each day, you will receive a notification with a summary of your daily
-          usage.
+          {{ t('showDailyNotifacation.description') }}
         </p>
       </label>
     </div>
     <div class="settings-item">
       <p class="setting-header d-inline-block">
-        Notification time with summary information about your daily usage
+        {{ t('notificationTimeSetting.message') }}
       </p>
       <VueDatePicker
         v-model="notificationTime"
@@ -28,25 +27,27 @@
       />
     </div>
     <div class="settings-item">
-      <label class="setting-header">Notifications for websites</label>
+      <label class="setting-header">{{ t('notificationTime.message') }}</label>
       <p class="description">
-        Show notifications every time you spend a certain period of time on the website
+        {{ t('notificationTime.description') }}
       </p>
       <ListWithTimeComponent :type="ListWithTime.Notifications" />
     </div>
     <div class="settings-item">
-      <label class="setting-header">Notification message</label>
-      <p class="description">You will see this message in notification for websites every time</p>
+      <label class="setting-header">{{ t('notificationMessage.message') }}</label>
+      <p class="description">
+        {{ t('notificationMessage.description') }}
+      </p>
       <input
         type="text"
         class=""
-        placeholder="Enter notification message name..."
+        :placeholder="t('enterNotification.message')"
         v-model="notificationMessage"
       />
       <input
         type="button"
         class="d-inline-block small-btn ml-10 width"
-        value="Save"
+        :value="t('save.message')"
         :disabled="notificationMessage == ''"
         @click="saveNotificationMessage()"
       />
@@ -62,6 +63,7 @@ export default {
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { NOTIFICATION_MESSAGE_DEFAULT, StorageParams } from '../storage/storage-params';
 import {
@@ -74,6 +76,8 @@ import ListWithTimeComponent from '../components/ListWithTime.vue';
 import { ListWithTime } from '../utils/enums';
 import Browser from 'webextension-polyfill';
 import { Messages } from '../utils/messages';
+
+const { t } = useI18n();
 
 const settingsStorage = injecStorage();
 

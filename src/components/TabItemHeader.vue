@@ -5,10 +5,10 @@
       <p class="time">{{ summaryTimeString }}</p>
     </div>
     <div class="sorted-block">
-      <span class="mr-5">Sorting by</span>
+      <span class="mr-5">{{ t('sortBy.message') }}</span>
       <select class="p-5" v-model="sortingBySelected" @change="sortingBy()">
-        <option :value="SortingBy.UsageTime">Usage Time</option>
-        <option :value="SortingBy.Sessions">Sessions</option>
+        <option :value="SortingBy.UsageTime">{{ t('usageTime.message') }}</option>
+        <option :value="SortingBy.Sessions">{{ t('sessions.message') }}</option>
       </select>
     </div>
   </div>
@@ -22,8 +22,11 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { SortingBy, TypeOfList } from '../utils/enums';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   listType: TypeOfList;
@@ -40,12 +43,15 @@ const emit = defineEmits<{
 }>();
 
 const title = computed(() => {
-  if (props.listType == TypeOfList.Today) return 'Today';
+  if (props.listType == TypeOfList.Today) return t('today.message');
   if (props.listType == TypeOfList.All) {
-    let countOfActiveDays = props.countOfActiveDays > 1 ? `(${props.countOfActiveDays} days)` : '';
-    return `Aggregate data since ${props.firstDay.toLocaleDateString()} ${countOfActiveDays} (${
-      props.countOfSites
-    } sites)`;
+    let countOfActiveDays =
+      props.countOfActiveDays > 1 ? `(${props.countOfActiveDays} ${t('days.message')})` : '';
+    return `${t(
+      'aggregate.message',
+    )} ${props.firstDay.toLocaleDateString()} ${countOfActiveDays} (${props.countOfSites} ${t(
+      'websites.message',
+    )})`;
   }
 });
 

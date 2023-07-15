@@ -4,11 +4,11 @@
   </div>
   <div v-else>
     <div class="no-data" v-if="countOfDays == undefined || (countOfDays == 0 && !noData)">
-      No data
+      {{ t('noData.message') }}
     </div>
     <div v-else-if="noData">
       <div class="no-data">
-        No data for the selected period
+        {{ t('noDataForPeriod.message') }}
         <VueDatePicker
           range
           :enable-time-picker="false"
@@ -37,10 +37,10 @@
             <span @click="presetDateRange(range)">{{ label }}</span>
           </template></VueDatePicker
         >
-        <input type="button" value="Export to CSV" @click="exportToCsv()" />
+        <input type="button" :value="t('exportToCsv.message')" @click="exportToCsv()" />
       </div>
       <div class="stats-block block">
-        <div class="header">Average time on selected days</div>
+        <div class="header">{{ t('averageTimeByDays.message') }}</div>
         <p>{{ convertSummaryTimeToString(tabsByDays!.averageTime) }}</p>
       </div>
       <ByDaysChart :data="tabsByDays!" />
@@ -71,6 +71,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import TabItem from '../components/TabItem.vue';
 import ByDaysChart from '../components/ByDaysChart.vue';
 import Expander from '../components/Expander.vue';
@@ -80,6 +81,8 @@ import { convertSummaryTimeToString } from '../utils/converter';
 import { ranges, ThisWeekRange } from '../utils/date';
 import { useImportToCsvWithData } from '../compositions/toCsv';
 import { useFile, FileType } from '../compositions/loadFile';
+
+const { t } = useI18n();
 
 const tabsByDays = ref<TabListByDays>();
 const isLoading = ref<boolean>();

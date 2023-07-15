@@ -1,7 +1,7 @@
 <template>
   <div class="d-inline-block">
-    <span v-if="showDocumentBadge" class="badge-document">Document</span>
-    <span v-if="showLimitBadge" class="badge-block">Limit</span>
+    <span v-if="showDocumentBadge" class="badge-document">{{ t('document.message') }}</span>
+    <span v-if="showLimitBadge" class="badge-block">{{ t('limit.message') }}</span>
   </div>
 </template>
 
@@ -13,8 +13,11 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { TypeOfList, TypeOfUrl } from '../utils/enums';
 import { isDomainInLimits } from '../compositions/limit-list';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   url: string;

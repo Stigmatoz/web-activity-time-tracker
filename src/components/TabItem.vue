@@ -10,7 +10,7 @@
         <p class="text-right time">{{ summaryTimeForTab }}</p>
       </div>
       <p v-if="showWarningMessage" class="warning-message">
-        You cannot open a local file due to security rules
+        {{ t('cannotOpenFile.message') }}
       </p>
       <div class="second-block">
         <div class="progress-bar">
@@ -31,12 +31,15 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Favicon from './Favicon.vue';
 import BadgeIcons from './BadgeIcons.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';
 import { CurrentTabItem } from '../dto/currentTabItem';
 import { TypeOfList, TypeOfUrl } from '../utils/enums';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   item: CurrentTabItem;
@@ -55,9 +58,9 @@ const url = computed(() =>
 );
 
 const sessions = computed(() => {
-  if (props.item.sessions == 0) return '0 session';
-  if (props.item.sessions > 1) return `${props.item.sessions} sessions`;
-  if (props.item.sessions == 1) return `${props.item.sessions} session`;
+  if (props.item.sessions == 0) return `0 ${t('someSession.message')}`;
+  if (props.item.sessions > 1) return `${props.item.sessions} ${t('someSession.message')}`;
+  if (props.item.sessions == 1) return `${props.item.sessions} ${t('session.message')}`;
 });
 
 const summaryTimeForTab = computed(() => convertSummaryTimeToString(props.item.summaryTime));

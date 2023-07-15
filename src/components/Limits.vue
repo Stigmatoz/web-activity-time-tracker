@@ -1,12 +1,11 @@
 <template>
   <div>
-    <p class="setting-header mt-0">Daily restrictions on access to websites</p>
+    <p class="setting-header mt-0">{{ t('limits.message') }}</p>
     <p class="description">
-      Set the maximum time allowed to visit the site per day. After this time, the site will be
-      blocked.
+      {{ t('limits.description') }}
     </p>
     <p class="description">
-      If you set the blocking time to 0 hours 0 minutes, the website will be blocked immediately
+      {{ t('limitsTip.message') }}
     </p>
     <ListWithTimeComponent :type="ListWithTime.Limits" />
   </div>
@@ -21,6 +20,9 @@ export default {
 <script lang="ts" setup>
 import ListWithTimeComponent from '../components/ListWithTime.vue';
 import { ListWithTime } from '../utils/enums';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>
 
 <style scoped>

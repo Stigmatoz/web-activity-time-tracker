@@ -13,7 +13,7 @@
         checked
         v-on:change="selectTab(SettingsTab.GeneralSettings)"
       />
-      <label name="tabName" for="general-tab">General Settings</label>
+      <label name="tabName" for="general-tab">{{ t('generalSettings.message') }}</label>
 
       <div class="settings-content">
         <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
@@ -27,7 +27,7 @@
         name="settings-group"
         v-on:change="selectTab(SettingsTab.WhiteList)"
       />
-      <label name="tabName" for="white-list-tab">White List</label>
+      <label name="tabName" for="white-list-tab">{{ t('whiteListSettings.message') }}</label>
 
       <div class="settings-content">
         <WhiteList v-if="selectedTab == SettingsTab.WhiteList" />
@@ -41,7 +41,7 @@
         name="settings-group"
         v-on:change="selectTab(SettingsTab.Limits)"
       />
-      <label name="tabName" for="limits-tab">Limits</label>
+      <label name="tabName" for="limits-tab">{{ t('limitsSettings.message') }}</label>
 
       <div class="settings-content">
         <Limits v-if="selectedTab == SettingsTab.Limits" />
@@ -54,7 +54,7 @@
         name="settings-group"
         v-on:change="selectTab(SettingsTab.Notifications)"
       />
-      <label name="tabName" for="notification-tab">Notifications</label>
+      <label name="tabName" for="notification-tab">{{ t('notificationsSettings.message') }}</label>
 
       <div class="settings-content">
         <DailyNotifications v-if="selectedTab == SettingsTab.Notifications" />
@@ -68,7 +68,7 @@
         name="settings-group"
         v-on:change="selectTab(SettingsTab.About)"
       />
-      <label name="tabName" for="about-tab">About</label>
+      <label name="tabName" for="about-tab">{{ t('aboutSettings.message') }}</label>
 
       <div class="settings-content">
         <About v-if="selectedTab == SettingsTab.About" />
@@ -79,12 +79,15 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
 import Limits from '../components/Limits.vue';
 import DailyNotifications from '../components/Notifications.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
+
+const { t } = useI18n();
 
 const selectedTab = ref<SettingsTab>();
 

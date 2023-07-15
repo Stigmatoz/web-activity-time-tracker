@@ -8,9 +8,9 @@
         v-model="viewTimeInBadge"
         @change="onChange(StorageParams.VIEW_TIME_IN_BADGE, $event.target)"
       />
-      <span>Display time tracker in icon</span>
+      <span>{{ t('viewTimeInBadge.message') }}</span>
       <p class="description">
-        You can see current spent time in short format in the icon of extension
+        {{ t('viewTimeInBadge.description') }}
       </p>
     </label>
   </div>
@@ -23,9 +23,9 @@
         v-model="allowDeferringBlock"
         @change="onChange(StorageParams.BLOCK_DEFERRAL, $event.target)"
       />
-      <span>Allow deferring block for 5 minutes</span>
+      <span>{{ t('allowDeferringBlock.message') }}</span>
       <p class="description">
-        After the site is blocked, you can postpone the blocking for 5 minutes ones
+        {{ t('allowDeferringBlock.description') }}
       </p>
     </label>
   </div>
@@ -43,30 +43,28 @@
     </label>
   </div> -->
   <div class="settings-item">
-    <label class="setting-header d-inline-block"
-      >Stop tracking if there is no activity during:
-    </label>
+    <label class="setting-header d-inline-block">{{ t('intervalInactivity.message') }} </label>
     <div class="d-inline-block ml-10">
       <select
         class="option"
         v-model="intervalInactivity"
         @change="onChange(StorageParams.INTERVAL_INACTIVITY, $event.target)"
       >
-        <option :value="InactivityInterval.Seconds_30">30 seconds</option>
-        <option :value="InactivityInterval.Seconds_45">45 seconds</option>
-        <option :value="InactivityInterval.Min_1">1 min</option>
-        <option :value="InactivityInterval.Min_2">2 min</option>
-        <option :value="InactivityInterval.Min_5">5 mins</option>
-        <option :value="InactivityInterval.Min_10">10 mins</option>
-        <option :value="InactivityInterval.Min_20">20 mins</option>
-        <option :value="InactivityInterval.Min_30">30 mins</option>
+        <option :value="InactivityInterval.Seconds_30">30 {{ t('sec.message') }}</option>
+        <option :value="InactivityInterval.Seconds_45">45 {{ t('sec.message') }}</option>
+        <option :value="InactivityInterval.Min_1">1 {{ t('min.message') }}</option>
+        <option :value="InactivityInterval.Min_2">2 {{ t('2min.message') }}</option>
+        <option :value="InactivityInterval.Min_5">5 {{ t('mins.message') }}</option>
+        <option :value="InactivityInterval.Min_10">10 {{ t('mins.message') }}</option>
+        <option :value="InactivityInterval.Min_20">20 {{ t('mins.message') }}</option>
+        <option :value="InactivityInterval.Min_30">30 {{ t('mins.message') }}</option>
       </select>
     </div>
-    <p class="description">These are any actions with the mouse or keyboard</p>
+    <p class="description">{{ t('intervalInactivity.description') }}</p>
   </div>
   <div class="settings-item">
-    <label class="setting-header d-inline-block">Exporting your web activity data to CSV </label>
-    <p class="description">You can export your web activity for any date range</p>
+    <label class="setting-header d-inline-block">{{ t('exportToCsvSetting.message') }}</label>
+    <p class="description">{{ t('exportToCsvSetting.description') }}</p>
     <div class="export-block">
       <VueDatePicker
         range
@@ -80,7 +78,7 @@
           <span @click="presetDateRange(range)">{{ label }}</span>
         </template>
       </VueDatePicker>
-      <input type="button" value="Export to CSV" @click="exportToCsv()" />
+      <input type="button" :value="t('exportToCsv.message')" @click="exportToCsv()" />
     </div>
   </div>
 </template>
@@ -93,6 +91,7 @@ export default {
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { useNotification } from '@kyvg/vue3-notification';
 import {
@@ -106,6 +105,8 @@ import {
 import { ranges, ThisWeekRange } from '../utils/date';
 import { useImportToCsv } from '../compositions/toCsv';
 import { FileType, useFile } from '../compositions/loadFile';
+
+const { t } = useI18n();
 
 const settingsStorage = injecStorage();
 const notification = useNotification();

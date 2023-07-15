@@ -3,7 +3,9 @@
     <img height="55" src="../assets/icons/preloader.gif" />
   </div>
   <div v-else>
-    <div class="no-data" v-if="countOfSites == undefined || countOfSites == 0">No data</div>
+    <div class="no-data" v-if="countOfSites == undefined || countOfSites == 0">
+      {{ t('noData.message') }}
+    </div>
     <div v-else>
       <OverallStatistics v-if="isShowOverallStats" :data="dataForOvarallStats" />
       <DonutChart :time="timeForChart" :labels="sitesForChart" />
@@ -25,7 +27,7 @@
       />
 
       <div class="show-all" v-if="showOnlyFirst100Items">
-        <button @click="showAllWebSites()">Show all websites</button>
+        <button @click="showAllWebSites()">{{ t('showAll.message') }}</button>
       </div>
     </div>
   </div>
@@ -39,6 +41,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import TabItem from '../components/TabItem.vue';
 import TabItemHeader from '../components/TabItemHeader.vue';
 import DonutChart from '../components/DonutChart.vue';
@@ -50,6 +53,8 @@ import { useAllTabListSummary } from '../compositions/all-tab-list-summary';
 import { CurrentTabItem } from '../dto/currentTabItem';
 import { todayLocalDate } from '../utils/date';
 import { OverallStats } from '../dto/tabListSummary';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   type: TypeOfList;

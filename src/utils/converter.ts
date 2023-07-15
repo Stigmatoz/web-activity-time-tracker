@@ -1,3 +1,4 @@
+import i18n from '../plugins/i18n';
 import { HOUR, MINUTE, Time } from './time';
 
 export function convertHHMMToSeconds(hours: number, minutes: number) {
@@ -56,9 +57,12 @@ export function convertSummaryTimeToString(summaryTime: number) {
     return value > 0 ? `${value} ${stringPrefix}` : '';
   }
 
-  return `${appendTime(days, 'd')} ${appendTime(hours, 'h')} ${appendTime(mins, 'm')} ${appendTime(
+  return `${appendTime(days, i18n.global.t('d.message'))} ${appendTime(
+    hours,
+    i18n.global.t('h.message'),
+  )} ${appendTime(mins, i18n.global.t('m.message'))} ${appendTime(
     seconds,
-    's',
+    i18n.global.t('s.message'),
   )}`;
 }
 
@@ -75,7 +79,10 @@ export function convertLimitTimeToString(summaryTime: number) {
     return `${value} ${stringPrefix}`;
   }
 
-  return `${appendTime(hours, 'h')} ${appendTime(mins, 'm')}`;
+  return `${appendTime(hours, i18n.global.t('h.message'))} ${appendTime(
+    mins,
+    i18n.global.t('m.message'),
+  )}`;
 }
 
 function zeroAppend(time: number) {

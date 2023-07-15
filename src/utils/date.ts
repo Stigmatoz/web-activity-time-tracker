@@ -1,3 +1,4 @@
+import i18n from '../plugins/i18n';
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, subMonths } from 'date-fns';
 import startOfToday from 'date-fns/startOfToday';
 
@@ -19,11 +20,11 @@ export const LatMonthRange = [
 
 export function ranges() {
   return [
-    { label: 'Today', range: TodayRange },
-    { label: 'This week', range: ThisWeekRange },
-    { label: 'This month', range: ThisMonthRange },
+    { label: i18n.global.t('today.message'), range: TodayRange },
+    { label: i18n.global.t('week.message'), range: ThisWeekRange },
+    { label: i18n.global.t('month.message'), range: ThisMonthRange },
     {
-      label: 'Last month',
+      label: i18n.global.t('lastMonth.message'),
       range: LatMonthRange,
     },
   ];
