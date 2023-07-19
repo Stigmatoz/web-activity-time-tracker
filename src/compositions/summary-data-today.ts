@@ -4,15 +4,13 @@ import { todayLocalDate } from '../utils/date';
 import { DaySummary } from '../dto/daySummary';
 import { startOfYesterday } from 'date-fns';
 import { getPercentage } from '../utils/common';
+import { ITabsRepository } from '../repository/tabs-repository-interface';
 
 export async function useWebUsageSummaryForDay(): Promise<DaySummary | null> {
   const repo = await injectTabsRepository();
-  const unSortedTabs = repo.getTodayTabs();
 
-  if (unSortedTabs.length == 0) return null;
-
-  const dataToday = getData(todayLocalDate(), unSortedTabs);
-  const dataYesterday = getData(startOfYesterday().toLocaleDateString('en-US'), unSortedTabs);
+  const dataToday = getData(todayLocalDate(), repo);
+  const dataYesterday = getData(startOfYesterday().toLocaleDateString('en-US'), repo);
 
   return {
     time: dataToday?.time,
@@ -28,9 +26,14 @@ export async function useWebUsageSummaryForDay(): Promise<DaySummary | null> {
   };
 }
 
-function getData(date: string, unSortedTabs: Tab[]) {
-  if (unSortedTabs.find(x => x.days.find(d => d.date == date)) == null) return null;
-  const tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
+function getData(date: string, repo: ITabsRepository) {
+  const unSortedTabs = repo.getTabs();
+  if (unSortedTabs.length == 0) return null;
+
+  const targetTabs = unSortedTabs.filter(x => x.days.find(s => s.date === date));
+  if (targetTabs.length == 0) return null;
+
+  const tabs = targetTabs.sort(function (a: Tab, b: Tab) {
     return b.days.find(s => s.date === date)!.summary - a.days.find(s => s.date === date)!.summary;
   });
 

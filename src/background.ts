@@ -7,6 +7,10 @@ import { StorageParams } from './storage/storage-params';
 
 logger.log('Start background script');
 
+self.onerror = err => {
+  console.error('Unhandled error:', err);
+};
+
 Browser.runtime.onInstalled.addListener(details => {
   logger.log('Extension installed:', details);
 });

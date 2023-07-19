@@ -1,4 +1,4 @@
-import i18n from '../plugins/i18n';
+import i18n, { getMessagesFromLocale } from '../plugins/i18n';
 import { HOUR, MINUTE, Time } from './time';
 
 export function convertHHMMToSeconds(hours: number, minutes: number) {
@@ -79,9 +79,9 @@ export function convertLimitTimeToString(summaryTime: number) {
     return `${value} ${stringPrefix}`;
   }
 
-  return `${appendTime(hours, i18n.global.t('h.message'))} ${appendTime(
+  return `${appendTime(hours, getMessagesFromLocale()['h']['message'])} ${appendTime(
     mins,
-    i18n.global.t('m.message'),
+    getMessagesFromLocale()['m']['message'],
   )}`;
 }
 

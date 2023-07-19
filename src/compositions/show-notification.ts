@@ -10,10 +10,10 @@ export async function showNotification(
   notificationType: NotificationType,
   title: string,
   message: string,
-): Promise<void> {
+): Promise<string> {
   await Browser.notifications.clear(notificationType);
-  await new Promise(res => setTimeout(res, 5 * SECOND));
-  await Browser.notifications.create(notificationType, {
+  await new Promise(res => setTimeout(res, 3 * SECOND));
+  return Browser.notifications.create(notificationType, {
     type: 'basic',
     title: title,
     message: message,
