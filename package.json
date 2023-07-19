@@ -7,7 +7,7 @@
     "dev": "vite build --watch --mode development",
     "start": "vite build --watch --mode production",
     "format": "prettier --write .",
-    "script:zip": "powershell scripts/zip.ps1"
+    "script:zip": "vite build --mode production && powershell scripts/zip.ps1"
   },
   "dependencies": {
     "@vueuse/core": "^10.2.1",
