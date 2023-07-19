@@ -3,7 +3,7 @@ import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import webExtension, { readJsonFile } from 'vite-plugin-web-extension';
 import pkg from './package.json';
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import VueI18nPlugin from '@intlify/vite-plugin-vue-i18n';
 import copy from 'rollup-plugin-copy';
 
 const APPID_CHROME = 'hhfnghjdeddcfegfekjeihfmbjenlomm';

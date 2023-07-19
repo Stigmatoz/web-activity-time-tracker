@@ -1,4 +1,5 @@
 import Browser from 'webextension-polyfill';
+import { SECOND } from '../utils/time';
 
 export enum NotificationType {
   DailySummaryNotification = 'daily-summary-notification',
@@ -11,6 +12,7 @@ export async function showNotification(
   message: string,
 ): Promise<void> {
   await Browser.notifications.clear(notificationType);
+  await new Promise(res => setTimeout(res, 5 * SECOND));
   await Browser.notifications.create(notificationType, {
     type: 'basic',
     title: title,
