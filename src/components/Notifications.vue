@@ -113,7 +113,7 @@ async function saveNotificationMessage() {
 async function handleDate(modelData: Time) {
   if (modelData != null) {
     notificationTime.value = modelData;
-    save(
+    await save(
       StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
       convertHHMMToSeconds(notificationTime.value.hours, notificationTime.value.minutes),
     );

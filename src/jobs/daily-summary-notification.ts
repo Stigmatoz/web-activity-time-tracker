@@ -3,6 +3,7 @@ import { convertLimitTimeToString } from '../utils/converter';
 import { Settings } from '../compositions/settings';
 import { StorageParams } from '../storage/storage-params';
 import { NotificationType, showNotification } from '../compositions/show-notification';
+import i18n from '../plugins/i18n';
 
 export async function dailySummaryNotification() {
   const showDailyNotifacation = (await Settings.getInstance().getSetting(
@@ -13,10 +14,14 @@ export async function dailySummaryNotification() {
     const data = await useWebUsageSummaryForDay();
     if (data == null) return;
 
-    const title = `Today's total usage time ${convertLimitTimeToString(data.time)}`;
-    const message = `${data?.percentageFromYesterday} compared to yesterday \n${
-      data.mostVisitedSite
-    } most visited website ${convertLimitTimeToString(data.mostVisitedSiteTime)}`;
+    const title = `${i18n.global.t('todayUsageTime.message')} ${convertLimitTimeToString(
+      data.time!,
+    )}`;
+    const message = `${data?.percentageFromYesterday} ${i18n.global.t(
+      'comparedToYesterday.message',
+    )} \n${data.mostVisitedSite} ${i18n.global.t('mostVisited.message')} ${convertLimitTimeToString(
+      data.mostVisitedSiteTime!,
+    )}`;
 
     await showNotification(NotificationType.DailySummaryNotification, title, message);
   }

@@ -213,5 +213,14 @@
   },
   "5mins": {
     "message": "+ 5 минут"
+  },
+  "todayUsageTime": {
+    "message": "Общее время использования на сегодняшний день "
+  },
+  "comparedToYesterday": {
+    "message": " по сравнению \u0441\u043e вчерашним днем "
+  },
+  "mostVisited": {
+    "message": "Самый посещаемый сайт "
   }
 }

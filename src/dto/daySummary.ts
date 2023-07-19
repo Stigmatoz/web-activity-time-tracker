@@ -1,7 +1,7 @@
 export type DaySummary = {
-  time: number;
-  timeYesterDay: number;
-  percentageFromYesterday: string;
-  mostVisitedSite: string;
-  mostVisitedSiteTime: number;
+  time: number | undefined;
+  timeYesterDay: number | undefined;
+  percentageFromYesterday: string | undefined;
+  mostVisitedSite: string | undefined;
+  mostVisitedSiteTime: number | undefined;
 };

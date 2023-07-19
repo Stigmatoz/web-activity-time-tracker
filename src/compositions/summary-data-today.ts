@@ -8,7 +8,6 @@ import { getPercentage } from '../utils/common';
 export async function useWebUsageSummaryForDay(): Promise<DaySummary | null> {
   const repo = await injectTabsRepository();
   const unSortedTabs = repo.getTodayTabs();
-  let tabs: Tab[] = [];
 
   if (unSortedTabs.length == 0) return null;
 
@@ -16,15 +15,21 @@ export async function useWebUsageSummaryForDay(): Promise<DaySummary | null> {
   const dataYesterday = getData(startOfYesterday().toLocaleDateString('en-US'), unSortedTabs);
 
   return {
-    time: dataToday.time,
-    mostVisitedSite: dataToday.mostVisitedSite,
-    mostVisitedSiteTime: dataToday.mostVisitedSiteTime,
-    timeYesterDay: dataYesterday.time,
-    percentageFromYesterday: `${getPercentage(dataToday.time, dataYesterday.time)}%`,
+    time: dataToday?.time,
+    mostVisitedSite: dataToday?.mostVisitedSite,
+    mostVisitedSiteTime: dataToday?.mostVisitedSiteTime,
+    timeYesterDay: dataYesterday?.time,
+    percentageFromYesterday:
+      dataToday == null
+        ? '0%'
+        : dataYesterday == null
+        ? '100%'
+        : `${getPercentage(dataToday.time, dataYesterday.time)}%`,
   };
 }
 
 function getData(date: string, unSortedTabs: Tab[]) {
+  if (unSortedTabs.find(x => x.days.find(d => d.date == date)) == null) return null;
   const tabs = unSortedTabs.sort(function (a: Tab, b: Tab) {
     return b.days.find(s => s.date === date)!.summary - a.days.find(s => s.date === date)!.summary;
   });

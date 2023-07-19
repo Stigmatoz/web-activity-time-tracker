@@ -42,8 +42,10 @@ async function rescheduleJobs(): Promise<void> {
     StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
   )) as number;
   await Browser.alarms.clear(JobId.DailySummaryNotification);
+  const nextTime = getNextTimeOfDay(dailySummaryNotificationTime * SECOND);
+  log(`[schedule-jobs] ${JobId.DailySummaryNotification} start time ${new Date(nextTime)}`);
   Browser.alarms.create(JobId.DailySummaryNotification, {
-    when: getNextTimeOfDay(dailySummaryNotificationTime * SECOND),
+    when: nextTime,
     periodInMinutes: DAY_MINUTES,
   });
 
@@ -59,6 +61,11 @@ async function createAlarmIfMissing(
 ): Promise<void> {
   const existing = await Browser.alarms.get(name).catch(() => undefined);
   if (existing == null) {
+    log(
+      `[schedule-jobs] ${name} start time ${
+        alarmInfo.when != undefined ? new Date(alarmInfo.when) : null
+      }`,
+    );
     Browser.alarms.create(name, alarmInfo);
   }
 }

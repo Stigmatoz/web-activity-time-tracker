@@ -20,7 +20,7 @@ export async function isNeedToShowNotification(url: string, tab: Tab): Promise<b
   if (item != undefined) {
     const date = tab.days.find(x => x.date == todayLocalDate());
     if (date != undefined) {
-      if (date.summary == item.time || date.summary % item.time == 0) {
+      if (date.summary != 0 && (date.summary == item.time || date.summary % item.time == 0)) {
         log(`Time for notification: website ${url} time ${item.time} summary time ${date.summary}`);
         return true;
       }

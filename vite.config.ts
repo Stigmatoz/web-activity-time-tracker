@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => ({
 
     emptyOutDir: true,
     sourcemap: mode === 'development' ? 'inline' : false,
-    minify: true,
+    minify: mode === 'development' ? false : true,
   },
   define: {
     'process.env': process.env,

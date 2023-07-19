@@ -213,5 +213,14 @@
   },
   "5mins": {
     "message": "+ 5 minutes"
+  },
+  "todayUsageTime": {
+    "message": "Today's total usage time "
+  },
+  "comparedToYesterday": {
+    "message": " compared to yesterday "
+  },
+  "mostVisited": {
+    "message": "Most visited website "
   }
 }
