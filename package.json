@@ -10,6 +10,7 @@
     "script:zip": "powershell scripts/zip.ps1"
   },
   "dependencies": {
+    "@vueuse/core": "^10.2.1",
     "chart.js": "^4.3.0",
     "date-fns": "^2.30.0",
     "rollup-plugin-copy": "^3.4.0",

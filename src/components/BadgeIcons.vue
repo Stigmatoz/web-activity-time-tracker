@@ -12,10 +12,11 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { TypeOfList, TypeOfUrl } from '../utils/enums';
 import { isDomainInLimits } from '../compositions/limit-list';
+import { computedAsync } from '@vueuse/core';
 
 const { t } = useI18n();
 
@@ -25,11 +26,9 @@ const props = defineProps<{
   listType: TypeOfList;
 }>();
 
-onMounted(async () => {
-  isLimit.value = await isDomainInLimits(props.url);
-});
-
-const isLimit = ref<boolean>();
+const isLimit = computedAsync(async () => {
+  return await isDomainInLimits(props.url);
+}, false);
 
 const showDocumentBadge = computed(() => props.type == TypeOfUrl.Document);
 const showLimitBadge = computed(() => props.listType == TypeOfList.Today && isLimit.value == true);
