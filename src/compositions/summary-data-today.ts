@@ -9,6 +9,9 @@ import { ITabsRepository } from '../repository/tabs-repository-interface';
 export async function useWebUsageSummaryForDay(): Promise<DaySummary | null> {
   const repo = await injectTabsRepository();
 
+  const unSortedTabs = repo.getTabs();
+  if (unSortedTabs.length == 0) return null;
+
   const dataToday = getData(todayLocalDate(), repo);
   const dataYesterday = getData(startOfYesterday().toLocaleDateString('en-US'), repo);
 
