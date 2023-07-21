@@ -2,10 +2,12 @@ import { createI18n } from 'vue-i18n';
 import Browser from 'webextension-polyfill';
 import en from '../_locales/en/messages.json';
 import ru from '../_locales/ru/messages.json';
+import de from '../_locales/de/messages.json';
 
 const locales = {
   en,
   ru,
+  de,
 };
 
 export type Languages = keyof typeof locales;

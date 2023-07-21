@@ -3,7 +3,7 @@
     "message": "Web Activity Time Tracker - Web Analytics"
   },
   "extDescription": {
-    "message": "Track, limit and block the time of your web activity. Monitor how much time you spend on websites and review your web analytics."
+    "message": "Track and limit the time of your web activity and block access to the web resources. Monitor the time limits and review your web analytics."
   },
   "settings": {
     "message": "Settings"
@@ -12,10 +12,10 @@
     "message": "Today"
   },
   "allTime": {
-    "message": "All The Time"
+    "message": "Total time"
   },
   "byDays": {
-    "message": "By Days"
+    "message": "Daily"
   },
   "noData": {
     "message": "No data"
@@ -24,7 +24,7 @@
     "message": "No data for the selected period"
   },
   "showAll": {
-    "message": "Show all websites"
+    "message": "Show all the websites"
   },
   "sortBy": {
     "message": "Sorting by"
@@ -51,7 +51,7 @@
     "message": "websites"
   },
   "cannotOpenFile": {
-    "message": "You cannot open a local file due to security rules"
+    "message": "You cannot open a local file due to security protocol"
   },
   "document": {
     "message": "Document"
@@ -81,10 +81,10 @@
     "message": "Total number of days"
   },
   "todayTime": {
-    "message": "Time for today"
+    "message": "All the time today"
   },
   "averageTime": {
-    "message": "Average time on active days"
+    "message": "Average time for active days"
   },
   "mostActiveDay": {
     "message": "The most active day"
@@ -93,10 +93,10 @@
     "message": "The most inactive day"
   },
   "todayInclude": {
-    "message": "Today is included in the statistics. Click if you want to exclude today."
+    "message": "Today is included in the statistics. Click to exclude."
   },
   "todayEcclude": {
-    "message": "Today is excluded from the statistics. Click if you want to include today."
+    "message": "Today is excluded from the statistics. Click to include."
   },
   "averageTimeByDays": {
     "message": "Average time on selected days"
@@ -130,7 +130,7 @@
   },
   "viewTimeInBadge": {
     "message": "Display time tracker in icon",
-    "description": "You can see current spent time in short format in the icon of extension"
+    "description": "You are able to see current 'spent time' information in short format on the extension icon"
   },
   "allowDeferringBlock": {
     "message": "Allow deferring block for 5 minutes",
@@ -157,7 +157,7 @@
     "message": "minutes"
   },
   "whiteList": {
-    "message": "Activity and time for these websites will not be tracked"
+    "message": "Activity and spent time for these websites will not be tracked"
   },
   "addWebsite": {
     "message": "Add Website"
