@@ -49,21 +49,16 @@ export function convertSummaryTimeToString(summaryTime: number) {
   let mins = Math.floor(totalSeconds / 60);
   let seconds = totalSeconds % 60;
 
-  hours = zeroAppend(hours);
-  mins = zeroAppend(mins);
-  seconds = zeroAppend(seconds);
-
-  function appendTime(value: number, stringPrefix: string) {
-    return value > 0 ? `${value} ${stringPrefix}` : '';
+  function appendTime(value: number, stringPrefix: string, isUseZero: boolean = false) {
+    return value > 0 ? `${isUseZero ? zeroAppend(value) : value} ${stringPrefix}` : '';
   }
 
-  return `${appendTime(days, i18n.global.t('d.message'))} ${appendTime(
-    hours,
-    i18n.global.t('h.message'),
-  )} ${appendTime(mins, i18n.global.t('m.message'))} ${appendTime(
-    seconds,
-    i18n.global.t('s.message'),
-  )}`;
+  const daysStr = appendTime(days, i18n.global.t('d.message'));
+  const hoursStr = appendTime(hours, i18n.global.t('h.message'), daysStr == '' ? false : true);
+  const minsStr = appendTime(mins, i18n.global.t('m.message'), hoursStr == '' ? false : true);
+  const secondsStr = appendTime(seconds, i18n.global.t('s.message'), minsStr == '' ? false : true);
+
+  return `${daysStr} ${hoursStr} ${minsStr} ${secondsStr}`;
 }
 
 export function convertLimitTimeToString(summaryTime: number) {
@@ -72,20 +67,18 @@ export function convertLimitTimeToString(summaryTime: number) {
   const totalSeconds = summaryTime % 3600;
   let mins = Math.floor(totalSeconds / 60);
 
-  hours = zeroAppend(hours);
-  mins = zeroAppend(mins);
-
-  function appendTime(value: number, stringPrefix: string) {
-    return `${value} ${stringPrefix}`;
+  function appendTime(value: number, stringPrefix: string, isUseZero: boolean = false) {
+    return `${isUseZero ? zeroAppend(value) : value} ${stringPrefix}`;
   }
 
   return `${appendTime(hours, getMessagesFromLocale()['h']['message'])} ${appendTime(
     mins,
     getMessagesFromLocale()['m']['message'],
+    true,
   )}`;
 }
 
 function zeroAppend(time: number) {
-  if (time < 10) return Number('0' + time);
+  if (time < 10) return `0${time}`;
   else return time;
 }
