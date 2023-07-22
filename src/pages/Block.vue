@@ -5,8 +5,12 @@
       <p class="d-inline-block header">Web Activity Time Tracker</p>
     </div>
     <p>
-      {{ t('block.message') }}<span>{{ webSite }}</span>
+      {{ t('block.message') }}
     </p>
+    <div>
+      <img class="favicon" height="35" :src="favicon" />
+      <span>{{ webSite }}</span>
+    </div>
     <table>
       <tr>
         <td class="title">{{ t('limit.message') }}:</td>
@@ -24,6 +28,7 @@
       :value="t('5mins.message')"
       @click="deferring()"
     />
+    <p class="desctiption">{{ t('deferringDescription.message') }}</p>
   </div>
 </template>
 
@@ -43,6 +48,7 @@ const settingsStorage = injecStorage();
 const webSite = ref<string>();
 const sourceUrl = ref<string>();
 const limitTime = ref<number>();
+const favicon = ref<string>();
 const limitTimeString = ref<string>();
 const summaryCounter = ref<number>();
 const allowDeferringBlock = ref<boolean>();
@@ -53,6 +59,7 @@ onMounted(async () => {
   webSite.value = queryObj.domain ?? '';
   sourceUrl.value = queryObj.url ?? '';
   limitTime.value = queryObj.limitTime;
+  favicon.value = queryObj.favicon ?? '';
   limitTimeString.value = convertLimitTimeToString(queryObj.limitTime);
   summaryCounter.value = queryObj.summaryCounter ?? 0;
 
@@ -101,6 +108,7 @@ body {
 .block-container span {
   font-weight: 600;
   font-size: 21px;
+  vertical-align: top;
 }
 
 .header {
@@ -129,5 +137,12 @@ table .title {
 }
 table .value {
   font-weight: 600;
+}
+.desctiption {
+  font-size: 13px !important;
+  color: #4a4a4a;
+}
+.favicon {
+  margin: 0 10px;
 }
 </style>

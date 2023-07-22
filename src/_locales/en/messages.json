@@ -132,6 +132,9 @@
     "message": "Display time tracker in icon",
     "description": "You are able to see current 'spent time' information in short format on the extension icon"
   },
+  "deferringDescription": {
+    "message": "You can postpone the blocking for 5 minutes only once during the day"
+  },
   "allowDeferringBlock": {
     "message": "Allow deferring block for 5 minutes",
     "description": "After the site is blocked, you can postpone the blocking for 5 minutes once during the day"

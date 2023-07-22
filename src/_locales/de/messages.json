@@ -132,6 +132,9 @@
     "message": "Zeitindikator anzeigen",
     "description": "Sie können die aktuellen Informationen zur verbrauchten Zeit im Kurzformat auf dem Erweiterungssymbol anzeigen"
   },
+  "deferringDescription": {
+    "message": "Sie können die Sperre nur einmal während des Tages um 5 Minuten verschieben"
+  },
   "allowDeferringBlock": {
     "message": "Verzögerung der Sperre um 5 Minuten zulassen",
     "description": "Nachdem die Site gesperrt wurde, können Sie die Sperrung einmal täglich um 5 Minuten verschieben"
