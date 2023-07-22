@@ -1,0 +1,229 @@
+{
+  "extName": {
+    "message": "Web Activity Time Tracker - Web Analytics"
+  },
+  "extDescription": {
+    "message": "Verfolgen, beschränken und blockieren Sie die Zeit Ihrer Web-Aktivität. Achte darauf, wie viel Zeit Sie auf Seiten verbringen."
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "today": {
+    "message": "Heute"
+  },
+  "allTime": {
+    "message": "Die ganze Zeit "
+  },
+  "byDays": {
+    "message": "Täglich"
+  },
+  "noData": {
+    "message": "Keine Daten verfügbar"
+  },
+  "noDataForPeriod": {
+    "message": "Keine Daten für den ausgewählten Zeitraum"
+  },
+  "showAll": {
+    "message": "Alle Websites anzeigen"
+  },
+  "sortBy": {
+    "message": "Nach sortieren"
+  },
+  "usageTime": {
+    "message": "Verwendungszeit"
+  },
+  "session": {
+    "message": "Die Session "
+  },
+  "someSession": {
+    "message": "Die Sessionen"
+  },
+  "sessions": {
+    "message": "Die Sessionen "
+  },
+  "days": {
+    "message": "Tage"
+  },
+  "aggregate": {
+    "message": "Aggregierte Daten seit"
+  },
+  "websites": {
+    "message": "webseiten"
+  },
+  "cannotOpenFile": {
+    "message": "Aus Sicherheitsgründen können Sie keine lokale Datei öffnen"
+  },
+  "document": {
+    "message": "Das Dokument"
+  },
+  "limit": {
+    "message": "Das Limit "
+  },
+  "d": {
+    "message": "d"
+  },
+  "h": {
+    "message": "h"
+  },
+  "m": {
+    "message": "m"
+  },
+  "s": {
+    "message": "s"
+  },
+  "firstActiveDay": {
+    "message": "Der erste aktive Tag"
+  },
+  "numberOfActiveDays": {
+    "message": "Gesamtzahl der aktiven Tage"
+  },
+  "totalNumberOfDays": {
+    "message": "Alle Tage"
+  },
+  "todayTime": {
+    "message": "Gesamtzeit heute"
+  },
+  "averageTime": {
+    "message": "Durchschnittliche Zeit an aktiven Tagen"
+  },
+  "mostActiveDay": {
+    "message": "Der aktivste Tag"
+  },
+  "mostInactiveDay": {
+    "message": "Der inaktivste Tag"
+  },
+  "todayInclude": {
+    "message": "Der heutige Tag ist in der Statistik enthalten. Klicken Sie auf, wenn Sie aus der Statistik ausschließen möchten."
+  },
+  "todayEcclude": {
+    "message": "Der heutige Tag ist aus der Statistik ausgeschlossen. Klicken Sie auf, wenn Sie in die Statistik einbeziehen möchten."
+  },
+  "averageTimeByDays": {
+    "message": "Durchschnittliche Zeit für ausgewählte Tage"
+  },
+  "exportToCsv": {
+    "message": "In CSV exportieren"
+  },
+  "week": {
+    "message": "Diese Woche"
+  },
+  "month": {
+    "message": "In diesem Monat "
+  },
+  "lastMonth": {
+    "message": "Im letzten Monat"
+  },
+  "generalSettings": {
+    "message": "Grundlegende Einstellungen"
+  },
+  "whiteListSettings": {
+    "message": "Weiße Liste"
+  },
+  "limitsSettings": {
+    "message": "Die Beschränkungen"
+  },
+  "notificationsSettings": {
+    "message": "Die Notifikationen"
+  },
+  "aboutSettings": {
+    "message": "Über das Programm"
+  },
+  "viewTimeInBadge": {
+    "message": "Zeitindikator anzeigen",
+    "description": "Sie können die aktuellen Informationen zur verbrauchten Zeit im Kurzformat auf dem Erweiterungssymbol anzeigen"
+  },
+  "deferringDescription": {
+    "message": "Sie können die Sperre nur einmal während des Tages um 5 Minuten verschieben"
+  },
+  "allowDeferringBlock": {
+    "message": "Verzögerung der Sperre um 5 Minuten zulassen",
+    "description": "Nachdem die Site gesperrt wurde, können Sie die Sperrung einmal täglich um 5 Minuten verschieben"
+  },
+  "intervalInactivity": {
+    "message": "Stoppen Sie den Tracker, wenn es keine Aktionen während:",
+    "description": "Dies sind alle Aktionen mit der Maus oder der Tastatur"
+  },
+  "exportToCsvSetting": {
+    "message": "Ihre Webaktivitätsdaten werden in das CSV-Format exportiert",
+    "description": "Sie können Ihre Webaktivität für jeden Datumsbereich exportieren"
+  },
+  "sec": {
+    "message": "sekundenschnelle"
+  },
+  "min": {
+    "message": "minute"
+  },
+  "2min": {
+    "message": "minuten"
+  },
+  "mins": {
+    "message": "minuten"
+  },
+  "whiteList": {
+    "message": "Aktivität und Zeit für diese Websites werden nicht erfasst."
+  },
+  "addWebsite": {
+    "message": "Website hinzufügen"
+  },
+  "enterWebsite": {
+    "message": "Geben Sie Ihre Website ein..."
+  },
+  "enterNotification": {
+    "message": "Geben Sie den Text für die Benachrichtigung ein..."
+  },
+  "limits": {
+    "message": "Tägliche Zugriffsbeschränkungen für die Website",
+    "description": "Legen Sie die maximale Zeit fest, die pro Tag für den Besuch der Website zulässig ist. Nach dieser Zeit wird die Website gesperrt."
+  },
+  "limitsTip": {
+    "message": "Wenn Sie die Blockierungszeit auf 0 Stunden 0 Minuten einstellen, wird die Site sofort blockiert"
+  },
+  "save": {
+    "message": "Speichern"
+  },
+  "showDailyNotifacation": {
+    "message": "Tägliche Zusammenfassungsbenachrichtigungen",
+    "description": "Am Ende jedes Tages erhalten Sie eine Benachrichtigung mit einer Zusammenfassung Ihrer täglichen Nutzung."
+  },
+  "notificationTime": {
+    "message": "Benachrichtigungen für Websites",
+    "description": "Zeigen Sie jedes Mal Benachrichtigungen an, wenn Sie den angegebenen Zeitraum auf der Website verbringen"
+  },
+  "notificationMessage": {
+    "message": "Benachrichtigungstext",
+    "description": "Dieser Text wird in der Benachrichtigung für Websites angezeigt"
+  },
+  "notificationTimeSetting": {
+    "message": "Zeigt eine Benachrichtigung an, die eine Zusammenfassung Ihrer täglichen Nutzung enthält"
+  },
+  "github": {
+    "message": "Wenn Sie eine Frage haben oder ein Problem melden möchten, können Sie dies tun"
+  },
+  "question": {
+    "message": "Sie können auch Fragen stellen oder Ihre Vorschläge hier abgeben (hinterlassen)"
+  },
+  "supportForm": {
+    "message": "unterstützungsformular"
+  },
+  "doYouEnjoy": {
+    "message": "Gefällt Ihnen"
+  },
+  "review": {
+    "message": "Schreiben Sie eine Bewertung"
+  },
+  "block": {
+    "message": "Sie haben heute Ihr Nutzungslimit erreicht"
+  },
+  "5mins": {
+    "message": "+ 5 minuten"
+  },
+  "todayUsageTime": {
+    "message": "Bisherige Gesamtnutzungszeit "
+  },
+  "comparedToYesterday": {
+    "message": " im Vergleich zu gestern "
+  },
+  "mostVisited": {
+    "message": "Die meistbesuchte Website "
+  }
+}

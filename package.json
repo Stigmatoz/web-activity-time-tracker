@@ -1,0 +1,33 @@
+{
+  "name": "web-activity-time-tracker",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch --mode development",
+    "start": "vite build --watch --mode production",
+    "format": "prettier --write .",
+    "script:zip": "vite build --mode production && powershell scripts/zip.ps1"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.2.1",
+    "chart.js": "^4.3.0",
+    "date-fns": "^2.30.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "vue": "^3.2.47",
+    "vue-chartjs": "^5.2.0",
+    "vue-i18n": "^9.2.2"
+  },
+  "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^0.12.2",
+    "@kyvg/vue3-notification": "^2.9.1",
+    "@types/webextension-polyfill": "^0.10.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vuepic/vue-datepicker": "^5.3.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.1.4",
+    "vite-plugin-web-extension": "^3.0.0",
+    "vue-tsc": "^1.2.0",
+    "webextension-polyfill": "^0.10.0"
+  }
+}

@@ -1,0 +1,6 @@
+singleQuote: true
+trailingComma: all
+endOfLine: lf
+printWidth: 100
+tabWidth: 2
+arrowParens: avoid
