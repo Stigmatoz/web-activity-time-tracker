@@ -9,11 +9,12 @@ Extension uses only local [chrome.storage API](https://developer.chrome.com/apps
 
 You can see your daily stats.
 
-![image](https://user-images.githubusercontent.com/23387046/206865189-2ffe27b2-c88a-40e0-82b5-a8df675554af.png)
+![image](https://github.com/Stigmatoz/web-activity-time-tracker/assets/23387046/d67c812c-2ba4-4ef8-a685-ab5fd77c7fbe)
+
 
 And you can see your overall stats.
 
-![image](https://user-images.githubusercontent.com/23387046/206865219-31fe0473-b550-4a41-8348-576401be1395.png)
+![image](https://github.com/Stigmatoz/web-activity-time-tracker/assets/23387046/6ea4547e-8bc6-4df7-ba0c-b5b330117270)
 
 
 If you have suggestions or problems using the extension, please [submit a bug or a feature request](https://github.com/Stigmatoz/web-activity-time-tracker/issues).
@@ -28,6 +29,10 @@ Web Activity Time Tracker is available via the official [Chrome Web Store](https
 2. Using Google Chrome browser, navigate to chrome://extensions/ and enable "Developer mode" in the upper right corner.
 3. Click on the "Load unpacked extension..." button.
 4. Browse to the src directory of the unarchived folder and confirm.
+
+# Run
+
+```pnpm run dev```
 
 # License
 
