@@ -115,11 +115,11 @@ function fillMostListWithoutToday(days: TabDay[]) {
   });
 
   if (sortedByTimeDaysWithoutToday.length == 0) return null;
-  const mostActiveDayExceptToday = sortedByTimeDaysWithoutToday[0];
+  const mostActiveDayExceptToday =
+    sortedByTimeDaysWithoutToday[sortedByTimeDaysWithoutToday.length - 1];
   const mostActiveDayObjExceptToday = fillMostDay(mostActiveDayExceptToday);
 
-  const mostInactiveDayExceptToday =
-    sortedByTimeDaysWithoutToday[sortedByTimeDaysWithoutToday.length - 1];
+  const mostInactiveDayExceptToday = sortedByTimeDaysWithoutToday[0];
   const mostInactiveDayObjExceptToday = fillMostDay(mostInactiveDayExceptToday);
 
   return {
@@ -133,10 +133,10 @@ function fillMostList(days: TabDay[]) {
     return a.summary - b.summary;
   });
 
-  const mostActiveDay = sortedByTimeDays[0];
+  const mostActiveDay = sortedByTimeDays[sortedByTimeDays.length - 1];
   const mostActiveDayObj = fillMostDay(mostActiveDay);
 
-  const mostInactiveDay = sortedByTimeDays[sortedByTimeDays.length - 1];
+  const mostInactiveDay = sortedByTimeDays[0];
   const mostInactiveDayObj = fillMostDay(mostInactiveDay);
 
   return {
