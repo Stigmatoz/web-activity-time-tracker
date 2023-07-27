@@ -1,5 +1,5 @@
 import i18n, { getMessagesFromLocale } from '../plugins/i18n';
-import { HOUR, MINUTE, Time } from './time';
+import { HOUR, HOUR_IN_SECONDS, MINUTE, MINUTE_IN_SECONDS, Time } from './time';
 
 export function convertHHMMToSeconds(hours: number, minutes: number) {
   return hours * 3600 + minutes * 60;
@@ -81,4 +81,14 @@ export function convertLimitTimeToString(summaryTime: number) {
 function zeroAppend(time: number) {
   if (time < 10) return `0${time}`;
   else return time;
+}
+
+export function convertStringTimeIntervalToSeconds(timeInterval: string) {
+  const time = timeInterval.split(':');
+  return Number(time[0]) * HOUR_IN_SECONDS + Number(time[1]) * MINUTE_IN_SECONDS + Number(time[2]);
+}
+
+export function convertHoursToTime(time: number) {
+  const timeInSeconds = Math.floor(time * MINUTE_IN_SECONDS);
+  return convertSummaryTimeToString(timeInSeconds);
 }

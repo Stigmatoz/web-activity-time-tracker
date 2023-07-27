@@ -114,7 +114,7 @@
     "message": "Im letzten Monat"
   },
   "generalSettings": {
-    "message": "Grundlegende Einstellungen"
+    "message": "Einstellungen"
   },
   "whiteListSettings": {
     "message": "Weiße Liste"
@@ -225,5 +225,11 @@
   },
   "mostVisited": {
     "message": "Die meistbesuchte Website "
+  },
+  "timeChart": {
+    "message": "Die heutige Zeit"
+  },
+  "timeChartDescription": {
+    "message": "Dies ist eine stundenweise Zeitleiste für den Tag"
   }
 }

@@ -14,7 +14,7 @@
         checked
         v-on:change="selectTab(SettingsTab.TimeIntervalChart)"
       />
-      <label name="tabName" for="timeIntervalChart-tab">Today Time chart</label>
+      <label name="tabName" for="timeIntervalChart-tab">{{ t('timeChart.message') }}</label>
 
       <div class="settings-content">
         <TimeIntervalChart v-if="selectedTab == SettingsTab.TimeIntervalChart" />

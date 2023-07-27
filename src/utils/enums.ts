@@ -10,6 +10,7 @@ export enum SortingBy {
 }
 
 export enum SettingsTab {
+  TimeIntervalChart,
   GeneralSettings,
   WhiteList,
   Limits,

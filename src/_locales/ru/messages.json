@@ -114,7 +114,7 @@
     "message": "Последний месяц"
   },
   "generalSettings": {
-    "message": "Основные настройки"
+    "message": "Настройки"
   },
   "whiteListSettings": {
     "message": "Белый список"
@@ -225,5 +225,11 @@
   },
   "mostVisited": {
     "message": "Самый посещаемый сайт "
+  },
+  "timeChart": {
+    "message": "Время сегодня"
+  },
+  "timeChartDescription": {
+    "message": "Это график времени в течение дня по часам"
   }
 }
