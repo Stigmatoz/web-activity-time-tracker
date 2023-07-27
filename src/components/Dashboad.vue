@@ -1,13 +1,15 @@
 <template>
-  <div class="settings-item">
-    <label class="setting-header"> {{ t('dashboard.message') }} </label>
-    <p class="description">{{ t('timeChartDescription.message') }}</p>
-  </div>
-  <div class="chart chartByHours">
-    <TimeIntervalChart />
-  </div>
-  <div class="chart mt-20">
-    <TabList :type="TypeOfList.Dashboard" :showAllStats="false" />
+  <div class="main">
+    <div class="settings-item">
+      <label class="setting-header"> {{ t('dashboard.message') }} </label>
+      <p class="description">{{ t('timeChartDescription.message') }}</p>
+    </div>
+    <div class="chart chartByHours">
+      <TimeIntervalChart />
+    </div>
+    <div class="chart mt-20">
+      <TabList :type="TypeOfList.Dashboard" :showAllStats="false" />
+    </div>
   </div>
 </template>
 
@@ -27,6 +29,10 @@ const { t } = useI18n();
 </script>
 
 <style scoped>
+.main {
+  width: 80%;
+  margin: auto;
+}
 .chart {
   margin: 20px;
   width: 80%;
