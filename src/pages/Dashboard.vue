@@ -5,12 +5,27 @@
       <img class="d-inline-block logo" height="30" src="../assets/icons/48x48.png" />
       <p class="d-inline-block title">Web Activity Time Tracker</p>
     </div>
+    <!-- <p class="tab-separator">Dashboard</p> -->
+    <div class="settings-tab">
+      <input
+        type="radio"
+        id="timeIntervalChart-tab"
+        name="settings-group"
+        checked
+        v-on:change="selectTab(SettingsTab.TimeIntervalChart)"
+      />
+      <label name="tabName" for="timeIntervalChart-tab">Today Time chart</label>
+
+      <div class="settings-content">
+        <TimeIntervalChart v-if="selectedTab == SettingsTab.TimeIntervalChart" />
+      </div>
+    </div>
+    <!-- <p class="tab-separator">Settings</p> -->
     <div class="settings-tab">
       <input
         type="radio"
         id="general-tab"
         name="settings-group"
-        checked
         v-on:change="selectTab(SettingsTab.GeneralSettings)"
       />
       <label name="tabName" for="general-tab">{{ t('generalSettings.message') }}</label>
@@ -83,6 +98,7 @@ import { useI18n } from 'vue-i18n';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
 import Limits from '../components/Limits.vue';
+import TimeIntervalChart from '../components/TimeIntervalChart.vue';
 import DailyNotifications from '../components/Notifications.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
@@ -91,7 +107,7 @@ const { t } = useI18n();
 
 const selectedTab = ref<SettingsTab>();
 
-onMounted(() => (selectedTab.value = SettingsTab.GeneralSettings));
+onMounted(() => (selectedTab.value = SettingsTab.TimeIntervalChart));
 
 function selectTab(value: SettingsTab) {
   selectedTab.value = value;
@@ -111,5 +127,10 @@ function selectTab(value: SettingsTab) {
 
 .header-block .logo {
   margin: 10px 20px;
+}
+.tab-separator {
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 600;
 }
 </style>
