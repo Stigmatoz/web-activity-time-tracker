@@ -14,10 +14,10 @@
         checked
         v-on:change="selectTab(SettingsTab.TimeIntervalChart)"
       />
-      <label name="tabName" for="timeIntervalChart-tab">{{ t('timeChart.message') }}</label>
+      <label name="tabName" for="timeIntervalChart-tab">{{ t('dashboard.message') }}</label>
 
       <div class="settings-content">
-        <TimeIntervalChart v-if="selectedTab == SettingsTab.TimeIntervalChart" />
+        <Dashboad v-if="selectedTab == SettingsTab.TimeIntervalChart" />
       </div>
     </div>
     <!-- <p class="tab-separator">Settings</p> -->
@@ -98,10 +98,10 @@ import { useI18n } from 'vue-i18n';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
 import Limits from '../components/Limits.vue';
-import TimeIntervalChart from '../components/TimeIntervalChart.vue';
 import DailyNotifications from '../components/Notifications.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
+import Dashboad from '../components/Dashboad.vue';
 
 const { t } = useI18n();
 

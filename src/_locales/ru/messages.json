@@ -226,8 +226,8 @@
   "mostVisited": {
     "message": "Самый посещаемый сайт "
   },
-  "timeChart": {
-    "message": "Время сегодня"
+  "dashboard": {
+    "message": "Дашборд"
   },
   "timeChartDescription": {
     "message": "Это график времени в течение дня по часам"

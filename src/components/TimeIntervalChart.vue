@@ -1,11 +1,5 @@
 <template>
-  <div class="settings-item">
-    <label class="setting-header"> {{ t('timeChart.message') }} </label>
-    <p class="description">{{ t('timeChartDescription.message') }}</p>
-  </div>
-  <div class="chart">
-    <Bar :data="data" :options="options" v-if="isLoaded" />
-  </div>
+  <Bar :data="data" :options="options" v-if="isLoaded" />
 </template>
 
 <script lang="ts">
@@ -16,7 +10,6 @@ export default {
 
 <script lang="ts" setup>
 import { Bar } from 'vue-chartjs';
-import { useI18n } from 'vue-i18n';
 import {
   Chart as ChartJS,
   Title,
@@ -32,8 +25,6 @@ import { StorageDeserializeParam } from '../storage/storage-params';
 import { TimeInterval } from '../entity/time-interval';
 import { todayLocalDate } from '../utils/date';
 import { convertHoursToTime, convertStringTimeIntervalToSeconds } from '../utils/converter';
-
-const { t } = useI18n();
 
 type DataForChart = {
   summary: number;
@@ -187,12 +178,3 @@ async function buildChart() {
 
 onMounted(async () => await buildChart());
 </script>
-
-<style scoped>
-.chart {
-  height: 350px;
-  margin: auto;
-  width: 80%;
-  margin: 20px;
-}
-</style>

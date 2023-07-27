@@ -2,6 +2,7 @@ export enum TypeOfList {
   Today,
   All,
   ByDays,
+  Dashboard,
 }
 
 export enum SortingBy {

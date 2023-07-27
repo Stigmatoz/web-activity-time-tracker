@@ -31,7 +31,11 @@ const isLimit = computedAsync(async () => {
 }, false);
 
 const showDocumentBadge = computed(() => props.type == TypeOfUrl.Document);
-const showLimitBadge = computed(() => props.listType == TypeOfList.Today && isLimit.value == true);
+const showLimitBadge = computed(
+  () =>
+    (props.listType == TypeOfList.Today || props.listType == TypeOfList.Dashboard) &&
+    isLimit.value == true,
+);
 </script>
 
 <style scoped>

@@ -1,3 +1,9 @@
+:root {
+  --main-color: #6ebf5d;
+  --popup-header: #efefef;
+  --progress-bar: #428bff;
+}
+
 .float-right {
   float: right;
 }

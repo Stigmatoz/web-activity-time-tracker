@@ -226,8 +226,8 @@
   "mostVisited": {
     "message": "Most visited website "
   },
-  "timeChart": {
-    "message": "Today's time"
+  "dashboard": {
+    "message": "Dashboard"
   },
   "timeChartDescription": {
     "message": "This is a chart of time during the day by the hour"
