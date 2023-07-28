@@ -5,6 +5,9 @@ export type Time = {
   minutes: number;
 };
 
+export const MINUTE_IN_SECONDS = 60;
+export const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
+
 //Every day - 60 minutes * 24 hours
 export const DAY_MINUTES = 1440;
 export const SECOND = 1000;

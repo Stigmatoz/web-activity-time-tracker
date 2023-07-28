@@ -114,7 +114,7 @@
     "message": "Im letzten Monat"
   },
   "generalSettings": {
-    "message": "Grundlegende Einstellungen"
+    "message": "Einstellungen"
   },
   "whiteListSettings": {
     "message": "Weiße Liste"
@@ -130,7 +130,7 @@
   },
   "viewTimeInBadge": {
     "message": "Zeitindikator anzeigen",
-    "description": "Sie können die aktuellen Informationen zur verbrauchten Zeit im Kurzformat auf dem Erweiterungssymbol anzeigen"
+    "description": "Sie können die aktuellen Informationen zur \"verbrauchten Zeit\" im Kurzformat anzeigen"
   },
   "deferringDescription": {
     "message": "Sie können die Sperre nur einmal während des Tages um 5 Minuten verschieben"
@@ -194,7 +194,7 @@
     "description": "Dieser Text wird in der Benachrichtigung für Websites angezeigt"
   },
   "notificationTimeSetting": {
-    "message": "Zeigt eine Benachrichtigung an, die eine Zusammenfassung Ihrer täglichen Nutzung enthält"
+    "message": "Benachrichtigungszeit mit zusammenfassenden Informationen zur täglichen Nutzung"
   },
   "github": {
     "message": "Wenn Sie eine Frage haben oder ein Problem melden möchten, können Sie dies tun"
@@ -225,5 +225,11 @@
   },
   "mostVisited": {
     "message": "Die meistbesuchte Website "
+  },
+  "dashboard": {
+    "message": "Dashboard"
+  },
+  "timeChartDescription": {
+    "message": "Dies ist eine stundenweise Zeitleiste für den Tag"
   }
 }

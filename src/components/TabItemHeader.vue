@@ -43,7 +43,8 @@ const emit = defineEmits<{
 }>();
 
 const title = computed(() => {
-  if (props.listType == TypeOfList.Today) return t('today.message');
+  if (props.listType == TypeOfList.Today || props.listType == TypeOfList.Dashboard)
+    return t('today.message');
   if (props.listType == TypeOfList.All) {
     let countOfActiveDays =
       props.countOfActiveDays > 1 ? `(${props.countOfActiveDays} ${t('days.message')})` : '';

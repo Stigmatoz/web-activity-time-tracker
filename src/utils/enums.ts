@@ -2,6 +2,7 @@ export enum TypeOfList {
   Today,
   All,
   ByDays,
+  Dashboard,
 }
 
 export enum SortingBy {
@@ -10,6 +11,7 @@ export enum SortingBy {
 }
 
 export enum SettingsTab {
+  Dashboard,
   GeneralSettings,
   WhiteList,
   Limits,

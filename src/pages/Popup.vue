@@ -6,7 +6,10 @@
     </div>
     <div class="icons-block">
       <!-- <img height="17" src="../assets/icons/dark-mode.svg" /> -->
-      <a @click="openDashboard()"
+      <a @click="openPage(SettingsTab.Dashboard)"
+        >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
+      /></a>
+      <a @click="openPage(SettingsTab.GeneralSettings)"
         >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
       /></a>
     </div>
@@ -74,13 +77,23 @@ import { useI18n } from 'vue-i18n';
 import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
-import { TypeOfList } from '../utils/enums';
+import { SettingsTab, TypeOfList } from '../utils/enums';
 
 const { t } = useI18n();
 
-async function openDashboard() {
+async function openPage(tab: SettingsTab) {
+  let tabName = '';
+  switch (tab) {
+    case SettingsTab.Dashboard:
+      tabName = 'dashboard';
+      break;
+    case SettingsTab.GeneralSettings:
+      tabName = 'settings';
+      break;
+  }
+  const url = Browser.runtime.getURL(`src/dashboard.html${tabName != '' ? `?tab=${tabName}` : ''}`);
   await Browser.tabs.create({
-    url: Browser.runtime.getURL('src/dashboard.html'),
+    url: url,
     active: true,
   });
 }

@@ -63,12 +63,16 @@ async function trackTime() {
           await mainTrackerWrapper(activeTab!, activeDomain, tab);
         }
       }
-    }
+    } else await closeOpenInterval();
   } else {
-    await closeInterval(activeTabInstance.getActiveTabDomain());
-    activeTabInstance.setActiveTab(null);
-    currentObj = null;
+    await closeOpenInterval();
   }
+}
+
+async function closeOpenInterval() {
+  await closeInterval(activeTabInstance.getActiveTabDomain());
+  activeTabInstance.setActiveTab(null);
+  currentObj = null;
 }
 
 async function mainTracker(
@@ -134,7 +138,7 @@ async function mainTracker(
         text: '',
         color: BadgeColor.red,
       });
-  }
+  } else await closeOpenInterval();
 }
 
 async function mainTrackerWrapper(activeTab: Browser.Tabs.Tab, activeDomain: string, tab: Tab) {

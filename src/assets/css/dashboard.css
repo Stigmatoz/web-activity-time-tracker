@@ -288,6 +288,7 @@ label {
   bottom: 0;
   padding: 50px;
   border-left: 1px solid #ccc;
+  overflow-y: auto;
 }
 .settings-content span {
   animation: 0.5s ease-out 0s 1 slideInFromTop;

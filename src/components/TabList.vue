@@ -8,7 +8,11 @@
     </div>
     <div v-else>
       <OverallStatistics v-if="isShowOverallStats" :data="dataForOvarallStats" />
-      <DonutChart :time="timeForChart" :labels="sitesForChart" />
+      <DonutChart
+        :time="timeForChart"
+        :labels="sitesForChart"
+        v-if="type != TypeOfList.Dashboard"
+      />
       <TabItemHeader
         :listType="type"
         :summaryTime="summaryTime"
@@ -86,7 +90,8 @@ function showAllWebSites() {
 
 async function loadList(sortingBy: SortingBy) {
   let tabSummary = null;
-  if (props.type == TypeOfList.Today) tabSummary = await useTodayTabListSummary(sortingBy);
+  if (props.type == TypeOfList.Today || props.type == TypeOfList.Dashboard)
+    tabSummary = await useTodayTabListSummary(sortingBy);
   if (props.type == TypeOfList.All) {
     tabSummary = await useAllTabListSummary(sortingBy);
 
@@ -127,13 +132,13 @@ async function sorting(sortingBy: SortingBy) {
 function getItem(tab: Tab): CurrentTabItem {
   return {
     summaryTime:
-      props.type == TypeOfList.Today
+      props.type == TypeOfList.Today || props.type == TypeOfList.Dashboard
         ? tab.days.find(day => day.date === todayLocalDate())!.summary
         : tab.summaryTime,
     favicon: tab.favicon,
     url: tab.url,
     sessions:
-      props.type == TypeOfList.Today
+      props.type == TypeOfList.Today || props.type == TypeOfList.Dashboard
         ? tab.days.find(day => day.date === todayLocalDate())!.counter
         : tab.counter,
   };

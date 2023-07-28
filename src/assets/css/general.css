@@ -1,3 +1,16 @@
+:root {
+  --main-color: #6ebf5d;
+  --popup-header: #efefef;
+  --progress-bar: #428bff;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 30%;
+}
+
 .float-right {
   float: right;
 }
