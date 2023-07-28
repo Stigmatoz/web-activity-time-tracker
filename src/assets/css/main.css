@@ -19,12 +19,6 @@ body {
   padding: 0;
   margin: 0;
 }
-.no-data {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 30%;
-}
 .tabs {
 }
 .tabs input[name='tab-control'] {
@@ -32,6 +26,7 @@ body {
 }
 .tabs .content section h2,
 .tabs ul li label {
+  
   font-size: 15px;
   color: #428bff;
 }

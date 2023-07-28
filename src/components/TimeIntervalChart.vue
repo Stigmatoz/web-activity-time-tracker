@@ -51,18 +51,44 @@ const hours: number[] = [];
 
 isLoaded.value = false;
 
-function convertTimIntervalToObject(timeInterval: string, domain: string): DomainsInterval | null {
+function convertTimIntervalToObject(
+  timeInterval: string,
+  domain: string,
+): DomainsInterval[] | null {
   const array = timeInterval.split('-');
   const time1 = array[0].split(':');
   const time2 = array[1].split(':');
-  //добавить подсчет, если в разных часах интервал
   if (time1[0] == time2[0]) {
-    return {
-      hour: Number(time1[0]),
+    return [
+      {
+        hour: Number(time1[0]),
+        summary:
+          convertStringTimeIntervalToSeconds(array[1]) -
+          convertStringTimeIntervalToSeconds(array[0]),
+        domain: domain,
+      },
+    ];
+  } else {
+    const arr = [];
+    const firstPart1 = array[0];
+    const firstPart2 = `${time1[0]}:59:59`;
+    arr.push({
+      hour: Number(firstPart1[0]),
       summary:
-        convertStringTimeIntervalToSeconds(array[1]) - convertStringTimeIntervalToSeconds(array[0]),
+        convertStringTimeIntervalToSeconds(firstPart2) -
+        convertStringTimeIntervalToSeconds(firstPart1),
       domain: domain,
-    };
+    });
+    const secondPart1 = `${time2[0]}:00:00`;
+    const secondPart2 = `${time2[0]}:${time2[1]}:${time2[2]}`;
+    arr.push({
+      hour: Number(secondPart1[0]),
+      summary:
+        convertStringTimeIntervalToSeconds(secondPart2) -
+        convertStringTimeIntervalToSeconds(secondPart1),
+      domain: domain,
+    });
+    return arr;
   }
   return null;
 }
@@ -77,12 +103,14 @@ function fillData(timeIntervalList: TimeInterval[]) {
     intervals.forEach(array => {
       const i = array.intervals;
       i.forEach(time => {
-        const obj = convertTimIntervalToObject(time, domain);
-        if (obj != null) {
-          const existDomain = intervalsObj.find(x => x.domain == domain && x.hour == obj.hour);
-          if (existDomain != undefined) {
-            existDomain.summary += obj.summary;
-          } else intervalsObj.push(obj);
+        const objs = convertTimIntervalToObject(time, domain);
+        if (objs != null && objs.length > 0) {
+          objs.forEach(obj => {
+            const existDomain = intervalsObj.find(x => x.domain == domain && x.hour == obj.hour);
+            if (existDomain != undefined) {
+              existDomain.summary += obj.summary;
+            } else intervalsObj.push(obj);
+          });
         }
       });
     });
