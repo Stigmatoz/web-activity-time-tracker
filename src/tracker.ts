@@ -138,7 +138,7 @@ async function mainTracker(
         text: '',
         color: BadgeColor.red,
       });
-  }
+  } else await closeOpenInterval();
 }
 
 async function mainTrackerWrapper(activeTab: Browser.Tabs.Tab, activeDomain: string, tab: Tab) {
