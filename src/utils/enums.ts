@@ -27,5 +27,4 @@ export enum ListWithTime {
 export enum TypeOfUrl {
   WebSite,
   Document,
-  Chrome,
 }
