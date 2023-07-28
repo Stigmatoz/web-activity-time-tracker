@@ -1,6 +1,7 @@
 <template>
   <div class="d-inline-block">
     <span v-if="showDocumentBadge" class="badge-document">{{ t('document.message') }}</span>
+    <span v-if="showChromeBadge" class="badge-chrome">Chrome</span>
     <span v-if="showLimitBadge" class="badge-block">{{ t('limit.message') }}</span>
   </div>
 </template>
@@ -36,9 +37,18 @@ const showLimitBadge = computed(
     (props.listType == TypeOfList.Today || props.listType == TypeOfList.Dashboard) &&
     isLimit.value == true,
 );
+const showChromeBadge = computed(() => props.type == TypeOfUrl.Chrome);
 </script>
 
 <style scoped>
+span.badge-chrome {
+  border-radius: 6px;
+  background-color: #3aab58;
+  padding: 3px 7px;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+}
 span.badge-document {
   border-radius: 6px;
   background-color: #0043ff9e;

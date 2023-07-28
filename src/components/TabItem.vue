@@ -47,9 +47,12 @@ const props = defineProps<{
   listType: TypeOfList;
 }>();
 
-const typeOfUrl = computed(() =>
-  props.item.url.startsWith('file:') ? TypeOfUrl.Document : TypeOfUrl.WebSite,
-);
+const typeOfUrl = computed(() => {
+  if (props.item.url.startsWith('file:')) return TypeOfUrl.Document;
+  if (props.item.url.startsWith('chrome://') || props.item.url.startsWith('chrome-extension://'))
+    return TypeOfUrl.Chrome;
+  return TypeOfUrl.WebSite;
+});
 
 const url = computed(() =>
   typeOfUrl.value == TypeOfUrl.Document

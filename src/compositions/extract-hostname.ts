@@ -6,6 +6,10 @@ export function extractHostname(url: string | undefined): string {
     return url;
   }
 
+  if (url.startsWith('chrome://') || url.startsWith('chrome-extension://')) {
+    return url;
+  }
+
   if (url.indexOf('//') > -1) {
     hostname = url.split('/')[2];
   } else {

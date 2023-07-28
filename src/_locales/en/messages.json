@@ -137,10 +137,10 @@
   },
   "allowDeferringBlock": {
     "message": "Allow deferring block for 5 minutes",
-    "description": "After the site is blocked, you can postpone the blocking for 5 minutes once during the day"
+    "description": "After the site is blocked, you can postpone the blocking for 5 minutes during the day only once"
   },
   "intervalInactivity": {
-    "message": "Stop the tracker if there is no action during:",
+    "message": "Stop the tracker if there is no action for",
     "description": "These are any actions with the mouse or keyboard"
   },
   "exportToCsvSetting": {
@@ -172,8 +172,8 @@
     "message": "Enter notification message..."
   },
   "limits": {
-    "message": "Daily restrictions on access to websites",
-    "description": "Set the maximum time allowed to visit the site per day. After this time, the site will be blocked."
+    "message": "Daily access restrictions for the websites",
+    "description": "Set the maximum time allowed to visit the website per day. After this time, the site will be blocked."
   },
   "limitsTip": {
     "message": "If you set the blocking time to 0 hours 0 minutes, the website will be blocked immediately"
@@ -197,28 +197,28 @@
     "message": "Notification time with summary information about your daily usage"
   },
   "github": {
-    "message": "If you have feedback or would like to report an issue, you can do so on the"
+    "message": "Leave your feedback or report an issue on "
   },
   "question": {
-    "message": "You can also ask questions or leave your suggestions here"
+    "message": "You can also ask questions and leave your suggestions"
   },
   "supportForm": {
     "message": "support form"
   },
   "doYouEnjoy": {
-    "message": "Do you enjoy using Web Activity Time Tracker?"
+    "message": "Do you enjoy Web Activity Time Tracker?"
   },
   "review": {
     "message": "Leave a review!"
   },
   "block": {
-    "message": "You've reached your limit today on "
+    "message": "You've reached your limit for today on "
   },
   "5mins": {
     "message": "+ 5 minutes"
   },
   "todayUsageTime": {
-    "message": "Today's total usage time "
+    "message": "Total usage time for today "
   },
   "comparedToYesterday": {
     "message": " compared to yesterday "
