@@ -14,6 +14,7 @@ export enum StorageParams {
   BLOCK_DEFERRAL_TIME = 'view_block_deferral_time',
   DAILY_SUMMARY_NOTIFICATION_TIME = 'daily-summary-notification-time',
   DAILY_NOTIFICATION = 'daily_notification',
+  INSTALL_DATE = 'install-date',
 }
 
 export enum StorageDeserializeParam {
