@@ -231,5 +231,9 @@
   },
   "timeChartDescription": {
     "message": "This is a chart of time during the day by the hour"
+  },
+  "enjoyAndReview": {
+    "message": "Enjoying the extension?",
+    "description": "Rate Web Activity Time Tracker"
   }
 }

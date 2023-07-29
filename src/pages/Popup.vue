@@ -69,6 +69,7 @@
       </section>
     </div>
   </div>
+  <Review />
 </template>
 
 <script lang="ts" setup>
@@ -77,6 +78,7 @@ import { useI18n } from 'vue-i18n';
 import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
+import Review from '../components/Review.vue';
 import { SettingsTab, TypeOfList } from '../utils/enums';
 
 const { t } = useI18n();
