@@ -231,5 +231,9 @@
   },
   "timeChartDescription": {
     "message": "Dies ist eine stundenweise Zeitleiste für den Tag"
+  },
+  "enjoyAndReview": {
+    "message": "Genießen Sie die Erweiterung?",
+    "description": "Bewerten Web Activity Time Tracker"
   }
 }

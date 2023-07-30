@@ -4,6 +4,8 @@ import { logger } from './compositions/logger';
 import { scheduleJobs } from './jobs/sheduler';
 import { Settings } from './compositions/settings';
 import { StorageParams } from './storage/storage-params';
+import { injecStorage } from './storage/inject-storage';
+import { todayLocalDate } from './utils/date';
 
 logger.log('Start background script');
 
@@ -11,8 +13,10 @@ self.onerror = err => {
   console.error('Unhandled error:', err);
 };
 
-Browser.runtime.onInstalled.addListener(details => {
+Browser.runtime.onInstalled.addListener(async details => {
   logger.log('Extension installed:', details);
+  const settingsStorage = injecStorage();
+  await settingsStorage.saveValue(StorageParams.INSTALL_DATE, todayLocalDate());
 });
 
 Browser.storage.onChanged.addListener((changes, namespace) => {

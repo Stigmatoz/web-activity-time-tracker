@@ -231,5 +231,9 @@
   },
   "timeChartDescription": {
     "message": "Это график времени в течение дня по часам"
+  },
+  "enjoyAndReview": {
+    "message": "Вам нравится расширение?",
+    "description": "Оцените Web Activity Time Tracker"
   }
 }

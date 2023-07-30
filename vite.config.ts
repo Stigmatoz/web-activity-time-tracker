@@ -2,11 +2,11 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import webExtension, { readJsonFile } from 'vite-plugin-web-extension';
-import pkg from './package.json';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import copy from 'rollup-plugin-copy';
 
 const APPID_CHROME = 'hhfnghjdeddcfegfekjeihfmbjenlomm';
+const browser = process.env.TARGET || 'chrome';
 
 function generateManifest() {
   const manifest = readJsonFile('src/manifest.json');
@@ -43,8 +43,8 @@ export default defineConfig(({ mode }) => ({
     __EXTENSION_MODE__: JSON.stringify(mode),
     __DEV__: mode === 'development',
     __PROD__: mode === 'production',
-    __EXTENSION_VERSION__: JSON.stringify(pkg.version),
-    __REAL_APP_ID__: APPID_CHROME,
+    __APP_ID__: JSON.stringify(APPID_CHROME),
+    __BROWSER__: JSON.stringify(browser),
   },
   plugins: [
     vue(),
