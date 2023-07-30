@@ -141,7 +141,7 @@ function fillData(timeIntervalList: TimeInterval[]) {
 
   objects.forEach(obj => {
     const emptyArray: number[] = Object.assign([], tempArray);
-    emptyArray[obj.hour] = Number((obj.summary / 60).toFixed(4));
+    emptyArray[obj.hour] = Number(obj.summary / 60);
     result.push({
       backgroundColor: ['#5668e2'],
       data: emptyArray,

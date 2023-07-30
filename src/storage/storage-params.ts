@@ -15,6 +15,7 @@ export enum StorageParams {
   DAILY_SUMMARY_NOTIFICATION_TIME = 'daily-summary-notification-time',
   DAILY_NOTIFICATION = 'daily_notification',
   REVIEW_DATE = 'review_date',
+  REVIEW_PROMPT_AT = 'review_prompt_at',
   INSTALL_DATE = 'install-date',
 }
 
