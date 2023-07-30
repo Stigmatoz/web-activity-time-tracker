@@ -16,10 +16,10 @@ export async function useWebUsageSummaryForDay(): Promise<DaySummary | null> {
   const dataYesterday = getData(startOfYesterday().toLocaleDateString('en-US'), repo);
 
   return {
-    time: dataToday?.time,
+    time: dataToday == null ? 0 : dataToday.time,
     mostVisitedSite: dataToday?.mostVisitedSite,
     mostVisitedSiteTime: dataToday?.mostVisitedSiteTime,
-    timeYesterDay: dataYesterday?.time,
+    timeYesterDay: dataYesterday == null ? 0 : dataYesterday.time,
     percentageFromYesterday:
       dataToday == null
         ? '0%'
