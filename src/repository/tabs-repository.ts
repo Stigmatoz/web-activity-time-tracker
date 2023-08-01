@@ -20,6 +20,10 @@ export class TabsRepository implements ITabsRepository {
     return this.tabs;
   }
 
+  removeAllTabs(): void {
+    this.tabs = [];
+  }
+
   getTodayTabs(): Tab[] {
     return this.tabs.filter(x => x.days.find(s => s.date === todayLocalDate()));
   }

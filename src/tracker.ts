@@ -16,6 +16,7 @@ import { convertSummaryTimeToBadgeString } from './utils/converter';
 import { Settings } from './compositions/settings';
 import { isNeedToShowNotification } from './compositions/notification-list';
 import { NotificationType, showNotification } from './compositions/show-notification';
+import { Messages } from './utils/messages';
 
 const activeTabInstance = ActiveTab.getInstance();
 
@@ -160,3 +161,12 @@ async function saveTabs() {
   const tabs = repo.getTabs();
   await storage.saveTabs(tabs);
 }
+
+Browser.runtime.onMessage.addListener(async message => {
+  if (message == Messages.ClearAllData) {
+    const storage = injecStorage();
+    const repo = await injectTabsRepositorySingleton();
+    repo.removeAllTabs();
+    await storage.saveTabs([]);
+  }
+});

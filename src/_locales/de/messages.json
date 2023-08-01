@@ -235,5 +235,18 @@
   "enjoyAndReview": {
     "message": "Genießen Sie die Erweiterung?",
     "description": "Bewerten Web Activity Time Tracker"
+  },
+  "removeAllData": {
+    "message": "Alle Daten entfernen",
+    "description": "Sie können alle Daten und Statistiken der besuchten Websites für immer löschen."
+  },
+  "remove": {
+    "message": "Entfernen"
+  },
+  "removeAllDataConfirm": {
+    "message": "Sind Sie sicher, dass Sie alle Daten löschen möchten?"
+  },
+  "cancel": {
+    "message": "Annullierung"
   }
 }

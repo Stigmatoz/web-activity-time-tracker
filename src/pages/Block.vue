@@ -11,6 +11,7 @@
       <img class="favicon" height="35" :src="favicon" />
       <span>{{ webSite }}</span>
     </div>
+    <p class="source-url">{{ sourceUrl }}</p>
     <table>
       <tr>
         <td class="title">{{ t('limit.message') }}:</td>
@@ -144,5 +145,10 @@ table .value {
 }
 .favicon {
   margin: 0 10px;
+}
+.source-url {
+  margin: 5px;
+  font-size: 14px !important;
+  color: grey;
 }
 </style>
