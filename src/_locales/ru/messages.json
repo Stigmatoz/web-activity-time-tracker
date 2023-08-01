@@ -235,5 +235,18 @@
   "enjoyAndReview": {
     "message": "Вам нравится расширение?",
     "description": "Оцените Web Activity Time Tracker"
+  },
+  "removeAllData": {
+    "message": "Удалить все данные",
+    "description": "Вы можете удалить все данные и статистику посещенных сайтов за все время"
+  },
+  "remove": {
+    "message": "Удалить"
+  },
+  "removeAllDataConfirm": {
+    "message": "Вы уверены, что хотите удалить все данные, включая статистику посещенных сайтов?"
+  },
+  "cancel": {
+    "message": "Отмена"
   }
 }

@@ -81,6 +81,25 @@
       <input type="button" :value="t('exportToCsv.message')" @click="exportToCsv()" />
     </div>
   </div>
+  <div class="settings-item">
+    <label class="setting-header d-inline-block">{{ t('removeAllData.message') }}</label>
+    <p class="description">{{ t('removeAllData.description') }}</p>
+    <input type="button" :value="t('remove.message')" @click="removeAll()" />
+  </div>
+  <div id="removeAllConfirmModal" class="modal" v-if="needToConfirmDeleteAllData">
+    <div class="modal-content">
+      <p class="text-center">{{ t('removeAllDataConfirm.message') }}</p>
+      <div class="text-center">
+        <input
+          type="button"
+          class="alert"
+          :value="t('remove.message')"
+          @click="removeAllConfirm()"
+        />
+        <input type="button" class="info ml-10" :value="t('cancel.message')" @click="cancel()" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -118,6 +137,8 @@ const darkMode = ref<boolean>();
 const selectedDate = ref<Date[]>();
 
 const presetRanges = ranges();
+
+const needToConfirmDeleteAllData = ref<boolean>();
 
 onMounted(async () => {
   viewTimeInBadge.value = await settingsStorage.getValue(
@@ -168,6 +189,18 @@ async function exportToCsv() {
       `websites_${dateFrom.toLocaleDateString()}-${dateTo.toLocaleDateString()}.csv`,
     );
   }
+}
+
+async function removeAll() {
+  needToConfirmDeleteAllData.value = true;
+}
+
+function removeAllConfirm() {
+  needToConfirmDeleteAllData.value = false;
+}
+
+function cancel() {
+  needToConfirmDeleteAllData.value = false;
 }
 </script>
 

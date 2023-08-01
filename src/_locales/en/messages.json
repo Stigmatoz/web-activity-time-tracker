@@ -235,5 +235,18 @@
   "enjoyAndReview": {
     "message": "Enjoying the extension?",
     "description": "Rate Web Activity Time Tracker"
+  },
+  "removeAllData": {
+    "message": "Remove all data",
+    "description": "You can delete all data and statistics of visited websites for all time"
+  },
+  "remove": {
+    "message": "Remove"
+  },
+  "removeAllDataConfirm": {
+    "message": "Are you sure you want to delete all data?"
+  },
+  "cancel": {
+    "message": "Cancel"
   }
 }
