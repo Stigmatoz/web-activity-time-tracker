@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => ({
       },
     },
 
-    emptyOutDir: true,
+    emptyOutDir: false,
     sourcemap: mode === 'development' ? 'inline' : false,
     minify: mode === 'development' ? false : true,
   },
