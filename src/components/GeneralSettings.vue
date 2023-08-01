@@ -124,6 +124,7 @@ import {
 import { ranges, ThisWeekRange } from '../utils/date';
 import { useImportToCsv } from '../compositions/toCsv';
 import { FileType, useFile } from '../compositions/loadFile';
+import { removeAllData } from '../compositions/remove-all-data';
 
 const { t } = useI18n();
 
@@ -195,7 +196,8 @@ async function removeAll() {
   needToConfirmDeleteAllData.value = true;
 }
 
-function removeAllConfirm() {
+async function removeAllConfirm() {
+  await removeAllData();
   needToConfirmDeleteAllData.value = false;
 }
 
