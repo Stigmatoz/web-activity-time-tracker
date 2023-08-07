@@ -17,13 +17,16 @@ export async function dailySummaryNotification() {
     const title = `${
       getMessagesFromLocale()['todayUsageTime']['message']
     }${convertLimitTimeToString(data.time!)}`;
+    const messageWithMostVisitedWebsite =
+      data.mostVisitedSite == undefined
+        ? ''
+        : `${data.mostVisitedSite} ${
+            getMessagesFromLocale()['mostVisited']['message']
+          }${convertLimitTimeToString(data.mostVisitedSiteTime!)}`;
+
     const message = [
-      `${data?.percentageFromYesterday}${
-        getMessagesFromLocale()['comparedToYesterday']['message']
-      }`,
-      `${data.mostVisitedSite} ${
-        getMessagesFromLocale()['mostVisited']['message']
-      }${convertLimitTimeToString(data.mostVisitedSiteTime!)}`,
+      `${data.percentageFromYesterday}${getMessagesFromLocale()['comparedToYesterday']['message']}`,
+      messageWithMostVisitedWebsite,
     ].join('\n');
 
     return await showNotification(NotificationType.DailySummaryNotification, title, message);

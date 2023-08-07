@@ -3,7 +3,7 @@
     "message": "Web Activity Time Tracker - Web Analytics"
   },
   "extDescription": {
-    "message": "Verfolgen, beschränken und blockieren Sie die Zeit Ihrer Web-Aktivität. Achte darauf, wie viel Zeit Sie auf Seiten verbringen."
+    "message": "Verfolgen und begrenzen Sie die Zeit Ihrer Webaktivitäten und blockieren Sie den Zugang zu den Websites. Überwachen Sie Ihre Internetnutzung."
   },
   "settings": {
     "message": "Einstellungen"
@@ -12,7 +12,7 @@
     "message": "Heute"
   },
   "allTime": {
-    "message": "Die ganze Zeit "
+    "message": "Gesamte Zeit"
   },
   "byDays": {
     "message": "Täglich"
@@ -27,37 +27,37 @@
     "message": "Alle Websites anzeigen"
   },
   "sortBy": {
-    "message": "Nach sortieren"
+    "message": "Sortieren nach"
   },
   "usageTime": {
     "message": "Verwendungszeit"
   },
   "session": {
-    "message": "Die Session "
+    "message": "Sitzung"
   },
   "someSession": {
-    "message": "Die Sessionen"
+    "message": "Sitzungen"
   },
   "sessions": {
-    "message": "Die Sessionen "
+    "message": "Sitzungen"
   },
   "days": {
     "message": "Tage"
   },
   "aggregate": {
-    "message": "Aggregierte Daten seit"
+    "message": "Gesammelte Daten seit"
   },
   "websites": {
-    "message": "webseiten"
+    "message": "Webseiten"
   },
   "cannotOpenFile": {
-    "message": "Aus Sicherheitsgründen können Sie keine lokale Datei öffnen"
+    "message": "Aufgrund des Sicherheitsprotokolls können Sie eine lokale Datei nicht öffnen"
   },
   "document": {
-    "message": "Das Dokument"
+    "message": "Dokument"
   },
   "limit": {
-    "message": "Das Limit "
+    "message": "Limit"
   },
   "d": {
     "message": "d"
@@ -93,25 +93,25 @@
     "message": "Der inaktivste Tag"
   },
   "todayInclude": {
-    "message": "Der heutige Tag ist in der Statistik enthalten. Klicken Sie auf, wenn Sie aus der Statistik ausschließen möchten."
+    "message": "Der heutige Tag ist in der Statistik enthalten. Aus der Statistik ausschließen."
   },
   "todayEcclude": {
-    "message": "Der heutige Tag ist aus der Statistik ausgeschlossen. Klicken Sie auf, wenn Sie in die Statistik einbeziehen möchten."
+    "message": "Der heutige Tag ist aus der Statistik ausgeschlossen. In die Statistik einbeziehen."
   },
   "averageTimeByDays": {
     "message": "Durchschnittliche Zeit für ausgewählte Tage"
   },
   "exportToCsv": {
-    "message": "In CSV exportieren"
+    "message": "Als CSV exportieren"
   },
   "week": {
     "message": "Diese Woche"
   },
   "month": {
-    "message": "In diesem Monat "
+    "message": "Diesen Monat"
   },
   "lastMonth": {
-    "message": "Im letzten Monat"
+    "message": "Letzter Monat"
   },
   "generalSettings": {
     "message": "Einstellungen"
@@ -120,44 +120,44 @@
     "message": "Weiße Liste"
   },
   "limitsSettings": {
-    "message": "Die Beschränkungen"
+    "message": "Beschränkungen"
   },
   "notificationsSettings": {
-    "message": "Die Notifikationen"
+    "message": "Benachrichtigungen"
   },
   "aboutSettings": {
-    "message": "Über das Programm"
+    "message": "Über die Erweiterung"
   },
   "viewTimeInBadge": {
     "message": "Zeitindikator anzeigen",
-    "description": "Sie können die aktuellen Informationen zur \"verbrauchten Zeit\" im Kurzformat anzeigen"
+    "description": "Die aktuellen Informationen zur \"verbrauchten Zeit\" im Kurzformat anzeigen"
   },
   "deferringDescription": {
-    "message": "Sie können die Sperre nur einmal während des Tages um 5 Minuten verschieben"
+    "message": "Die Sperre kann nur einmal pro Tag um 5 Minuten verschoben werden"
   },
   "allowDeferringBlock": {
     "message": "Verzögerung der Sperre um 5 Minuten zulassen",
     "description": "Nachdem die Site gesperrt wurde, können Sie die Sperrung einmal täglich um 5 Minuten verschieben"
   },
   "intervalInactivity": {
-    "message": "Stoppen Sie den Tracker, wenn es keine Aktionen während:",
-    "description": "Dies sind alle Aktionen mit der Maus oder der Tastatur"
+    "message": "Zeiterfassung stoppen, bei Inaktivität für:",
+    "description": "Betrifft alle Aktionen mit der Maus oder der Tastatur"
   },
   "exportToCsvSetting": {
-    "message": "Ihre Webaktivitätsdaten werden in das CSV-Format exportiert",
-    "description": "Sie können Ihre Webaktivität für jeden Datumsbereich exportieren"
+    "message": "Ihre Webaktivitätsdaten als CSV-Datei exportieren",
+    "description": "Ihre Webaktivitäten für einen beliebigen Zeitraum exportieren"
   },
   "sec": {
-    "message": "sekundenschnelle"
+    "message": "Sekunden"
   },
   "min": {
-    "message": "minute"
+    "message": "Minute"
   },
   "2min": {
-    "message": "minuten"
+    "message": "Minuten"
   },
   "mins": {
-    "message": "minuten"
+    "message": "Minuten"
   },
   "whiteList": {
     "message": "Aktivität und Zeit für diese Websites werden nicht erfasst."
@@ -166,56 +166,56 @@
     "message": "Website hinzufügen"
   },
   "enterWebsite": {
-    "message": "Geben Sie Ihre Website ein..."
+    "message": "Namen der Website eingeben..."
   },
   "enterNotification": {
-    "message": "Geben Sie den Text für die Benachrichtigung ein..."
+    "message": "Text für die Benachrichtigung eingeben..."
   },
   "limits": {
-    "message": "Tägliche Zugriffsbeschränkungen für die Website",
+    "message": "Tägliche Zugriffsbeschränkungen für Websites",
     "description": "Legen Sie die maximale Zeit fest, die pro Tag für den Besuch der Website zulässig ist. Nach dieser Zeit wird die Website gesperrt."
   },
   "limitsTip": {
-    "message": "Wenn Sie die Blockierungszeit auf 0 Stunden 0 Minuten einstellen, wird die Site sofort blockiert"
+    "message": "Setzen Sie die Blockierungszeit auf 0 Stunden 0 Minuten, um die Website sofort zu blockieren."
   },
   "save": {
     "message": "Speichern"
   },
   "showDailyNotifacation": {
-    "message": "Tägliche Zusammenfassungsbenachrichtigungen",
+    "message": "Tägliche Zusammenfassung als Benachrichtigung",
     "description": "Am Ende jedes Tages erhalten Sie eine Benachrichtigung mit einer Zusammenfassung Ihrer täglichen Nutzung."
   },
   "notificationTime": {
     "message": "Benachrichtigungen für Websites",
-    "description": "Zeigen Sie jedes Mal Benachrichtigungen an, wenn Sie den angegebenen Zeitraum auf der Website verbringen"
+    "description": "Jedes Mal eine Benachrichtigung anzeigen, wenn Sie den angegebenen Zeitraum auf einer Website verbringen."
   },
   "notificationMessage": {
     "message": "Benachrichtigungstext",
     "description": "Dieser Text wird in der Benachrichtigung für Websites angezeigt"
   },
   "notificationTimeSetting": {
-    "message": "Benachrichtigungszeit mit zusammenfassenden Informationen zur täglichen Nutzung"
+    "message": "Tägliche Zusammenfassung um folgende Uhrzeit anzeigen:"
   },
   "github": {
-    "message": "Wenn Sie eine Frage haben oder ein Problem melden möchten, können Sie dies tun"
+    "message": "Feedback zur Erweiterung geben oder ein Problem melden: "
   },
   "question": {
-    "message": "Sie können auch Fragen stellen oder Ihre Vorschläge hier abgeben (hinterlassen)"
+    "message": "Eine Frage stellen oder Verbesserungen vorschlagen: "
   },
   "supportForm": {
-    "message": "unterstützungsformular"
+    "message": "Unterstützungsformular"
   },
   "doYouEnjoy": {
-    "message": "Gefällt Ihnen"
+    "message": "Gefällt Ihnen diese Erweiterung?"
   },
   "review": {
-    "message": "Schreiben Sie eine Bewertung"
+    "message": "Schreiben Sie eine Bewertung!"
   },
   "block": {
-    "message": "Sie haben heute Ihr Nutzungslimit erreicht"
+    "message": "Sie haben Ihr tägliches Nutzungslimit erreicht für "
   },
   "5mins": {
-    "message": "+ 5 minuten"
+    "message": "+ 5 Minuten"
   },
   "todayUsageTime": {
     "message": "Bisherige Gesamtnutzungszeit "
@@ -227,26 +227,26 @@
     "message": "Die meistbesuchte Website "
   },
   "dashboard": {
-    "message": "Dashboard"
+    "message": "Übersicht"
   },
   "timeChartDescription": {
     "message": "Dies ist eine stundenweise Zeitleiste für den Tag"
   },
   "enjoyAndReview": {
-    "message": "Genießen Sie die Erweiterung?",
-    "description": "Bewerten Web Activity Time Tracker"
+    "message": "Gefällt Ihnen diese Erweiterung?",
+    "description": "Web Activity Time Tracker bewerten"
   },
   "removeAllData": {
     "message": "Alle Daten entfernen",
-    "description": "Sie können alle Daten und Statistiken der besuchten Websites für immer löschen."
+    "description": "Alle Daten und Statistiken der besuchten Websites für immer löschen."
   },
   "remove": {
-    "message": "Entfernen"
+    "message": "Löschen"
   },
   "removeAllDataConfirm": {
     "message": "Sind Sie sicher, dass Sie alle Daten löschen möchten?"
   },
   "cancel": {
-    "message": "Annullierung"
+    "message": "Abbrechen"
   }
 }

@@ -67,7 +67,7 @@ async function openStore() {
 <style scoped>
 .review-block {
   width: -webkit-fill-available;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   padding: 8px 20px;
   font-size: 14px;
