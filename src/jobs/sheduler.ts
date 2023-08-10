@@ -46,7 +46,6 @@ async function rescheduleJobs(): Promise<void> {
   log(`[schedule-jobs] ${JobId.DailySummaryNotification} start time ${new Date(nextTime)}`);
   Browser.alarms.create(JobId.DailySummaryNotification, {
     when: nextTime,
-    periodInMinutes: DAY_MINUTES,
   });
 
   await createAlarmIfMissing(JobId.RemoveOldTimeIntervals, {
