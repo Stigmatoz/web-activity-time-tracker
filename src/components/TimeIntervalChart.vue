@@ -92,7 +92,6 @@ function convertTimIntervalToObject(
     });
     return arr;
   }
-  return null;
 }
 
 function fillData(timeIntervalList: TimeInterval[]) {

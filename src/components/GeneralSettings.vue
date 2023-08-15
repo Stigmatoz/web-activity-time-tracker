@@ -86,6 +86,19 @@
     <p class="description">{{ t('removeAllData.description') }}</p>
     <input type="button" :value="t('remove.message')" @click="removeAll()" />
   </div>
+  <div class="settings-item">
+    <label class="setting-header d-inline-block">{{ t('backupAndRestore.message') }}</label>
+    <p class="description">{{ t('backupAndRestore.description') }}</p>
+    <input type="button" :value="t('backup.message')" @click="backup()" />
+    <input
+      type="file"
+      ref="restoreFile"
+      style="display: none"
+      @change="restoreFileUpload()"
+      accept="application/json"
+    />
+    <input type="button" class="ml-10" :value="t('restore.message')" @click="restore()" />
+  </div>
   <div id="removeAllConfirmModal" class="modal" v-if="needToConfirmDeleteAllData">
     <div class="modal-content">
       <p class="text-center">{{ t('removeAllDataConfirm.message') }}</p>
@@ -121,10 +134,12 @@ import {
   VIEW_TIME_IN_BADGE_DEFAULT,
   InactivityInterval,
 } from '../storage/storage-params';
-import { ranges, ThisWeekRange } from '../utils/date';
+import { ranges, ThisWeekRange, todayLocalDate } from '../utils/date';
 import { useImportToCsv } from '../compositions/toCsv';
 import { FileType, useFile } from '../compositions/loadFile';
 import { removeAllData } from '../compositions/remove-all-data';
+import { injectTabsRepository } from '../repository/inject-tabs-repository';
+import { restoreData } from '../compositions/restoreData';
 
 const { t } = useI18n();
 
@@ -140,6 +155,8 @@ const selectedDate = ref<Date[]>();
 const presetRanges = ranges();
 
 const needToConfirmDeleteAllData = ref<boolean>();
+
+const restoreFile = ref<any>();
 
 onMounted(async () => {
   viewTimeInBadge.value = await settingsStorage.getValue(
@@ -203,6 +220,45 @@ async function removeAllConfirm() {
 
 function cancel() {
   needToConfirmDeleteAllData.value = false;
+}
+
+async function backup() {
+  const repo = await injectTabsRepository();
+  const tabs = repo.getTabs();
+  const json = JSON.stringify(tabs);
+  useFile(json, FileType.JSON, `backup-${todayLocalDate()}.json`);
+}
+
+function restore() {
+  restoreFile.value.click();
+}
+
+function restoreFileUpload() {
+  try {
+    const file = restoreFile.value.files[0];
+    if (file != null && file.type === FileType.JSON) {
+      var reader = new FileReader();
+      reader.readAsText(file, 'UTF-8');
+      reader.onload = async readerEvent => {
+        if (readerEvent != null) {
+          let content = readerEvent.target?.result;
+          if (content != null) {
+            await restoreData(content as string);
+          }
+        }
+      };
+    } else {
+      notification.notify({
+        title: 'Wrong restore file format',
+        type: 'warn',
+      });
+    }
+  } catch {
+    notification.notify({
+      title: 'Wrong restore file format',
+      type: 'warn',
+    });
+  }
 }
 </script>
 

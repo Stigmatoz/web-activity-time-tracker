@@ -248,5 +248,15 @@
   },
   "cancel": {
     "message": "Abbrechen"
+  },
+  "backupAndRestore": {
+    "message": "Sicherung und Wiederherstellen",
+    "description": "Sie können eine Sicherungskopie aller Daten für alle besuchten Websites herunterladen"
+  },
+  "backup": {
+    "message": "Sicherung"
+  },
+  "restore": {
+    "message": "Wiederherstellen"
   }
 }

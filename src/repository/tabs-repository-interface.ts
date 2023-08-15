@@ -1,6 +1,7 @@
 import { Tab } from '../entity/tab';
 
 export interface ITabsRepository {
+  initAsync(): void;
   getTabs(): Tab[];
   removeAllTabs(): void;
   getTodayTabs(): Tab[];

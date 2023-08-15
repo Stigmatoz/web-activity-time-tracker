@@ -248,5 +248,15 @@
   },
   "cancel": {
     "message": "Cancel"
+  },
+  "backupAndRestore": {
+    "message": "Backup and restore",
+    "description": "You can download a backup copy of all data for all visited sites"
+  },
+  "backup": {
+    "message": "Backup"
+  },
+  "restore": {
+    "message": "Restore"
   }
 }

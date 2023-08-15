@@ -1,5 +1,6 @@
 export enum FileType {
   CSV = 'text/csv',
+  JSON = 'application/json',
 }
 
 export function useFile(data: string, type: FileType, fileName: string) {

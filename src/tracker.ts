@@ -169,4 +169,10 @@ Browser.runtime.onMessage.addListener(async message => {
     repo.removeAllTabs();
     await storage.saveTabs([]);
   }
+  if (message.message == Messages.Restore) {
+    const storage = injecStorage();
+    await storage.saveTabs(message.data);
+    const repo = await injectTabsRepositorySingleton();
+    repo.initAsync();
+  }
 });
