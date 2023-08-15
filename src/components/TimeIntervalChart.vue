@@ -72,8 +72,9 @@ function convertTimIntervalToObject(
     const arr = [];
     const firstPart1 = array[0];
     const firstPart2 = `${time1[0]}:59:59`;
+    const hourForFirstPart = firstPart1.split(':');
     arr.push({
-      hour: Number(firstPart1[0]),
+      hour: Number(hourForFirstPart[0]),
       summary:
         convertStringTimeIntervalToSeconds(firstPart2) -
         convertStringTimeIntervalToSeconds(firstPart1),
@@ -81,8 +82,9 @@ function convertTimIntervalToObject(
     });
     const secondPart1 = `${time2[0]}:00:00`;
     const secondPart2 = `${time2[0]}:${time2[1]}:${time2[2]}`;
+    const hourForsecondPart = secondPart1.split(':');
     arr.push({
-      hour: Number(secondPart1[0]),
+      hour: Number(hourForsecondPart[0]),
       summary:
         convertStringTimeIntervalToSeconds(secondPart2) -
         convertStringTimeIntervalToSeconds(secondPart1),
