@@ -1,5 +1,13 @@
 # Web Activity Time Tracker <a href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm" rel="nofollow"><img src="https://user-images.githubusercontent.com/768070/51865757-87d45300-2347-11e9-84fd-bafff5b036b2.png" alt="Add to Chrome" style="max-width:100%;"></a>
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/d/hhfnghjdeddcfegfekjeihfmbjenlomm.svg?&label=Chrome%20users&ogo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/hhfnghjdeddcfegfekjeihfmbjenlomm?&logoColor=white;label=Rating)](https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hhfnghjdeddcfegfekjeihfmbjenlomm.svg?&logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm)
+
+[![Microsoft Edge Store](https://img.shields.io/badge/dynamic/json?label=Edge%20users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Feepmlmdenlkkjieghjmedjahpofieogf&color=gree)](https://microsoftedge.microsoft.com/addons/detail/web-activity-time-tracker/eepmlmdenlkkjieghjmedjahpofieogf)
+[![Microsoft Edge Store](https://img.shields.io/badge/dynamic/json?label=Rating&suffix=/5&color=gree&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Feepmlmdenlkkjieghjmedjahpofieogf)](https://microsoftedge.microsoft.com/addons/detail/web-activity-time-tracker/eepmlmdenlkkjieghjmedjahpofieogf)
+[![Microsoft Edge Store](https://img.shields.io/badge/dynamic/json?label=Microsoft%20Edge&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Feepmlmdenlkkjieghjmedjahpofieogf&logo=microsoft-edge)](https://microsoftedge.microsoft.com/addons/detail/web-activity-time-tracker/eepmlmdenlkkjieghjmedjahpofieogf)
+
 Web Activity Time Tracker keeps track of how much time you spend on the web and presents the stats in a useful and intuitive way. 
 You can set a daily visit limit for sites and block it after the expiration of the limit. 
 
