@@ -32,5 +32,9 @@ Browser.runtime.onStartup.addListener(() => {
   logger.log(`onStartup event`);
 });
 
+Browser.windows.onFocusChanged.addListener(() => {
+  logger.log('onFocusChanged');
+});
+
 scheduleJobs();
 initTracker();
