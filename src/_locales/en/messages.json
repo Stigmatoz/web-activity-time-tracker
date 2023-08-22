@@ -258,5 +258,41 @@
   },
   "restore": {
     "message": "Restore"
+  },
+  "welcome": {
+    "message": "Welcome to Web Activity Time Tracker",
+    "description": "Web Activity Time Tracker is <b>open-source</b>, <b>free</b> and <b>no ads</b> extension, which can help you track the time you spent on browsing websites and the count of visit."
+  },
+  "getStarted": {
+    "message": "Get started"
+  },
+  "welcomeStart": {
+    "message": "You can quicly start using the extension in just 3 easy steps"
+  },
+  "pinIcon": {
+    "message": "Pin the icon"
+  },
+  "pinIconPart1": {
+    "message": "To use this extension more conveniently, you can pin the icon to toolbar. Click the icon"
+  },
+  "pinIconPart2": {
+    "message": "and then click the pin icon"
+  },
+  "browse": {
+    "message": "Browse any websites",
+    "description": "When you visit any website, you will see that the time is displayed on the icon, just like here"
+  },
+  "seeData": {
+    "message": "View your data on the popup page and on the dashboard",
+    "description": "Click on the extension icon to open a popup page and you will be able to read the data visualized using a pie chart, for today, for all time or by day. In the popup window, you can open the dashboard and it will show you today's time by the clock. And you can set a daily time limit for any websites, notifications for websites, or export data to CSV."
+  },
+  "close": {
+    "message": "Close"
+  },
+  "useExtension": {
+    "message": "Use the extension"
+  },
+  "next": {
+    "message": "Next"
   }
 }

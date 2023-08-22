@@ -1,37 +1,30 @@
 <template>
   <div class="main">
-    <p class="header">Welcome to Web Activity Time Tracker</p>
-    <p class="description">
-      Web Activity Time Tracker is <span>open-sourse</span>, <span>free</span> and
-      <span>no ads</span> extension, which can help you track the time you spent on browsing
-      websites and the count of visit.
-    </p>
+    <p class="header">{{ t('welcome.message') }}</p>
+    <p class="description" v-html="t('welcome.description')"></p>
     <img class="img" src="../assets/initial.jpg" height="250" />
     <div class="steps">
-      <p class="header">Get started</p>
-      <p class="description">You can quicly start using the extension in just 3 easy steps</p>
-      <p class="step">1. Pin the icon</p>
+      <p class="header">{{ t('getStarted.message') }}</p>
+      <p class="description">{{ t('welcomeStart.message') }}</p>
+      <p class="step">1. {{ t('pinIcon.message') }}</p>
       <p class="description">
-        To use this extension more conviently, you can pin the icon to toolbar. Click the icon
-        <img src="../assets/icons/extension.svg" height="25" /> and then click the pin icon
+        {{ t('pinIconPart1.message') }}
+        <img src="../assets/icons/extension.svg" height="25" /> {{ t('pinIconPart2.message') }}
         <img src="../assets/icons/pin.svg" height="25" />
       </p>
       <img class="img" src="../assets/pin-tutorial.png" height="250" />
-      <p class="step">2. Browse any websites</p>
+      <p class="step">2. {{ t('browse.message') }}</p>
       <p class="description">
-        Browse any websites and you will see that time is beating on the icon, just like this
+        {{ t('browse.description') }}
         <img src="../assets/icons/icon.png" height="35" />
       </p>
-      <p class="step">3. Read data in the popup page and on dashboard</p>
+      <p class="step">3.{{ t('seeData.message') }}</p>
       <p class="description mt-20">
-        Click on the extension icon to open a popup page and you will be able to read the data
-        visualized using a pie chart, for today, for all time, or by day. In the popup window, you
-        can open the dashboard and it will show you today's time by hour. And you can set a daily
-        time limit for any websites, notifications for websites, or export data to CSV.
+        {{ t('seeData.description') }}
       </p>
       <div class="btn-block">
-        <button class="close" @click="close()">Close</button>
-        <button @click="openDashboard()">Use the extension</button>
+        <button class="close" @click="close()">{{ t('close.message') }}</button>
+        <button @click="openDashboard()">{{ t('useExtension.message') }}</button>
       </div>
     </div>
   </div>
@@ -40,6 +33,8 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import Browser from 'webextension-polyfill';
+
+const { t } = useI18n();
 
 async function close() {
   const currentTab = await Browser.tabs.getCurrent();
