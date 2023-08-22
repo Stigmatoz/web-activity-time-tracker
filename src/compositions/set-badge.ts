@@ -2,7 +2,7 @@ import Browser from 'webextension-polyfill';
 
 export interface BadgeState {
   color: BadgeColor;
-  tabId: number;
+  tabId: number | undefined;
   text: string;
 }
 
@@ -13,10 +13,12 @@ export enum BadgeColor {
   none = '#000',
 }
 
-export function useBadge(badge: BadgeState): void {
-  Browser.action.setBadgeBackgroundColor({ color: badge.color });
-  Browser.action.setBadgeText({
-    tabId: badge.tabId,
-    text: badge.text,
-  });
+export async function useBadge(badge: BadgeState): Promise<void> {
+  if (badge.tabId != undefined) {
+    await Browser.action.setBadgeBackgroundColor({ color: badge.color });
+    await Browser.action.setBadgeText({
+      tabId: badge.tabId,
+      text: badge.text,
+    });
+  }
 }

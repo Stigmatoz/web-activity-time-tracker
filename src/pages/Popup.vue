@@ -5,7 +5,6 @@
       <p class="header">Web Activity Time Tracker</p>
     </div>
     <div class="icons-block">
-      <!-- <img height="17" src="../assets/icons/dark-mode.svg" /> -->
       <a @click="openPage(SettingsTab.Dashboard)"
         >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
       /></a>

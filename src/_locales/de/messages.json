@@ -258,5 +258,41 @@
   },
   "restore": {
     "message": "Wiederherstellen"
+  },
+  "welcome": {
+    "message": "Willkommen bei Web Activity Time Tracker",
+    "description": "Web Activity Time Tracker ist eine <b>open-source</b>, <b>kostenlose</b> und <b>werbefreie</b> Erweiterung, mit der Sie die Zeit, die Sie für das Durchsuchen von Websites aufgewendet haben, und die Anzahl der Besuche nachverfolgen können."
+  },
+  "getStarted": {
+    "message": "Anleitung"
+  },
+  "welcomeStart": {
+    "message": "Sie können die Erweiterung in nur 3 einfachen Schritten schnell verwenden"
+  },
+  "pinIcon": {
+    "message": "Pin das Symbol"
+  },
+  "pinIconPart1": {
+    "message": "Um diese Erweiterung bequemer zu verwenden, können Sie das Symbol an die Symbolleiste anheften. Klicken Sie auf das Symbol"
+  },
+  "pinIconPart2": {
+    "message": "und klicken Sie dann auf das Pin-Symbol"
+  },
+  "browse": {
+    "message": "Durchsuchen Sie alle Websites",
+    "description": "Wenn Sie eine Website besuchen, werden Sie sehen, dass die Uhrzeit auf dem Symbol angezeigt wird, genau wie hier"
+  },
+  "seeData": {
+    "message": "Zeigen Sie Ihre Daten auf der Popup-Seite und im Dashboard an",
+    "description": "Klicken Sie auf das Erweiterungssymbol, um eine Popup-Seite zu öffnen, und Sie können die mit einem Kreisdiagramm gerenderten Daten für heute, für alle Zeiten oder für Tage lesen. In einem Popup-Fenster können Sie das Dashboard öffnen, und es zeigt Ihnen die heutige Zeit nach Stunden an. Und Sie können ein tägliches Zeitlimit für alle Websites festlegen, Benachrichtigungen für Websites festlegen oder Daten in CSV exportieren."
+  },
+  "close": {
+    "message": "Schließen"
+  },
+  "useExtension": {
+    "message": "Verwenden Sie die Erweiterung"
+  },
+  "next": {
+    "message": "Weiter"
   }
 }
