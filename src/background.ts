@@ -28,6 +28,16 @@ Browser.storage.onChanged.addListener((changes, namespace) => {
 
 Browser.runtime.setUninstallURL('https://webtracker.online/goodbye.html');
 
+Browser.runtime.onInstalled.addListener(async details => {
+  if (details.reason == 'install') {
+    const initialPageUrl = Browser.runtime.getURL('src/welcome.html');
+    await Browser.tabs.create({
+      url: initialPageUrl,
+      active: true,
+    });
+  }
+});
+
 Browser.runtime.onStartup.addListener(() => {
   logger.log(`onStartup event`);
 });

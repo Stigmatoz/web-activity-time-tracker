@@ -41,8 +41,8 @@ async function trackTime() {
       const activeDomain = extractHostname(activeTab!.url);
 
       if (await isInBlackList(activeDomain)) {
-        useBadge({
-          tabId: activeTab!.id!,
+        await useBadge({
+          tabId: activeTab?.id,
           text: 'n/a',
           color: BadgeColor.green,
         });
@@ -128,14 +128,14 @@ async function mainTracker(
     const viewInBadge = await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE);
 
     if (viewInBadge)
-      useBadge({
-        tabId: activeTab!.id!,
+      await useBadge({
+        tabId: activeTab?.id,
         text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
         color: BadgeColor.blue,
       });
     else
-      useBadge({
-        tabId: activeTab!.id!,
+      await useBadge({
+        tabId: activeTab?.id,
         text: '',
         color: BadgeColor.red,
       });
