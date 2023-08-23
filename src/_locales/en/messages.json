@@ -294,5 +294,9 @@
   },
   "next": {
     "message": "Next"
+  },
+  "showChangelog": {
+    "message": "Show changelog",
+    "description": "Show the list of changes after updating extension"
   }
 }

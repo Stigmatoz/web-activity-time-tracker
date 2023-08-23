@@ -13,12 +13,6 @@ self.onerror = err => {
   console.error('Unhandled error:', err);
 };
 
-Browser.runtime.onInstalled.addListener(async details => {
-  logger.log('Extension installed:', details);
-  const settingsStorage = injecStorage();
-  await settingsStorage.saveValue(StorageParams.INSTALL_DATE, todayLocalDate());
-});
-
 Browser.storage.onChanged.addListener((changes, namespace) => {
   for (var key in changes) {
     if (Object.values(StorageParams).includes(key as StorageParams))
@@ -30,11 +24,25 @@ Browser.runtime.setUninstallURL('https://webtracker.online/goodbye.html');
 
 Browser.runtime.onInstalled.addListener(async details => {
   if (details.reason == 'install') {
+    logger.log('Extension installed:', details);
+    const settingsStorage = injecStorage();
+    await settingsStorage.saveValue(StorageParams.INSTALL_DATE, todayLocalDate());
+
     const initialPageUrl = Browser.runtime.getURL('src/welcome.html');
     await Browser.tabs.create({
       url: initialPageUrl,
       active: true,
     });
+  }
+  if (details.reason == 'update') {
+    const showChangelog = (await Settings.getInstance().getSetting(
+      StorageParams.SHOW_CHANGELOG,
+    )) as boolean;
+    if (showChangelog)
+      await Browser.tabs.create({
+        url: 'https://webtracker.online/releasenotes.html',
+        active: true,
+      });
   }
 });
 

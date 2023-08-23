@@ -289,10 +289,14 @@
   "close": {
     "message": "Schließen"
   },
-  "useExtension": {
+  "useExtension": { 
     "message": "Verwenden Sie die Erweiterung"
   },
   "next": {
     "message": "Weiter"
+  },
+  "showChangelog": {
+    "message": "Änderungsliste anzeigen",
+    "description": "Zeigen Sie die Liste der Änderungen nach dem Aktualisieren der Erweiterung an"
   }
 }
