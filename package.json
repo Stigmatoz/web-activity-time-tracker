@@ -12,6 +12,7 @@
   "dependencies": {
     "@vueuse/core": "^10.2.1",
     "chart.js": "^4.3.0",
+    "d3": "^7.8.5",
     "date-fns": "^2.30.0",
     "rollup-plugin-copy": "^3.4.0",
     "vue": "^3.2.47",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@intlify/unplugin-vue-i18n": "^0.12.2",
     "@kyvg/vue3-notification": "^2.9.1",
+    "@types/d3": "^7.4.0",
     "@types/webextension-polyfill": "^0.10.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vuepic/vue-datepicker": "^5.3.0",

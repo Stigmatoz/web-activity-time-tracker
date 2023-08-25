@@ -298,5 +298,15 @@
   "showChangelog": {
     "message": "Änderungsliste anzeigen",
     "description": "Zeigen Sie die Liste der Änderungen nach dem Aktualisieren der Erweiterung an"
+  },
+  "byHours": {
+    "message": "Stundenweise"
+  },
+  "intervals": {
+    "message": "Intervalle"
+  },
+  "intervalsChart": {
+    "message": "Nur Zeitintervalle größer als",
+    "description": "werden angezeigt"
   }
 }

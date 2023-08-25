@@ -298,5 +298,15 @@
   "showChangelog": {
     "message": "Show changelog",
     "description": "Show the list of changes after updating extension"
+  },
+  "byHours": {
+    "message": "Horly"
+  },
+  "intervals": {
+    "message": "Intervals"
+  },
+  "intervalsChart": {
+    "message": "Only time intervals greater than",
+    "description": "are shown"
   }
 }
