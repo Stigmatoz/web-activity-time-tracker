@@ -16,51 +16,58 @@ import { StorageDeserializeParam } from '../storage/storage-params';
 import { TimeInterval } from '../entity/time-interval';
 import { todayLocalDate } from '../utils/date';
 import { useI18n } from 'vue-i18n';
-import { convertHoursToTime, convertStringTimeIntervalToSeconds } from '../utils/converter';
 import * as d3 from 'd3';
+import { convertStringTimeIntervalToSeconds } from '../utils/converter';
 
 const { t } = useI18n();
+const storage = injecStorage();
 
 const chart = ref<any>();
+
+type DataForChart = {
+  domain: string;
+  interval: string;
+};
 
 onMounted(async () => {
   const timeIntervalList = (await storage.getDeserializeList(
     StorageDeserializeParam.TIMEINTERVAL_LIST,
   )) as TimeInterval[];
 
-  // data.intervals.forEach(function (interval) {
-  //   resultArr.push({ domain: data.domain, interval: interval });
-  // });
-  const data = [
-    {
-      domain: 'google.com',
-      interval: '10:12:18-10:25:17',
-    },
-    {
-      domain: 'habr.com',
-      interval: '10:28:18-10:31:17',
-    },
-    {
-      domain: 'medium.com',
-      interval: '11:41:18-11:48:17',
-    },
-    {
-      domain: 'xy.com',
-      interval: '02:41:18-03:01:17',
-    },
-  ];
-  drawIntervalChart(data);
+  const todayIntervals = timeIntervalList?.filter(x => x.day == todayLocalDate());
+  const dataForChart: DataForChart[] = [];
+  todayIntervals.forEach(interval => {
+    interval.intervals.forEach(int => {
+      const from = int.split('-')[0];
+      const to = int.split('-')[1];
+      if (convertStringTimeIntervalToSeconds(to) - convertStringTimeIntervalToSeconds(from) > 5) {
+        dataForChart.push({ domain: interval.domain, interval: convertInterval(int) });
+      }
+    });
+  });
+  drawIntervalChart(dataForChart);
 });
 
-function drawIntervalChart(data) {
-  data.forEach(function (item) {
-    var hFrom = getHourFrom(item.interval);
-    var hTo = getHourTo(item.interval);
+function convertInterval(interval: string): string {
+  function convert(item: string[]) {
+    item = item.map(x => (x.length == 1 ? `0${x}` : x));
+    return item.join(':');
+  }
+
+  const sourceTimeFrom = interval.split('-')[0].split(':');
+  const sourceTimeTo = interval.split('-')[1].split(':');
+  return `${convert(sourceTimeFrom)}-${convert(sourceTimeTo)}`;
+}
+
+function drawIntervalChart(data: DataForChart[]) {
+  data.forEach(item => {
+    const hFrom = getHourFrom(item.interval);
+    const hTo = getHourTo(item.interval);
     if (hFrom != hTo) {
-      var sourceTimeFrom = item.interval.split('-')[0].split(':');
-      var sourceTimeTo = item.interval.split('-')[1].split(':');
-      var timeTo = `${sourceTimeFrom[0]}:59:59`;
-      var timeFrom = `${sourceTimeTo[0]}:00:00`;
+      const sourceTimeFrom = item.interval.split('-')[0].split(':');
+      const sourceTimeTo = item.interval.split('-')[1].split(':');
+      const timeTo = `${sourceTimeFrom[0]}:59:59`;
+      const timeFrom = `${sourceTimeTo[0]}:00:00`;
       data.push({ domain: item.domain, interval: item.interval.split('-')[0] + '-' + timeTo });
       data.push({ domain: item.domain, interval: timeFrom + '-' + item.interval.split('-')[1] });
     }
@@ -179,147 +186,6 @@ function drawIntervalChart(data) {
     return Number(time.split(':')[2]);
   }
 }
-
-type DataForChart = {
-  summary: number;
-  hour: number;
-  domains: DomainsInterval[];
-};
-
-type DomainsInterval = {
-  hour: number;
-  summary: number;
-  domain: string;
-};
-
-const storage = injecStorage();
-
-const options = ref<any>();
-const data = ref<any>();
-const isLoaded = ref<boolean>();
-
-const objects: DataForChart[] = [];
-const hours: number[] = [];
-
-isLoaded.value = false;
-
-function convertTimIntervalToObject(
-  timeInterval: string,
-  domain: string,
-): DomainsInterval[] | null {
-  const array = timeInterval.split('-');
-  const time1 = array[0].split(':');
-  const time2 = array[1].split(':');
-  if (time1[0] == time2[0]) {
-    return [
-      {
-        hour: Number(time1[0]),
-        summary:
-          convertStringTimeIntervalToSeconds(array[1]) -
-          convertStringTimeIntervalToSeconds(array[0]),
-        domain: domain,
-      },
-    ];
-  } else {
-    const arr = [];
-    const firstPart1 = array[0];
-    const firstPart2 = `${time1[0]}:59:59`;
-    const hourForFirstPart = firstPart1.split(':');
-    arr.push({
-      hour: Number(hourForFirstPart[0]),
-      summary:
-        convertStringTimeIntervalToSeconds(firstPart2) -
-        convertStringTimeIntervalToSeconds(firstPart1),
-      domain: domain,
-    });
-    const secondPart1 = `${time2[0]}:00:00`;
-    const secondPart2 = `${time2[0]}:${time2[1]}:${time2[2]}`;
-    const hourForsecondPart = secondPart1.split(':');
-    arr.push({
-      hour: Number(hourForsecondPart[0]),
-      summary:
-        convertStringTimeIntervalToSeconds(secondPart2) -
-        convertStringTimeIntervalToSeconds(secondPart1),
-      domain: domain,
-    });
-    return arr;
-  }
-}
-
-function fillData(timeIntervalList: TimeInterval[]) {
-  const items = timeIntervalList?.filter(x => x.day == todayLocalDate());
-  const domains = items.map(x => x.domain);
-  const result: any[] = [];
-  const intervalsObj: DomainsInterval[] = [];
-  domains.forEach(domain => {
-    const intervals = items.filter(x => x.domain == domain);
-    intervals.forEach(array => {
-      const i = array.intervals;
-      i.forEach(time => {
-        const objs = convertTimIntervalToObject(time, domain);
-        if (objs != null && objs.length > 0) {
-          objs.forEach(obj => {
-            const existDomain = intervalsObj.find(x => x.domain == domain && x.hour == obj.hour);
-            if (existDomain != undefined) {
-              existDomain.summary += obj.summary;
-            } else intervalsObj.push(obj);
-          });
-        }
-      });
-    });
-  });
-
-  const tempArray: number[] = [];
-  for (let index = 0; index < 24; index++) {
-    const obj = objects.find(x => x.hour == index);
-    const intervalObj = intervalsObj.filter(x => x.hour == index);
-    const summary =
-      intervalObj.length == 0 ? 0 : intervalObj.map(x => x.summary).reduce((a, b) => a + b);
-    if (obj == undefined) {
-      const newObj = {
-        summary: summary,
-        hour: index,
-        domains: intervalObj,
-      };
-      objects.push(newObj);
-    } else {
-      obj.summary += summary;
-      intervalObj.forEach(element => {
-        obj.domains.push(element);
-      });
-    }
-
-    tempArray.push(0);
-  }
-
-  objects.forEach(obj => {
-    const emptyArray: number[] = Object.assign([], tempArray);
-    emptyArray[obj.hour] = Number(obj.summary / 60);
-    result.push({
-      backgroundColor: ['#5668e2'],
-      data: emptyArray,
-    });
-  });
-
-  return result;
-}
-
-async function buildChart() {
-  const timeIntervalList = (await storage.getDeserializeList(
-    StorageDeserializeParam.TIMEINTERVAL_LIST,
-  )) as TimeInterval[];
-  for (let index = 0; index <= 23; index++) {
-    hours.push(index);
-  }
-  let minutes: number[] = [];
-  for (let index = 1; index < 60; index++) {
-    minutes.push(index);
-  }
-
-  isLoaded.value = true;
-}
-
-onMounted(async () => await buildChart());
 </script>
 
 <style scoped>
