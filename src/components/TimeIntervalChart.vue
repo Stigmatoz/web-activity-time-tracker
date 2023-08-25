@@ -175,7 +175,7 @@ function drawIntervalChart(data: DataForChart[]) {
     .style('stroke-width', '1')
     .attr('class', 'bar')
     .attr('x', (data: any) => x(getHourFrom(data.interval)) + 2)
-    .attr('width', 25)
+    .attr('width', chart.value.offsetWidth / 24 - 4)
     .attr('y', (data: any) => y(getMinutesTo(data.interval)) - 1)
     .attr('height', (data: any) => {
       const offset = getMinutesTo(data.interval) - getMinutesFrom(data.interval);
