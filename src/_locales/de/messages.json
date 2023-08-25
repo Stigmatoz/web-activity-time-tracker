@@ -299,11 +299,14 @@
     "message": "Änderungsliste anzeigen",
     "description": "Zeigen Sie die Liste der Änderungen nach dem Aktualisieren der Erweiterung an"
   },
-  "byHoursChart": {
+  "byHours": {
     "message": "Stundenweise"
   },
-  "intervalChartChart": {
-    "message": "Intervalldiagramm",
-    "description": "Es werden nur Zeitintervalle angezeigt, die länger als 5 Sekunden sind"
+  "intervals": {
+    "message": "Intervalle"
+  },
+  "intervalsChart": {
+    "message": "Nur Zeitintervalle größer als",
+    "description": "werden angezeigt"
   }
 }

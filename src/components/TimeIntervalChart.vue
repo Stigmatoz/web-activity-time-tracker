@@ -1,5 +1,16 @@
 <template>
-  <p class="description">{{ t('intervalChartChart.description') }}</p>
+  <div>
+    <p class="description d-inline-block">{{ t('intervalsChart.message') }}</p>
+    <div class="d-inline-block mr-10 ml-10">
+      <select class="option" v-model="minValue" @change="refreshChart()">
+        <option :value="MinValue.Seconds_10">10 {{ t('sec.message') }}</option>
+        <option :value="MinValue.Min_1">1 {{ t('min.message') }}</option>
+        <option :value="MinValue.Min_5">5 {{ t('2min.message') }}</option>
+        <option :value="MinValue.Min_10">10 {{ t('mins.message') }}</option>
+      </select>
+    </div>
+    <p class="description d-inline-block">{{ t('intervalsChart.description') }}</p>
+  </div>
   <div ref="chart" id="timeIntervalChartD3"></div>
 </template>
 
@@ -19,10 +30,19 @@ import { useI18n } from 'vue-i18n';
 import * as d3 from 'd3';
 import { convertStringTimeIntervalToSeconds } from '../utils/converter';
 
+enum MinValue {
+  Seconds_10 = 10,
+  Min_1 = 60,
+  Min_5 = 300,
+  Min_10 = 600,
+}
+
 const { t } = useI18n();
 const storage = injecStorage();
 
 const chart = ref<any>();
+const minValue = ref<number>();
+const todayIntervals = ref<TimeInterval[]>();
 
 type DataForChart = {
   domain: string;
@@ -30,23 +50,36 @@ type DataForChart = {
 };
 
 onMounted(async () => {
+  minValue.value = MinValue.Seconds_10;
   const timeIntervalList = (await storage.getDeserializeList(
     StorageDeserializeParam.TIMEINTERVAL_LIST,
   )) as TimeInterval[];
 
-  const todayIntervals = timeIntervalList?.filter(x => x.day == todayLocalDate());
+  todayIntervals.value = timeIntervalList?.filter(x => x.day == todayLocalDate());
+  renderChart();
+});
+
+function renderChart() {
   const dataForChart: DataForChart[] = [];
-  todayIntervals.forEach(interval => {
+  todayIntervals.value?.forEach(interval => {
     interval.intervals.forEach(int => {
       const from = int.split('-')[0];
       const to = int.split('-')[1];
-      if (convertStringTimeIntervalToSeconds(to) - convertStringTimeIntervalToSeconds(from) > 5) {
+      if (
+        convertStringTimeIntervalToSeconds(to) - convertStringTimeIntervalToSeconds(from) >
+        minValue.value!
+      ) {
         dataForChart.push({ domain: interval.domain, interval: convertInterval(int) });
       }
     });
   });
   drawIntervalChart(dataForChart);
-});
+}
+
+function refreshChart() {
+  chart.value.innerHTML = '';
+  renderChart();
+}
 
 function convertInterval(interval: string): string {
   function convert(item: string[]) {

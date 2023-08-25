@@ -8,13 +8,13 @@
         <input
           type="button"
           :class="['chart-btn', chart == TypeOfChart.Horly ? 'active' : '']"
-          :value="t('byHoursChart.message')"
+          :value="t('byHours.message')"
           @click="openChart(TypeOfChart.Horly)"
         />
         <input
           type="button"
           :class="['ml-10', 'chart-btn', chart == TypeOfChart.Interval ? 'active' : '']"
-          :value="t('intervalChartChart.message')"
+          :value="t('intervals.message')"
           @click="openChart(TypeOfChart.Interval)"
         />
       </div>

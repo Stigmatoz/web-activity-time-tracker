@@ -299,11 +299,14 @@
     "message": "Show changelog",
     "description": "Show the list of changes after updating extension"
   },
-  "byHoursChart": {
+  "byHours": {
     "message": "Horly"
   },
-  "intervalChartChart": {
-    "message": "Interval Chart",
-    "description": "Only time intervals greater than 5 seconds are shown"
+  "intervals": {
+    "message": "Intervals"
+  },
+  "intervalsChart": {
+    "message": "Only time intervals greater than",
+    "description": "are shown"
   }
 }
