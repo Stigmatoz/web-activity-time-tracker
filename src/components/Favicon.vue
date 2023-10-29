@@ -15,16 +15,12 @@ import { NO_FAVICON } from '../utils/consts';
 import { TypeOfUrl } from '../utils/enums';
 
 const props = defineProps<{
-  url: string | undefined;
+  url: string;
   type: TypeOfUrl;
 }>();
 
 const faviconValid = computed(
-  () =>
-    props.url == undefined ||
-    props.url == '' ||
-    props.url.startsWith('chrome://favicon/') ||
-    props.type == TypeOfUrl.Document,
+  () => props.url.startsWith('chrome://favicon/') || props.type == TypeOfUrl.Document,
 );
 
 const faviconUrl = computed(() => `https://www.google.com/s2/favicons?domain=${props.url}&sz=64`);
