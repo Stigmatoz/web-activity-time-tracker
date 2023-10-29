@@ -3,7 +3,7 @@
     <Favicon :url="item.url" :type="typeOfUrl" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
-        <div class="w-80">
+        <div :class="listType == TypeOfList.All ? 'w-60' : 'w-80'">
           <p class="url" @click="openUrl(item.url)">{{ url }}</p>
           <BadgeIcons :url="url" :type="typeOfUrl" :listType="listType" />
         </div>
