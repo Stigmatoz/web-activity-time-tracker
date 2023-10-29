@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="setting-header mt-0">{{ t('limits.message') }}</p>
+    <p class="title mt-0">{{ t('limits.message') }}</p>
     <p class="description">
       {{ t('limits.description') }}
     </p>

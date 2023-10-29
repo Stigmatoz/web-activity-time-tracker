@@ -20,21 +20,6 @@
         <Dashboad v-if="selectedTab == SettingsTab.Dashboard" />
       </div>
     </div>
-    <!-- <p class="tab-separator">Settings</p> -->
-    <div class="settings-tab">
-      <input
-        type="radio"
-        id="general-tab"
-        name="settings-group"
-        :checked="selectedTab == SettingsTab.GeneralSettings"
-        v-on:change="selectTab(SettingsTab.GeneralSettings)"
-      />
-      <label name="tabName" for="general-tab">{{ t('generalSettings.message') }}</label>
-
-      <div class="settings-content">
-        <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
-      </div>
-    </div>
 
     <div class="settings-tab">
       <input
@@ -81,6 +66,21 @@
     </div>
 
     <div class="settings-tab">
+      <input
+        type="radio"
+        id="general-tab"
+        name="settings-group"
+        :checked="selectedTab == SettingsTab.GeneralSettings"
+        v-on:change="selectTab(SettingsTab.GeneralSettings)"
+      />
+      <label name="tabName" for="general-tab">{{ t('generalSettings.message') }}</label>
+
+      <div class="settings-content">
+        <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
+      </div>
+    </div>
+
+    <div class="settings-tab mt-30">
       <input
         type="radio"
         id="about-tab"

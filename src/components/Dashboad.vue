@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="settings-item">
-      <label class="setting-header"> {{ t('dashboard.message') }} </label>
+      <label class="title"> {{ t('dashboard.message') }} </label>
     </div>
     <div class="chart chartByHours">
       <div class="mt-10 mb-20">

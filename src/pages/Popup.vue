@@ -138,9 +138,14 @@ function selectTab(type: TypeOfList) {
   margin: 7px 10px 0 0;
 }
 
+.headerBlock .icons-block a:hover {
+  color: rgb(99, 99, 243);
+}
+
 .headerBlock .icons-block a {
   font-size: 12px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .headerBlock .icons-block a img {

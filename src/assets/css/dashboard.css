@@ -12,12 +12,12 @@ body {
 
 .title {
   font-size: 18px;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .setting-header {
-  font-weight: 550;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .description {
@@ -42,6 +42,10 @@ body {
 .url-list li {
   line-height: 25px;
   font-size: 14px;
+}
+
+.url-list li span{
+  font-weight: 600;
 }
 
 input[type='text'] {
@@ -315,5 +319,5 @@ label {
 
 .url-list .time-value {
   margin-top: 5px;
-  margin-left: 30px;
+  margin-left: 55px;
 }

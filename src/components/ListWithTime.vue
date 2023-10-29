@@ -8,8 +8,8 @@
           height="16"
           @click="editItemFromList(limit.domain, limit.time)"
         />
-        {{ limit.domain }}
-        <p class="time-value">{{ getTime(limit.time) }}</p>
+        <Favicon :url="limit.domain" :type="TypeOfUrl.WebSite" /> <span>{{ limit.domain }}</span>
+        <p class="time-value">{{ t('limit.message') }} : {{ getTime(limit.time) }}</p>
       </div>
     </li>
   </ul>
@@ -39,12 +39,13 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import Favicon from './Favicon.vue';
 import { useNotification } from '@kyvg/vue3-notification';
 import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { Time } from '../utils/time';
 import { computed, onMounted, ref } from 'vue';
-import { ListWithTime } from '../utils/enums';
+import { ListWithTime, TypeOfUrl } from '../utils/enums';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../compositions/extract-hostname';

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p class="setting-header mt-0">{{ t('whiteList.message') }}</p>
+    <p class="title mt-0">{{ t('whiteList.message') }}</p>
     <ul readonly class="url-list">
       <li v-for="(url, i) of whiteList" :key="i">
         <div>
           <img src="../assets/icons/delete.png" height="16" @click="deleteFromWhiteList(url)" />
-          {{ url }}
+          <Favicon :url="url" :type="TypeOfUrl.WebSite" /> <span>{{ url }}</span>
         </div>
       </li>
     </ul>
@@ -34,8 +34,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import Favicon from './Favicon.vue';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { TypeOfUrl } from '../utils/enums';
 import { useNotification } from '@kyvg/vue3-notification';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
