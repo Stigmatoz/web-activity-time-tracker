@@ -5,8 +5,7 @@
       <img class="d-inline-block logo" height="30" src="../assets/icons/48x48.png" />
       <p class="d-inline-block title">Web Activity Time Tracker</p>
     </div>
-    <!-- <p class="tab-separator">Dashboard</p> -->
-    <div class="settings-tab">
+    <div class="settings-tab mt-20">
       <input
         type="radio"
         id="timeIntervalChart-tab"
@@ -14,7 +13,11 @@
         :checked="selectedTab == SettingsTab.Dashboard"
         v-on:change="selectTab(SettingsTab.Dashboard)"
       />
-      <label name="tabName" for="timeIntervalChart-tab">{{ t('dashboard.message') }}</label>
+      <label name="tabName" for="timeIntervalChart-tab"
+        ><img src="../assets/icons/s-dashboard.svg" height="30" />{{
+          t('dashboard.message')
+        }}</label
+      >
 
       <div class="settings-content">
         <Dashboad v-if="selectedTab == SettingsTab.Dashboard" />
@@ -29,7 +32,11 @@
         :checked="selectedTab == SettingsTab.WhiteList"
         v-on:change="selectTab(SettingsTab.WhiteList)"
       />
-      <label name="tabName" for="white-list-tab">{{ t('whiteListSettings.message') }}</label>
+      <label name="tabName" for="white-list-tab"
+        ><img src="../assets/icons/s-whitelist.svg" height="30" />{{
+          t('whiteListSettings.message')
+        }}</label
+      >
 
       <div class="settings-content">
         <WhiteList v-if="selectedTab == SettingsTab.WhiteList" />
@@ -44,7 +51,11 @@
         :checked="selectedTab == SettingsTab.Limits"
         v-on:change="selectTab(SettingsTab.Limits)"
       />
-      <label name="tabName" for="limits-tab">{{ t('limitsSettings.message') }}</label>
+      <label name="tabName" for="limits-tab"
+        ><img src="../assets/icons/s-limits.svg" height="30" />{{
+          t('limitsSettings.message')
+        }}</label
+      >
 
       <div class="settings-content">
         <Limits v-if="selectedTab == SettingsTab.Limits" />
@@ -58,7 +69,11 @@
         :checked="selectedTab == SettingsTab.Notifications"
         v-on:change="selectTab(SettingsTab.Notifications)"
       />
-      <label name="tabName" for="notification-tab">{{ t('notificationsSettings.message') }}</label>
+      <label name="tabName" for="notification-tab"
+        ><img src="../assets/icons/s-notifications.svg" height="30" />{{
+          t('notificationsSettings.message')
+        }}</label
+      >
 
       <div class="settings-content">
         <DailyNotifications v-if="selectedTab == SettingsTab.Notifications" />
@@ -73,7 +88,11 @@
         :checked="selectedTab == SettingsTab.GeneralSettings"
         v-on:change="selectTab(SettingsTab.GeneralSettings)"
       />
-      <label name="tabName" for="general-tab">{{ t('generalSettings.message') }}</label>
+      <label name="tabName" for="general-tab"
+        ><img src="../assets/icons/s-settings.svg" height="30" />{{
+          t('generalSettings.message')
+        }}</label
+      >
 
       <div class="settings-content">
         <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
@@ -88,7 +107,11 @@
         :checked="selectedTab == SettingsTab.About"
         v-on:change="selectTab(SettingsTab.About)"
       />
-      <label name="tabName" for="about-tab">{{ t('aboutSettings.message') }}</label>
+      <label name="tabName" for="about-tab"
+        ><img src="../assets/icons/s-about.svg" height="30" />{{
+          t('aboutSettings.message')
+        }}</label
+      >
 
       <div class="settings-content">
         <About v-if="selectedTab == SettingsTab.About" />
@@ -133,9 +156,6 @@ function selectTab(value: SettingsTab) {
 </script>
 
 <style scoped>
-.header-block {
-  background-color: white;
-}
 .header-block .title {
   vertical-align: top;
   margin-top: 15px;
@@ -144,7 +164,7 @@ function selectTab(value: SettingsTab) {
 }
 
 .header-block .logo {
-  margin: 10px 20px;
+  margin: 10px 10px 10px 35px;
 }
 .tab-separator {
   margin-left: 10px;

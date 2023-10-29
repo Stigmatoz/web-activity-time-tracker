@@ -1,6 +1,8 @@
 <template>
-  <img v-if="faviconValid" class="favicon no-favicon" height="22" :src="NO_FAVICON" />
-  <img v-else class="favicon" height="30" :src="faviconUrl" />
+  <div class="container">
+    <img v-if="faviconValid" class="favicon no-favicon" height="22" :src="NO_FAVICON" />
+    <img v-else class="favicon" height="30" :src="faviconUrl" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -27,6 +29,11 @@ const faviconUrl = computed(() => `https://www.google.com/s2/favicons?domain=${p
 </script>
 
 <style scoped>
+.container {
+  display: inline-block;
+  height: 30px;
+  width: 40px;
+}
 .favicon {
   padding: 5px;
 }

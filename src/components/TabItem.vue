@@ -100,7 +100,7 @@ const showWarningMessage = ref<boolean>();
   display: inline-block;
 }
 .tab-item .url:hover {
-  color: #1a0dab;
+  color: rgb(99, 99, 243);
 }
 .tab-item p {
   margin: 5px;

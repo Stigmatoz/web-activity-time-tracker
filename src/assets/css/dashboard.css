@@ -30,12 +30,12 @@ body {
 .url-list {
   border-radius: 3px;
   border: 1px solid #ccc;
-  width: 515px;
-  min-height: 150px;
+  width: 655px;
+  min-height: 300px;
   cursor: pointer;
   list-style: none;
   padding: 10px;
-  max-height: 300px;
+  max-height: 600px;
   overflow: auto;
 }
 
@@ -283,6 +283,10 @@ label {
 .settings-tab [type='radio'] {
   display: none;
 }
+.settings-tab img{
+  vertical-align: middle;
+  margin-right: 10px;
+}
 .settings-content {
   position: absolute;
   top: 0;
@@ -312,9 +316,6 @@ label {
   vertical-align: middle;
   margin-right: 10px;
   cursor: pointer;
-}
-.url-list {
-  width: 655px !important;
 }
 
 .url-list .time-value {
