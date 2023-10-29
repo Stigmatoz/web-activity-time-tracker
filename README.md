@@ -11,7 +11,7 @@
 Web Activity Time Tracker keeps track of how much time you spend on the web and presents the stats in a useful and intuitive way. 
 You can set a daily visit limit for sites and block it after the expiration of the limit. 
 
-Extension uses only local [chrome.storage API](https://developer.chrome.com/apps/storage) chrome.storage API to store data and it does't send data anywhere.
+Extension uses only local [chrome.storage API](https://developer.chrome.com/apps/storage) chrome.storage API to store data and it doesn't send data anywhere.
 
 ![image](https://user-images.githubusercontent.com/23387046/206865140-875bf7ab-a59e-42e3-bb9e-e348e8b85749.png) ![image](https://user-images.githubusercontent.com/23387046/206865174-aa409efe-495d-450e-a8ea-1d97024c9e23.png)
 
@@ -44,4 +44,4 @@ Web Activity Time Tracker is available via the official [Chrome Web Store](https
 
 # License
 
-This work is licensed under a MIT License.
+This work is licensed under an MIT License.
