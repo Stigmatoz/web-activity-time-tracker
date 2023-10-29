@@ -1,6 +1,6 @@
 <template>
   <div class="tab-item">
-    <Favicon :favicon="item.favicon" />
+    <Favicon :url="item.url" :type="typeOfUrl" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
         <div class="w-80">

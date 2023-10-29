@@ -1,6 +1,6 @@
 import Browser from 'webextension-polyfill';
 import { buildBlockQuery } from '../utils/block-page';
-import { NO_FAVICON_URL } from '../utils/consts';
+import { NO_FAVICON } from '../utils/consts';
 
 export async function useBlockPage(
   domain: string,
@@ -11,7 +11,7 @@ export async function useBlockPage(
 ): Promise<void> {
   const favicon =
     favIconUrl == undefined || favIconUrl == '' || favIconUrl.startsWith('chrome://favicon/')
-      ? NO_FAVICON_URL
+      ? NO_FAVICON
       : favIconUrl;
   const blockUrl =
     Browser.runtime.getURL('src/block.html') +
