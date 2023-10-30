@@ -1,6 +1,6 @@
 <template>
   <div class="tab-item">
-    <Favicon :url="item.url" :type="typeOfUrl" />
+    <Favicon :favicon="item.favicon" :type="typeOfUrl" />
     <div class="ml-10 flex-grow-2">
       <div class="first-block">
         <div :class="listType == TypeOfList.All ? 'w-60' : 'w-80'">

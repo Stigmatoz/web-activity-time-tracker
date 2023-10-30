@@ -5,7 +5,8 @@
       <li v-for="(url, i) of whiteList" :key="i">
         <div>
           <img src="../assets/icons/delete.png" height="16" @click="deleteFromWhiteList(url)" />
-          <Favicon :url="url" :type="TypeOfUrl.WebSite" /> <span>{{ url }}</span>
+          <Favicon :type="TypeOfUrl.WebSite" :favicon="getFavicon(url)" />
+          <span>{{ url }}</span>
         </div>
       </li>
     </ul>
@@ -35,6 +36,7 @@ export default {
 
 <script lang="ts" setup>
 import Favicon from './Favicon.vue';
+import { getFavicon } from '../utils/favicon';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { TypeOfUrl } from '../utils/enums';
