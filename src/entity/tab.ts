@@ -1,5 +1,5 @@
 import { todayLocalDate } from '../utils/date';
-import { logger } from '../compositions/logger';
+import { logger } from '../utils/logger';
 
 export class Tab implements ISerializable<Tab> {
   url: string = '';

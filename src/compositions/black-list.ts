@@ -1,6 +1,6 @@
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
-import { extractHostname } from './extract-hostname';
+import { extractHostname } from '../utils/extract-hostname';
 import { Settings } from './settings';
 
 export async function isInBlackList(url: string): Promise<boolean> {

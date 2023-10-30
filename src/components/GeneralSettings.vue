@@ -151,11 +151,11 @@ import {
   SHOW_CHANGELOG_DEFAULT,
 } from '../storage/storage-params';
 import { ranges, ThisWeekRange, todayLocalDate } from '../utils/date';
-import { useImportToCsv } from '../compositions/toCsv';
-import { FileType, useFile } from '../compositions/loadFile';
-import { removeAllData } from '../compositions/remove-all-data';
+import { useImportToCsv } from '../compositions/useImportToCsv';
+import { FileType, useFile } from '../compositions/useFile';
+import { useRemoveAllData } from '../compositions/useRemoveAllData';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
-import { restoreData } from '../compositions/restoreData';
+import { useRestoreData } from '../compositions/useRestoreData';
 
 const { t } = useI18n();
 
@@ -235,7 +235,7 @@ async function removeAll() {
 }
 
 async function removeAllConfirm() {
-  await removeAllData();
+  await useRemoveAllData();
   needToConfirmDeleteAllData.value = false;
 }
 
@@ -264,7 +264,7 @@ function restoreFileUpload() {
         if (readerEvent != null) {
           let content = readerEvent.target?.result;
           if (content != null) {
-            await restoreData(content as string);
+            await useRestoreData(content as string);
           }
         }
       };

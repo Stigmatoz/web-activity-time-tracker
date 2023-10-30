@@ -1,21 +1,20 @@
 import Browser from 'webextension-polyfill';
-import { isValidPage } from './compositions/valid-page';
-import { extractHostname } from './compositions/extract-hostname';
+import { isValidPage } from './utils/valid-page';
+import { extractHostname } from './utils/extract-hostname';
 import { injectTabsRepositorySingleton } from './repository/inject-tabs-repository';
 import { isInBlackList } from './compositions/black-list';
-import { useBadge } from './compositions/set-badge';
+import { useBadge, BadgeColor } from './compositions/useBadge';
 import { INTERVAL_SAVE_STORAGE_DEFAULT, StorageParams } from './storage/storage-params';
-import { BadgeColor } from './compositions/set-badge';
 import { injecStorage } from './storage/inject-storage';
-import { addInterval, closeInterval } from './compositions/daily-intervals';
-import { ActiveTab } from './compositions/active-tab';
+import { useDailyIntervals } from './compositions/useDailyIntervals';
+import { ActiveTab } from './utils/active-tab';
 import { isLimitExceeded } from './compositions/limit-list';
 import { Tab } from './entity/tab';
-import { useBlockPage } from './compositions/block-page';
+import { useBlockPage } from './compositions/useBlockPage';
 import { convertSummaryTimeToBadgeString } from './utils/converter';
 import { Settings } from './compositions/settings';
-import { isNeedToShowNotification } from './compositions/notification-list';
-import { NotificationType, showNotification } from './compositions/show-notification';
+import { useNotificationList } from './compositions/useNotificationList';
+import { NotificationType, useNotification } from './compositions/useNotification';
 import { Messages } from './utils/messages';
 
 const activeTabInstance = ActiveTab.getInstance();
@@ -71,7 +70,7 @@ async function trackTime() {
 }
 
 async function closeOpenInterval() {
-  await closeInterval(activeTabInstance.getActiveTabDomain());
+  (await useDailyIntervals()).closeInterval(activeTabInstance.getActiveTabDomain());
   activeTabInstance.setActiveTab(null);
   currentObj = null;
 }
@@ -108,19 +107,19 @@ async function mainTracker(
 
     if (isActiveTabWasChanged(activeDomain)) {
       tab.incCounter();
-      await closeInterval(activeTabInstance.getActiveTabDomain());
+      (await useDailyIntervals()).closeInterval(activeTabInstance.getActiveTabDomain());
       activeTabInstance.setActiveTab(activeTab.url!);
-      await addInterval(activeTabInstance.getActiveTabDomain());
+      (await useDailyIntervals()).addInterval(activeTabInstance.getActiveTabDomain());
     }
     if (tab.favicon == '' && activeTab.favIconUrl != undefined)
       tab.setFavicon(activeTab.favIconUrl);
 
-    if (await isNeedToShowNotification(activeDomain, tab)) {
+    if (await useNotificationList().isNeedToShowNotification(activeDomain, tab)) {
       const message = (await Settings.getInstance().getSetting(
         StorageParams.NOTIFICATION_MESSAGE,
       )) as string;
       const title = `${activeDomain} notification`;
-      await showNotification(NotificationType.WebSiteNotification, title, message);
+      await useNotification(NotificationType.WebSiteNotification, title, message);
     }
 
     tab.incSummaryTime();

@@ -5,7 +5,7 @@ import { Settings } from './settings';
 import { Deffering } from '../entity/deffering';
 import { injecStorage } from '../storage/inject-storage';
 import { MINUTE } from '../utils/time';
-import { log } from './logger';
+import { log } from '../utils/logger';
 
 export async function isInDeferList(url: string): Promise<boolean> {
   const deferList = (await Settings.getInstance().getSetting(

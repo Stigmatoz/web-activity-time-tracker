@@ -42,7 +42,7 @@ import { useNotification } from '@kyvg/vue3-notification';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
-import { extractHostname } from '../compositions/extract-hostname';
+import { extractHostname } from '../utils/extract-hostname';
 
 const { t } = useI18n();
 

@@ -6,7 +6,7 @@ export enum NotificationType {
   WebSiteNotification = 'website-notification',
 }
 
-export async function showNotification(
+export async function useNotification(
   notificationType: NotificationType,
   title: string,
   message: string,

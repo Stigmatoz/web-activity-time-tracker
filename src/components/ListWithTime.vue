@@ -48,7 +48,7 @@ import { computed, onMounted, ref } from 'vue';
 import { ListWithTime, TypeOfUrl } from '../utils/enums';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
-import { extractHostname } from '../compositions/extract-hostname';
+import { extractHostname } from '../utils/extract-hostname';
 import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { Restriction } from '../entity/restriction';
 import { BaseTimeList } from '../entity/baseTimeList';

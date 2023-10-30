@@ -1,5 +1,5 @@
 import Browser, { Alarms } from 'webextension-polyfill';
-import { log } from '../compositions/logger';
+import { log } from '../utils/logger';
 import { StorageParams } from '../storage/storage-params';
 import { DAY_MINUTES, SECOND, getNextTimeOfDay } from '../utils/time';
 import { Settings } from '../compositions/settings';

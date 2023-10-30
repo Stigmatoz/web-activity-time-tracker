@@ -4,7 +4,7 @@ import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { todayLocalDate } from '../utils/date';
 import { isInDeferList } from './deferList';
-import { log } from './logger';
+import { log } from '../utils/logger';
 import { Settings } from './settings';
 
 export type LimitExceed = {

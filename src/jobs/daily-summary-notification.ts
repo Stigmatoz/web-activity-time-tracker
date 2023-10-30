@@ -1,8 +1,8 @@
-import { useWebUsageSummaryForDay } from '../compositions/summary-data-today';
+import { useWebUsageSummaryForDay } from '../compositions/useWebUsageSummaryForDay';
 import { convertLimitTimeToString } from '../utils/converter';
 import { Settings } from '../compositions/settings';
 import { StorageParams } from '../storage/storage-params';
-import { NotificationType, showNotification } from '../compositions/show-notification';
+import { NotificationType, useNotification } from '../compositions/useNotification';
 import { getMessagesFromLocale } from '../plugins/i18n';
 
 export async function dailySummaryNotification() {
@@ -29,6 +29,6 @@ export async function dailySummaryNotification() {
       messageWithMostVisitedWebsite,
     ].join('\n');
 
-    return await showNotification(NotificationType.DailySummaryNotification, title, message);
+    return await useNotification(NotificationType.DailySummaryNotification, title, message);
   }
 }

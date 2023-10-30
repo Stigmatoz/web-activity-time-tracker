@@ -24,7 +24,7 @@ import {
 import { convertSummaryTimeToString } from '../utils/converter';
 import { TabListByDays } from '../dto/tabListSummary';
 import { ref, watch } from 'vue';
-import { log } from '../compositions/logger';
+import { log } from '../utils/logger';
 
 const props = defineProps<{
   data: TabListByDays;

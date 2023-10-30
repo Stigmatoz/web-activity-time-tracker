@@ -17,5 +17,5 @@ export async function useBlockPage(
     Browser.runtime.getURL('src/block.html') +
     buildBlockQuery(domain, url, liimitTime, summaryCounter, favicon);
   const tab = await Browser.tabs.query({ currentWindow: true, active: true });
-  Browser.tabs.update(tab[0].id, { url: blockUrl });
+  await Browser.tabs.update(tab[0].id, { url: blockUrl });
 }

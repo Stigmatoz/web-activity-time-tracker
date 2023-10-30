@@ -1,4 +1,4 @@
-import { logger } from '../compositions/logger';
+import { logger } from '../utils/logger';
 
 export class TimeInterval implements ISerializable<TimeInterval> {
   domain: string = '';

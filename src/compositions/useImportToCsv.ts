@@ -1,5 +1,5 @@
 import { DayTabs } from '../dto/tabListSummary';
-import { useTabListByDays } from './tab-list-by-days';
+import { useTabListByDays } from './useTabListByDays';
 
 const CSV_HEADER = 'Date,WebSite,Time(sec),Sessions\r\n';
 
