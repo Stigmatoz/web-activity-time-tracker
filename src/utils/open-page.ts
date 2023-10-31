@@ -21,8 +21,18 @@ export async function openPage(tab: SettingsTab, domain?: string) {
   const url = Browser.runtime.getURL(
     `src/dashboard.html${tabName != '' ? `?tab=${tabName}` : ''}${getDomain()}`,
   );
-  await Browser.tabs.create({
-    url: url,
+  const currentPage = await Browser.tabs.query({
     active: true,
+    lastFocusedWindow: true,
   });
+  if (currentPage[0].url?.startsWith(`chrome-extension://${__APP_ID__}/src/dashboard.html`))
+    await Browser.tabs.update({
+      url: url,
+      active: true,
+    });
+  else
+    await Browser.tabs.create({
+      url: url,
+      active: true,
+    });
 }
