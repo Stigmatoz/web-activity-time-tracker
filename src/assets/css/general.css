@@ -61,12 +61,6 @@ select {
 .w-100 {
   width: 100%;
 }
-.w-80 {
-  width: 80%;
-}
-.w-60 {
-  width: 60%;
-}
 input[type='button'] {
   background: #428bff;
   color: #fff;
