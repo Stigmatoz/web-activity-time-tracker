@@ -11,7 +11,12 @@
           <p class="url">{{ url }}</p>
           <BadgeIcons :url="url" :type="typeOfUrl" :listType="listType" />
           <p class="links" v-if="isShowCmdButtons" title="Statistics">
-            <img class="link" src="../assets/icons/details-link.svg" height="18" />
+            <img
+              class="link"
+              src="../assets/icons/details-link.svg"
+              height="18"
+              @click="openStats(item.url)"
+            />
           </p>
 
           <p class="links" v-if="isShowCmdButtons" title="Open website">
@@ -49,12 +54,12 @@ export default {
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Favicon from './Favicon.vue';
-import TabItemLink from './TabItemLink.vue';
 import BadgeIcons from './BadgeIcons.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';
 import { CurrentTabItem } from '../dto/currentTabItem';
-import { TypeOfList, TypeOfUrl } from '../utils/enums';
+import { SettingsTab, TypeOfList, TypeOfUrl } from '../utils/enums';
+import { openPage } from '../utils/open-page';
 
 const { t } = useI18n();
 
@@ -92,6 +97,10 @@ function openUrl(url: string) {
     url = `https://${url}`;
     window.open(url, '_blank');
   } else showWarningMessage.value = true;
+}
+
+async function openStats(url: string) {
+  await openPage(SettingsTab.WebsiteStats, url);
 }
 
 const showWarningMessage = ref<boolean>();

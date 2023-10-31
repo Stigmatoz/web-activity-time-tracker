@@ -1,33 +1,27 @@
 <template>
-  <div class="main">
-    <div class="settings-item">
-      <label class="title"> {{ t('dashboard.message') }} </label>
-    </div>
-    <div class="chart chartByHours">
-      <div class="mt-10 mb-20">
-        <input
-          type="button"
-          :class="['chart-btn', chart == TypeOfChart.Horly ? 'active' : '']"
-          :value="t('byHours.message')"
-          @click="openChart(TypeOfChart.Horly)"
-        />
-        <input
-          type="button"
-          :class="['ml-10', 'chart-btn', chart == TypeOfChart.Interval ? 'active' : '']"
-          :value="t('intervals.message')"
-          @click="openChart(TypeOfChart.Interval)"
-        />
-      </div>
-      <HourlyChart v-if="chart == TypeOfChart.Horly" />
-      <TimeIntervalChart v-if="chart == TypeOfChart.Interval" />
-    </div>
-    <div class="tab-items">
-      <TabList
-        :type="TypeOfList.Dashboard"
-        :showAllStats="false"
-        v-if="chart == TypeOfChart.Horly"
+  <div class="settings-item">
+    <label class="title"> {{ t('dashboard.message') }} </label>
+  </div>
+  <div class="chart chartByHours">
+    <div class="mt-10 mb-20">
+      <input
+        type="button"
+        :class="['chart-btn', chart == TypeOfChart.Horly ? 'active' : '']"
+        :value="t('byHours.message')"
+        @click="openChart(TypeOfChart.Horly)"
+      />
+      <input
+        type="button"
+        :class="['ml-10', 'chart-btn', chart == TypeOfChart.Interval ? 'active' : '']"
+        :value="t('intervals.message')"
+        @click="openChart(TypeOfChart.Interval)"
       />
     </div>
+    <HourlyChart v-if="chart == TypeOfChart.Horly" />
+    <TimeIntervalChart v-if="chart == TypeOfChart.Interval" />
+  </div>
+  <div class="tab-items">
+    <TabList :type="TypeOfList.Dashboard" :showAllStats="false" v-if="chart == TypeOfChart.Horly" />
   </div>
 </template>
 

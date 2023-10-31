@@ -12,6 +12,7 @@ export enum SortingBy {
 
 export enum SettingsTab {
   Dashboard,
+  WebsiteStats,
   GeneralSettings,
   WhiteList,
   Limits,
