@@ -14,7 +14,7 @@
             <img
               class="link"
               src="../assets/icons/details-link.svg"
-              height="18"
+              height="21"
               @click="openStats(item.url)"
             />
           </p>
@@ -23,7 +23,7 @@
             <img
               class="link"
               src="../assets/icons/open-link.svg"
-              height="18"
+              height="21"
               @click="openUrl(item.url)"
             />
           </p>
@@ -60,6 +60,7 @@ import { getPercentage } from '../utils/common';
 import { CurrentTabItem } from '../dto/currentTabItem';
 import { SettingsTab, TypeOfList, TypeOfUrl } from '../utils/enums';
 import { openPage } from '../utils/open-page';
+import { getTypeOfUrl } from '../utils/get-type-of-url';
 
 const { t } = useI18n();
 
@@ -71,9 +72,7 @@ const props = defineProps<{
 
 const isShowCmdButtons = ref<boolean>();
 
-const typeOfUrl = computed(() =>
-  props.item.url.startsWith('file:') ? TypeOfUrl.Document : TypeOfUrl.WebSite,
-);
+const typeOfUrl = computed(() => getTypeOfUrl(props.item.url));
 
 const url = computed(() =>
   typeOfUrl.value == TypeOfUrl.Document
