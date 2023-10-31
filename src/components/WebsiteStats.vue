@@ -45,7 +45,7 @@
             </template></VueDatePicker
           >
         </div>
-        <div class="mt-20 ml-10 mr-10">
+        <div class="mt-20 ml-10 mr-10 by-days-chart">
           <ByDaysChart :data="tabInfoByDays!" />
         </div>
       </div>
@@ -68,7 +68,7 @@ import { openPage } from '../utils/open-page';
 import { computed, onMounted, ref } from 'vue';
 import { SettingsTab } from '../utils/enums';
 import { ThisWeekRange, ranges } from '../utils/date';
-import { useDomainStatsByDays } from '../compositions/useDomainStatsByDays';
+import { useTabStatsByDays } from '../compositions/useTabStatsByDays';
 import { TabListByDays } from '../dto/tabListSummary';
 import { Tab } from '../entity/tab';
 import { getTypeOfUrl } from '../utils/get-type-of-url';
@@ -98,12 +98,16 @@ onMounted(async () => {
   const dateTo = selectedDate.value?.[1] as Date;
   const repo = await injectTabsRepository();
   tab.value = repo.getTab(props.domain);
+  if (tab == undefined) {
+    noData.value = true;
+    return;
+  }
 
   await loadList(dateFrom, dateTo);
 });
 
 async function loadList(dateFrom: Date, dateTo: Date) {
-  const tabList = await useDomainStatsByDays(dateFrom, dateTo);
+  const tabList = await useTabStatsByDays(dateFrom, dateTo, tab.value?.url!);
   if (tabList != null) {
     tabInfoByDays.value = tabList;
     if (tabList.days.length == 0 && tabList.summaryTime == 0) noData.value = true;
@@ -129,5 +133,8 @@ async function handleDate(modelData: Date[]) {
 .date-block {
   display: flex;
   justify-content: space-between;
+}
+.by-days-chart {
+  height: 400px;
 }
 </style>

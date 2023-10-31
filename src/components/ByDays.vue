@@ -41,7 +41,7 @@
         <div class="header">{{ t('averageTimeByDays.message') }}</div>
         <p>{{ convertSummaryTimeToString(tabsByDays!.averageTime) }}</p>
       </div>
-      <div class="ml-20 mr-20">
+      <div class="ml-20 mr-20 by-days-chart">
         <ByDaysChart :data="tabsByDays!" />
       </div>
       <div>
@@ -160,5 +160,8 @@ async function exportToCsv() {
   display: flex;
   justify-content: space-between;
   margin: 0 25px;
+}
+.by-days-chart {
+  height: 240px;
 }
 </style>
