@@ -300,7 +300,7 @@
     "description": "Show the list of changes after updating extension"
   },
   "byHours": {
-    "message": "Horly"
+    "message": "Hourly"
   },
   "intervals": {
     "message": "Intervals"
