@@ -25,6 +25,7 @@ export async function useTabStatsByDays(
       days: [],
       averageTime: 0,
       summaryTime: 0,
+      sessions: 0,
     };
 
   unSortedTabsByDays.forEach(tabDay => {
@@ -38,6 +39,7 @@ export async function useTabStatsByDays(
           day: tabDay.date,
           tabs: [],
           time: tabDay.summary,
+          sessions: tabDay.counter,
         };
         dayTab.tabs.push({
           favicon: tab.favicon,
@@ -48,6 +50,7 @@ export async function useTabStatsByDays(
         daysTabs.push(dayTab);
       } else {
         dayTab.time += tabDay.summary;
+        dayTab.sessions += tabDay.counter;
         dayTab.tabs.push({
           favicon: tab.favicon,
           url: tab.url,
@@ -74,11 +77,18 @@ export async function useTabStatsByDays(
       return a + b;
     });
 
+  const totalSessions = daysTabs
+    .map(x => x.sessions)
+    .reduce(function (a, b) {
+      return a + b;
+    });
+
   const averageTime = Math.round(summaryTime / daysTabs.length);
 
   return {
     days: daysTabs,
     summaryTime: summaryTime,
     averageTime: averageTime,
+    sessions: totalSessions,
   };
 }

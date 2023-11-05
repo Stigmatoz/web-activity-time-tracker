@@ -46,7 +46,10 @@
           >
         </div>
         <div class="mt-20 ml-10 mr-10 by-days-chart">
-          <ByDaysChart :data="tabInfoByDays!" />
+          <by-days-chart :data="tabInfoByDays!" />
+        </div>
+        <div>
+          <website-stats-details :details="tabInfoByDays!" />
         </div>
       </div>
     </div>
@@ -64,6 +67,7 @@ import { useI18n } from 'vue-i18n';
 import Favicon from './Favicon.vue';
 import NoDataByDays from './NoDataByDays.vue';
 import ByDaysChart from '../components/ByDaysChart.vue';
+import WebsiteStatsDetails from '../components/WebsiteStatsDetails.vue';
 import { openPage } from '../utils/open-page';
 import { computed, onMounted, ref } from 'vue';
 import { SettingsTab } from '../utils/enums';
