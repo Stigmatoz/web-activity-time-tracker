@@ -74,30 +74,13 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import Browser from 'webextension-polyfill';
 import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
 import Review from '../components/Review.vue';
+import { openPage } from '../utils/open-page';
 import { SettingsTab, TypeOfList } from '../utils/enums';
 
 const { t } = useI18n();
-
-async function openPage(tab: SettingsTab) {
-  let tabName = '';
-  switch (tab) {
-    case SettingsTab.Dashboard:
-      tabName = 'dashboard';
-      break;
-    case SettingsTab.GeneralSettings:
-      tabName = 'settings';
-      break;
-  }
-  const url = Browser.runtime.getURL(`src/dashboard.html${tabName != '' ? `?tab=${tabName}` : ''}`);
-  await Browser.tabs.create({
-    url: url,
-    active: true,
-  });
-}
 
 const activeTab = ref<TypeOfList>();
 

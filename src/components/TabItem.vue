@@ -1,11 +1,32 @@
 <template>
   <div class="tab-item">
     <Favicon :favicon="item.favicon" :type="typeOfUrl" />
-    <div class="ml-10 flex-grow-2">
+    <div
+      class="ml-10 flex-grow-2"
+      @mouseover="isShowCmdButtons = true"
+      @mouseleave="isShowCmdButtons = false"
+    >
       <div class="first-block">
-        <div :class="listType == TypeOfList.All ? 'w-60' : 'w-80'">
-          <p class="url" @click="openUrl(item.url)">{{ url }}</p>
+        <div>
+          <p class="url">{{ url }}</p>
           <BadgeIcons :url="url" :type="typeOfUrl" :listType="listType" />
+          <p class="links" v-if="isShowCmdButtons" title="Statistics">
+            <img
+              class="link"
+              src="../assets/icons/details-link.svg"
+              height="21"
+              @click="openStats(item.url)"
+            />
+          </p>
+
+          <p class="links" v-if="isShowCmdButtons" title="Open website">
+            <img
+              class="link"
+              src="../assets/icons/open-link.svg"
+              height="21"
+              @click="openUrl(item.url)"
+            />
+          </p>
         </div>
         <p class="text-right time">{{ summaryTimeForTab }}</p>
       </div>
@@ -37,7 +58,9 @@ import BadgeIcons from './BadgeIcons.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';
 import { CurrentTabItem } from '../dto/currentTabItem';
-import { TypeOfList, TypeOfUrl } from '../utils/enums';
+import { SettingsTab, TypeOfList, TypeOfUrl } from '../utils/enums';
+import { openPage } from '../utils/open-page';
+import { getTypeOfUrl } from '../utils/get-type-of-url';
 
 const { t } = useI18n();
 
@@ -47,9 +70,9 @@ const props = defineProps<{
   listType: TypeOfList;
 }>();
 
-const typeOfUrl = computed(() =>
-  props.item.url.startsWith('file:') ? TypeOfUrl.Document : TypeOfUrl.WebSite,
-);
+const isShowCmdButtons = ref<boolean>();
+
+const typeOfUrl = computed(() => getTypeOfUrl(props.item.url));
 
 const url = computed(() =>
   typeOfUrl.value == TypeOfUrl.Document
@@ -75,6 +98,10 @@ function openUrl(url: string) {
   } else showWarningMessage.value = true;
 }
 
+async function openStats(url: string) {
+  await openPage(SettingsTab.WebsiteStats, url);
+}
+
 const showWarningMessage = ref<boolean>();
 </script>
 
@@ -91,12 +118,21 @@ const showWarningMessage = ref<boolean>();
 .tab-item:hover {
   border: 1px rgb(202, 202, 202) solid;
 }
+
+.tab-item .links {
+  display: inline-block;
+  margin: 0;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.tab-item .links .link {
+  vertical-align: middle;
+}
 .tab-item .url {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   overflow-wrap: anywhere;
-  max-width: 80%;
   display: inline-block;
 }
 .tab-item .url:hover {

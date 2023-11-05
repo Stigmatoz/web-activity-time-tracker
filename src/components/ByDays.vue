@@ -3,9 +3,7 @@
     <img height="55" src="../assets/icons/preloader.gif" />
   </div>
   <div v-else>
-    <div class="no-data" v-if="countOfDays == undefined || (countOfDays == 0 && !noData)">
-      {{ t('noData.message') }}
-    </div>
+    <no-data-by-days v-if="countOfDays == undefined || (countOfDays == 0 && !noData)" />
     <div v-else-if="noData">
       <div class="no-data">
         {{ t('noDataForPeriod.message') }}
@@ -43,7 +41,9 @@
         <div class="header">{{ t('averageTimeByDays.message') }}</div>
         <p>{{ convertSummaryTimeToString(tabsByDays!.averageTime) }}</p>
       </div>
-      <ByDaysChart :data="tabsByDays!" />
+      <div class="ml-20 mr-20 by-days-chart">
+        <ByDaysChart :data="tabsByDays!" />
+      </div>
       <div>
         <Expander
           v-for="(tabDay, i) of tabsByDays?.days"
@@ -73,6 +73,7 @@ export default {
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import TabItem from '../components/TabItem.vue';
+import NoDataByDays from './NoDataByDays.vue';
 import ByDaysChart from '../components/ByDaysChart.vue';
 import Expander from '../components/Expander.vue';
 import { TabListByDays } from '../dto/tabListSummary';
@@ -160,14 +161,7 @@ async function exportToCsv() {
   justify-content: space-between;
   margin: 0 25px;
 }
-.date-block .date-picker {
-  width: 250px;
-}
-.no-data .date-picker {
-  font-weight: normal;
-  text-align: center;
-  width: 250px;
-  margin: auto;
-  margin-top: 15px;
+.by-days-chart {
+  height: 240px;
 }
 </style>

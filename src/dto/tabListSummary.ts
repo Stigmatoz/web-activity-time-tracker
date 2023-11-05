@@ -33,10 +33,12 @@ export interface TabListByDays {
   days: DayTabs[];
   averageTime: number;
   summaryTime: number;
+  sessions: number;
 }
 
 export interface DayTabs {
   day: string;
   tabs: CurrentTabItem[];
   time: number;
+  sessions: number;
 }

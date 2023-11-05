@@ -10,7 +10,7 @@
         type="radio"
         id="timeIntervalChart-tab"
         name="settings-group"
-        :checked="selectedTab == SettingsTab.Dashboard"
+        :checked="selectedTab == SettingsTab.Dashboard || selectedTab == SettingsTab.WebsiteStats"
         v-on:change="selectTab(SettingsTab.Dashboard)"
       />
       <label name="tabName" for="timeIntervalChart-tab"
@@ -20,7 +20,11 @@
       >
 
       <div class="settings-content">
-        <Dashboad v-if="selectedTab == SettingsTab.Dashboard" />
+        <DashboadContainer
+          v-if="selectedTab == SettingsTab.Dashboard || selectedTab == SettingsTab.WebsiteStats"
+          :type="selectedTab"
+          :domain="selectedWebsite"
+        />
       </div>
     </div>
 
@@ -129,11 +133,12 @@ import Limits from '../components/Limits.vue';
 import DailyNotifications from '../components/Notifications.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
-import Dashboad from '../components/Dashboad.vue';
+import DashboadContainer from '../components/DashboadContainer.vue';
 
 const { t } = useI18n();
 
 const selectedTab = ref<SettingsTab>();
+const selectedWebsite = ref<string>();
 
 onMounted(() => {
   const urlObj = new URL(location.href);
@@ -145,6 +150,12 @@ onMounted(() => {
         break;
       case 'settings':
         selectedTab.value = SettingsTab.GeneralSettings;
+        break;
+      case 'website-stats':
+        selectedTab.value = SettingsTab.WebsiteStats;
+        const domain = urlObj.searchParams.get('website');
+        if (domain != null && domain != '') selectedWebsite.value = domain;
+        else selectedTab.value = SettingsTab.Dashboard;
         break;
     }
   } else selectedTab.value = selectedTab.value = SettingsTab.Dashboard;

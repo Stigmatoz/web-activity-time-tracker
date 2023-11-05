@@ -95,10 +95,9 @@ function refreshChart() {
 
 <style scoped>
 .chart {
-  height: 230px;
+  height: 100%;
   margin: auto;
-  width: 80%;
-  margin-top: -10px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 </style>

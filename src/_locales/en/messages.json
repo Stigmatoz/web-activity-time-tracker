@@ -86,6 +86,9 @@
   "averageTime": {
     "message": "Average time for active days"
   },
+  "averageDailyUsage": {
+    "message": "Average daily usage"
+  },
   "mostActiveDay": {
     "message": "The most active day"
   },

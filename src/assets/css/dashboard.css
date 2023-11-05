@@ -281,6 +281,10 @@ label {
   display: table-cell;
   cursor: pointer;
 }
+.settings-tab label[name='tabName']:hover {
+  background-color: #cccccc !important;
+    border-radius: 10px;
+}
 .settings-tab [type='radio'] {
   display: none;
 }

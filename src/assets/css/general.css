@@ -35,6 +35,12 @@
 .mr-10 {
   margin-right: 10px;
 }
+.ml-20 {
+  margin-left: 20px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
 .mr-5 {
   margin-right: 5px;
 }
@@ -60,12 +66,6 @@ select {
 }
 .w-100 {
   width: 100%;
-}
-.w-80 {
-  width: 80%;
-}
-.w-60 {
-  width: 60%;
 }
 input[type='button'] {
   background: #428bff;
@@ -142,4 +142,14 @@ input[type='button'][disabled] {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+.no-data .date-picker {
+  font-weight: normal;
+  text-align: center;
+  width: 250px;
+  margin: auto;
+  margin-top: 15px;
+}
+.date-block .date-picker {
+  width: 250px;
 }
