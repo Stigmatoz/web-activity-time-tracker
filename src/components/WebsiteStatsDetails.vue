@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <div class="block">
-      <p class="title">Total time</p>
+      <p class="title">{{ t('allTime.message') }}</p>
       <p class="value">
         {{ convertSummaryTimeToString(details.summaryTime) }}
       </p>
     </div>
     <div class="block">
-      <p class="title">Total sessions</p>
+      <p class="title">{{ t('sessions.message') }}</p>
       <p class="value">
         {{ details.sessions }}
       </p>
     </div>
     <div class="block">
-      <p class="title">Average daily time</p>
+      <p class="title">{{ t('averageDailyUsage.message') }}</p>
       <p class="value">
         {{ convertSummaryTimeToString(details.averageTime) }}
       </p>

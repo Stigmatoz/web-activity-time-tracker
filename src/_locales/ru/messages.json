@@ -86,6 +86,9 @@
   "averageTime": {
     "message": "Среднее время по активным дням"
   },
+  "averageDailyUsage": {
+    "message": "Среднее ежедневное использование"
+  },
   "mostActiveDay": {
     "message": "Самый активный день"
   },
