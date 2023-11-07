@@ -96,8 +96,6 @@ function selectTab(type: TypeOfList) {
 <style scoped>
 .headerBlock {
   height: 52px;
-  /* background-color: var(--popup-header); */
-  border-bottom: 1px solid #e7e7e7;
 }
 
 .headerBlock .header {
