@@ -3,7 +3,7 @@ import Browser from 'webextension-polyfill';
 import en from '../_locales/en/messages.json';
 import ru from '../_locales/ru/messages.json';
 import de from '../_locales/de/messages.json';
-import zh from '../_locales/zh/messages.json';
+import zh from '../_locales/zh_CN/messages.json';
 
 const locales = {
   en,
