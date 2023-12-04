@@ -26,7 +26,7 @@ const settingsStorage = injecStorage();
 const PROMPT_AT_TIME_OF_DAY = 12;
 const ADD_DAYS_FIRST = 2;
 const ADD_DAYS_NEXT = 5;
-const CHROME_STORE_URL = `https://chrome.google.com/webstore/detail/web-activity-time-tracker/${__APP_ID__}/reviews`;
+const CHROME_STORE_URL = `https://chromewebstore.google.com/detail/web-activity-time-tracker/${__APP_ID__}/reviews`;
 
 const showReview = ref<boolean>();
 
