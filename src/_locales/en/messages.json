@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Web Activity Time Tracker - Website Blocker"
+    "message": "Web Activity Time Tracker - Block Sites"
   },
   "extDescription": {
-    "message": "Track and limit the time of your web activity and block distracting websites. Monitor your web usage."
+    "message": "Track time of your web activity, limit and block distracting websites. Monitor your web usage."
   },
   "settings": {
     "message": "Settings"
