@@ -14,19 +14,12 @@
     >
     <label class="about-label"
       >{{ t('question.message') }}
-      <a
-        href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/support"
-        target="_blank"
-        >{{ t('supportForm.message') }}</a
+      <a :href="CHROME_STORE_SUPPORT_URL" target="_blank">{{ t('supportForm.message') }}</a
       >.</label
     >
     <label class="about-label"
       >{{ t('doYouEnjoy.message') }}
-      <a
-        href="https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm/reviews"
-        target="_blank"
-        >{{ t('review.message') }}</a
-      ></label
+      <a :href="CHROME_STORE_REVIEW_URL" target="_blank">{{ t('review.message') }}</a></label
     >
   </div>
 </template>
@@ -39,6 +32,7 @@ export default {
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
+import { CHROME_STORE_SUPPORT_URL, CHROME_STORE_REVIEW_URL } from '../utils/chrome-url';
 const { t } = useI18n();
 </script>
 

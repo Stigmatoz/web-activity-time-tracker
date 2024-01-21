@@ -19,6 +19,7 @@ import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { addDays, startOfToday } from 'date-fns';
 import { addHours } from 'date-fns/esm';
+import { CHROME_STORE_REVIEW_URL } from '../utils/chrome-url';
 
 const { t } = useI18n();
 
@@ -26,7 +27,6 @@ const settingsStorage = injecStorage();
 const PROMPT_AT_TIME_OF_DAY = 12;
 const ADD_DAYS_FIRST = 2;
 const ADD_DAYS_NEXT = 5;
-const CHROME_STORE_URL = `https://chromewebstore.google.com/detail/web-activity-time-tracker/${__APP_ID__}/reviews`;
 
 const showReview = ref<boolean>();
 
@@ -59,7 +59,7 @@ async function closeBlock() {
 }
 
 async function openStore() {
-  window.open(CHROME_STORE_URL, '_blank');
+  window.open(CHROME_STORE_REVIEW_URL, '_blank');
   await settingsStorage.saveValue(StorageParams.REVIEW_DATE, new Date().toString());
 }
 </script>
