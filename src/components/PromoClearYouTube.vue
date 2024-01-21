@@ -1,8 +1,10 @@
 <template>
   <div class="review-block" v-if="showReview && canShowPromo">
     <p>{{ t('promoClearYoutube.message') }}</p>
-    <img height="15" src="../assets/icons/close.svg" @click="closeBlock()" />
-    <input type="button" :value="t('promoClearYoutube.description')" @click="openStore()" />
+    <div class="btn-block">
+      <img height="15" src="../assets/icons/close.svg" @click="closeBlock()" />
+      <input type="button" :value="t('promoClearYoutube.description')" @click="openStore()" />
+    </div>
   </div>
 </template>
 
@@ -13,19 +15,20 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { CHROME_STORE_CLEAR_YOUTUBE_URL } from '../utils/chrome-url';
 import { usePromoExtension } from '../compositions/usePromoExtension';
+import { computedAsync } from '@vueuse/core';
 
 const { t } = useI18n();
 
 const settingsStorage = injecStorage();
-const showReview = ref<boolean>();
+const showReview = ref<boolean>(true);
 
-const canShowPromo = computed(async () => await usePromoExtension());
+const canShowPromo = computedAsync(async () => await usePromoExtension());
 
 async function closeBlock() {
   showReview.value = false;
@@ -33,6 +36,7 @@ async function closeBlock() {
 }
 
 async function openStore() {
+  showReview.value = false;
   window.open(CHROME_STORE_CLEAR_YOUTUBE_URL, '_blank');
   await settingsStorage.saveValue(StorageParams.PROMO_CLEAR_YOUTUBE, true);
 }
@@ -40,25 +44,30 @@ async function openStore() {
 
 <style scoped>
 .review-block {
-  width: -webkit-fill-available;
-  position: fixed;
-  bottom: 0;
-  padding: 8px 20px;
+  margin: 20px 0 20px 0;
+  padding: 10px;
   font-size: 14px;
   background-color: #efefef;
+  border-radius: 10px;
+  min-width: 655px;
+}
+.review-block .btn-block {
+  margin: 8px 5px 0 0;
+  vertical-align: top;
+  float: right;
 }
 .review-block input[type='button'] {
-  margin: 0 20px 0 0;
   float: right;
   width: auto;
 }
 .review-block p {
   display: inline-block;
-  margin: 8px;
-  font-size: 17px;
+  margin: 0 10px;
+  font-size: 16px;
+  width: 70%;
 }
 .review-block img {
-  padding: 9px 0 0 0;
+  margin-left: 8px;
   cursor: pointer;
   float: right;
 }

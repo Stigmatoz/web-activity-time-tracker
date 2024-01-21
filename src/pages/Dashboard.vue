@@ -43,7 +43,9 @@
       >
 
       <div class="settings-content">
-        <WhiteList v-if="selectedTab == SettingsTab.WhiteList" />
+        <div class="main">
+          <WhiteList v-if="selectedTab == SettingsTab.WhiteList" />
+        </div>
       </div>
     </div>
 
@@ -62,7 +64,9 @@
       >
 
       <div class="settings-content">
-        <Limits v-if="selectedTab == SettingsTab.Limits" />
+        <div class="main">
+          <Limits v-if="selectedTab == SettingsTab.Limits" />
+        </div>
       </div>
     </div>
     <div class="settings-tab">
@@ -80,7 +84,9 @@
       >
 
       <div class="settings-content">
-        <DailyNotifications v-if="selectedTab == SettingsTab.Notifications" />
+        <div class="main">
+          <DailyNotifications v-if="selectedTab == SettingsTab.Notifications" />
+        </div>
       </div>
     </div>
 
@@ -99,7 +105,9 @@
       >
 
       <div class="settings-content">
-        <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
+        <div class="main">
+          <GeneralSettings v-if="selectedTab == SettingsTab.GeneralSettings" />
+        </div>
       </div>
     </div>
 
@@ -118,7 +126,9 @@
       >
 
       <div class="settings-content">
-        <About v-if="selectedTab == SettingsTab.About" />
+        <div class="main">
+          <About v-if="selectedTab == SettingsTab.About" />
+        </div>
       </div>
     </div>
   </div>
@@ -167,6 +177,10 @@ function selectTab(value: SettingsTab) {
 </script>
 
 <style scoped>
+.main {
+  width: 80%;
+  margin: auto;
+}
 .header-block .title {
   vertical-align: top;
   margin-top: 15px;

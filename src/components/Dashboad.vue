@@ -57,10 +57,6 @@ function openChart(type: TypeOfChart) {
 </script>
 
 <style scoped>
-.main {
-  width: 80%;
-  margin: auto;
-}
 .chart {
   margin: 20px 0;
   width: 80%;

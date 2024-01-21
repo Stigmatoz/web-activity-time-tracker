@@ -32,6 +32,7 @@
         {{ t('notificationTime.description') }}
       </p>
       <ListWithTimeComponent :type="ListWithTime.Notifications" />
+      <PromoClearYouTube />
     </div>
     <div class="settings-item">
       <label class="setting-header">{{ t('notificationMessage.message') }}</label>
@@ -73,6 +74,7 @@ import {
 import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { Time } from '../utils/time';
 import ListWithTimeComponent from '../components/ListWithTime.vue';
+import PromoClearYouTube from '../components/PromoClearYouTube.vue';
 import { ListWithTime } from '../utils/enums';
 import Browser from 'webextension-polyfill';
 import { Messages } from '../utils/messages';

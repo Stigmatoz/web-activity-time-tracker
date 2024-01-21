@@ -8,6 +8,7 @@
       {{ t('limitsTip.message') }}
     </p>
     <ListWithTimeComponent :type="ListWithTime.Limits" />
+    <PromoClearYouTube />
   </div>
 </template>
 
@@ -19,6 +20,7 @@ export default {
 
 <script lang="ts" setup>
 import ListWithTimeComponent from '../components/ListWithTime.vue';
+import PromoClearYouTube from '../components/PromoClearYouTube.vue';
 import { ListWithTime } from '../utils/enums';
 import { useI18n } from 'vue-i18n';
 
