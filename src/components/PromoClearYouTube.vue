@@ -15,30 +15,44 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { CHROME_STORE_CLEAR_YOUTUBE_URL } from '../utils/chrome-url';
 import { usePromoExtension } from '../compositions/usePromoExtension';
 import { computedAsync } from '@vueuse/core';
+import { useExtensionPage } from '../compositions/useExtensionPage';
 
 const { t } = useI18n();
 
 const settingsStorage = injecStorage();
+const extensionPage = useExtensionPage();
+
 const showReview = ref<boolean>(true);
 
 const canShowPromo = computedAsync(async () => await usePromoExtension());
+const isBlockPage = computed(() => extensionPage.isBlockPage);
 
 async function closeBlock() {
   showReview.value = false;
-  await settingsStorage.saveValue(StorageParams.PROMO_CLEAR_YOUTUBE, true);
+  await settingsStorage.saveValue(
+    isBlockPage.value
+      ? StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK
+      : StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS,
+    true,
+  );
 }
 
 async function openStore() {
   showReview.value = false;
   window.open(CHROME_STORE_CLEAR_YOUTUBE_URL, '_blank');
-  await settingsStorage.saveValue(StorageParams.PROMO_CLEAR_YOUTUBE, true);
+  await settingsStorage.saveValue(
+    isBlockPage.value
+      ? StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK
+      : StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS,
+    true,
+  );
 }
 </script>
 

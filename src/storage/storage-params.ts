@@ -18,7 +18,8 @@ export enum StorageParams {
   REVIEW_DATE = 'review_date',
   REVIEW_PROMPT_AT = 'review_prompt_at',
   INSTALL_DATE = 'install-date',
-  PROMO_CLEAR_YOUTUBE = 'promo-clear-youtube',
+  PROMO_CLEAR_YOUTUBE_ON_LIMITS = 'promo-clear-youtube-on-limits',
+  PROMO_CLEAR_YOUTUBE_ON_BLOCK = 'promo-clear-youtube-on-block',
 }
 
 export enum StorageDeserializeParam {
@@ -89,7 +90,8 @@ export function getDefaultValue(param: StorageParams) {
       return DAILY_NOTIFICATION_DEFAULT;
     case StorageParams.SHOW_CHANGELOG:
       return SHOW_CHANGELOG_DEFAULT;
-    case StorageParams.PROMO_CLEAR_YOUTUBE:
+    case StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK:
+    case StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS:
       return SHOW_PROMO_CLEAR_YOUTUBE_DEFAULT;
   }
 }
