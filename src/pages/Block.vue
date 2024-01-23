@@ -30,6 +30,7 @@
       @click="deferring()"
     />
     <p class="desctiption">{{ t('deferringDescription.message') }}</p>
+    <PromoClearYouTube />
   </div>
 </template>
 
@@ -41,6 +42,7 @@ import { injecStorage } from '../storage/inject-storage';
 import { BLOCK_DEFERRAL_DEFAULT, StorageParams } from '../storage/storage-params';
 import { convertLimitTimeToString } from '../utils/converter';
 import { defering, canDefering } from '../compositions/deferList';
+import PromoClearYouTube from '../components/PromoClearYouTube.vue';
 
 const { t } = useI18n();
 

@@ -41,5 +41,5 @@ export async function usePromoExtension() {
       extensionPage.isBlockPage.value,
   );
 
-  return showOnLimitPage || showOnBlockPage;
+  return showOnLimitPage.value || showOnBlockPage.value;
 }

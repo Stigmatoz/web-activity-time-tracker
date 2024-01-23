@@ -15,7 +15,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
@@ -32,27 +32,23 @@ const extensionPage = useExtensionPage();
 const showReview = ref<boolean>(true);
 
 const canShowPromo = computedAsync(async () => await usePromoExtension());
-const isBlockPage = computed(() => extensionPage.isBlockPage);
 
 async function closeBlock() {
   showReview.value = false;
-  await settingsStorage.saveValue(
-    isBlockPage.value
-      ? StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK
-      : StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS,
-    true,
-  );
+  await saveValue();
 }
 
 async function openStore() {
   showReview.value = false;
   window.open(CHROME_STORE_CLEAR_YOUTUBE_URL, '_blank');
-  await settingsStorage.saveValue(
-    isBlockPage.value
-      ? StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK
-      : StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS,
-    true,
-  );
+  await saveValue();
+}
+
+async function saveValue() {
+  let param: StorageParams | undefined = undefined;
+  if (extensionPage.isBlockPage.value) param = StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK;
+  if (extensionPage.isLimitPage.value) param = StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS;
+  if (param) await settingsStorage.saveValue(param, true);
 }
 </script>
 

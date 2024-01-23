@@ -32,7 +32,6 @@
         {{ t('notificationTime.description') }}
       </p>
       <ListWithTimeComponent :type="ListWithTime.Notifications" />
-      <PromoClearYouTube />
     </div>
     <div class="settings-item">
       <label class="setting-header">{{ t('notificationMessage.message') }}</label>
