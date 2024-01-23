@@ -135,7 +135,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
@@ -144,35 +144,46 @@ import DailyNotifications from '../components/Notifications.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
 import DashboadContainer from '../components/DashboadContainer.vue';
+import { useExtensionPage } from '../compositions/useExtensionPage';
+import { getEnumValueTab } from '../utils/extension-tabs';
 
 const { t } = useI18n();
+const extensionPage = useExtensionPage();
 
 const selectedTab = ref<SettingsTab>();
+const currentUrl = ref(new URL(location.href));
 const selectedWebsite = ref<string>();
 
-onMounted(() => {
-  const urlObj = new URL(location.href);
-  const tabName = urlObj.searchParams.get('tab');
-  if (tabName != null && tabName != '') {
-    switch (tabName) {
-      case 'dashboard':
-        selectedTab.value = SettingsTab.Dashboard;
-        break;
-      case 'settings':
-        selectedTab.value = SettingsTab.GeneralSettings;
-        break;
-      case 'website-stats':
-        selectedTab.value = SettingsTab.WebsiteStats;
-        const domain = urlObj.searchParams.get('website');
-        if (domain != null && domain != '') selectedWebsite.value = domain;
-        else selectedTab.value = SettingsTab.Dashboard;
-        break;
-    }
-  } else selectedTab.value = selectedTab.value = SettingsTab.Dashboard;
+watch(currentUrl, () => {
+  getCurrentTab();
 });
+
+onMounted(() => {
+  getCurrentTab();
+});
+
+function getCurrentTab() {
+  const tabName = currentUrl.value.searchParams.get('tab');
+  if (tabName != null && tabName != '') {
+    selectedTab.value = getEnumValueTab(tabName);
+    const domain = currentUrl.value.searchParams.get('website');
+    if (selectedTab.value == SettingsTab.WebsiteStats) {
+      if (domain != null && domain != '') selectedWebsite.value = domain;
+      else selectedTab.value = SettingsTab.Dashboard;
+    } else if (domain != null && domain != '') {
+      window.history.replaceState(
+        location.href,
+        document.title,
+        location.href.replace(`&website=${domain}`, ''),
+      );
+    }
+  }
+}
 
 function selectTab(value: SettingsTab) {
   selectedTab.value = value;
+  extensionPage.updateTab(value);
+  currentUrl.value = new URL(location.href);
 }
 </script>
 

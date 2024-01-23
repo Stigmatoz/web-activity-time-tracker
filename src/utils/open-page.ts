@@ -1,23 +1,14 @@
 import Browser from 'webextension-polyfill';
 import { SettingsTab } from './enums';
+import { getStringTab } from './extension-tabs';
 
 export async function openPage(tab: SettingsTab, domain?: string) {
   function getDomain() {
     return domain != undefined && tab == SettingsTab.WebsiteStats ? `&website=${domain}` : '';
   }
 
-  let tabName = '';
-  switch (tab) {
-    case SettingsTab.Dashboard:
-      tabName = 'dashboard';
-      break;
-    case SettingsTab.WebsiteStats:
-      tabName = 'website-stats';
-      break;
-    case SettingsTab.GeneralSettings:
-      tabName = 'settings';
-      break;
-  }
+  let tabName = getStringTab(tab);
+
   const url = Browser.runtime.getURL(
     `src/dashboard.html${tabName != '' ? `?tab=${tabName}` : ''}${getDomain()}`,
   );
