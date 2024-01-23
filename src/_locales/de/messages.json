@@ -311,5 +311,9 @@
   "intervalsChart": {
     "message": "Nur Zeitintervalle größer als",
     "description": "werden angezeigt"
+  },
+  "promoClearYoutube": {
+    "message": "Möchten Sie Kurzfilme, Kommentare, empfohlene Videos, Abonnements und andere YouTube-Ablenkungen blockieren? Wir haben eine weitere Erweiterung erstellt, mit der Sie YouTube ohne Ablenkung ansehen können.",
+    "description": "Install"
   }
 }

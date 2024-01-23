@@ -215,8 +215,8 @@
     "message": "Leave a review!"
   },
   "promoClearYoutube": {
-    "message": "Хотели бы вы блокировать шортсы, комментарии, рекомендованные видео, подписки и другие отвлекающие элементы YouTube? Мы создали еще одно расширение, которое поможет вам смотреть YouTube без отвлекающих факторов.",
-    "description": "Установить"
+    "message": "Would you like to block shorts, comments, recommended videos, subscriptions, and other YouTube distractions? We've created another extension that will help you watch YouTube without distractions.",
+    "description": "Install"
   },
   "block": {
     "message": "You've reached your limit for today on "

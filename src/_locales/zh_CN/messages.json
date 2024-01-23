@@ -311,5 +311,9 @@
   "intervalsChart": {
     "message": "只有时间间隔大于",
     "description": "展示"
+  },
+  "promoClearYoutube": {
+    "message": "您想屏蔽短片、评论、推荐视频、订阅和其他 YouTube 干扰内容吗？ 我们创建了另一个扩展程序，可帮助您不受干扰地观看 YouTube",
+    "description": "安装"
   }
 }
