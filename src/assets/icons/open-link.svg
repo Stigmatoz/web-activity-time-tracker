@@ -1,5 +1,202 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M3 14.25C3.41421 14.25 3.75 14.5858 3.75 15C3.75 16.4354 3.75159 17.4365 3.85315 18.1919C3.9518 18.9257 4.13225 19.3142 4.40901 19.591C4.68577 19.8678 5.07435 20.0482 5.80812 20.1469C6.56347 20.2484 7.56459 20.25 9 20.25H15C16.4354 20.25 17.4365 20.2484 18.1919 20.1469C18.9257 20.0482 19.3142 19.8678 19.591 19.591C19.8678 19.3142 20.0482 18.9257 20.1469 18.1919C20.2484 17.4365 20.25 16.4354 20.25 15C20.25 14.5858 20.5858 14.25 21 14.25C21.4142 14.25 21.75 14.5858 21.75 15V15.0549C21.75 16.4225 21.75 17.5248 21.6335 18.3918C21.5125 19.2919 21.2536 20.0497 20.6517 20.6516C20.0497 21.2536 19.2919 21.5125 18.3918 21.6335C17.5248 21.75 16.4225 21.75 15.0549 21.75H8.94513C7.57754 21.75 6.47522 21.75 5.60825 21.6335C4.70814 21.5125 3.95027 21.2536 3.34835 20.6517C2.74643 20.0497 2.48754 19.2919 2.36652 18.3918C2.24996 17.5248 2.24998 16.4225 2.25 15.0549C2.25 15.0366 2.25 15.0183 2.25 15C2.25 14.5858 2.58579 14.25 3 14.25Z" fill="#1C274C"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.25C12.2106 2.25 12.4114 2.33852 12.5535 2.49392L16.5535 6.86892C16.833 7.17462 16.8118 7.64902 16.5061 7.92852C16.2004 8.20802 15.726 8.18678 15.4465 7.88108L12.75 4.9318V16C12.75 16.4142 12.4142 16.75 12 16.75C11.5858 16.75 11.25 16.4142 11.25 16V4.9318L8.55353 7.88108C8.27403 8.18678 7.79963 8.20802 7.49393 7.92852C7.18823 7.64902 7.16698 7.17462 7.44648 6.86892L11.4465 2.49392C11.5886 2.33852 11.7894 2.25 12 2.25Z" fill="#1C274C"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+
+<rect id="Icons" x="-896" y="0" width="1280" height="800" style="fill:none;"/>
+
+<g id="Icons1" serif:id="Icons">
+
+<g id="Strike">
+
+</g>
+
+<g id="H1">
+
+</g>
+
+<g id="H2">
+
+</g>
+
+<g id="H3">
+
+</g>
+
+<g id="list-ul">
+
+</g>
+
+<g id="hamburger-1">
+
+</g>
+
+<g id="hamburger-2">
+
+</g>
+
+<g id="list-ol">
+
+</g>
+
+<g id="list-task">
+
+</g>
+
+<g id="trash">
+
+</g>
+
+<g id="vertical-menu">
+
+</g>
+
+<g id="horizontal-menu">
+
+</g>
+
+<g id="sidebar-2">
+
+</g>
+
+<g id="Pen">
+
+</g>
+
+<g id="Pen1" serif:id="Pen">
+
+</g>
+
+<g id="clock">
+
+</g>
+
+<g id="external-link">
+
+<path d="M36.026,20.058l-21.092,0c-1.65,0 -2.989,1.339 -2.989,2.989l0,25.964c0,1.65 1.339,2.989 2.989,2.989l26.024,0c1.65,0 2.989,-1.339 2.989,-2.989l0,-20.953l3.999,0l0,21.948c0,3.308 -2.686,5.994 -5.995,5.995l-28.01,0c-3.309,0 -5.995,-2.687 -5.995,-5.995l0,-27.954c0,-3.309 2.686,-5.995 5.995,-5.995l22.085,0l0,4.001Z"/>
+
+<path d="M55.925,25.32l-4.005,0l0,-10.481l-27.894,27.893l-2.832,-2.832l27.895,-27.895l-10.484,0l0,-4.005l17.318,0l0.002,0.001l0,17.319Z"/>
+
+</g>
+
+<g id="hr">
+
+</g>
+
+<g id="info">
+
+</g>
+
+<g id="warning">
+
+</g>
+
+<g id="plus-circle">
+
+</g>
+
+<g id="minus-circle">
+
+</g>
+
+<g id="vue">
+
+</g>
+
+<g id="cog">
+
+</g>
+
+<g id="logo">
+
+</g>
+
+<g id="radio-check">
+
+</g>
+
+<g id="eye-slash">
+
+</g>
+
+<g id="eye">
+
+</g>
+
+<g id="toggle-off">
+
+</g>
+
+<g id="shredder">
+
+</g>
+
+<g id="spinner--loading--dots-" serif:id="spinner [loading, dots]">
+
+</g>
+
+<g id="react">
+
+</g>
+
+<g id="check-selected">
+
+</g>
+
+<g id="turn-off">
+
+</g>
+
+<g id="code-block">
+
+</g>
+
+<g id="user">
+
+</g>
+
+<g id="coffee-bean">
+
+</g>
+
+<g id="coffee-beans">
+
+<g id="coffee-bean1" serif:id="coffee-bean">
+
+</g>
+
+</g>
+
+<g id="coffee-bean-filled">
+
+</g>
+
+<g id="coffee-beans-filled">
+
+<g id="coffee-bean2" serif:id="coffee-bean">
+
+</g>
+
+</g>
+
+<g id="clipboard">
+
+</g>
+
+<g id="clipboard-paste">
+
+</g>
+
+<g id="clipboard-copy">
+
+</g>
+
+<g id="Layer1">
+
+</g>
+
+</g>
+
 </svg>
