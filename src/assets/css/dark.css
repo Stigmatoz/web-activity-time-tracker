@@ -1,0 +1,45 @@
+.dark{
+  background-color: #303030;
+  color: white;
+}
+.dark .headerBlock .header {
+  color: #ffffff;
+}
+.dark .headerBlock .icons-block a:hover{
+  filter: invert(40%) sepia(94%) saturate(3371%) hue-rotate(227deg) brightness(99%) contrast(92%);
+}
+.dark .headerBlock .icons-block a img {
+  filter: invert(100%) sepia(17%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(102%);
+}
+.dark .header-block {
+  background-color: #616161;
+}
+.dark .tab-item .progress-bar{
+  border: 1.5px rgb(107 107 107) solid;
+}
+.dark .tab-item:hover{
+  border: 1px rgb(107 107 107) solid;
+}
+.dark .tab-item .links .link{
+  filter: invert(100%) sepia(17%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(102%);
+}
+.dark .stats-block .block p{
+  color: #b9b9b9;
+}
+.dark .stats-block .block .header {
+  background-color: #595959;
+  color: rgb(255 255 255);
+}
+.dark .stats-block.block .header{
+  background-color: #595959;
+  color: rgb(255 255 255);
+}
+.dark .stats-block.block p{
+  color: #b9b9b9;
+}
+.dark .expander-body{
+  background-color: #595959;
+}
+.dark .header span{
+  color: rgb(255 255 255);
+}
