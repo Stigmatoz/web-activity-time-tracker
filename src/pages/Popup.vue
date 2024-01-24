@@ -5,6 +5,22 @@
       <p class="header">Web Activity Time Tracker</p>
     </div>
     <div class="icons-block">
+      <img
+        class="dark-mode-icon"
+        height="25"
+        src="../assets/icons/light-mode.svg"
+        title="Disable Dark Mode"
+        v-if="darkMode == true"
+        @click="changeDarkMode(false)"
+      />
+      <img
+        class="dark-mode-icon"
+        title="Enable Dark Mode"
+        height="25"
+        src="../assets/icons/dark-mode.svg"
+        v-if="darkMode == false"
+        @click="changeDarkMode(true)"
+      />
       <a @click="openPage(SettingsTab.Dashboard)"
         >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
       /></a>
@@ -79,17 +95,30 @@ import ByDays from '../components/ByDays.vue';
 import Review from '../components/Review.vue';
 import { openPage } from '../utils/open-page';
 import { SettingsTab, TypeOfList } from '../utils/enums';
+import { injecStorage } from '../storage/inject-storage';
+import { DARK_MODE_DEFAULT, StorageParams } from '../storage/storage-params';
+import { applyDarkMode } from '../utils/dark-mode';
 
 const { t } = useI18n();
+const settingsStorage = injecStorage();
 
 const activeTab = ref<TypeOfList>();
+const darkMode = ref<boolean>();
 
-onMounted(() => {
+onMounted(async () => {
   activeTab.value = TypeOfList.Today;
+  darkMode.value = await settingsStorage.getValue(StorageParams.DARK_MODE, DARK_MODE_DEFAULT);
+  if (darkMode.value) applyDarkMode(darkMode.value);
 });
 
 function selectTab(type: TypeOfList) {
   activeTab.value = type;
+}
+
+async function changeDarkMode(value: boolean) {
+  await settingsStorage.saveValue(StorageParams.DARK_MODE, value);
+  darkMode.value = value;
+  applyDarkMode(value);
 }
 </script>
 
@@ -97,7 +126,6 @@ function selectTab(type: TypeOfList) {
 .headerBlock {
   height: 52px;
 }
-
 .headerBlock .header {
   font-size: 16px;
   padding: 0 10px;
@@ -132,5 +160,9 @@ function selectTab(type: TypeOfList) {
 .headerBlock .icons-block a img {
   vertical-align: middle;
   padding-left: 5px !important;
+}
+.headerBlock .icons-block .dark-mode-icon {
+  vertical-align: middle;
+  margin-right: 10px;
 }
 </style>
