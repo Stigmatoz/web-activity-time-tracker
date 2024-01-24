@@ -119,6 +119,15 @@ async function changeDarkMode(value: boolean) {
   await settingsStorage.saveValue(StorageParams.DARK_MODE, value);
   darkMode.value = value;
   applyDarkMode(value);
+  updateTab();
+}
+
+function updateTab() {
+  const tempValue = activeTab.value;
+  activeTab.value = undefined;
+  setTimeout(() => {
+    activeTab.value = tempValue;
+  }, 50);
 }
 </script>
 
@@ -148,7 +157,7 @@ async function changeDarkMode(value: boolean) {
 }
 
 .headerBlock .icons-block a:hover {
-  color: rgb(99, 99, 243);
+  filter: invert(40%) sepia(94%) saturate(3371%) hue-rotate(227deg) brightness(99%) contrast(92%);
 }
 
 .headerBlock .icons-block a {
