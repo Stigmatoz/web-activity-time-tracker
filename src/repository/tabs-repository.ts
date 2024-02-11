@@ -32,7 +32,7 @@ export class TabsRepository implements ITabsRepository {
     return this.tabs?.find(x => x.url === domain);
   }
 
-  async addTab(domain: string, favicon: string | undefined): Promise<Tab | undefined> {
+  async addTab(domain: string): Promise<Tab | undefined> {
     const tabFromStorage = this.getTab(domain);
     const isInBlackListFlag = await isInBlackList(domain);
 

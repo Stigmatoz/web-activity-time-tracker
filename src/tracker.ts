@@ -57,7 +57,7 @@ async function trackTime() {
 
         let tab = repo.getTab(activeDomain);
         if (tab == undefined) {
-          tab = await repo.addTab(activeDomain, activeTab?.favIconUrl);
+          tab = await repo.addTab(activeDomain);
         }
         if (tab != undefined) {
           await mainTrackerWrapper(activeTab!, activeDomain, tab);

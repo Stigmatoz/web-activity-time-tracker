@@ -6,5 +6,5 @@ export interface ITabsRepository {
   removeAllTabs(): void;
   getTodayTabs(): Tab[];
   getTab(domain: string): Tab | undefined;
-  addTab(domain: string, favicon: string | undefined): Promise<Tab | undefined>;
+  addTab(domain: string): Promise<Tab | undefined>;
 }
