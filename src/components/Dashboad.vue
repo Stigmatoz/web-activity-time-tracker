@@ -4,18 +4,20 @@
   </div>
   <div class="chart chartByHours">
     <div class="mt-10 mb-20">
-      <input
-        type="button"
+      <button
         :class="['chart-btn', chart == TypeOfChart.Horly ? 'active' : '']"
-        :value="t('byHours.message')"
         @click="openChart(TypeOfChart.Horly)"
-      />
-      <input
-        type="button"
+      >
+        <img class="ml-5" src="../assets/icons/by-hours.svg" height="22" />
+        {{ t('byHours.message') }}
+      </button>
+      <button
         :class="['ml-10', 'chart-btn', chart == TypeOfChart.Interval ? 'active' : '']"
-        :value="t('intervals.message')"
         @click="openChart(TypeOfChart.Interval)"
-      />
+      >
+        <img class="ml-5" src="../assets/icons/by-intervals.svg" height="22" />
+        {{ t('intervals.message') }}
+      </button>
     </div>
     <HourlyChart v-if="chart == TypeOfChart.Horly" />
     <TimeIntervalChart v-if="chart == TypeOfChart.Interval" />
@@ -73,6 +75,7 @@ function openChart(type: TypeOfChart) {
 }
 
 .chart-btn.active {
-  background-color: #428bff;
+  background-color: #428bff !important;
+  color: white;
 }
 </style>
