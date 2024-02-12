@@ -77,11 +77,11 @@ import NoDataByDays from './NoDataByDays.vue';
 import ByDaysChart from '../components/ByDaysChart.vue';
 import Expander from '../components/Expander.vue';
 import { TabListByDays } from '../dto/tabListSummary';
-import { useTabListByDays } from '../compositions/useTabListByDays';
+import { useTabListByDays } from '../functions/useTabListByDays';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { ranges, ThisWeekRange } from '../utils/date';
-import { useImportToCsvWithData } from '../compositions/useImportToCsv';
-import { useFile, FileType } from '../compositions/useFile';
+import { useImportToCsvWithData } from '../functions/useImportToCsv';
+import { useFile, FileType } from '../functions/useFile';
 
 const { t } = useI18n();
 

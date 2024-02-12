@@ -151,11 +151,11 @@ import {
   SHOW_CHANGELOG_DEFAULT,
 } from '../storage/storage-params';
 import { ranges, ThisWeekRange, todayLocalDate } from '../utils/date';
-import { useImportToCsv } from '../compositions/useImportToCsv';
-import { FileType, useFile } from '../compositions/useFile';
-import { useRemoveAllData } from '../compositions/useRemoveAllData';
+import { useImportToCsv } from '../functions/useImportToCsv';
+import { FileType, useFile } from '../functions/useFile';
+import { useRemoveAllData } from '../functions/useRemoveAllData';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
-import { useRestoreData } from '../compositions/useRestoreData';
+import { useRestoreData } from '../functions/useRestoreData';
 
 const { t } = useI18n();
 

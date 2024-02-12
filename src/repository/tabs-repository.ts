@@ -1,7 +1,7 @@
 import { ITabsRepository } from './tabs-repository-interface';
 import { Tab } from '../entity/tab';
 import { injecStorage } from '../storage/inject-storage';
-import { isInBlackList } from '../compositions/black-list';
+import { isInBlackList } from '../functions/black-list';
 import { StorageDeserializeParam } from '../storage/storage-params';
 import { todayLocalDate } from '../utils/date';
 

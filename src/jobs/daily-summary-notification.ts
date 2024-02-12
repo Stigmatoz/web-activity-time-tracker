@@ -1,8 +1,8 @@
-import { useWebUsageSummaryForDay } from '../compositions/useWebUsageSummaryForDay';
+import { useWebUsageSummaryForDay } from '../functions/useWebUsageSummaryForDay';
 import { convertLimitTimeToString } from '../utils/converter';
-import { Settings } from '../compositions/settings';
+import { Settings } from '../functions/settings';
 import { StorageParams } from '../storage/storage-params';
-import { NotificationType, useNotification } from '../compositions/useNotification';
+import { NotificationType, useNotification } from '../functions/useNotification';
 import { getMessagesFromLocale } from '../plugins/i18n';
 
 export async function dailySummaryNotification() {

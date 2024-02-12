@@ -72,7 +72,7 @@ import { openPage } from '../utils/open-page';
 import { computed, onMounted, ref } from 'vue';
 import { SettingsTab } from '../utils/enums';
 import { ThisWeekRange, ranges } from '../utils/date';
-import { useTabStatsByDays } from '../compositions/useTabStatsByDays';
+import { useTabStatsByDays } from '../functions/useTabStatsByDays';
 import { TabListByDays } from '../dto/tabListSummary';
 import { Tab } from '../entity/tab';
 import { getTypeOfUrl } from '../utils/get-type-of-url';

@@ -15,7 +15,7 @@ export default {
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { TypeOfList, TypeOfUrl } from '../utils/enums';
-import { isDomainInLimits } from '../compositions/limit-list';
+import { isDomainInLimits } from '../functions/limit-list';
 import { computedAsync } from '@vueuse/core';
 
 const { t } = useI18n();

@@ -41,8 +41,8 @@ import { getValueFromQuery } from '../utils/block-page';
 import { injecStorage } from '../storage/inject-storage';
 import { BLOCK_DEFERRAL_DEFAULT, StorageParams } from '../storage/storage-params';
 import { convertLimitTimeToString } from '../utils/converter';
-import { defering, canDefering } from '../compositions/deferList';
 import PromoClearYouTube from '../components/PromoClearYouTube.vue';
+import { canDefering, defering } from '../functions/deferList';
 
 const { t } = useI18n();
 

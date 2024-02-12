@@ -2,7 +2,7 @@ import Browser from 'webextension-polyfill';
 import { initTracker } from './tracker';
 import { logger } from './utils/logger';
 import { scheduleJobs } from './jobs/sheduler';
-import { Settings } from './compositions/settings';
+import { Settings } from './functions/settings';
 import { StorageParams } from './storage/storage-params';
 import { injecStorage } from './storage/inject-storage';
 import { todayLocalDate } from './utils/date';

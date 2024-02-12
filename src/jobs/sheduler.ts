@@ -2,7 +2,7 @@ import Browser, { Alarms } from 'webextension-polyfill';
 import { log } from '../utils/logger';
 import { StorageParams } from '../storage/storage-params';
 import { DAY_MINUTES, SECOND, getNextTimeOfDay } from '../utils/time';
-import { Settings } from '../compositions/settings';
+import { Settings } from '../functions/settings';
 import { dailySummaryNotification } from './daily-summary-notification';
 import { removeOldTimeIntervals } from './remove-time-intervals';
 import { startOfTomorrow } from 'date-fns';
