@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
             extType = 'icons';
           }
-          return `assets/${extType}/[name]-[hash][extname]`;
+          return `assets/${extType}/[name][extname]`;
         },
       },
     },
