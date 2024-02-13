@@ -1,6 +1,6 @@
 import { Tab } from '../entity/tab';
 import { TimeInterval } from '../entity/time-interval';
-import { HOUR } from '../utils/time';
+import { HOUR, MINUTE_IN_SECONDS } from '../utils/time';
 
 export enum StorageParams {
   BLACK_LIST = 'black_list',
@@ -20,6 +20,11 @@ export enum StorageParams {
   INSTALL_DATE = 'install-date',
   PROMO_CLEAR_YOUTUBE_ON_LIMITS = 'promo-clear-youtube-on-limits',
   PROMO_CLEAR_YOUTUBE_ON_BLOCK = 'promo-clear-youtube-on-block',
+  IS_POMODORO_ENABLED = 'is-pomodoro-enabled',
+  POMODORO_START_TIME = 'pomodoro-start-time',
+  POMODORO_INTERVAL_WORK = 'pomodoro-interval-work',
+  POMODORO_INTERVAL_REST = 'pomodoro-interval-rest',
+  POMODORO_FREQUENCY = 'pomodoro-frequency',
 }
 
 export enum StorageDeserializeParam {
@@ -63,6 +68,10 @@ export const DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT = (20 * HOUR) / 1000;
 export const DAILY_NOTIFICATION_DEFAULT = true;
 export const SHOW_CHANGELOG_DEFAULT = false;
 export const SHOW_PROMO_CLEAR_YOUTUBE_DEFAULT = false;
+export const IS_POMODORO_ENABLED_DEFAULT = false;
+export const POMODORO_INTERVAL_WORK_DEFAULT = 25 * MINUTE_IN_SECONDS;
+export const POMODORO_INTERVAL_REST_DEFAULT = 5 * MINUTE_IN_SECONDS;
+export const POMODORO_FREQUENCY_DEFAULT = 3;
 
 export function getDefaultValue(param: StorageParams) {
   switch (param) {
@@ -93,5 +102,13 @@ export function getDefaultValue(param: StorageParams) {
     case StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK:
     case StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS:
       return SHOW_PROMO_CLEAR_YOUTUBE_DEFAULT;
+    case StorageParams.IS_POMODORO_ENABLED:
+      return IS_POMODORO_ENABLED_DEFAULT;
+    case StorageParams.POMODORO_INTERVAL_WORK:
+      return POMODORO_INTERVAL_WORK_DEFAULT;
+    case StorageParams.POMODORO_INTERVAL_REST:
+      return POMODORO_INTERVAL_REST_DEFAULT;
+    case StorageParams.POMODORO_FREQUENCY:
+      return POMODORO_FREQUENCY_DEFAULT;
   }
 }

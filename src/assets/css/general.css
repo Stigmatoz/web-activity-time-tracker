@@ -29,6 +29,9 @@
 .mb-20 {
   margin-bottom: 20px;
 }
+.ml-5 {
+  margin-left: 5px;
+}
 .ml-10 {
   margin-left: 10px;
 }
@@ -57,6 +60,10 @@
   text-align: center;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
 .mt-15 {
   margin-top: 15px;
 }
@@ -67,7 +74,7 @@ select {
 .w-100 {
   width: 100%;
 }
-input[type='button'] {
+button, input[type='button'] {
   background: #428bff;
   color: #fff;
   border-radius: 3px;
@@ -83,22 +90,22 @@ input[type='button'] {
   width: 200px;
 }
 
-input[type='button']:hover {
+button, input[type='button']:hover {
   background: #5c9dfe;
   text-decoration: none;
 }
 
-input[type='button'].alert {
+button, input[type='button'].alert {
   background: #fe5c5c !important;
 }
 
-input[type='button'].info {
+button, input[type='button'].info {
   background: #ffffff !important;
   color: black;
   border: 1px solid black;
 }
 
-input[type='button'][disabled] {
+button, input[type='button'][disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
