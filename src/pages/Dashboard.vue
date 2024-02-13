@@ -93,6 +93,27 @@
     <div class="settings-tab">
       <input
         type="radio"
+        id="pomodoro-tab"
+        name="settings-group"
+        :checked="selectedTab == SettingsTab.Pomodoro"
+        v-on:change="selectTab(SettingsTab.Pomodoro)"
+      />
+      <label name="tabName" for="pomodoro-tab"
+        ><img src="../assets/icons/pomodoro.svg" height="30" />{{
+          t('pomodoroMode.message')
+        }}</label
+      >
+
+      <div class="settings-content">
+        <div class="main">
+          <Pomodoro v-if="selectedTab == SettingsTab.Pomodoro" />
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-tab">
+      <input
+        type="radio"
         id="general-tab"
         name="settings-group"
         :checked="selectedTab == SettingsTab.GeneralSettings"
@@ -141,6 +162,7 @@ import GeneralSettings from '../components/GeneralSettings.vue';
 import WhiteList from '../components/WhiteList.vue';
 import Limits from '../components/Limits.vue';
 import DailyNotifications from '../components/Notifications.vue';
+import Pomodoro from '../components/Pomodoro.vue';
 import About from '../components/About.vue';
 import { SettingsTab } from '../utils/enums';
 import DashboadContainer from '../components/DashboadContainer.vue';

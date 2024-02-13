@@ -17,6 +17,7 @@ export enum SettingsTab {
   WhiteList,
   Limits,
   Notifications,
+  Pomodoro,
   About,
 }
 
