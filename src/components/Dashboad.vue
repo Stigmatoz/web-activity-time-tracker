@@ -71,7 +71,19 @@ function openChart(type: TypeOfChart) {
   height: 390px;
 }
 .chart-btn {
-  background-color: rgb(202, 202, 202);
+  background-color: rgb(192, 192, 192);
+  color: #fff;
+  border-radius: 3px;
+  height: 36px;
+  line-height: 35px;
+  padding: 0 20px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
+  width: 200px;
 }
 
 .chart-btn.active {

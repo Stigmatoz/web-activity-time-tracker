@@ -125,8 +125,18 @@ async function changeStatus() {
   margin-top: 5px;
 }
 button {
-  color: white !important;
   border: none;
+  color: #fff;
+  border-radius: 3px;
+  height: 36px;
+  line-height: 35px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 80px;
+  text-align: center;
+  width: 200px;
 }
 button.start {
   background-color: rgb(62, 148, 62) !important;

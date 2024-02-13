@@ -74,7 +74,7 @@ select {
 .w-100 {
   width: 100%;
 }
-button, input[type='button'] {
+input[type='button'] {
   background: #428bff;
   color: #fff;
   border-radius: 3px;
@@ -90,22 +90,22 @@ button, input[type='button'] {
   width: 200px;
 }
 
-button, input[type='button']:hover {
+input[type='button']:hover {
   background: #5c9dfe;
   text-decoration: none;
 }
 
-button, input[type='button'].alert {
+input[type='button'].alert {
   background: #fe5c5c !important;
 }
 
-button, input[type='button'].info {
+input[type='button'].info {
   background: #ffffff !important;
   color: black;
   border: 1px solid black;
 }
 
-button, input[type='button'][disabled] {
+input[type='button'][disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
