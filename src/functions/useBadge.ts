@@ -8,9 +8,9 @@ export interface BadgeState {
 }
 
 export enum BadgeIcon {
-  timer = '/assets/icons/128x128.png',
-  pomodoroWorkingTime = '/assets/icons/empty.png',
-  pomodoroRestTime = '/assets/icons/empty.png',
+  default = '/assets/icons/128x128.png',
+  pomodoroWorkingTime = '/assets/icons/pomodoro.png',
+  pomodoroRestTime = '/assets/icons/pomodoro-rest-icon.png',
 }
 
 export enum BadgeColor {
@@ -26,8 +26,15 @@ export async function useBadge(badge: BadgeState): Promise<void> {
     tabId: badge.tabId,
     text: badge.text,
   });
-  if (badge.icon)
+  if (badge.icon) {
     await Browser.action.setIcon({
       path: badge.icon,
+    });
+    await Browser.action.setBadgeText({
+      text: badge.text,
+    });
+  } else
+    await Browser.action.setIcon({
+      path: BadgeIcon.default,
     });
 }

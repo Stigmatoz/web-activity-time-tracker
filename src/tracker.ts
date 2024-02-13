@@ -42,7 +42,7 @@ async function trackTime() {
 
       await checkPomodoro();
 
-      if (await isInBlackList(activeDomain)) {
+      if ((await isInBlackList(activeDomain)) && (await canChangeBadge())) {
         await useBadge({
           tabId: activeTab?.id,
           text: 'n/a',
@@ -127,7 +127,9 @@ async function mainTracker(
 
     tab.incSummaryTime();
 
-    const viewInBadge = await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE);
+    const viewInBadge =
+      (await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE)) &&
+      (await canChangeBadge());
 
     if (viewInBadge)
       await useBadge({
@@ -162,6 +164,10 @@ async function saveTabs() {
   const repo = await injectTabsRepositorySingleton();
   const tabs = repo.getTabs();
   await storage.saveTabs(tabs);
+}
+
+async function canChangeBadge() {
+  return !(await Settings.getInstance().getSetting(StorageParams.IS_POMODORO_ENABLED)) as boolean;
 }
 
 Browser.runtime.onMessage.addListener(async message => {
