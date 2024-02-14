@@ -315,5 +315,12 @@
   "promoClearYoutube": {
     "message": "Möchten Sie Kurzfilme, Kommentare, empfohlene Videos, Abonnements und andere YouTube-Ablenkungen blockieren? Wir haben eine weitere Erweiterung erstellt, mit der Sie YouTube ohne Ablenkung ansehen können.",
     "description": "Install"
+  },
+  "tryMyOtherApps": {
+    "message": "Probieren Sie meine anderen Apps aus"
+  },
+  "clearYoutube": {
+    "message": "Clear YouTube",
+    "description": "Chrome-Erweiterung, die YouTube-Shorts, empfohlene Videos, Kommentare, Feeds, Homepage-Empfehlungen und andere Ablenkungen ausblenden kann. Sieh dir YouTube ohne Ablenkungen an."
   }
 }

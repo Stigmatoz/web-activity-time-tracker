@@ -315,5 +315,12 @@
   "promoClearYoutube": {
     "message": "您想屏蔽短片、评论、推荐视频、订阅和其他 YouTube 干扰内容吗？ 我们创建了另一个扩展程序，可帮助您不受干扰地观看 YouTube",
     "description": "安装"
+  },
+  "tryMyOtherApps": {
+    "message": "试试我的其他应用程序"
+  },
+  "clearYoutube": {
+    "message": "Clear YouTube",
+    "description": "Chrome扩展程序，可以隐藏YouTube短片，推荐视频，评论，feed，主页推荐和其他分心。 观看YouTube免费分心。"
   }
 }

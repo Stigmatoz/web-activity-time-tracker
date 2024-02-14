@@ -315,5 +315,12 @@
   "intervalsChart": {
     "message": "Only time intervals greater than",
     "description": "are shown"
+  },
+  "tryMyOtherApps": {
+    "message": "Try my other apps"
+  },
+  "clearYoutube": {
+    "message": "Clear YouTube",
+    "description": "Chrome extension that can hide YouTube shorts, recomended videos, comments, feed, homepage recommendations and other distractions. Watch YouTube free of distractions."
   }
 }
