@@ -127,22 +127,22 @@ async function mainTracker(
 
     tab.incSummaryTime();
 
-    const viewInBadge =
-      (await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE)) &&
-      (await canChangeBadge());
+    const viewInBadge = await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE);
 
-    if (viewInBadge)
-      await useBadge({
-        tabId: activeTab?.id,
-        text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
-        color: BadgeColor.blue,
-      });
-    else
-      await useBadge({
-        tabId: activeTab?.id,
-        text: '',
-        color: BadgeColor.red,
-      });
+    if (await canChangeBadge()) {
+      if (viewInBadge)
+        await useBadge({
+          tabId: activeTab?.id,
+          text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
+          color: BadgeColor.blue,
+        });
+      else
+        await useBadge({
+          tabId: activeTab?.id,
+          text: null,
+          color: BadgeColor.none,
+        });
+    }
   } else await closeOpenInterval();
 }
 

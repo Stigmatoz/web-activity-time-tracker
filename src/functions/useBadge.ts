@@ -1,16 +1,16 @@
 import Browser from 'webextension-polyfill';
 
 export interface BadgeState {
-  text: string;
+  text: string | null;
   color: BadgeColor;
   tabId?: number;
   icon?: BadgeIcon;
 }
 
 export enum BadgeIcon {
-  default = '/assets/icons/128x128.png',
+  default = '/128x128.png',
   pomodoroWorkingTime = '/assets/icons/pomodoro.png',
-  pomodoroRestTime = '/assets/icons/pomodoro-rest-icon.png',
+  pomodoroRestTime = '/assets/icons/pomodoro-rest.png',
 }
 
 export enum BadgeColor {
@@ -21,7 +21,8 @@ export enum BadgeColor {
 }
 
 export async function useBadge(badge: BadgeState): Promise<void> {
-  await Browser.action.setBadgeBackgroundColor({ color: badge.color });
+  if (badge.color != BadgeColor.none)
+    await Browser.action.setBadgeBackgroundColor({ color: badge.color });
   await Browser.action.setBadgeText({
     tabId: badge.tabId,
     text: badge.text,
@@ -31,6 +32,7 @@ export async function useBadge(badge: BadgeState): Promise<void> {
       path: badge.icon,
     });
     await Browser.action.setBadgeText({
+      tabId: badge.tabId,
       text: badge.text,
     });
   } else

@@ -42,6 +42,7 @@ import {
 } from '../storage/storage-params';
 import { Time } from '../utils/time';
 import { logger } from '../utils/logger';
+import { useBadge, BadgeColor, BadgeIcon } from '../functions/useBadge';
 
 const { t } = useI18n();
 const settingsStorage = injecStorage();
@@ -90,10 +91,25 @@ async function changeStatus() {
     StorageParams.POMODORO_INTERVAL_REST,
     convertHHMMToSeconds(restTime.value.hours, restTime.value.minutes),
   );
-  await settingsStorage.saveValue(StorageParams.POMODORO_START_TIME, new Date());
+  await settingsStorage.saveValue(StorageParams.POMODORO_START_TIME, new Date().toString());
   await settingsStorage.saveValue(StorageParams.POMODORO_FREQUENCY, frequency.value);
 
   isEnabled.value = !isEnabled.value;
+
+  if (isEnabled.value)
+    await useBadge({
+      text: null,
+      color: BadgeColor.none,
+      icon: BadgeIcon.pomodoroWorkingTime,
+    });
+  else {
+    await settingsStorage.saveValue(StorageParams.POMODORO_START_TIME, null);
+    await useBadge({
+      text: null,
+      color: BadgeColor.none,
+      icon: BadgeIcon.default,
+    });
+  }
 
   logger.log(`Change pomodoro status to ${String(isEnabled.value).toUpperCase()}`);
 }

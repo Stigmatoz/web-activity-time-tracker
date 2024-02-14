@@ -29,7 +29,3 @@ export function daysBetween(startDate: Date, endDate: Date): number {
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
   return (treatAsUTC(endDate).valueOf() - treatAsUTC(startDate).valueOf()) / millisecondsPerDay + 1;
 }
-
-export function timeToSeconds(time: Time) {
-  return time.hours * HOUR_IN_SECONDS + time.minutes * MINUTE_IN_SECONDS;
-}
