@@ -21,10 +21,14 @@
         v-if="darkMode == false"
         @click="changeDarkMode(true)"
       />
-      <a @click="openPage(SettingsTab.Dashboard)"
+
+      <a @click="openPage(SettingsTab.Pomodoro)"
+        >{{ t('pomodoroMode.message') }}<img src="../assets/icons/pomodoro.svg" height="22"
+      /></a>
+      <a class="filter" @click="openPage(SettingsTab.Dashboard)"
         >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
       /></a>
-      <a @click="openPage(SettingsTab.GeneralSettings)"
+      <a class="filter" @click="openPage(SettingsTab.GeneralSettings)"
         >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
       /></a>
     </div>
@@ -153,7 +157,7 @@ function updateTab() {
 }
 .headerBlock .icons-block {
   float: right;
-  margin: 7px 10px 0 0;
+  margin: 7px 0 0 0;
 }
 
 .headerBlock .icons-block a:hover {
