@@ -15,17 +15,19 @@
     </p>
     <p class="explanation">{{ t('pomodoroExplanationStop.message') }}</p>
   </div>
-  <div class="pomodoro-block mt-20">
-    <p class="title">{{ t('pomodoroWork.message') }}</p>
-    <VueDatePicker v-model="workTime" time-picker class="date-picker" />
-  </div>
-  <div class="pomodoro-block">
-    <p class="title">{{ t('pomodoroRest.message') }}</p>
-    <VueDatePicker v-model="restTime" time-picker class="date-picker" />
-  </div>
-  <div class="pomodoro-block">
-    <p class="title">{{ t('pomodoroFrequency.message') }}</p>
-    <input type="number" class="frequency" v-model="frequency" />
+  <div :class="isEnabled ? 'disabled' : ''">
+    <div class="pomodoro-block mt-20">
+      <p class="title">{{ t('pomodoroWork.message') }}</p>
+      <VueDatePicker v-model="workTime" time-picker class="date-picker" />
+    </div>
+    <div class="pomodoro-block">
+      <p class="title">{{ t('pomodoroRest.message') }}</p>
+      <VueDatePicker v-model="restTime" time-picker class="date-picker" />
+    </div>
+    <div class="pomodoro-block">
+      <p class="title">{{ t('pomodoroFrequency.message') }}</p>
+      <input type="number" class="frequency" v-model="frequency" />
+    </div>
   </div>
   <button
     class="d-inline-block mt-15"
@@ -185,5 +187,10 @@ button.stop {
 .explanation-block .explanation {
   font-size: 15px;
   color: black;
+}
+.disabled {
+  border-radius: 10px;
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>
