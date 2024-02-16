@@ -3,6 +3,18 @@
   <p class="description">
     {{ t('pomodoro.description') }}
   </p>
+  <div class="explanation-block">
+    <p class="explanation">
+      {{ t('pomodoroExplanationIcon.message') }}
+      <span><img class="ml-5" src="../assets/icons/pomodoro.png" height="30" /></span>.
+      {{ t('pomodoroExplanationIcon.description') }}
+      <img class="ml-5" src="../assets/icons/pomodoro-rest.png" height="30" />.
+    </p>
+    <p class="explanation">
+      {{ t('pomodoroExplanationTime.message') }}
+    </p>
+    <p class="explanation">{{ t('pomodoroExplanationStop.message') }}</p>
+  </div>
   <div class="pomodoro-block mt-20">
     <p class="title">{{ t('pomodoroWork.message') }}</p>
     <VueDatePicker v-model="workTime" time-picker class="date-picker" />
@@ -26,7 +38,11 @@
   </button>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+export default {
+  name: 'Pomodoro',
+};
+</script>
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
@@ -159,5 +175,15 @@ button.start {
 }
 button.stop {
   background-color: rgb(191, 59, 59) !important;
+}
+.explanation-block {
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #d7d7ff;
+  border-radius: 10px;
+}
+.explanation-block .explanation {
+  font-size: 15px;
+  color: black;
 }
 </style>

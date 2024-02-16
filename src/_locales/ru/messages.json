@@ -128,6 +128,38 @@
   "notificationsSettings": {
     "message": "Уведомления"
   },
+  "pomodoroMode": {
+    "message": "Pomodoro"
+  },
+  "pomodoro": {
+    "message": "Pomodoro",
+    "description": "Метод Pomodoro — это техника тайм-менеджмента, завязанная на чередовании периодов сфокусированной работы и отдыха. По классике метода помодоро период работы длится 25 минут, период отдыха 5 минут."
+  },
+  "pomodoroExplanationIcon": {
+    "message": "Когда режим Pomodoro включен и активен режим работы, то вы будете видеть эту иконку",
+    "description": "В периоды отдыха вы будете видеть эту иконку расширения"
+  },
+  "pomodoroExplanationTime": {
+    "message": "Во время режима Pomodoro, расширение продолжает учитывать время, которые вы провели на сайтах,работают все лимиты и уведомления."
+  },
+  "pomodoroExplanationStop": {
+    "message": "После нажатия 'Остановить', время работы и отдыха обнуляется."
+  },
+  "pomodoroWork": {
+    "message": "Период работы"
+  },
+  "pomodoroRest": {
+    "message": "Период отдыха"
+  },
+  "pomodoroFrequency": {
+    "message": "Количество повторов"
+  },
+  "start": {
+    "message": "Запустить"
+  },
+  "stop": {
+    "message": "Остановить"
+  },
   "aboutSettings": {
     "message": "\u041E программе"
   },
@@ -310,11 +342,15 @@
     "message": "По часам"
   },
   "intervals": {
-    "message": "Интервальны",
+    "message": "Интервалы",
     "description": "Отображаются только временные интервалы, превышающие 5 секунд"
   },
   "intervalsChart": {
     "message": "Отображаются только временные интервалы, превышающие",
     "description": ""
+  },
+  "completelyBlocked": {
+    "message": "Полностью заблокирован",
+    "description": "Полностью заблокировать"
   }
 }

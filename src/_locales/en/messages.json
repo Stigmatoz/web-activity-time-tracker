@@ -3,7 +3,7 @@
     "message": "Web Activity Time Tracker - Block Sites"
   },
   "extDescription": {
-    "message": "Time tracking of your web activity, limit and block distracting websites. Monitor your web usage."
+    "message": "Track time of your web activity, limit and block distracting websites. Monitor your web usage."
   },
   "settings": {
     "message": "Settings"
@@ -127,6 +127,38 @@
   },
   "notificationsSettings": {
     "message": "Notifications"
+  },
+  "pomodoroMode": {
+    "message": "Pomodoro"
+  },
+  "pomodoro": {
+    "message": "Pomodoro",
+    "description": "The Pomodoro method is a time management technique based on alternating periods of focused work and rest. According to the classics of the Pomodoro method, the work period lasts 25 minutes, the rest period is 5 minutes."
+  },
+  "pomodoroExplanationIcon": {
+    "message": "When Pomodoro mode is on and operation mode is active, you will see this icon",
+    "description": "During rest periods, you will see this extension icon"
+  },
+  "pomodoroExplanationTime": {
+    "message": "During Pomodoro mode, the extension continues to take into account the time you spent on the sites, all limits and notifications work."
+  },
+  "pomodoroExplanationStop": {
+    "message": "After clicking 'Stop', work and rest time is reset to zero."
+  },
+  "pomodoroWork": {
+    "message": "The period of work"
+  },
+  "pomodoroRest": {
+    "message": "The rest period"
+  },
+  "pomodoroFrequency": {
+    "message": "Number of repetitions"
+  },
+  "start": {
+    "message": "Run"
+  },
+  "stop": {
+    "message": "Stop"
   },
   "aboutSettings": {
     "message": "About"
@@ -315,5 +347,9 @@
   "intervalsChart": {
     "message": "Only time intervals greater than",
     "description": "are shown"
+  },
+  "completelyBlocked": {
+    "message": "Completely Blocked",
+    "description": "Completely Block"
   }
 }

@@ -128,6 +128,38 @@
   "notificationsSettings": {
     "message": "通知"
   },
+  "pomodoroMode": {
+    "message": "Pomodoro"
+  },
+  "pomodoro": {
+    "message": "Pomodoro",
+    "description": "Pomodoro 工作法是一种时间管理技术，以交替集中工作和休息为基础。根据经典的 Pomodoro 方法，工作时间为 25 分钟，休息时间为 5 分钟。"
+  },
+  "pomodoroExplanationIcon": {
+    "message": "启用 Pomodoro 模式并激活操作模式后，您将看到以下图标",
+    "description": "在休息时间，您会看到这个扩展图标"
+  },
+  "pomodoroExplanationTime": {
+    "message": "在 Pomodoro 模式下，扩展会继续考虑你在网站上花费的时间、所有限制和通知。"
+  },
+  "pomodoroExplanationStop": {
+    "message": "按下 '停止' 键后，运行时间和休息时间将重置为零"
+  },
+  "pomodoroWork": {
+    "message": "工作期限"
+  },
+  "pomodoroRest": {
+    "message": "休息时间"
+  },
+  "pomodoroFrequency": {
+    "message": "重复次数"
+  },
+  "start": {
+    "message": "启动"
+  },
+  "stop": {
+    "message": "停止"
+  },
   "aboutSettings": {
     "message": "关于"
   },
@@ -315,5 +347,9 @@
   "promoClearYoutube": {
     "message": "您想屏蔽短片、评论、推荐视频、订阅和其他 YouTube 干扰内容吗？ 我们创建了另一个扩展程序，可帮助您不受干扰地观看 YouTube",
     "description": "安装"
+  },
+  "completelyBlocked": {
+    "message": "完全封锁",
+    "description": "完全封锁"
   }
 }

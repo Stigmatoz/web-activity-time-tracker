@@ -141,7 +141,7 @@ function updateTab() {
 }
 .headerBlock .header {
   font-size: 16px;
-  padding: 0 10px;
+  padding: 0 0 0 5px;
   display: inline-block;
   font-weight: 600;
   color: #4a4a4a;
@@ -176,6 +176,5 @@ function updateTab() {
 }
 .headerBlock .icons-block .dark-mode-icon {
   vertical-align: middle;
-  margin-right: 10px;
 }
 </style>

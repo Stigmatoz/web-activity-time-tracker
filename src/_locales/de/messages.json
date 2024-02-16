@@ -128,6 +128,38 @@
   "notificationsSettings": {
     "message": "Benachrichtigungen"
   },
+  "pomodoroMode": {
+    "message": "Pomodoro"
+  },
+  "pomodoro": {
+    "message": "Pomodoro",
+    "description": "Die Pomodoro-Methode ist eine Zeitmanagementtechnik, die auf dem Wechsel von konzentrierten Arbeits- und Ruhephasen basiert. Bei der klassischen Pomodoro-Methode dauert die Arbeitsphase 25 Minuten und die Ruhephase 5 Minuten."
+  },
+  "pomodoroExplanationIcon": {
+    "message": "Wenn der Pomodoro-Modus aktiviert ist und der Betriebsmodus aktiv ist, sehen Sie dieses Symbol",
+    "description": "Während der Ruhezeiten sehen Sie dieses Erweiterungssymbol"
+  },
+  "pomodoroExplanationTime": {
+    "message": "Während des Pomodoro-Modus berücksichtigt die Erweiterung weiterhin die Zeit, die Sie auf den Seiten verbracht haben, alle Grenzen und Benachrichtigungen funktionieren."
+  },
+  "pomodoroExplanationStop": {
+    "message": "Nach dem Drücken von 'Stop' werden die Betriebs- und Ruhezeiten auf Null zurückgesetzt."
+  },
+  "pomodoroWork": {
+    "message": "Zeitraum der Arbeit"
+  },
+  "pomodoroRest": {
+    "message": "Ruhezeit"
+  },
+  "pomodoroFrequency": {
+    "message": "Anzahl der Wiederholungen"
+  },
+  "start": {
+    "message": "Starten Sie"
+  },
+  "stop": {
+    "message": "Stop"
+  },
   "aboutSettings": {
     "message": "Über die Erweiterung"
   },
@@ -315,5 +347,9 @@
   "promoClearYoutube": {
     "message": "Möchten Sie Kurzfilme, Kommentare, empfohlene Videos, Abonnements und andere YouTube-Ablenkungen blockieren? Wir haben eine weitere Erweiterung erstellt, mit der Sie YouTube ohne Ablenkung ansehen können.",
     "description": "Install"
+  },
+  "completelyBlocked": {
+    "message": "Vollständig blockiert",
+    "description": "Vollständig blockieren"
   }
 }
