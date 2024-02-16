@@ -6,17 +6,24 @@ import { Settings } from './functions/settings';
 import { StorageParams } from './storage/storage-params';
 import { injecStorage } from './storage/inject-storage';
 import { todayLocalDate } from './utils/date';
+import { checkPomodoro } from './functions/pomodoro';
 
 logger.log('Start background script');
+let pomodoroTimer: number;
 
 self.onerror = err => {
   console.error('Unhandled error:', err);
 };
 
-Browser.storage.onChanged.addListener((changes, namespace) => {
+Browser.storage.onChanged.addListener(async (changes, namespace) => {
   for (var key in changes) {
     if (Object.values(StorageParams).includes(key as StorageParams))
-      Settings.getInstance().reloadSetting(key as StorageParams);
+      await Settings.getInstance().reloadSetting(key as StorageParams);
+
+    if (key == StorageParams.IS_POMODORO_ENABLED) {
+      const value = changes[StorageParams.IS_POMODORO_ENABLED].newValue;
+      pomodoro(value);
+    }
   }
 });
 
@@ -54,5 +61,15 @@ Browser.windows.onFocusChanged.addListener(() => {
   logger.log('onFocusChanged');
 });
 
+async function pomodoro(value?: boolean) {
+  if (value == undefined) {
+    const settingsStorage = injecStorage();
+    value = await settingsStorage.getValue(StorageParams.IS_POMODORO_ENABLED);
+  }
+  if (value == true) pomodoroTimer = setInterval(checkPomodoro, 1000);
+  else clearInterval(pomodoroTimer);
+}
+
+pomodoro();
 scheduleJobs();
 initTracker();

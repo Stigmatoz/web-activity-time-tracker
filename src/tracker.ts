@@ -16,7 +16,6 @@ import { Settings } from './functions/settings';
 import { useNotificationList } from './functions/useNotificationList';
 import { NotificationType, useNotification } from './functions/useNotification';
 import { Messages } from './utils/messages';
-import { checkPomodoro } from './functions/pomodoro';
 
 const activeTabInstance = ActiveTab.getInstance();
 
@@ -39,8 +38,6 @@ async function trackTime() {
     const activeTab = window.tabs?.find(t => t.active === true);
     if (isValidPage(activeTab)) {
       const activeDomain = extractHostname(activeTab!.url);
-
-      await checkPomodoro();
 
       if ((await isInBlackList(activeDomain)) && (await canChangeBadge())) {
         await useBadge({

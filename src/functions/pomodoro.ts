@@ -4,6 +4,7 @@ import { StorageParams } from '../storage/storage-params';
 import { useBadge, BadgeIcon, BadgeColor } from './useBadge';
 import { Settings } from './settings';
 import Browser from 'webextension-polyfill';
+import { logger } from '../utils/logger';
 
 export async function checkPomodoro() {
   function isTargetPeriod() {
@@ -48,28 +49,41 @@ export async function checkPomodoro() {
 
   const pomodoroEndTime = addSeconds(startTime, workTime * frequency + restTime * frequency);
 
+  const activeTab = await Browser.tabs.query({ active: true });
+
   if (now > pomodoroEndTime) {
     await storage.saveValue(StorageParams.IS_POMODORO_ENABLED, false);
     await storage.saveValue(StorageParams.POMODORO_START_TIME, null);
+    await useBadge({
+      tabId: activeTab[0].id,
+      text: null,
+      color: BadgeColor.none,
+      icon: BadgeIcon.default,
+    });
     return;
   }
 
   const isWork = isTargetPeriod();
 
-  const activeTab = await Browser.tabs.query({ active: true });
-
-  if (isWork)
+  if (isWork) {
+    logger.log('[Pomodoro] Work Time');
     await useBadge({
       tabId: activeTab[0].id,
       text: null,
       color: BadgeColor.none,
       icon: BadgeIcon.pomodoroWorkingTime,
     });
-  else
+  } else {
+    logger.log('[Pomodoro] Rest Time');
     await useBadge({
       tabId: activeTab[0].id,
       text: null,
       color: BadgeColor.none,
       icon: BadgeIcon.pomodoroRestTime,
     });
+  }
+
+  return {
+    isWork,
+  };
 }
