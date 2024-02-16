@@ -163,6 +163,9 @@
   "stop": {
     "message": "Stop"
   },
+  "pomodoroIsEnabled": {
+    "message": "Pomodoro Mode is enabled"
+  },
   "aboutSettings": {
     "message": "About"
   },

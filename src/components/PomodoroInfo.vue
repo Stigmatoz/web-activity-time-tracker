@@ -1,8 +1,8 @@
 <template>
   <div class="pomodoro-popup-block" v-if="isEnabled">
-    <p>Pomodoro Mode is enabled</p>
-    <span v-if="isWorkingTime">WORK</span>
-    <span v-if="!isWorkingTime">REST</span>
+    <p>{{ t('pomodoroIsEnabled.message') }}</p>
+    <span v-if="isWorkingTime">{{ t('pomodoroWork.message') }}</span>
+    <span v-if="!isWorkingTime">{{ t('pomodoroRest.message') }}</span>
     <input
       type="button"
       :value="t('pomodoroSettings.message')"
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { StorageParams, IS_POMODORO_ENABLED_DEFAULT } from '../storage/storage-params';
 import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
@@ -47,7 +47,7 @@ onMounted(async () => {
   width: -webkit-fill-available;
   position: fixed;
   bottom: 0;
-  padding: 8px 20px;
+  padding: 8px 10px;
   font-size: 14px;
   background-color: #efefef;
 }
@@ -61,7 +61,7 @@ onMounted(async () => {
   padding: 5px;
   background-color: rgb(105, 202, 105);
   color: black;
-  margin-left: 10px;
+  margin-left: 5px;
   border-radius: 5px;
   font-weight: 500;
   font-size: 13px;

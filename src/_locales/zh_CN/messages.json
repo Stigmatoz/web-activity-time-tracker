@@ -160,6 +160,9 @@
   "stop": {
     "message": "停止"
   },
+  "pomodoroIsEnabled": {
+    "message": "番茄钟模式已启用"
+  },
   "aboutSettings": {
     "message": "关于"
   },

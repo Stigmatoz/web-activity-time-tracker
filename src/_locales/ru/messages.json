@@ -160,6 +160,9 @@
   "stop": {
     "message": "Остановить"
   },
+  "pomodoroIsEnabled": {
+    "message": "Режим Pomodoro включен"
+  },
   "aboutSettings": {
     "message": "\u041E программе"
   },

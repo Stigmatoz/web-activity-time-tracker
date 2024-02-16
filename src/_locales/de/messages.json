@@ -160,6 +160,9 @@
   "stop": {
     "message": "Stop"
   },
+  "pomodoroIsEnabled": {
+    "message": "Der Pomodoro-Modus ist aktiviert"
+  },
   "aboutSettings": {
     "message": "Über die Erweiterung"
   },
