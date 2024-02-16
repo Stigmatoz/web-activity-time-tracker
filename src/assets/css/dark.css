@@ -43,3 +43,9 @@
 .dark .header span{
   color: rgb(255 255 255);
 }
+.dark .review-block p{
+  color:#303030;
+}
+.dark .pomodoro-popup-block p{
+  color:#303030;
+}

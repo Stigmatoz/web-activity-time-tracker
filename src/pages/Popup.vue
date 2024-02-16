@@ -88,6 +88,7 @@
       </section>
     </div>
   </div>
+  <PomodoroInfo />
   <Review />
 </template>
 
@@ -97,6 +98,7 @@ import { useI18n } from 'vue-i18n';
 import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
 import Review from '../components/Review.vue';
+import PomodoroInfo from '../components/PomodoroInfo.vue';
 import { openPage } from '../utils/open-page';
 import { SettingsTab, TypeOfList } from '../utils/enums';
 import { injecStorage } from '../storage/inject-storage';

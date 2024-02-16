@@ -82,6 +82,7 @@ async function openStore() {
   display: inline-block;
   margin: 8px;
   font-size: 17px;
+  font-weight: 500;
 }
 .review-block img {
   padding: 9px 0 0 0;

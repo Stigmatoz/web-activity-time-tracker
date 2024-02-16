@@ -131,6 +131,9 @@
   "pomodoroMode": {
     "message": "Pomodoro"
   },
+  "pomodoroSettings": {
+    "message": "Pomodoro Settings"
+  },
   "pomodoro": {
     "message": "Pomodoro",
     "description": "The Pomodoro method is a time management technique based on alternating periods of focused work and rest. According to the classics of the Pomodoro method, the work period lasts 25 minutes, the rest period is 5 minutes."
