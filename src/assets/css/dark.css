@@ -3,7 +3,7 @@
   color: white;
 }
 .dark .headerBlock .header {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .dark .headerBlock .icons-block a:hover{
   filter: invert(40%) sepia(94%) saturate(3371%) hue-rotate(227deg) brightness(99%) contrast(92%);
@@ -24,7 +24,7 @@
   filter: invert(100%) sepia(17%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(102%);
 }
 .dark .stats-block .block p{
-  color: #b9b9b9;
+  color: #b9b9b9 !important;
 }
 .dark .stats-block .block .header {
   background-color: #595959;
@@ -35,11 +35,32 @@
   color: rgb(255 255 255);
 }
 .dark .stats-block.block p{
-  color: #b9b9b9;
+  color: #b9b9b9 !important;
 }
 .dark .expander-body{
-  background-color: #595959;
+  background-color: #595959 !important;
+}
+.dark .expander .header span{
+  color: #b9b9b9 !important;
 }
 .dark .header span{
   color: rgb(255 255 255);
+}
+.dark .settings-tab label[name="tabName"] img{
+  filter: invert(100%) sepia(17%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(102%);
+}
+.dark .settings-tab label[name="tabName"]{
+  background-color: #303030 !important;
+}
+.dark .settings-content{
+  background-color: #303030 !important;
+}
+.dark .app-block .title{
+  color: black;
+}
+.dark .settings-tab label[name="tabName"]:hover, .dark [type='radio']:checked ~ label{
+  background-color: #979797 !important;
+}
+.dark .container p.value{
+  color: black;
 }

@@ -29,7 +29,7 @@
       </p>
     </label>
   </div>
-  <!-- <div class="settings-item">
+  <div class="settings-item">
     <label class="setting-header">
       <input
         type="checkbox"
@@ -38,10 +38,9 @@
         v-model="darkMode"
         @change="onChange(StorageParams.DARK_MODE, $event.target)"
       />
-      <span>Dark mode</span>
-      <p class="description">Dark theme</p>
+      <span>{{ t('darkTheme.message') }}</span>
     </label>
-  </div> -->
+  </div>
   <div class="settings-item">
     <label class="setting-header d-inline-block">{{ t('intervalInactivity.message') }} </label>
     <div class="d-inline-block ml-10">
@@ -156,6 +155,7 @@ import { FileType, useFile } from '../functions/useFile';
 import { useRemoveAllData } from '../functions/useRemoveAllData';
 import { injectTabsRepository } from '../repository/inject-tabs-repository';
 import { useRestoreData } from '../functions/useRestoreData';
+import { applyDarkMode } from '../utils/dark-mode';
 
 const { t } = useI18n();
 
@@ -202,6 +202,8 @@ async function onChange(storageParam: StorageParams, target: any) {
       storageParam,
       storageParam == StorageParams.INTERVAL_INACTIVITY ? Number(target.value) : target.checked,
     );
+
+  if (storageParam == StorageParams.DARK_MODE) applyDarkMode(target.checked);
 }
 
 async function save(storageParam: StorageParams, value: any) {

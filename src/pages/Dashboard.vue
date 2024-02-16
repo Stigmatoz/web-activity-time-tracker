@@ -146,19 +146,26 @@ import { SettingsTab } from '../utils/enums';
 import DashboadContainer from '../components/DashboadContainer.vue';
 import { useExtensionPage } from '../compositions/useExtensionPage';
 import { getEnumValueTab } from '../utils/extension-tabs';
+import { applyDarkMode } from '../utils/dark-mode';
+import { injecStorage } from '../storage/inject-storage';
+import { StorageParams, DARK_MODE_DEFAULT } from '../storage/storage-params';
 
 const { t } = useI18n();
 const extensionPage = useExtensionPage();
+const settingsStorage = injecStorage();
 
 const selectedTab = ref<SettingsTab>();
 const currentUrl = ref(new URL(location.href));
 const selectedWebsite = ref<string>();
+const darkMode = ref<boolean>();
 
 watch(currentUrl, () => {
   getCurrentTab();
 });
 
-onMounted(() => {
+onMounted(async () => {
+  darkMode.value = await settingsStorage.getValue(StorageParams.DARK_MODE, DARK_MODE_DEFAULT);
+  applyDarkMode(darkMode.value!);
   getCurrentTab();
 });
 
