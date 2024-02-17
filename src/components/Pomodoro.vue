@@ -52,7 +52,7 @@
   </div>
   <button
     class="d-inline-block mt-15"
-    :class="isEnabled ? 'stop' : 'start'"
+    :class="[isEnabled ? 'stop' : 'start', isDisabled ? 'disabled' : '']"
     @click="changeStatus()"
   >
     <img v-if="isEnabled" class="ml-5" src="../assets/icons/stop.svg" height="20" />
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { Ref, computed, onMounted, ref } from 'vue';
 import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
@@ -105,6 +105,9 @@ const isEnabled = ref<boolean>();
 const audioAfterWork = ref<PomodoroSounds>();
 const audioAfterRest = ref<PomodoroSounds>();
 const audioAfterFinished = ref<PomodoroSounds>();
+const isDisabled = computed(
+  () => frequency.value <= 0 || timeIsEmpty(workTime) || timeIsEmpty(restTime),
+);
 
 onMounted(async () => {
   isEnabled.value = await settingsStorage.getValue(
@@ -143,6 +146,10 @@ onMounted(async () => {
     POMODORO_AUDIO_AFTER_FINISHED_DEFAULT,
   );
 });
+
+function timeIsEmpty(time: Ref<Time | undefined>) {
+  return time.value == undefined || (time.value.hours == 0 && time.value.minutes == 0);
+}
 
 async function changeStatus() {
   await settingsStorage.saveValue(StorageParams.IS_POMODORO_ENABLED, !isEnabled.value);
