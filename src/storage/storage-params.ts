@@ -1,5 +1,6 @@
 import { Tab } from '../entity/tab';
 import { TimeInterval } from '../entity/time-interval';
+import { PomodoroSounds } from '../utils/pomodoro';
 import { HOUR, MINUTE_IN_SECONDS } from '../utils/time';
 
 export enum StorageParams {
@@ -23,6 +24,9 @@ export enum StorageParams {
   IS_POMODORO_ENABLED = 'is-pomodoro-enabled',
   POMODORO_START_TIME = 'pomodoro-start-time',
   POMODORO_INTERVAL_WORK = 'pomodoro-interval-work',
+  POMODORO_AUDIO_AFTER_WORK = 'pomodoro-audio-after-work',
+  POMODORO_AUDIO_AFTER_REST = 'pomodoro-audio-after-rest',
+  POMODORO_AUDIO_AFTER_FINISHED = 'pomodoro-audio-after-finished',
   POMODORO_INTERVAL_REST = 'pomodoro-interval-rest',
   POMODORO_FREQUENCY = 'pomodoro-frequency',
 }
@@ -72,6 +76,9 @@ export const IS_POMODORO_ENABLED_DEFAULT = false;
 export const POMODORO_INTERVAL_WORK_DEFAULT = 25 * MINUTE_IN_SECONDS;
 export const POMODORO_INTERVAL_REST_DEFAULT = 5 * MINUTE_IN_SECONDS;
 export const POMODORO_FREQUENCY_DEFAULT = 3;
+export const POMODORO_AUDIO_AFTER_WORK_DEFAULT = PomodoroSounds['Sound 3'];
+export const POMODORO_AUDIO_AFTER_REST_DEFAULT = PomodoroSounds['Sound 8'];
+export const POMODORO_AUDIO_AFTER_FINISHED_DEFAULT = PomodoroSounds['Sound 10'];
 
 export function getDefaultValue(param: StorageParams) {
   switch (param) {
@@ -110,5 +117,11 @@ export function getDefaultValue(param: StorageParams) {
       return POMODORO_INTERVAL_REST_DEFAULT;
     case StorageParams.POMODORO_FREQUENCY:
       return POMODORO_FREQUENCY_DEFAULT;
+    case StorageParams.POMODORO_AUDIO_AFTER_WORK:
+      return POMODORO_AUDIO_AFTER_WORK_DEFAULT;
+    case StorageParams.POMODORO_AUDIO_AFTER_REST:
+      return POMODORO_AUDIO_AFTER_REST_DEFAULT;
+    case StorageParams.POMODORO_AUDIO_AFTER_FINISHED:
+      return POMODORO_AUDIO_AFTER_FINISHED_DEFAULT;
   }
 }

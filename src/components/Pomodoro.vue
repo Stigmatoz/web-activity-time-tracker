@@ -21,12 +21,33 @@
       <VueDatePicker v-model="workTime" time-picker class="date-picker" />
     </div>
     <div class="pomodoro-block">
+      <PomodoroSoundsSelector
+        v-if="audioAfterWork"
+        :option="StorageParams.POMODORO_AUDIO_AFTER_WORK"
+        :value="audioAfterWork"
+      />
+    </div>
+    <div class="pomodoro-block">
       <p class="title">{{ t('pomodoroRest.message') }}</p>
       <VueDatePicker v-model="restTime" time-picker class="date-picker" />
     </div>
     <div class="pomodoro-block">
+      <PomodoroSoundsSelector
+        v-if="audioAfterRest"
+        :option="StorageParams.POMODORO_AUDIO_AFTER_REST"
+        :value="audioAfterRest"
+      />
+    </div>
+    <div class="pomodoro-block">
       <p class="title">{{ t('pomodoroFrequency.message') }}</p>
       <input type="number" class="frequency" v-model="frequency" />
+    </div>
+    <div class="pomodoro-block">
+      <PomodoroSoundsSelector
+        v-if="audioAfterFinished"
+        :option="StorageParams.POMODORO_AUDIO_AFTER_FINISHED"
+        :value="audioAfterFinished"
+      />
     </div>
   </div>
   <button
@@ -53,6 +74,9 @@ import { useI18n } from 'vue-i18n';
 import { injecStorage } from '../storage/inject-storage';
 import {
   IS_POMODORO_ENABLED_DEFAULT,
+  POMODORO_AUDIO_AFTER_FINISHED_DEFAULT,
+  POMODORO_AUDIO_AFTER_REST_DEFAULT,
+  POMODORO_AUDIO_AFTER_WORK_DEFAULT,
   POMODORO_FREQUENCY_DEFAULT,
   POMODORO_INTERVAL_REST_DEFAULT,
   POMODORO_INTERVAL_WORK_DEFAULT,
@@ -61,6 +85,9 @@ import {
 import { Time } from '../utils/time';
 import { logger } from '../utils/logger';
 import { useBadge, BadgeColor, BadgeIcon } from '../functions/useBadge';
+import { PomodoroSounds } from '../utils/pomodoro';
+import PomodoroSoundsSelector from '../components/PomodoroSoundsSelector.vue';
+import Browser from 'webextension-polyfill';
 
 const { t } = useI18n();
 const settingsStorage = injecStorage();
@@ -75,6 +102,9 @@ const restTime = ref<Time>({
 });
 const frequency = ref<number>(3);
 const isEnabled = ref<boolean>();
+const audioAfterWork = ref<PomodoroSounds>();
+const audioAfterRest = ref<PomodoroSounds>();
+const audioAfterFinished = ref<PomodoroSounds>();
 
 onMounted(async () => {
   isEnabled.value = await settingsStorage.getValue(
@@ -96,6 +126,21 @@ onMounted(async () => {
   frequency.value = await settingsStorage.getValue(
     StorageParams.POMODORO_FREQUENCY,
     POMODORO_FREQUENCY_DEFAULT,
+  );
+
+  audioAfterWork.value = await settingsStorage.getValue(
+    StorageParams.POMODORO_AUDIO_AFTER_WORK,
+    POMODORO_AUDIO_AFTER_WORK_DEFAULT,
+  );
+
+  audioAfterRest.value = await settingsStorage.getValue(
+    StorageParams.POMODORO_AUDIO_AFTER_REST,
+    POMODORO_AUDIO_AFTER_REST_DEFAULT,
+  );
+
+  audioAfterFinished.value = await settingsStorage.getValue(
+    StorageParams.POMODORO_AUDIO_AFTER_FINISHED,
+    POMODORO_AUDIO_AFTER_FINISHED_DEFAULT,
   );
 });
 
@@ -131,12 +176,18 @@ async function changeStatus() {
 
   logger.log(`Change pomodoro status to ${String(isEnabled.value).toUpperCase()}`);
 }
+
+function playAudio(sound: PomodoroSounds) {
+  const myAudio = new Audio(Browser.runtime.getURL(`assets/pomodoro-sounds/${sound}`));
+  myAudio.play();
+}
 </script>
 
 <style scoped>
 .pomodoro-block {
   display: flex;
   justify-content: start;
+  align-items: center;
 }
 .date-picker {
   width: 120px;
