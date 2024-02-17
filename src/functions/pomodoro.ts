@@ -5,9 +5,15 @@ import { useBadge, BadgeIcon, BadgeColor } from './useBadge';
 import { Settings } from './settings';
 import Browser from 'webextension-polyfill';
 import { logger } from '../utils/logger';
+import { playSound } from './playSound';
 
 export async function checkPomodoro() {
-  function isTargetPeriod() {
+  type PomodoroPeriod = {
+    isTargetPeriod: boolean;
+    isTargetPeriodFinishedNow: boolean;
+  };
+
+  function isTargetPeriod(): PomodoroPeriod {
     for (let index = 1; index <= frequency; index++) {
       const plusWorkingTime = workTime * (index - 1);
       const plusRestTime = restTime * (index - 1);
@@ -20,9 +26,23 @@ export async function checkPomodoro() {
         now.getTime() >= isPomodoroTargetPeriodStart.getTime() &&
         now.getTime() <= isPomodoroTargetPeriodEnd.getTime();
 
-      if (isTargetPeriod) return true;
+      if (isTargetPeriod)
+        return {
+          isTargetPeriod: true,
+          isTargetPeriodFinishedNow: now.getTime() == isPomodoroTargetPeriodEnd.getTime(),
+        };
     }
-    return false;
+    return {
+      isTargetPeriod: false,
+      isTargetPeriodFinishedNow: false,
+    };
+  }
+
+  async function play(param: StorageParams) {
+    if (target.isTargetPeriodFinishedNow) {
+      const sound = await storage.getValue(param);
+      playSound(sound);
+    }
   }
 
   const storage = injecStorage();
@@ -51,7 +71,9 @@ export async function checkPomodoro() {
 
   const activeTab = await Browser.tabs.query({ active: true });
 
-  if (now > pomodoroEndTime) {
+  if (now >= pomodoroEndTime) {
+    if (now == pomodoroEndTime) await play(StorageParams.POMODORO_AUDIO_AFTER_FINISHED);
+
     await storage.saveValue(StorageParams.IS_POMODORO_ENABLED, false);
     await storage.saveValue(StorageParams.POMODORO_START_TIME, null);
     await useBadge({
@@ -63,7 +85,8 @@ export async function checkPomodoro() {
     return;
   }
 
-  const isWork = isTargetPeriod();
+  const target = isTargetPeriod();
+  const isWork = target.isTargetPeriod;
 
   if (isWork) {
     logger.log('[Pomodoro] Work Time');
@@ -73,6 +96,7 @@ export async function checkPomodoro() {
       color: BadgeColor.none,
       icon: BadgeIcon.pomodoroWorkingTime,
     });
+    await play(StorageParams.POMODORO_AUDIO_AFTER_WORK);
   } else {
     logger.log('[Pomodoro] Rest Time');
     await useBadge({
@@ -81,6 +105,7 @@ export async function checkPomodoro() {
       color: BadgeColor.none,
       icon: BadgeIcon.pomodoroRestTime,
     });
+    await play(StorageParams.POMODORO_AUDIO_AFTER_REST);
   }
 
   return {

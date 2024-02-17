@@ -29,8 +29,8 @@ export default {
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { PomodoroAudioParams, PomodoroSounds } from '../utils/pomodoro';
-import Browser from 'webextension-polyfill';
 import { injecStorage } from '../storage/inject-storage';
+import { playSound } from '../functions/playSound';
 
 const props = defineProps<{
   option: PomodoroAudioParams;
@@ -42,10 +42,7 @@ const settingsStorage = injecStorage();
 const audioAfterPeriod = ref<PomodoroSounds>(props.value);
 
 function playAudio() {
-  const myAudio = new Audio(
-    Browser.runtime.getURL(`assets/pomodoro-sounds/${audioAfterPeriod.value}`),
-  );
-  myAudio.play();
+  playSound(audioAfterPeriod.value);
 }
 
 async function onAudioChange(target: any) {
