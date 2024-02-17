@@ -58,7 +58,10 @@ export default defineConfig(({ mode }) => ({
       additionalInputs: ['src/block.html', 'src/welcome.html'],
     }),
     copy({
-      targets: [{ src: 'src/_locales', dest: 'dist' }],
+      targets: [
+        { src: 'src/_locales', dest: 'dist' },
+        { src: 'src/assets/pomodoro-sounds', dest: 'dist/assets' },
+      ],
     }),
   ],
   optimizeDeps: {
