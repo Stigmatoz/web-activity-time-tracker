@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => ({
     webExtension({
       manifest: generateManifest,
       watchFilePaths: ['package.json', 'manifest.json'],
-      additionalInputs: ['src/block.html', 'src/welcome.html'],
+      additionalInputs: ['src/block.html', 'src/welcome.html', 'src/offscreen.html'],
     }),
     copy({
       targets: [

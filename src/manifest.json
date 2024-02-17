@@ -19,7 +19,8 @@
     "idle",
     "unlimitedStorage",
     "alarms",
-    "notifications"
+    "notifications",
+    "offscreen"
   ],
   "offline_enabled": true,
   "background": {
