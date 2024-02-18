@@ -2,7 +2,7 @@ import i18n, { getMessagesFromLocale } from '../plugins/i18n';
 import { HOUR, HOUR_IN_SECONDS, MINUTE, MINUTE_IN_SECONDS, Time } from './time';
 
 export function convertHHMMToSeconds(hours: number, minutes: number) {
-  return hours * 3600 + minutes * 60;
+  return hours * HOUR_IN_SECONDS + minutes * MINUTE_IN_SECONDS;
 }
 
 export function convertHHMMToMilliSeconds(hours: number, minutes: number) {
@@ -10,9 +10,9 @@ export function convertHHMMToMilliSeconds(hours: number, minutes: number) {
 }
 
 export function convertSecondsToHHMM(seconds: number): Time {
-  const hours = Math.floor(seconds / 3600);
-  const totalSeconds = seconds % 3600;
-  const mins = Math.floor(totalSeconds / 60);
+  const hours = Math.floor(seconds / HOUR_IN_SECONDS);
+  const totalSeconds = seconds % HOUR_IN_SECONDS;
+  const mins = Math.floor(totalSeconds / MINUTE_IN_SECONDS);
 
   return {
     hours: hours,

@@ -29,6 +29,9 @@
 .mb-20 {
   margin-bottom: 20px;
 }
+.ml-5 {
+  margin-left: 5px;
+}
 .ml-10 {
   margin-left: 10px;
 }
@@ -55,6 +58,10 @@
 }
 .text-center {
   text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10px;
 }
 
 .mt-15 {

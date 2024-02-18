@@ -39,7 +39,7 @@ async function trackTime() {
     if (isValidPage(activeTab)) {
       const activeDomain = extractHostname(activeTab!.url);
 
-      if (await isInBlackList(activeDomain)) {
+      if ((await isInBlackList(activeDomain)) && (await canChangeBadge())) {
         await useBadge({
           tabId: activeTab?.id,
           text: 'n/a',
@@ -126,18 +126,20 @@ async function mainTracker(
 
     const viewInBadge = await Settings.getInstance().getSetting(StorageParams.VIEW_TIME_IN_BADGE);
 
-    if (viewInBadge)
-      await useBadge({
-        tabId: activeTab?.id,
-        text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
-        color: BadgeColor.blue,
-      });
-    else
-      await useBadge({
-        tabId: activeTab?.id,
-        text: '',
-        color: BadgeColor.red,
-      });
+    if (await canChangeBadge()) {
+      if (viewInBadge)
+        await useBadge({
+          tabId: activeTab?.id,
+          text: convertSummaryTimeToBadgeString(tab.days.at(-1)!.summary),
+          color: BadgeColor.blue,
+        });
+      else
+        await useBadge({
+          tabId: activeTab?.id,
+          text: null,
+          color: BadgeColor.none,
+        });
+    }
   } else await closeOpenInterval();
 }
 
@@ -161,17 +163,6 @@ async function saveTabs() {
   await storage.saveTabs(tabs);
 }
 
-Browser.runtime.onMessage.addListener(async message => {
-  if (message == Messages.ClearAllData) {
-    const storage = injecStorage();
-    const repo = await injectTabsRepositorySingleton();
-    repo.removeAllTabs();
-    await storage.saveTabs([]);
-  }
-  if (message.message == Messages.Restore) {
-    const storage = injecStorage();
-    await storage.saveTabs(message.data);
-    const repo = await injectTabsRepositorySingleton();
-    repo.initAsync();
-  }
-});
+async function canChangeBadge() {
+  return !(await Settings.getInstance().getSetting(StorageParams.IS_POMODORO_ENABLED)) as boolean;
+}

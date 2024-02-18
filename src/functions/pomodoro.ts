@@ -1,64 +1,152 @@
 import { addSeconds } from 'date-fns';
 import { injecStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
-import { Time, timeToSeconds } from '../utils/time';
 import { useBadge, BadgeIcon, BadgeColor } from './useBadge';
+import { Settings } from './settings';
+import Browser from 'webextension-polyfill';
+import { logger } from '../utils/logger';
+import { Messages } from '../utils/messages';
+import { isDateEqual } from '../utils/date';
+import { createOffscreen } from '../offscreen/index';
 
 export async function checkPomodoro() {
-  function isTargetPeriod(isRest: boolean) {
-    for (let index = 1; index <= frequency; index++) {
-      const plusWorkingTime = timeToSeconds(workTime) * (isRest ? index : index--);
-      const plusRestTime = timeToSeconds(restTime) * index--;
-      const isPomodoroTargetPeriodStart = addSeconds(startTime, plusWorkingTime + plusRestTime);
-      const isPomodoroTargetPeriodEnd = addSeconds(
-        startTime,
-        plusWorkingTime + plusRestTime + timeToSeconds(workTime),
-      );
-      const isTargetPeriod =
-        now.getTime() >= isPomodoroTargetPeriodStart.getTime() &&
-        now.getTime() <= isPomodoroTargetPeriodEnd.getTime();
+  type PomodoroPeriod = {
+    period: Period;
+    isTargetPeriod: boolean;
+    isTargetPeriodFinishedNow: boolean;
+  };
 
-      if (isTargetPeriod) return true;
+  enum Period {
+    work = 'WORK',
+    rest = 'REST',
+    finished = 'FINISH',
+  }
+
+  function isTargetPeriod(period: Period): PomodoroPeriod {
+    let isPomodoroTargetPeriodEnd;
+    for (let index = 1; index <= frequency; index++) {
+      let ind = period == Period.work ? index - 1 : index;
+      const plusWorkingTime = workTime * ind;
+      const plusRestTime = (restTime + 1) * (index - 1);
+      const isPomodoroTargetPeriodStart = addSeconds(startTime, plusWorkingTime + plusRestTime);
+      isPomodoroTargetPeriodEnd = addSeconds(startTime, plusWorkingTime + plusRestTime + workTime);
+      const isTargetPeriod =
+        now >= isPomodoroTargetPeriodStart &&
+        (now <= isPomodoroTargetPeriodEnd || addSeconds(now, -1) <= isPomodoroTargetPeriodEnd);
+
+      if (isTargetPeriod) {
+        console.log(
+          now,
+          isPomodoroTargetPeriodEnd,
+          isDateEqual(now, isPomodoroTargetPeriodEnd) ||
+            isDateEqual(addSeconds(now, -1), isPomodoroTargetPeriodEnd),
+          period,
+        );
+        return {
+          period: period,
+          isTargetPeriod: isTargetPeriod,
+          isTargetPeriodFinishedNow:
+            isDateEqual(now, isPomodoroTargetPeriodEnd) ||
+            isDateEqual(addSeconds(now, -1), isPomodoroTargetPeriodEnd),
+        };
+      }
     }
-    return false;
+    return {
+      period: Period.finished,
+      isTargetPeriod: false,
+      isTargetPeriodFinishedNow: false,
+    };
+  }
+
+  async function play(period: Period) {
+    function getSound() {
+      switch (period) {
+        case Period.work:
+          return StorageParams.POMODORO_AUDIO_AFTER_WORK;
+        case Period.rest:
+          return StorageParams.POMODORO_AUDIO_AFTER_REST;
+        case Period.finished:
+          return StorageParams.POMODORO_AUDIO_AFTER_FINISHED;
+      }
+    }
+    logger.log(`[Pomodoro] ${period}`);
+    const sound = await storage.getValue(getSound());
+    await createOffscreen();
+    await Browser.runtime.sendMessage({
+      message: Messages.PlayAudio,
+      sound: sound,
+      offscreen: true,
+    });
   }
 
   const storage = injecStorage();
-  const isPomodoroEnabled = (await storage.getValue(StorageParams.IS_POMODORO_ENABLED)) as boolean;
+  const isPomodoroEnabled = (await Settings.getInstance().getSetting(
+    StorageParams.IS_POMODORO_ENABLED,
+  )) as boolean;
 
   if (!isPomodoroEnabled) return;
 
-  const startTime = (await storage.getValue(StorageParams.POMODORO_START_TIME)) as Date;
-  const workTime = (await storage.getValue(StorageParams.POMODORO_INTERVAL_WORK)) as Time;
-  const restTime = (await storage.getValue(StorageParams.POMODORO_INTERVAL_REST)) as Time;
-  const frequency = (await storage.getValue(StorageParams.POMODORO_FREQUENCY)) as number;
+  const startTime = new Date(
+    (await Settings.getInstance().getSetting(StorageParams.POMODORO_START_TIME)) as string,
+  );
+  const workTime = (await Settings.getInstance().getSetting(
+    StorageParams.POMODORO_INTERVAL_WORK,
+  )) as number;
+  const restTime = (await Settings.getInstance().getSetting(
+    StorageParams.POMODORO_INTERVAL_REST,
+  )) as number;
+  const frequency = (await Settings.getInstance().getSetting(
+    StorageParams.POMODORO_FREQUENCY,
+  )) as number;
 
   const now = new Date();
 
-  const pomodoroEndTime = addSeconds(
-    startTime,
-    timeToSeconds(workTime) * frequency + timeToSeconds(restTime) * frequency,
-  );
+  const pomodoroEndTime = addSeconds(startTime, workTime * frequency + restTime * frequency);
 
-  if (pomodoroEndTime > now) {
+  const activeTab = await Browser.tabs.query({ active: true });
+
+  if (now >= pomodoroEndTime) {
+    if (isDateEqual(now, pomodoroEndTime)) {
+      logger.log(`[Pomodoro] Pomodoro finished`);
+      await play(Period.finished);
+    }
+
     await storage.saveValue(StorageParams.IS_POMODORO_ENABLED, false);
     await storage.saveValue(StorageParams.POMODORO_START_TIME, null);
+    await useBadge({
+      tabId: activeTab[0].id,
+      text: null,
+      color: BadgeColor.none,
+      icon: BadgeIcon.default,
+    });
     return;
   }
 
-  const isWork = isTargetPeriod(false);
-  const isRest = isTargetPeriod(true);
+  let target = isTargetPeriod(Period.work);
+  const isWork = target.isTargetPeriod;
 
-  if (isWork)
+  if (isWork) {
     await useBadge({
-      text: '',
+      tabId: activeTab[0].id,
+      text: null,
       color: BadgeColor.none,
       icon: BadgeIcon.pomodoroWorkingTime,
     });
-  if (isRest)
-    await useBadge({
-      text: '',
-      color: BadgeColor.none,
-      icon: BadgeIcon.pomodoroRestTime,
-    });
+  } else {
+    target = isTargetPeriod(Period.rest);
+    if (target.isTargetPeriod) {
+      await useBadge({
+        tabId: activeTab[0].id,
+        text: null,
+        color: BadgeColor.none,
+        icon: BadgeIcon.pomodoroRestTime,
+      });
+    }
+  }
+
+  if (target.isTargetPeriodFinishedNow) await play(target.period);
+
+  return {
+    isWork,
+  };
 }

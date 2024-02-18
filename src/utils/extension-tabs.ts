@@ -16,6 +16,8 @@ export function getStringTab(tab: SettingsTab) {
       return 'whitelist';
     case SettingsTab.Notifications:
       return 'notifications';
+    case SettingsTab.Pomodoro:
+      return 'pomodoro';
   }
 }
 
@@ -35,5 +37,7 @@ export function getEnumValueTab(tab: string) {
       return SettingsTab.WhiteList;
     case 'notifications':
       return SettingsTab.Notifications;
+    case 'pomodoro':
+      return SettingsTab.Pomodoro;
   }
 }

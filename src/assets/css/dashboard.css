@@ -21,7 +21,7 @@ body {
 }
 
 .description {
-  font-size: 13px;
+  font-size: 14px;
   color: grey;
   margin: 7px 0 15px 0;
   font-weight: normal;
@@ -49,7 +49,7 @@ body {
   margin-left: 10px;
 }
 
-input[type='text'] {
+input[type='number'],input[type='text'] {
   height: 36px;
   padding: 0 0 0 5px;
   width: 400px;

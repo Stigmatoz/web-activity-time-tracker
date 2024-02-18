@@ -8,7 +8,7 @@
 .dark .headerBlock .icons-block a:hover{
   filter: invert(40%) sepia(94%) saturate(3371%) hue-rotate(227deg) brightness(99%) contrast(92%);
 }
-.dark .headerBlock .icons-block a img {
+.dark .headerBlock .icons-block a.filter img {
   filter: invert(100%) sepia(17%) saturate(0%) hue-rotate(24deg) brightness(103%) contrast(102%);
 }
 .dark .header-block {
@@ -63,4 +63,10 @@
 }
 .dark .container p.value{
   color: black;
+}
+.dark .review-block p{
+  color:#303030;
+}
+.dark .pomodoro-popup-block p{
+  color:#303030;
 }

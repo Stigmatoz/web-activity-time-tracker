@@ -21,10 +21,14 @@
         v-if="darkMode == false"
         @click="changeDarkMode(true)"
       />
-      <a @click="openPage(SettingsTab.Dashboard)"
+
+      <a @click="openPage(SettingsTab.Pomodoro)"
+        >{{ t('pomodoroMode.message') }}<img src="../assets/icons/pomodoro.svg" height="22"
+      /></a>
+      <a class="filter" @click="openPage(SettingsTab.Dashboard)"
         >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
       /></a>
-      <a @click="openPage(SettingsTab.GeneralSettings)"
+      <a class="filter" @click="openPage(SettingsTab.GeneralSettings)"
         >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
       /></a>
     </div>
@@ -84,6 +88,7 @@
       </section>
     </div>
   </div>
+  <PomodoroInfo />
   <Review />
 </template>
 
@@ -93,6 +98,7 @@ import { useI18n } from 'vue-i18n';
 import TabList from '../components/TabList.vue';
 import ByDays from '../components/ByDays.vue';
 import Review from '../components/Review.vue';
+import PomodoroInfo from '../components/PomodoroInfo.vue';
 import { openPage } from '../utils/open-page';
 import { SettingsTab, TypeOfList } from '../utils/enums';
 import { injecStorage } from '../storage/inject-storage';
@@ -137,7 +143,7 @@ function updateTab() {
 }
 .headerBlock .header {
   font-size: 16px;
-  padding: 0 10px;
+  padding: 0 0 0 5px;
   display: inline-block;
   font-weight: 600;
   color: #4a4a4a;
@@ -153,7 +159,7 @@ function updateTab() {
 }
 .headerBlock .icons-block {
   float: right;
-  margin: 7px 10px 0 0;
+  margin: 7px 0 0 0;
 }
 
 .headerBlock .icons-block a:hover {
@@ -172,6 +178,5 @@ function updateTab() {
 }
 .headerBlock .icons-block .dark-mode-icon {
   vertical-align: middle;
-  margin-right: 10px;
 }
 </style>

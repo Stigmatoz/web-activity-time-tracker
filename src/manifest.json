@@ -19,7 +19,8 @@
     "idle",
     "unlimitedStorage",
     "alarms",
-    "notifications"
+    "notifications",
+    "offscreen"
   ],
   "offline_enabled": true,
   "background": {
@@ -28,5 +29,9 @@
   "action": {
     "default_popup": "src/popup.html",
     "default_title": "Web Activity Time Tracker"
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["assets/pomodoro-sounds/*.mp3"],
+    "matches": ["<all_urls>"]
+  }]
 }

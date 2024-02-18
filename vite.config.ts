@@ -22,6 +22,7 @@ function generateManifest() {
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   build: {
+    assetsInlineLimit: 1024,
     rollupOptions: {
       output: {
         assetFileNames: assetInfo => {
@@ -54,10 +55,13 @@ export default defineConfig(({ mode }) => ({
     webExtension({
       manifest: generateManifest,
       watchFilePaths: ['package.json', 'manifest.json'],
-      additionalInputs: ['src/block.html', 'src/welcome.html'],
+      additionalInputs: ['src/block.html', 'src/welcome.html', 'src/offscreen.html'],
     }),
     copy({
-      targets: [{ src: 'src/_locales', dest: 'dist' }],
+      targets: [
+        { src: 'src/_locales', dest: 'dist' },
+        { src: 'src/assets/pomodoro-sounds', dest: 'dist/assets' },
+      ],
     }),
   ],
   optimizeDeps: {
