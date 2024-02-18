@@ -366,5 +366,15 @@
   "completelyBlocked": {
     "message": "完全封锁",
     "description": "完全封锁"
+  },
+  "tryMyOtherApps": {
+    "message": "试试我的其他应用程序"
+  },
+  "clearYoutube": {
+    "message": "Clear YouTube",
+    "description": "Chrome扩展程序，可以隐藏YouTube短片，推荐视频，评论，feed，主页推荐和其他分心。 观看YouTube免费分心。"
+  },
+  "darkTheme": {
+    "message": "黑暗主题"
   }
 }

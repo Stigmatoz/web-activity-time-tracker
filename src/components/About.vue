@@ -22,6 +22,7 @@
       <a :href="CHROME_STORE_REVIEW_URL" target="_blank">{{ t('review.message') }}</a></label
     >
   </div>
+  <MyApps />
 </template>
 
 <script lang="ts">
@@ -31,6 +32,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import MyApps from './MyApps.vue';
 import { useI18n } from 'vue-i18n';
 import { CHROME_STORE_SUPPORT_URL, CHROME_STORE_REVIEW_URL } from '../utils/chrome-url';
 const { t } = useI18n();

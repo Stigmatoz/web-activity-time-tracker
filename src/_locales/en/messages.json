@@ -366,5 +366,15 @@
   "completelyBlocked": {
     "message": "Completely Blocked",
     "description": "Completely Block"
+  },
+  "tryMyOtherApps": {
+    "message": "Try my other apps"
+  },
+  "clearYoutube": {
+    "message": "Clear YouTube",
+    "description": "Chrome extension that can hide YouTube shorts, recomended videos, comments, feed, homepage recommendations and other distractions. Watch YouTube free of distractions."
+  },
+  "darkTheme": {
+    "message": "Dark theme"
   }
 }

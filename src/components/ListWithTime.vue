@@ -10,7 +10,14 @@
         />
         <Favicon :type="TypeOfUrl.WebSite" :favicon="getFavicon(limit.domain)" />
         <span>{{ limit.domain }}</span>
-        <p class="time-value">{{ t('limit.message') }} : {{ getTime(limit.time) }}</p>
+        <div>
+          <p class="time-value d-inline-block" v-if="!completelyBlocked(limit.time)">
+            {{ t('limit.message') }} : {{ getTime(limit.time) }}
+          </p>
+          <p class="blocked" v-if="completelyBlocked(limit.time)">
+            {{ t('completelyBlocked.message') }}
+          </p>
+        </div>
       </div>
     </li>
   </ul>
@@ -30,6 +37,18 @@
       :disabled="isDisabledSaving"
       @click="isEdit ? editItem() : addToList()"
     />
+  </div>
+  <div class="mt-10" v-if="showCompletelyBlockValue">
+    <label class="block-checkbox">
+      <input
+        type="checkbox"
+        class="filled-in"
+        id="viewTimeInBadge"
+        v-model="isCheckedCompletelyBlocked"
+        @change="completelyBlock"
+      />
+      <span>{{ t('completelyBlocked.description') }}</span>
+    </label>
   </div>
 </template>
 
@@ -73,6 +92,15 @@ const time = ref<Time>({
 });
 const newWebsiteForList = ref<string>();
 const storageParam = ref<StorageParams>();
+const isCheckedCompletelyBlocked = computed(
+  () => time.value != undefined && time.value.hours == 0 && time.value.minutes == 0,
+);
+const showCompletelyBlockValue = computed(
+  () =>
+    props.type == ListWithTime.Limits &&
+    newWebsiteForList.value != undefined &&
+    newWebsiteForList.value != '',
+);
 
 onMounted(async () => {
   switch (props.type) {
@@ -110,6 +138,15 @@ function addToList() {
     save(list.value);
     newWebsiteForList.value = '';
   }
+}
+
+function completelyBlock() {
+  time.value.hours = 0;
+  time.value.minutes = 0;
+}
+
+function completelyBlocked(time: number) {
+  return props.type == ListWithTime.Limits && time == 0;
 }
 
 function getTime(time: number) {
@@ -170,5 +207,12 @@ async function save(value: any) {
 .limits-time-block .date-picker {
   width: 120px;
   margin: 0 15px;
+}
+.blocked {
+  display: inline-block;
+  font-size: 13px;
+  color: gray;
+  margin-left: 55px;
+  margin-top: 5px;
 }
 </style>
