@@ -131,6 +131,9 @@
   "pomodoroMode": {
     "message": "Pomodoro"
   },
+  "pomodoroSettings": {
+    "message": "Pomodoro 设置"
+  },
   "pomodoro": {
     "message": "Pomodoro",
     "description": "Pomodoro 工作法是一种时间管理技术，以交替集中工作和休息为基础。根据经典的 Pomodoro 方法，工作时间为 25 分钟，休息时间为 5 分钟。"
@@ -162,6 +165,15 @@
   },
   "pomodoroIsEnabled": {
     "message": "番茄钟模式已启用"
+  },
+  "pomodoroSoundAfter": {
+    "message": "完整时段后的声音"
+  },
+  "clickToPreview": {
+    "message": "点击收听"
+  },
+  "sound": {
+    "message": "声音"
   },
   "aboutSettings": {
     "message": "关于"

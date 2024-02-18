@@ -131,6 +131,9 @@
   "pomodoroMode": {
     "message": "Pomodoro"
   },
+  "pomodoroSettings": {
+    "message": "Настройки Pomodoro"
+  },
   "pomodoro": {
     "message": "Pomodoro",
     "description": "Метод Pomodoro — это техника тайм-менеджмента, завязанная на чередовании периодов сфокусированной работы и отдыха. По классике метода помодоро период работы длится 25 минут, период отдыха 5 минут."
@@ -162,6 +165,15 @@
   },
   "pomodoroIsEnabled": {
     "message": "Режим Pomodoro включен"
+  },
+  "pomodoroSoundAfter": {
+    "message": "Воспроизведение после завершения периода"
+  },
+  "clickToPreview": {
+    "message": "Нажмите для прослушивания"
+  },
+  "sound": {
+    "message": "Мелодия"
   },
   "aboutSettings": {
     "message": "\u041E программе"

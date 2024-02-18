@@ -131,6 +131,9 @@
   "pomodoroMode": {
     "message": "Pomodoro"
   },
+  "pomodoroSettings": {
+    "message": "Pomodoro Einstellungen"
+  },
   "pomodoro": {
     "message": "Pomodoro",
     "description": "Die Pomodoro-Methode ist eine Zeitmanagementtechnik, die auf dem Wechsel von konzentrierten Arbeits- und Ruhephasen basiert. Bei der klassischen Pomodoro-Methode dauert die Arbeitsphase 25 Minuten und die Ruhephase 5 Minuten."
@@ -162,6 +165,15 @@
   },
   "pomodoroIsEnabled": {
     "message": "Der Pomodoro-Modus ist aktiviert"
+  },
+  "pomodoroSoundAfter": {
+    "message": "Ton nach vollständiger Periode"
+  },
+  "clickToPreview": {
+    "message": "Zum Anhören klicken"
+  },
+  "sound": {
+    "message": "Ton"
   },
   "aboutSettings": {
     "message": "Über die Erweiterung"

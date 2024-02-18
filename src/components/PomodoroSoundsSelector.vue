@@ -1,22 +1,22 @@
 <template>
-  <p class="title-audio d-inline-block">Sound after complete period</p>
+  <p class="title-audio d-inline-block">{{ t('pomodoroSoundAfter.message') }}</p>
   <select class="option" v-model="audioAfterPeriod" @change="onAudioChange($event.target)">
-    <option :value="PomodoroSounds['Sound 1']">Sound 1</option>
-    <option :value="PomodoroSounds['Sound 2']">Sound 2</option>
-    <option :value="PomodoroSounds['Sound 3']">Sound 3</option>
-    <option :value="PomodoroSounds['Sound 4']">Sound 4</option>
-    <option :value="PomodoroSounds['Sound 5']">Sound 5</option>
-    <option :value="PomodoroSounds['Sound 6']">Sound 6</option>
-    <option :value="PomodoroSounds['Sound 7']">Sound 7</option>
-    <option :value="PomodoroSounds['Sound 8']">Sound 8</option>
-    <option :value="PomodoroSounds['Sound 9']">Sound 9</option>
-    <option :value="PomodoroSounds['Sound 10']">Sound 10</option>
-    <option :value="PomodoroSounds['Sound 11']">Sound 11</option>
-    <option :value="PomodoroSounds['Sound 12']">Sound 12</option>
-    <option :value="PomodoroSounds['Sound 13']">Sound 13</option>
+    <option :value="PomodoroSounds['Sound 1']">{{ t('sound.message') }} 1</option>
+    <option :value="PomodoroSounds['Sound 2']">{{ t('sound.message') }} 2</option>
+    <option :value="PomodoroSounds['Sound 3']">{{ t('sound.message') }} 3</option>
+    <option :value="PomodoroSounds['Sound 4']">{{ t('sound.message') }} 4</option>
+    <option :value="PomodoroSounds['Sound 5']">{{ t('sound.message') }} 5</option>
+    <option :value="PomodoroSounds['Sound 6']">{{ t('sound.message') }} 6</option>
+    <option :value="PomodoroSounds['Sound 7']">{{ t('sound.message') }} 7</option>
+    <option :value="PomodoroSounds['Sound 8']">{{ t('sound.message') }} 8</option>
+    <option :value="PomodoroSounds['Sound 9']">{{ t('sound.message') }} 9</option>
+    <option :value="PomodoroSounds['Sound 10']">{{ t('sound.message') }} 10</option>
+    <option :value="PomodoroSounds['Sound 11']">{{ t('sound.message') }} 11</option>
+    <option :value="PomodoroSounds['Sound 12']">{{ t('sound.message') }} 12</option>
+    <option :value="PomodoroSounds['Sound 13']">{{ t('sound.message') }} 13</option>
   </select>
   <img src="../assets/icons/start.svg" height="22" @click="playAudio" class="play" />
-  <span class="preview">Click to preview</span>
+  <span class="preview">{{ t('clickToPreview.message') }}</span>
 </template>
 
 <script lang="ts">

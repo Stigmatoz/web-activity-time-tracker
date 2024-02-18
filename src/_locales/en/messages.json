@@ -149,10 +149,10 @@
     "message": "After clicking 'Stop', work and rest time is reset to zero."
   },
   "pomodoroWork": {
-    "message": "The period of work"
+    "message": "Period of work"
   },
   "pomodoroRest": {
-    "message": "The rest period"
+    "message": "Period of rest"
   },
   "pomodoroFrequency": {
     "message": "Number of repetitions"
@@ -165,6 +165,15 @@
   },
   "pomodoroIsEnabled": {
     "message": "Pomodoro Mode is enabled"
+  },
+  "pomodoroSoundAfter": {
+    "message": "Sound after complete period"
+  },
+  "clickToPreview": {
+    "message": "Click to listen"
+  },
+  "sound": {
+    "message": "Sound"
   },
   "aboutSettings": {
     "message": "About"
