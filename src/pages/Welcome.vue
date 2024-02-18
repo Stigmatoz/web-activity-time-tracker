@@ -77,7 +77,7 @@ async function openDashboard() {
 .main {
   margin: auto;
   text-align: center;
-  width: 60%;
+  margin: 0 20%;
   height: 100%;
 }
 .initial-block {
