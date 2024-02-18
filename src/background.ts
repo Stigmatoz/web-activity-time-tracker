@@ -7,6 +7,8 @@ import { StorageParams } from './storage/storage-params';
 import { injecStorage } from './storage/inject-storage';
 import { todayLocalDate } from './utils/date';
 import { checkPomodoro } from './functions/pomodoro';
+import { Messages } from './utils/messages';
+import { injectTabsRepositorySingleton } from './repository/inject-tabs-repository';
 
 logger.log('Start background script');
 let pomodoroTimer: number;
@@ -73,3 +75,18 @@ async function pomodoro(value?: boolean) {
 pomodoro();
 scheduleJobs();
 initTracker();
+
+Browser.runtime.onMessage.addListener(async message => {
+  if (message == Messages.ClearAllData) {
+    const storage = injecStorage();
+    const repo = await injectTabsRepositorySingleton();
+    repo.removeAllTabs();
+    await storage.saveTabs([]);
+  }
+  if (message.message == Messages.Restore) {
+    const storage = injecStorage();
+    await storage.saveTabs(message.data);
+    const repo = await injectTabsRepositorySingleton();
+    repo.initAsync();
+  }
+});

@@ -29,3 +29,14 @@ export function ranges() {
     },
   ];
 }
+
+export function isDateEqual(first: Date, second: Date) {
+  return (
+    first.getFullYear() == second.getFullYear() &&
+    first.getMonth() == second.getMonth() &&
+    first.getDate() == second.getDate() &&
+    first.getHours() == second.getHours() &&
+    first.getMinutes() == second.getMinutes() &&
+    first.getSeconds() == second.getSeconds()
+  );
+}

@@ -166,18 +166,3 @@ async function saveTabs() {
 async function canChangeBadge() {
   return !(await Settings.getInstance().getSetting(StorageParams.IS_POMODORO_ENABLED)) as boolean;
 }
-
-Browser.runtime.onMessage.addListener(async message => {
-  if (message == Messages.ClearAllData) {
-    const storage = injecStorage();
-    const repo = await injectTabsRepositorySingleton();
-    repo.removeAllTabs();
-    await storage.saveTabs([]);
-  }
-  if (message.message == Messages.Restore) {
-    const storage = injecStorage();
-    await storage.saveTabs(message.data);
-    const repo = await injectTabsRepositorySingleton();
-    repo.initAsync();
-  }
-});
