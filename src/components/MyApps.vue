@@ -2,7 +2,9 @@
   <div class="main">
     <p class="header">{{ t('tryMyOtherApps.message') }}</p>
     <div class="app-block" @click="openAppLink(App.ClearYoutube)">
-      <img src="../assets/icons/clear-youtube-logo.svg" height="45" />
+      <div class="img-block">
+        <img src="../assets/icons/clear-youtube-logo.svg" height="45" />
+      </div>
       <div>
         <p class="title">{{ t('clearYoutube.message') }}</p>
         <p class="description">
@@ -57,6 +59,9 @@ function openAppLink(app: App) {
   flex-direction: row;
   gap: 20px;
   cursor: pointer;
+}
+.app-block .img-block {
+  margin: auto 0;
 }
 .title {
   font-weight: 500;

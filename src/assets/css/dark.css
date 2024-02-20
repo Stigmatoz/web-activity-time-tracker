@@ -59,7 +59,7 @@
   color: black;
 }
 .dark .settings-tab label[name="tabName"]:hover, .dark [type='radio']:checked ~ label{
-  background-color: #979797 !important;
+  background-color: #666666 !important;
 }
 .dark .container p.value{
   color: black;
