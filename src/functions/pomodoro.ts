@@ -32,22 +32,15 @@ export async function checkPomodoro() {
       isPomodoroTargetPeriodEnd = addSeconds(startTime, plusWorkingTime + plusRestTime + workTime);
       const isTargetPeriod =
         now >= isPomodoroTargetPeriodStart &&
-        (now <= isPomodoroTargetPeriodEnd || addSeconds(now, -1) <= isPomodoroTargetPeriodEnd);
+        (addSeconds(now, -1) <= isPomodoroTargetPeriodEnd || now <= isPomodoroTargetPeriodEnd);
 
       if (isTargetPeriod) {
-        console.log(
-          now,
-          isPomodoroTargetPeriodEnd,
-          isDateEqual(now, isPomodoroTargetPeriodEnd) ||
-            isDateEqual(addSeconds(now, -1), isPomodoroTargetPeriodEnd),
-          period,
-        );
         return {
           period: period,
           isTargetPeriod: isTargetPeriod,
           isTargetPeriodFinishedNow:
-            isDateEqual(now, isPomodoroTargetPeriodEnd) ||
-            isDateEqual(addSeconds(now, -1), isPomodoroTargetPeriodEnd),
+            isDateEqual(addSeconds(now, -1), isPomodoroTargetPeriodEnd) ||
+            isDateEqual(now, isPomodoroTargetPeriodEnd),
         };
       }
     }
