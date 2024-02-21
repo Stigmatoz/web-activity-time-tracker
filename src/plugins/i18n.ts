@@ -4,12 +4,14 @@ import en from '../_locales/en/messages.json';
 import ru from '../_locales/ru/messages.json';
 import de from '../_locales/de/messages.json';
 import zh from '../_locales/zh_CN/messages.json';
+import es from '../_locales/es/messages.json';
 
 const locales = {
   en,
   ru,
   de,
   zh,
+  es,
 };
 
 export type Languages = keyof typeof locales;
