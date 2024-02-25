@@ -9,11 +9,11 @@ export enum BlockParams {
 export function buildBlockQuery(
   domain: string,
   url: string,
-  liimitTime: number,
+  limitTime: number,
   summaryCounter: number,
   favicon: string,
 ) {
-  return `?domain=${domain}&url=${url}&summaryTime=${liimitTime}&summaryCounter=${summaryCounter}&favicon=${favicon}`;
+  return `?domain=${domain}&url=${url}&summaryTime=${limitTime}&summaryCounter=${summaryCounter}&favicon=${favicon}`;
 }
 
 export function getValueFromQuery(url: string) {
