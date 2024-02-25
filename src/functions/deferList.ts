@@ -3,7 +3,7 @@ import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { Settings } from './settings';
 import { Deffering } from '../entity/deffering';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { MINUTE } from '../utils/time';
 import { log } from '../utils/logger';
 
@@ -42,7 +42,7 @@ export async function canDefering(url: string): Promise<boolean> {
 }
 
 export async function defering(url: string, timeInMinutes: number): Promise<void> {
-  const settingsStorage = injecStorage();
+  const settingsStorage = injectStorage();
 
   const deferList = (await Settings.getInstance().getSetting(
     StorageParams.BLOCK_DEFERRAL_TIME,

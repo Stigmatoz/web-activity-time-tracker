@@ -1,12 +1,12 @@
 import { TimeInterval } from '../entity/time-interval';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageDeserializeParam } from '../storage/storage-params';
 import { todayLocalDate } from '../utils/date';
 
 export async function useDailyIntervals() {
   async function closeInterval(domain: string | null): Promise<void> {
     if (domain == null) return;
-    const storage = injecStorage();
+    const storage = injectStorage();
     const timeIntervalList = (await storage.getDeserializeList(
       StorageDeserializeParam.TIMEINTERVAL_LIST,
     )) as TimeInterval[];
@@ -18,7 +18,7 @@ export async function useDailyIntervals() {
   async function addInterval(domain: string | null): Promise<void> {
     if (domain == null) return;
 
-    const storage = injecStorage();
+    const storage = injectStorage();
     let timeIntervalList = (await storage.getDeserializeList(
       StorageDeserializeParam.TIMEINTERVAL_LIST,
     )) as TimeInterval[];

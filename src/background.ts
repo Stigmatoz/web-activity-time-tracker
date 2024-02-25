@@ -4,7 +4,7 @@ import { logger } from './utils/logger';
 import { scheduleJobs } from './jobs/sheduler';
 import { Settings } from './functions/settings';
 import { StorageParams } from './storage/storage-params';
-import { injecStorage } from './storage/inject-storage';
+import { injectStorage } from './storage/inject-storage';
 import { todayLocalDate } from './utils/date';
 import { checkPomodoro } from './functions/pomodoro';
 import { Messages } from './utils/messages';
@@ -34,7 +34,7 @@ Browser.runtime.setUninstallURL('https://webtracker.online/goodbye.html');
 Browser.runtime.onInstalled.addListener(async details => {
   if (details.reason == 'install') {
     logger.log('Extension installed:', details);
-    const settingsStorage = injecStorage();
+    const settingsStorage = injectStorage();
     await settingsStorage.saveValue(StorageParams.INSTALL_DATE, todayLocalDate());
 
     const initialPageUrl = Browser.runtime.getURL('src/welcome.html');
@@ -65,7 +65,7 @@ Browser.windows.onFocusChanged.addListener(() => {
 
 async function pomodoro(value?: boolean) {
   if (value == undefined) {
-    const settingsStorage = injecStorage();
+    const settingsStorage = injectStorage();
     value = await settingsStorage.getValue(StorageParams.IS_POMODORO_ENABLED);
   }
   if (value == true) pomodoroTimer = setInterval(checkPomodoro, 1000);
@@ -78,13 +78,13 @@ initTracker();
 
 Browser.runtime.onMessage.addListener(async message => {
   if (message == Messages.ClearAllData) {
-    const storage = injecStorage();
+    const storage = injectStorage();
     const repo = await injectTabsRepositorySingleton();
     repo.removeAllTabs();
     await storage.saveTabs([]);
   }
   if (message.message == Messages.Restore) {
-    const storage = injecStorage();
+    const storage = injectStorage();
     await storage.saveTabs(message.data);
     const repo = await injectTabsRepositorySingleton();
     repo.initAsync();

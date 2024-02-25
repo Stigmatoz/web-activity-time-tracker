@@ -1,6 +1,6 @@
 import { ITabsRepository } from './tabs-repository-interface';
 import { Tab } from '../entity/tab';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { isInBlackList } from '../functions/black-list';
 import { StorageDeserializeParam } from '../storage/storage-params';
 import { todayLocalDate } from '../utils/date';
@@ -13,7 +13,7 @@ export class TabsRepository implements ITabsRepository {
   }
 
   async initAsync() {
-    this.tabs = (await injecStorage().getDeserializeList(StorageDeserializeParam.TABS)) as Tab[];
+    this.tabs = (await injectStorage().getDeserializeList(StorageDeserializeParam.TABS)) as Tab[];
   }
 
   getTabs(): Tab[] {

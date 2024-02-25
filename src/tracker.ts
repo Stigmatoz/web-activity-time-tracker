@@ -5,7 +5,7 @@ import { injectTabsRepositorySingleton } from './repository/inject-tabs-reposito
 import { isInBlackList } from './functions/black-list';
 import { useBadge, BadgeColor } from './functions/useBadge';
 import { INTERVAL_SAVE_STORAGE_DEFAULT, StorageParams } from './storage/storage-params';
-import { injecStorage } from './storage/inject-storage';
+import { injectStorage } from './storage/inject-storage';
 import { useDailyIntervals } from './functions/useDailyIntervals';
 import { ActiveTab } from './utils/active-tab';
 import { isLimitExceeded } from './functions/limit-list';
@@ -157,7 +157,7 @@ function isActiveTabWasChanged(activeDomain: string) {
 }
 
 async function saveTabs() {
-  const storage = injecStorage();
+  const storage = injectStorage();
   const repo = await injectTabsRepositorySingleton();
   const tabs = repo.getTabs();
   await storage.saveTabs(tabs);
