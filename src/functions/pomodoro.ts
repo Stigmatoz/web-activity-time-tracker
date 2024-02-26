@@ -1,5 +1,5 @@
 import { addSeconds } from 'date-fns';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { useBadge, BadgeIcon, BadgeColor } from './useBadge';
 import { Settings } from './settings';
@@ -72,7 +72,7 @@ export async function checkPomodoro() {
     });
   }
 
-  const storage = injecStorage();
+  const storage = injectStorage();
   const isPomodoroEnabled = (await Settings.getInstance().getSetting(
     StorageParams.IS_POMODORO_ENABLED,
   )) as boolean;

@@ -1,4 +1,4 @@
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams, getDefaultValue } from '../storage/storage-params';
 
 export class Settings {
@@ -26,7 +26,7 @@ export class Settings {
   }
 
   private async getValue(param: StorageParams) {
-    const storage = injecStorage();
+    const storage = injectStorage();
     const value = await storage.getValue(param, getDefaultValue(param));
     this._settings.set(param, value);
     return value;

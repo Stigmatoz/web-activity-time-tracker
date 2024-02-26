@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import { Restriction } from '../entity/restriction';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { useExtensionPage } from './useExtensionPage';
 
@@ -11,7 +11,7 @@ export const QUERY_PARAMS_BLOCK = 'block.html';
 export const QUERY_PARAMS_BLOCK_DOMAIN = 'domain';
 
 export async function usePromoExtension() {
-  const settingsStorage = injecStorage();
+  const settingsStorage = injectStorage();
   const extensionPage = useExtensionPage();
 
   const hasReviewOnLimits = await settingsStorage.getValue(

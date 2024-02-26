@@ -1,10 +1,10 @@
 import { StorageDeserializeParam } from '../storage/storage-params';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { TimeInterval } from '../entity/time-interval';
 import { todayLocalDate } from '../utils/date';
 
 export async function removeOldTimeIntervals() {
-  const storage = injecStorage();
+  const storage = injectStorage();
   let timeIntervalList = (await storage.getDeserializeList(
     StorageDeserializeParam.TIMEINTERVAL_LIST,
   )) as TimeInterval[];

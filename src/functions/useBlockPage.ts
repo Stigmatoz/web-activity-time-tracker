@@ -5,7 +5,7 @@ import { NO_FAVICON } from '../utils/consts';
 export async function useBlockPage(
   domain: string,
   url: string,
-  liimitTime: number,
+  limitTime: number,
   summaryCounter: number,
   favIconUrl: string | undefined,
 ): Promise<void> {
@@ -15,7 +15,7 @@ export async function useBlockPage(
       : favIconUrl;
   const blockUrl =
     Browser.runtime.getURL('src/block.html') +
-    buildBlockQuery(domain, url, liimitTime, summaryCounter, favicon);
+    buildBlockQuery(domain, url, limitTime, summaryCounter, favicon);
   const tab = await Browser.tabs.query({ currentWindow: true, active: true });
   await Browser.tabs.update(tab[0].id, { url: blockUrl });
 }
