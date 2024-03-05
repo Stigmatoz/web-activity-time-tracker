@@ -12,6 +12,17 @@
         </p>
       </div>
     </div>
+    <div class="app-block" @click="openAppLink(App.TrackerJam)">
+      <div class="img-block">
+        <img src="../assets/icons/trackerjam-logo.png" height="45" />
+      </div>
+      <div>
+        <p class="title">{{ t('trackerjam.message') }}</p>
+        <p class="description">
+          {{ t('trackerjam.description') }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,6 +46,8 @@ function openAppLink(app: App) {
   switch (app) {
     case App.ClearYoutube:
       window.open(CHROME_STORE_CLEAR_YOUTUBE_URL, '_blank');
+    case App.TrackerJam:
+      window.open('https://trackerjam.com/?utm_source=watt_extension', '_blank');
   }
 }
 </script>

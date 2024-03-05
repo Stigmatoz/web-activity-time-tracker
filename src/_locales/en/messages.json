@@ -374,6 +374,10 @@
     "message": "Clean YouTube",
     "description": "Chrome extension that can hide YouTube shorts, recomended videos, comments, feed, homepage recommendations and other distractions. Watch YouTube free of distractions."
   },
+  "trackerjam": {
+    "message": "TrackerJam",
+    "description": "Automatic web tracker for teams. Detailed reports for each team member, detailing time spent on websites, track any URL's inside domain, productivity scores, top domains with categories and etc."
+  },
   "darkTheme": {
     "message": "Dark theme"
   }

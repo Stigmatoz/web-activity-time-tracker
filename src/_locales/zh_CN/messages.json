@@ -374,6 +374,10 @@
     "message": "Clean YouTube",
     "description": "Chrome扩展程序，可以隐藏YouTube短片，推荐视频，评论，feed，主页推荐和其他分心。 观看YouTube免费分心。"
   },
+  "trackerjam": {
+    "message": "TrackerJam",
+    "description": "团队自动网络跟踪器。为每个团队成员提供详细报告，包括在网站上花费的时间、域内任何 URL 的跟踪、工作效率评分、顶级域分类等。"
+  },
   "darkTheme": {
     "message": "黑暗主题"
   }

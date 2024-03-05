@@ -374,6 +374,10 @@
     "message": "Clean YouTube",
     "description": "Chrome-Erweiterung, die YouTube-Shorts, empfohlene Videos, Kommentare, Feeds, Homepage-Empfehlungen und andere Ablenkungen ausblenden kann. Sieh dir YouTube ohne Ablenkungen an."
   },
+  "trackerjam": {
+    "message": "TrackerJam",
+    "description": "Automatischer Web-Tracker für Teams. Detaillierte Berichte für jedes Teammitglied, mit detaillierten Angaben zur auf Websites verbrachten Zeit, Verfolgung aller URLs innerhalb der Domain, Produktivitätsbewertungen, Top-Domains mit Kategorien usw."
+  },
   "darkTheme": {
     "message": "Dunkles Thema"
   }

@@ -374,6 +374,10 @@
     "message": "Clean YouTube",
     "description": "Extensión de Chrome que puede ocultar los cortos de YouTube, los vídeos recomendados, los comentarios, el feed, las recomendaciones de la página de inicio y otras distracciones. Vea YouTube sin distracciones."
   },
+  "trackerjam": {
+    "message": "TrackerJam",
+    "description": "Rastreador web automático para equipos. Informes detallados para cada miembro del equipo, detallando el tiempo empleado en sitios web, seguimiento de cualquier URL dentro del dominio, puntuaciones de productividad, dominios principales con categorías y etc."
+  },
   "darkTheme": {
     "message": "Tema oscuro"
   }
