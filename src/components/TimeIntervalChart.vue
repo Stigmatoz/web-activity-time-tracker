@@ -22,7 +22,7 @@ export default {
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageDeserializeParam } from '../storage/storage-params';
 import { TimeInterval } from '../entity/time-interval';
 import { todayLocalDate } from '../utils/date';
@@ -38,7 +38,7 @@ enum MinValue {
 }
 
 const { t } = useI18n();
-const storage = injecStorage();
+const storage = injectStorage();
 
 const chart = ref<any>();
 const minValue = ref<number>();

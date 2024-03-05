@@ -21,13 +21,13 @@ export default {
 import { onMounted, ref } from 'vue';
 import { StorageParams, IS_POMODORO_ENABLED_DEFAULT } from '../storage/storage-params';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { openPage } from '../utils/open-page';
 import { SettingsTab } from '../utils/enums';
 import { checkPomodoro } from '../functions/pomodoro';
 
 const { t } = useI18n();
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const isEnabled = ref<boolean>();
 const isWorkingTime = ref<boolean>();

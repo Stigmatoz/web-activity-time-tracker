@@ -14,7 +14,7 @@ export default {
 import { Doughnut } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { convertSummaryTimeToString } from '../utils/converter';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { onMounted, ref } from 'vue';
 import { DARK_MODE_DEFAULT, StorageParams } from '../storage/storage-params';
 
@@ -23,7 +23,7 @@ const props = defineProps<{
   labels: string[];
 }>();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 const darkMode = ref();
 const data = ref();
 const options = ref();

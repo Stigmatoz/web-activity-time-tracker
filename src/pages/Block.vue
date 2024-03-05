@@ -38,7 +38,7 @@
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getValueFromQuery } from '../utils/block-page';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { BLOCK_DEFERRAL_DEFAULT, StorageParams } from '../storage/storage-params';
 import { convertLimitTimeToString } from '../utils/converter';
 import PromoClearYouTube from '../components/PromoClearYouTube.vue';
@@ -46,7 +46,7 @@ import { canDefering, defering } from '../functions/deferList';
 
 const { t } = useI18n();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const webSite = ref<string>();
 const sourceUrl = ref<string>();

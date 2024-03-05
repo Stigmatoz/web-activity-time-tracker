@@ -169,12 +169,12 @@ import DashboadContainer from '../components/DashboadContainer.vue';
 import { useExtensionPage } from '../compositions/useExtensionPage';
 import { getEnumValueTab } from '../utils/extension-tabs';
 import { applyDarkMode } from '../utils/dark-mode';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams, DARK_MODE_DEFAULT } from '../storage/storage-params';
 
 const { t } = useI18n();
 const extensionPage = useExtensionPage();
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const selectedTab = ref<SettingsTab>();
 const currentUrl = ref(new URL(location.href));

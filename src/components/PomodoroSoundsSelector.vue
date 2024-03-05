@@ -29,7 +29,7 @@ export default {
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { PomodoroAudioParams, PomodoroSounds } from '../utils/pomodoro';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { playSound } from '../functions/playSound';
 
 const props = defineProps<{
@@ -38,7 +38,7 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 const audioAfterPeriod = ref<PomodoroSounds>(props.value);
 
 function playAudio() {

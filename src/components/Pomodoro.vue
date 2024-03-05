@@ -71,7 +71,7 @@ export default {
 import { Ref, computed, onMounted, ref } from 'vue';
 import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import {
   IS_POMODORO_ENABLED_DEFAULT,
   POMODORO_AUDIO_AFTER_FINISHED_DEFAULT,
@@ -90,7 +90,7 @@ import PomodoroSoundsSelector from '../components/PomodoroSoundsSelector.vue';
 import Browser from 'webextension-polyfill';
 
 const { t } = useI18n();
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const workTime = ref<Time>({
   hours: 0,

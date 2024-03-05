@@ -17,7 +17,7 @@ export default {
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { CHROME_STORE_CLEAR_YOUTUBE_URL } from '../utils/chrome-url';
 import { usePromoExtension } from '../compositions/usePromoExtension';
@@ -26,7 +26,7 @@ import { useExtensionPage } from '../compositions/useExtensionPage';
 
 const { t } = useI18n();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 const extensionPage = useExtensionPage();
 
 const showReview = ref<boolean>(true);

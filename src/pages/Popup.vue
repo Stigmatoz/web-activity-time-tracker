@@ -101,12 +101,12 @@ import Review from '../components/Review.vue';
 import PomodoroInfo from '../components/PomodoroInfo.vue';
 import { openPage } from '../utils/open-page';
 import { SettingsTab, TypeOfList } from '../utils/enums';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { DARK_MODE_DEFAULT, StorageParams } from '../storage/storage-params';
 import { applyDarkMode } from '../utils/dark-mode';
 
 const { t } = useI18n();
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const activeTab = ref<TypeOfList>();
 const darkMode = ref<boolean>();

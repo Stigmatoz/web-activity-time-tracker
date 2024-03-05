@@ -138,7 +138,7 @@ export default {
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { useNotification } from '@kyvg/vue3-notification';
 import {
   BLOCK_DEFERRAL_DEFAULT,
@@ -159,7 +159,7 @@ import { applyDarkMode } from '../utils/dark-mode';
 
 const { t } = useI18n();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 const notification = useNotification();
 
 const viewTimeInBadge = ref<boolean>();

@@ -21,7 +21,7 @@ import {
   CategoryScale,
 } from 'chart.js';
 import { onMounted, ref } from 'vue';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageDeserializeParam } from '../storage/storage-params';
 import { TimeInterval } from '../entity/time-interval';
 import { todayLocalDate } from '../utils/date';
@@ -42,7 +42,7 @@ type DomainsInterval = {
   domain: string;
 };
 
-const storage = injecStorage();
+const storage = injectStorage();
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 

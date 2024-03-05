@@ -15,7 +15,7 @@ export default {
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { addDays, startOfToday } from 'date-fns';
 import { addHours } from 'date-fns/esm';
@@ -23,7 +23,7 @@ import { CHROME_STORE_REVIEW_URL } from '../utils/chrome-url';
 
 const { t } = useI18n();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 const PROMPT_AT_TIME_OF_DAY = 12;
 const ADD_DAYS_FIRST = 2;
 const ADD_DAYS_NEXT = 5;

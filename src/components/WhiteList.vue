@@ -41,7 +41,7 @@ import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { TypeOfUrl } from '../utils/enums';
 import { useNotification } from '@kyvg/vue3-notification';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { isDomainEquals } from '../utils/common';
 import { extractHostname } from '../utils/extract-hostname';
@@ -50,7 +50,7 @@ const { t } = useI18n();
 
 const notification = useNotification();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const whiteList = ref<string[]>();
 const newWebsiteForWhiteList = ref<string>();

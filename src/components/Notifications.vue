@@ -64,7 +64,7 @@ export default {
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { NOTIFICATION_MESSAGE_DEFAULT, StorageParams } from '../storage/storage-params';
 import {
   DAILY_NOTIFICATION_DEFAULT,
@@ -80,7 +80,7 @@ import { Messages } from '../utils/messages';
 
 const { t } = useI18n();
 
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const showDailyNotifacation = ref<boolean>();
 const dailyNotificationTime = ref<number>();

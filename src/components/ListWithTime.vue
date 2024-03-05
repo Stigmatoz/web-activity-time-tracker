@@ -63,7 +63,7 @@ import Favicon from './Favicon.vue';
 import { getFavicon } from '../utils/favicon';
 import { useNotification } from '@kyvg/vue3-notification';
 import { useI18n } from 'vue-i18n';
-import { injecStorage } from '../storage/inject-storage';
+import { injectStorage } from '../storage/inject-storage';
 import { Time } from '../utils/time';
 import { computed, onMounted, ref } from 'vue';
 import { ListWithTime, TypeOfUrl } from '../utils/enums';
@@ -82,7 +82,7 @@ const props = defineProps<{
 }>();
 
 const notification = useNotification();
-const settingsStorage = injecStorage();
+const settingsStorage = injectStorage();
 
 const list = ref<BaseTimeList[]>();
 const isEdit = ref<boolean>();
