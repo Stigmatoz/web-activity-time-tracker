@@ -130,7 +130,6 @@ const showWarningMessage = ref<boolean>();
 }
 .tab-item .url {
   font-size: 15px;
-  font-weight: 600;
   cursor: pointer;
   overflow-wrap: anywhere;
   display: inline-block;

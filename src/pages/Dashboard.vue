@@ -132,7 +132,7 @@
       </div>
     </div>
 
-    <div class="settings-tab mt-30">
+    <div class="settings-tab">
       <input
         type="radio"
         id="about-tab"
@@ -140,7 +140,7 @@
         :checked="selectedTab == SettingsTab.About"
         v-on:change="selectTab(SettingsTab.About)"
       />
-      <label name="tabName" for="about-tab"
+      <label class="about" name="tabName" for="about-tab"
         ><img src="../assets/icons/s-about.svg" height="30" />{{
           t('aboutSettings.message')
         }}</label
@@ -221,6 +221,9 @@ function selectTab(value: SettingsTab) {
   width: 80%;
   margin: auto;
 }
+.header-block {
+  background-color: unset !important;
+}
 .header-block .title {
   vertical-align: top;
   margin-top: 15px;
@@ -229,11 +232,15 @@ function selectTab(value: SettingsTab) {
 }
 
 .header-block .logo {
-  margin: 10px 10px 10px 35px;
+  margin: 10px 10px 10px 15px;
 }
 .tab-separator {
   margin-left: 10px;
   font-size: 13px;
   font-weight: 600;
+}
+.about {
+  position: fixed;
+  bottom: 20px;
 }
 </style>
