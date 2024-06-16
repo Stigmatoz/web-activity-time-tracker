@@ -55,6 +55,7 @@
 }
 .dark .settings-content{
   background-color: #303030 !important;
+  border-left: 1px solid #494949 !important;
 }
 .dark .app-block .title{
   color: black;
