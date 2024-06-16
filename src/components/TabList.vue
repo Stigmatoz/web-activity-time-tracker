@@ -79,7 +79,7 @@ const firstDay = ref<Date>();
 const countOfActiveDays = ref<number>();
 
 const countOfSites = computed(() => (tabs.value != undefined ? tabs.value.length : 0));
-const isLoading = ref<boolean>();
+const isLoading = ref<boolean>(true);
 
 const showOnlyFirst100Items = ref<boolean>();
 
