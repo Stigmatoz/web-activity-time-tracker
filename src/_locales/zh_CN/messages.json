@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Web Activity Time Tracker - 阻止网站、网络分析和番茄钟"
+    "message": "Web Activity Time Tracker - 封鎖網站、Pomodoro 與網頁分析"
   },
   "extDescription": {
     "message": "追踪和限制您的网站活动时间，并阻止访问网站。监控您的网站使用情况"
@@ -361,7 +361,7 @@
   },
   "promoClearYoutube": {
     "message": "您想屏蔽短片、评论、推荐视频、订阅和其他 YouTube 干扰内容吗？ 我们创建了另一个扩展程序，可帮助您不受干扰地观看 YouTube",
-    "description": "安装"
+    "description": "嘗試 Clean YouTube"
   },
   "completelyBlocked": {
     "message": "完全封锁",

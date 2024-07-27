@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Web Activity Time Tracker - Block Sites, Web Analytics & Pomodoro"
+    "message": "Web Activity Time Tracker - Block Sites, Pomodoro & Web Analytics"
   },
   "extDescription": {
     "message": "Track time of your web activity, limit and block distracting websites. Monitor your web usage."
@@ -263,7 +263,7 @@
   },
   "promoClearYoutube": {
     "message": "Would you like to block shorts, comments, recommended videos, subscriptions, and other YouTube distractions? We've created another extension that will help you watch YouTube without distractions.",
-    "description": "Install"
+    "description": "Try Clean Youtube"
   },
   "block": {
     "message": "You've reached your limit for today on "

@@ -1,27 +1,5 @@
 <template>
-  <ul readonly class="url-list">
-    <li v-for="(limit, i) of list" :key="i">
-      <div>
-        <img src="../assets/icons/delete.png" height="16" @click="deleteFromList(limit.domain)" />
-        <img
-          src="../assets/icons/edit.svg"
-          height="16"
-          @click="editItemFromList(limit.domain, limit.time)"
-        />
-        <Favicon :type="TypeOfUrl.WebSite" :favicon="getFavicon(limit.domain)" />
-        <span>{{ limit.domain }}</span>
-        <div>
-          <p class="time-value d-inline-block" v-if="!completelyBlocked(limit.time)">
-            {{ t('limit.message') }} : {{ getTime(limit.time) }}
-          </p>
-          <p class="blocked" v-if="completelyBlocked(limit.time)">
-            {{ t('completelyBlocked.message') }}
-          </p>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <div class="limits-time-block mt-20">
+  <div class="limits-time-block mb-20">
     <input
       type="text"
       :disabled="isEdit"
@@ -50,6 +28,28 @@
       <span>{{ t('completelyBlocked.description') }}</span>
     </label>
   </div>
+  <ul readonly class="url-list">
+    <li v-for="(limit, i) of list" :key="i">
+      <div>
+        <img src="../assets/icons/delete.png" height="16" @click="deleteFromList(limit.domain)" />
+        <img
+          src="../assets/icons/edit.svg"
+          height="16"
+          @click="editItemFromList(limit.domain, limit.time)"
+        />
+        <Favicon :type="TypeOfUrl.WebSite" :favicon="getFavicon(limit.domain)" />
+        <span>{{ limit.domain }}</span>
+        <div>
+          <p class="time-value d-inline-block" v-if="!completelyBlocked(limit.time)">
+            {{ t('limit.message') }} : {{ getTime(limit.time) }}
+          </p>
+          <p class="blocked" v-if="completelyBlocked(limit.time)">
+            {{ t('completelyBlocked.message') }}
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">
@@ -213,6 +213,6 @@ async function save(value: any) {
   font-size: 13px;
   color: gray;
   margin-left: 55px;
-  margin-top: 5px;
+  margin-top: 0;
 }
 </style>

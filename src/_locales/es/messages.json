@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Web Activity Time Tracker - Bloquear sitios, análisis web y Pomodoro"
+    "message": "Web Activity Time Tracker - Sitios bloqueados, Pomodoro y análisis web"
   },
   "extDescription": {
     "message": "Controla el tiempo de tu actividad web, limita y bloquea los sitios web que te distraen. Monitoriza tu uso de la web."
@@ -263,7 +263,7 @@
   },
   "promoClearYoutube": {
     "message": "¿Te gustaría bloquear los cortos, los comentarios, los vídeos recomendados, las suscripciones y otras distracciones de YouTube? Hemos creado otra extensión que te ayudará a ver YouTube sin distracciones.",
-    "description": "Instale"
+    "description": "Prueba Clean YouTube"
   },
   "block": {
     "message": "Has alcanzado tu límite por hoy en"

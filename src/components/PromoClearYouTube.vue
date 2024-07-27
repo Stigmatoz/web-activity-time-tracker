@@ -68,7 +68,6 @@ async function saveValue() {
 }
 .review-block input[type='button'] {
   float: right;
-  width: auto;
 }
 .review-block p {
   display: inline-block;
