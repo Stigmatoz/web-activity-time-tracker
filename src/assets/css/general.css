@@ -77,7 +77,7 @@ select {
 input[type='button'] {
   background: #428bff;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 10px;
   height: 36px;
   line-height: 35px;
   padding: 0 20px;
@@ -102,7 +102,7 @@ input[type='button'].alert {
 input[type='button'].info {
   background: #ffffff !important;
   color: black;
-  border: 1px solid black;
+  border: 1px solid rgb(151, 151, 151);
 }
 
 input[type='button'][disabled] {
