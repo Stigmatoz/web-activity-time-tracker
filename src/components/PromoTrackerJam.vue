@@ -1,6 +1,6 @@
 <template>
-  <div class="modal" v-if="!showPromo">
-    <div class="modal-content">
+  <div class="modal" v-if="showPromo">
+    <div class="modal-content promo">
       <p class="title">{{ t('trackerJamPromo.message') }}</p>
       <div class="img-block">
         <img src="../assets/trackerjam-promo.jpg" />
