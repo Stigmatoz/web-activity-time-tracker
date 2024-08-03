@@ -43,7 +43,7 @@ Browser.runtime.onInstalled.addListener(async details => {
       active: true,
     });
   }
-  if (details.reason == 'update') {
+  if (details.reason == 'update' && !details.previousVersion) {
     const showChangelog = (await Settings.getInstance().getSetting(
       StorageParams.SHOW_CHANGELOG,
     )) as boolean;
