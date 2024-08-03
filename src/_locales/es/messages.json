@@ -380,5 +380,35 @@
   },
   "darkTheme": {
     "message": "Tema oscuro"
+  },
+  "trackerJamPromo": {
+    "message": "Pruebe nuestra nueva aplicación TrackerJam"
+  },
+  "trackerJamPromo_description": {
+    "message": "¿Le gustaría probar el seguimiento automático del tiempo con almacenamiento en la nube?"
+  },
+  "trackerJamPromo_description2": {
+    "message": "TrackerJam es una combinación de una extensión de Chrome para analizar la actividad del navegador y un panel web para ver informes detallados."
+  },
+  "trackerJamPromo_features": {
+    "message": "Nuestras características:"
+  },
+  "trackerJamPromo_features1": {
+    "message": "Almacenamiento en la nube"
+  },
+  "trackerJamPromo_features2": {
+    "message": "Puedes añadir varios usuarios para trabajar en equipo o utilizar el rastreador para analizar el tiempo personal y laboral por separado"
+  },
+  "trackerJamPromo_features3": {
+    "message": "Analiza los sitios visitados por categoría en función de la IA y las métricas de productividad"
+  },
+  "trackerJamPromo_features4": {
+    "message": "Análisis detallados de cualquier página web visitada dentro de un sitio web"
+  },
+  "trackerJamPromo_features5": {
+    "message": "Personalización del tiempo de trabajo"
+  },
+  "try": {
+    "message": "Pruebe"
   }
 }

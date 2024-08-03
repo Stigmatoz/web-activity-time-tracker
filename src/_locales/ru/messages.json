@@ -381,5 +381,35 @@
   },
   "darkTheme": {
     "message": "Темная тема"
+  },
+  "trackerJamPromo": {
+    "message": "Попробуйте наше новое приложение TrackerJam"
+  },
+  "trackerJamPromo_description": {
+    "message": "Хотите попробовать автоматический тайм-трекер с облачным хранилищем?"
+  },
+  "trackerJamPromo_description2": {
+    "message": "TrackerJam - это сочетание расширения для хрома для анализа активности в браузере и веб-панели для просмотра подробных отчетов."
+  },
+  "trackerJamPromo_features": {
+    "message": "Наши возможности:"
+  },
+  "trackerJamPromo_features1": {
+    "message": "Облачное хранилище"
+  },
+  "trackerJamPromo_features2": {
+    "message": "Вы можете добавить несколько пользователей для работы в команде или использовать трекер для анализа личного и рабочего времени по отдельности"
+  },
+  "trackerJamPromo_features3": {
+    "message": "Анализ посещенных сайтов по категориям на основе показателей искусственного интеллекта и продуктивности"
+  },
+  "trackerJamPromo_features4": {
+    "message": "Подробная аналитика по любой посещенной веб-странице внутри сайта"
+  },
+  "trackerJamPromo_features5": {
+    "message": "Настройка рабочего времени"
+  },
+  "try": {
+    "message": "Попробовать"
   }
 }

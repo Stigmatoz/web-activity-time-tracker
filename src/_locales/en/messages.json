@@ -380,5 +380,35 @@
   },
   "darkTheme": {
     "message": "Dark theme"
+  },
+  "trackerJamPromo": {
+    "message": "Try our new app TrackerJam"
+  },
+  "trackerJamPromo_description": {
+    "message": "Would like to try automatic time tracker with cloud storage?"
+  },
+  "trackerJamPromo_description2": {
+    "message": "TrackerJam is a combination of a chrome extension to analyze browser activity and a web dashboard to see detailed reports."
+  },
+  "trackerJamPromo_features": {
+    "message": "Our features:"
+  },
+  "trackerJamPromo_features1": {
+    "message": "Cloud storage"
+  },
+  "trackerJamPromo_features2": {
+    "message": "You can add multiple users to work as a team or use the tracker to analyze personal and work time separately"
+  },
+  "trackerJamPromo_features3": {
+    "message": "Analyze visited sites by category based on AI and productivity metrics"
+  },
+  "trackerJamPromo_features4": {
+    "message": "Detailed analytics on any visited web page within a web site"
+  },
+  "trackerJamPromo_features5": {
+    "message": "Work time customization"
+  },
+  "try": {
+    "message": "Try"
   }
 }

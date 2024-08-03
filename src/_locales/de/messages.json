@@ -380,5 +380,35 @@
   },
   "darkTheme": {
     "message": "Dunkles Thema"
+  },
+  "trackerJamPromo": {
+    "message": "Probieren Sie unsere neue App TrackerJam"
+  },
+  "trackerJamPromo_description": {
+    "message": "Möchten Sie eine automatische Zeiterfassung mit Cloud-Speicher ausprobieren?"
+  },
+  "trackerJamPromo_description2": {
+    "message": "TrackerJam ist eine Kombination aus einer Chrome-Erweiterung zur Analyse der Browser-Aktivitäten und einem Web-Dashboard zur Anzeige detaillierter Berichte."
+  },
+  "trackerJamPromo_features": {
+    "message": "Unsere Funktionen:"
+  },
+  "trackerJamPromo_features1": {
+    "message": "Cloud-Speicher"
+  },
+  "trackerJamPromo_features2": {
+    "message": "Sie können mehrere Benutzer hinzufügen, um als Team zu arbeiten, oder den Tracker verwenden, um persönliche und berufliche Zeit getrennt zu analysieren"
+  },
+  "trackerJamPromo_features3": {
+    "message": "Analyse der besuchten Seiten nach Kategorien, basierend auf KI und Produktivitätsmetriken"
+  },
+  "trackerJamPromo_features4": {
+    "message": "Detaillierte Analysen zu jeder besuchten Seite innerhalb einer Website"
+  },
+  "trackerJamPromo_features5": {
+    "message": "Anpassung der Arbeitszeiten"
+  },
+  "try": {
+    "message": "Testen Sie"
   }
 }

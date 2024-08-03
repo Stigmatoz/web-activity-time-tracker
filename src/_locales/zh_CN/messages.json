@@ -380,5 +380,35 @@
   },
   "darkTheme": {
     "message": "黑暗主题"
+  },
+  "trackerJamPromo": {
+    "message": "试试我们的新应用程序 TrackerJam"
+  },
+  "trackerJamPromo_description": {
+    "message": "想试试带有云存储功能的自动时间跟踪器吗？"
+  },
+  "trackerJamPromo_description2": {
+    "message": "TrackerJam 是一个 Chrome 浏览器扩展程序，用于分析浏览器活动，同时也是一个网络仪表盘，用于查看详细报告。"
+  },
+  "trackerJamPromo_features": {
+    "message": "我们的特色"
+  },
+  "trackerJamPromo_features1": {
+    "message": "云存储"
+  },
+  "trackerJamPromo_features2": {
+    "message": "你可以添加多个用户作为一个团队工作，或使用跟踪器分别分析个人和工作时间"
+  },
+  "trackerJamPromo_features3": {
+    "message": "根据人工智能和工作效率指标，按类别分析访问过的网站"
+  },
+  "trackerJamPromo_features4": {
+    "message": "详细分析网站内任何访问过的网页"
+  },
+  "trackerJamPromo_features5": {
+    "message": "自定义工作时间"
+  },
+  "try": {
+    "message": "试用"
   }
 }
