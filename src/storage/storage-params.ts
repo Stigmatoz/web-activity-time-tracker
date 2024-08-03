@@ -29,6 +29,8 @@ export enum StorageParams {
   POMODORO_AUDIO_AFTER_FINISHED = 'pomodoro-audio-after-finished',
   POMODORO_INTERVAL_REST = 'pomodoro-interval-rest',
   POMODORO_FREQUENCY = 'pomodoro-frequency',
+  PROMO_TRACKERJAM_DATE = 'promo-trackerjam-date',
+  PROMO_TRACKERJAM_PROMPT_AT = 'promo-trackerjam-prompt-at',
 }
 
 export enum StorageDeserializeParam {
