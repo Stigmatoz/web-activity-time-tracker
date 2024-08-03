@@ -73,7 +73,7 @@ function openChart(type: TypeOfChart) {
 .chart-btn {
   background-color: rgb(192, 192, 192);
   color: #fff;
-  border-radius: 3px;
+  border-radius: 7px;
   height: 36px;
   line-height: 35px;
   padding: 0 20px;

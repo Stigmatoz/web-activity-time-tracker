@@ -219,7 +219,7 @@ function playAudio(sound: PomodoroSounds) {
 button {
   border: none;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 7px;
   height: 36px;
   line-height: 35px;
   padding: 0 20px;
