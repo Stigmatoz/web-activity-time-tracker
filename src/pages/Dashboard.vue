@@ -153,7 +153,7 @@
       </div>
     </div>
 
-    <PromoTrackerJam />
+    <PromoCleanYoutubeModal />
   </div>
 </template>
 
@@ -161,7 +161,7 @@
 import { onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import GeneralSettings from '../components/GeneralSettings.vue';
-import PromoTrackerJam from '../components/PromoTrackerJam.vue';
+import PromoCleanYoutubeModal from '../components/PromoCleanYoutubeModal.vue';
 import WhiteList from '../components/WhiteList.vue';
 import Limits from '../components/Limits.vue';
 import DailyNotifications from '../components/Notifications.vue';

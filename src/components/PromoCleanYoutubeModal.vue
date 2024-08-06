@@ -1,21 +1,20 @@
 <template>
-  <div class="modal" v-if="showPromo">
+  <div class="modal" v-if="!showPromo">
     <div class="modal-content promo">
-      <p class="title">{{ t('trackerJamPromo.message') }}</p>
+      <p class="title">{{ t('cleanYoutube_promo.message') }}</p>
       <div class="img-block">
-        <img src="../assets/trackerjam-promo.jpg" />
+        <img src="../assets/clear-youtube-promo.png" />
       </div>
-      <p class="text">{{ t('trackerJamPromo_description.message') }}</p>
-
       <p class="text">
-        {{ t('trackerJamPromo_description2.message') }}
+        {{ t('cleanYoutube_description.message') }} {{ t('cleanYoutube_description2.message') }}
       </p>
-      <p class="text features">{{ t('trackerJamPromo_features.message') }}</p>
+
+      <p class="text features">{{ t('cleanYoutube_features.message') }}</p>
       <ul>
-        <li>✅ {{ t('trackerJamPromo_features1.message') }}</li>
-        <li>✅ {{ t('trackerJamPromo_features2.message') }}</li>
-        <li>✅ {{ t('trackerJamPromo_features3.message') }}</li>
-        <li>✅ {{ t('trackerJamPromo_features4.message') }}</li>
+        <li>✅ {{ t('cleanYoutube_features1.message') }}</li>
+        <li>✅ {{ t('cleanYoutube_features2.message') }}</li>
+        <li>✅ {{ t('cleanYoutube_features3.message') }}</li>
+        <li>✅ {{ t('cleanYoutube_features4.message') }}</li>
       </ul>
       <div class="text-center">
         <input type="button" :value="t('try.message')" @click="openUrl()" />
@@ -32,6 +31,7 @@ import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { addDays, startOfToday } from 'date-fns';
 import { addHours } from 'date-fns/esm';
+import { CHROME_STORE_CLEAR_YOUTUBE_URL } from '../utils/chrome-url';
 
 const { t } = useI18n();
 const settingsStorage = injectStorage();
@@ -43,13 +43,13 @@ const ADD_DAYS_INITIAL = 2;
 const ADD_DAYS_COUNT = 5;
 
 onMounted(async () => {
-  const promoDate = await settingsStorage.getValue(StorageParams.PROMO_TRACKERJAM_DATE);
+  const promoDate = await settingsStorage.getValue(StorageParams.PROMO_CLEAR_YOUTUBE_DATE);
 
   if (promoDate == undefined) {
-    let nextTime = await settingsStorage.getValue(StorageParams.PROMO_TRACKERJAM_PROMPT_AT);
+    let nextTime = await settingsStorage.getValue(StorageParams.PROMO_CLEAR_YOUTUBE_PROMPT_AT);
     if (nextTime == undefined) {
       await settingsStorage.saveValue(
-        StorageParams.PROMO_TRACKERJAM_PROMPT_AT,
+        StorageParams.PROMO_CLEAR_YOUTUBE_PROMPT_AT,
         addDays(addHours(startOfToday(), PROMPT_AT_TIME_OF_DAY), ADD_DAYS_INITIAL).toString(),
       );
     } else {
@@ -62,14 +62,14 @@ onMounted(async () => {
 async function close() {
   showPromo.value = false;
   await settingsStorage.saveValue(
-    StorageParams.PROMO_TRACKERJAM_PROMPT_AT,
+    StorageParams.PROMO_CLEAR_YOUTUBE_PROMPT_AT,
     addDays(addHours(startOfToday(), PROMPT_AT_TIME_OF_DAY), ADD_DAYS_COUNT).toString(),
   );
 }
 
 async function openUrl() {
-  window.open('https://trackerjam.com?utm_source=watt_extension_prom', '_blank');
-  await settingsStorage.saveValue(StorageParams.PROMO_TRACKERJAM_DATE, new Date().toString());
+  window.open(CHROME_STORE_CLEAR_YOUTUBE_URL, '_blank');
+  await settingsStorage.saveValue(StorageParams.PROMO_CLEAR_YOUTUBE_DATE, new Date().toString());
 }
 </script>
 
