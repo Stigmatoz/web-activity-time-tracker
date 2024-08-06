@@ -374,39 +374,35 @@
     "message": "Clean YouTube",
     "description": "Extensión de Chrome que puede ocultar los cortos de YouTube, los vídeos recomendados, los comentarios, el feed, las recomendaciones de la página de inicio y otras distracciones. Vea YouTube sin distracciones."
   },
-  "trackerjam": {
-    "message": "TrackerJam",
-    "description": "Rastreador web automático para equipos. Informes detallados para cada miembro del equipo, detallando el tiempo empleado en sitios web, seguimiento de cualquier URL dentro del dominio, puntuaciones de productividad, dominios principales con categorías y etc."
-  },
   "darkTheme": {
     "message": "Tema oscuro"
   },
-  "trackerJamPromo": {
-    "message": "Pruebe nuestra nueva aplicación TrackerJam"
+  "cleanYoutube_promo": {
+    "message": "Prueba nuestra nueva extensión Clean Youtube"
   },
-  "trackerJamPromo_description": {
-    "message": "¿Le gustaría probar el seguimiento automático del tiempo con almacenamiento en la nube?"
+  "cleanYoutube_description": {
+    "message": "Te gustaría ocultar cortos, vídeos recomendados, comentarios en YouTube?"
   },
-  "trackerJamPromo_description2": {
-    "message": "TrackerJam es una combinación de una extensión de Chrome para analizar la actividad del navegador y un panel web para ver informes detallados."
+  "cleanYoutube_description2": {
+    "message": "Clean Youtube es un bloqueador de contenido de YouTube™."
   },
-  "trackerJamPromo_features": {
+  "cleanYoutube_features": {
     "message": "Nuestras características:"
   },
-  "trackerJamPromo_features1": {
-    "message": "Almacenamiento en la nube"
+  "cleanYoutube_features1": {
+    "message": "Modo Limpio - Muestra sólo el reproductor de vídeo en la página"
   },
-  "trackerJamPromo_features2": {
-    "message": "Puedes añadir varios usuarios para trabajar en equipo o utilizar el rastreador para analizar el tiempo personal y laboral por separado"
+  "cleanYoutube_features2": {
+    "message": "Ocultar cortos, comentarios, vídeos relacionados. Más de 15 opciones."
   },
-  "trackerJamPromo_features3": {
-    "message": "Analiza los sitios visitados por categoría en función de la IA y las métricas de productividad"
+  "cleanYoutube_features3": {
+    "message": "Desactivar reproducción automática"
   },
-  "trackerJamPromo_features4": {
-    "message": "Análisis detallados de cualquier página web visitada dentro de un sitio web"
+  "cleanYoutube_features4": {
+    "message": "Desactivar tarjetas de fin de pantalla"
   },
-  "trackerJamPromo_features5": {
-    "message": "Personalización del tiempo de trabajo"
+  "cleanYoutube_features5": {
+    "message": "Modo Blanco y Negro"
   },
   "try": {
     "message": "Pruebe"

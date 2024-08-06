@@ -374,39 +374,35 @@
     "message": "Clean YouTube",
     "description": "Chrome extension that can hide YouTube shorts, recomended videos, comments, feed, homepage recommendations and other distractions. Watch YouTube free of distractions."
   },
-  "trackerjam": {
-    "message": "TrackerJam",
-    "description": "Automatic web tracker for teams. Detailed reports for each team member, detailing time spent on websites, track any URL's inside domain, productivity scores, top domains with categories and etc."
-  },
   "darkTheme": {
     "message": "Dark theme"
   },
-  "trackerJamPromo": {
-    "message": "Try our new app TrackerJam"
+  "cleanYoutube_promo": {
+    "message": "Try our new extension Clean Youtube"
   },
-  "trackerJamPromo_description": {
-    "message": "Would like to try automatic time tracker with cloud storage?"
+  "cleanYoutube_description": {
+    "message": "Would like to hide shorts, recommended videos, comments on YouTube?"
   },
-  "trackerJamPromo_description2": {
-    "message": "TrackerJam is a combination of a chrome extension to analyze browser activity and a web dashboard to see detailed reports."
+  "cleanYoutube_description2": {
+    "message": "Clean Youtube is a YouTube™ content blocker."
   },
-  "trackerJamPromo_features": {
+  "cleanYoutube_features": {
     "message": "Our features:"
   },
-  "trackerJamPromo_features1": {
-    "message": "Cloud storage"
+  "cleanYoutube_features1": {
+    "message": "Clean Mode - Show only Video Player on Page"
   },
-  "trackerJamPromo_features2": {
-    "message": "You can add multiple users to work as a team or use the tracker to analyze personal and work time separately"
+  "cleanYoutube_features2": {
+    "message": "Hide Shorts, Comments, Related Videos. 15+ options."
   },
-  "trackerJamPromo_features3": {
-    "message": "Analyze visited sites by category based on AI and productivity metrics"
+  "cleanYoutube_features3": {
+    "message": "Disable AutoPlay"
   },
-  "trackerJamPromo_features4": {
-    "message": "Detailed analytics on any visited web page within a web site"
+  "cleanYoutube_features4": {
+    "message": "Disable End Screen Cards"
   },
-  "trackerJamPromo_features5": {
-    "message": "Work time customization"
+  "cleanYoutube_features5": {
+    "message": "Black and White Mode"
   },
   "try": {
     "message": "Try"

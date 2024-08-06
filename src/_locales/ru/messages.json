@@ -375,39 +375,35 @@
     "message": "Clean YouTube",
     "description": "Расширение для Chrome, которое может скрывать шортс YouTube, рекомендуемые видео, комментарии, ленту новостей, рекомендации по домашней странице и другие отвлекающие факторы. Смотрите YouTube без отвлекающих факторов."
   },
-  "trackerjam": {
-    "message": "TrackerJam",
-    "description": "Автоматический веб-трекер для команд. Подробные отчеты для каждого члена команды, детализация времени, проведенного на веб-сайтах, отслеживание любых URL внутри домена, показатели продуктивности, топ доменов с категориями и т.д."
-  },
   "darkTheme": {
     "message": "Темная тема"
   },
-  "trackerJamPromo": {
-    "message": "Попробуйте наше новое приложение TrackerJam"
+  "cleanYoutube_promo": {
+    "message": "Попробуйте наше новое расширение Clean Youtube"
   },
-  "trackerJamPromo_description": {
-    "message": "Хотите попробовать автоматический тайм-трекер с облачным хранилищем?"
+  "cleanYoutube_description": {
+    "message": "Хотите скрыть шортсы, рекомендуемые видео, комментарии на YouTube?"
   },
-  "trackerJamPromo_description2": {
-    "message": "TrackerJam - это сочетание расширения для хрома для анализа активности в браузере и веб-панели для просмотра подробных отчетов."
+  "cleanYoutube_description2": {
+    "message": "Clean Youtube - это блокировщик контента YouTube™."
   },
-  "trackerJamPromo_features": {
+  "cleanYoutube_features": {
     "message": "Наши возможности:"
   },
-  "trackerJamPromo_features1": {
-    "message": "Облачное хранилище"
+  "cleanYoutube_features1": {
+    "message": "Clean Mode - покажите только видеоплеер на странице"
   },
-  "trackerJamPromo_features2": {
-    "message": "Вы можете добавить несколько пользователей для работы в команде или использовать трекер для анализа личного и рабочего времени по отдельности"
+  "cleanYoutube_features2": {
+    "message": "Скрыть шортсы, комментарии, связанные видео. 15+ опций."
   },
-  "trackerJamPromo_features3": {
-    "message": "Анализ посещенных сайтов по категориям на основе показателей искусственного интеллекта и продуктивности"
+  "cleanYoutube_features3": {
+    "message": "Отключить автовоспроизведение"
   },
-  "trackerJamPromo_features4": {
-    "message": "Подробная аналитика по любой посещенной веб-странице внутри сайта"
+  "cleanYoutube_features4": {
+    "message": "Отключить карточки в конце видео"
   },
-  "trackerJamPromo_features5": {
-    "message": "Настройка рабочего времени"
+  "cleanYoutube_features5": {
+    "message": "Черно-белый режим"
   },
   "try": {
     "message": "Попробовать"

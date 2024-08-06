@@ -374,39 +374,35 @@
     "message": "Clean YouTube",
     "description": "Chrome-Erweiterung, die YouTube-Shorts, empfohlene Videos, Kommentare, Feeds, Homepage-Empfehlungen und andere Ablenkungen ausblenden kann. Sieh dir YouTube ohne Ablenkungen an."
   },
-  "trackerjam": {
-    "message": "TrackerJam",
-    "description": "Automatischer Web-Tracker für Teams. Detaillierte Berichte für jedes Teammitglied, mit detaillierten Angaben zur auf Websites verbrachten Zeit, Verfolgung aller URLs innerhalb der Domain, Produktivitätsbewertungen, Top-Domains mit Kategorien usw."
-  },
   "darkTheme": {
     "message": "Dunkles Thema"
   },
-  "trackerJamPromo": {
-    "message": "Probieren Sie unsere neue App TrackerJam"
+  "cleanYoutube_promo": {
+    "message": "Probieren Sie unsere neue Erweiterung Clean Youtube"
   },
-  "trackerJamPromo_description": {
-    "message": "Möchten Sie eine automatische Zeiterfassung mit Cloud-Speicher ausprobieren?"
+  "cleanYoutube_description": {
+    "message": "Möchten Sie Kurzfilme, empfohlene Videos und Kommentare auf YouTube ausblenden?"
   },
-  "trackerJamPromo_description2": {
-    "message": "TrackerJam ist eine Kombination aus einer Chrome-Erweiterung zur Analyse der Browser-Aktivitäten und einem Web-Dashboard zur Anzeige detaillierter Berichte."
+  "cleanYoutube_description2": {
+    "message": "Clean Youtube ist ein YouTube™-Inhaltsblocker."
   },
-  "trackerJamPromo_features": {
+  "cleanYoutube_features": {
     "message": "Unsere Funktionen:"
   },
-  "trackerJamPromo_features1": {
-    "message": "Cloud-Speicher"
+  "cleanYoutube_features1": {
+    "message": "Clean Mode - Nur Videoplayer auf der Seite anzeigen"
   },
-  "trackerJamPromo_features2": {
-    "message": "Sie können mehrere Benutzer hinzufügen, um als Team zu arbeiten, oder den Tracker verwenden, um persönliche und berufliche Zeit getrennt zu analysieren"
+  "cleanYoutube_features2": {
+    "message": "Kurze Videos, Kommentare und verwandte Videos ausblenden. 15+ Optionen."
   },
-  "trackerJamPromo_features3": {
-    "message": "Analyse der besuchten Seiten nach Kategorien, basierend auf KI und Produktivitätsmetriken"
+  "cleanYoutube_features3": {
+    "message": "AutoPlay deaktivieren"
   },
-  "trackerJamPromo_features4": {
-    "message": "Detaillierte Analysen zu jeder besuchten Seite innerhalb einer Website"
+  "cleanYoutube_features4": {
+    "message": "Endscreen-Karten deaktivieren"
   },
-  "trackerJamPromo_features5": {
-    "message": "Anpassung der Arbeitszeiten"
+  "cleanYoutube_features5": {
+    "message": "Schwarz/Weiß-Modus"
   },
   "try": {
     "message": "Testen Sie"

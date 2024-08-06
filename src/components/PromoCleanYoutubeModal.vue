@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" v-if="!showPromo">
+  <div class="modal" v-if="showPromo">
     <div class="modal-content promo">
       <p class="title">{{ t('cleanYoutube_promo.message') }}</p>
       <div class="img-block">
