@@ -1,10 +1,11 @@
 <template>
   <div class="review-block" v-if="showReview && canShowPromo">
-    <p>{{ t('promoClearYoutube.message') }}</p>
-    <div class="btn-block">
-      <img height="15" src="../assets/icons/close.svg" @click="closeBlock()" />
-      <input type="button" :value="t('promoClearYoutube.description')" @click="openStore()" />
+    <div class="img-block">
+      <img src="../assets/icons/clear-youtube-logo.svg" height="45" />
     </div>
+    <p>{{ t('promoClearYoutube.message') }}</p>
+    <input type="button" :value="t('promoClearYoutube.description')" @click="openStore()" />
+    <img height="15" src="../assets/icons/close.svg" @click="closeBlock()" />
   </div>
 </template>
 
@@ -59,14 +60,12 @@ async function saveValue() {
   font-size: 14px;
   background-color: #efefef;
   border-radius: 10px;
-  min-width: 655px;
+  display: flex;
+  justify-content: space-between;
 }
 .review-block .btn-block {
   margin: 8px 5px 0 0;
   vertical-align: top;
-  float: right;
-}
-.review-block input[type='button'] {
   float: right;
 }
 .review-block p {
