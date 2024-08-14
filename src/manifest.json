@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extName__",
   "short_name": "Web Tracker",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "__MSG_extDescription__",
   "options_page": "src/dashboard.html",
   "default_locale": "en",
