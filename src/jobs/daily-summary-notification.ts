@@ -6,11 +6,11 @@ import { NotificationType, useNotification } from '../functions/useNotification'
 import { getMessagesFromLocale } from '../plugins/i18n';
 
 export async function dailySummaryNotification() {
-  const showDailyNotifacation = (await Settings.getInstance().getSetting(
+  const showDailyNotification = (await Settings.getInstance().getSetting(
     StorageParams.DAILY_NOTIFICATION,
   )) as boolean;
 
-  if (showDailyNotifacation) {
+  if (showDailyNotification) {
     const data = await useWebUsageSummaryForDay();
     if (data == null) return;
 

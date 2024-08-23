@@ -231,7 +231,7 @@
   "save": {
     "message": "Speichern"
   },
-  "showDailyNotifacation": {
+  "showDailyNotification": {
     "message": "Tägliche Zusammenfassung als Benachrichtigung",
     "description": "Am Ende jedes Tages erhalten Sie eine Benachrichtigung mit einer Zusammenfassung Ihrer täglichen Nutzung."
   },
