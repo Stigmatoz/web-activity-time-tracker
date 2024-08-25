@@ -231,7 +231,7 @@
   "save": {
     "message": "保存"
   },
-  "showDailyNotifacation": {
+  "showDailyNotification": {
     "message": "每日摘要通知",
     "description": "每天结束时，您将收到一条通知，其中包含您的每日使用情况摘要。"
   },

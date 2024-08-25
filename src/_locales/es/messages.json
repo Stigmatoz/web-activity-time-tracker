@@ -231,7 +231,7 @@
   "save": {
     "message": "Guardar"
   },
-  "showDailyNotifacation": {
+  "showDailyNotification": {
     "message": "Notificaciones diarias resumidas",
     "description": "Al final de cada día, recibirás una notificación con un resumen de tu uso diario"
   },

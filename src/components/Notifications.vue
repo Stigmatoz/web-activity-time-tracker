@@ -6,12 +6,12 @@
           type="checkbox"
           class="filled-in"
           id="blockDeferral"
-          v-model="showDailyNotifacation"
+          v-model="showDailyNotification"
           @change="onChange(StorageParams.DAILY_NOTIFICATION, $event.target)"
         />
-        <span>{{ t('showDailyNotifacation.message') }}</span>
+        <span>{{ t('showDailyNotification.message') }}</span>
         <p class="description">
-          {{ t('showDailyNotifacation.description') }}
+          {{ t('showDailyNotification.description') }}
         </p>
       </label>
     </div>
@@ -82,13 +82,13 @@ const { t } = useI18n();
 
 const settingsStorage = injectStorage();
 
-const showDailyNotifacation = ref<boolean>();
+const showDailyNotification = ref<boolean>();
 const dailyNotificationTime = ref<number>();
 const notificationTime = ref<Time>();
 const notificationMessage = ref<string>();
 
 onMounted(async () => {
-  showDailyNotifacation.value = await settingsStorage.getValue(
+  showDailyNotification.value = await settingsStorage.getValue(
     StorageParams.DAILY_NOTIFICATION,
     DAILY_NOTIFICATION_DEFAULT,
   );
