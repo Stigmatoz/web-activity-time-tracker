@@ -51,7 +51,7 @@
 }
 .dark .settings-tab label[name="tabName"]{
   background-color: #303030 !important;
-  color: #bbbbbb;
+  color: #f7f7f7;
 }
 .dark .settings-content{
   background-color: #303030 !important;
