@@ -51,7 +51,7 @@
       </div>
 
       <div>
-        <Expander day="Total" :time="tabsByDays?.summaryTime || 0">
+        <Expander :day="t('allTime.message')" :time="tabsByDays?.summaryTime || 0" class="total">
           <TabItem
             v-for="(tab, i) of mergeAllDays(tabsByDays?.days)"
             :item="tab"
@@ -65,11 +65,11 @@
           :day="tabDay.day"
           :time="tabDay.time"
         >
-        <TabItem
-          v-for="(tab, i) of tabDay.tabs"
-          :key="i"
-          :item="tab"
-          :summaryTimeForWholeDay="tabDay.time"
+          <TabItem
+            v-for="(tab, i) of tabDay.tabs"
+            :key="i"
+            :item="tab"
+            :summaryTimeForWholeDay="tabDay.time"
           />
         </Expander>
       </div>
@@ -199,5 +199,8 @@ function mergeAllDays(days: TabListByDays['days'] | undefined): CurrentTabItem[]
 }
 .by-days-chart {
   height: 240px;
+}
+.expander.total {
+  background-color: #e0e4ff;
 }
 </style>

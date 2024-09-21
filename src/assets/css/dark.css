@@ -43,6 +43,9 @@
 .dark .expander .header span{
   color: #b9b9b9 !important;
 }
+.dark .expander.total {
+  background-color: #6f6f6f !important;
+}
 .dark .header span{
   color: rgb(255 255 255);
 }
