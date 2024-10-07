@@ -19,7 +19,7 @@ import { injectStorage } from '../storage/inject-storage';
 import { StorageParams } from '../storage/storage-params';
 import { addDays, startOfToday } from 'date-fns';
 import { addHours } from 'date-fns/esm';
-import { CHROME_STORE_REVIEW_URL } from '../utils/chrome-url';
+import { CHROME_STORE_REVIEW_URL, EDGE_STORE_REVIEW_URL } from '../utils/chrome-url';
 
 const { t } = useI18n();
 
@@ -32,20 +32,18 @@ const showReview = ref<boolean>();
 
 onMounted(async () => {
   showReview.value = false;
-  if (__BROWSER__ == 'chrome') {
-    const reviewDate = await settingsStorage.getValue(StorageParams.REVIEW_DATE);
+  const reviewDate = await settingsStorage.getValue(StorageParams.REVIEW_DATE);
 
-    if (reviewDate == undefined) {
-      let nextTime = await settingsStorage.getValue(StorageParams.REVIEW_PROMPT_AT);
-      if (nextTime == undefined) {
-        await settingsStorage.saveValue(
-          StorageParams.REVIEW_PROMPT_AT,
-          addDays(addHours(startOfToday(), PROMPT_AT_TIME_OF_DAY), ADD_DAYS_FIRST).toString(),
-        );
-      } else {
-        nextTime = new Date(nextTime);
-        if (nextTime < new Date()) showReview.value = true;
-      }
+  if (reviewDate == undefined) {
+    let nextTime = await settingsStorage.getValue(StorageParams.REVIEW_PROMPT_AT);
+    if (nextTime == undefined) {
+      await settingsStorage.saveValue(
+        StorageParams.REVIEW_PROMPT_AT,
+        addDays(addHours(startOfToday(), PROMPT_AT_TIME_OF_DAY), ADD_DAYS_FIRST).toString(),
+      );
+    } else {
+      nextTime = new Date(nextTime);
+      if (nextTime < new Date()) showReview.value = true;
     }
   }
 });
@@ -59,7 +57,7 @@ async function closeBlock() {
 }
 
 async function openStore() {
-  window.open(CHROME_STORE_REVIEW_URL, '_blank');
+  window.open(__BROWSER__ == 'edge' ? EDGE_STORE_REVIEW_URL : CHROME_STORE_REVIEW_URL, '_blank');
   await settingsStorage.saveValue(StorageParams.REVIEW_DATE, new Date().toString());
 }
 </script>

@@ -5,7 +5,10 @@ import webExtension, { readJsonFile } from 'vite-plugin-web-extension';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import copy from 'rollup-plugin-copy';
 
-const APPID_CHROME = 'hhfnghjdeddcfegfekjeihfmbjenlomm';
+const APP_ID = {
+  chrome: 'hhfnghjdeddcfegfekjeihfmbjenlomm',
+  edge: 'eepmlmdenlkkjieghjmedjahpofieogf',
+};
 const browser = process.env.TARGET || 'chrome';
 
 function generateManifest() {
@@ -44,7 +47,7 @@ export default defineConfig(({ mode }) => ({
     __EXTENSION_MODE__: JSON.stringify(mode),
     __DEV__: mode === 'development',
     __PROD__: mode === 'production',
-    __APP_ID__: JSON.stringify(APPID_CHROME),
+    __APP_ID__: JSON.stringify(APP_ID[browser]),
     __BROWSER__: JSON.stringify(browser),
   },
   plugins: [
