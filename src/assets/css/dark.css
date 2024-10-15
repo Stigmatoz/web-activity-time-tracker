@@ -50,7 +50,9 @@
   color: rgb(255 255 255);
 }
 .dark .settings-tab label[name="tabName"] img{
-  filter: brightness(0) saturate(100%) invert(70%) sepia(5%) saturate(3889%) hue-rotate(191deg) brightness(95%) contrast(81%)
+  background-color: grey;
+  border-radius: 10px;
+  padding: 5px;
 }
 .dark .settings-tab label[name="tabName"]{
   background-color: #303030 !important;
