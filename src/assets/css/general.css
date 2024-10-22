@@ -75,7 +75,7 @@ select {
   width: 100%;
 }
 input[type='button'] {
-  background: #428bff;
+  background: #5377af;
   color: #fff;
   border-radius: 7px;
   height: 36px;
@@ -91,7 +91,7 @@ input[type='button'] {
 }
 
 input[type='button']:hover {
-  background: #5c9dfe;
+  background: #314158;
   text-decoration: none;
 }
 

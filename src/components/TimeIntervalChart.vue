@@ -23,7 +23,11 @@ export default {
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import { injectStorage } from '../storage/inject-storage';
-import { StorageDeserializeParam } from '../storage/storage-params';
+import {
+  DARK_MODE_DEFAULT,
+  StorageDeserializeParam,
+  StorageParams,
+} from '../storage/storage-params';
 import { TimeInterval } from '../entity/time-interval';
 import { todayLocalDate } from '../utils/date';
 import { useI18n } from 'vue-i18n';
@@ -43,6 +47,7 @@ const storage = injectStorage();
 const chart = ref<any>();
 const minValue = ref<number>();
 const todayIntervals = ref<TimeInterval[]>();
+const darkMode = ref();
 
 type DataForChart = {
   domain: string;
@@ -56,6 +61,7 @@ onMounted(async () => {
   )) as TimeInterval[];
 
   todayIntervals.value = timeIntervalList?.filter(x => x.day == todayLocalDate());
+  darkMode.value = await storage.getValue(StorageParams.DARK_MODE, DARK_MODE_DEFAULT);
   renderChart();
 });
 
@@ -157,12 +163,16 @@ function drawIntervalChart(data: DataForChart[]) {
   svg
     .append('g')
     .attr('class', 'grid')
-    .style('color', '#e5e5e5')
+    .style('color', darkMode.value ? '#797979' : '#e5e5e5')
     .attr('transform', `translate(0, ${height})`)
     .call(xAxis.tickSize(-height));
 
-  svg.append('g').attr('class', 'grid').style('color', '#e5e5e5').call(yAxis.tickSize(-width));
-  svg.selectAll('text').style('fill', 'black');
+  svg
+    .append('g')
+    .attr('class', 'grid')
+    .style('color', darkMode.value ? '#797979' : '#e5e5e5')
+    .call(yAxis.tickSize(-width));
+  svg.selectAll('text').style('fill', '#797979');
 
   //draw the bars, offset y and bar height based on data
   svg

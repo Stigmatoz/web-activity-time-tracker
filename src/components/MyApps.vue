@@ -70,6 +70,7 @@ function openAppLink(app: App) {
 .description {
   margin-top: 10px;
   font-size: 14px;
+  color: black;
 }
 img {
   margin: auto;

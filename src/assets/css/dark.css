@@ -46,6 +46,9 @@
 .dark .expander.total {
   background-color: #6f6f6f !important;
 }
+.dark .url-list{
+  border: 1px solid #494949 !important;
+}
 .dark .header span{
   color: rgb(255 255 255);
 }
@@ -62,8 +65,14 @@
   background-color: #303030 !important;
   border-left: 1px solid #494949 !important;
 }
+.dark .app-block{
+  background-color: #919191 !important;
+}
 .dark .app-block .title{
-  color: black;
+  color: rgb(255, 255, 255);
+}
+.dark .app-block .description{
+  color: white !important;
 }
 .dark .settings-tab label[name="tabName"]:hover, .dark [type='radio']:checked ~ label{
   background-color: #666666 !important;

@@ -87,7 +87,7 @@ function openChart(type: TypeOfChart) {
 }
 
 .chart-btn.active {
-  background-color: #428bff !important;
+  background-color: #5377af !important;
   color: white;
 }
 </style>
