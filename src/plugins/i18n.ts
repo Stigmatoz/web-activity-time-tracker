@@ -5,6 +5,7 @@ import ru from '../_locales/ru/messages.json';
 import de from '../_locales/de/messages.json';
 import zh from '../_locales/zh_CN/messages.json';
 import es from '../_locales/es/messages.json';
+import ja from '../_locales/ja/messages.json';
 
 const locales = {
   en,
@@ -12,6 +13,7 @@ const locales = {
   de,
   zh,
   es,
+  ja,
 };
 
 export type Languages = keyof typeof locales;

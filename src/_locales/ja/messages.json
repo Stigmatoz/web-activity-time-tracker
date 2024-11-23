@@ -1,0 +1,410 @@
+{
+  "extName": {
+    "message": "ウェブ活動時間トラッカー - ブロックウェブサイト,ポモドーロ＆ウ:ェブ分析"
+  },
+  "extDescription": {
+    "message": "あなたのウェブ活動の時間を追跡し,制限し,気が散るウェブサイトをブロックします。あなたのウェブ利用を監視します。"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "today": {
+    "message": "今日"
+  },
+  "allTime": {
+    "message": "合計時間"
+  },
+  "byDays": {
+    "message": "毎日"
+  },
+  "noData": {
+    "message": "データなし"
+  },
+  "noDataForPeriod": {
+    "message": "選択された期間のデータがありません"
+  },
+  "showAll": {
+    "message": "すべてのウェブサイトを表示"
+  },
+  "sortBy": {
+    "message": "ソート順"
+  },
+  "usageTime": {
+    "message": "使用時間"
+  },
+  "session": {
+    "message": "セッション"
+  },
+  "someSession": {
+    "message": "セッション"
+  },
+  "sessions": {
+    "message": "セッション"
+  },
+  "days": {
+    "message": "日数"
+  },
+  "aggregate": {
+    "message": "からの集計データ"
+  },
+  "websites": {
+    "message": "ウェブサイト"
+  },
+  "cannotOpenFile": {
+    "message": "セキュリティ・プロトコルのため,ローカル・ファイルを開けません。"
+  },
+  "docmument": {
+    "message": "ドキュメント"
+  },
+  "limit": {
+    "message": "リミット"
+  },
+  "d": {
+    "message": "d"
+  },
+  "h": {
+    "message": "h"
+  },
+  "m": {
+    "message": "m"
+  },
+  "s": {
+    "message": "s"
+  },
+  "firstActiveDay": {
+    "message": "最初の活動日"
+  },
+  "numberOfActiveDays": {
+    "message": "アクティブな日数"
+  },
+  "totalNumberOfDays": {
+    "message": "合計日数"
+  },
+  "todayTime": {
+    "message": "今日のすべての時間"
+  },
+  "averageTime": {
+    "message": "アクティブな日の平均時間"
+  },
+  "averageDailyUsage": {
+    "message": "1日の平均使用量"
+  },
+  "mostActiveDay": {
+    "message": "最もアクティブな日"
+  },
+  "mostInactiveDay": {
+    "message": "最もアクティブでない日"
+  },
+  "todayInclude": {
+    "message": "今日は統計に含まれます。除外するにはクリックしてください。"
+  },
+  "todayEcclude": {
+    "message": "今日は統計から除外されています。クリックすると含まれます。"
+  },
+  "averageTimeByDays": {
+    "message": "選択した日の平均時間"
+  },
+  "exportToCsv": {
+    "message": "CSVにエクスポート"
+  },
+  "week": {
+    "message": "今週"
+  },
+  "month": {
+    "message": "今月"
+  },
+  "lastMonth": {
+    "message": "今月"
+  },
+  "generalSettings": {
+    "message": "設定"
+  },
+  "whiteListSettings": {
+    "message": "ホワイトリスト"
+  },
+  "limitsSettings": {
+    "message": "制限"
+  },
+  "notificationsSettings": {
+    "message": "通知"
+  },
+  "pomodoroMode": {
+    "message": "ポモドーロ"
+  },
+  "pomodoroSettings": {
+    "message": "ポモドーロ設定"
+  },
+  "pomodoro": {
+    "message": "ポモドーロ",
+    "description": "ポモドーロ法は,集中した作業と休息を交互に繰り返すことに基づく時間管理手法である。ポモドーロ法の古典によれば,作業時間は25分,休憩時間は5分である。"
+  },
+  "pomodoroExplanationIcon": {
+    "message": "ポモドーロモードがオンで,操作モードがアクティブなとき,このアイコンを見ることができます,",
+    "description": "休憩時間中は,この拡張アイコンが表示されます"
+  },
+  "pomodoroExplanationTime": {
+    "message": "ポモドーロモードの間,エクステンションはサイトに費やした時間を考慮し続け,すべての制限と通知作業を行います。"
+  },
+  "pomodoroExplanationStop": {
+    "message": "停止」をクリックすると、作業時間と休憩時間はゼロにリセットされる。"
+  },
+  "pomodoroWork": {
+    "message": "仕事の期間"
+  },
+  "pomodoroRest": {
+    "message": "休息期間"
+  },
+  "pomodoroFrequency": {
+    "message": "繰り返し回数"
+  },
+  "start": {
+    "message": "実行"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "pomodoroIsEnabled": {
+    "message": "ポモドーロモードは有効です"
+  },
+  "pomodoroSoundAfter": {
+    "message": "期間終了後の音"
+  },
+  "clickToPreview": {
+    "message": "クリックで試聴"
+  },
+  "sound": {
+    "message": "サウンド"
+  },
+  "aboutSettings": {
+    "message": "について"
+  },
+  "viewTimeInBadge": {
+    "message": "アイコンにタイムトラッカーを表示する,",
+    "description": "拡張機能アイコンをクリックすると、現在の「滞在時間」情報を短いフォーマットで見ることができます。"
+  },
+  "deferringDescription": {
+    "message": "一日のうち一度だけ,5分間だけブロック時間を延期することができます。"
+  },
+  "allowDeferringBlock": {
+    "message": "5分間のブロック延期を許可",
+    "description": "サイトがブロックされた後,一度だけ日中5分間ブロックを延期できる"
+  },
+  "intervalInactivity": {
+    "message": "のアクションがない場合,トラッカーを停止します,",
+    "description": "マウスやキーボードによるアクション"
+  },
+  "exportToCsvSetting": {
+    "message": "WebアクティビティデータをCSVにエクスポートします,",
+    "説明": "任意の日付範囲のウェブ活動をエクスポートできます。"
+  },
+  "sec": {
+    "message": "秒"
+  },
+  "min": {
+    "message": "分"
+  },
+  "2min": {
+    "message": "分"
+  },
+  "mins": {
+    "message": "分"
+  },
+  "whiteList": {
+    "message": "これらのウェブサイトのアクティビティと滞在時間は追跡されません。"
+  },
+  "addWebsite": {
+    "message": "ウェブサイトを追加"
+  },
+  "enterWebsite": {
+    "message": "ウェブサイト名を入力してください..."
+  },
+  "enterNotification": {
+    "message": "通知messageを入力..."
+  },
+  "limits": {
+    "message": "ウェブサイトの毎日のアクセス制限",
+    "description": "1日にウェブサイトにアクセスできる最大時間を設定します。この時間を過ぎると,サイトはブロックされます。"
+  },
+  "limitsTip": {
+    "message": "ブロック時間を0時間0分に設定した場合,ウェブサイトは直ちにブロックされます。"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "showDailyNotification": {
+    "message": "デイリーサマリー通知",
+    "description": "一日の終わりに,一日の使用量を要約した通知を受け取ります"
+  },
+  "notificationTime": {
+    "message": "ウェブサイトの通知",
+    "description": "選択した時間をウェブサイトに費やすたびに通知を表示する"
+  },
+  "notificationMessage": {
+    "message": "通知メッセージ",
+    "description": "ウェブサイトの通知で毎回このmessageが表示されます"
+  },
+  "notificationTimeSetting": {
+    "message": "1日の利用状況についてのサマリー情報を通知時間に表示"
+  },
+  "github": {
+    "message": "ご意見をお寄せください。"
+  },
+  "question": {
+    "message": "質問や提案を残すこともできます。"
+  },
+  "supportForm": {
+    "message": "サポートフォーム"
+  },
+  "doYouEnjoy": {
+    "message": "Web Activity Time Trackerを楽しんでいますか？"
+  },
+  "review": {
+    "message": "レビューを書く"
+  },
+  "promoClearYoutube": {
+    "message": "ショートフィルム,コメント,おすすめ動画,購読,その他のYouTubeの邪魔なものをブロックしたいですか？気晴らしにYouTubeを見るのに役立つ別の拡張機能を作りました。",
+    "description": "クリーンユーチューブを試す"
+  },
+  "block": {
+    "message": "で今日の制限に達した。"
+  },
+  "5mins": {
+    "message": "+5分"
+  },
+  "todayUsageTime": {
+    "message": "今日の総使用時間"
+  },
+  "comparedToYesterday": {
+    "message": " 昨日との比較 "
+  },
+  "mostVisited": {
+    "message": "最も訪問されたウェブサイト"
+  },
+  "dashboard": {
+    "message": "ダッシュボード"
+  },
+  "timeChartDescription": {
+    "message": "日中の時間を時間単位で表したチャートです"
+  },
+  "enjoyAndReview": {
+    "message": "エクステンションを楽しんでいますか？",
+    "description": "ウェブ活動時間トラッカーを評価する"
+  },
+  "removeAllData": {
+    "message": "すべてのデータを削除する,",
+    "description": "訪問したウェブサイトのすべてのデータと統計情報を削除することができます。"
+  },
+  "remove": {
+    "message": "削除"
+  },
+  "removeAllDataConfirm": {
+    "message": "本当に全データを削除しますか？"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "backupAndRestore": {
+    "message": "バックアップとリストア",
+    "説明": "訪問したすべてのサイトのすべてのデータのバックアップコピーをダウンロードすることができます。"
+  },
+  "backup": {
+    "message": "バックアップ"
+  },
+  "restore": {
+    "message": "リストア"
+  },
+  "welcome": {
+    "message": "Web Activity Time Trackerへようこそ",
+    "description": "Web Activity Time Trackerは、オープンソース、<b>無料</b>、<b>広告なし</b>の拡張機能で、ウェブサイトの閲覧に費やした時間や訪問回数を記録することができます。"
+  },
+  "getStarted": {
+    "message": "スタート"
+  },
+  "welcomeStart": {
+    "message": "簡単な3ステップで、すぐに拡張機能を使い始めることができます。"
+  },
+  "pinIcon": {
+    "message": "アイコンをピン留めする"
+  },
+  "pinIconPart1": {
+    "message": "この拡張機能をより便利に使用するには、アイコンをツールバーに固定します。アイコンをクリック"
+  },
+  "pinIconPart2": {
+    "message": "をクリックし、ピンのアイコンをクリックします。"
+  },
+  "browse": {
+    "message": "任意のウェブサイトをブラウズする,",
+    "description": "ウェブサイトにアクセスすると,アイコンに時刻が表示されます。"
+  },
+  "seeData": {
+    "message": "ポップアップページとダッシュボードでデータを見る",
+    "description": "拡張機能のアイコンをクリックすると,ポップアップページが開き,円グラフを使って視覚化されたデータを,今日,すべての時間,または日ごとに読むことができます。ポップアップウィンドウでは,ダッシュボードを開くことができ,時計で今日の時間を表示します。また,任意のウェブサイトに対して1日の時間制限を設定したり,ウェブサイトに対する通知を設定したり,データをCSVにエクスポートしたりすることができます。"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "useExtension": {
+    "message": "拡張機能を使用する"
+  },
+  "next": {
+    "message": "次"
+  },
+  "showChangelog": {
+    "message": "変更履歴を表示",
+    "description": "エクステンションの更新後に変更点の一覧を表示する"
+  },
+  "byHours": {
+    "message": "時間単位"
+  },
+  "interval": {
+    "message": "間隔"
+  },
+  "intervalsChart": {
+    "message": "より大きい時間間隔のみ",
+    "description": "が表示される。"
+  },
+  "completelyBlocked": {
+    "message": "完全にブロックされました,",
+    "description": "完全にブロック"
+  },
+  "tryMyOtherApps": {
+    "message": "他のアプリを試す"
+  },
+  "clearYoutube": {
+    "message": "YouTubeをクリーン",
+    "description": "YouTubeのショートムービー,おすすめビデオ,コメント,フィード,ホームページのおすすめやその他の邪魔なものを隠すことができるChrome拡張機能です。気晴らしにYouTubeを見よう。"
+  },
+  "darkTheme": {
+    "message": "ダークテーマ"
+  },
+  "cleanYoutube_promo": {
+    "message": "新しい拡張機能Clean Youtubeをお試しください"
+  },
+  "cleanYoutube_description": {
+    "message": "YouTubeのショートフィルム,おすすめ動画,コメントを非表示にしますか？"
+  },
+  "cleanYoutube_description2": {
+    "message": "クリーンYoutubeはYouTube™コンテンツブロッカーです。"
+  },
+  "cleanYoutube_features": {
+    "message": "私たちの機能:"
+  },
+  "cleanYoutube_features1": {
+    "message": "クリーンモード - ページに動画プレーヤーのみを表示"
+  },
+  "cleanYoutube_features2": {
+    "message": "ショートカット、コメント、関連ビデオを隠す。15以上のオプション"
+  },
+  "cleanYoutube_features3": {
+    "message": "自動再生を無効にする"
+  },
+  "cleanYoutube_features4": {
+    "message": "終了画面カードを無効にする"
+  },
+  "cleanYoutube_features5": {
+    "message": "白黒モード"
+  },
+  "try": {
+    "message": "トライ"
+  }
+}
