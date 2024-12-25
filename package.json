@@ -28,8 +28,8 @@
     "@vuepic/vue-datepicker": "^5.4.0",
     "typescript": "^5.7.2",
     "vite": "^4.5.5",
-    "vite-plugin-web-extension": "^3.2.0",
-    "vue-tsc": "^1.8.27",
+    "vite-plugin-web-extension": "^4.0.0",
+    "vue-tsc": "^2.2.0",
     "webextension-polyfill": "^0.10.0"
   }
 }
