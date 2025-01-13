@@ -33,8 +33,9 @@
           >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
         /></a>
       </div>
-      <a @click="openPage(SettingsTab.Pomodoro)" class="float-right"
-        >{{ t('donate.message') }}<img src="../assets/icons/donate.png" height="22"
+      <a @click="openPage(SettingsTab.Donate)" class="float-right"
+        >{{ t('donate.message')
+        }}<img class="donate-img" src="../assets/icons/donate.png" height="22"
       /></a>
     </div>
   </div>
@@ -184,5 +185,10 @@ function updateTab() {
 }
 .headerBlock .icons-block .dark-mode-icon {
   vertical-align: middle;
+}
+
+.headerBlock .icons-block .donate-img {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 </style>

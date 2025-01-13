@@ -10,6 +10,8 @@ export function getStringTab(tab: SettingsTab) {
       return 'settings';
     case SettingsTab.About:
       return 'about';
+    case SettingsTab.Donate:
+      return 'donation';
     case SettingsTab.Limits:
       return 'limits';
     case SettingsTab.WhiteList:
