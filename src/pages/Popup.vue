@@ -5,31 +5,36 @@
       <p class="header">Web Activity Time Tracker</p>
     </div>
     <div class="icons-block">
-      <img
-        class="dark-mode-icon"
-        height="25"
-        src="../assets/icons/light-mode.svg"
-        title="Disable Dark Mode"
-        v-if="darkMode == true"
-        @click="changeDarkMode(false)"
-      />
-      <img
-        class="dark-mode-icon"
-        title="Enable Dark Mode"
-        height="25"
-        src="../assets/icons/dark-mode.svg"
-        v-if="darkMode == false"
-        @click="changeDarkMode(true)"
-      />
+      <div>
+        <img
+          class="dark-mode-icon"
+          height="25"
+          src="../assets/icons/light-mode.svg"
+          title="Disable Dark Mode"
+          v-if="darkMode == true"
+          @click="changeDarkMode(false)"
+        />
+        <img
+          class="dark-mode-icon"
+          title="Enable Dark Mode"
+          height="25"
+          src="../assets/icons/dark-mode.svg"
+          v-if="darkMode == false"
+          @click="changeDarkMode(true)"
+        />
 
-      <a @click="openPage(SettingsTab.Pomodoro)"
-        >{{ t('pomodoroMode.message') }}<img src="../assets/icons/pomodoro.svg" height="22"
-      /></a>
-      <a class="filter" @click="openPage(SettingsTab.Dashboard)"
-        >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
-      /></a>
-      <a class="filter" @click="openPage(SettingsTab.GeneralSettings)"
-        >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
+        <a @click="openPage(SettingsTab.Pomodoro)"
+          >{{ t('pomodoroMode.message') }}<img src="../assets/icons/pomodoro.svg" height="22"
+        /></a>
+        <a class="filter" @click="openPage(SettingsTab.Dashboard)"
+          >{{ t('dashboard.message') }}<img height="22" src="../assets/icons/dashboard.svg"
+        /></a>
+        <a class="filter" @click="openPage(SettingsTab.GeneralSettings)"
+          >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
+        /></a>
+      </div>
+      <a @click="openPage(SettingsTab.Pomodoro)" class="float-right"
+        >{{ t('donate.message') }}<img src="../assets/icons/donate.png" height="22"
       /></a>
     </div>
   </div>
@@ -139,7 +144,8 @@ function updateTab() {
 
 <style scoped>
 .headerBlock {
-  height: 52px;
+  display: flex;
+  justify-content: space-between;
 }
 .headerBlock .header {
   font-size: 16px;
