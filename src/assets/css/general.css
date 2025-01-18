@@ -160,3 +160,9 @@ input[type='button'][disabled] {
 .date-block .date-picker {
   width: 250px;
 }
+.font-bold{
+  font-weight: 600;
+}
+.font-16{
+  font-size: 16px;
+}

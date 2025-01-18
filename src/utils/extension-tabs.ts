@@ -41,5 +41,7 @@ export function getEnumValueTab(tab: string) {
       return SettingsTab.Notifications;
     case 'pomodoro':
       return SettingsTab.Pomodoro;
+    case 'donation':
+      return SettingsTab.Donate;
   }
 }
