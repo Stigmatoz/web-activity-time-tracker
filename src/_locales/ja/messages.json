@@ -406,5 +406,26 @@
   },
   "try": {
     "message": "トライ"
+  },
+  "donate": {
+    "message": "寄付する"
+  },
+  "enjoy":{
+    "message": "Web Activity Time Trackerを楽しんでいますか？"
+  },
+  "canDonate":{
+    "message": "Web Activity Time Trackerは無料の拡張機能です。さらなる開発のために、暗号通貨でご支援ください。"
+  },
+  "thanks":{
+    "message": "ありがとうございます！ 🙏"
+  },
+  "coin":{
+    "message": "コイン"
+  },
+  "chain":{
+    "message": "チェーン"
+  },
+  "address":{
+    "message": "アドレス"
   }
 }

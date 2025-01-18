@@ -409,5 +409,23 @@
   },
   "donate": {
     "message": "Donate"
+  },
+  "enjoy":{
+    "message": "Do you enjoy Web Activity Time Tracker?"
+  },
+  "canDonate":{
+    "message": "Web Activity Time Tracker is free extension. You can support me for the further development with cryptocurrency."
+  },
+  "thanks":{
+    "message": "Thank you! 🙏"
+  },
+  "coin":{
+    "message": "Coin"
+  },
+  "chain":{
+    "message": "Chain"
+  },
+  "address":{
+    "message": "Address"
   }
 }

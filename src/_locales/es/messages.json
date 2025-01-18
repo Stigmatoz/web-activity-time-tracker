@@ -406,5 +406,26 @@
   },
   "try": {
     "message": "Pruebe"
+  },
+  "donate":{
+    "message": "Donación"
+  },
+  "enjoy":{
+    "message": "¿Te gusta Web Activity Time Tracker?"
+  },
+  "canDonate":{
+    "message": "Web Activity Time Tracker es una extensión gratuita. Usted me puede apoyar para el desarrollo futuro con cryptocurrency."
+  },
+  "thanks":{
+    "message": "Muchas gracias! 🙏"
+  },
+  "coin":{
+    "message": "Moneda"
+  },
+  "chain":{
+    "message": "Cadena"
+  },
+  "address":{
+    "message": "Dirección"
   }
 }

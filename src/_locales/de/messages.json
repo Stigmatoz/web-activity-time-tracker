@@ -406,5 +406,26 @@
   },
   "try": {
     "message": "Testen Sie"
+  },
+  "donate":{
+    "message": "Spende"
+  },
+  "enjoy":{
+    "message": "Haben Sie Spaß an Web Activity Time Tracker?"
+  },
+  "canDonate":{
+    "message": "Web Activity Time Tracker ist eine kostenlose Erweiterung. Sie können mich für die weitere Entwicklung mit Kryptowährung unterstützen."
+  },
+  "thanks":{
+    "message": "Vielen Dank dafür! 🙏"
+  },
+  "coin":{
+    "message": "Münze"
+  },
+  "chain":{
+    "message": "Kette"
+  },
+  "address":{
+    "message": "Adresse"
   }
 }
