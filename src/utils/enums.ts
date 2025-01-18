@@ -19,6 +19,7 @@ export enum SettingsTab {
   Notifications,
   Pomodoro,
   About,
+  Donate,
 }
 
 export enum ListWithTime {

@@ -406,5 +406,26 @@
   },
   "try": {
     "message": "试用"
+  },
+  "donate":{
+    "message": "捐赠"
+  },
+  "enjoy":{
+    "message": "您喜欢 Web Activity Time Tracker 吗"
+  },
+  "canDonate":{
+    "message": "Web Activity Time Tracker 是永久免费的扩展。您可以使用加密货币支持我进一步开发。"
+  },
+  "thanks":{
+    "message": "谢谢！ 🙏"
+  },
+  "coin":{
+    "message": "币"
+  },
+  "chain":{
+    "message": "链"
+  },
+  "address":{
+    "message": "币链地址"
   }
 }
