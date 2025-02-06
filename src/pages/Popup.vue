@@ -33,10 +33,6 @@
           >{{ t('settings.message') }}<img height="22" src="../assets/icons/settings.svg"
         /></a>
       </div>
-      <a @click="openPage(SettingsTab.Donate)" class="float-right"
-        >{{ t('donate.message')
-        }}<img class="donate-img" src="../assets/icons/donate.png" height="22"
-      /></a>
     </div>
   </div>
   <div class="tabs">
