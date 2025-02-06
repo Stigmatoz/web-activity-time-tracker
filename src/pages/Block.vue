@@ -81,7 +81,7 @@ async function deferring() {
     haveToShowDeffering.value
   ) {
     await defering(webSite.value, 5);
-    if (sourceUrl.value != '') window.open(sourceUrl.value);
+    if (sourceUrl.value != '') window.location.replace(sourceUrl.value);
   }
 }
 </script>
