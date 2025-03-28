@@ -1,0 +1,431 @@
+{
+    "extName": {
+      "message": "Web Activity Time Tracker - Web Sitelerini Engelle, Pomodoro ve Web Analitiği"
+    },
+    "extDescription": {
+      "message": "Web aktivitelerinizi takip edin, dikkat dağıtıcı web sitelerini sınırlayın ve engelleyin. Web kullanımınızı izleyin."
+    },
+    "settings": {
+      "message": "Ayarlar"
+    },
+    "today": {
+      "message": "Bugün"
+    },
+    "allTime": {
+      "message": "Toplam zaman"
+    },
+    "byDays": {
+      "message": "Günlük"
+    },
+    "noData": {
+      "message": "Veri yok"
+    },
+    "noDataForPeriod": {
+      "message": "Seçilen dönem için veri yok"
+    },
+    "showAll": {
+      "message": "Tüm web sitelerini göster"
+    },
+    "sortBy": {
+      "message": "Sırala"
+    },
+    "usageTime": {
+      "message": "Kullanım Süresi"
+    },
+    "session": {
+      "message": "oturum"
+    },
+    "someSession": {
+      "message": "oturumlar"
+    },
+    "sessions": {
+      "message": "Oturumlar"
+    },
+    "days": {
+      "message": "günler"
+    },
+    "aggregate": {
+      "message": "Tarihinden itibaren verileri birleştir"
+    },
+    "websites": {
+      "message": "web siteleri"
+    },
+    "cannotOpenFile": {
+      "message": "Güvenlik protokolü nedeniyle yerel bir dosya açılamaz"
+    },
+    "document": {
+      "message": "Belge"
+    },
+    "limit": {
+      "message": "Sınırlama"
+    },
+    "d": {
+      "message": "g"
+    },
+    "h": {
+      "message": "s"
+    },
+    "m": {
+      "message": "d"
+    },
+    "s": {
+      "message": "sn"
+    },
+    "firstActiveDay": {
+      "message": "İlk aktif gün"
+    },
+    "numberOfActiveDays": {
+      "message": "Aktif gün sayısı"
+    },
+    "totalNumberOfDays": {
+      "message": "Toplam gün sayısı"
+    },
+    "todayTime": {
+      "message": "Bugün tüm zaman"
+    },
+    "averageTime": {
+      "message": "Aktif günler için ortalama süre"
+    },
+    "averageDailyUsage": {
+      "message": "Günlük ortalama kullanım"
+    },
+    "mostActiveDay": {
+      "message": "En aktif gün"
+    },
+    "mostInactiveDay": {
+      "message": "En pasif gün"
+    },
+    "todayInclude": {
+      "message": "Bugün istatistiklere dahil. Hariç tutmak için tıklayın."
+    },
+    "todayEcclude": {
+      "message": "Bugün istatistiklere dahil değil. Dahil etmek için tıklayın."
+    },
+    "averageTimeByDays": {
+      "message": "Seçilen günlerdeki ortalama süre"
+    },
+    "exportToCsv": {
+      "message": "CSV'ye aktar"
+    },
+    "week": {
+      "message": "Bu hafta"
+    },
+    "month": {
+      "message": "Bu ay"
+    },
+    "lastMonth": {
+      "message": "Geçen ay"
+    },
+    "generalSettings": {
+      "message": "Ayarlar"
+    },
+    "whiteListSettings": {
+      "message": "Beyaz Liste"
+    },
+    "limitsSettings": {
+      "message": "Sınırlamalar"
+    },
+    "notificationsSettings": {
+      "message": "Bildirimler"
+    },
+    "pomodoroMode": {
+      "message": "Pomodoro"
+    },
+    "pomodoroSettings": {
+      "message": "Pomodoro Ayarları"
+    },
+    "pomodoro": {
+      "message": "Pomodoro",
+      "description": "Pomodoro yöntemi, odaklanmış çalışma ve dinlenme dönemleri arasında geçiş yapmaya dayalı bir zaman yönetimi tekniğidir. Pomodoro yönteminin klasiklerine göre, çalışma süresi 25 dakika, dinlenme süresi ise 5 dakikadır."
+    },
+    "pomodoroExplanationIcon": {
+      "message": "Pomodoro modu açıkken ve işlem modu aktifken, bu simgeyi göreceksiniz",
+      "description": "Dinlenme dönemlerinde bu uzantı simgesini göreceksiniz"
+    },
+    "pomodoroExplanationTime": {
+      "message": "Pomodoro modu sırasında, uzantı sitelerde geçirdiğiniz zamanı hesaplamaya devam eder, tüm sınırlar ve bildirimler çalışır."
+    },
+    "pomodoroExplanationStop": {
+      "message": "'Durdur' düğmesine tıkladıktan sonra, çalışma ve dinlenme süresi sıfırlanır."
+    },
+    "pomodoroWork": {
+      "message": "Çalışma süresi"
+    },
+    "pomodoroRest": {
+      "message": "Dinlenme süresi"
+    },
+    "pomodoroFrequency": {
+      "message": "Tekrar sayısı"
+    },
+    "start": {
+      "message": "Başlat"
+    },
+    "stop": {
+      "message": "Durdur"
+    },
+    "pomodoroIsEnabled": {
+      "message": "Pomodoro Modu etkin"
+    },
+    "pomodoroSoundAfter": {
+      "message": "Tam süreden sonra ses"
+    },
+    "clickToPreview": {
+      "message": "Dinlemek için tıklayın"
+    },
+    "sound": {
+      "message": "Ses"
+    },
+    "aboutSettings": {
+      "message": "Hakkında"
+    },
+    "viewTimeInBadge": {
+      "message": "Zaman izleyiciyi simgede görüntüle",
+      "description": "Geçerli 'harcanan zaman' bilgisini kısa formatta uzantı simgesinde görebilirsiniz"
+    },
+    "deferringDescription": {
+      "message": "Engellemeyi gün içinde yalnızca bir kez 5 dakika erteleyebilirsiniz"
+    },
+    "allowDeferringBlock": {
+      "message": "Engellemeyi 5 dakika ertelemeye izin ver",
+      "description": "Site engellendikten sonra, engellemeyi gün içinde yalnızca bir kez 5 dakika erteleyebilirsiniz"
+    },
+    "intervalInactivity": {
+      "message": "Hiçbir işlem yapılmazsa zamanlayıcıyı durdur",
+      "description": "Bunlar fare veya klavye ile yapılan herhangi bir işlemdir"
+    },
+    "exportToCsvSetting": {
+      "message": "Web aktivite verilerinizi CSV'ye aktarma",
+      "description": "Herhangi bir tarih aralığı için web aktivitenizi dışa aktarabilirsiniz"
+    },
+    "sec": {
+      "message": "saniye"
+    },
+    "min": {
+      "message": "dakika"
+    },
+    "2min": {
+      "message": "dakikalar"
+    },
+    "mins": {
+      "message": "dakikalar"
+    },
+    "whiteList": {
+      "message": "Bu web siteleri için aktivite ve harcanan zaman izlenmeyecek"
+    },
+    "addWebsite": {
+      "message": "Web Sitesi Ekle"
+    },
+    "enterWebsite": {
+      "message": "Web sitesi adını girin..."
+    },
+    "enterNotification": {
+      "message": "Bildirim mesajını girin..."
+    },
+    "limits": {
+      "message": "Web siteleri için günlük erişim kısıtlamaları",
+      "description": "Web sitesini günde ziyaret etmek için izin verilen maksimum süreyi ayarlayın. Bu süreden sonra site engellenecektir."
+    },
+    "limitsTip": {
+      "message": "Engelleme süresini 0 saat 0 dakika olarak ayarlarsanız, web sitesi hemen engellenir"
+    },
+    "save": {
+      "message": "Kaydet"
+    },
+    "showDailyNotification": {
+      "message": "Günlük Özet Bildirimleri",
+      "description": "Her günün sonunda, günlük kullanımınızın bir özetiyle bildirim alacaksınız"
+    },
+    "notificationTime": {
+      "message": "Web siteleri için bildirimler",
+      "description": "Web sitesinde seçilen bir süreyi harcadığınızda her zaman bildirim göster"
+    },
+    "notificationMessage": {
+      "message": "Bildirim mesajı",
+      "description": "Web siteleri için her zaman bildirimde bu mesajı göreceksiniz"
+    },
+    "notificationTimeSetting": {
+      "message": "Günlük kullanımınız hakkında özet bilgi içeren bildirim süresi"
+    },
+    "github": {
+      "message": "Geri bildiriminizi bırakın veya bir sorunu rapor edin "
+    },
+    "question": {
+      "message": "Ayrıca sorular sorabilir ve önerilerinizi bırakabilirsiniz"
+    },
+    "supportForm": {
+      "message": "destek formu"
+    },
+    "doYouEnjoy": {
+      "message": "Web Activity Time Tracker'dan memnun musunuz?"
+    },
+    "review": {
+      "message": "Bir inceleme bırakın!"
+    },
+    "promoClearYoutube": {
+      "message": "YouTube'daki shorts, yorumlar, önerilen videolar, abonelikler ve diğer dikkat dağıtıcı unsurları engellemek ister misiniz? YouTube'u dikkat dağıtmadan izlemenize yardımcı olacak başka bir uzantı oluşturduk.",
+      "description": "Temiz YouTube'u deneyin"
+    },
+    "block": {
+      "message": "Bugün için limitinize ulaştınız "
+    },
+    "5mins": {
+      "message": "+ 5 dakika"
+    },
+    "todayUsageTime": {
+      "message": "Bugünkü toplam kullanım süresi "
+    },
+    "comparedToYesterday": {
+      "message": " düne kıyasla "
+    },
+    "mostVisited": {
+      "message": "En çok ziyaret edilen web sitesi "
+    },
+    "dashboard": {
+      "message": "Gösterge Paneli"
+    },
+    "timeChartDescription": {
+      "message": "Bu, gün boyunca saat bazında zaman grafiğidir"
+    },
+    "enjoyAndReview": {
+      "message": "Uzantının keyfini çıkarıyor musunuz?",
+      "description": "Web Activity Time Tracker'ı değerlendirin"
+    },
+    "removeAllData": {
+      "message": "Tüm verileri kaldır",
+      "description": "Tüm zamanlar için ziyaret edilen web sitelerinin tüm verilerini ve istatistiklerini silebilirsiniz"
+    },
+    "remove": {
+      "message": "Kaldır"
+    },
+    "removeAllDataConfirm": {
+      "message": "Tüm verileri silmek istediğinizden emin misiniz?"
+    },
+    "cancel": {
+      "message": "İptal"
+    },
+    "backupAndRestore": {
+      "message": "Yedekleme ve geri yükleme",
+      "description": "Tüm ziyaret edilen siteler için tüm verilerin yedek bir kopyasını indirebilirsiniz"
+    },
+    "backup": {
+      "message": "Yedekle"
+    },
+    "restore": {
+      "message": "Geri Yükle"
+    },
+    "welcome": {
+      "message": "Web Activity Time Tracker'a Hoş Geldiniz",
+      "description": "Web Activity Time Tracker <b>açık kaynaklı</b>, <b>ücretsiz</b> ve <b>reklamsız</b> bir uzantıdır. Web sitelerinde geçirdiğiniz zamanı ve ziyaret sayısını takip etmenize yardımcı olabilir."
+    },
+    "getStarted": {
+      "message": "Başlayın"
+    },
+    "welcomeStart": {
+      "message": "Uzantıyı yalnızca 3 kolay adımda hızlıca kullanmaya başlayabilirsiniz"
+    },
+    "pinIcon": {
+      "message": "Simgesini sabitleyin"
+    },
+    "pinIconPart1": {
+      "message": "Bu uzantıyı daha rahat kullanmak için simgeyi araç çubuğuna sabitleyebilirsiniz. Simgeye tıklayın"
+    },
+    "pinIconPart2": {
+      "message": "ve ardından sabitleme simgesine tıklayın"
+    },
+    "browse": {
+      "message": "Herhangi bir web sitesinde gezinin",
+      "description": "Herhangi bir web sitesini ziyaret ettiğinizde, simgede zamanın şu şekilde görüntülendiğini göreceksiniz"
+    },
+    "seeData": {
+      "message": "Verilerinizi açılır sayfada ve gösterge panelinde görüntüleyin",
+      "description": "Uzantı simgesine tıklayarak bir açılır sayfa açabilir ve verileri pasta grafiği kullanılarak görselleştirilmiş şekilde okuyabilirsiniz; bugün, tüm zamanlar veya günlere göre. Açılır pencerede, gösterge panelini açabilir ve size günün zamanını saatle gösterebilir. Ayrıca, herhangi bir web sitesi için günlük zaman sınırı belirleyebilir, web siteleri için bildirimler ayarlayabilir veya verileri CSV'ye aktarabilirsiniz."
+    },
+    "close": {
+      "message": "Kapat"
+    },
+    "useExtension": {
+      "message": "Uzantıyı kullanın"
+    },
+    "next": {
+      "message": "Sonraki"
+    },
+    "showChangelog": {
+      "message": "Değişiklik günlüğünü göster",
+      "description": "Uzantıyı güncelledikten sonra değişiklik listesini göster"
+    },
+    "byHours": {
+      "message": "Saatlik"
+    },
+    "intervals": {
+      "message": "Aralıklar"
+    },
+    "intervalsChart": {
+      "message": "Yalnızca",
+      "description": "daha büyük zaman aralıkları gösterilir"
+    },
+    "completelyBlocked": {
+      "message": "Tamamen Engellendi",
+      "description": "Tamamen Engelle"
+    },
+    "tryMyOtherApps": {
+      "message": "Diğer uygulamalarımı deneyin"
+    },
+    "clearYoutube": {
+      "message": "Temiz YouTube",
+      "description": "Kısa videoları, önerilen videoları, yorumları, beslemeyi, ana sayfa önerilerini ve diğer dikkat dağıtıcı unsurları gizleyebilen bir Chrome uzantısı. YouTube'u dikkat dağıtıcı unsurlardan arınmış şekilde izleyin."
+    },
+    "darkTheme": {
+      "message": "Karanlık tema"
+    },
+    "cleanYoutube_promo": {
+      "message": "Yeni uzantımız Temiz YouTube'u deneyin"
+    },
+    "cleanYoutube_description": {
+      "message": "YouTube'da shorts, önerilen videolar, yorumları gizlemek ister misiniz?"
+    },
+    "cleanYoutube_description2": {
+      "message": "Temiz YouTube, bir YouTube™ içerik engelleyicisidir."
+    },
+    "cleanYoutube_features": {
+      "message": "Özelliklerimiz:"
+    },
+    "cleanYoutube_features1": {
+      "message": "Temiz Mod - Sayfada yalnızca Video Oynatıcıyı Göster"
+    },
+    "cleanYoutube_features2": {
+      "message": "Shorts, Yorumlar ve İlgili Videoları Gizleyin. 15+ seçenek."
+    },
+    "cleanYoutube_features3": {
+      "message": "Otomatik Oynatmayı Devre Dışı Bırak"
+    },
+    "cleanYoutube_features4": {
+      "message": "Bitiş Ekranı Kartlarını Devre Dışı Bırak"
+    },
+    "cleanYoutube_features5": {
+      "message": "Siyah Beyaz Modu"
+    },
+    "try": {
+      "message": "Deneyin"
+    },
+    "donate": {
+      "message": "Bağış Yap"
+    },
+    "enjoy": {
+      "message": "Web Activity Time Tracker'dan memnun musunuz?"
+    },
+    "canDonate": {
+      "message": "Web Activity Time Tracker ücretsiz bir uzantıdır. Gelecekteki geliştirmeler için kripto para ile beni destekleyebilirsiniz."
+    },
+    "thanks": {
+      "message": "Teşekkürler! 🙏"
+    },
+    "coin": {
+      "message": "Coin"
+    },
+    "chain": {
+      "message": "Zincir"
+    },
+    "address": {
+      "message": "Adres"
+    }
+}
