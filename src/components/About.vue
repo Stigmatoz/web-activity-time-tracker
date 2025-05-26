@@ -1,18 +1,6 @@
 <template>
   <div class="about">
     <label class="about-label"
-      >GitHub:
-      <a href="https://github.com/Stigmatoz/web-activity-time-tracker" target="_blank"
-        >github.com/Stigmatoz/web-activity-time-tracker</a
-      ></label
-    >
-    <label class="about-label"
-      >{{ t('github.message') }}
-      <a href="https://github.com/Stigmatoz/web-activity-time-tracker/issues" target="_blank"
-        >GitHub issues page</a
-      ></label
-    >
-    <label class="about-label"
       >{{ t('question.message') }}
       <a :href="CHROME_STORE_SUPPORT_URL" target="_blank">{{ t('supportForm.message') }}</a
       >.</label

@@ -2,7 +2,7 @@
   <notifications position="bottom right" />
   <div class="settings-tabs">
     <div class="header-block">
-      <img class="d-inline-block logo" height="30" src="../assets/icons/48x48.png" />
+      <img class="d-inline-block logo" height="40" src="../assets/icons/48x48.png" />
       <p class="d-inline-block title">TimeSpy</p>
     </div>
     <div class="settings-tab mt-20">
@@ -231,7 +231,7 @@ function selectTab(value: SettingsTab) {
   vertical-align: top;
   margin-top: 15px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 19px;
 }
 .header-block .logo {
   margin: 10px 10px 10px 15px;
