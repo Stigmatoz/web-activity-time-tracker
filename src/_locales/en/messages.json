@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Web Activity Time Tracker - Block Websites, Pomodoro & Web Analytics"
+    "message": "TimeSpy - Block Websites, Pomodoro & Web Analytics"
   },
   "extDescription": {
     "message": "Track time of your web activity, limit and block distracting websites. Monitor your web usage."
@@ -256,7 +256,7 @@
     "message": "support form"
   },
   "doYouEnjoy": {
-    "message": "Do you enjoy Web Activity Time Tracker?"
+    "message": "Do you enjoy TimeSpy?"
   },
   "review": {
     "message": "Leave a review!"
@@ -288,7 +288,7 @@
   },
   "enjoyAndReview": {
     "message": "Enjoying the extension?",
-    "description": "Rate Web Activity Time Tracker"
+    "description": "Rate TimeSpy"
   },
   "removeAllData": {
     "message": "Remove all data",
@@ -314,8 +314,8 @@
     "message": "Restore"
   },
   "welcome": {
-    "message": "Welcome to Web Activity Time Tracker",
-    "description": "Web Activity Time Tracker is <b>open-source</b>, <b>free</b> and <b>no ads</b> extension, which can help you track the time you spent on browsing websites and the count of visit."
+    "message": "Welcome to TimeSpy",
+    "description": "TimeSpy is <b>open-source</b>, <b>free</b> and <b>no ads</b> extension, which can help you track the time you spent on browsing websites and the count of visit."
   },
   "getStarted": {
     "message": "Get started"
@@ -411,10 +411,10 @@
     "message": "Donate"
   },
   "enjoy":{
-    "message": "Do you enjoy Web Activity Time Tracker?"
+    "message": "Do you enjoy TimeSpy?"
   },
   "canDonate":{
-    "message": "Web Activity Time Tracker is free extension. You can support me for the further development with cryptocurrency."
+    "message": "TimeSpy is free extension. You can support me for the further development with cryptocurrency."
   },
   "thanks":{
     "message": "Thank you! 🙏"

@@ -2,7 +2,7 @@
   <div class="block-container">
     <div class="header">
       <img class="d-inline-block" height="40" src="../assets/icons/48x48.png" />
-      <p class="d-inline-block header">Web Activity Time Tracker</p>
+      <p class="d-inline-block header">TimeSpy</p>
     </div>
     <p>
       {{ t('block.message') }}

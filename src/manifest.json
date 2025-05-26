@@ -28,7 +28,7 @@
   },
   "action": {
     "default_popup": "src/popup.html",
-    "default_title": "Web Activity Time Tracker"
+    "default_title": "TimeSpy"
   },
   "web_accessible_resources": [{
     "resources": ["assets/pomodoro-sounds/*.mp3"],

@@ -2,14 +2,14 @@ function print(logFn: typeof console.log, style: string, ...args: any[]) {
   if (typeof args[0] === 'string') {
     const newArgs = [...args];
     logFn(
-      `%cWeb Activity Time Tracker%c${new Date().toLocaleTimeString()}%c ${newArgs.shift()}`,
+      `%cTimeSpy%c${new Date().toLocaleTimeString()}%c ${newArgs.shift()}`,
       style,
       'background-color: #eaf1fb; padding: 2px 4px; border-radius: 3px',
       '',
       ...newArgs,
     );
   } else {
-    logFn('%cWeb Activity Time Tracker', style, ...args);
+    logFn('%cTimeSpy', style, ...args);
   }
 }
 

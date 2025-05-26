@@ -2,7 +2,7 @@
   <div class="headerBlock">
     <div class="d-inline-block">
       <img class="logo" height="30" src="../assets/icons/48x48.png" />
-      <p class="header">Web Activity Time Tracker</p>
+      <p class="header">TimeSpy</p>
     </div>
     <div class="icons-block">
       <div>

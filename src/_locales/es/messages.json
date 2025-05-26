@@ -1,6 +1,6 @@
 {
   "extName": {
-    "message": "Web Activity Time Tracker - Sitios bloqueados, Pomodoro y análisis web"
+    "message": "TimeSpy - Sitios bloqueados, Pomodoro y análisis web"
   },
   "extDescription": {
     "message": "Controla el tiempo de tu actividad web, limita y bloquea los sitios web que te distraen. Monitoriza tu uso de la web."
@@ -256,7 +256,7 @@
     "message": "formulario de asistencia"
   },
   "doYouEnjoy": {
-    "message": "¿Te gusta Web Activity Time Tracker?"
+    "message": "¿Te gusta TimeSpy?"
   },
   "review": {
     "message": "Deja tu opinión"
@@ -288,7 +288,7 @@
   },
   "enjoyAndReview": {
     "message": "¿Disfrutando de la ampliación?",
-    "description": "Valora Web Activity Time Tracker"
+    "description": "Valora TimeSpy"
   },
   "removeAllData": {
     "message": "Eliminar todos los datos",
@@ -314,8 +314,8 @@
     "message": "Restaurar"
   },
   "welcome": {
-    "message": "Bienvenido a Web Activity Time Tracker",
-    "description": "Web Activity Time Tracker es una extensión de código abierto, gratuita y sin publicidad, que puede ayudarte a controlar el tiempo que pasas navegando por páginas web y el recuento de visitas."
+    "message": "Bienvenido a TimeSpy",
+    "description": "TimeSpy es una extensión de código abierto, gratuita y sin publicidad, que puede ayudarte a controlar el tiempo que pasas navegando por páginas web y el recuento de visitas."
   },
   "getStarted": {
     "message": "Empezar"
@@ -411,10 +411,10 @@
     "message": "Donación"
   },
   "enjoy":{
-    "message": "¿Te gusta Web Activity Time Tracker?"
+    "message": "¿Te gusta TimeSpy?"
   },
   "canDonate":{
-    "message": "Web Activity Time Tracker es una extensión gratuita. Usted me puede apoyar para el desarrollo futuro con cryptocurrency."
+    "message": "TimeSpy es una extensión gratuita. Usted me puede apoyar para el desarrollo futuro con cryptocurrency."
   },
   "thanks":{
     "message": "Muchas gracias! 🙏"

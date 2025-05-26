@@ -256,7 +256,7 @@
     "message": "サポートフォーム"
   },
   "doYouEnjoy": {
-    "message": "Web Activity Time Trackerを楽しんでいますか？"
+    "message": "TimeSpyを楽しんでいますか？"
   },
   "review": {
     "message": "レビューを書く"
@@ -314,8 +314,8 @@
     "message": "リストア"
   },
   "welcome": {
-    "message": "Web Activity Time Trackerへようこそ",
-    "description": "Web Activity Time Trackerは、オープンソース、<b>無料</b>、<b>広告なし</b>の拡張機能で、ウェブサイトの閲覧に費やした時間や訪問回数を記録することができます。"
+    "message": "TimeSpyへようこそ",
+    "description": "TimeSpyは、オープンソース、<b>無料</b>、<b>広告なし</b>の拡張機能で、ウェブサイトの閲覧に費やした時間や訪問回数を記録することができます。"
   },
   "getStarted": {
     "message": "スタート"
@@ -411,10 +411,10 @@
     "message": "寄付する"
   },
   "enjoy":{
-    "message": "Web Activity Time Trackerを楽しんでいますか？"
+    "message": "TimeSpyを楽しんでいますか？"
   },
   "canDonate":{
-    "message": "Web Activity Time Trackerは無料の拡張機能です。さらなる開発のために、暗号通貨でご支援ください。"
+    "message": "TimeSpyは無料の拡張機能です。さらなる開発のために、暗号通貨でご支援ください。"
   },
   "thanks":{
     "message": "ありがとうございます！ 🙏"

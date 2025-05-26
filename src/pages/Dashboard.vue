@@ -3,7 +3,7 @@
   <div class="settings-tabs">
     <div class="header-block">
       <img class="d-inline-block logo" height="30" src="../assets/icons/48x48.png" />
-      <p class="d-inline-block title">Web Activity Time Tracker</p>
+      <p class="d-inline-block title">TimeSpy</p>
     </div>
     <div class="settings-tab mt-20">
       <input
