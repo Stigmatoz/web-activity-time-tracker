@@ -11,13 +11,13 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.11.1",
-    "chart.js": "^4.4.7",
+    "chart.js": "^4.4.9",
     "d3": "^7.9.0",
     "date-fns": "^2.30.0",
     "rollup-plugin-copy": "^3.5.0",
-    "vue": "^3.5.13",
+    "vue": "^3.5.15",
     "vue-chartjs": "^5.3.2",
-    "vue-i18n": "^9.14.2"
+    "vue-i18n": "^9.14.4"
   },
   "devDependencies": {
     "@intlify/unplugin-vue-i18n": "^0.12.3",
@@ -26,10 +26,10 @@
     "@types/webextension-polyfill": "^0.10.7",
     "@vitejs/plugin-vue": "^4.6.2",
     "@vuepic/vue-datepicker": "^5.4.0",
-    "typescript": "^5.7.2",
-    "vite": "^4.5.5",
-    "vite-plugin-web-extension": "^4.0.0",
-    "vue-tsc": "^2.2.0",
+    "typescript": "^5.8.3",
+    "vite": "^4.5.14",
+    "vite-plugin-web-extension": "^4.4.3",
+    "vue-tsc": "^2.2.10",
     "webextension-polyfill": "^0.10.0"
   }
 }
