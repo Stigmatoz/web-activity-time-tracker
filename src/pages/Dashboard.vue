@@ -153,25 +153,6 @@
       </div>
     </div>
 
-    <div class="settings-tab">
-      <input
-        type="radio"
-        id="donate-tab"
-        name="settings-group"
-        :checked="selectedTab == SettingsTab.Donate"
-        v-on:change="selectTab(SettingsTab.Donate)"
-      />
-      <label name="tabName" for="donate-tab" class="donate"
-        ><img src="../assets/icons/donate.png" height="30" />{{ t('donate.message') }}</label
-      >
-
-      <div class="settings-content">
-        <div class="main">
-          <Donation v-if="selectedTab == SettingsTab.Donate" />
-        </div>
-      </div>
-    </div>
-
     <PromoCleanYoutubeModal />
   </div>
 </template>
@@ -193,7 +174,6 @@ import { getEnumValueTab } from '../utils/extension-tabs';
 import { applyDarkMode } from '../utils/dark-mode';
 import { injectStorage } from '../storage/inject-storage';
 import { StorageParams, DARK_MODE_DEFAULT } from '../storage/storage-params';
-import Donation from '../components/Donation.vue';
 
 const { t } = useI18n();
 const extensionPage = useExtensionPage();
@@ -264,9 +244,5 @@ function selectTab(value: SettingsTab) {
 .about {
   position: fixed;
   bottom: 20px;
-}
-.donate {
-  position: fixed;
-  bottom: 75px;
 }
 </style>

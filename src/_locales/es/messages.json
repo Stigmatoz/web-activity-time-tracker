@@ -407,14 +407,8 @@
   "try": {
     "message": "Pruebe"
   },
-  "donate":{
-    "message": "Donación"
-  },
   "enjoy":{
     "message": "¿Te gusta TimeSpy?"
-  },
-  "canDonate":{
-    "message": "TimeSpy es una extensión gratuita. Usted me puede apoyar para el desarrollo futuro con cryptocurrency."
   },
   "thanks":{
     "message": "Muchas gracias! 🙏"

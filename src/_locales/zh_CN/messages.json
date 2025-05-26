@@ -407,14 +407,8 @@
   "try": {
     "message": "试用"
   },
-  "donate":{
-    "message": "捐赠"
-  },
   "enjoy":{
     "message": "您喜欢 TimeSpy 吗"
-  },
-  "canDonate":{
-    "message": "TimeSpy 是永久免费的扩展。您可以使用加密货币支持我进一步开发。"
   },
   "thanks":{
     "message": "谢谢！ 🙏"

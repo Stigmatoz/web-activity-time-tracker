@@ -182,9 +182,4 @@ function updateTab() {
 .headerBlock .icons-block .dark-mode-icon {
   vertical-align: middle;
 }
-
-.headerBlock .icons-block .donate-img {
-  padding-top: 0;
-  padding-bottom: 0;
-}
 </style>

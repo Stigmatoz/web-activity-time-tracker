@@ -407,14 +407,8 @@
   "try": {
     "message": "トライ"
   },
-  "donate": {
-    "message": "寄付する"
-  },
   "enjoy":{
     "message": "TimeSpyを楽しんでいますか？"
-  },
-  "canDonate":{
-    "message": "TimeSpyは無料の拡張機能です。さらなる開発のために、暗号通貨でご支援ください。"
   },
   "thanks":{
     "message": "ありがとうございます！ 🙏"
