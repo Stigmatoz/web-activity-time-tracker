@@ -2,6 +2,8 @@
 
 ⚠️⚠️⚠️ **Important notice! The Chrome extension has been sold. So I am not responsible for any changes to the functionality of the extension.** ⚠️⚠️⚠️
 
+**The new version is available on the Chrome Store https://chromewebstore.google.com/detail/timespy-block-websites-po/ggomgkmpcnmfhgmpfaphkbmnokllflom**
+
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/hhfnghjdeddcfegfekjeihfmbjenlomm.svg?&label=Chrome%20users&ogo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/hhfnghjdeddcfegfekjeihfmbjenlomm?&logoColor=white;label=Rating)](https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/hhfnghjdeddcfegfekjeihfmbjenlomm.svg?&logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/web-activity-time-tracker/hhfnghjdeddcfegfekjeihfmbjenlomm)
