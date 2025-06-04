@@ -6,7 +6,7 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import copy from 'rollup-plugin-copy';
 
 const APP_ID = {
-  chrome: 'hhfnghjdeddcfegfekjeihfmbjenlomm',
+  chrome: 'ggomgkmpcnmfhgmpfaphkbmnokllflom',
   edge: 'eepmlmdenlkkjieghjmedjahpofieogf',
 };
 const browser = process.env.TARGET || 'chrome';
