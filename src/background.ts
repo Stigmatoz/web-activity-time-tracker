@@ -43,16 +43,16 @@ Browser.runtime.onInstalled.addListener(async details => {
       active: true,
     });
   }
-  if (details.reason == 'update' && !details.previousVersion) {
-    const showChangelog = (await Settings.getInstance().getSetting(
-      StorageParams.SHOW_CHANGELOG,
-    )) as boolean;
-    if (showChangelog)
-      await Browser.tabs.create({
-        url: 'https://webtracker.online/releasenotes.html',
-        active: true,
-      });
-  }
+  // if (details.reason == 'update' && !details.previousVersion) {
+  //   const showChangelog = (await Settings.getInstance().getSetting(
+  //     StorageParams.SHOW_CHANGELOG,
+  //   )) as boolean;
+  //   if (showChangelog)
+  //     await Browser.tabs.create({
+  //       url: 'https://webtracker.online/releasenotes.html',
+  //       active: true,
+  //     });
+  // }
 });
 
 Browser.runtime.onStartup.addListener(() => {
