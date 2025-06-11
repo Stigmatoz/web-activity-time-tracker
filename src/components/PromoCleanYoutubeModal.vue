@@ -74,6 +74,9 @@ async function openUrl() {
 </script>
 
 <style scoped>
+.promo {
+  margin: 5% auto !important;
+}
 .title {
   font-size: 22px;
   font-weight: 500;

@@ -89,3 +89,7 @@
 .dark .promo{
   color: black !important;
 }
+.dark .modal-content:not(.promo){
+  background-color: #595959 !important;
+  border: 1px solid #595959;
+}
