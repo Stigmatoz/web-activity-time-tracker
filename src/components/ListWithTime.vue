@@ -74,6 +74,7 @@ import { convertHHMMToSeconds, convertSecondsToHHMM } from '../utils/converter';
 import { Restriction } from '../entity/restriction';
 import { BaseTimeList } from '../entity/baseTimeList';
 import { Notifications } from '../entity/notification';
+import { requestNotificationPermission, checkNotificationPermission } from '../functions/useNotification';
 
 const { t } = useI18n();
 
@@ -119,7 +120,7 @@ onMounted(async () => {
   }
 });
 
-function addToList() {
+async function addToList() {
   const existingItem = list.value?.find(x =>
     isDomainEquals(extractHostname(x.domain), extractHostname(newWebsiteForList.value!)),
   );
@@ -129,12 +130,36 @@ function addToList() {
       type: 'error',
     });
   } else {
-    const newLimit = new Restriction(
-      extractHostname(newWebsiteForList.value!),
-      time.value.hours,
-      time.value.minutes,
-    );
-    list.value?.push(newLimit);
+    // For notifications list, check/request permission
+    if (props.type === ListWithTime.Notifications) {
+      const hasPermission = await checkNotificationPermission();
+      if (!hasPermission) {
+        const granted = await requestNotificationPermission();
+        if (!granted) {
+          notification.notify({
+            title: 'Notification permission required',
+            text: 'Please enable notifications in your browser settings to add website notifications.',
+            type: 'error',
+          });
+          return;
+        }
+      }
+      
+      const newNotification = new Notifications(
+        extractHostname(newWebsiteForList.value!),
+        time.value.hours,
+        time.value.minutes,
+      );
+      list.value?.push(newNotification);
+    } else {
+      const newLimit = new Restriction(
+        extractHostname(newWebsiteForList.value!),
+        time.value.hours,
+        time.value.minutes,
+      );
+      list.value?.push(newLimit);
+    }
+    
     save(list.value);
     newWebsiteForList.value = '';
   }

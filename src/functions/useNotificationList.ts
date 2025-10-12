@@ -21,9 +21,15 @@ export function useNotificationList() {
     if (item != undefined) {
       const date = tab.days.find(x => x.date == todayLocalDate());
       if (date != undefined) {
-        if (date.summary != 0 && (date.summary == item.time || date.summary % item.time == 0)) {
+        // Check if we've exceeded the threshold and haven't shown notification for this interval yet
+        const currentInterval = Math.floor(date.summary / item.time);
+        const previousSummary = date.summary - 1; // Previous second
+        const previousInterval = Math.floor(previousSummary / item.time);
+        
+        // Show notification when we cross into a new interval (threshold exceeded)
+        if (date.summary >= item.time && currentInterval > previousInterval) {
           log(
-            `Time for notification: website ${url} time ${item.time} summary time ${date.summary}`,
+            `Notification threshold exceeded: website ${url} threshold ${item.time}s, current time ${date.summary}s, interval ${currentInterval}`,
           );
           return true;
         }

@@ -52,6 +52,30 @@
         @click="saveNotificationMessage()"
       />
     </div>
+    <div class="settings-item">
+      <label class="setting-header">{{ t('testNotification.message', 'Test Notifications') }}</label>
+      <p class="description">
+        {{ t('testNotification.description', 'Click to test if notifications are working properly') }}
+      </p>
+      <input
+        type="button"
+        class="d-inline-block small-btn width"
+        value="Test Daily Notification"
+        @click="testDailyNotification()"
+      />
+      <input
+        type="button"
+        class="d-inline-block small-btn width ml-10"
+        value="Test Website Notification"
+        @click="testWebsiteNotification()"
+      />
+      <input
+        type="button"
+        class="d-inline-block small-btn width ml-10"
+        value="Test Browser Native"
+        @click="testNativeNotification()"
+      />
+    </div>
   </div>
 </template>
 
@@ -77,6 +101,7 @@ import PromoClearYouTube from '../components/PromoClearYouTube.vue';
 import { ListWithTime } from '../utils/enums';
 import Browser from 'webextension-polyfill';
 import { Messages } from '../utils/messages';
+import { requestNotificationPermission, checkNotificationPermission, useNotification, NotificationType } from '../functions/useNotification';
 
 const { t } = useI18n();
 
@@ -123,11 +148,75 @@ async function handleDate(modelData: Time) {
 }
 
 async function onChange(storageParam: StorageParams, target: any) {
-  if (target != null) await save(storageParam, target.checked);
+  if (target != null) {
+    // If enabling daily notifications, request permission first
+    if (storageParam === StorageParams.DAILY_NOTIFICATION && target.checked) {
+      const hasPermission = await checkNotificationPermission();
+      if (!hasPermission) {
+        const granted = await requestNotificationPermission();
+        if (!granted) {
+          // Permission denied, don't enable the setting
+          showDailyNotification.value = false;
+          alert('Notification permission is required to enable notifications. Please enable notifications in your browser settings.');
+          return;
+        }
+      }
+    }
+    await save(storageParam, target.checked);
+  }
 }
 
 async function save(storageParam: StorageParams, value: any) {
   if (value != undefined) await settingsStorage.saveValue(storageParam, value);
+}
+
+async function testDailyNotification() {
+  console.log('[testDailyNotification] Testing daily notification');
+  const title = 'Test Daily Notification';
+  const message = 'This is a test of the daily summary notification system. If you see this, notifications are working!';
+  
+  const result = await useNotification(NotificationType.DailySummaryNotification, title, message);
+  console.log('[testDailyNotification] Test notification result:', result);
+}
+
+async function testWebsiteNotification() {
+  console.log('[testWebsiteNotification] Testing website notification');
+  const title = 'Test Website Notification';
+  const message = 'This is a test of the website notification system. If you see this, website notifications are working!';
+  
+  const result = await useNotification(NotificationType.WebSiteNotification, title, message);
+  console.log('[testWebsiteNotification] Test notification result:', result);
+}
+
+async function testNativeNotification() {
+  console.log('[testNativeNotification] Testing native browser notification');
+  
+  try {
+    if ('Notification' in window) {
+      const permission = await Notification.requestPermission();
+      console.log('[testNativeNotification] Permission:', permission);
+      
+      if (permission === 'granted') {
+        const notification = new Notification('Native Test Notification', {
+          body: 'This is a native browser notification test. If you see this, your browser notifications work!',
+          icon: '/src/assets/icons/48x48.png'
+        });
+        
+        notification.onclick = () => {
+          console.log('[testNativeNotification] Notification clicked');
+          notification.close();
+        };
+        
+        console.log('[testNativeNotification] Native notification created:', notification);
+      } else {
+        console.log('[testNativeNotification] Permission denied');
+      }
+    } else {
+      console.log('[testNativeNotification] Notifications not supported');
+    }
+  } catch (error) {
+    console.error('[testNativeNotification] Error:', error);
+  }
 }
 </script>
 

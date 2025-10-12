@@ -41,9 +41,14 @@ async function rescheduleJobs(): Promise<void> {
   const dailySummaryNotificationTime = (await Settings.getInstance().getSetting(
     StorageParams.DAILY_SUMMARY_NOTIFICATION_TIME,
   )) as number;
+  console.log('[schedule-jobs] Daily notification time setting (seconds):', dailySummaryNotificationTime);
+  
   await Browser.alarms.clear(JobId.DailySummaryNotification);
   const nextTime = getNextTimeOfDay(dailySummaryNotificationTime * SECOND);
-  log(`[schedule-jobs] ${JobId.DailySummaryNotification} start time ${new Date(nextTime)}`);
+  console.log(`[schedule-jobs] ${JobId.DailySummaryNotification} next trigger time: ${new Date(nextTime)}`);
+  console.log(`[schedule-jobs] Current time: ${new Date()}`);
+  console.log(`[schedule-jobs] Time until next alarm: ${Math.round((nextTime - Date.now()) / 1000 / 60)} minutes`);
+  
   Browser.alarms.create(JobId.DailySummaryNotification, {
     when: nextTime,
     periodInMinutes: DAY_MINUTES,
@@ -53,6 +58,10 @@ async function rescheduleJobs(): Promise<void> {
     when: startOfTomorrow().getTime(),
     periodInMinutes: DAY_MINUTES,
   });
+  
+  // Verify the alarm was created
+  const createdAlarm = await Browser.alarms.get(JobId.DailySummaryNotification);
+  console.log('[schedule-jobs] Created alarm:', createdAlarm);
 }
 
 async function createAlarmIfMissing(
