@@ -114,12 +114,17 @@ async function mainTracker(
     if (tab.favicon == '' && activeTab.favIconUrl != undefined)
       tab.setFavicon(activeTab.favIconUrl);
 
-    if (await useNotificationList().isNeedToShowNotification(activeDomain, tab)) {
+    const shouldShowNotification = await useNotificationList().isNeedToShowNotification(activeDomain, tab);
+    console.log(`[tracker] Website notification check for ${activeDomain}:`, shouldShowNotification);
+    
+    if (shouldShowNotification) {
       const message = (await Settings.getInstance().getSetting(
         StorageParams.NOTIFICATION_MESSAGE,
       )) as string;
       const title = `${activeDomain} notification`;
-      await useNotification(NotificationType.WebSiteNotification, title, message);
+      console.log(`[tracker] Sending website notification for ${activeDomain}:`, { title, message });
+      const result = await useNotification(NotificationType.WebSiteNotification, title, message);
+      console.log(`[tracker] Website notification result for ${activeDomain}:`, result);
     }
 
     tab.incSummaryTime();
