@@ -20,8 +20,12 @@
     "unlimitedStorage",
     "alarms",
     "notifications",
-    "offscreen"
+    "offscreen",
+    "favicon"
   ],
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; object-src 'self'; connect-src 'none'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; media-src 'self'; frame-src 'none'"
+  },
   "offline_enabled": true,
   "background": {
     "service_worker": "src/background.ts"

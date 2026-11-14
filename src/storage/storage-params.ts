@@ -11,7 +11,6 @@ export enum StorageParams {
   INTERVAL_INACTIVITY = 'inactivity_interval',
   DARK_MODE = 'night_mode',
   VIEW_TIME_IN_BADGE = 'view_time_in_badge',
-  SHOW_CHANGELOG = 'show_changelog',
   BLOCK_DEFERRAL = 'view_block_deferral',
   BLOCK_DEFERRAL_TIME = 'view_block_deferral_time',
   DAILY_SUMMARY_NOTIFICATION_TIME = 'daily-summary-notification-time',
@@ -72,7 +71,6 @@ export const SHOW_HINT_DEFAULT = true;
 // default time is 20:00, time in seconds
 export const DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT = (20 * HOUR) / 1000;
 export const DAILY_NOTIFICATION_DEFAULT = true;
-export const SHOW_CHANGELOG_DEFAULT = false;
 export const SHOW_PROMO_CLEAR_YOUTUBE_DEFAULT = false;
 export const IS_POMODORO_ENABLED_DEFAULT = false;
 export const POMODORO_INTERVAL_WORK_DEFAULT = 25 * MINUTE_IN_SECONDS;
@@ -106,8 +104,6 @@ export function getDefaultValue(param: StorageParams) {
       return DAILY_SUMMARY_NOTIFICATION_TIME_DEFAULT;
     case StorageParams.DAILY_NOTIFICATION:
       return DAILY_NOTIFICATION_DEFAULT;
-    case StorageParams.SHOW_CHANGELOG:
-      return SHOW_CHANGELOG_DEFAULT;
     case StorageParams.PROMO_CLEAR_YOUTUBE_ON_BLOCK:
     case StorageParams.PROMO_CLEAR_YOUTUBE_ON_LIMITS:
       return SHOW_PROMO_CLEAR_YOUTUBE_DEFAULT;

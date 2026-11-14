@@ -98,21 +98,6 @@
     />
     <input type="button" class="ml-10" :value="t('restore.message')" @click="restore()" />
   </div>
-  <div class="settings-item">
-    <label class="setting-header">
-      <input
-        type="checkbox"
-        class="filled-in"
-        id="showChangelog"
-        v-model="showChangelog"
-        @change="onChange(StorageParams.SHOW_CHANGELOG, $event.target)"
-      />
-      <span>{{ t('showChangelog.message') }}</span>
-      <p class="description">
-        {{ t('showChangelog.description') }}
-      </p>
-    </label>
-  </div>
   <div id="removeAllConfirmModal" class="modal" v-if="needToConfirmDeleteAllData">
     <div class="modal-content">
       <p class="text-center">{{ t('removeAllDataConfirm.message') }}</p>
@@ -147,7 +132,6 @@ import {
   StorageParams,
   VIEW_TIME_IN_BADGE_DEFAULT,
   InactivityInterval,
-  SHOW_CHANGELOG_DEFAULT,
 } from '../storage/storage-params';
 import { ranges, ThisWeekRange, todayLocalDate } from '../utils/date';
 import { useImportToCsv } from '../functions/useImportToCsv';
@@ -171,7 +155,6 @@ const selectedDate = ref<Date[]>();
 const presetRanges = ranges();
 
 const needToConfirmDeleteAllData = ref<boolean>();
-const showChangelog = ref<boolean>();
 
 const restoreFile = ref<any>();
 
@@ -190,10 +173,6 @@ onMounted(async () => {
     BLOCK_DEFERRAL_DEFAULT,
   );
   selectedDate.value = ThisWeekRange;
-  showChangelog.value = await settingsStorage.getValue(
-    StorageParams.SHOW_CHANGELOG,
-    SHOW_CHANGELOG_DEFAULT,
-  );
 });
 
 async function onChange(storageParam: StorageParams, target: any) {

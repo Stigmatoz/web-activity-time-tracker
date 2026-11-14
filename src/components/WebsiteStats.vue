@@ -28,7 +28,7 @@
       <div v-else>
         <div class="date-block">
           <div>
-            <Favicon :favicon="tab?.favicon" :type="getTypeOfUrl(tab?.url!)" />
+            <Favicon :favicon="getFavicon(tab?.url)" :type="getTypeOfUrl(tab?.url!)" />
             <span class="title"> {{ tab?.url }}</span>
           </div>
 
@@ -65,6 +65,7 @@ export default {
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import Favicon from './Favicon.vue';
+import { getFavicon } from '../utils/favicon';
 import NoDataByDays from './NoDataByDays.vue';
 import ByDaysChart from '../components/ByDaysChart.vue';
 import WebsiteStatsDetails from '../components/WebsiteStatsDetails.vue';

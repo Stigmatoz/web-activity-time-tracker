@@ -1,6 +1,6 @@
 <template>
   <div class="tab-item">
-    <Favicon :favicon="item.favicon" :type="typeOfUrl" />
+    <Favicon :favicon="getFavicon(item.url)" :type="typeOfUrl" />
     <div
       class="ml-10 flex-grow-2"
       @mouseover="isShowCmdButtons = true"
@@ -54,6 +54,7 @@ export default {
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Favicon from './Favicon.vue';
+import { getFavicon } from '../utils/favicon';
 import BadgeIcons from './BadgeIcons.vue';
 import { convertSummaryTimeToString } from '../utils/converter';
 import { getPercentage } from '../utils/common';

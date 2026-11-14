@@ -1,3 +1,8 @@
-export function getFavicon(url: string) {
-  return `https://www.google.com/s2/favicons?domain=${url}&sz=64`;
+import Browser from 'webextension-polyfill';
+
+// Uses the browser's local favicon cache (needs the "favicon" permission); no network request is made.
+export function getFavicon(urlOrDomain: string | undefined) {
+  if (!urlOrDomain) return '';
+  const pageUrl = /^https?:\/\//.test(urlOrDomain) ? urlOrDomain : `https://${urlOrDomain}`;
+  return `${Browser.runtime.getURL('/_favicon/')}?pageUrl=${encodeURIComponent(pageUrl)}&size=64`;
 }

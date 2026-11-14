@@ -38,6 +38,7 @@
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { getValueFromQuery } from '../utils/block-page';
+import { getFavicon } from '../utils/favicon';
 import { injectStorage } from '../storage/inject-storage';
 import { BLOCK_DEFERRAL_DEFAULT, StorageParams } from '../storage/storage-params';
 import { convertLimitTimeToString } from '../utils/converter';
@@ -62,7 +63,7 @@ onMounted(async () => {
   webSite.value = queryObj.domain ?? '';
   sourceUrl.value = queryObj.url ?? '';
   limitTime.value = queryObj.limitTime;
-  favicon.value = queryObj.favicon ?? '';
+  favicon.value = getFavicon(webSite.value);
   limitTimeString.value = convertLimitTimeToString(queryObj.limitTime);
   summaryCounter.value = queryObj.summaryCounter ?? 0;
 

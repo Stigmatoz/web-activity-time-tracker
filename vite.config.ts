@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
     minify: mode === 'development' ? false : true,
   },
   define: {
-    'process.env': process.env,
+    'process.env': {},
     __EXTENSION_MODE__: JSON.stringify(mode),
     __DEV__: mode === 'development',
     __PROD__: mode === 'production',

@@ -17,6 +17,17 @@ You can set a daily visit limit for sites and block it after the expiration of t
 
 Extension uses only local [chrome.storage API](https://developer.chrome.com/apps/storage) chrome.storage API to store data and it doesn't send data anywhere.
 
+### Privacy-hardened fork
+
+This fork makes the "no data leaves the device" claim enforceable:
+
+- Favicons come from the browser's local `_favicon` cache instead of Google's favicon service (which received every domain you track).
+- The uninstall-feedback URL and the "show changelog" release-notes page were removed.
+- A strict Content Security Policy (`connect-src 'none'`, no remote images/frames/scripts) blocks any network request from extension pages.
+- The build no longer inlines the build machine's `process.env` into the bundle.
+
+Remaining outbound links (GitHub, store review/support, the author's other extension promo) open only when you click them.
+
 ![image](https://user-images.githubusercontent.com/23387046/206865140-875bf7ab-a59e-42e3-bb9e-e348e8b85749.png) ![image](https://user-images.githubusercontent.com/23387046/206865174-aa409efe-495d-450e-a8ea-1d97024c9e23.png)
 
 You can see your daily stats.

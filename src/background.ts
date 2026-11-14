@@ -29,8 +29,6 @@ Browser.storage.onChanged.addListener(async (changes, namespace) => {
   }
 });
 
-Browser.runtime.setUninstallURL('https://webtracker.online/goodbye.html');
-
 Browser.runtime.onInstalled.addListener(async details => {
   if (details.reason == 'install') {
     logger.log('Extension installed:', details);
@@ -42,16 +40,6 @@ Browser.runtime.onInstalled.addListener(async details => {
       url: initialPageUrl,
       active: true,
     });
-  }
-  if (details.reason == 'update' && !details.previousVersion) {
-    const showChangelog = (await Settings.getInstance().getSetting(
-      StorageParams.SHOW_CHANGELOG,
-    )) as boolean;
-    if (showChangelog)
-      await Browser.tabs.create({
-        url: 'https://webtracker.online/releasenotes.html',
-        active: true,
-      });
   }
 });
 
